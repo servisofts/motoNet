@@ -20,13 +20,8 @@ const NaviDrawe = (props) => {
     if (!isVisible) {
         return <View></View>
     }
-
     var letra = "#fff";
-    var colorContainer = "#000000aa";
-
-
-
-
+    var colorContainer = "red";
     return (
 
         <Modal
@@ -59,7 +54,7 @@ const NaviDrawe = (props) => {
                                 }}>
 
 
-                                    <Svg name="LogoGlup"
+                                    <Svg name="LogoMoto"
                                         style={{
                                             width: 130,
                                             height: 130,
@@ -87,7 +82,7 @@ const NaviDrawe = (props) => {
                                             marginTop: 10,
                                             fontWeight: "bold",
                                             fontSize: 20,
-                                            color: "#FF0000",
+                                            color: "#fff",
                                         }} >Salir</Text>
                                     </TouchableOpacity>
                                 </View>

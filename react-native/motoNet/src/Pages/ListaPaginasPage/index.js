@@ -38,7 +38,7 @@ class ListaPaginasPage extends Component {
 
 
 
-                <Text style={{ color: Theme.colors.primary }}>Lista de paginas...</Text>
+                <Text style={{ color: "#fff" }}>Lista de paginas...</Text>
                 {
 
                     this.arr.map((obj, key) => {
@@ -50,7 +50,8 @@ class ListaPaginasPage extends Component {
                                 style={{
                                     width: 200,
                                     height: 40,
-                                    backgroundColor: Theme.colors.primary,
+                                    borderWidth: 3,
+                                    borderColor: "#fff",
                                     margin: 10,
                                     justifyContent: "center",
                                     alignItems: "center",

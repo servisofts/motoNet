@@ -97,7 +97,7 @@ const Login = (props) => {
                     }}>
 
 
-                    <Svg name="LogoGlup"
+                    <Svg name="LogoMoto"
                         style={{
                             width: 200,
                             height: 200,
@@ -147,9 +147,9 @@ const Login = (props) => {
                         style={{
                             marginTop: 10,
                             flex: 1,
-                            width: '90%',
+                            width: '80%',
                             alignItems: 'center',
-                            flexDirection: 'column',
+                            flexDirection: 'row',
                         }}>
                         <TouchableOpacity
                             style={styles.touch4}>
@@ -167,7 +167,7 @@ const Login = (props) => {
                         <TouchableOpacity
                             onPress={() => props.navigation.navigate("RegistroUsuarioPage")}
 
-                            style={styles.touch3}>
+                            style={styles.touch4}>
                             <Text
                                 style={{
                                     color: '#fff',
@@ -208,26 +208,7 @@ const Login = (props) => {
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            style={{
-                                flex: 1,
-                                marginTop: 10,
-                                width: "70%",
-                                height: 50,
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                flexDirection: 'row',
-                                backgroundColor: "#000",
-                                borderRadius: 25,
-                                shadowColor: "#000",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: -2,
-                                },
-                                shadowOpacity: 0.25,
-                                shadowRadius: 3.84,
-
-                                elevation: 5,
-                            }}>
+                            style={styles.icloud}>
                             <Svg name="icloud"
                                 style={{
                                     width: 35,
@@ -295,7 +276,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         backgroundColor: "#3D5893",
-        borderRadius: 25,
+        borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -316,7 +297,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderRadius: 25,
+        borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -329,14 +310,24 @@ const styles = StyleSheet.create({
     },
 
     icloud: {
-        width: 200,
+        flex: 1,
+        marginTop: 10,
+        width: "70%",
         height: 50,
-        borderRadius: 10,
-        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
-        borderWidth: 1,
-        margin: 5,
+        flexDirection: 'row',
+        backgroundColor: "#000",
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: -2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
 
     touch: {
@@ -358,7 +349,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         paddingLeft: 15,
-        borderRadius: 25,
+        borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -391,13 +382,16 @@ const styles = StyleSheet.create({
     },
     touch4: {
         flex: 1,
-        backgroundColor: "#53af45",
+        backgroundColor: "red",
         width: "80%",
         height: 50,
+        borderColor: "#fff",
+        margin: 2,
+        borderWidth: 3,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderRadius: 25,
+        borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,

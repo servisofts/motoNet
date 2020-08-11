@@ -21,7 +21,7 @@ const Inicio = (props) => {
         latitude: -17.613977,
         longitude: -63.665321,
         latitudeDelta: 13,
-        longitudeDelta: 13,
+        longitudeDelta: 1,
     });
 
 
@@ -77,17 +77,16 @@ const Inicio = (props) => {
                 }}
                 style={styles.icono}>
 
-                <Svg name="LogoGlup"
+                <Svg name="LogoMoto"
                     style={{
                         width: 50,
                         height: 50,
-                        fill: "#fff"
 
                     }} />
             </TouchableOpacity>
                 
-            <ModeloComponent componente={props.state.modeloComponenteReducer.componente} />
-
+{/*             <ModeloComponent componente={props.state.modeloComponenteReducer.componente} />
+ */}
         </View>
     )
 
@@ -145,7 +144,7 @@ const styles = StyleSheet.create({
         borderColor: "#fff",
         borderWidth: 2,
         borderRadius: 100,
-        backgroundColor: "#4fc2ef",
+        backgroundColor: "red",
         position: "absolute",   
         alignItems: 'center',
         justifyContent: 'center',

@@ -12,6 +12,7 @@ import Google, { ReactComponent as Googlew } from '../img/google.svg';
 import Facebook, { ReactComponent as Facebookw } from '../img/facebook.svg';
 import Icloud, { ReactComponent as Icloudw } from '../img/icloud.svg';
 import Arreglo, { ReactComponent as Arreglow } from '../img/arreglo.svg';
+import MotoNetBW, { ReactComponent as MotoNetBWw } from '../img/MotoNetBR.svg';
 
 const Svg = (props) => {
     const isWeb = Platform.OS === 'web';
@@ -28,11 +29,11 @@ const Svg = (props) => {
                 <Arreglow style={props.style} />
                 :
                 <Arreglo style={props.style} />
-        case "LogoGlup":
+        case "LogoMoto":
             return isWeb ?
-                <LogoGlupw style={props.style} />
+                <MotoNetBWw style={props.style} />
                 :
-                <LogoGlup style={props.style} />
+                <MotoNetBW style={props.style} />
         case "correo":
             return isWeb ?
                 <Emailw style={props.style} />

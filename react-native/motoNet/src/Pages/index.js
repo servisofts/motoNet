@@ -4,6 +4,7 @@ import LoginPage from './LoginPage';
 import RegistroUsuarioPage from './RegistroUsuarioPage';
 import CargaPage from './CargaPage';
 import InicioPage from './InicioPage';
+import PruebaPage from './PruebaPage';
 
 
 export const getPages = () => {
@@ -13,7 +14,8 @@ export const getPages = () => {
         LoginPage,
         RegistroUsuarioPage,
         CargaPage,
-        InicioPage
+        InicioPage,
+        PruebaPage
 
     }
 }

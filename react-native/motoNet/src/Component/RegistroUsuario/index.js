@@ -34,9 +34,10 @@ const RegistroUsuario = (props) => {
                 width: "100%",
                 alignItems: 'center',
                 flexDirection: 'column',
+                marginTop: 10,
             }}>
 
-                <Svg name="LogoGlup"
+                <Svg name="LogoMoto"
                     style={{
                         width: 100,
                         height: 100,
@@ -46,126 +47,59 @@ const RegistroUsuario = (props) => {
 
                 <View
                     style={styles.view}>
-
-                    <Text
-                        style={{
-                            width: '85%',
-                            textAlign: "left",
-                            color: "#fff",
-                            fontSize: 20
-
-                        }}>Usuario</Text>
-                    <TextInput
-                        style={styles.input} />
+                    <Text style={styles.texto}>Usuario</Text>
+                    <TextInput style={styles.input} />
                 </View>
 
 
                 <View
                     style={styles.view}>
-
-                    <Text
-                        style={{
-                            width: '85%',
-                            textAlign: "left",
-                            color: "#fff",
-                            fontSize: 20
-
-                        }}>Edad</Text>
-                    <TextInput
-                        style={styles.input} />
+                    <Text style={styles.texto}>Nombre</Text>
+                    <TextInput style={styles.input} />
                 </View>
 
 
                 <View
                     style={styles.view}>
-
-                    <Text
-                        style={{
-                            width: '85%',
-                            textAlign: "left",
-                            color: "#fff",
-                            fontSize: 20
-
-                        }}>Correo </Text>
-                    <TextInput
-                        style={styles.input} />
+                    <Text style={styles.texto}>Apellido</Text>
+                    <TextInput style={styles.input} />
                 </View>
 
                 <View
                     style={styles.view}>
+                    <Text style={styles.texto}>Telefono</Text>
+                    <TextInput style={styles.input} />
+                </View>
 
-                    <Text
-                        style={{
-                            width: '85%',
-                            textAlign: "left",
-                            color: "#fff",
-                            fontSize: 20
+                <View
+                    style={styles.view}>
+                    <Text style={styles.texto}>Sexo</Text>
+                    <TextInput style={styles.input} />
+                </View>
 
-                        }}>Telefono</Text>
-                    <TextInput
-                        style={styles.input} />
+                <View
+                    style={styles.view}>
+                    <Text style={styles.texto}>Nacionalidad</Text>
+                    <TextInput style={styles.input} />
+                </View>
+
+                <View
+                    style={styles.view}>
+                    <Text style={styles.texto}>Domicilio actual</Text>
+                    <TextInput style={styles.input} />
                 </View>
                 <View
                     style={styles.view}>
 
-                    <Text
-                        style={{
-                            width: '85%',
-                            textAlign: "left",
-                            color: "#fff",
-                            fontSize: 20
-
-                        }}>Sexo</Text>
-                    <TextInput
-                        style={styles.input} />
-                </View>
-
-
-                <View
-                    style={styles.view}>
-
-                    <Text
-                        style={{
-                            width: '85%',
-                            textAlign: "left",
-                            color: "#fff",
-                            fontSize: 20
-
-                        }}>Nacionalidad</Text>
-                    <TextInput
-                        style={styles.input} />
-                </View>
-                <View
-                    style={styles.view}>
-
-                    <Text
-                        style={{
-                            width: '85%',
-                            textAlign: "left",
-                            color: "#fff",
-                            fontSize: 20
-
-                        }}>Domicilio actual</Text>
-                    <TextInput
-                        style={styles.input} />
-                </View>
-                <View
-                    style={styles.view}>
-
-                    <Text
-                        style={{
-                            width: '85%',
-                            textAlign: "left",
-                            color: "#fff",
-                            fontSize: 20
-
-                        }}>Insertar documento</Text>
+                    <Text style={styles.texto}>Insertar documento</Text>
                     <TouchableOpacity
                         style={styles.touchDoc} >
                         <Text
                             style={{
                                 fontSize: 20,
-                                textAlign: "left"
+                                textAlign: "left",
+                                color:"#fff"
+                                
                             }}>
                             Click
                             </Text>
@@ -224,12 +158,14 @@ const styles = StyleSheet.create({
     touchDoc: {
         flex: 1,
         backgroundColor: "red",
-        width: "100%",
+        borderWidth: 3,
+        borderColor: "#fff",
+        width: "80%",
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderRadius: 25,
+        borderRadius: 10,
         shadowColor: "#000",
         paddingLeft: 15,
         shadowOffset: {
@@ -249,7 +185,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderRadius: 25,
+        borderRadius: 10,
         shadowColor: "#000",
         paddingLeft: 15,
         shadowOffset: {
@@ -264,14 +200,16 @@ const styles = StyleSheet.create({
     touch3: {
         marginTop: 10,
         flex: 1,
-        backgroundColor: "#4fc2ef",
+        borderWidth: 3,
+        borderColor: "#fff",
+        backgroundColor: "red",
         width: "50%",
         height: 40,
         marginBottom: 10,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderRadius: 25,
+        borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -307,6 +245,16 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         marginTop: 5,
         justifyContent: 'center',
+
+
+    },
+    texto: {
+
+        width: '100%',
+        textAlign: "left",
+        color: "#fff",
+        fontSize: 20,
+        margin: 5,
     }
 
 });

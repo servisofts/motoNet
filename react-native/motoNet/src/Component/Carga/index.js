@@ -1,35 +1,47 @@
 
 
 import React from 'react';
-import { View, Text, } from 'react-native';
+import {
+    View,
+    Text,
+    StyleSheet,
+    Animated,
+    Easing,
+    AppRegistry,
+} from 'react-native';
 import { connect } from 'react-redux';
 /* import storage from '../../Storage';
  */
 import Theme from '../../Styles/Theme.json'
 import Svg from '../../Svg';
 
+///import SkeletonContent from 'react-native-skeleton-content';
 
 const Carga = (props) => {
     const [obj, setObj] = React.useState(false);
-
-    if (obj) {
-
-        props.state.navigationReducer.navigate("LoginPage");
-
-
-    } else {
-
-        const delay = ms => new Promise(res => setTimeout(res, ms));
-        const yourFunction = async () => {
-            await delay(3000);
-            console.log("Waited 5s");
-            setObj(true);
-
-        };
-        yourFunction();
+    const state = {
+        rotateAnim: new Animated.Value(0)
     }
+
+      if (obj) {
+  
+          props.state.navigationReducer.navigate("LoginPage");
   
   
+      } else {
+  
+          const delay = ms => new Promise(res => setTimeout(res, ms));
+          const yourFunction = async () => {
+              await delay(3000);
+              console.log("Waited 5s");
+              setObj(true);
+  
+          };
+          yourFunction();
+      }
+
+    
+
     return (
 
         <View style={{
@@ -37,7 +49,6 @@ const Carga = (props) => {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: Theme.colors.fondo
         }}>
 
 
@@ -45,13 +56,8 @@ const Carga = (props) => {
 
 
             <View style={{ width: '100%', justifyContent: 'center', alignItems: 'center', }}>
-                <Svg name="LogoGlup"
-                    style={{
-                        width: 200,
-                        height: 200,
-                        fill: "#fff"
-
-                    }} />
+              
+              
 
                 <Text style={{ alignItems: 'center', fontWeight: 'bold', color: '#fff' }}>Estamos en etapa de desarrollo.</Text>
                 <Text style={{ alignItems: 'center', fontWeight: 'bold', color: '#fff' }}>Esperamos su comprencion</Text>
@@ -62,8 +68,22 @@ const Carga = (props) => {
     );
 
 }
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    image: {
+        width: 200,
+        height: 200,
+        borderRadius: 10,
+        backgroundColor: 'white'
+    }
+});
 const initStates = (state) => {
     return { state }
 };
-
 export default connect(initStates)(Carga);
+AppRegistry.registerComponent('Carga', () => Carga);
