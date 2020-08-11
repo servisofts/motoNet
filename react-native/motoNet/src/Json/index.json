@@ -1,0 +1,88 @@
+[
+    {
+        "titulo": "Arduino",
+        "descripcion": "Nano placa de automatizacion.",
+        "foto": "http://www.arduino.com/"
+        ,
+        "links": [
+            {
+                "url": "http://www.electronica-cyber.com/index.php/component/virtuemart/robotica/sku2146-arduino-nano-v3-0-original-atmega328p-ch340g-5v-16m-micro-controller-board-incluye-cable2019-07-13-17-05-17_-detail.html?Itemid=0#prettyPhoto",
+                "precio": "29,00 Bs.",
+                "detalle": "Bolivia"
+            },
+            {
+                "url": "https://www.nova.com.bo/arduino-nano.html",
+                "precio": "29,00 Bs.",
+                "detalle": "Bolivia"
+            },
+            {
+                "url": "https://www.aliexpress.com/item/33011803738.html?spm=a2g0o.productlist.0.0.7a324442sD5Ks6&s=p&ad_pvid=202008051205266195537366635370023205391_2&algo_pvid=6f7964a8-a209-4be6-881d-cd6cf8018945&algo_expid=6f7964a8-a209-4be6-881d-cd6cf8018945-1&btsid=0ab50f0815966543263856189ebcce&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_",
+                "precio": "$1,52 - $1,64",
+                "detalle": "China"
+            }
+        ]
+    },
+    {
+        "titulo": "Relay Moule",
+        "descripcion": "",
+        "foto": "https://imgaz1.staticbg.com/thumb/large/upload/2012/lidanpo/SKU099653h.jpg"
+        ,
+        "links": [
+            {
+                "url": "https://www.alibaba.com/product-detail/1-Channel-5V-Relay-Module-5v_60821911635.html?spm=a2700.themePage.offer-list.2.3c575d28YizgeP",
+                "precio": "$0.14 - $0.35",
+                "detalle": "China"
+            },
+            {
+                "url": "https://www.aliexpress.com/item/4000620187131.html?spm=a2g0o.productlist.0.0.6fbb60faIcebTv&s=p&ad_pvid=202008051135214377458920055760000558271_7&algo_pvid=82d5072a-3c39-4470-b7f4-45e124735ffd&algo_expid=82d5072a-3c39-4470-b7f4-45e124735ffd-6&btsid=0ab6f82115966525216238065e2d2b&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_",
+                "precio": "$0.73 - 4.25",
+                "detalle": "China"
+            },
+            {
+                "url": "https://www.nova.com.bo/relay-de-2-canales-para-arduino-pic-o-microcontroladores.html",
+                "precio": "18,00 Bs",
+                "detalle": "Bolivia"
+            }
+        ]
+    },
+    {
+        "titulo": "SIM800L",
+        "descripcion": "1pcs Smallest SIM800L GPRS GSM Module MicroSIM Card Core BOard Quad-band TTL Serial Port C52 SIM800",
+        "foto": "https://hetpro-store.com/images/detailed/11/minisim_02.png",
+        "links": [
+            {
+                "url": "https://www.aliexpress.com/item/32969640976.html?spm=a2g0o.productlist.0.0.55073c8dCSsErA&algo_pvid=89e33351-0a1c-4a59-a8e4-9ebf430b3f42&algo_expid=89e33351-0a1c-4a59-a8e4-9ebf430b3f42-2&btsid=0ab6f82215966549114855032e0207&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_",
+                "precio": "$ 1.49",
+                "detalle": "China"
+            },
+            {
+                "url": "https://www.amazon.com/-/es/SIM800-m%C3%B3dulo-Expansion-V2-0-Quad-Band-Raspberry-geekstory/dp/B079FP5287",
+                "precio": "$ 21.99",
+                "detalle": "Amazon"
+            }
+            ,
+            {
+                "url": "https://www.nova.com.bo/modulo-sim800-gsm-gprs-sms.html",
+                "precio": "170,00 Bs",
+                "detalle": "Bolivia"
+            }
+        ]
+    },
+    {
+        "titulo": "MB102",
+        "descripcion": "",
+        "foto": "https://cdn.shopify.com/s/files/1/0557/2945/products/Fuente_Tipo_A_-_ElectroCrea_x700.png?v=1546435983",
+        "links": [
+            {
+                "url": "https://www.nova.com.bo/fuente-para-protoboard-mb102-5v-y-33v.html",
+                "precio": "12,00 Bs",
+                "detalle": "Bolivia"
+            },
+            {
+                "url": "https://www.aliexpress.com/item/32382955228.html?spm=a2g0o.productlist.0.0.2a256d17uHgNtz&algo_pvid=2d0c2494-c6c1-4ffc-a9c1-4f6d3152f745&algo_expid=2d0c2494-c6c1-4ffc-a9c1-4f6d3152f745-5&btsid=0ab6d69f15966554722326821e3211&ws_ab_test=searchweb0_0,searchweb201602_,searchweb201603_",
+                "precio": "$ 0.71",
+                "detalle": "AliExpress"
+            }
+        ]
+    }
+]
