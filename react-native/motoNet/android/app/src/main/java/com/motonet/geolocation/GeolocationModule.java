@@ -26,7 +26,7 @@ public class GeolocationModule extends ReactContextBaseJavaModule {
     //Mandatory function getName that specifies the module name
     @Override
     public String getName() {
-        return "Device";
+        return "Geolocation";
     }
     //Custom function that we are going to export to JS
     @ReactMethod
