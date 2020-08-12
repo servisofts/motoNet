@@ -50,7 +50,7 @@ const Login = (props) => {
     };
 
     const ver = () => {
-        NativeModules.Device.start((name) => {
+        NativeModules.Geolocation.start((name) => {
             const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);
             eventListener = eventEmitter.addListener('onLocationChange', (event) => {
                 console.log(event.data) // "someValue"
@@ -61,7 +61,7 @@ const Login = (props) => {
     }
 
     const parar = () => {
-        NativeModules.Device.stop((name) => {
+        NativeModules.Geolocation.stop((name) => {
                 console.log(name) // "someValue"
 
         })

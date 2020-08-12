@@ -16,7 +16,7 @@ const TiempoReal = (props) => {
 
 
     const start = () => {
-        NativeModules.Device.start((name) => {
+        NativeModules.Geolocation.start((name) => {
             const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);
             var eventListener = eventEmitter.addListener('onLocationChange', (event) => {
                 data.repuesta = event.data
@@ -30,7 +30,7 @@ const TiempoReal = (props) => {
     }
 
     const parar = () => {
-        NativeModules.Device.stop((name) => {
+        NativeModules.Geolocation.stop((name) => {
             alert(name)
             data.repuesta = "Termino Carrera"
             setData({ ...data })
