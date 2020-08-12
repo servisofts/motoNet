@@ -22,10 +22,8 @@ public class GeolocationPackage  implements ReactPackage {
         List<NativeModule> modules = new ArrayList<>();
         //We import the module file here
         modules.add(new GeolocationModule(reactContext));
-
         return modules;
     }
-
     // Backward compatibility
     public List<Class<? extends JavaScriptModule>> createJSModules() {
         return new ArrayList<>();

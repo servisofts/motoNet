@@ -49,9 +49,25 @@ const Login = (props) => {
 
     };
 
+    const ver = () => {
+        NativeModules.Device.start((name) => {
+            const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);
+            eventListener = eventEmitter.addListener('onLocationChange', (event) => {
+                console.log(event.data) // "someValue"
+            });
+        })
 
 
+    }
 
+    const parar = () => {
+        NativeModules.Device.stop((name) => {
+                console.log(name) // "someValue"
+
+        })
+
+
+    }
     const _fbAuth = () => {
         LoginManager.logInWithPermissions(["public_profile"]).then(
             function (result) {
@@ -252,14 +268,6 @@ const Login = (props) => {
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => {
-                                NativeModules.Geolocation.requestPermissions("Location").then(resp => alert(resp));
-                                const calendarManagerEmitter = new NativeEventEmitter(NativeModules.Geolocation);
-                                const subscription = calendarManagerEmitter.addListener(
-                                    'onLocationChange',
-                                    (reminder) => console.log(reminder.name)
-                                );
-                            }}
                             style={
                                 styles.touch
                             }>
