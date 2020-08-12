@@ -9,11 +9,10 @@ import PruebaPage from './PruebaPage';
 
 export const getPages = () => {
     return {
-        ListaPaginasPage,
+        CargaPage,
         ConsolaPage,
         LoginPage,
         RegistroUsuarioPage,
-        CargaPage,
         InicioPage,
         PruebaPage
 
