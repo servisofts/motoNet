@@ -16,26 +16,25 @@ const TiempoReal = (props) => {
 
 
     const start = () => {
-        NativeModules.Geolocation.start((name) => {
-            const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);
+        NativeModules.Geolocation.start("Location").then(resp => {
+            const eventEmitter = new NativeEventEmitter(NativeModules.Geolocation);
             var eventListener = eventEmitter.addListener('onLocationChange', (event) => {
-                data.repuesta = event.data
+                data.repuesta = event
                 data.cantidad++;
                 setData({ ...data })
                 return <View />
             });
-        })
+        });
+  
 
 
     }
 
     const parar = () => {
-        NativeModules.Geolocation.stop((name) => {
-            alert(name)
+        NativeModules.Geolocation.stop("Location").then(resp => {
             data.repuesta = "Termino Carrera"
             setData({ ...data })
             return <View />
-
         })
     }
     return (
@@ -61,7 +60,7 @@ const TiempoReal = (props) => {
             </TouchableOpacity>
             <Text
                 style={{
-                    fonSize: 15,
+                    fontSize: 15,
                     textAlign: "center"
                 }}>
                 {JSON.stringify(data)}

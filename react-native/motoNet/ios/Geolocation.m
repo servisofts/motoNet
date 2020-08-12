@@ -51,7 +51,8 @@ RCT_EXPORT_METHOD(hasPermissions:(NSString *)permissionType
   resolve(@(locationAllowed));
 }
 
-RCT_EXPORT_METHOD(stop:requestPermissionsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(stop:(NSString *)permissionType
+                 requestPermissionsWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
     NSArray *arbitraryReturnVal = @[@"Stop Ubicacion..."];
@@ -60,7 +61,8 @@ RCT_EXPORT_METHOD(stop:requestPermissionsWithResolver:(RCTPromiseResolveBlock)re
   resolve(arbitraryReturnVal);
 }
 
-RCT_EXPORT_METHOD(start:requestPermissionsWithResolver:(RCTPromiseResolveBlock)resolve
+RCT_EXPORT_METHOD(start:(NSString *)permissionType
+                 requestPermissionsWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
   NSArray *arbitraryReturnVal = @[@"Iniciando Ubicacion"];
@@ -106,8 +108,12 @@ RCT_EXPORT_METHOD(start:requestPermissionsWithResolver:(RCTPromiseResolveBlock)r
                           @"timestamp": @([location.timestamp timeIntervalSince1970] * 1000) // in ms
                         };
   
-  NSString *eventName = @"entro";
-     [self sendEventWithName:@"onLocationChange" body:@{@"data": eventName}];
+            NSObject *eventName = @{
+              @"lat":@(location.coordinate.latitude),
+              @"lng":@(location.coordinate.latitude)
+                                    
+            };
+                          [self sendEventWithName:@"onLocationChange" body:@{@"data": eventName}];
   
   
     //RCTLogInfo(@"significantLocationChange : %@", lastLocationEvent);
