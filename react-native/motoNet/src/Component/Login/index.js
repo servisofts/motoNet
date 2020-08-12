@@ -7,7 +7,8 @@ import {
     TextInput,
     ScrollView,
     StyleSheet,
-    NativeModules
+    NativeModules,
+    NativeEventEmitter
 } from 'react-native';
 import Svg from '../../Svg';
 import base64 from 'react-native-base64'
@@ -155,7 +156,7 @@ const Login = (props) => {
                             flexDirection: 'row',
                         }}>
                         <TouchableOpacity
-                        onPress={() => props.navigation.navigate("InicioPage")}
+                            onPress={() => props.navigation.navigate("InicioPage")}
 
                             style={styles.touch4}>
                             <Text
@@ -251,8 +252,13 @@ const Login = (props) => {
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={()=>{
-                                NativeModules.Geolocation.getDeviceName((err, name) => console.log(err, name));
+                            onPress={() => {
+                                NativeModules.Geolocation.requestPermissions("Location").then(resp => alert(resp));
+                                const calendarManagerEmitter = new NativeEventEmitter(NativeModules.Geolocation);
+                                const subscription = calendarManagerEmitter.addListener(
+                                    'onLocationChange',
+                                    (reminder) => console.log(reminder.name)
+                                );
                             }}
                             style={
                                 styles.touch

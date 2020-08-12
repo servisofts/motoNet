@@ -18,6 +18,7 @@
 		5E27FEC353AB44D8D3D4125A /* libPods-motoNet-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D64EA49956FCF41406CE370 /* libPods-motoNet-tvOS.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B0210D6D2E91E0289272B1FF /* libPods-motoNet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BC7CFE090A1E1E7B748B3FF /* libPods-motoNet.a */; };
+		C8EB84F024E42A9200A29169 /* Geolocation.m in Sources */ = {isa = PBXBuildFile; fileRef = C8EB84EF24E42A9200A29169 /* Geolocation.m */; };
 		CB22B7574BA3FB387D00A3C8 /* libPods-motoNet-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E186323F7AB68C6A09C44C4F /* libPods-motoNet-tvOSTests.a */; };
 		CD3BB6CF55FC95836C57938E /* libPods-motoNet-motoNetTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EC18EAE4DDB6910619929264 /* libPods-motoNet-motoNetTests.a */; };
 /* End PBXBuildFile section */
@@ -62,6 +63,8 @@
 		6CECDE4123C229F395A69147 /* Pods-motoNet.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-motoNet.debug.xcconfig"; path = "Target Support Files/Pods-motoNet/Pods-motoNet.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = motoNet/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B1FD35588B5BE39311DF8D5B /* Pods-motoNet-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-motoNet-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-motoNet-tvOSTests/Pods-motoNet-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C8EB84EE24E42A5F00A29169 /* Geolocation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Geolocation.h; sourceTree = "<group>"; };
+		C8EB84EF24E42A9200A29169 /* Geolocation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Geolocation.m; sourceTree = "<group>"; };
 		E186323F7AB68C6A09C44C4F /* libPods-motoNet-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-motoNet-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EC18EAE4DDB6910619929264 /* libPods-motoNet-motoNetTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-motoNet-motoNetTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
@@ -125,6 +128,7 @@
 		13B07FAE1A68108700A75B9A /* motoNet */ = {
 			isa = PBXGroup;
 			children = (
+				C8EB84ED24E42A3100A29169 /* Geolocation */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -195,6 +199,15 @@
 				2D02E4901E0B4A5D006451C7 /* motoNet-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C8EB84ED24E42A3100A29169 /* Geolocation */ = {
+			isa = PBXGroup;
+			children = (
+				C8EB84EE24E42A5F00A29169 /* Geolocation.h */,
+				C8EB84EF24E42A9200A29169 /* Geolocation.m */,
+			);
+			name = Geolocation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -572,6 +585,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C8EB84F024E42A9200A29169 /* Geolocation.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -687,6 +701,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MUBDVWB883;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = motoNet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -860,7 +875,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -913,7 +928,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.3;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -921,6 +936,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -936,7 +952,7 @@
 				00E356F71AD99517003FC87E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "motoNet" */ = {
 			isa = XCConfigurationList;
@@ -945,7 +961,7 @@
 				13B07F951A680F5B00A75B9A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		2D02E4BA1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "motoNet-tvOS" */ = {
 			isa = XCConfigurationList;
@@ -954,7 +970,7 @@
 				2D02E4981E0B4A5E006451C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		2D02E4BB1E0B4A5E006451C7 /* Build configuration list for PBXNativeTarget "motoNet-tvOSTests" */ = {
 			isa = XCConfigurationList;
@@ -963,7 +979,7 @@
 				2D02E49A1E0B4A5E006451C7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "motoNet" */ = {
 			isa = XCConfigurationList;
@@ -972,7 +988,7 @@
 				83CBBA211A601CBA00E9B192 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
