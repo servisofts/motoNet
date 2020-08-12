@@ -7,7 +7,8 @@ import {
     TextInput,
     ScrollView,
     StyleSheet,
-    NativeModules
+    NativeModules,
+    NativeEventEmitter
 } from 'react-native';
 import Svg from '../../Svg';
 import base64 from 'react-native-base64'
@@ -48,9 +49,25 @@ const Login = (props) => {
 
     };
 
+    const ver = () => {
+        NativeModules.Device.start((name) => {
+            const eventEmitter = new NativeEventEmitter(NativeModules.ToastExample);
+            eventListener = eventEmitter.addListener('onLocationChange', (event) => {
+                console.log(event.data) // "someValue"
+            });
+        })
 
 
+    }
 
+    const parar = () => {
+        NativeModules.Device.stop((name) => {
+                console.log(name) // "someValue"
+
+        })
+
+
+    }
     const _fbAuth = () => {
         LoginManager.logInWithPermissions(["public_profile"]).then(
             function (result) {
@@ -155,7 +172,7 @@ const Login = (props) => {
                             flexDirection: 'row',
                         }}>
                         <TouchableOpacity
-                        onPress={() => props.navigation.navigate("InicioPage")}
+                            onPress={() => props.navigation.navigate("InicioPage")}
 
                             style={styles.touch4}>
                             <Text
@@ -251,9 +268,6 @@ const Login = (props) => {
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={()=>{
-                                NativeModules.Geolocation.getDeviceName((err, name) => console.log(err, name));
-                            }}
                             style={
                                 styles.touch
                             }>
