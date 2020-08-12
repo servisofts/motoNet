@@ -6,12 +6,14 @@ import {
     Text,
     TextInput,
     ScrollView,
-    StyleSheet
+    StyleSheet,
+    NativeModules
 } from 'react-native';
 import Svg from '../../Svg';
 import base64 from 'react-native-base64'
 import { LoginManager } from "react-native-fbsdk";
 import Theme from '../../Styles/Theme.json'
+
 const Login = (props) => {
 
 
@@ -144,6 +146,7 @@ const Login = (props) => {
                     </View>
 
                     <View
+
                         style={{
                             marginTop: 10,
                             flex: 1,
@@ -152,6 +155,8 @@ const Login = (props) => {
                             flexDirection: 'row',
                         }}>
                         <TouchableOpacity
+                        onPress={() => props.navigation.navigate("InicioPage")}
+
                             style={styles.touch4}>
                             <Text
                                 style={{
@@ -246,6 +251,9 @@ const Login = (props) => {
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
+                            onPress={()=>{
+                                NativeModules.Geolocation.getDeviceName((err, name) => console.log(err, name));
+                            }}
                             style={
                                 styles.touch
                             }>
