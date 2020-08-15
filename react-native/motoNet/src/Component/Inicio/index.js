@@ -7,12 +7,14 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    NativeModules,
+    NativeEventEmitter,
 } from 'react-native';
 import Svg from '../../Svg';
 import Theme from '../../Styles/Theme.json'
 
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 import ModeloComponent from './ModeloComponent';
 var mapa;
 const Inicio = (props) => {
@@ -24,10 +26,30 @@ const Inicio = (props) => {
         longitudeDelta: 1,
     });
 
+    const [lugar, setlugar] = React.useState({
+        latitude: -17.613977,
+        longitude: -63.665321,
+    });
 
 
 
+    const start = () => {
+        NativeModules.Geolocation.start(1).then(resp => {
+            const eventEmitter = new NativeEventEmitter(NativeModules.Geolocation);
+            var eventListener = eventEmitter.addListener('onLocationChange', (event) => {
+                console.log(event);
+                var obj = JSON.parse(event.data);
+                setlugar({
+                    latitude : obj.latitude,
+                    longitude : obj.longitude
+                })
+                return <View />
+            });
+        });
 
+
+
+    }
 
     const markerClick = (obj) => {
         console.log(obj);
@@ -69,12 +91,16 @@ const Inicio = (props) => {
                 showsUserLocation={true}
                 ref={map => { mapa = map }}
             >
+                <Marker
+                    coordinate={lugar}
+                    title={"Hola"}
+                    description={"nose"}
+                />
+
             </MapView>
 
             <TouchableOpacity
-                onPress={() => {
-                    props.state.naviDrawerReducer.openBar()
-                }}
+                onPress={start}
                 style={styles.icono}>
 
                 <Svg name="LogoMoto"
@@ -84,8 +110,8 @@ const Inicio = (props) => {
 
                     }} />
             </TouchableOpacity>
-                
-{/*             <ModeloComponent componente={props.state.modeloComponenteReducer.componente} />
+
+            {/*             <ModeloComponent componente={props.state.modeloComponenteReducer.componente} />
  */}
         </View>
     )
@@ -145,7 +171,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 100,
         backgroundColor: "red",
-        position: "absolute",   
+        position: "absolute",
         alignItems: 'center',
         justifyContent: 'center',
         top: 10,

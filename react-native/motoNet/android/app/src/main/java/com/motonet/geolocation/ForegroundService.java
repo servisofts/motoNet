@@ -34,7 +34,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ForegroundService extends Service {
-
+    private int varian =1;
     private LocationListener listener;
     private LocationManager locationManager;
 
@@ -53,8 +53,12 @@ public class ForegroundService extends Service {
                 WritableMap params = Arguments.createMap();
                 JSONObject data = new JSONObject();
                 try {
-                    data.put("lat",latfin);
-                    data.put("lng",lngfin);
+                    data.put("latitude",location.getLatitude());
+                    data.put("longitude",location.getLongitude());
+                    data.put("altitude",location.getAltitude());
+                    data.put("accuracy",location.getAccuracy());
+                    data.put("speed",location.getSpeed());
+                    data.put("time",location.getTime());
 
                 } catch (JSONException e) {
 
@@ -100,8 +104,9 @@ public class ForegroundService extends Service {
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, 1, listener);
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, 1, listener);
+
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1, varian, listener);
+        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1, varian, listener);
 
 
 
@@ -109,7 +114,7 @@ public class ForegroundService extends Service {
     }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
+        varian = intent.getIntExtra("varian",1);
         createNotificationChannel();
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this,

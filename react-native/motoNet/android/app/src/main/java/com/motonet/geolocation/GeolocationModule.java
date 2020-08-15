@@ -6,6 +6,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.facebook.react.bridge.Callback;
+import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -41,27 +42,27 @@ public class GeolocationModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void start(Callback cb) {
+    public void start(int varin, Promise cb) {
         try{
             SingletonCallback.getSingletonInstance( getReactApplicationContext());
             Intent serviceIntent = new Intent(getReactApplicationContext(), ForegroundService.class);
             ContextCompat.startForegroundService(getReactApplicationContext(), serviceIntent);
-
-            cb.invoke( "Iniciando Carrera");
+            serviceIntent.putExtra("varian",varin);
+            cb.resolve( "Iniciando Carrera");
 
         }catch (Exception e){
-            cb.invoke(e.toString(), "error inicio carrera");
+            cb.resolve("error inicio carrera");
         }
     }
 
     @ReactMethod
-    public void stop(Callback cb) {
+    public void stop(String nombre,Promise cb) {
         try{
             Intent serviceIntent = new Intent(getReactApplicationContext(), ForegroundService.class);
             getCurrentActivity().stopService(serviceIntent);
-            cb.invoke( "parrar  Carrera");
+            cb.resolve( "parrar  Carrera");
         }catch (Exception e){
-            cb.invoke(e.toString(), "error repuesta");
+            cb.resolve( "error repuesta");
         }
     }
 
