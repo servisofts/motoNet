@@ -16,7 +16,7 @@ const TiempoReal = (props) => {
 
 
     const start = () => {
-        NativeModules.Geolocation.start("Location").then(resp => {
+        NativeModules.Geolocation.start(1).then(resp => {
             const eventEmitter = new NativeEventEmitter(NativeModules.Geolocation);
             var eventListener = eventEmitter.addListener('onLocationChange', (event) => {
                 data.repuesta = event

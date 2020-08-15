@@ -61,7 +61,7 @@ RCT_EXPORT_METHOD(stop:(NSString *)permissionType
   resolve(arbitraryReturnVal);
 }
 
-RCT_EXPORT_METHOD(start:(NSString *)permissionType
+RCT_EXPORT_METHOD(start:(NSInteger *)vearing
                  requestPermissionsWithResolver:(RCTPromiseResolveBlock)resolve
                  rejecter:(RCTPromiseRejectBlock)reject)
 {
@@ -76,14 +76,17 @@ RCT_EXPORT_METHOD(start:(NSString *)permissionType
   
   locationManager.delegate = self;
   locationManager.allowsBackgroundLocationUpdates = true;
-  locationManager.pausesLocationUpdatesAutomatically = true;
-
+  locationManager.pausesLocationUpdatesAutomatically = false;
+       
   if ([locationManager respondsToSelector:@selector(requestAlwaysAuthorization)]) {
     [locationManager requestAlwaysAuthorization];
   } else if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
     [locationManager requestWhenInUseAuthorization];
   }
-
+  
+  locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+  locationManager.distanceFilter = !vearing;
+  
   [locationManager startUpdatingLocation];
   [locationManager startMonitoringSignificantLocationChanges];
  
@@ -96,24 +99,17 @@ RCT_EXPORT_METHOD(start:(NSString *)permissionType
     CLLocation* location = [locations lastObject];
     
     lastLocationEvent = @{
-                          @"coords": @{
                                   @"latitude": @(location.coordinate.latitude),
                                   @"longitude": @(location.coordinate.longitude),
                                   @"altitude": @(location.altitude),
                                   @"accuracy": @(location.horizontalAccuracy),
-                                  @"altitudeAccuracy": @(location.verticalAccuracy),
                                   @"heading": @(location.course),
                                   @"speed": @(location.speed),
-                                  },
-                          @"timestamp": @([location.timestamp timeIntervalSince1970] * 1000) // in ms
+                                  @"time": @([location.timestamp timeIntervalSince1970] * 1000) // in ms
                         };
   
-            NSObject *eventName = @{
-              @"lat":@(location.coordinate.latitude),
-              @"lng":@(location.coordinate.latitude)
-                                    
-            };
-                          [self sendEventWithName:@"onLocationChange" body:@{@"data": eventName}];
+     
+                          [self sendEventWithName:@"onLocationChange" body:@{@"data": lastLocationEvent}];
   
   
     //RCTLogInfo(@"significantLocationChange : %@", lastLocationEvent);
