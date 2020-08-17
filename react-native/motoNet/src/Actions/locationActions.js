@@ -3,16 +3,17 @@ export const getAllOpen = (socket) => async (dispatch) => {
     const _obj = {
         component: "location",
         type: "getAllOpen",
+        estado:"cargando"
     }
 
-    if (!socket) {
+    if (!socket.isOpen) {
         dispatch({
             ..._obj,
             estado: "error"
         })
         return;
     }
-    socket.send(JSON.stringify(_obj));
+    socket.send(_obj);
     dispatch({
         ..._obj,
         estado: "cargando"
@@ -26,16 +27,17 @@ export const getAllClose = (socket) => async (dispatch) => {
     const _obj = {
         component: "location",
         type: "getAllClose",
+        estado:"cargando"
     }
 
-    if (!socket) {
+    if (!socket.isOpen) {
         dispatch({
             ..._obj,
             estado: "error"
         })
         return;
     }
-    socket.send(JSON.stringify(_obj));
+    socket.send(_obj);
     dispatch({
         ..._obj,
         estado: "cargando"

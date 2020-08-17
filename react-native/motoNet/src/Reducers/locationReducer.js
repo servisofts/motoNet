@@ -74,11 +74,13 @@ const onLocationChangeSend = (newState, action) => {
     return newState;
 }
 const getAllClose = (newState, action) => {
-    console.log("entro send location");
+    console.log("entro al cerrar ");
+    newState.isMotos = false;
     return newState;
 }
 const getAllOpen = (newState, action) => {
-    console.log("entro");
+    console.log("emtrp open");
+    newState.isMotos = true;
     if (action.estado == "exito") {
         if (!newState.locations) {
             newState.locations = {};
@@ -86,13 +88,15 @@ const getAllOpen = (newState, action) => {
         action.data.map((obj, key) => {
             newState.locations[obj.key] = action.data[key];
         })
+       
     }
     return newState;
 }
 
 const getAllUpdate = (newState, action) => {
-    console.log("entro");
+    
     if (action.estado == "exito") {
+        newState.isMotos = true;
         if (!newState.locations) {
             newState.locations = {};
         }

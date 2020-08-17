@@ -95,20 +95,46 @@ const Inicio = (props) => {
             </Marker>
         )
     }
+
+
+    const getMarkersAll = () => {
+        if (!props.state.locationReducer.locations) {
+            return <View />
+        }
+        var data = props.state.locationReducer.locations;
+        Object.keys(data).map((key)=>{
+            var obj=data[key];
+            var json = { latitude: obj.latitude, longitude: obj.longitude };
+            return (
+                <Marker
+                    coordinate={json}
+                >
+                    <Svg name="MarkerMoto"
+                        style={{
+                            width: 50,
+                            height: 50,
+    
+                        }} />
+                </Marker>
+            )
+        })
+        
+        
+    }
     const getIconoMoto = () => {
         var texto = "Ocultar"
-        var colors = "#353"
-        if (props.state.locationReducer.isMotos) {
-            colors = "#4f2"
-            var texto = "Ver motos"
+        var colors = "#f00"
+        if (!props.state.locationReducer.isMotos) {
+            colors = "#242"
+             texto = "Ver motos"
         }
         return (<TouchableOpacity
             onPress={() => {
                 if (props.state.locationReducer.isMotos) {
-                    props.getAllClose()
+                    props.getAllClose(props.state.socketClienteReducer);
                     return <View />
                 }
-                props.getAllOpen()
+                props.getAllOpen(props.state.socketClienteReducer)
                 return <View />
             }}
             style={[styles.icono2, {
@@ -141,6 +167,7 @@ const Inicio = (props) => {
                 ref={map => { mapa = map }}
             >
                 {getMarker()}
+                {getMarkersAll()}
 
             </MapView>
 
