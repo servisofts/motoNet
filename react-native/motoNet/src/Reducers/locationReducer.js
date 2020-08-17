@@ -76,6 +76,7 @@ const onLocationChangeSend = (newState, action) => {
 const getAllClose = (newState, action) => {
     console.log("entro al cerrar ");
     newState.isMotos = false;
+     newState.locations=[];
     return newState;
 }
 const getAllOpen = (newState, action) => {
@@ -96,7 +97,6 @@ const getAllOpen = (newState, action) => {
 const getAllUpdate = (newState, action) => {
     
     if (action.estado == "exito") {
-        newState.isMotos = true;
         if (!newState.locations) {
             newState.locations = {};
         }
