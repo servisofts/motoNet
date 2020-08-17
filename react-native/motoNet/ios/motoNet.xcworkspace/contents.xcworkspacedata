@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:../../../prueba.gpx">
+   </FileRef>
+   <FileRef
       location = "group:motoNet.xcodeproj">
    </FileRef>
    <FileRef

@@ -31,9 +31,8 @@ export const init = (store) => {
             }
 
                 objSend.type = "onLocationChange";
-                objSend.data = JSON.parse(event.data);
+                objSend.data = event.data;
                 store.dispatch(objSend);
-         
                 //if (!this.props.state.SocketClienteReducer.isOpen) {}
             });
         });
