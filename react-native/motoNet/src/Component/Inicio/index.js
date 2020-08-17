@@ -102,7 +102,8 @@ const Inicio = (props) => {
             return <View />
         }
         var data = props.state.locationReducer.locations;
-        Object.keys(data).map((key)=>{
+        var resp;
+        return Object.keys(data).map((key)=>{
             var obj=data[key];
             var jsons = { latitude: obj.latitude, longitude: obj.longitude };
             return (

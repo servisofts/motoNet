@@ -19,6 +19,9 @@ export const init = (store) => {
             const eventEmitter = new NativeEventEmitter(NativeModules.Geolocation);
             var eventListener = eventEmitter.addListener('onLocationChange', (event) => {
 
+                if(!event.data.latitude){
+                    event.data =  JSON.parse(event.data);
+                }
                 var state = store.getState();
                 if (state.socketClienteReducer) {
                     if (state.socketClienteReducer.isOpen) {
@@ -32,9 +35,7 @@ export const init = (store) => {
                 }
 
                 
-                if(!event.data.latitude){
-                    event.data =  JSON.parse(event.data);
-                }
+            
                 objSend.data = event.data;
                 
                 objSend.type = "onLocationChange";
