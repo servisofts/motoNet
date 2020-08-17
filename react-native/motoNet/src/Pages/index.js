@@ -10,7 +10,6 @@ import SocketClientePage from './SocketClientePage';
 
 export const getPages = () => {
     return {
-        ListaPaginasPage,
         CargaPage,
         ConsolaPage,
         LoginPage,

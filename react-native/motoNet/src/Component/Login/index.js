@@ -155,7 +155,7 @@ const Login = (props) => {
                             flexDirection: 'row',
                         }}>
                         <TouchableOpacity
-                            onPress={() => props.navigation.replace("InicioPage")}
+                            onPress={() => props.navigation.navigate("InicioPage")}
 
                             style={styles.touch4}>
                             <Text

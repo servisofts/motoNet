@@ -1,5 +1,6 @@
 const initialState = {
     isOpen: false,
+    isMotos: false,
     history: [],
     estado: false
 }
@@ -7,7 +8,6 @@ export default (state, action) => {
     if (!state) state = initialState
     if (action.component === "location") {
         var newState = { ...state }
-        //console.log(action)
         switch (action.type) {
             case "init":
                 newState = init(newState, action);
@@ -21,8 +21,17 @@ export default (state, action) => {
             case "close":
                 newState = close(newState, action);
                 break;
-            case "send":
-                newState = send(newState, action);
+            case "onLocationChangeSend":
+                newState = onLocationChangeSend(newState, action);
+                break;
+            case "getAllOpen":
+                newState = getAllOpen(newState, action);
+                break;
+            case "getAllClose":
+                newState = getAllClose(newState, action);
+                break;
+            case "getAllUpdate":
+                newState = getAllUpdate(newState, action);
                 break;
             default: break;
         }
@@ -60,7 +69,36 @@ const close = (newState, action) => {
     return newState;
 }
 
-const send = (newState, action) => {
+const onLocationChangeSend = (newState, action) => {
     console.log("entro send location");
+    return newState;
+}
+const getAllClose = (newState, action) => {
+    console.log("entro send location");
+    return newState;
+}
+const getAllOpen = (newState, action) => {
+    console.log("entro");
+    if (action.estado == "exito") {
+        if (!newState.locations) {
+            newState.locations = {};
+        }
+        action.data.map((obj, key) => {
+            newState.locations[obj.key] = action.data[key];
+        })
+    }
+    return newState;
+}
+
+const getAllUpdate = (newState, action) => {
+    console.log("entro");
+    if (action.estado == "exito") {
+        if (!newState.locations) {
+            newState.locations = {};
+        }
+        action.data.map((obj, key) => {
+            newState.locations[obj.key] = action.data[key];
+        })
+    }
     return newState;
 }

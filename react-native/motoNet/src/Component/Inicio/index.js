@@ -1,5 +1,6 @@
 import React from 'react';
 import * as mapaActions from '../../Actions/mapaActions'
+import * as locationActions from '../../Actions/locationActions'
 
 import { connect } from 'react-redux';
 import {
@@ -33,7 +34,6 @@ const Inicio = (props) => {
     });
     if (!props.state.locationReducer.isOpen) {
         props.state.locationReducer.open();
-
     }
 
 
@@ -73,6 +73,9 @@ const Inicio = (props) => {
         setZoom(false);
     }
 
+
+
+
     const getMarker = () => {
         if (!props.state.locationReducer.data) {
             return <View />
@@ -92,12 +95,46 @@ const Inicio = (props) => {
             </Marker>
         )
     }
+    const getIconoMoto = () => {
+        var texto = "Ocultar"
+        var colors = "#353"
+        if (props.state.locationReducer.isMotos) {
+            colors = "#4f2"
+            var texto = "Ver motos"
+        }
+        return (<TouchableOpacity
+            onPress={() => {
+                if (props.state.locationReducer.isMotos) {
+                    props.getAllClose()
+                    return <View />
+                }
+                props.getAllOpen()
+                return <View />
+            }}
+            style={[styles.icono2, {
+                backgroundColor: colors,
+            }]}>
 
+            <Svg name="MarkerMoto"
+                style={{
+                    width: 30,
+                    height: 30,
+
+                }} />
+            <Text style={{ color: "#fff", fontSize: 10, }}>
+                {texto}
+            </Text>
+        </TouchableOpacity>)
+
+
+
+
+    }
     return (
         <View style={styles.container}>
 
             <MapView
-               
+
                 style={styles.map}
                 initialRegion={region}
                 // showsUserLocation={true}
@@ -119,7 +156,7 @@ const Inicio = (props) => {
                     }} />
             </TouchableOpacity>
 
-
+            {getIconoMoto()}
         </View>
     )
 
@@ -193,11 +230,33 @@ const styles = StyleSheet.create({
 
         elevation: 5,
     },
+    icono2: {
+
+        width: 65,
+        height: 65,
+
+        borderRadius: 100,
+        position: "absolute",
+        alignItems: 'center',
+        justifyContent: 'center',
+        top: 10,
+        right: 10,
+        shadowColor: "#fff",
+        shadowOffset: {
+            width: 0,
+            height: -2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+    },
 });
 const initActions = ({
-    ...mapaActions
+    ...mapaActions,
+    ...locationActions
 });
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(Inicio);
+export default connect(initStates,initActions)(Inicio);
