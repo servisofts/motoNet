@@ -83,7 +83,7 @@ const Inicio = (props) => {
             <Marker
                 coordinate={json}
             >
-                <Svg name="LogoMotoRed"
+                <Svg name="MarkerMoto"
                     style={{
                         width: 50,
                         height: 50,
