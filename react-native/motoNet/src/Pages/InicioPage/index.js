@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import Inicio from '../../Component/Inicio';
-class LoginPage extends Component {
+class InicioPage extends Component {
     static navigationOptions = {
         headerShown: false,
     }
@@ -32,4 +32,4 @@ const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates)(LoginPage);
+export default connect(initStates)(InicioPage);

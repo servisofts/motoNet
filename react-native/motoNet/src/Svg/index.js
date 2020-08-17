@@ -13,6 +13,7 @@ import Facebook, { ReactComponent as Facebookw } from '../img/facebook.svg';
 import Icloud, { ReactComponent as Icloudw } from '../img/icloud.svg';
 import Arreglo, { ReactComponent as Arreglow } from '../img/arreglo.svg';
 import MotoNetBW, { ReactComponent as MotoNetBWw } from '../img/MotoNetBR.svg';
+import MotoNetBR, { ReactComponent as MotoNetBRw } from '../img/MotoNetBW.svg';
 
 const Svg = (props) => {
     const isWeb = Platform.OS === 'web';
@@ -34,6 +35,11 @@ const Svg = (props) => {
                 <MotoNetBWw style={props.style} />
                 :
                 <MotoNetBW style={props.style} />
+        case "LogoMotoRed":
+            return isWeb ?
+                <MotoNetBRw style={props.style} />
+                :
+                <MotoNetBR style={props.style} />
         case "correo":
             return isWeb ?
                 <Emailw style={props.style} />

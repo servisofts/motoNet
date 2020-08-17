@@ -10,44 +10,36 @@ import {
     TouchableWithoutFeedback,
     NativeModules,
     NativeEventEmitter,
+
 } from 'react-native';
 import Svg from '../../Svg';
 import Theme from '../../Styles/Theme.json'
 
 import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
-import ModeloComponent from './ModeloComponent';
+
 var mapa;
 const Inicio = (props) => {
     const [zoom, setZoom] = React.useState(false);
     const [region] = React.useState({
-        latitude: -17.613977,
-        longitude: -63.665321,
-        latitudeDelta: 13,
-        longitudeDelta: 1,
+        latitude: -17.7799998333333332,
+        longitude: -63.180598333333336,
+        latitudeDelta: 0.07,
+        longitudeDelta: 0.07,
     });
 
     const [lugar, setlugar] = React.useState({
-        latitude: -17.613977,
-        longitude: -63.665321,
+        latitude: 0,
+        longitude: 0,
     });
+    if (!props.state.locationReducer.isOpen) {
+        props.state.locationReducer.open();
+
+    }
 
 
 
     const start = () => {
-        NativeModules.Geolocation.start(1).then(resp => {
-            const eventEmitter = new NativeEventEmitter(NativeModules.Geolocation);
-            var eventListener = eventEmitter.addListener('onLocationChange', (event) => {
-                console.log(event);
-                var obj = JSON.parse(event.data);
-                setlugar({
-                    latitude : obj.latitude,
-                    longitude : obj.longitude
-                })
-                return <View />
-            });
-        });
-
-
+        props.state.naviDrawerReducer.openBar()
 
     }
 
@@ -63,8 +55,8 @@ const Inicio = (props) => {
         obj = {
             latitude: obj.latitude,
             longitude: obj.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1
         }
         mapa.animateToRegion(obj, 1000);
         setZoom(true);
@@ -81,6 +73,26 @@ const Inicio = (props) => {
         setZoom(false);
     }
 
+    const getMarker = () => {
+        if (!props.state.locationReducer.data) {
+            return <View />
+        }
+        var data = props.state.locationReducer.data;
+        var json = { latitude: data.latitude, longitude: data.longitude };
+        return (
+            <Marker
+                coordinate={json}
+            >
+                <Svg name="LogoMotoRed"
+                    style={{
+                        width: 50,
+                        height: 50,
+
+                    }} />
+            </Marker>
+        )
+    }
+
     return (
         <View style={styles.container}>
 
@@ -88,14 +100,10 @@ const Inicio = (props) => {
                 provider={PROVIDER_GOOGLE} // remove if not using Google Maps
                 style={styles.map}
                 initialRegion={region}
-                showsUserLocation={true}
+                // showsUserLocation={true}
                 ref={map => { mapa = map }}
             >
-                <Marker
-                    coordinate={lugar}
-                    title={"Hola"}
-                    description={"nose"}
-                />
+                {getMarker()}
 
             </MapView>
 
@@ -111,8 +119,7 @@ const Inicio = (props) => {
                     }} />
             </TouchableOpacity>
 
-            {/*             <ModeloComponent componente={props.state.modeloComponenteReducer.componente} />
- */}
+
         </View>
     )
 

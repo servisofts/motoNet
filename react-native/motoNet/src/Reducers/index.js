@@ -7,6 +7,8 @@ import popupCalendarioReducer from './popupCalendarioReducer';
 import mapaReducer from './mapaReducer';
 import naviDrawerReducer from './naviDrawerReducer';
 import modeloComponenteReducer from './modeloComponenteReducer';
+import locationReducer from './locationReducer';
+import socketClienteReducer from './socketClienteReducer';
 export default combineReducers({
     navigationReducer,
     consoleReducer,
@@ -15,5 +17,7 @@ export default combineReducers({
     popupCalendarioReducer,
     mapaReducer,
     naviDrawerReducer,
-    modeloComponenteReducer
+    modeloComponenteReducer,
+    locationReducer,
+    socketClienteReducer
 });

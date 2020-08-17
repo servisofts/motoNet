@@ -27,8 +27,9 @@ import Reducer from './src/Reducers';
 import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 //
-/* import * as conection from './src/Component/conection'
- */
+// import * as conection from './src/conection'
+import * as Location from './src/Location'
+
 import LinearGradient from 'react-native-linear-gradient';
 
 import Theme from './src/Styles/Theme.json';
@@ -38,8 +39,24 @@ const store = createStore(
   {},
   applyMiddleware(reduxThunk),
 );
-/* conection.initSocket(store, "")
- */
+
+//CONEXIONES DE SERVIDORES
+// conection.initSocket(store, "")
+import * as socketCliente from './src/socketCliente'
+
+//SERVICIOS 
+
+Location.init(store);
+
+
+
+socketCliente.initSocket(store, {
+  port: 10001,
+  host: "192.168.1.104",
+  tls: true,
+  tlsCert: require("./servisofts.pem")
+})
+
 
 const Home = createStackNavigator(
   Pages.getPages(),

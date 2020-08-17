@@ -19,27 +19,21 @@ import Svg from '../../Svg';
 
 const Carga = (props) => {
     const [obj, setObj] = React.useState(false);
-    const state = {
-        rotateAnim: new Animated.Value(0)
-    }
 
-      if (obj) {
-  
-          props.state.navigationReducer.navigate("LoginPage");
-  
-  
-      } else {
-  
-          const delay = ms => new Promise(res => setTimeout(res, ms));
-          const yourFunction = async () => {
-              await delay(3000);
-              console.log("Waited 5s");
-              setObj(true);
-  
-          };
-          yourFunction();
-      }
 
+            
+
+          if (!obj) {
+            const delay = ms => new Promise(res => setTimeout(res, ms));
+            const yourFunction = async () => {
+                await delay(3000);
+                setObj(true);
+                props.state.navigationReducer.replace("LoginPage");
+                return <View></View>  
+            };
+            yourFunction();
+        }
+  
     
 
     return (

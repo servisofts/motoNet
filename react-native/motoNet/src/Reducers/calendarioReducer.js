@@ -45,8 +45,5 @@ export default (state, action) => {
         }
     }
 
-    return {
-        ...state,
-        ...action,
-    }
+    return state;
 } 

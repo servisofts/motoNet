@@ -155,7 +155,7 @@ const Login = (props) => {
                             flexDirection: 'row',
                         }}>
                         <TouchableOpacity
-                        onPress={() => props.navigation.navigate("InicioPage")}
+                            onPress={() => props.navigation.replace("InicioPage")}
 
                             style={styles.touch4}>
                             <Text
@@ -212,25 +212,7 @@ const Login = (props) => {
                                 Sing in with Google
                             </Text>
                         </TouchableOpacity>
-                        <TouchableOpacity
-                            style={styles.icloud}>
-                            <Svg name="icloud"
-                                style={{
-                                    width: 35,
-                                    height: 35,
-                                    fill: "#fff"
 
-                                }} />
-                            <Text
-                                style={{
-                                    textAlign: "center",
-                                    flex: 0.8,
-                                    color: "#fff",
-                                    width: '100%',
-                                }}>
-                                Sing in with Apple
-                            </Text>
-                        </TouchableOpacity>
                         <TouchableOpacity
                             onPress={_fbAuth}
                             style={styles.facebook}>
@@ -251,7 +233,7 @@ const Login = (props) => {
                             </Text>
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={()=>{
+                            onPress={() => {
                                 NativeModules.Device.getDeviceName((err, name) => console.log(err, name));
                             }}
                             style={

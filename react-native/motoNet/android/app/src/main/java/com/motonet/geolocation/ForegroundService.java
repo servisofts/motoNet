@@ -1,6 +1,7 @@
 package com.motonet.geolocation;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -20,6 +21,7 @@ import android.provider.Settings;
 
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 
 import com.facebook.react.bridge.Arguments;
@@ -33,6 +35,8 @@ import org.jetbrains.annotations.Nullable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import static androidx.core.app.ActivityCompat.shouldShowRequestPermissionRationale;
+
 public class ForegroundService extends Service {
     private int varian =1;
     private LocationListener listener;
@@ -42,6 +46,13 @@ public class ForegroundService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+
+        if (ContextCompat.checkSelfPermission(
+                getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) ==
+                PackageManager.PERMISSION_GRANTED) {
+
+        }
 
         listener = new LocationListener() {
             @Override
@@ -95,13 +106,9 @@ public class ForegroundService extends Service {
         if (ActivityCompat.checkSelfPermission(ForegroundService.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(ForegroundService.this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
+
+          //
+
             return;
         }
 
@@ -112,6 +119,9 @@ public class ForegroundService extends Service {
 
 
     }
+
+
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         varian = intent.getIntExtra("varian",1);
@@ -126,6 +136,8 @@ public class ForegroundService extends Service {
                 .build();
         startForeground(1, notification);
 
+
+        //ActivityCompat.requestPermissions( this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},0);
         //do heavy work on a background thread
         //stopSelf();
         return START_NOT_STICKY;
