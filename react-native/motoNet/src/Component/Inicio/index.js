@@ -104,10 +104,10 @@ const Inicio = (props) => {
         var data = props.state.locationReducer.locations;
         Object.keys(data).map((key)=>{
             var obj=data[key];
-            var json = { latitude: obj.latitude, longitude: obj.longitude };
+            var jsons = { latitude: obj.latitude, longitude: obj.longitude };
             return (
                 <Marker
-                    coordinate={json}
+                    coordinate={jsons}
                 >
                     <Svg name="MarkerMoto"
                         style={{
