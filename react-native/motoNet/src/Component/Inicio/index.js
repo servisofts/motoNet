@@ -8,15 +8,10 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
-    TouchableWithoutFeedback,
-    NativeModules,
-    NativeEventEmitter,
-
 } from 'react-native';
 import Svg from '../../Svg';
-import Theme from '../../Styles/Theme.json'
 
-import MapView, { PROVIDER_GOOGLE, Marker } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import MapView, {  Marker } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 
 var mapa;
 const Inicio = (props) => {

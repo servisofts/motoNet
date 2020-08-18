@@ -52,12 +52,5 @@ public class MainActivity extends ReactActivity {
                       new String[] { permission },
                       requestCode);
     }
-    else {
-      Toast
-              .makeText(MainActivity.this,
-                      "Permission already granted",
-                      Toast.LENGTH_SHORT)
-              .show();
-    }
   }
 }
