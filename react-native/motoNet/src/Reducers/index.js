@@ -9,6 +9,7 @@ import naviDrawerReducer from './naviDrawerReducer';
 import modeloComponenteReducer from './modeloComponenteReducer';
 import locationReducer from './locationReducer';
 import socketClienteReducer from './socketClienteReducer';
+import usuarioReducer from './usuarioReducer';
 export default combineReducers({
     navigationReducer,
     consoleReducer,
@@ -19,5 +20,6 @@ export default combineReducers({
     naviDrawerReducer,
     modeloComponenteReducer,
     locationReducer,
-    socketClienteReducer
+    socketClienteReducer,
+    usuarioReducer
 });

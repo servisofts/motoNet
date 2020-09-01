@@ -39,25 +39,14 @@ const store = createStore(
   {},
   applyMiddleware(reduxThunk),
 );
-
 //CONEXIONES DE SERVIDORES
 // conection.initSocket(store, "")
 import * as socketCliente from './src/socketCliente'
-
+import DisconectBarra from './src/Component/DisconectBarra';
 //SERVICIOS 
-
-Location.init(store);
-
-
-
-socketCliente.initSocket(store, {
-  port: 10001,
-  host: "192.168.1.104",
-  tls: true,
-  tlsCert: require("./servisofts.pem")
-})
-
-
+Location.init(store); 
+//SERVICIOS 
+socketCliente.initSocket(store);
 const Home = createStackNavigator(
   Pages.getPages(),
   {
@@ -119,6 +108,7 @@ class App extends Component {
             width: "100%",
             height: "100%"
           }}>
+            <DisconectBarra />
             <Container />
             <NaviDrawer />
 

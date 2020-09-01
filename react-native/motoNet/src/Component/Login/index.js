@@ -16,7 +16,23 @@ import Theme from '../../Styles/Theme.json'
 
 const Login = (props) => {
 
+    const [obj, setObj] = React.useState({
+        usr: {
+            value: "",
+            error: false
+        },
+        pass: {
+            value: "",
+            error: false
+        },
 
+
+    });
+    if (props.state.usuarioReducer.estado === "exito") {
+        props.navigation.estado = ""
+        props.navigation.navigate("InicioPage");
+        return <View />
+    }
     const _responseInfoCallback = (error, result) => {
         if (error) {
             alert('Error fetching data: ' + error.toString());
@@ -48,6 +64,14 @@ const Login = (props) => {
 
     };
 
+    const hanlechage = (text, id) => {
+        obj[id] = {
+            value: text,
+            error: false,
+        }
+        setObj({ ...obj })
+        return <View />
+    };
 
 
 
@@ -86,9 +110,6 @@ const Login = (props) => {
                 alignItems: 'center',
                 flexDirection: 'column',
             }}>
-
-
-
                 <View
                     style={{
                         marginTop: 20,
@@ -97,8 +118,6 @@ const Login = (props) => {
                         alignItems: 'center',
                         flexDirection: 'column',
                     }}>
-
-
                     <Svg name="LogoMoto"
                         style={{
                             width: 200,
@@ -106,10 +125,6 @@ const Login = (props) => {
                             fill: "#fff"
 
                         }} />
-
-
-
-
                     <View
                         style={{
                             width: '80%',
@@ -121,12 +136,10 @@ const Login = (props) => {
 
                         <TextInput
                             style={styles.touch2}
-                            placeholder={"Usuario"} />
-
-
+                            placeholder={"Usuario"}
+                            onChangeText={text => hanlechage(text, "usr")}
+                            value={obj.usr.value} />
                     </View>
-
-
                     <View
                         style={{
                             width: '80%',
@@ -135,16 +148,14 @@ const Login = (props) => {
                             marginTop: 20,
                             justifyContent: 'center',
                         }}>
-
-
                         <TextInput
                             style={styles.touch2}
                             placeholder={"Password"}
+                            onChangeText={text => hanlechage(text, "pass")}
+                            value={obj.pass.value}
+
                         />
-
-
                     </View>
-
                     <View
 
                         style={{
@@ -155,7 +166,27 @@ const Login = (props) => {
                             flexDirection: 'row',
                         }}>
                         <TouchableOpacity
-                            onPress={() => props.navigation.navigate("InicioPage")}
+                            onPress={() => {
+                                  var  datas= {}
+                                for (const key in obj) {
+
+                                    if (!obj[key].value || obj[key].value.lenth <= 0) {
+                                        obj[key].error = true;
+                                        exito = false;
+                                    } else {
+                                        obj[key].error = false;
+                                        datas[key] = obj[key].value
+                                    }
+                                }
+                                props.state.socketClienteReducer.sessiones["motonet"].send({
+                                    component: "usuario",
+                                    type: "login",
+                                    data: datas,
+                                    estado: "cargando"
+                                }, true);
+                                return <View />
+
+                            }}
 
                             style={styles.touch4}>
                             <Text
