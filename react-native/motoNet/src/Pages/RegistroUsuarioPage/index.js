@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { } from "..";
 import {
     Text,
     View,
@@ -8,6 +8,7 @@ import {
     Animated
 } from 'react-native';
 import RegistroUsuario from '../../Component/RegistroUsuario';
+
 class RegistroUsuarioPage extends Component {
     static navigationOptions = {
         headerShown: false,
@@ -21,10 +22,8 @@ class RegistroUsuarioPage extends Component {
                 flex: 1,
                 alignItems: 'center',
             }}>
-                <RegistroUsuario navigation={this.props.navigation}/>
+                <RegistroUsuario navigation={this.props.navigation} />
             </View>
-
-
         );
     }
 };

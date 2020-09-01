@@ -42,7 +42,7 @@ public class ForegroundService extends Service {
     private LocationListener listener;
     private LocationManager locationManager;
 
-    public static final String CHANNEL_ID = "ForegroundServiceChannel";
+    public static final String CHANNEL_ID = "ForegroundServiceChannel.motoNet";
     @Override
     public void onCreate() {
         super.onCreate();

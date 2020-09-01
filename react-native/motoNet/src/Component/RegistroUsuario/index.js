@@ -9,14 +9,12 @@ import {
     StyleSheet
 } from 'react-native';
 import Svg from '../../Svg';
-import base64 from 'react-native-base64'
 import { LoginManager } from "react-native-fbsdk";
 import Theme from '../../Styles/Theme.json'
-import { color } from 'react-native-reanimated';
 const RegistroUsuario = (props) => {
 
     const [obj, setObj] = React.useState({
-        user: {
+        usr: {
             value: "",
             error: false
         },
@@ -24,12 +22,12 @@ const RegistroUsuario = (props) => {
             value: "",
             error: false
         },
-        apellidos: {},
-        telefono: {
-            value: "591"
-        },
-        fecha_nacimiento: {
+        apellidos: {
             value: "",
+            error: false
+        },
+        telefono: {
+            value: "591",
             error: false
 
         },
@@ -46,24 +44,23 @@ const RegistroUsuario = (props) => {
             value: "",
             error: false
         },
-        sexo: {
-            value: "",
-            error: false
-        }
+
 
     });
 
+    if (props.state.usuarioReducer.estado === "exito") {
+        props.navigation.estado = ""
+        props.navigation.goBack();
+        return <View />
+    }
 
-
-    const hanlechage = (event) => {
-
-
-
-        obj[event.id] = {
-            value: event.text,
+    const hanlechage = (text, id) => {
+        obj[id] = {
+            value: text,
             error: false,
         }
         setObj({ ...obj })
+        return <View />
     };
     const Registrar = (event) => {
         console.log(obj)
@@ -100,23 +97,17 @@ const RegistroUsuario = (props) => {
 
 
         }
-        if (obj.fecha_nacimiento.value === "") {
-            obj.fecha_nacimiento.error = true;
-            exito = false;
-        }
-
-
-
 
         setObj({ ...obj })
-/*         objToSend.fecha_nacimiento = Moment(objToSend.fecha_nacimiento, "DD/MM/YYYY").format("YYYY-MM-DD");
- */        if (exito) {
-            setestado(true)
-            props.Registro(props.state.socketReducer.socket, objToSend);
+        if (exito) {
+            props.state.socketClienteReducer.sessiones["motonet"].send({
+                component: "usuario",
+                type: "registro",
+                data: objToSend.data,
+                estado: "cargando"
+            }, true);
             return <View />
-
         }
-
     }
 
 
@@ -149,8 +140,10 @@ const RegistroUsuario = (props) => {
                     style={styles.view}>
                     <Text style={styles.texto}>Usuario</Text>
                     <TextInput style={styles.input}
-                        style={(obj.user.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "user")} />
+                        style={(obj.usr.error ? styles.error : styles.input)}
+                        onChangeText={text => hanlechage(text, "usr")}
+                        value={obj.usr.value}
+                    />
                 </View>
 
 
@@ -159,7 +152,9 @@ const RegistroUsuario = (props) => {
                     <Text style={styles.texto}>Nombres</Text>
                     <TextInput style={styles.input}
                         style={(obj.nombres.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "nombres")} />
+                        onChangeText={text => hanlechage(text, "nombres")}
+                        value={obj.nombres.value}
+                    />
                 </View>
 
 
@@ -168,49 +163,44 @@ const RegistroUsuario = (props) => {
                     <Text style={styles.texto}>Apellidos</Text>
                     <TextInput
                         style={(obj.apellidos.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "apellidos")} />
+                        onChangeText={text => hanlechage(text, "apellidos")}
+                        value={obj.apellidos.value}
+                    />
                 </View>
-
+                <View
+                    style={styles.view}>
+                    <Text style={styles.texto}>Correo</Text>
+                    <TextInput style={(obj.correo.error ? styles.error : styles.input)}
+                        onChangeText={text => hanlechage(text, "correo")}
+                        value={obj.correo.value}
+                    />
+                </View>
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Telefono</Text>
                     <TextInput style={(obj.telefono.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "telefono")} />
+                        onChangeText={text => hanlechage(text, "telefono")}
+                        value={obj.telefono.value}
+                    />
                 </View>
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Password</Text>
                     <TextInput style={(obj.pass.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "pass")} />
+                        onChangeText={text => hanlechage(text, "pass")}
+                        value={obj.pass.value}
+
+                    />
                 </View>
 
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Confirmar password</Text>
                     <TextInput style={(obj.confirmar.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "confirmar")} />
+                        onChangeText={text => hanlechage(text, "confirmar")}
+                        value={obj.confirmar.value}
+                    />
                 </View>
-              
-                <View
-                    style={styles.view}>
-
-                    {/* <Text style={styles.texto}>Insertar documento</Text>
-                    <TouchableOpacity
-                        style={styles.touchDoc} >
-                        <Text
-                            style={{
-                                fontSize: 20,
-                                textAlign: "left",
-                                color: "#fff"
-
-                            }}>
-                            Click
-                            </Text>
-
-                    </TouchableOpacity> */}
-                </View>
-
-
                 <TouchableOpacity
                     onPress={Registrar}
 
@@ -218,15 +208,12 @@ const RegistroUsuario = (props) => {
                     <Text
                         style={{
                             color: '#fff',
-
                         }}
                     >
                         Registrar
                         </Text>
                 </TouchableOpacity>
             </View>
-
-
             <TouchableOpacity
                 onPress={() => props.navigation.goBack()}
                 style={{
@@ -386,6 +373,7 @@ const styles = StyleSheet.create({
     }
 
 });
+
 const initStates = (state) => {
     return { state }
 };

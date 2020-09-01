@@ -1,5 +1,4 @@
 export const registrarUser = (socket,usuario) => async (dispatch) => {
-
     const _obj = {
         component: "usuario",
         type: "registrar",

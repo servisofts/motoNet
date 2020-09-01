@@ -29,6 +29,8 @@ const Inicio = (props) => {
     });
     if (!props.state.locationReducer.isOpen) {
         props.state.locationReducer.open();
+        return<View></View>
+
     }
 
 
@@ -86,7 +88,7 @@ const Inicio = (props) => {
                         width: 50,
                         height: 50,
 
-                    }} />
+                    }}/>
             </Marker>
         )
     }
@@ -114,8 +116,6 @@ const Inicio = (props) => {
                 </Marker>
             )
         })
-        
-        
     }
     const getIconoMoto = () => {
         var texto = "Ocultar"

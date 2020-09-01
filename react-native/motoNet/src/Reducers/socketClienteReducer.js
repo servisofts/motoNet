@@ -1,13 +1,7 @@
 const initialState = {
     estado: "Not Found",
-    isOpen: false,
-    open:(props)=>{
-        return false;
-    },
-    close:()=>{
-        return false;
-    },
-    history:[]
+    history: [],
+    sessiones: {}
 }
 
 export default (state, action) => {
@@ -19,6 +13,9 @@ export default (state, action) => {
             case "open":
                 open(state, action);
                 break;
+            case "conectando":
+                conectando(state, action);
+                break;
             case "initSocket":
                 initSocket(state, action);
                 break;
@@ -28,28 +25,33 @@ export default (state, action) => {
             case "close":
                 close(state, action);
                 break;
+
         }
-        state = {...state};
+        state = { ...state };
     }
     return state;
 }
 
+const conectando = (state, action) => {
+    state.sessiones[action.data.nombre] = {
+        isOpen: false,
+        estado: "Conectado.",
+        socket:action.socket
+    }
+}
 const open = (state, action) => {
-    state.estado = "Conectado."
-    state.isOpen = true;
-    state.send = action.send;
+    state.sessiones[action.nombre].isOpen = true;
+    state.sessiones[action.nombre].estado = "conectado";
+    state.sessiones[action.nombre].send = action.send;
 }
 
 const initSocket = (state, action) => {
-    state.estado = "Desconectado."
     state.open = action.open;
-    state.close = action.close;
-    state.isOpen = false;
 }
 const error = (state, action) => {
-    state.estado = action.error;
+    state.sessiones[action.nombre].estado = action.error;
 }
 const close = (state, action) => {
-    state.estado = action.error;
-    state.isOpen = false;
+    state.sessiones[action.nombre].estado = action.error;
+    state.sessiones[action.nombre].isOpen = false;
 }
