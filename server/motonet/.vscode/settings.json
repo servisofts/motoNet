@@ -1,0 +1,7 @@
+{
+    "java.dependency.packagePresentation": "hierarchical",
+    "java.dependency.syncWithFolderExplorer": false,
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ]
+}
