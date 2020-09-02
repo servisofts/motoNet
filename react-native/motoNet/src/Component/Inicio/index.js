@@ -87,7 +87,7 @@ const Inicio = (props) => {
                     style={{
                         width: 50,
                         height: 50,
-
+                        transform: [{ rotate: data.deegre + 'deg' }]
                     }} />
             </Marker>
         )
@@ -127,6 +127,7 @@ const Inicio = (props) => {
         var dy = data.longitude - data2.longitude;
         var theta = Math.atan2(dy, dx); // range (-PI, PI]
         theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+        
         // if (theta < 0) theta = 360 + theta; // range [0, 360)
         return (
             <Marker
@@ -158,8 +159,8 @@ const Inicio = (props) => {
                 >
                     <Svg name="LogoMotoRed"
                         style={{
-                            width: 50,
-                            height: 50,
+                            width: 20,
+                            height: 20,
 
                         }} />
                 </Marker>
@@ -211,9 +212,9 @@ const Inicio = (props) => {
                 // showsUserLocation={true}
                 ref={map => { mapa = map }}
             >
-                {/* {getMarker()} */}
+                {getMarker()}
                 {/* {getMarkersAll()} */}
-                {getPolyline()}
+                {/* {getPolyline()} */}
 
             </MapView>
 

@@ -22,26 +22,46 @@ export const init = (store) => {
                 if (!event.data.latitude) {
                     event.data = JSON.parse(event.data);
                 }
+
+
+                event.data.deegre = 0;
+                var state = store.getState();
+                if (state.locationReducer.history) {
+                    if (state.locationReducer.history.length > 0) {
+                        var data2 = state.locationReducer.history[state.locationReducer.history.length - 1];
+                        console.log(data2);
+                        var dx = event.data.latitude - data2.latitude;
+                        var dy = event.data.longitude - data2.longitude;
+                        var theta = Math.atan2(dy, dx); // range (-PI, PI]
+                        theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+                        event.data.deegre = theta;
+                    }
+                }
+
+
                 objSend.data = event.data;
                 objSend.type = "onLocationChange";
                 store.dispatch(objSend);
-                var state = store.getState();
                 if (state.socketClienteReducer) {
                     if (state.socketClienteReducer.sessiones) {
                         if (state.socketClienteReducer.sessiones["motonet"].isOpen) {
-                            var locationToServer = {
-                                component: "location",
-                                type: "onLocationChangeSend",
-                                data: event.data
-                            };
-                            state.socketClienteReducer.sessiones["motonet"].send(locationToServer);
+                            if (state.usuarioReducer.usuarioLog) {
+                                var locationToServer = {
+                                    component: "location",
+                                    type: "registro",
+                                    key_usuario_servicio: state.usuarioReducer.usuarioLog.usuario_servicio.key,
+                                    data: event.data
+                                };
+                                state.socketClienteReducer.sessiones["motonet"].send(locationToServer);
+                            }
+
                         }
                     }
                 }
 
 
 
-              
+
                 //if (!this.props.state.SocketClienteReducer.isOpen) {}
             });
         });

@@ -37,7 +37,7 @@ public class Location {
 
     public void defaultType(JSONObject obj, Router router) {
         System.out.println(obj.toString());
-        // SocketCliete.send("usuario", obj, router);
+        SocketCliete.send("geolocation", obj, router);
 
     }
 }

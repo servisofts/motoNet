@@ -4,6 +4,7 @@ import SocketCliente.SocketCliete;
 import conexion.Conexion;
 
 public class App {
+    
     public static void main(String[] args) throws Exception {
         System.out.println("Iniciando server servisofts");
         if (!Config.validate()) {

@@ -20,6 +20,9 @@ const NaviDrawe = (props) => {
     if (!isVisible) {
         return <View></View>
     }
+    const handleClick = (pros)=>{
+
+    }
     var letra = "#fff";
     var colorContainer = "red";
     return (
