@@ -102,66 +102,26 @@ const Inicio = (props) => {
         scale: 10,
     };
     
-    const getPolyline = () => {
-        if (!props.state.locationReducer.data) {
-            return <View />
-        }
-        if (props.state.locationReducer.history.length - 1 <= 0) {
-            return <View />
-        }
-        var lltem = [];
-        var data = props.state.locationReducer.data;
-        var json = { latitude: data.latitude, longitude: data.longitude };
-        var data2 = props.state.locationReducer.history[props.state.locationReducer.history.length - 2];
-        
-        var json2 = { latitude: data2.latitude, longitude: data2.longitude };
-        // var distancia  = getDistanciaMetros(data.latitude,data.longitude,data2.latitude,data2.longitude);
-        
-        // if(distancia<4){
-        //     return <View/>
-        // }
-        lltem.push(json2);
-        lltem.push(data);
-
-        var dx = data.latitude - data2.latitude;
-        var dy = data.longitude - data2.longitude;
-        var theta = Math.atan2(dy, dx); // range (-PI, PI]
-        theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
-        
-        // if (theta < 0) theta = 360 + theta; // range [0, 360)
-        return (
-            <Marker
-                coordinate={json}
-            >
-                <Svg name="MarkerMoto"
-                    style={{
-                        width: 50,
-                        height: 50,
-                        transform: [{ rotate: theta + 'deg' }]
-                    }} />
-            </Marker>
-        )
-    }
-
 
     const getMarkersAll = () => {
-        if (!props.state.locationReducer.locations) {
-            return <View />
-        }
-        var data = props.state.locationReducer.locations;
+        
+        var data = props.state.locationReducer.usuario_servicio;
         var resp;
         return Object.keys(data).map((key) => {
             var obj = data[key];
             var jsons = { latitude: obj.latitude, longitude: obj.longitude };
+            if(key === props.state.usuarioReducer.usuarioLog.usuario_servicio.key){
+                return <View/>
+            }
             return (
                 <Marker
                     coordinate={jsons}
                 >
-                    <Svg name="LogoMotoRed"
+                    <Svg name="MarkerMoto"
                         style={{
-                            width: 20,
-                            height: 20,
-
+                            width: 30,
+                            height: 30,
+                            transform: [{ rotate: obj.deegre + 'deg' }]
                         }} />
                 </Marker>
             )
@@ -189,8 +149,8 @@ const Inicio = (props) => {
 
             <Svg name="LogoMotoRed"
                 style={{
-                    width: 30,
-                    height: 30,
+                    width: 20,
+                    height: 20,
 
                 }} />
             <Text style={{ color: "#fff", fontSize: 10, }}>
@@ -209,11 +169,11 @@ const Inicio = (props) => {
 
                 style={styles.map}
                 initialRegion={region}
-                // showsUserLocation={true}
+                showsUserLocation={true}
                 ref={map => { mapa = map }}
             >
-                {getMarker()}
-                 {getMarkersAll()}
+                {/*getMarker()*/}
+                {getMarkersAll()}
                 {/* {getPolyline()} */}
 
             </MapView>

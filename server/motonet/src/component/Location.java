@@ -8,6 +8,7 @@ import java.util.UUID;
 import conexion.*;
 import Router.Router;
 import SocketCliente.SocketCliete;
+import SocketServer.SocketServer;
 import util.*;
 
 import org.json.JSONArray;
@@ -28,12 +29,19 @@ public class Location {
 
     public Location(JSONObject data, Router router) {
         switch (data.getString("type")) {
-                
+            case "registro":
+                registro(data, router);
+                break;
             default:
                 defaultType(data, router);
         }
     }
 
+    public void registro(JSONObject obj, Router router) {
+        System.out.println(obj.toString());
+        SocketServer.sendAll(obj.toString());
+        SocketCliete.send("geolocation", obj, router);
+    }
 
     public void defaultType(JSONObject obj, Router router) {
         System.out.println(obj.toString());

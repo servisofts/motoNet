@@ -15,7 +15,7 @@
         "puerto": 5432,
         "pg_restore": "C:\\Program Files\\PostgreSQL\\12\\bin\\pg_restore.exe",
         "pass": "postgres",
-        "ip": "192.168.1.110",
+        "ip": "192.168.0.110",
         "pg_dump": "C:\\Program Files\\PostgreSQL\\12\\bin\\pg_dump.exe",
         "bd_name": "servisofts.motonet",
         "user": "postgres"
@@ -36,7 +36,7 @@
     },
     "socket_server": {
         "puerto": 10004,
-        "ip": "192.168.0.3"
+        "ip": "192.168.0.9"
     }
 }
 
