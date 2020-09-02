@@ -187,7 +187,7 @@ const Inicio = (props) => {
                 backgroundColor: colors,
             }]}>
 
-            <Svg name="MarkerMoto"
+            <Svg name="LogoMotoRed"
                 style={{
                     width: 30,
                     height: 30,
@@ -213,7 +213,7 @@ const Inicio = (props) => {
                 ref={map => { mapa = map }}
             >
                 {getMarker()}
-                {/* {getMarkersAll()} */}
+                 {getMarkersAll()}
                 {/* {getPolyline()} */}
 
             </MapView>
