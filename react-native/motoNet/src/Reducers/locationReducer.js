@@ -2,7 +2,8 @@ const initialState = {
     isOpen: false,
     isMotos: false,
     history: [],
-    estado: false
+    estado: false,
+    usuario_servicio:{}
 }
 export default (state, action) => {
     if (!state) state = initialState
@@ -33,6 +34,9 @@ export default (state, action) => {
             case "getAllUpdate":
                 newState = getAllUpdate(newState, action);
                 break;
+            case "registro":
+                newState = registro(newState, action);
+                break;
             default: break;
         }
         return {
@@ -60,7 +64,7 @@ const onLocationChange = (newState, action) => {
     newState.estado = "exito";
     newState.data = action.data;
     newState.history.push(action.data);
-    
+
     return newState;
 }
 
@@ -77,7 +81,7 @@ const onLocationChangeSend = (newState, action) => {
 const getAllClose = (newState, action) => {
     console.log("entro al cerrar ");
     newState.isMotos = false;
-     newState.locations=[];
+    newState.locations = [];
     return newState;
 }
 const getAllOpen = (newState, action) => {
@@ -90,13 +94,13 @@ const getAllOpen = (newState, action) => {
         action.data.map((obj, key) => {
             newState.locations[obj.key] = action.data[key];
         })
-       
+
     }
     return newState;
 }
 
 const getAllUpdate = (newState, action) => {
-    
+
     if (action.estado == "exito") {
         if (!newState.locations) {
             newState.locations = {};
@@ -105,5 +109,14 @@ const getAllUpdate = (newState, action) => {
             newState.locations[obj.key] = action.data[key];
         })
     }
+    return newState;
+}
+
+const registro = (newState, action) => {
+    console.log("action");
+    if(!action.key_usuario_servicio){
+        return newState;
+    }
+    newState.usuario_servicio[action.key_usuario_servicio] = action.data;
     return newState;
 }
