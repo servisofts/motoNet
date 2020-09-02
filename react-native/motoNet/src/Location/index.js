@@ -19,27 +19,29 @@ export const init = (store) => {
             const eventEmitter = new NativeEventEmitter(NativeModules.Geolocation);
             var eventListener = eventEmitter.addListener('onLocationChange', (event) => {
 
-                if(!event.data.latitude){
-                    event.data =  JSON.parse(event.data);
+                if (!event.data.latitude) {
+                    event.data = JSON.parse(event.data);
                 }
+                objSend.data = event.data;
+                objSend.type = "onLocationChange";
+                store.dispatch(objSend);
                 var state = store.getState();
                 if (state.socketClienteReducer) {
-                    if (state.socketClienteReducer.isOpen) {
-                        var locationToServer = {
-                            component: "location",
-                            type: "onLocationChangeSend",
-                            data: event.data
-                        };
-                        state.socketClienteReducer.send(locationToServer);
+                    if (state.socketClienteReducer.sessiones) {
+                        if (state.socketClienteReducer.sessiones["motonet"].isOpen) {
+                            var locationToServer = {
+                                component: "location",
+                                type: "onLocationChangeSend",
+                                data: event.data
+                            };
+                            state.socketClienteReducer.sessiones["motonet"].send(locationToServer);
+                        }
                     }
                 }
 
-                
-            
-                objSend.data = event.data;
-                
-                objSend.type = "onLocationChange";
-                store.dispatch(objSend);
+
+
+              
                 //if (!this.props.state.SocketClienteReducer.isOpen) {}
             });
         });

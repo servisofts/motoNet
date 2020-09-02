@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Svg from '../../Svg';
 
-import MapView, {  Marker } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
+import MapView, { Marker, Polyline } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 
 var mapa;
 const Inicio = (props) => {
@@ -29,7 +29,7 @@ const Inicio = (props) => {
     });
     if (!props.state.locationReducer.isOpen) {
         props.state.locationReducer.open();
-        return<View></View>
+        return <View></View>
 
     }
 
@@ -88,7 +88,56 @@ const Inicio = (props) => {
                         width: 50,
                         height: 50,
 
-                    }}/>
+                    }} />
+            </Marker>
+        )
+    }
+
+    const arrow = {
+        path: 'M 0,0 5,15 -5,15 0,0 z', // 0,0 is the tip of the arrow
+        fillColor: 'red',
+        fillOpacity: 1.0,
+        strokeColor: 'red',
+        strokeWeight: 1,
+        scale: 10,
+    };
+    
+    const getPolyline = () => {
+        if (!props.state.locationReducer.data) {
+            return <View />
+        }
+        if (props.state.locationReducer.history.length - 1 <= 0) {
+            return <View />
+        }
+        var lltem = [];
+        var data = props.state.locationReducer.data;
+        var json = { latitude: data.latitude, longitude: data.longitude };
+        var data2 = props.state.locationReducer.history[props.state.locationReducer.history.length - 2];
+        
+        var json2 = { latitude: data2.latitude, longitude: data2.longitude };
+        // var distancia  = getDistanciaMetros(data.latitude,data.longitude,data2.latitude,data2.longitude);
+        
+        // if(distancia<4){
+        //     return <View/>
+        // }
+        lltem.push(json2);
+        lltem.push(data);
+
+        var dx = data.latitude - data2.latitude;
+        var dy = data.longitude - data2.longitude;
+        var theta = Math.atan2(dy, dx); // range (-PI, PI]
+        theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+        // if (theta < 0) theta = 360 + theta; // range [0, 360)
+        return (
+            <Marker
+                coordinate={json}
+            >
+                <Svg name="MarkerMoto"
+                    style={{
+                        width: 50,
+                        height: 50,
+                        transform: [{ rotate: theta + 'deg' }]
+                    }} />
             </Marker>
         )
     }
@@ -100,8 +149,8 @@ const Inicio = (props) => {
         }
         var data = props.state.locationReducer.locations;
         var resp;
-        return Object.keys(data).map((key)=>{
-            var obj=data[key];
+        return Object.keys(data).map((key) => {
+            var obj = data[key];
             var jsons = { latitude: obj.latitude, longitude: obj.longitude };
             return (
                 <Marker
@@ -111,7 +160,7 @@ const Inicio = (props) => {
                         style={{
                             width: 50,
                             height: 50,
-    
+
                         }} />
                 </Marker>
             )
@@ -122,7 +171,7 @@ const Inicio = (props) => {
         var colors = "#f00"
         if (!props.state.locationReducer.isMotos) {
             colors = "#242"
-             texto = "Ver motos"
+            texto = "Ver motos"
         }
         return (<TouchableOpacity
             onPress={() => {
@@ -162,8 +211,9 @@ const Inicio = (props) => {
                 // showsUserLocation={true}
                 ref={map => { mapa = map }}
             >
-                {getMarker()}
-                {getMarkersAll()}
+                {/* {getMarker()} */}
+                {/* {getMarkersAll()} */}
+                {getPolyline()}
 
             </MapView>
 
@@ -282,4 +332,4 @@ const initActions = ({
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates,initActions)(Inicio);
+export default connect(initStates, initActions)(Inicio);
