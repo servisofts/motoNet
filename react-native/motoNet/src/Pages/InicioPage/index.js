@@ -20,8 +20,24 @@ class InicioPage extends Component {
         return (
             <View style={{
                 flex: 1,
+                width: "100%",
+                justifyContent: 'center',
             }}>
-                <Inicio navigation={this.props.navigation}/>
+                <Inicio navigation={this.props.navigation} />
+                <TouchableOpacity style={{
+                    width: 200,
+                    height: 50,
+                    borderRadius: 20,
+                    position: "absolute",
+                    bottom: 30,
+                    backgroundColor: "red",
+                    left: "25%",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+
+                }}>
+                    <Text>Pedir moto</Text>
+                </TouchableOpacity>
             </View>
 
 

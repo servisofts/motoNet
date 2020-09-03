@@ -27,12 +27,12 @@ const Inicio = (props) => {
         latitude: 0,
         longitude: 0,
     });
-    if (!props.state.locationReducer.isOpen) {
+   /*  if (!props.state.locationReducer.isOpen) {
         props.state.locationReducer.open();
         return <View></View>
 
     }
-
+ */
 
 
     const start = () => {
