@@ -1,7 +1,5 @@
 import TcpSocket from 'react-native-tcp-socket';
-
 const delay = ms => new Promise(res => setTimeout(res, ms));
-
 export const initSocket = (store) => {
     const open = (cert) => {
         if (state = store.getState()) {
@@ -14,7 +12,6 @@ export const initSocket = (store) => {
             }
 
         }
-
         var client = TcpSocket.createConnection(cert, () => {
             store.dispatch({
                 component: "socketCliente",
@@ -37,7 +34,6 @@ export const initSocket = (store) => {
                 console.log("ERROR")
             }
         });
-        
         client.on('error', function (error) {
             
             store.dispatch({
@@ -64,7 +60,6 @@ export const initSocket = (store) => {
                 error: "Se perdio la coneccion."
             })
         });
-
         store.dispatch({
             component: "socketCliente",
             type: "conectando",
@@ -73,8 +68,6 @@ export const initSocket = (store) => {
 
         });
     }
-
-
     store.dispatch({
         component: "socketCliente",
         type: "initSocket",

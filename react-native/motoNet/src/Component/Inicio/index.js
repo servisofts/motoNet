@@ -27,12 +27,12 @@ const Inicio = (props) => {
         latitude: 0,
         longitude: 0,
     });
-    if (!props.state.locationReducer.isOpen) {
+   /*  if (!props.state.locationReducer.isOpen) {
         props.state.locationReducer.open();
         return <View></View>
 
     }
-
+ */
 
 
     const start = () => {
@@ -117,11 +117,11 @@ const Inicio = (props) => {
                 <Marker
                     coordinate={jsons}
                 >
-                    <Svg name="LogoMoto"
+                    <Svg name="MarkerMoto"
                         style={{
-                            width: 20,
-                            height: 20,
-                            transform: [{ rotate: data.deegre + 'deg' }]
+                            width: 30,
+                            height: 30,
+                            transform: [{ rotate: obj.deegre + 'deg' }]
                         }} />
                 </Marker>
             )
@@ -147,7 +147,7 @@ const Inicio = (props) => {
                 backgroundColor: colors,
             }]}>
 
-            <Svg name="MarkerMoto"
+            <Svg name="LogoMotoRed"
                 style={{
                     width: 20,
                     height: 20,
@@ -169,10 +169,10 @@ const Inicio = (props) => {
 
                 style={styles.map}
                 initialRegion={region}
-                // showsUserLocation={true}
+                showsUserLocation={true}
                 ref={map => { mapa = map }}
             >
-                {getMarker()}
+                {/*getMarker()*/}
                 {getMarkersAll()}
                 {/* {getPolyline()} */}
 
