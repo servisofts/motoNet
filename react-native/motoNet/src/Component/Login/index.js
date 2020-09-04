@@ -138,7 +138,10 @@ const Login = (props) => {
                             style={styles.touch2}
                             placeholder={"Usuario"}
                             onChangeText={text => hanlechage(text, "usr")}
-                            value={obj.usr.value} />
+                            value={obj.usr.value}
+                            autoCapitalize = 'none'
+                            autoFocus = {true}
+                        />
                     </View>
                     <View
                         style={{
@@ -153,7 +156,8 @@ const Login = (props) => {
                             placeholder={"Password"}
                             onChangeText={text => hanlechage(text, "pass")}
                             value={obj.pass.value}
-
+                            autoCapitalize = 'none'
+                            secureTextEntry
                         />
                     </View>
                     <View
@@ -167,7 +171,7 @@ const Login = (props) => {
                         }}>
                         <TouchableOpacity
                             onPress={() => {
-                                  var  datas= {}
+                                var datas = {}
                                 for (const key in obj) {
 
                                     if (!obj[key].value || obj[key].value.lenth <= 0) {
@@ -363,7 +367,7 @@ const styles = StyleSheet.create({
     },
     touch2: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#EAEAE2",
         width: "80%",
         height: 50,
         alignItems: 'center',
@@ -384,7 +388,7 @@ const styles = StyleSheet.create({
     touch3: {
         marginTop: 10,
         flex: 1,
-        backgroundColor: "#4fc2ef",
+        backgroundColor: "#F7F7B6",
         width: "80%",
         height: 50,
         alignItems: 'center',
