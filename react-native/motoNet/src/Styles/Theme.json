@@ -1,15 +1,17 @@
-
 {
-    "barStyle":"light-content",
+    "barStyle": "light-content",
     "colors": {
         "primary": "#012",
         "primary2": "#000",
         "secondary": "#fff",
-        "boder":"#eeeeee",
-        "fondo":"red"
+        "boder": "#eeeeee",
+        "fondo": "red",
+        "borderTextError": "#F5F11F"
     },
-    "gradient":{
-        "primary":["#000000","#ffffff"]
+    "gradient": {
+        "primary": [
+            "#000000",
+            "#ffffff"
+        ]
     }
-    
 }

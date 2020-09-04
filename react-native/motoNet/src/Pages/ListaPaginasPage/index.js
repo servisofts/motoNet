@@ -66,8 +66,6 @@ class ListaPaginasPage extends Component {
                     })
                 }
 
-
-
             </View>
 
         );
