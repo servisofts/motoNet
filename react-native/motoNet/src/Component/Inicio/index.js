@@ -27,11 +27,11 @@ const Inicio = (props) => {
         latitude: 0,
         longitude: 0,
     });
-    if (!props.state.locationReducer.isOpen) {
-        props.state.locationReducer.open();
-        return <View></View>
+    // if (!props.state.locationReducer.isOpen) {
+    //     props.state.locationReducer.open();
+    //     return <View></View>
 
-    }
+    // }
 
 
 
@@ -104,8 +104,7 @@ const Inicio = (props) => {
     
 
     const getMarkersAll = () => {
-        
-        var data = props.state.locationReducer.usuario_servicio;
+         var data = props.state.locationReducer.usuario_servicio;
         var resp;
         return Object.keys(data).map((key) => {
             var obj = data[key];
@@ -151,7 +150,6 @@ const Inicio = (props) => {
                 style={{
                     width: 20,
                     height: 20,
-
                 }} />
             <Text style={{ color: "#fff", fontSize: 10, }}>
                 {texto}
