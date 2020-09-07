@@ -7,32 +7,26 @@ import {
     TouchableOpacity,
     Animated
 } from 'react-native';
+import Confirmar from '../../Component/Confirmar';
 
-import Prueba from '../../Component/Prueba';
-
-class PruebaPage extends Component {
+class ConfirmarPage extends Component {
     static navigationOptions = {
-        headerShown: false,
+        headerShown: true,
     }
     constructor(props) {
         super(props);
     }
     render() {
         return (
-            <View style={{
-                flex: 1,
-                alignItems: 'center',
-                backgroundColor: "#000fff",
-            }}>
-            
+            <View style={{ flex: 1, alignItems: 'center', }}>                
+                <Confirmar />
             </View>
-
-
         );
     }
 };
+
 const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates)(PruebaPage);
+export default connect(initStates)(ConfirmarPage);

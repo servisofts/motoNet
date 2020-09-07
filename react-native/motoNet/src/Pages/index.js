@@ -6,8 +6,9 @@ import CargaPage from './CargaPage';
 import InicioPage from './InicioPage';
 import PruebaPage from './PruebaPage';
 import SocketClientePage from './SocketClientePage';
-import TerminosCondiciones from './TerminosCondiciones'
-import Ayuda from './Ayuda'
+import TerminosCondicionesPage from './TerminosCondicionesPage'
+import AyudaPage from './AyudaPage'
+import ConfirmarPage from './ConfirmarPage'
 
 export const getPages = () => {
     return {
@@ -18,6 +19,9 @@ export const getPages = () => {
         RegistroUsuarioPage,
         InicioPage,
         PruebaPage,
-        SocketClientePage
+        SocketClientePage,
+        ConfirmarPage,
+        AyudaPage,
+        TerminosCondicionesPage
     }
 }
