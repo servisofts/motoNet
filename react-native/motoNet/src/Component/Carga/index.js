@@ -20,9 +20,6 @@ import Svg from '../../Svg';
 const Carga = (props) => {
     const [obj, setObj] = React.useState(false);
 
-
-            
-
           if (!obj) {
             const delay = ms => new Promise(res => setTimeout(res, ms));
             const yourFunction = async () => {

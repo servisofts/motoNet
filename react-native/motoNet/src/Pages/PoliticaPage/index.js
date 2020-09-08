@@ -7,9 +7,9 @@ import {
     TouchableOpacity,
     Animated
 } from 'react-native';
-import Ayuda from '../../Component/Ayuda';
+import Politica from '../../Component/Politica';
 
-class AyudaPage extends Component {
+class PoliticaPage extends Component {
     static navigationOptions = {
         headerShown: false,
     }
@@ -22,7 +22,7 @@ class AyudaPage extends Component {
                 flex: 1,
                 alignItems: 'center',
             }}>
-                <Ayuda />
+                <Politica />
             </View>
 
 
@@ -33,4 +33,4 @@ const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates)(AyudaPage);
+export default connect(initStates)(PoliticaPage);

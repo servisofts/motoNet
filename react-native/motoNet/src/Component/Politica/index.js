@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../Svg';
-const Ayuda = (props) => {
+const Politica = (props) => {
 
     return (
 
@@ -21,16 +21,16 @@ const Ayuda = (props) => {
                             fill: "#000"
                         }} />
                 </View>
-                <View style={{ backgroundColor: "red", width:"50%" }}>
-                    <Text style={{ alignItems: "flex-start", justifyContent: 'center', fontWeight: 'bold', color: '#fff', fontSize: 25 }}>
-                        Ayuda
+                <View style={{ alignItems: "flex-start", backgroundColor: "red" }}>
+                    <Text style={{ alignItems: "flex-start", fontWeight: 'bold', color: '#fff', fontSize: 25 }}>
+                        Politica Privacidad
                 </Text>
                 </View>
-                <View style={{ alignItems: "flex-end", backgroundColor: "blue", width:"50%" }}>
+                <View style={{ alignItems: "flex-end", backgroundColor: "blue" }}>
                     <Svg name="LogoMoto"
                         style={{
-                            width: 70,
-                            height: 70,
+                            width: 50,
+                            height: 50,
                             fill: "#fff",
                         }} />
                 </View>
@@ -64,7 +64,6 @@ const MainContainer = StyleSheet.create({
 
 const contenedorPolitica = StyleSheet.create({
     contenedor: {
-        width:"100%",
         backgroundColor: "white",
         justifyContent: 'center',
         alignItems: 'center'
@@ -73,9 +72,7 @@ const contenedorPolitica = StyleSheet.create({
 
 const politicaPrivacidad = StyleSheet.create({
     leyenda: {
-        width:"80%",
         alignItems: 'center',
-        justifyContent:"center",
         fontWeight: 'bold',
         color: 'red'
     }
@@ -84,4 +81,4 @@ const politicaPrivacidad = StyleSheet.create({
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(Ayuda);
+export default connect(initStates)(Politica);

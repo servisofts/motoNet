@@ -9,19 +9,23 @@ import SocketClientePage from './SocketClientePage';
 import TerminosCondicionesPage from './TerminosCondicionesPage'
 import AyudaPage from './AyudaPage'
 import ConfirmarPage from './ConfirmarPage'
+import PoliticaPage from './PoliticaPage'
+import ListasPages from './ListasPage'
 
 export const getPages = () => {
     return {
-        ListaPaginasPage,
-        CargaPage,
-        ConsolaPage,
-        LoginPage,
-        RegistroUsuarioPage,
-        InicioPage,
-        PruebaPage,
-        SocketClientePage,
-        ConfirmarPage,
-        AyudaPage,
-        TerminosCondicionesPage
+        "Lista de Paginas": ListaPaginasPage,
+        "Carga": CargaPage,
+        "Consola": ConsolaPage,
+        "Login": LoginPage,
+        "Registro de Usuario": RegistroUsuarioPage,
+        "Inicio": InicioPage,
+        "Listas": ListasPages,
+        "Prueba Page": PruebaPage,
+        "Socket Cliente": SocketClientePage,
+        "Confirmacion": ConfirmarPage,
+        "Ayuda": AyudaPage,
+        "Politica de Privacidad": PoliticaPage,
+        "Terminos y Condiciones": TerminosCondicionesPage
     }
 }

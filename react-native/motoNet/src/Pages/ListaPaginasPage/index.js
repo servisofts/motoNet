@@ -34,39 +34,40 @@ class ListaPaginasPage extends Component {
                     backgroundColor: Theme.colors.fondo,
                     flex: 1,
                     alignItems: "center",
+
                 }}>
 
+                <Text style={{ color: "#CBD8D8", fontSize: 30, fontWeight: 'bold' }}>Lista de paginas...</Text>
 
+                <ScrollView style={{ width: "100%" }}>
+                    {
+                        this.arr.map((obj, key) => {
 
-                <Text style={{ color: "#fff" }}>Lista de paginas...</Text>
-                {
-                    this.arr.map((obj, key) => {
+                            return (
 
-                        return (
-                            <TouchableOpacity key={key} onPress={() => {
-                                this.props.navigation.navigate(obj);
-                            }}
-                                style={{
-                                    width: 200,
-                                    height: 40,
-                                    borderWidth: 3,
-                                    borderColor: "#000",
-                                    margin: 10,
-                                    justifyContent: "center",
-                                    alignItems: "center",
-                                    borderRadius: 10
+                                <TouchableOpacity key={key} onPress={() => {
+                                    this.props.navigation.navigate(obj);
                                 }}
-                            >
-                                <Text style={{ color: Theme.colors.secondary }}>
-                                    {obj}
-                                </Text>
-                            </TouchableOpacity>
-                        )
-                    })
-                }
-
+                                    style={{
+                                        width: "90%",
+                                        height: 50,
+                                        borderWidth: 3,
+                                        borderColor: "#CAC6AC",
+                                        margin: 15,
+                                        justifyContent: "center",
+                                        alignItems: "center",
+                                        borderRadius: 20
+                                    }}
+                                >
+                                    <Text style={{ color: Theme.colors.secondary, fontSize: 19 }}>
+                                        {obj}
+                                    </Text>
+                                </TouchableOpacity>
+                            )
+                        })
+                    }
+                </ScrollView>
             </View>
-
         );
     }
 

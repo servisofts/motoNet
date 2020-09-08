@@ -28,7 +28,7 @@ const RegistroUsuario = (props) => {
         },
         telefono: {
             value: "591",
-            error: false
+            error: false 
 
         },
 
@@ -97,7 +97,7 @@ const RegistroUsuario = (props) => {
             exito = false;
 
         }
-
+        
         setObj({ ...obj })
         if (exito) {
             props.state.socketClienteReducer.sessiones["motonet"].send({
@@ -143,6 +143,7 @@ const RegistroUsuario = (props) => {
                         style={(obj.usr.error ? styles.error : styles.input)}
                         onChangeText={text => hanlechage(text, "usr")}
                         value={obj.usr.value}
+                        autoFocus = {true}
                         autoCapitalize = 'none'
                     />
                 </View>
