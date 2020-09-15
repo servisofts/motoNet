@@ -196,6 +196,8 @@ dependencies {
         exclude group:'com.facebook.fbjni'
     }
 ///////////////////////map
+   implementation project(':react-native-community-geolocation')
+    implementation project(':react-native-image-picker')
 
     implementation(project(':react-native-maps')) {
         exclude group: 'com.google.android.gms', module: 'play-services-base'

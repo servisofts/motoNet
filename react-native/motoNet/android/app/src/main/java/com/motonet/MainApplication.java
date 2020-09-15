@@ -26,7 +26,7 @@ import com.facebook.FacebookSdk;
 import com.facebook.appevents.AppEventsLogger;
 //----IMPORT GRADIENTE----
 import com.BV.LinearGradient.LinearGradientPackage; // <--- This!
-import com.motonet.geolocation.GeolocationPackage;
+
 
 public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost =
@@ -40,8 +40,7 @@ public class MainApplication extends Application implements ReactApplication {
           @SuppressWarnings("UnnecessaryLocalVariable")
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
-
-            packages.add(new GeolocationPackage());
+            packages.add(new com.motonet.geolocation.GeolocationPackage());
           return packages;
         }
         @Override

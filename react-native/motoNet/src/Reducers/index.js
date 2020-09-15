@@ -10,6 +10,7 @@ import modeloComponenteReducer from './modeloComponenteReducer';
 import locationReducer from './locationReducer';
 import socketClienteReducer from './socketClienteReducer';
 import usuarioReducer from './usuarioReducer';
+import locationGoogleMapReducer from './locationGoogleMapReducer';
 export default combineReducers({
     navigationReducer,
     consoleReducer,
@@ -21,5 +22,6 @@ export default combineReducers({
     modeloComponenteReducer,
     locationReducer,
     socketClienteReducer,
-    usuarioReducer
+    usuarioReducer,
+    locationGoogleMapReducer
 });

@@ -170,9 +170,10 @@ const Inicio = (props) => {
                 style={styles.map}
                 initialRegion={region}
                 showsUserLocation={true}
+                
                 ref={map => { mapa = map }}
             >
-                {/*getMarker()*/}
+                {getMarker()}
                 {getMarkersAll()}
                 {/* {getPolyline()} */}
 

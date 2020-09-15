@@ -89,8 +89,6 @@ const goBackButton = (navigation) => {
 
   </TouchableOpacity>)
 }
-
-
 const Container = createAppContainer(Home);
 class App extends Component {
   constructor(props) {
@@ -100,8 +98,6 @@ class App extends Component {
     return (
       <Provider store={store}>
         <SafeAreaView style={{ backgroundColor: Theme.colors.primary }}>
-
-
           <StatusBar barStyle={Theme.barStyle} />
 
           <View style={{

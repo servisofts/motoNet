@@ -23,6 +23,12 @@ export default (state, action) => {
             case "registroFacebook":
                 registroFacebook(state, action);
                 break;
+            case "registroFacebook":
+                registroFacebook(state, action);
+                break;
+            case "pedir":
+                pedir(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -36,7 +42,13 @@ const login = (state, action) => {
     }
 
 }
+const pedir = (state, action) => {
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        alert("llego")
+    }
 
+}
 const loginFacebook = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {

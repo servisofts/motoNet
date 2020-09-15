@@ -35,7 +35,7 @@ export const initSocket = (store) => {
             }
         });
         client.on('error', function (error) {
-            
+
             store.dispatch({
                 component: "socketCliente",
                 type: "error",
@@ -45,7 +45,7 @@ export const initSocket = (store) => {
         });
         client.on('close', function () {
             console.log("SOCKET CLOSE")
-           
+
             const delay = ms => new Promise(res => setTimeout(res, ms));
             const yourFunction = async () => {
                 await delay(5000);
@@ -80,7 +80,7 @@ export const initSocket = (store) => {
     open({
         nombre: "motonet",
         port: 10004,
-        host: "servisofts.com",
+        host: "192.168.0.3",
         tls: true,
         tlsCert: { uri: pem }
     })

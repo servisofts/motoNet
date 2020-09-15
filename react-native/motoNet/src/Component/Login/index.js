@@ -138,7 +138,9 @@ const Login = (props) => {
                             style={styles.touch2}
                             placeholder={"Usuario"}
                             onChangeText={text => hanlechage(text, "usr")}
-                            value={obj.usr.value} />
+                            value={obj.usr.value}
+                            autoCapitalize='none'
+                        />
                     </View>
                     <View
                         style={{
@@ -153,6 +155,8 @@ const Login = (props) => {
                             placeholder={"Password"}
                             onChangeText={text => hanlechage(text, "pass")}
                             value={obj.pass.value}
+                            autoCapitalize='none'
+                            secureTextEntry
 
                         />
                     </View>
@@ -167,7 +171,7 @@ const Login = (props) => {
                         }}>
                         <TouchableOpacity
                             onPress={() => {
-                                  var  datas= {}
+                                var datas = {}
                                 for (const key in obj) {
 
                                     if (!obj[key].value || obj[key].value.lenth <= 0) {
@@ -201,13 +205,11 @@ const Login = (props) => {
 
 
                         <TouchableOpacity
-                            onPress={() => props.navigation.navigate("RegistroUsuarioPage")}
-
+                            onPress={() => props.navigation.navigate("InicioPage")}
                             style={styles.touch4}>
                             <Text
                                 style={{
                                     color: '#fff',
-
                                 }}
                             >
                                 Crear una cuenta
