@@ -5,110 +5,73 @@
  * @format
  * @flow strict-local
  */
-
-import React from 'react';
+import React, { Component } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
+  View, SafeAreaView,
 } from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 
-const App: () => React$Node = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
-          <View style={styles.body}>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Step One</Text>
-              <Text style={styles.sectionDescription}>
-                Edit <Text style={styles.highlight}>App.js</Text> to change this
-                screen and then come back to see your edits.
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>See Your Changes</Text>
-              <Text style={styles.sectionDescription}>
-                <ReloadInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Debug</Text>
-              <Text style={styles.sectionDescription}>
-                <DebugInstructions />
-              </Text>
-            </View>
-            <View style={styles.sectionContainer}>
-              <Text style={styles.sectionTitle}>Learn More</Text>
-              <Text style={styles.sectionDescription}>
-                Read the docs to discover what to do next:
-              </Text>
-            </View>
-            <LearnMoreLinks />
-          </View>
-        </ScrollView>
-      </SafeAreaView>
-    </>
-  );
+///reducx
+import { createStore, applyMiddleware } from 'redux';
+import Reducer from './src/reducers';
+import reduxThunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+//
+
+//IMPORTS DEL NAVIGATION
+import { createStackNavigator } from 'react-navigation-stack';
+import { createAppContainer } from 'react-navigation';
+import * as Pages from './src/pages';
+//--FIN--
+
+
+const store = createStore(
+  Reducer,
+  {},
+  applyMiddleware(reduxThunk),
+);
+
+
+const Home = createStackNavigator(
+  Pages.getPages(),
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      // headerBackground: () =>
+      //   <LinearGradient colors={Theme.gradient.primary} style={{
+      //     height: "100%",
+      //     width: "100%",
+      //     top: 0,
+      //     left: 0,
+      //     backgroundColor: "#000",
+      //     position: "absolute"
+      //   }}>
+
+      //   </LinearGradient>
+      // ,
+      // headerTitleStyle: {
+      //   color: Theme.colors.secondary,
+      // },
+      // headerRight: () => (
+      //   <View />
+      // )
+    }),
+  }
+);
+const Container = createAppContainer(Home);
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <Provider store={store}>
+        <SafeAreaView style={{flex:1}}>
+          <Container />
+        </SafeAreaView>
+        </Provider>
+    );
+  }
 };
-
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
-  },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
-});
 
 export default App;
