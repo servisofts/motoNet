@@ -21,6 +21,12 @@ background: -webkit-linear-gradient(90deg, rgba(231,51,73,1) 11%, rgba(255,0,31,
 background: linear-gradient(90deg, rgba(231,51,73,1) 11%, rgba(255,0,31,0.6867121848739496) 36%);
 filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e73349",endColorstr="#ff001f",GradientType=1);
 }
+
+.colorPrincipal{
+  background-color: #ff3333;
+}
+
+
 .page{
   height: 100%;
   min-height: 100vh;
