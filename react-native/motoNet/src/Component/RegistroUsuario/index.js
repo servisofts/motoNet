@@ -28,7 +28,7 @@ const RegistroUsuario = (props) => {
         },
         telefono: {
             value: "591",
-            error: false
+            error: false 
 
         },
 
@@ -90,14 +90,14 @@ const RegistroUsuario = (props) => {
         if (!obj.telefono.value || obj.telefono.value.length < 10) {
             obj.telefono.error = true;
             exito = false;
+
         }
         if (obj.pass.value !== obj.confirmar.value) {
             obj.confirmar.error = true
             exito = false;
 
-
         }
-
+        
         setObj({ ...obj })
         if (exito) {
             props.state.socketClienteReducer.sessiones["motonet"].send({
@@ -139,10 +139,12 @@ const RegistroUsuario = (props) => {
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Usuario</Text>
-                    <TextInput style={styles.input}
+                    <TextInput placeholder="Ingrese nombre de usuario" style={styles.input}
                         style={(obj.usr.error ? styles.error : styles.input)}
                         onChangeText={text => hanlechage(text, "usr")}
                         value={obj.usr.value}
+                        autoFocus = {true}
+                        autoCapitalize = 'none'
                     />
                 </View>
 
@@ -150,10 +152,11 @@ const RegistroUsuario = (props) => {
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Nombres</Text>
-                    <TextInput style={styles.input}
+                    <TextInput placeholder="Ingrese un nombre"  style={styles.input}
                         style={(obj.nombres.error ? styles.error : styles.input)}
                         onChangeText={text => hanlechage(text, "nombres")}
                         value={obj.nombres.value}
+                        autoCapitalize = 'none'
                     />
                 </View>
 
@@ -161,44 +164,54 @@ const RegistroUsuario = (props) => {
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Apellidos</Text>
-                    <TextInput
+                    <TextInput placeholder="Ingrese un apellido" 
                         style={(obj.apellidos.error ? styles.error : styles.input)}
                         onChangeText={text => hanlechage(text, "apellidos")}
                         value={obj.apellidos.value}
+                        autoCapitalize = 'none'
                     />
                 </View>
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Correo</Text>
-                    <TextInput style={(obj.correo.error ? styles.error : styles.input)}
+                    <TextInput placeholder="Ingrese un correo válido"  
+                    style={(obj.correo.error ? styles.error : styles.input)}
                         onChangeText={text => hanlechage(text, "correo")}
                         value={obj.correo.value}
+                        autoCapitalize = 'none'
                     />
                 </View>
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Telefono</Text>
-                    <TextInput style={(obj.telefono.error ? styles.error : styles.input)}
+                    <TextInput placeholder="Ingrese un número de telefono" 
+                    style={(obj.telefono.error ? styles.error : styles.input)}
                         onChangeText={text => hanlechage(text, "telefono")}
                         value={obj.telefono.value}
+                        keyboardType = 'numeric'
+                        
                     />
+                    
                 </View>
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Password</Text>
-                    <TextInput style={(obj.pass.error ? styles.error : styles.input)}
+                    <TextInput placeholder="Ingresar contraseña"  style={(obj.pass.error ? styles.error : styles.input)}
                         onChangeText={text => hanlechage(text, "pass")}
                         value={obj.pass.value}
-
+                        autoCapitalize = 'none'
+                        secureTextEntry
                     />
                 </View>
 
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Confirmar password</Text>
-                    <TextInput style={(obj.confirmar.error ? styles.error : styles.input)}
+                    <TextInput placeholder="Confirme su contraseña"  style={(obj.confirmar.error ? styles.error : styles.input)}
                         onChangeText={text => hanlechage(text, "confirmar")}
                         value={obj.confirmar.value}
+                        secureTextEntry
+                        autoCapitalize = 'none'
                     />
                 </View>
                 <TouchableOpacity
@@ -271,10 +284,9 @@ const styles = StyleSheet.create({
     },
     input: {
         flex: 1,
-        backgroundColor: "#ffffff99",
+        backgroundColor: "#EAEAE2",
         width: "100%",
         height: 40,
-
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
@@ -292,7 +304,7 @@ const styles = StyleSheet.create({
     },
     error: {
         flex: 1,
-        backgroundColor: "#ffffff99",
+        backgroundColor: "#F7F7B6",
         width: "100%",
         height: 40,
         alignItems: 'center',
@@ -300,7 +312,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         borderRadius: 10,
         borderWidth: 2,
-        borderColor: "#fff",
+        borderColor: "#FFFF00",
         shadowColor: "#000",
         paddingLeft: 15,
         shadowOffset: {

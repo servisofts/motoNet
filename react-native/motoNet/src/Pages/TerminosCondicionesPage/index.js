@@ -7,12 +7,11 @@ import {
     TouchableOpacity,
     Animated
 } from 'react-native';
+import TerminoCondiciones from '../../Component/TerminosCondiciones';
 
-import Prueba from '../../Component/Prueba';
-
-class PruebaPage extends Component {
+class TerminoCondicionesPage extends Component {
     static navigationOptions = {
-        headerShown: false,
+        headerShown: true,
     }
     constructor(props) {
         super(props);
@@ -22,9 +21,8 @@ class PruebaPage extends Component {
             <View style={{
                 flex: 1,
                 alignItems: 'center',
-                backgroundColor: "#000fff",
             }}>
-            
+                <TerminoCondiciones />
             </View>
 
 
@@ -35,4 +33,4 @@ const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates)(PruebaPage);
+export default connect(initStates)(TerminoCondicionesPage);

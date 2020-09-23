@@ -7,14 +7,13 @@ import {
     TouchableOpacity,
     Animated
 } from 'react-native';
+import Ayuda from '../../Component/Ayuda';
 
-import Prueba from '../../Component/Prueba';
-
-class PruebaPage extends Component {
+class AyudaPage extends Component {
     static navigationOptions = {
         headerShown: false,
     }
-    constructor(props) {
+    constructor(props) { 
         super(props);
     }
     render() {
@@ -22,9 +21,8 @@ class PruebaPage extends Component {
             <View style={{
                 flex: 1,
                 alignItems: 'center',
-                backgroundColor: "#000fff",
             }}>
-            
+                <Ayuda />
             </View>
 
 
@@ -35,4 +33,4 @@ const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates)(PruebaPage);
+export default connect(initStates)(AyudaPage);

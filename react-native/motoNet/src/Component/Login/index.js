@@ -139,7 +139,12 @@ const Login = (props) => {
                             placeholder={"Usuario"}
                             onChangeText={text => hanlechage(text, "usr")}
                             value={obj.usr.value}
+<<<<<<< HEAD
                             autoCapitalize='none'
+=======
+                            autoCapitalize = 'none'
+                            autoFocus = {true}
+>>>>>>> 55b938e2b1bde4d8c0e2ef19737947d65ec64a0e
                         />
                     </View>
                     <View
@@ -155,9 +160,14 @@ const Login = (props) => {
                             placeholder={"Password"}
                             onChangeText={text => hanlechage(text, "pass")}
                             value={obj.pass.value}
+<<<<<<< HEAD
                             autoCapitalize='none'
                             secureTextEntry
 
+=======
+                            autoCapitalize = 'none'
+                            secureTextEntry
+>>>>>>> 55b938e2b1bde4d8c0e2ef19737947d65ec64a0e
                         />
                     </View>
                     <View
@@ -365,7 +375,7 @@ const styles = StyleSheet.create({
     },
     touch2: {
         flex: 1,
-        backgroundColor: "#fff",
+        backgroundColor: "#EAEAE2",
         width: "80%",
         height: 50,
         alignItems: 'center',
@@ -386,7 +396,7 @@ const styles = StyleSheet.create({
     touch3: {
         marginTop: 10,
         flex: 1,
-        backgroundColor: "#4fc2ef",
+        backgroundColor: "#F7F7B6",
         width: "80%",
         height: 50,
         alignItems: 'center',
