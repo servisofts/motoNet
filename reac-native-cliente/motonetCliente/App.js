@@ -22,6 +22,7 @@ import { Provider } from 'react-redux';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import * as Pages from './src/pages';
+import * as socketCliente from './src/socketCliente'
 //--FIN--
 
 
@@ -31,6 +32,8 @@ const store = createStore(
   applyMiddleware(reduxThunk),
 );
 
+//SERVICIOS 
+socketCliente.initSocket(store);
 
 const Home = createStackNavigator(
   Pages.getPages(),
