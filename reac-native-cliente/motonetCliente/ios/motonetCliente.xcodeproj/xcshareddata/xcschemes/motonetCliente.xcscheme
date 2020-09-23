@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "motonetCliente.app"
-               BlueprintName = "motonetCliente"
-               ReferencedContainer = "container:motonetCliente.xcodeproj">
+               BuildableName = "motonetcliente.app"
+               BlueprintName = "motonetcliente"
+               ReferencedContainer = "container:motonetcliente.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "motonetClienteTests.xctest"
-               BlueprintName = "motonetClienteTests"
-               ReferencedContainer = "container:motonetCliente.xcodeproj">
+               BuildableName = "motonetclienteTests.xctest"
+               BlueprintName = "motonetclienteTests"
+               ReferencedContainer = "container:motonetcliente.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "motonetCliente.app"
-            BlueprintName = "motonetCliente"
-            ReferencedContainer = "container:motonetCliente.xcodeproj">
+            BuildableName = "motonetcliente.app"
+            BlueprintName = "motonetcliente"
+            ReferencedContainer = "container:motonetcliente.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "motonetCliente.app"
-            BlueprintName = "motonetCliente"
-            ReferencedContainer = "container:motonetCliente.xcodeproj">
+            BuildableName = "motonetcliente.app"
+            BlueprintName = "motonetcliente"
+            ReferencedContainer = "container:motonetcliente.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

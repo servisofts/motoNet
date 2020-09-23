@@ -1,15 +1,33 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 
-import Inicio from '../../Components/Inicio'
+import NaviDrawer from '../../Components/NaviDrawer';
+import * as am4core from "@amcharts/amcharts4/core";
+import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
-class InicioPage extends Component {
-    render() {
-        return (
-            <div>
-                <Inicio />
-            </div>
-        )
-    }
+am4core.useTheme(am4themes_animated);
+
+const LoginPage = (props) => {
+    
+    /*if (!props.state.usuarioReducer.usuarioLog) {
+        props.history.push("/");
+        return <div />
+    }*/
+    return (
+        <NaviDrawer title={"Inicio"} history={props.history}
+            page={() => {
+                return (
+                    <div>
+                        <p>Holaaaaaaaaa Inicio</p>
+                    </div>
+                )
+            }} />
+    )
 }
 
-export default InicioPage;
+const initStates = (state) => {
+    return { state }
+};
+
+
+export default connect(initStates)(LoginPage);

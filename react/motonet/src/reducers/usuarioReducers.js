@@ -22,6 +22,8 @@ export default (state, action) => {
                 login(state, action);
                 break;
         }
+
+        state = { ...state };
     }
     return state;
 }
@@ -32,5 +34,9 @@ const login = (state, action) => {
         state.usuarioLog = action.data;
         sessionStorage.setItem("usuarioLog", JSON.stringify(action.data));
     }
+    if(action.estado === "error"){
+        state.erorsango = action.error
+    }
 
 }
+

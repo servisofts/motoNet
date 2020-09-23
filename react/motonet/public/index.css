@@ -15,12 +15,18 @@ code {
 }
 
 .secondary{
-  background: rgb(85,210,246);
-background: -moz-linear-gradient(180deg, rgba(80,205,241,1) 0%, rgba(11,175,242,1) 100%);
-background: -webkit-linear-gradient(180deg, rgba(80,205,241,1) 0%, rgba(11,175,242,1) 100%);
-background: linear-gradient(180deg, rgba(80,205,241,1) 0%, rgba(11,175,242,1) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#55d2f6",endColorstr="#0baff2",GradientType=1);
+  background: rgb(231,51,73);
+background: -moz-linear-gradient(90deg, rgba(231,51,73,1) 11%, rgba(255,0,31,0.6867121848739496) 36%);
+background: -webkit-linear-gradient(90deg, rgba(231,51,73,1) 11%, rgba(255,0,31,0.6867121848739496) 36%);
+background: linear-gradient(90deg, rgba(231,51,73,1) 11%, rgba(255,0,31,0.6867121848739496) 36%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e73349",endColorstr="#ff001f",GradientType=1);
 }
+
+.colorPrincipal{
+  background-color: #ff3333;
+}
+
+
 .page{
   height: 100%;
   min-height: 100vh;
