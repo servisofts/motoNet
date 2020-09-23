@@ -11,6 +11,7 @@ import locationReducer from './locationReducer';
 import socketClienteReducer from './socketClienteReducer';
 import usuarioReducer from './usuarioReducer';
 import locationGoogleMapReducer from './locationGoogleMapReducer';
+import cabeceraDatoReducer from './cabeceraDatoReducer';
 export default combineReducers({
     navigationReducer,
     consoleReducer,
@@ -23,5 +24,6 @@ export default combineReducers({
     locationReducer,
     socketClienteReducer,
     usuarioReducer,
-    locationGoogleMapReducer
+    locationGoogleMapReducer,
+    cabeceraDatoReducer
 });

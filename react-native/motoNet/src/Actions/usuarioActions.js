@@ -20,3 +20,23 @@ export const registrarUser = (socket,usuario) => async (dispatch) => {
     })
 
 }
+export const registro = (socket, data) => async (dispatch) => {
+    var objSend = {
+        component: "usuario",
+        type: "registro",
+        estado: "cargando",
+        cabecera:"registro_conductor",
+        data
+    }
+    if (!socket.isOpen) {
+        dispatch({
+            ...objSend,
+            estado: "error"
+        })
+        return;
+    }
+    socket.send(objSend);
+    dispatch({
+        ...objSend,
+    })
+}

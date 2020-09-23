@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import Svg from '../../Svg';
 import base64 from 'react-native-base64'
-import { LoginManager } from "react-native-fbsdk";
+import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from "react-native-fbsdk";
 import Theme from '../../Styles/Theme.json'
 
 const Login = (props) => {
@@ -25,12 +25,25 @@ const Login = (props) => {
             value: "",
             error: false
         },
-
-
     });
+
     if (props.state.usuarioReducer.estado === "exito") {
         props.navigation.estado = ""
-        props.navigation.navigate("InicioPage");
+        props.navigation.navigate("CargaPage");
+        return <View />
+    }
+    if (props.state.usuarioReducer.estado === "error") {
+        switch (props.state.usuarioReducer.error) {
+            case "not_found":
+                props.navigation.navigate("RegistroUsuarioPage", {
+                    data,
+                    registro: "facebook"
+                })
+                break;
+        }
+        props.state.usuarioReducer.estado = ""
+        obj.pass.error = true;
+        setObj({ ...obj })
         return <View />
     }
     const _responseInfoCallback = (error, result) => {
@@ -73,24 +86,49 @@ const Login = (props) => {
         return <View />
     };
 
-
-
     const _fbAuth = () => {
         LoginManager.logInWithPermissions(["public_profile"]).then(
             function (result) {
                 if (result.isCancelled) {
-                    console.log("Login cancelled");
                 } else {
-                    console.log(
-                        "entro: "
-                    );
-                    console.log(result);
+                    AccessToken.getCurrentAccessToken().then(
+                        (data) => {
+                            let accessToken = data.accessToken
+                            const responseInfoCallback = (error, result) => {
+                                if (error) {
+                                    console.log(error)
+                                } else {
+                                    console.log(result)
+/*                                     props.loginFacebook(props.state.socketClienteReducer.sessiones["motonet"], result);
+ */                                    data = result;
+                                    setFace(data);
+                                    LoginManager.logOut();
+                                }
+                            }
+                            const infoRequest = new GraphRequest(
+                                '/me',
+                                {
+                                    accessToken: accessToken,
+                                    parameters: {
+                                        fields: {
+                                            string: 'email,name,first_name,middle_name,last_name'
+                                        }
+                                    }
+                                },
+                                responseInfoCallback
+                            );
+                            // Start the graph request.
+                            new GraphRequestManager().addRequest(infoRequest).start()
+                        }
+                    )
                 }
+
             },
             function (error) {
                 console.log("Login fail with error: " + error);
             }
         );
+        LoginManager.logOut();
     }
 
 
@@ -133,18 +171,13 @@ const Login = (props) => {
                             marginTop: 30,
                             justifyContent: 'center',
                         }}>
-
                         <TextInput
                             style={styles.touch2}
                             placeholder={"Usuario"}
                             onChangeText={text => hanlechage(text, "usr")}
                             value={obj.usr.value}
-<<<<<<< HEAD
                             autoCapitalize='none'
-=======
-                            autoCapitalize = 'none'
-                            autoFocus = {true}
->>>>>>> 55b938e2b1bde4d8c0e2ef19737947d65ec64a0e
+                            autoFocus={true}
                         />
                     </View>
                     <View
@@ -160,18 +193,13 @@ const Login = (props) => {
                             placeholder={"Password"}
                             onChangeText={text => hanlechage(text, "pass")}
                             value={obj.pass.value}
-<<<<<<< HEAD
                             autoCapitalize='none'
                             secureTextEntry
-
-=======
-                            autoCapitalize = 'none'
+                            autoCapitalize='none'
                             secureTextEntry
->>>>>>> 55b938e2b1bde4d8c0e2ef19737947d65ec64a0e
                         />
                     </View>
                     <View
-
                         style={{
                             marginTop: 10,
                             flex: 1,
@@ -215,7 +243,7 @@ const Login = (props) => {
 
 
                         <TouchableOpacity
-                            onPress={() => props.navigation.navigate("InicioPage")}
+                            onPress={() => props.navigation.navigate("RegistroUsuarioPage")}
                             style={styles.touch4}>
                             <Text
                                 style={{
