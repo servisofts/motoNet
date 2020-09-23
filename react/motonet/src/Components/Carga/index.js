@@ -19,7 +19,7 @@ const Carga = (props) => {
             props.propsPadre.history.push("/Inicio");
         }
     };
-    depuesDeLaCarga()
+    depuesDeLaCarga() 
 
     return (
         <div className="page secondary">

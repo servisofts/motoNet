@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react'
 const Login = () => {
 
     return (
-        <div>
+        <div className="page secondary">
             pagina login
         </div>
     )

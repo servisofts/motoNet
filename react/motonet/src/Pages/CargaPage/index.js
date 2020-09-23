@@ -5,9 +5,7 @@ import { connect } from 'react-redux';
 import Carga from '../../Components/Carga'
 
 class CargaPage extends Component {
-    constructor(props){
-        super(false)
-    }
+    
     render() {
         return (
             <div>
