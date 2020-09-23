@@ -3,12 +3,12 @@ require_relative '../node_modules/@react-native-community/cli-platform-ios/nativ
 
 platform :ios, '10.0'
 
-target 'motonetCliente' do
+target 'motonetcliente' do
   config = use_native_modules!
 
   use_react_native!(:path => config["reactNativePath"])
 
-  target 'motonetClienteTests' do
+  target 'motonetclienteTests' do
     inherit! :complete
     # Pods for testing
   end
@@ -23,10 +23,10 @@ target 'motonetCliente' do
   end
 end
 
-target 'motonetCliente-tvOS' do
-  # Pods for motonetCliente-tvOS
+target 'motonetcliente-tvOS' do
+  # Pods for motonetcliente-tvOS
 
-  target 'motonetCliente-tvOSTests' do
+  target 'motonetcliente-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
