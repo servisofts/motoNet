@@ -7,9 +7,9 @@ export const getAllOpen = (socket) => async (dispatch) => {
     }
 
     if (!socket.isOpen) {
-        dispatch({
+        dispatch({  
             ..._obj,
-            estado: "error"
+            estado: "error" 
         })
         return;
     }
@@ -51,4 +51,4 @@ export const repuestaUbicacion = (repuesta) => async (dispatch) => {
         repuesta
     })
 
-}
+}   
