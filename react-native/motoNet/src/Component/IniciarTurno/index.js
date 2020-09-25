@@ -2,6 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { View, TouchableOpacity, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+
+
+
 const iniciarTurno = (props) => {
     if (props.state.backgroundLocationReducer.isOpen) {
         return <View />
@@ -34,15 +37,16 @@ const iniciarTurno = (props) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                <Text >
-                 Bienvenido 
+                <Text>
+                 Bienvenido {"\n"} 
                  {props.state.usuarioReducer.usuarioDatos["Nombres"].dato}
                  {" "+props.state.usuarioReducer.usuarioDatos["Apellidos"].dato}.
                 </Text>
                 <Text >
-                 Para recivir viajes precion iniciar.
+                 Para recibir viajes precione iniciar.
                 </Text>
             </TouchableOpacity>
+        
         </View>
     )
 }

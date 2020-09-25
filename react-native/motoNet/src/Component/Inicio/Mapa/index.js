@@ -4,6 +4,7 @@ import * as locationActions from '../../../Actions/locationActions'
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { View, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
+
 var mapa;
 const Mapa = (props) => {
     const [zoom, setZoom] = React.useState(false);
@@ -71,11 +72,11 @@ const Mapa = (props) => {
     )
 }
 const styles = StyleSheet.create({
-
     map: {
         width: '100%',
         height: "100%",
     },
+   
 });
 const initActions = ({
     ...mapaActions,

@@ -14,6 +14,7 @@ import locationGoogleMapReducer from './locationGoogleMapReducer';
 import cabeceraDatoReducer from './cabeceraDatoReducer';
 import backgroundLocationReducer from './backgroundLocationReducer';
 import componenteInicioReducer from './componenteInicioReducer';
+import ViajeReducer from './ViajeReducer';
 
 export default combineReducers({
     navigationReducer,
@@ -30,5 +31,6 @@ export default combineReducers({
     usuarioReducer,
     locationGoogleMapReducer,
     cabeceraDatoReducer,
-    componenteInicioReducer
+    componenteInicioReducer,
+    ViajeReducer,
 });
