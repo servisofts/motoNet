@@ -1,34 +1,31 @@
 import {
     NativeModules,
     NativeEventEmitter,
-    Platform
+    Platform,
+    AsyncStorage
 } from 'react-native';
 export const init = (store) => {
 
     var objSend = {
-        component: "location",
+        component: "backgroundLocation",
         type: "initial",
         data: "",
     };
     const open = () => {
-        NativeModules.Geolocation.start(1).then(resp => {
-
+        NativeModules.BackgroundGeolocation.start(1).then(resp => {
             objSend.type = "open";
             store.dispatch(objSend);
-
-            const eventEmitter = new NativeEventEmitter(NativeModules.Geolocation);
+            AsyncStorage.setItem("motonet_backgrounLocation", JSON.stringify(objSend));
+            const eventEmitter = new NativeEventEmitter(NativeModules.BackgroundGeolocation);
             var eventListener = eventEmitter.addListener('onLocationChange', (event) => {
-
                 if (!event.data.latitude) {
                     event.data = JSON.parse(event.data);
                 }
-
-
                 event.data.deegre = 0;
                 var state = store.getState();
-                if (state.locationReducer.history) {
-                    if (state.locationReducer.history.length > 0) {
-                        var data2 = state.locationReducer.history[state.locationReducer.history.length - 1];
+                if (state.backgroundLocationReducer.history) {
+                    if (state.backgroundLocationReducer.history.length > 0) {
+                        var data2 = state.backgroundLocationReducer.history[state.backgroundLocationReducer.history.length - 1];
                         console.log(data2);
                         var dx = event.data.latitude - data2.latitude;
                         var dy = event.data.longitude - data2.longitude;
@@ -37,8 +34,6 @@ export const init = (store) => {
                         event.data.deegre = theta;
                     }
                 }
-
-
                 objSend.data = event.data;
                 objSend.type = "onLocationChange";
                 store.dispatch(objSend);
@@ -47,11 +42,12 @@ export const init = (store) => {
                         if (state.socketClienteReducer.sessiones["motonet"].isOpen) {
                             if (state.usuarioReducer.usuarioLog) {
                                 var locationToServer = {
-                                    component: "location",
+                                    component: "backgroundLocation",
                                     type: "registro",
-                                    key_usuario_servicio: state.usuarioReducer.usuarioLog.usuario_servicio.key,
+                                    key_usuario: state.usuarioReducer.usuarioLog.key,
                                     data: event.data
                                 };
+                                console.log(locationToServer);
                                 state.socketClienteReducer.sessiones["motonet"].send(locationToServer);
                             }
 
@@ -67,18 +63,19 @@ export const init = (store) => {
         });
     }
     const close = () => {
-        NativeModules.Geolocation.stop("Location").then(resp => {
+        NativeModules.BackgroundGeolocation.stop("Location").then(resp => {
             objSend.type = "close";
             store.dispatch(objSend);
+            AsyncStorage.setItem("motonet_backgrounLocation", "");
         })
     }
 
     store.dispatch({
-        component: "location",
+        component: "backgroundLocation",
         type: "init",
         open,
         close,
-
     });
+    
 
 }

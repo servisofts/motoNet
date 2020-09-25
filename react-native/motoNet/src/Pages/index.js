@@ -10,9 +10,9 @@ import PedirMotoPage from './PedirMotoPage';
 import UsuarioPerfilPage from './UsuarioPerfilPage';
 export const getPages = () => {
     return {
+        CargaPage,
         ListaPaginasPage,
         UsuarioPerfilPage,
-        CargaPage,
         ConsolaPage,
         LoginPage,
         RegistroUsuarioPage,

@@ -28,7 +28,7 @@ import reduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 //
 // import * as conection from './src/conection'
-import * as Location from './src/Location'
+import * as BackgroundLocation from './src/BackgroundLocation'
 
 import LinearGradient from 'react-native-linear-gradient';
 
@@ -44,7 +44,7 @@ const store = createStore(
 import * as socketCliente from './src/socketCliente'
 import DisconectBarra from './src/Component/DisconectBarra';
 //SERVICIOS 
-Location.init(store); 
+BackgroundLocation.init(store); 
 //SERVICIOS 
 socketCliente.initSocket(store);
 const Home = createStackNavigator(
@@ -106,7 +106,6 @@ class App extends Component {
           }}>
             <DisconectBarra />
             <Container />
-            <NaviDrawer />
 
           </View>
 
