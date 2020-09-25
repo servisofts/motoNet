@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import CargaPage from './Pages/CargaPage'
 import LoginPage from './Pages/LoginPage'
 import InicioPage from './Pages/InicioPage'
-
+import ListaUsuarioPage from './Pages/ListaUsuarioPage'
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
       <Route exact path='/' component={CargaPage} />
       <Route exact path='/Login' component={LoginPage} />
       <Route exact path='/Inicio' component={InicioPage} />
+      <Route exact path='/ListaUsuario' component={ListaUsuarioPage} />
       
     </BrowserRouter>
   );

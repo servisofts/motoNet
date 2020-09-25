@@ -69,7 +69,7 @@ const Login = (props) => {
     }
 
     if (props.state.usuarioReducer.estado === "error") {
-        alert('error, vuelva a escribir');
+        //alert('error, vuelva a escribir');
 
     }
 
@@ -125,7 +125,7 @@ const Login = (props) => {
                             <CssTextField variant="outlined" label="Password" error={data.pass.error} style={{ margin: 8, width: "100%" }} type="password" value={data.pass.value} onChange={(evt) => onChange(evt, "pass")} onKeyPress={event => {
                                 if (event.key == 'Enter') {
                                     console.log('entro la puta madre')
-                                    { handleClick() }
+                                    { enviarLoginServe() }
                                 }
                             }} />
                         </form>
@@ -141,7 +141,7 @@ const Login = (props) => {
                         <Grid container>
 
                             <Grid xs={12}>
-                                <Button variant="contained" size="large" onClick={handleClick}>
+                                <Button variant="contained" size="large" onClick={enviarLoginServe}>
                                     {props.state.usuarioReducer.estado == "cargando" ? <CircularProgress color="#fff" style={{ display: "block" }} /> : "Iniciar"}
                                 </Button>
 
