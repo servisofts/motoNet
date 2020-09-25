@@ -6,6 +6,11 @@ import Svg from '../../Svg'
 
 export class LoginPage extends Component {
 
+    static navigationOptions = ({ navigation }) => (
+        {
+            headerShown: false
+        }
+    );
     constructor(props) {
         super(props);
         this.state = {
@@ -110,14 +115,14 @@ export class LoginPage extends Component {
                         flexDirection: "row",
                         with: "100%",
                         alignItems: "center",
-                        marginTop:30                     
+                        marginTop: 30
                     }}>
-                        <View style={{                            
+                        <View style={{
                             alignItems: "center"
                         }}>
                             <ButtonRegistro titulo="INICIAR SESSION" estilo="sign" click={this.handleClick2} />
                         </View>
-                        <View style={{                          
+                        <View style={{
                             alignItems: "center"
                         }}>
                             <ButtonRegistro titulo="REGISTRAR" estilo="create" click={this.handleClick} />

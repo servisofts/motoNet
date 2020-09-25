@@ -8,11 +8,11 @@ import { connect } from 'react-redux'
 
 
 class RegistroUsuarioPage extends Component {
-    static navigationOptions = ({ navigation }) => (
-        {
-            headerShown: false
-        }
-    );
+
+    static navigationOptions = {
+        headerShown: false,
+    }
+
     constructor(props) {
         super(props);
         this.state = {
@@ -43,12 +43,12 @@ class RegistroUsuarioPage extends Component {
 
         var cabecera = "registro_cliente";
         if (!this.props.state.cabeceraDatoReducer.data[cabecera]) {
-            this.props.state.socketClienteReducer.sessiones["motonet"].send({
-                component: "cabeceraDato",
-                type: "getDatoCabecera",
-                estado: "cargando",
-                cabecera: cabecera,
-            }, true);
+            /*  this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                 component: "cabeceraDato",
+                 type: "getDatoCabecera",
+                 estado: "cargando",
+                 cabecera: cabecera,
+             }, true); */
         }
     }
 
