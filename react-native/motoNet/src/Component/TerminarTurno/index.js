@@ -25,7 +25,7 @@ const TerminarTurno = (props) => {
                     justifyContent: 'center',
                 }}>
                 <Text style={{ color: "#fff",fontSize: 10,fontWeight: 'bold', }} >
-                    TERMINAR TURNo
+                   Terminar Turno
                 </Text>
             </TouchableOpacity>
         </View>

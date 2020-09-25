@@ -1,9 +1,9 @@
-#import "Geolocation.h"
+#import "BackgroundGeolocation.h"
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@implementation Geolocation
+@implementation BackgroundGeolocation
 {
   CLLocationManager * locationManager;
    NSDictionary * lastLocationEvent;
@@ -15,7 +15,7 @@
  
 
 //export the name of the native module as 'Device' since no explicit name is mentioned
-RCT_EXPORT_MODULE(Geolocation);
+RCT_EXPORT_MODULE(BackgroundGeolocation);
 
 - (NSArray<NSString *> *)supportedEvents
 {

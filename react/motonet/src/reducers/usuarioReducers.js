@@ -21,6 +21,9 @@ export default (state, action) => {
             case "login":
                 login(state, action);
                 break;
+            case "getAllNuevo":
+                getAllNuevo(state, action);
+                break;
         }
 
         state = { ...state };
@@ -34,9 +37,21 @@ const login = (state, action) => {
         state.usuarioLog = action.data;
         sessionStorage.setItem("usuarioLog", JSON.stringify(action.data));
     }
-    if(action.estado === "error"){
+    if (action.estado === "error") {
         state.erorsango = action.error
     }
 
+}
+
+const getAllNuevo = (state, action) => {
+    state.estado = action.estado;
+    if (action.estado === "exito") {
+        if (!state.data) {
+            state.data = {}
+        }
+        action.data.map((obj, key) => {
+            state.data[obj.key_usuario] = JSON.parse(obj.data);
+        });
+    }
 }
 
