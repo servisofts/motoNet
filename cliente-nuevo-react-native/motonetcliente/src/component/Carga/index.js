@@ -7,6 +7,9 @@ const Carga = (props) => {
     const [obj, setObj] = React.useState(false);
 
     if (obj) {
+        if (props.state.usuarioReducer.usuarioLog) {
+            props.state.navigationReducer.replace("InicioPage");
+        }
         props.state.navigationReducer.replace("LoginPage");
         //setObj(false);
         return <View />

@@ -12,6 +12,7 @@ export const getPages = () => {
         LoginPage,
         RegistroUsuarioPage,        
         InicioPage,
+
         
     }
 }
