@@ -8,7 +8,11 @@ import { connect } from 'react-redux'
 
 
 class RegistroUsuarioPage extends Component {
-
+    static navigationOptions = ({ navigation }) => (
+        {
+            headerShown: false
+        }
+    );
     constructor(props) {
         super(props);
         this.state = {
@@ -183,8 +187,6 @@ class RegistroUsuarioPage extends Component {
                 estado: "cargando",
             };
             this.props.state.socketClienteReducer.sessiones["motonet"].send(jsonSend, true);
-
-
             /*  } */
             return <View />
         }
@@ -267,6 +269,7 @@ class RegistroUsuarioPage extends Component {
                             placeholder={"Contraseña"}
                             value={this.state.contraseña.value}
                             placeholderTextColor="#626262"
+                            secureTextEntry
                             autoCapitalize='none'
                         />
                     </View>
