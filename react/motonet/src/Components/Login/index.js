@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { CircularProgress, Grid, Button } from '@material-ui/core';
+import { CircularProgress, Grid, Button, Snackbar } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import MuiAlert from '@material-ui/lab/Alert';
 
 import TextField from '@material-ui/core/TextField';
 import { Link } from 'react-router-dom';
@@ -38,6 +39,18 @@ const CssTextField = withStyles({
 
 const Login = (props) => {
 
+    const [open, setOpen] = React.useState(false);
+    const handleClick = () => {
+        setOpen(true);
+    };
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpen(false);
+    };
+
+
     const [data, setData] = React.useState({
         usr: {
             error: false,
@@ -68,12 +81,6 @@ const Login = (props) => {
         props.propsPadre.history.push("/Inicio");
         return <div />
     }
-
-
-    const errorLogin = () => {
- 
-    }
-
 
     const enviarLoginServe = () => {
         var dataSend = {};
@@ -118,10 +125,11 @@ const Login = (props) => {
                             <CssTextField variant="outlined" label="Password" error={data.pass.error} style={{ margin: 8, width: "100%" }} type="password" value={data.pass.value} onChange={(evt) => onChange(evt, "pass")} onKeyPress={event => {
                                 if (event.key == 'Enter') {
                                     console.log('entro la puta madre')
-                                    { enviarLoginServe() }
+                                    { handleClick() }
                                 }
                             }} />
                         </form>
+
                     </div>
                     <div style={{
                         display: "flex",
@@ -133,7 +141,7 @@ const Login = (props) => {
                         <Grid container>
 
                             <Grid xs={12}>
-                                <Button variant="contained" size="large" onClick={enviarLoginServe}>
+                                <Button variant="contained" size="large" onClick={handleClick}>
                                     {props.state.usuarioReducer.estado == "cargando" ? <CircularProgress color="#fff" style={{ display: "block" }} /> : "Iniciar"}
                                 </Button>
 
@@ -146,11 +154,21 @@ const Login = (props) => {
                             </Grid>
                         </Grid>
                     </div>
+
+                    <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+                        <Alert onClose={handleClose} severity="warning">
+                            Error, Datos incorrectos...
+                        </Alert>
+                    </Snackbar>
                 </div>
             </div>
         </div>
     )
 
+}
+
+function Alert(props) {
+    return <MuiAlert elevation={10} variant="filled" {...props} />;
 }
 
 const initStates = (state) => {
