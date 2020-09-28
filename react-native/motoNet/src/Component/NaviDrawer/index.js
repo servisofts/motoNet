@@ -19,8 +19,9 @@ const NaviDrawe = (props) => {
         return <View></View>
     }
     const handleClick = (pros) => {
-
+        props.navigation.navigate(pros);
     }
+
     var letra = "#fff";
     var colorContainer = "red";
     return (
@@ -80,7 +81,7 @@ const NaviDrawe = (props) => {
                                     marginStart:20
                                 }}>
                                     <TouchableOpacity style={styles.sty}
-                                        onPress={() => { handleClick("Inicio") }}
+                                        onPress={() => { handleClick("PerfilPage") }}
                                     >
                                         <Text style={{ fontSize: 20, color: letra }} >Perfil</Text>
                                     </TouchableOpacity >

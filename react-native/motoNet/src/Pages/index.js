@@ -9,6 +9,7 @@ import SocketClientePage from './SocketClientePage';
 import PedirMotoPage from './PedirMotoPage';
 import UsuarioPerfilPage from './UsuarioPerfilPage';
 import ConfirmarPage from './ConfirmarPage';
+import PerfilPage from './PerfilPage';
 
 export const getPages = () => {
     return {
@@ -23,5 +24,6 @@ export const getPages = () => {
         SocketClientePage,
         PedirMotoPage,
         ConfirmarPage,
+        PerfilPage,
     }
 }
