@@ -23,8 +23,16 @@ public class Manejador {
                     new Location(data, router);
                     break;
                 }
+                case "backgroundLocation": {
+                    new BackgroundLocation(data, router);
+                    break;
+                }
                 case "locationGoogle": {
                     new LocationGoogle(data, router);
+                    break;
+                }
+                case "viaje": {
+                    new Viaje(data, router);
                     break;
                 }
                 default:

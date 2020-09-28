@@ -51,7 +51,7 @@ public class servicio {
         }
         SocketCliete.servicios_habilitados = serviciosH;
         SocketCliete.StartServicio("usuario");
-        // SocketCliete.StartServicio("geolocation");
+        SocketCliete.StartServicio("geolocation");
     }
 
     private void initServer(JSONObject obj) {
