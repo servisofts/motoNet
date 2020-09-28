@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, ScrollView } from 'react-native'
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler'
 import ButtonRegistro from '../../component/LoginComponent/ButtonRegistro'
 import MiCheckBox from '../../component/MiCheckBox';
@@ -34,6 +34,10 @@ class RegistroUsuarioPage extends Component {
             },
             contraseña: {
                 value: "",
+                error: false
+            },
+            politica: {
+                value: false,
                 error: false
             },
         };
@@ -195,134 +199,136 @@ class RegistroUsuarioPage extends Component {
 
     render() {
         return (
-            <View style={{
-                backgroundColor: "#FC363B",
-                flex: 1
-            }}>
+            <ScrollView style={{ flex: 1, }}>
                 <View style={{
-                    flex: 0.4,
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    backgroundColor: "#FC363B",
+                    flex: 1
                 }}>
-                    <Svg name="Logo"
-                        style={{
-                            width: 200,
-                            height: 200,
-                        }} />
-                </View>
-
-                <View style={{
-                    flex: 1,
-                    alignItems: "center"
-                }}>
-                    <View style={styles.contenedorInput}>
-                        <TextInput style={{
-                        }}
-                            onChangeText={text => this.handleChange(text, "nombres")}
-                            style={(this.state.nombres.error ? styles.error : styles.Input)}
-                            placeholder={"Nombres"}
-                            value={this.state.nombres.value}
-                            placeholderTextColor="#626262"
-                            color="#000"
-                            autoCapitalize='none'
-                        />
-                    </View>
-
-                    <View style={styles.contenedorInput}>
-                        <TextInput
-                            onChangeText={text => this.handleChange(text, "apellidos")}
-                            style={(this.state.apellidos.error ? styles.error : styles.Input)}
-                            placeholder={"Apellidos"}
-                            value={this.state.apellidos.value}
-                            placeholderTextColor="#626262"
-                            autoCapitalize='none'
-                        />
-                    </View>
-
-                    <View style={styles.contenedorInput}>
-                        <TextInput
-                            onChangeText={text => this.handleCorreo(text, "correo")}
-                            style={(this.state.correo.error ? styles.error : styles.Input)}
-                            placeholder={"Correo"}
-                            value={this.state.correo.value}
-                            placeholderTextColor="#626262"
-                            autoCapitalize='none'
-                        />
-                    </View>
-
-                    <View style={styles.contenedorInput}>
-                        <TextInput
-                            onChangeText={text => this.handleChange(text, "telefono")}
-                            style={(this.state.telefono.error ? styles.error : styles.Input)}
-                            placeholder={"Telefono"}
-                            value={this.state.telefono.value}
-                            placeholderTextColor="#626262"
-                            autoCapitalize='none'
-                            maxLength={8}
-                        />
-                    </View>
-
-                    <View style={styles.contenedorInput}>
-                        <TextInput
-                            onChangeText={text => this.handleChange(text, "contraseña")}
-                            style={(this.state.contraseña.error ? styles.error : styles.Input)}
-                            placeholder={"Contraseña"}
-                            value={this.state.contraseña.value}
-                            placeholderTextColor="#626262"
-                            secureTextEntry
-                            autoCapitalize='none'
-                        />
-                    </View>
-
                     <View style={{
-                        width: '80%',
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
+                        flex: 0.4,
+                        alignItems: 'center',
+                        justifyContent: 'center',
                     }}>
-                        <View style={{ flex: 1, paddingTop: 20 }}>
-                            <MiCheckBox
-                            //ischeck={obj.politica.value} 
-                            //onChange={text => hanlechage(text, "politica")} 
-                            />
-                        </View>
-                        <TouchableOpacity
-                            onPress={() => {
-                                props.navigation.navigate("PoliticaPage");
-                                return <View />
-                            }}
+                        <Svg name="Logo"
                             style={{
-                                width: '90%',
-                                marginTop: 10,
-                                justifyContent: 'flex-start',
-                            }} >
-
-                            <Text style={{
-                                paddingLeft: 10,
-                                color: "#fff"
-                            }}>Mostrar la politica de privacidad</Text>
-                            <Text style={{
-                                marginStart: 10,
-                                fontSize: 10,
-                                maxWidth: "90%",
-                                width: 290,
-                                color: "#fff"
-                            }}>Por favor, confirma que estas de acuerdo con nuestra
-                                politica de
-                                privacidad
-                    </Text>
-                        </TouchableOpacity>
+                                width: 200,
+                                height: 200,
+                            }} />
                     </View>
 
                     <View style={{
-                        marginTop: 20,
-                        width: "100%",
+                        flex: 1,
                         alignItems: "center"
                     }}>
-                        <ButtonRegistro click={this.Registrar} titulo="REGISTRAR" estilo="sign" />
-                    </View>
+                        <View style={styles.contenedorInput}>
+                            <TextInput style={{
+                            }}
+                                onChangeText={text => this.handleChange(text, "nombres")}
+                                style={(this.state.nombres.error ? styles.error : styles.Input)}
+                                placeholder={"Nombres"}
+                                value={this.state.nombres.value}
+                                placeholderTextColor="#626262"
+                                color="#000"
+                                autoCapitalize='none'
+                            />
+                        </View>
 
+                        <View style={styles.contenedorInput}>
+                            <TextInput
+                                onChangeText={text => this.handleChange(text, "apellidos")}
+                                style={(this.state.apellidos.error ? styles.error : styles.Input)}
+                                placeholder={"Apellidos"}
+                                value={this.state.apellidos.value}
+                                placeholderTextColor="#626262"
+                                autoCapitalize='none'
+                            />
+                        </View>
+
+                        <View style={styles.contenedorInput}>
+                            <TextInput
+                                onChangeText={text => this.handleCorreo(text, "correo")}
+                                style={(this.state.correo.error ? styles.error : styles.Input)}
+                                placeholder={"Correo"}
+                                value={this.state.correo.value}
+                                placeholderTextColor="#626262"
+                                autoCapitalize='none'
+                            />
+                        </View>
+
+                        <View style={styles.contenedorInput}>
+                            <TextInput
+                                onChangeText={text => this.handleChange(text, "telefono")}
+                                style={(this.state.telefono.error ? styles.error : styles.Input)}
+                                placeholder={"Telefono"}
+                                value={this.state.telefono.value}
+                                placeholderTextColor="#626262"
+                                autoCapitalize='none'
+                                maxLength={8}
+                            />
+                        </View>
+
+                        <View style={styles.contenedorInput}>
+                            <TextInput
+                                onChangeText={text => this.handleChange(text, "contraseña")}
+                                style={(this.state.contraseña.error ? styles.error : styles.Input)}
+                                placeholder={"Contraseña"}
+                                value={this.state.contraseña.value}
+                                placeholderTextColor="#626262"
+                                secureTextEntry
+                                autoCapitalize='none'
+                            />
+                        </View>
+
+                        <View style={{
+                            width: '80%',
+                            flexDirection: 'row',
+                            justifyContent: 'flex-start',
+                        }}>
+                            <View style={{ flex: 1, paddingTop: 20 }}>
+                                <MiCheckBox
+                                ischeck={this.state.politica.value} 
+                                onChange={text => this.handleChange(text, "politica")} 
+                                />
+                            </View>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    this.props.navigation.navigate("PoliticaPage");
+                                    return <View />
+                                }}
+                                style={{
+                                    width: '90%',
+                                    marginTop: 10,
+                                    justifyContent: 'flex-start',
+                                }} >
+
+                                <Text style={{
+                                    paddingLeft: 10,
+                                    color: "#fff"
+                                }}>Mostrar la politica de privacidad</Text>
+                                <Text style={{
+                                    marginStart: 10,
+                                    fontSize: 10,
+                                    maxWidth: "90%",
+                                    width: 290,
+                                    color: "#fff"
+                                }}>Por favor, confirma que estas de acuerdo con nuestra
+                                    politica de
+                                    privacidad
+                    </Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        <View style={{
+                            marginTop: 20,
+                            width: "100%",
+                            alignItems: "center"
+                        }}>
+                            <ButtonRegistro click={this.Registrar} titulo="REGISTRAR" estilo="sign" />
+                        </View>
+
+                    </View>
                 </View>
-            </View>
+            </ScrollView>
         )
     }
 }

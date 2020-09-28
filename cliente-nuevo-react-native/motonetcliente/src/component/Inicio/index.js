@@ -5,6 +5,7 @@ import { View } from 'react-native';
 import ComponenteInicio from './ComponenteInicio';
 import BuscadorComponenteMap from '../BuscardorDireccion/BuscadorComponenteMap';
 import MarkerMedio from '../BuscardorDireccion/MarkerMedio';
+import ConfirmacionBusqueda from './ConfirmacionBusqueda';
 const Inicio = (props) => {
     if (props.state.componenteInicioReducer.seleccionado != "IniciarTurno") {
         props.state.componenteInicioReducer.navigate("IniciarTurno", props.dispatch);
@@ -18,7 +19,7 @@ const Inicio = (props) => {
             <Mapa />
             <MarkerMedio  navigation={props.navigation}/>
             <BuscadorComponenteMap navigation={props.navigation} />
-            
+            <ConfirmacionBusqueda/>
         </View>
     )
 }

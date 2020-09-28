@@ -10,46 +10,40 @@ import { connect } from 'react-redux';
 import Svg from '../../../Svg';
 import ListaBusqueda from '../ListaBusqueda';
 import * as locationActions from '../../../action/locationActions'
-
+import * as viajesActions from '../../../action/viajesActions'
+import Geolocation from '@react-native-community/geolocation';
 const BuscadorComponenteMap = (props) => {
     const [data, setData] = React.useState({
-        obj: {
-            texto: "",
-            escribiendo: "",
-            inicio: {
-                value: "",
-                estado: true
-            },
-            fin: {
-                value: "",
-                estado: false
-            },
-        },
         dataUbicacion: false,
         mostrarTexto: false,
         ubicacionActual: props.ubicacionActual || false,
         repuestaInput: false,
         focusInput: false
     })
-
-
+    const actualizarUbicacion = () => {
+        props.actualizarUbicacion(props.state.viajesReducer.ubicacion)
+        return<View/>
+    }
     if (props.state.locationGoogleMapReducer.estado === "exito") {
         if (props.state.locationGoogleMapReducer.type === "autoComplete") {
-            if (data.obj.inicio.estado) {
-                data.obj.inicio.value = props.state.locationGoogleMapReducer.data.direccion
+            if (props.state.viajesReducer.ubicacion.inicio.estado) {
+                props.state.viajesReducer.ubicacion.inicio.value = props.state.locationGoogleMapReducer.data.direccion
+                props.state.viajesReducer.ubicacion.inicio.data = props.state.locationGoogleMapReducer.data
             }
-            if (data.obj.fin.estado) {
-                data.obj.inicio.value = props.state.locationGoogleMapReducer.data.direccion
+            if (props.state.viajesReducer.ubicacion.fin.estado) {
+                props.state.viajesReducer.ubicacion.fin.data = props.state.locationGoogleMapReducer.data
+                props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
             }
         }
         if (props.state.locationGoogleMapReducer.type === "geocode") {
-            if (data.obj.inicio.estado) {
-                data.obj.inicio.value = props.state.locationGoogleMapReducer.data.direccion
+            if (props.state.viajesReducer.ubicacion.inicio.estado) {
+                props.state.viajesReducer.ubicacion.inicio.value = props.state.locationGoogleMapReducer.data.direccion
+                props.state.viajesReducer.ubicacion.inicio.data = props.state.locationGoogleMapReducer.data
             }
-            if (data.obj.fin.estado) {
-                data.obj.fin.value = props.state.locationGoogleMapReducer.data.direccion
+            if (props.state.viajesReducer.ubicacion.fin.estado) {
+                props.state.viajesReducer.ubicacion.fin.data = props.state.locationGoogleMapReducer.data
+                props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
             }
-            data.dataUbicacion = props.state.locationGoogleMapReducer.data
         }
         if (props.state.locationGoogleMapReducer.type === "actualizar") {
             props.state.locationGoogleMapReducer.estado = ""
@@ -57,8 +51,8 @@ const BuscadorComponenteMap = (props) => {
             setData({ ...data })
             return <View />
         }
+        actualizarUbicacion()
         props.state.locationGoogleMapReducer.estado = "";
-        setData({ ...data });
     }
     const buscarInput = () => {
         return (
@@ -103,21 +97,22 @@ const BuscadorComponenteMap = (props) => {
 
                             }}
                             onFocus={() => {
-                                data.obj.inicio.estado = true
-                                data.obj.fin.estado = false
-                                setData({ ...data })
+                                props.state.viajesReducer.ubicacion.fin.estado = false
+                                props.state.viajesReducer.ubicacion.inicio.estado = true
+                                actualizarUbicacion()
                             }}
                             placeholder={"Calle"}
-                            value={data.obj.inicio.value}
+                            value={props.state.viajesReducer.ubicacion.inicio.value}
                             onChangeText={(texto) => hanlechage(texto)}
 
                         />
                         <TouchableOpacity
                             onPress={() => {
-                                data.obj.inicio.estado = true
-                                data.obj.fin.estado = false
-                                data.obj.inicio.value = ""
-                                setData({ ...data })
+                                props.state.viajesReducer.ubicacion.fin.estado = false
+                                props.state.viajesReducer.ubicacion.inicio.estado = true
+                                props.state.viajesReducer.ubicacion.inicio.value = ""
+                                actualizarUbicacion()
+
                             }}
                         >
                             <Svg name="eliminar"
@@ -165,23 +160,21 @@ const BuscadorComponenteMap = (props) => {
 
                             }}
                             onFocus={() => {
-                                data.obj.inicio.estado = false
-                                data.obj.fin.estado = true
+                                props.state.viajesReducer.ubicacion.fin.estado = true
+                                props.state.viajesReducer.ubicacion.inicio.estado = false
                                 setData({ ...data })
                             }}
                             placeholder={"Calle"}
-                            value={data.obj.fin.value}
+                            value={props.state.viajesReducer.ubicacion.fin.value}
                             onChangeText={(texto) => hanlechage(texto)}
 
                         />
                         <TouchableOpacity
                             onPress={() => {
-                                data.obj.inicio.estado = false
-                                data.obj.fin.estado = true
-                                data.obj.fin.value = ""
-                                data.obj.texto = ""
-                                setData({ ...data })
-
+                                props.state.viajesReducer.ubicacion.fin.estado = true
+                                props.state.viajesReducer.ubicacion.inicio.estado = false
+                                props.state.viajesReducer.ubicacion.fin.value = ""
+                                actualizarUbicacion()
                             }}
                         >
                             <Svg name="eliminar"
@@ -200,36 +193,53 @@ const BuscadorComponenteMap = (props) => {
         )
     }
     const hanlechageLista = (obj) => {
-        data.obj.escribiendo = obj.direccion
-        data.dataUbicacion = obj
-        data.escribir = true
-        setData({ ...data })
-        return <View />
-    };
-    /*  const peticion = () => {
-         Geolocation.getCurrentPosition((info) => {
-             data.ubicacionActual = {
-                 latitude: info.coords.latitude,
-                 longitude: info.coords.longitude
-             }
-             props.state.socketClienteReducer.sessiones["glup"].send({
-                 component: "locationGoogle",
-                 type: "autoComplete",
-                 data: {
-                     direccion: data.obj.escribiendo,
-                     ...data.ubicacionActual
-                 },
-                 estado: "cargando"
-             }, true);
-         });
-     } */
-    const hanlechage = (text) => {
-        if (text.length > 5) {
-            data.obj.escribiendo = text
+        if (data.obj.inicio.estado) {
+            data.obj.inicio.value = obj.direccion
+            data.obj.inicio.data = obj.direccion
             setData({ ...data })
             return <View />
         }
-        data.obj.escribiendo = text
+        if (data.obj.fin.estado) {
+            data.obj.inicio.value = obj.direccion
+            setData({ ...data })
+            return <View />
+        }
+        setData({ ...data })
+        return <View />
+    };
+    const peticion = () => {
+        Geolocation.getCurrentPosition((info) => {
+            data.ubicacionActual = {
+                latitude: info.coords.latitude,
+                longitude: info.coords.longitude
+            }
+            var direccions = false
+
+            /*         props.state.socketClienteReducer.sessiones["glup"].send({
+                        component: "locationGoogle",
+                        type: "autoComplete",
+                        data: {
+                            direccion:  props.state.viajesReducer.ubicacion.fin.value,
+                            ...data.ubicacionActual
+                        },
+                        estado: "cargando"
+                    }, true); */
+        });
+    }
+    const hanlechage = (text) => {
+        if (text.length > 5) {
+
+            if (props.state.viajesReducer.ubicacion.inicio.estado) {
+                props.state.viajesReducer.ubicacion.inicio.value = text
+                peticion()
+                return <View />
+            }
+            if (props.state.viajesReducer.ubicacion.fin.estado) {
+                props.state.viajesReducer.ubicacion.fin.value = text
+                peticion()
+                return <View />
+            }
+        }
         setData({ ...data })
         return <View />
     };
@@ -299,6 +309,7 @@ const styles = StyleSheet.create({
 });
 const initActions = ({
     ...locationActions,
+    ...viajesActions
 });
 const initStates = (state) => {
     return { state }

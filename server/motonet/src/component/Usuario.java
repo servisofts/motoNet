@@ -31,17 +31,29 @@ public class Usuario {
             case "registro":
                 registro(data, router);
                 break;
-                
+            case "identificacion":
+                identificaion(data, router);
+                break;
+
             default:
                 defaultType(data, router);
         }
     }
 
     public void registro(JSONObject obj, Router router) {
-   
-        //obj.getJSONObject("data").put("pass", util.randomPass(6));
+
+        // obj.getJSONObject("data").put("pass", util.randomPass(6));
         SocketCliete.send("usuario", obj, router);
 
+    }
+
+    public void identificaion(JSONObject obj, Router router) {
+        System.out.println(obj.toString());
+        // data.getBoolean("noSend")
+        obj.put("estado", "exito");
+        JSONObject data = obj.getJSONObject("data");
+        // Router router = Router.peticiones.get(obj.getString("router"));
+        router.setKeyUsuario(data.getString("key"));
     }
 
     public void defaultType(JSONObject obj, Router router) {
