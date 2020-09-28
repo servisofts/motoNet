@@ -1,7 +1,7 @@
 import React from 'react'
 import NaviDrawer from '../../Components/NaviDrawer';
 import { CircularProgress, Grid, Button, Snackbar } from '@material-ui/core';
-
+import GoogleMapReact from 'google-map-react';
 
 const MapaPage = (props) => {
     return (
