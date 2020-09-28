@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import util.console;
+
 public class Conexion {
 
     private static Connection con;
@@ -49,18 +51,19 @@ public class Conexion {
                         return con;
                     }
                 }
-                System.out.println("Conectando a la base de datos...");
+                console.log(console.ANSI_YELLOW,"Conectando a la base de datos...");
+                System.out.println();
                 con = DriverManager.getConnection("jdbc:postgresql://" + ip + ":" + puerto + "/" + bd_name, usuario,
                         contrasena);
-                System.out.println("Conexion exitosa postgres");
+                        console.log(console.ANSI_YELLOW,"Conexion exitosa postgres");
                 return con;
             } catch (SQLException e) {
                 // restore_backup();
-                System.out.println("Base de datos restaurada exitosamente");
+                console.log(console.ANSI_YELLOW,"Base de datos restaurada exitosamente");
             }
             return con;
         } catch (Exception e) {
-            System.out.println("Error en la conexcion: " + e.getLocalizedMessage());
+            console.log(console.ANSI_YELLOW,"Error en la conexion: " + e.getLocalizedMessage());
             return null;
         }
     }
@@ -180,7 +183,8 @@ public class Conexion {
         path += bd_name;
         // C:\Program Files\PostgreSQL\12\bin
         try {
-            System.out.println("Guardando backup en " + path);
+            console.log(console.ANSI_YELLOW,"Guardando backup en " + path);
+            System.out.println();
             File pgdump = new File(ruta_pg_dump);
             if (pgdump.exists()) {
                 if (!path.equalsIgnoreCase("")) {

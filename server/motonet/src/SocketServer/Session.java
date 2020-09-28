@@ -24,6 +24,7 @@ import org.json.JSONObject;
 import Router.Router;
 import SSL.SSL;
 import component.Manejador;
+import util.console;
 
 
 
@@ -31,7 +32,7 @@ public class Session extends Thread {
 
     private String id;
     private SSLSocket socket;
-    private static PrintWriter outpw = null;
+    private PrintWriter outpw = null;
     private X509Certificate cer;
     
     private JSONObject servicio = null;
@@ -60,6 +61,12 @@ public class Session extends Thread {
 
     }
 
+    /**
+     * @return the id
+     */
+    public String getIdString() {
+        return id;
+    }
     public void send(String mensaje) {
         outpw.println(mensaje);
         outpw.flush();
@@ -84,7 +91,7 @@ public class Session extends Thread {
     @Override
     public void run() {
         setId(id);
-        System.out.println("Nueva session desde " + id);
+        console.log(console.ANSI_GREEN,"Nueva session desde " + id);
         InputStream inp = null;
         BufferedReader brinp = null;
         try {
@@ -108,7 +115,7 @@ public class Session extends Thread {
                 line = brinp.readLine();
                 if ((line == null) || line.equalsIgnoreCase("QUIT")) {
                     socket.close();
-                    System.out.println("Conexion cerrada: ip = " + id + " );");
+                    console.log(console.ANSI_GREEN,"Conexion cerrada: ip = " + id + " );");
                     setLog("Close", "Conexion cerrada: ip = " + id + " )");
                   
                     return;
@@ -139,7 +146,7 @@ public class Session extends Thread {
                     if (b) {
                         isRun = false;
                     }
-                    System.out.println("Error en el cliente " + this.id + " ->\n " + e.getLocalizedMessage());
+                    console.log(console.ANSI_GREEN,"Error en el cliente " + this.id + " ->\n " + e.getLocalizedMessage());
 
                 } else {
                     isRun = false;

@@ -55,6 +55,7 @@ import org.json.JSONObject;
 import Config.Config;
 import qr.QRterminal;
 import util.Email;
+import util.console;
 
 public class SSL {
 
@@ -157,7 +158,7 @@ public class SSL {
             // FileOutputStream out = new FileOutputStream("servisofts.jks");
             // keystore.store(out, "Servisofts123.".toCharArray());
             // out.close();
-            System.out.println("Nuevo certificado creado.");
+            console.log(console.ANSI_PURPLE,"Nuevo certificado creado.");
             registerPem(nombre, cert);
 
             return true;
@@ -176,7 +177,7 @@ public class SSL {
 
             keyStore.setCertificateEntry(nombre, cert);
             keyStore.store(new FileOutputStream(path), pass.toCharArray());
-            System.out.println("Nuevo certificado creado.");
+            console.log(console.ANSI_PURPLE,"Nuevo certificado creado.");
             return true;
         } catch (Exception e) {
             return false;
@@ -229,7 +230,7 @@ public class SSL {
         JSONObject servicio = socket_client.getJSONObject("servicio");
         JSONObject cert = servicio.getJSONObject("cert");
         if (getCert(cert.getString("OU")) != null) {
-            System.out.println("Certificado " + cert.getString("OU") + " cargado con exito.");
+            console.log(console.ANSI_PURPLE,"Certificado " + cert.getString("OU") + " cargado con exito.");
             return true;
         }
 
@@ -265,7 +266,7 @@ public class SSL {
             JSONObject certConfig = ssl.getJSONObject("cert");
 
             if (getCert(certConfig.getString("OU")) != null) {
-                System.out.println("Certificado " + certConfig.getString("OU") + " cargado con exito.");
+                console.log(console.ANSI_PURPLE,"Certificado " + certConfig.getString("OU") + " cargado con exito.");
 
                 return true;
             }
@@ -312,7 +313,6 @@ public class SSL {
             FileOutputStream out = new FileOutputStream(ssl.getString("nombre_jks") + ".jks");
             keystore.store(out, ssl.getString("pass_jks").toCharArray());
             out.close();
-            System.out.println("Nuevo certificado creado.");
 
             String pemCert = "-----SERVISOFTS-"+certConfig.getString("OU")+"-CERTIFICATE-----"+getPemNoHeader(cert);
 

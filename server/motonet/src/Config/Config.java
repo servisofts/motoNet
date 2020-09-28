@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class Config {
 
     private static JSONObject config = null;
-
+    
     public static boolean validate() {
         boolean repuesta = true;
         if (getJSON() != null) {
@@ -128,8 +128,7 @@ public class Config {
         try {
             if (config == null) {
                 System.out.print("Leyendo archivos config.json");
-                FileReader file;
-                file = new FileReader("config.json");
+                FileReader file = new FileReader("config.json");
                 int valor = file.read();
                 String configJson = "";
                 while (valor != -1) {
@@ -143,10 +142,8 @@ public class Config {
 
             }
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } catch (IOException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return config;
