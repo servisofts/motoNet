@@ -18,6 +18,7 @@ const Inicio = (props) => {
             <Mapa />
             <MarkerMedio  navigation={props.navigation}/>
             <BuscadorComponenteMap navigation={props.navigation} />
+            
         </View>
     )
 }

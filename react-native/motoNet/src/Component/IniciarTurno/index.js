@@ -1,7 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { View, TouchableOpacity, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import {
+    View,
+    TouchableOpacity,
+    Text,
+    StyleSheet,
+    TouchableWithoutFeedback
+
+} from 'react-native';
 
 
 
@@ -38,15 +45,15 @@ const iniciarTurno = (props) => {
                     justifyContent: 'center',
                 }}>
                 <Text>
-                 Bienvenido {"\n"} 
-                 {props.state.usuarioReducer.usuarioDatos["Nombres"].dato}
-                 {" "+props.state.usuarioReducer.usuarioDatos["Apellidos"].dato}.
+                    Bienvenido {"\n"}
+                    {props.state.usuarioReducer.usuarioDatos["Nombres"].dato}
+                    {" " + props.state.usuarioReducer.usuarioDatos["Apellidos"].dato}.
                 </Text>
                 <Text >
-                 Para recibir viajes precione iniciar.
+                    Para recibir viajes precione iniciar.
                 </Text>
             </TouchableOpacity>
-        
+
         </View>
     )
 }
