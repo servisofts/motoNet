@@ -38,14 +38,14 @@ public class Servicio {
                 initClient(action);
                 break;
             default:
-                System.out.println("type Not Found");
+            console.log(console.ANSI_RED,"type Not Found");
         }
 
     }
 
     public static void init(JSONObject action) {
         try {
-            System.out.println("Init client");
+            console.log(console.ANSI_RED,"Init client");
             JSONObject objSend = new JSONObject();
             objSend.put("component", "servicio");
             objSend.put("type", "initClient");
@@ -67,6 +67,7 @@ public class Servicio {
     }
 
     public static void initClient(JSONObject action) {
-        System.out.println(action.toString());
+        
+        console.log(console.ANSI_RED, "Indentificado como: "+action.getString("id")+ " - "+action.getJSONObject("data").getString("OU"));
     }
 }

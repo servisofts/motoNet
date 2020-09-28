@@ -8,6 +8,8 @@ import java.util.UUID;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+
+
 public class Router {
 
     public static final int TIPO_HTTP = 1;
@@ -58,7 +60,6 @@ public class Router {
     }
 
     public void sendRespuesta(JSONObject data) {
-
         if(data.has("component")&&data.has("type")){
             String key = data.getString("component")+","+data.getString("type");
                 JSONArray arr = Times.get(key);
@@ -73,11 +74,27 @@ public class Router {
             case Router.TIPO_TCPS:
                 ((SocketServer.Session) (this.getSession())).send(data.toString());
                 break;
+            case Router.TIPO_WS:
+                ((SocketWeb.Session) (this.getSession())).send(data.toString());
+                break;
         }
         Router.peticiones.remove(data.getString("router"));
     }
 
 
+    public void setKeyUsuario(String keyUsuario){
+    String idSession = "";
+        switch (this.getTipo()) {
+            case Router.TIPO_TCPS:
+                idSession =((SocketServer.Session) (this.getSession())).getIdString();
+                SocketServer.SocketServer.setUserSession(keyUsuario, idSession);
+                break;
+            case Router.TIPO_WS:
+               idSession = ((SocketWeb.Session) (this.getSession())).getId();
+                SocketWeb.SocketWeb.setUserSession(keyUsuario, idSession);
+                break;
+        }
+    }
 
     public static String setPeticion(Router router){
         String uid = UUID.randomUUID().toString();
