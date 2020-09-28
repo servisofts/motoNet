@@ -21,6 +21,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import AccountBox from '@material-ui/icons/AccountBox';
 import Home from '@material-ui/icons/Home';
 import RoomIcon from '@material-ui/icons/Room';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import logoMotoInicio from '../../img/MotoNetBR.svg';
@@ -209,7 +210,9 @@ const NaviDrawer = (props) => {
                     {getButtonNotifi({ name: "Notificaciones", path: "Notificaciones", icon: <NotificationsIcon /> })}
                     {getButton({ name: "Inicio", path: "Inicio", icon: <Home /> })}
                     {getButton({ name: "Usuarios nuevos", path: "ListaUsuario", icon: <AccountBox /> })}
-                    {getButton({ name: "Mapa", path: "Mapa", icon: <RoomIcon/>})}
+                    {getButton({ name: "Mapa", path: "MapaPage", icon: <RoomIcon /> })}
+                    {getButton({ name: "Salir", path: "", icon: <ExitToAppIcon /> })}
+
                     <div onClick={
                         () => {
                             sessionStorage.removeItem("usuarioLog");

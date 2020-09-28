@@ -6,6 +6,7 @@ import componenteInicioReducer from './componenteInicioReducer';
 import naviDrawerReducer from './naviDrawerReducer';
 import locationGoogleMapReducer from './locationGoogleMapReducer';
 import usuarioReducer from './usuarioReducer';
+import viajesReducer from './viajesReducer';
 
 export default combineReducers({
     navigationReducer,
@@ -14,6 +15,7 @@ export default combineReducers({
     componenteInicioReducer,
     naviDrawerReducer,
     locationGoogleMapReducer,
-    usuarioReducer
+    usuarioReducer,
+    viajesReducer
 
 });

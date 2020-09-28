@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View, Text, Modal, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, SafeAreaView } from 'react-native';
+import { Platform, View, Text, Modal, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, SafeAreaView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../Svg';
 
@@ -9,7 +9,7 @@ const NaviDrawe = (props) => {
     const [isVisible, setVisible] = React.useState(false);
 
 
-    
+
     if (!props.state.naviDrawerReducer.openBar) {
         props.state.naviDrawerReducer.openBar = () => {
             setVisible(true);
@@ -20,7 +20,7 @@ const NaviDrawe = (props) => {
     if (!isVisible) {
         return <View></View>
     }
-    const handleClick = (pros)=>{
+    const handleClick = (pros) => {
 
     }
     var letra = "#fff";
@@ -30,10 +30,11 @@ const NaviDrawe = (props) => {
             animationType="fade"
             transparent={true}
             visible={isVisible}
-            style={{ border: 0 ,
+            style={{
+                border: 0,
             }}
         >
-            <View style={{ width: Dimensions.get("window").width, height: "100%", position: "absolute", top: 0 ,}} >
+            <View style={{ width: Dimensions.get("window").width, height: "100%", position: "absolute", top: 0, }} >
                 <TouchableWithoutFeedback onPress={() => {
                     setVisible(false);
                 }} style={{ flex: 1 }}>
@@ -50,7 +51,7 @@ const NaviDrawe = (props) => {
                             }}>
                                 <View style={{
                                     width: "80%",
-                                     paddingTop: 20,
+                                    paddingTop: 20,
                                     paddingBottom: 50,
                                     alignItems: "center",
                                 }}>
@@ -73,10 +74,18 @@ const NaviDrawe = (props) => {
                                         style={styles.sty} onPress={() => { handleClick("ListaSiniestro") }} >
                                         <Text style={{ fontSize: 20, color: letra }}>Prueba</Text>
                                     </TouchableOpacity>
-                        
 
 
-                                    <TouchableOpacity style={styles.sty}>
+
+                                    <TouchableOpacity
+                                        style={styles.sty}
+                                        onPress={() => {
+                                            AsyncStorage.removeItem("motonet_usuarioLog");
+                                            props.state.usuarioReducer.usuarioLog = false
+                                            props.state.navigationReducer.replace("CargaPage")
+                                            return<View/>
+                                        }}
+                                    >
                                         <Text style={{
                                             marginTop: 10,
                                             fontWeight: "bold",
@@ -97,7 +106,7 @@ const NaviDrawe = (props) => {
 
 const styles = StyleSheet.create({
 
-  
+
     sty: {
         marginTop: 40,
         width: "100%",

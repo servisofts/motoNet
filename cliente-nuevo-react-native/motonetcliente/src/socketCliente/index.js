@@ -1,3 +1,4 @@
+import { AsyncStorage } from 'react-native';
 import TcpSocket from 'react-native-tcp-socket';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -28,6 +29,19 @@ export const initSocket = (store) => {
                         });
                     }
                 }
+            });
+            AsyncStorage.getItem("motonet_usuarioLog").then((value) => {
+                if(value.length<=0){
+                    return;
+                }
+                var usr = JSON.parse(value);
+                var objSend = { 
+                 component: "usuario",
+                    type: "identificacion",
+                    data: usr,
+                    estado: "cargando"
+                };
+                client.write(JSON.stringify(objSend) + "\n");
             });
         });
         client.on('data', function (data) {

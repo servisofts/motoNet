@@ -92,7 +92,7 @@ const Login = (props) => {
 
     const _fbAuth = () => {
         props.navigation.replace("InicioPage");
-        return<View/>
+        return <View />
         LoginManager.logInWithPermissions(["public_profile"]).then(
             function (result) {
                 if (result.isCancelled) {
@@ -215,7 +215,7 @@ const Login = (props) => {
                         }}>
                         <TouchableOpacity
                             onPress={() => {
-                               
+                                var exito = true
                                 var datas = {}
                                 for (const key in obj) {
 
@@ -226,6 +226,10 @@ const Login = (props) => {
                                         obj[key].error = false;
                                         datas[key] = obj[key].value
                                     }
+                                }
+                                if (!exito) {
+                                    setObj({ ...obj })
+                                    return <View />
                                 }
                                 props.state.socketClienteReducer.sessiones["motonet"].send({
                                     component: "usuario",
