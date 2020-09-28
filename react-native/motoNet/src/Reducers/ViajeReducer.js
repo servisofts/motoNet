@@ -19,6 +19,7 @@ export default (state, action) => {
 const viajeEntrante = () => {
     state.estado = action.estado
     if (action.estado === "exito") {
-        state.data = action.data
+        console.log("Viaje entrantee.....")
+        //state.data = action.data
     }
 }

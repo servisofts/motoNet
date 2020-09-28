@@ -33,19 +33,6 @@ const Carga = (props) => {
                     }, true);
                     return <View />
                 } else {
-                    var estados = false
-                    Object.keys(props.state.usuarioReducer.usuarioDatos).map((key) => {
-                        var obj = props.state.usuarioReducer.usuarioDatos[key]
-                        if (obj.estado === 0) {
-                            estados = true
-                            return <View />
-                        }
-                    })
-                    if (estados) {
-                        props.state.usuarioReducer.estado = ""
-                        props.state.navigationReducer.replace("InicioPage");
-                        return <View />
-                    }
                     props.state.usuarioReducer.estado = ""
                     props.state.navigationReducer.replace("InicioPage");
                     return <View />;
@@ -103,4 +90,4 @@ const initStates = (state) => {
     return { state }
 };
 export default connect(initStates)(Carga);
-AppRegistry.registerComponent('Carga', () => Carga);
+

@@ -10,10 +10,19 @@ public class ViajeHilo {
         Thread thread = new Thread() {
             @Override
             public void run() {
+
+ 
                 JSONObject objSend =  new JSONObject();
                 objSend.put("component", "viaje");
                 objSend.put("type", "viajeEntrante");
-                objSend.put("data", obj);
+                objSend.put("data", "");
+                objSend.put("estado", "exito");
+
+
+                JSONObject objSend =  new JSONObject();
+                objSend.put("component", "viaje");
+                objSend.put("type", "viajeEntrante");
+                objSend.put("data", "");
                 objSend.put("estado", "exito");
                 SocketServer.sendUser(objSend.toString(), "1eab302f-5e84-41b2-bfca-7852eb52fc4a");
             }

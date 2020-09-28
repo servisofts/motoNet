@@ -20,33 +20,32 @@ const iniciarTurno = (props) => {
             justifyContent: 'center',
         }}>
 
-            <Text style={{
-                width: "100%",
-            }}>
-
+            <Text style={{fontSize:20,color:"#ccc"}}>
+                Bienvenido
             </Text>
+            <Text style={{fontSize:30, color:"#fff"}}>
+                {props.state.usuarioReducer.usuarioDatos["Nombres"].dato}
+                {" " + props.state.usuarioReducer.usuarioDatos["Apellidos"].dato}.
+                </Text>
+                <Text style={{fontSize:20,color:"#ccc"}}>
+                Para recibir viajes precione iniciar.
+                </Text>
             <TouchableOpacity
                 onPress={() => {
                     props.state.backgroundLocationReducer.open()
                 }}
                 style={{
-                    width: 150,
-                    height: 150,
+                    marginTop:20,
+                    width: 100,
+                    height: 100,
                     borderRadius: 100,
                     backgroundColor: "#fff",
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                <Text>
-                 Bienvenido {"\n"} 
-                 {props.state.usuarioReducer.usuarioDatos["Nombres"].dato}
-                 {" "+props.state.usuarioReducer.usuarioDatos["Apellidos"].dato}.
-                </Text>
-                <Text >
-                 Para recibir viajes precione iniciar.
-                </Text>
+                <Text>Iniciar</Text>
             </TouchableOpacity>
-        
+
         </View>
     )
 }
