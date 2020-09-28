@@ -64,7 +64,7 @@ const onLocationChange = (newState, action) => {
     newState.estado = "exito";
     newState.data = action.data;
     newState.history.push(action.data);
-
+    console.log(newState.data)
     return newState;
 }
 
