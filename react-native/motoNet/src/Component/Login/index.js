@@ -29,7 +29,7 @@ const Login = (props) => {
 
     if (props.state.usuarioReducer.estado === "exito") {
         props.navigation.estado = ""
-        props.navigation.navigate("CargaPage");
+        props.navigation.replace("CargaPage");
         return <View />
     }
     if (props.state.usuarioReducer.estado === "error") {

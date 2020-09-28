@@ -1,5 +1,4 @@
 
-
 import React from 'react';
 import {
     View,
@@ -8,6 +7,7 @@ import {
     Animated,
     Easing,
     AppRegistry,
+    AsyncStorage
 } from 'react-native';
 import { connect } from 'react-redux';
 /* import storage from '../../Storage';
@@ -58,15 +58,18 @@ const Carga = (props) => {
         //setObj(false);
         return <View />
     } else {
-        const delay = ms => new Promise(res => setTimeout(res, ms));
 
+        const delay = ms => new Promise(res => setTimeout(res, ms));
         const yourFunction = async () => {
-            await delay(1000);
+            await delay(2000);
             console.log("Waited 5s");
             setObj(true);
             return <View />;
         };
         yourFunction();
+       
+        //VERIFICO EL USUARIO
+
     }
     return (
         <View style={{

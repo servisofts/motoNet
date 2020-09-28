@@ -1,4 +1,4 @@
-
+import { AsyncStorage } from 'react-native';
 const initialState = {
     estado: "Not Found",
     history: [],
@@ -35,16 +35,28 @@ export default (state, action) => {
             case "getUsuario":
                 getUsuario(state, action);
                 break;
+            case "identificacion":
+                identificacion(state, action);
+                break;
+
         }
         state = { ...state };
     }
     return state;
 }
+const identificacion = (state, action) => {
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.usuarioLog = action.data;
+        AsyncStorage.setItem("motonet_usuarioLog", JSON.stringify(action.data));
+        state.login = "login"
+    }
+}
 const login = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
-/*         Storage.setItem("usuario", JSON.stringify(action.usuario));
- */        state.usuarioLog = action.data;
+        state.usuarioLog = action.data;
+        AsyncStorage.setItem("motonet_usuarioLog", JSON.stringify(action.data));
         state.login = "login"
     }
 }

@@ -8,11 +8,13 @@ import PruebaPage from './PruebaPage';
 import SocketClientePage from './SocketClientePage';
 import PedirMotoPage from './PedirMotoPage';
 import UsuarioPerfilPage from './UsuarioPerfilPage';
+import ConfirmarPage from './ConfirmarPage';
+
 export const getPages = () => {
     return {
+        CargaPage,
         ListaPaginasPage,
         UsuarioPerfilPage,
-        CargaPage,
         ConsolaPage,
         LoginPage,
         RegistroUsuarioPage,
@@ -20,6 +22,6 @@ export const getPages = () => {
         PruebaPage,
         SocketClientePage,
         PedirMotoPage,
-
+        ConfirmarPage,
     }
 }

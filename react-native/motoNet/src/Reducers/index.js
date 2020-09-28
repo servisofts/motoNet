@@ -12,6 +12,10 @@ import socketClienteReducer from './socketClienteReducer';
 import usuarioReducer from './usuarioReducer';
 import locationGoogleMapReducer from './locationGoogleMapReducer';
 import cabeceraDatoReducer from './cabeceraDatoReducer';
+import backgroundLocationReducer from './backgroundLocationReducer';
+import componenteInicioReducer from './componenteInicioReducer';
+import ViajeReducer from './ViajeReducer';
+
 export default combineReducers({
     navigationReducer,
     consoleReducer,
@@ -19,11 +23,14 @@ export default combineReducers({
     calendarioReducer,
     popupCalendarioReducer,
     mapaReducer,
+    backgroundLocationReducer,
     naviDrawerReducer,
     modeloComponenteReducer,
     locationReducer,
     socketClienteReducer,
     usuarioReducer,
     locationGoogleMapReducer,
-    cabeceraDatoReducer
+    cabeceraDatoReducer,
+    componenteInicioReducer,
+    ViajeReducer,
 });

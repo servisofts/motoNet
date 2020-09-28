@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { View, Text, TouchableHighlight, Alert, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
@@ -25,7 +23,7 @@ const Confirmar = (props) => {
         console.log('Carrera Confirmada')
     }
     const cancelar = () => {
-        console.log('Carrera CAncelada')
+        console.log('Carrera Cancelada')
     }
 
     return (
@@ -46,7 +44,6 @@ const Confirmar = (props) => {
                 <Text style={{ alignitems: 'center', fontweight: 'bold', color: '#000' }}>esperamos su comprencion</Text>
             </View>
         </View>
-
     );
 }
 
