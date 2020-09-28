@@ -287,7 +287,7 @@ class RegistroUsuarioPage extends Component {
                         </View>
                         <TouchableOpacity
                             onPress={() => {
-                                props.navigation.navigate("PoliticaPage");
+                                this.props.navigation.navigate("PoliticaPage");
                                 return <View />
                             }}
                             style={{
