@@ -16,10 +16,10 @@ export default (state, action) => {
     return state;
 }
 
-const viajeEntrante = () => {
+const viajeEntrante = (state, action) => {
     state.estado = action.estado
-    if (action.estado === "exito") {
+    if (state.estado === "exito") {
         console.log("Viaje entrantee.....")
-        //state.data = action.data
+        state.data = action.data
     }
 }

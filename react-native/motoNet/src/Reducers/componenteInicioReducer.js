@@ -19,6 +19,16 @@ export default (state, action) => {
         }
         state = { ...state };
     }
+
+
+
+    if (action.component == "viaje") {
+        if(action.type == "viajeEntrante"){
+            state.seleccionado = "ConfirmarViaje";
+        }
+        state = { ...state };
+    }
+    
     return state;
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
+import Svg from '../../Svg';
 
 const ConfirmarViaje = (props) => {
 
@@ -8,7 +9,10 @@ const ConfirmarViaje = (props) => {
         <View style={{
             position: "absolute",
             width: "100%",
-            height: "100%",
+            height: "40%",
+            bottom: 0,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
             backgroundColor: "red",
         }}>
             <View
@@ -18,116 +22,76 @@ const ConfirmarViaje = (props) => {
                     justifyContent: "space-evenly",
                 }}>
 
+                <Svg name="LogoMoto"
+                    style={{
+                        width: 40,
+                        height: 40,
+                    }} />
+
                 <Text style={{
                     color: "#fff",
-                    fontSize: 45,
+                    fontSize: 20,
                     fontWeight: "bold"
                 }}>
-                    MotoNet
+                    Su moto esta en camino.
                     </Text>
-                <TextInput
-                    style={styles.touch}
-                    placeholder={""}
-                    onChangeText={text => hanlechage(text, "pass")}
-                    //value={obj.pass.value}
-                    autoCapitalize='none'
-                />
-                <TextInput
-                    style={styles.touch}
-                    placeholder={""}
-                    onChangeText={text => hanlechage(text, "pass")}
-                    //value={obj.pass.value}
-                    autoCapitalize='none'
-                />
-            </View>
-
-            <View style={{
-                flex: 1.5,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                <TouchableOpacity
-                    onPress={() => {
-                        props.state.backgroundLocationReducer.open()
-                    }}
-                    style={{
-                        width: 200,
-                        height: 200,
-                        borderRadius: 100,
-                        backgroundColor: "#fff",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}>
-                    <Text>
-                        CONFIRMAR VIAJE
-                </Text>
-                </TouchableOpacity>
             </View>
 
             <View style={{
                 flex: 1,
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
+                flexDirection: "row"
             }}>
+
                 <View style={{
-                    borderRadius: 30,
-                    borderWidth: 3,
+                    flex: 1,
                     width: "90%",
                     borderColor: "#fff",
                 }}>
+
+                    <TouchableOpacity
+                        onPress={() => {
+                            this.state.popup = true
+                            this.setState(this.stater);
+/*                     this.abrirPopup()
+ */                }}
+                        style={{
+                            paddingLeft: 10, backgroundColor: "#00c3f3", width: '100%', height: "100%",
+                            borderRadius: 10,
+                            alignItems: 'flex-start',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                        }}
+                    >                        
+                        <Svg name="Editar"
+                            style={{
+                                width: 20,
+                                height: 20,
+                                fill: "#fff"
+                            }} />
+                    </TouchableOpacity>
                     <Text style={{
                         color: "#fff",
-                        textAlign: "center",
                         fontWeight: "bold",
                         fontSize: 15
                     }}>
-                        DETALLE DEL PEDIDO
+                        Nombre del Conductor
                         </Text>
+                </View>
 
-                    <View style={{
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        marginTop: 30
+                <View style={{
+                    width: "90%",
+                    borderColor: "#fff",
+                    flex: 1,
+                }}>
+                    <Text style={{
+                        color: "#fff",
+                        fontWeight: "bold",
+                        fontSize: 15
                     }}>
-                        <Text style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 15
-                        }}>
-                            Tiempo Perdido
+                        Tipo de Pago
                         </Text>
-
-                        <Text style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 15
-                        }}>
-                            Tipo de Pago
-                        </Text>
-                    </View>
-
-                    <View style={{
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        marginTop: 30,
-                        marginBottom: 20
-                    }}>
-                        <Text style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 15
-                        }}>
-                            Tiempo estimado
-                        </Text>
-
-                        <Text style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 15
-                        }}>
-                            Monto estimado
-                        </Text>
-                    </View>
                 </View>
             </View>
         </View>

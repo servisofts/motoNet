@@ -1,9 +1,8 @@
 import React from 'react';
-import * as mapaActions from '../../../Actions/mapaActions'
-import * as locationActions from '../../../Actions/locationActions'
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-import { View, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, StyleSheet} from 'react-native';
+import PopupViajesComponet from '../../Component/PopupViajesComponet';
 
 var mapa;
 const ViajePage = (props) => {
@@ -63,25 +62,25 @@ const ViajePage = (props) => {
         setZoom(false);
     }
     return (
-        <MapView
-            style={styles.map}
-            initialRegion={region}
-            ref={map => { mapa = map }}
-        >
-        </MapView>
+        <View>
+            <MapView
+                style={styles.map}
+                initialRegion={region}
+                ref={map => { mapa = map }}
+            >
+            </MapView>
+            <PopupViajesComponet />
+        </View>
     )
 }
+
 const styles = StyleSheet.create({
     map: {
         width: '100%',
         height: "100%",
     },
-   
 });
-const initActions = ({
-    ...mapaActions,
-    ...locationActions
-});
+
 const initStates = (state) => {
     return { state }
 };
