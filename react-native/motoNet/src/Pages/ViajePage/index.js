@@ -1,7 +1,7 @@
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-import { View, StyleSheet} from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import PopupViajesComponet from '../../Component/PopupViajesComponet';
 
 var mapa;
@@ -28,13 +28,34 @@ const ViajePage = (props) => {
         yourFunction();
     }
 
-
     const markerClick = (obj) => {
         console.log(obj);
         if (!zoom)
             zoomin(obj);
         else
             zoomout(obj);
+    }
+
+    getMarkerSelect = () => {
+      /*   if (!this.state.marcar) {
+            return <View />
+        } */
+        return (
+            <Marker
+                coordinate={region}
+            >
+                <TouchableOpacity
+                    >
+                    <Svg name="LogoMoto"
+                        style={{
+                            width: 25,
+                            height: 25,
+                            fill: "#fff"
+                        }} />
+                </TouchableOpacity>
+
+            </Marker>
+        )
     }
 
     const zoomin = (obj) => {
@@ -68,11 +89,14 @@ const ViajePage = (props) => {
                 initialRegion={region}
                 ref={map => { mapa = map }}
             >
+                {this.getMarkerSelect()}
             </MapView>
             <PopupViajesComponet />
         </View>
     )
 }
+
+
 
 const styles = StyleSheet.create({
     map: {

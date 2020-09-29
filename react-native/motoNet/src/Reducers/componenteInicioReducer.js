@@ -1,12 +1,12 @@
 const initialState = {
     estado: "",
-    data:{},
-    seleccionado:false,
-    navigate:(select,dispatch)=>{
-        initialState.seleccionado =select; 
+    data: {},
+    seleccionado: false,
+    navigate: (select, dispatch) => {
+        initialState.seleccionado = select;
         dispatch({
-            component:"componenteInicio",
-            type:"change",
+            component: "componenteInicio",
+            type: "change",
             select
         })
     }
@@ -14,21 +14,20 @@ const initialState = {
 export default (state, action) => {
     if (!state) return initialState
     if (action.component == "componenteInicio") {
-        if(action.type == "change"){
+        if (action.type == "change") {
             state.seleccionado = action.select
         }
         state = { ...state };
     }
 
-
-
     if (action.component == "viaje") {
-        if(action.type == "viajeEntrante"){
+        if (action.type == "viajeEntrante") {
             state.seleccionado = "ConfirmarViaje";
         }
         state = { ...state };
     }
-    
+
+
     return state;
 }
 

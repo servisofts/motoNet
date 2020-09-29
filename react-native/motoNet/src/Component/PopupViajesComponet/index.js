@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, TextInput, Image } from 'react-native';
 import Svg from '../../Svg';
 
 const ConfirmarViaje = (props) => {
@@ -9,7 +9,7 @@ const ConfirmarViaje = (props) => {
         <View style={{
             position: "absolute",
             width: "100%",
-            height: "40%",
+            height: "35%",
             bottom: 0,
             borderTopLeftRadius: 20,
             borderTopRightRadius: 20,
@@ -41,36 +41,26 @@ const ConfirmarViaje = (props) => {
                 flex: 1,
                 alignItems: "center",
                 justifyContent: "center",
-                flexDirection: "row"
+                flexDirection: "row",
             }}>
 
                 <View style={{
                     flex: 1,
-                    width: "90%",
-                    borderColor: "#fff",
+                    alignItems: "center"
                 }}>
-
-                    <TouchableOpacity
-                        onPress={() => {
-                            this.state.popup = true
-                            this.setState(this.stater);
-/*                     this.abrirPopup()
- */                }}
+                    <Image
                         style={{
-                            paddingLeft: 10, backgroundColor: "#00c3f3", width: '100%', height: "100%",
-                            borderRadius: 10,
+                            backgroundColor: "#fff",
+                            width: 40,
+                            height: 40,
+                            borderRadius: 100,
                             alignItems: 'flex-start',
                             justifyContent: 'center',
                             flexDirection: 'column',
                         }}
-                    >                        
-                        <Svg name="Editar"
-                            style={{
-                                width: 20,
-                                height: 20,
-                                fill: "#fff"
-                            }} />
-                    </TouchableOpacity>
+                        source={{ uri: 'https://www.designthinking.services/wp-content/uploads/2015/07/HERRAMIENTAS-DESIGN-THINKING-METODO-PERSONA.png' }}
+                    />
+
                     <Text style={{
                         color: "#fff",
                         fontWeight: "bold",
@@ -78,19 +68,33 @@ const ConfirmarViaje = (props) => {
                     }}>
                         Nombre del Conductor
                         </Text>
+
+                    <Text style={{
+                        color: "#fff",
+                        fontWeight: "bold",
+                        fontSize: 15
+                    }}>
+                        Su puntuacion
+                        </Text>
                 </View>
 
                 <View style={{
-                    width: "90%",
-                    borderColor: "#fff",
                     flex: 1,
+                    alignItems:"center"
                 }}>
                     <Text style={{
                         color: "#fff",
                         fontWeight: "bold",
                         fontSize: 15
                     }}>
-                        Tipo de Pago
+                        Tiempo en espera
+                        </Text>
+                    <Text style={{
+                        color: "#fff",
+                        fontWeight: "bold",
+                        fontSize: 15
+                    }}>
+                       11:00
                         </Text>
                 </View>
             </View>

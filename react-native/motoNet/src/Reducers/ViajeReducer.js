@@ -1,3 +1,5 @@
+import { AsyncStorage } from "react-native";
+
 const initialState = {
 }
 
@@ -10,6 +12,9 @@ export default (state, action) => {
             case "viajeEntrante":
                 viajeEntrante(state, action);
                 break;
+            case "confirmarBusqueda":
+                confirmarBusqueda(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -17,9 +22,19 @@ export default (state, action) => {
 }
 
 const viajeEntrante = (state, action) => {
-    state.estado = action.estado
-    if (state.estado === "exito") {
+    if (action.estado === "exito") {
         console.log("Viaje entrantee.....")
         state.data = action.data
+    }
+}
+
+const confirmarBusqueda = (state, action) => {
+    state.estado = action.estado
+    if (state.estado === "exito") {
+        state.data = action.data
+        AsyncStorage.setItem("motonetConductor_viaje", JSON.stringify(action.data));
+    }
+    if(state.estado === "error") {       
+        state.error = action.error
     }
 }

@@ -4,6 +4,35 @@ import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-nativ
 
 const ConfirmarViaje = (props) => {
 
+    
+    // console.log(objeto)
+    //var datos = JSON.parse(objeto.data);
+    if (props.state.ViajeReducer.estado === "error") {
+        props.state.ViajeReducer.estado = "";
+        props.state.ViajeReducer.data=false;
+        return <View/>
+    }
+
+    if (props.state.ViajeReducer.estado === "exito") {
+        props.state.navigationReducer.replace("ViajePage"); 
+        return <View/>       
+    }
+    
+    if (!props.state.ViajeReducer.data) {
+       return <Text>No existe</Text>
+    }
+    var datos = props.state.ViajeReducer.data;
+    const AceptarViaje = () => {
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "viaje",
+            type: "confirmarBusqueda",
+            estado: "cargando",
+            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+            key_viaje: datos.key,
+        }, true);
+        return <View />
+    }
+
     return (
         <View style={{
             position: "absolute",
@@ -17,7 +46,6 @@ const ConfirmarViaje = (props) => {
                     alignItems: 'center',
                     justifyContent: "space-evenly",
                 }}>
-
                 <Text style={{
                     color: "#fff",
                     fontSize: 45,
@@ -29,14 +57,14 @@ const ConfirmarViaje = (props) => {
                     style={styles.touch}
                     placeholder={""}
                     onChangeText={text => hanlechage(text, "pass")}
-                    //value={obj.pass.value}
+                    value={datos.destinos[0].direccion}
                     autoCapitalize='none'
                 />
                 <TextInput
                     style={styles.touch}
                     placeholder={""}
                     onChangeText={text => hanlechage(text, "pass")}
-                    //value={obj.pass.value}
+                    value={datos.destinos[1].direccion}
                     autoCapitalize='none'
                 />
             </View>
@@ -47,9 +75,7 @@ const ConfirmarViaje = (props) => {
                 justifyContent: 'center',
             }}>
                 <TouchableOpacity
-                    onPress={() => {
-                        props.state.backgroundLocationReducer.open()
-                    }}
+                    onPress={AceptarViaje}
                     style={{
                         width: 200,
                         height: 200,
