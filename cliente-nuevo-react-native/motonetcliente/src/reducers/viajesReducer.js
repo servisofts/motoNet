@@ -12,7 +12,7 @@ const initialState = {
             data: false
         }
     },
-
+    viaje: false,
 }
 export default (state, action) => {
     if (!state) return initialState
@@ -28,6 +28,13 @@ export default (state, action) => {
             case "buscar":
                 buscar(state, action);
                 break;
+            case "confirmarBusqueda":
+                confirmarBusqueda(state, action);
+                break;
+            case "cancelarBusqueda":
+                cancelarBusqueda(state, action);
+                break;
+
         }
         state = { ...state };
     }
@@ -37,9 +44,23 @@ export default (state, action) => {
 const actualizarViaje = (state, action) => {
     state.ubicacion = action.data
 }
+const cancelarBusqueda = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+}
+
+const confirmarBusqueda = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
 const buscar = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
-
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
 }

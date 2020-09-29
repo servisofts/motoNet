@@ -4,10 +4,13 @@ import LogoCompleto from '../img/logo.svg';
 import Bien from '../img/bien.svg';
 import EliminarIcono from '../img/cerrar.svg';
 import MarkerMoto from '../img/MarkerMoto.svg';
+import Ubicacion from '../img/ubicacion.svg';
 
 const Svg = (props) => {
 
     switch (props.name) {
+        case "ubicacion":
+            return <Ubicacion style={props.style} />
         case "MarkerMoto":
             return <MarkerMoto style={props.style} />
         case "Logo":

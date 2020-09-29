@@ -1,9 +1,8 @@
 import React from 'react';
-import * as mapaActions from '../../../Actions/mapaActions'
-import * as locationActions from '../../../Actions/locationActions'
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-import { View, StyleSheet, Text, TouchableOpacity, TextInput } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import PopupViajesComponet from '../../Component/PopupViajesComponet';
 
 var mapa;
 const ViajePage = (props) => {
@@ -29,13 +28,34 @@ const ViajePage = (props) => {
         yourFunction();
     }
 
-
     const markerClick = (obj) => {
         console.log(obj);
         if (!zoom)
             zoomin(obj);
         else
             zoomout(obj);
+    }
+
+    getMarkerSelect = () => {
+      /*   if (!this.state.marcar) {
+            return <View />
+        } */
+        return (
+            <Marker
+                coordinate={region}
+            >
+                <TouchableOpacity
+                    >
+                    <Svg name="LogoMoto"
+                        style={{
+                            width: 25,
+                            height: 25,
+                            fill: "#fff"
+                        }} />
+                </TouchableOpacity>
+
+            </Marker>
+        )
     }
 
     const zoomin = (obj) => {
@@ -63,25 +83,28 @@ const ViajePage = (props) => {
         setZoom(false);
     }
     return (
-        <MapView
-            style={styles.map}
-            initialRegion={region}
-            ref={map => { mapa = map }}
-        >
-        </MapView>
+        <View>
+            <MapView
+                style={styles.map}
+                initialRegion={region}
+                ref={map => { mapa = map }}
+            >
+                {this.getMarkerSelect()}
+            </MapView>
+            <PopupViajesComponet />
+        </View>
     )
 }
+
+
+
 const styles = StyleSheet.create({
     map: {
         width: '100%',
         height: "100%",
     },
-   
 });
-const initActions = ({
-    ...mapaActions,
-    ...locationActions
-});
+
 const initStates = (state) => {
     return { state }
 };

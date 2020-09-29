@@ -1,17 +1,6 @@
-
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    Animated,
-    Easing,
-    AppRegistry,
-    AsyncStorage
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-/* import storage from '../../Storage';
- */
 
 const Carga = (props) => {
     const [obj, setObj] = React.useState(false);
@@ -54,7 +43,7 @@ const Carga = (props) => {
             return <View />;
         };
         yourFunction();
-       
+
         //VERIFICO EL USUARIO
 
     }

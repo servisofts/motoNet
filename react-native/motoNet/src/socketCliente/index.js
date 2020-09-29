@@ -21,8 +21,9 @@ export const initSocket = (store) => {
                 type: "open",
                 data: "",
                 nombre: cert.nombre,
-                send: (obj) => {
+                send: (obj, isDispatch) => {
                     client.write(JSON.stringify(obj) + "\n");
+                    if(isDispatch) store.dispatch(obj);
                 }
             });
         

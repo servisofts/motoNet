@@ -84,33 +84,6 @@ class PerfilPage extends Component {
         return <View />
     }
 
-    /* right = () => {
-        const rightButtons = [
-            <TouchableOpacity
-                onPress={() => {
-                    this.state.popup = true
-                    this.setState(this.stater);
-//                     this.abrirPopup()
-                 }}
-                style={{
-                    paddingLeft: 10, backgroundColor: "#00c3f3", width: '100%', height: "100%",
-                    borderRadius: 10,
-                    alignItems: 'flex-start',
-                    justifyContent: 'center',
-                    flexDirection: 'column',
-                }}
-            >
-                <Text style={{ color: "#fff", fontSize: 10 }}>Editar</Text>
-                <Svg name="Editar"
-                    style={{
-                        width: 20,
-                        height: 20,
-                        fill: "#fff"
-                    }} />
-            </TouchableOpacity>
-        ];
-        return rightButtons;
-    } */
 
 
     pickPhoto = () => {

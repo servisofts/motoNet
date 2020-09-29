@@ -41,7 +41,7 @@ class CargaPage extends Component {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: "#FC363B",
+        backgroundColor: "red",
       }}>
         <Animated.View
           style={[
@@ -71,15 +71,8 @@ class CargaPage extends Component {
 
         </Animated.View>
 
-        <View style={{
-
-          flex: 1,
-          alignItems: "center",
-
-        }}>
-          <Carga />
-        </View>
-
+       
+          <Carga navigation={this.props.navigation} />
       </View>
     );
   }

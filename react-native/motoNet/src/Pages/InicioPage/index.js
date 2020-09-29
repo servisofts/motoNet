@@ -11,11 +11,18 @@ import {
 import Inicio from '../../Component/Inicio';
 import NaviDrawer from '../../Component/NaviDrawer';
 class InicioPage extends Component {
-    static navigationOptions = {
-        headerShown: false,
-    }
+    static navigationOptions = ({ navigation }) => (
+        navigation.state.prop ? ({ ...navigation.state.prop }) : {}
+      );
     constructor(props) {
         super(props);
+        props.state.navigationReducer.setParams(props.navigation, {
+            title: "Inicio",
+            headerShown: false,
+            headerTitleStyle: {
+              color: '#fff',
+            },
+          })
     }
     render() {
         return (

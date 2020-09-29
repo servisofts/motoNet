@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
+import { View, TouchableOpacity, Text, StyleSheet, TextInput, Image } from 'react-native';
+import Svg from '../../Svg';
 
 const ConfirmarViaje = (props) => {
 
@@ -8,7 +9,10 @@ const ConfirmarViaje = (props) => {
         <View style={{
             position: "absolute",
             width: "100%",
-            height: "100%",
+            height: "35%",
+            bottom: 0,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
             backgroundColor: "red",
         }}>
             <View
@@ -18,116 +22,80 @@ const ConfirmarViaje = (props) => {
                     justifyContent: "space-evenly",
                 }}>
 
+                <Svg name="LogoMoto"
+                    style={{
+                        width: 40,
+                        height: 40,
+                    }} />
+
                 <Text style={{
                     color: "#fff",
-                    fontSize: 45,
+                    fontSize: 20,
                     fontWeight: "bold"
                 }}>
-                    MotoNet
+                    Su moto esta en camino.
                     </Text>
-                <TextInput
-                    style={styles.touch}
-                    placeholder={""}
-                    onChangeText={text => hanlechage(text, "pass")}
-                    //value={obj.pass.value}
-                    autoCapitalize='none'
-                />
-                <TextInput
-                    style={styles.touch}
-                    placeholder={""}
-                    onChangeText={text => hanlechage(text, "pass")}
-                    //value={obj.pass.value}
-                    autoCapitalize='none'
-                />
-            </View>
-
-            <View style={{
-                flex: 1.5,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
-                <TouchableOpacity
-                    onPress={() => {
-                        props.state.backgroundLocationReducer.open()
-                    }}
-                    style={{
-                        width: 200,
-                        height: 200,
-                        borderRadius: 100,
-                        backgroundColor: "#fff",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }}>
-                    <Text>
-                        CONFIRMAR VIAJE
-                </Text>
-                </TouchableOpacity>
             </View>
 
             <View style={{
                 flex: 1,
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
+                flexDirection: "row",
             }}>
+
                 <View style={{
-                    borderRadius: 30,
-                    borderWidth: 3,
-                    width: "90%",
-                    borderColor: "#fff",
+                    flex: 1,
+                    alignItems: "center"
                 }}>
+                    <Image
+                        style={{
+                            backgroundColor: "#fff",
+                            width: 40,
+                            height: 40,
+                            borderRadius: 100,
+                            alignItems: 'flex-start',
+                            justifyContent: 'center',
+                            flexDirection: 'column',
+                        }}
+                        source={{ uri: 'https://www.designthinking.services/wp-content/uploads/2015/07/HERRAMIENTAS-DESIGN-THINKING-METODO-PERSONA.png' }}
+                    />
+
                     <Text style={{
                         color: "#fff",
-                        textAlign: "center",
                         fontWeight: "bold",
                         fontSize: 15
                     }}>
-                        DETALLE DEL PEDIDO
+                        Nombre del Conductor
                         </Text>
 
-                    <View style={{
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        marginTop: 30
+                    <Text style={{
+                        color: "#fff",
+                        fontWeight: "bold",
+                        fontSize: 15
                     }}>
-                        <Text style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 15
-                        }}>
-                            Tiempo Perdido
+                        Su puntuacion
                         </Text>
+                </View>
 
-                        <Text style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 15
-                        }}>
-                            Tipo de Pago
-                        </Text>
-                    </View>
-
-                    <View style={{
-                        flexDirection: "row",
-                        justifyContent: "space-around",
-                        marginTop: 30,
-                        marginBottom: 20
+                <View style={{
+                    flex: 1,
+                    alignItems:"center"
+                }}>
+                    <Text style={{
+                        color: "#fff",
+                        fontWeight: "bold",
+                        fontSize: 15
                     }}>
-                        <Text style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 15
-                        }}>
-                            Tiempo estimado
+                        Tiempo en espera
                         </Text>
-
-                        <Text style={{
-                            color: "#fff",
-                            fontWeight: "bold",
-                            fontSize: 15
-                        }}>
-                            Monto estimado
+                    <Text style={{
+                        color: "#fff",
+                        fontWeight: "bold",
+                        fontSize: 15
+                    }}>
+                       11:00
                         </Text>
-                    </View>
                 </View>
             </View>
         </View>

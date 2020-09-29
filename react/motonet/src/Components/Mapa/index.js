@@ -22,7 +22,7 @@ export class Mapa extends Component {
     componentDidMount() {
         console.log("emtrp did mount")
         //Avisa que quiere escuchar las posiciones de los conductores
-        var dataSend = {};
+        /*var dataSend = {};
         var objSend = {
             component: "usuario",
             type: "login",
@@ -30,7 +30,7 @@ export class Mapa extends Component {
             data: dataSend
         };
        
-        this.props.state.socketReducer.send(objSend);
+        this.props.state.socketReducer.send(objSend);*/
     }
     componentWillUnmount() {
 

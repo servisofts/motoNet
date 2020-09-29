@@ -18,11 +18,12 @@ const BuscadorComponenteMap = (props) => {
         mostrarTexto: false,
         ubicacionActual: props.ubicacionActual || false,
         repuestaInput: false,
-        focusInput: false
+        focusInput: false,
+        ubicacion: props.state.viajesReducer.ubicacion
     })
     const actualizarUbicacion = () => {
         props.actualizarUbicacion(props.state.viajesReducer.ubicacion)
-        return<View/>
+        return <View />
     }
     if (props.state.locationGoogleMapReducer.estado === "exito") {
         if (props.state.locationGoogleMapReducer.type === "autoComplete") {
@@ -41,6 +42,7 @@ const BuscadorComponenteMap = (props) => {
                 props.state.viajesReducer.ubicacion.inicio.data = props.state.locationGoogleMapReducer.data
             }
             if (props.state.viajesReducer.ubicacion.fin.estado) {
+
                 props.state.viajesReducer.ubicacion.fin.data = props.state.locationGoogleMapReducer.data
                 props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
             }
@@ -86,6 +88,7 @@ const BuscadorComponenteMap = (props) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexDirection: 'row',
+
                     }}>
 
                         <TextInput
@@ -111,6 +114,7 @@ const BuscadorComponenteMap = (props) => {
                                 props.state.viajesReducer.ubicacion.fin.estado = false
                                 props.state.viajesReducer.ubicacion.inicio.estado = true
                                 props.state.viajesReducer.ubicacion.inicio.value = ""
+                                props.state.viajesReducer.ubicacion.inicio.data = false
                                 actualizarUbicacion()
 
                             }}
@@ -162,7 +166,7 @@ const BuscadorComponenteMap = (props) => {
                             onFocus={() => {
                                 props.state.viajesReducer.ubicacion.fin.estado = true
                                 props.state.viajesReducer.ubicacion.inicio.estado = false
-                                setData({ ...data })
+                                actualizarUbicacion()
                             }}
                             placeholder={"Calle"}
                             value={props.state.viajesReducer.ubicacion.fin.value}
@@ -172,6 +176,7 @@ const BuscadorComponenteMap = (props) => {
                         <TouchableOpacity
                             onPress={() => {
                                 props.state.viajesReducer.ubicacion.fin.estado = true
+                                props.state.viajesReducer.ubicacion.fin.data = ""
                                 props.state.viajesReducer.ubicacion.inicio.estado = false
                                 props.state.viajesReducer.ubicacion.fin.value = ""
                                 actualizarUbicacion()
@@ -189,25 +194,16 @@ const BuscadorComponenteMap = (props) => {
 
 
                 </View>
+                <ListaBusqueda onchage={hanlechageLista} />
+
             </View>
         )
     }
     const hanlechageLista = (obj) => {
-        if (data.obj.inicio.estado) {
-            data.obj.inicio.value = obj.direccion
-            data.obj.inicio.data = obj.direccion
-            setData({ ...data })
-            return <View />
-        }
-        if (data.obj.fin.estado) {
-            data.obj.inicio.value = obj.direccion
-            setData({ ...data })
-            return <View />
-        }
-        setData({ ...data })
+        peticion(obj.direccion)
         return <View />
     };
-    const peticion = () => {
+    const peticion = (text) => {
         Geolocation.getCurrentPosition((info) => {
             data.ubicacionActual = {
                 latitude: info.coords.latitude,
@@ -215,15 +211,15 @@ const BuscadorComponenteMap = (props) => {
             }
             var direccions = false
 
-            /*         props.state.socketClienteReducer.sessiones["glup"].send({
-                        component: "locationGoogle",
-                        type: "autoComplete",
-                        data: {
-                            direccion:  props.state.viajesReducer.ubicacion.fin.value,
-                            ...data.ubicacionActual
-                        },
-                        estado: "cargando"
-                    }, true); */
+            props.state.socketClienteReducer.sessiones["motonet"].send({
+                component: "locationGoogle",
+                type: "autoComplete",
+                data: {
+                    direccion: text,
+                    ...data.ubicacionActual
+                },
+                estado: "cargando"
+            }, true);
         });
     }
     const hanlechage = (text) => {
@@ -231,16 +227,23 @@ const BuscadorComponenteMap = (props) => {
 
             if (props.state.viajesReducer.ubicacion.inicio.estado) {
                 props.state.viajesReducer.ubicacion.inicio.value = text
-                peticion()
-                return <View />
             }
             if (props.state.viajesReducer.ubicacion.fin.estado) {
                 props.state.viajesReducer.ubicacion.fin.value = text
-                peticion()
-                return <View />
             }
+            actualizarUbicacion()
+            peticion(text)
+
         }
-        setData({ ...data })
+        if (props.state.viajesReducer.ubicacion.inicio.estado) {
+            props.state.viajesReducer.ubicacion.inicio.value = text
+
+        }
+        if (props.state.viajesReducer.ubicacion.fin.estado) {
+            props.state.viajesReducer.ubicacion.fin.value = text
+
+        }
+        actualizarUbicacion()
         return <View />
     };
 
@@ -254,11 +257,7 @@ const BuscadorComponenteMap = (props) => {
             top: 20,
             flexDirection: 'column',
         }}>
-
-
             {buscarInput()}
-            <ListaBusqueda onchage={hanlechageLista} />
-
         </View>
     )
 
@@ -266,7 +265,7 @@ const BuscadorComponenteMap = (props) => {
 const styles = StyleSheet.create({
     buscar: {
         width: 300,
-        height: 50,
+        height: 40,
         borderColor: "#00000022",
         borderWidth: 2,
         borderRadius: 100,

@@ -36,7 +36,6 @@ class CargaPage extends Component {
       { iterations: 1000 },
     ).start();
 
-
     if (Platform.OS === 'android') {
       Linking.getInitialURL().then(url => {
         this.navigate(url);
@@ -44,9 +43,6 @@ class CargaPage extends Component {
     } else {
       Linking.addEventListener('url', this.handleOpenURL);
     }
-
-
-
   }
 
   componentWillUnmount() { // C
@@ -99,8 +95,6 @@ class CargaPage extends Component {
     );
   }
 }
-
-
 
 const styles = StyleSheet.create({
   container: {
