@@ -12,12 +12,11 @@ public class ViajeHilo {
             public void run() {
 
  
-                JSONObject objSend =  new JSONObject();
-                objSend.put("component", "viaje");
-                objSend.put("type", "viajeEntrante");
-                objSend.put("data", "");
-                objSend.put("estado", "exito");
-
+                JSONObject obj =  new JSONObject();
+                // objSend.put("component", "viaje");
+                // objSend.put("type", "viajeEntrante");
+                // objSend.put("data", "");
+                // objSend.put("estado", "exito");
 
                 JSONObject objSend =  new JSONObject();
                 objSend.put("component", "viaje");
