@@ -6,16 +6,16 @@ export default class UsaruarioRecuperarPage extends Component {
 
         var listaDeHumanos = [
             {
-                nombre:"RRIcky",
-                    raza:"Camba",
-                    sexo:"Hombre",
-                    ci:"",
-                },
-                {
-                    nombre:"koki",
-                    raza:"Gaucho",
-                    sexo:"Mujer",
-                    ci:"https://scontent.fsrz1-1.fna.fbcdn.net/v/t1.0-9/68741811_2617031028321012_7851024913702846464_o.jpg?_nc_cat=100&_nc_sid=09cbfe&_nc_ohc=XG_CjB8PNF4AX8wHBdJ&_nc_ht=scontent.fsrz1-1.fna&oh=b321c85a27af5c1e10ff09f4c68c2927&oe=5F934BC9",
+                nombre: "RRIcky",
+                raza: "Camba",
+                sexo: "Hombre",
+                ci: "",
+            },
+            {
+                nombre: "koki",
+                raza: "Gaucho",
+                sexo: "Mujer",
+                ci: "https://scontent.fsrz1-1.fna.fbcdn.net/v/t1.0-9/68741811_2617031028321012_7851024913702846464_o.jpg?_nc_cat=100&_nc_sid=09cbfe&_nc_ohc=XG_CjB8PNF4AX8wHBdJ&_nc_ht=scontent.fsrz1-1.fna&oh=b321c85a27af5c1e10ff09f4c68c2927&oe=5F934BC9",
             },
         ];
         return (
@@ -37,7 +37,7 @@ export default class UsaruarioRecuperarPage extends Component {
                                 textAlign: "center",
                                 color: "#000"
                             }}>
-                               {obj.nombre}
+                                {obj.nombre}
                             </h1>
                         </Grid>
                     </Grid>

@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
         width: "100%",
         fontWeight: 'bold',
         fontSize: 18,
-        color: "#6e367e",
+        color: "#f00",
     },
     logo: {
         height: 150,
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         padding: 10,
         fontSize: 18,
-        color: "#6e367e"
+        color: "#f00"
     },
     contenedors: {
         position: "absolute",

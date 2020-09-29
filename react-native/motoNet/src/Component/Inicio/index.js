@@ -13,13 +13,13 @@ const Inicio = (props) => {
         props.state.componenteInicioReducer.navigate("ConfirmarViaje", props.dispatch);
     } */
 
-    if (props.state.ViajeReducer.data) {
-        props.state.componenteInicioReducer.navigate("ConfirmarViaje", props.dispatch);
-    } else {
+   // if (props.state.ViajeReducer.estado == "exito") {
+       // props.state.componenteInicioReducer.navigate("ConfirmarViaje", props.dispatch);
+    //} else {
         if (props.state.componenteInicioReducer.seleccionado != "IniciarTurno" && !props.state.backgroundLocationReducer.isOpen) {
             props.state.componenteInicioReducer.navigate("IniciarTurno", props.dispatch);
         }
-    }
+   // }
 
     return (
         <View style={{
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
         borderColor: "#fff",
         borderWidth: 2,
         borderRadius: 100,
-        backgroundColor: "#4fc2ef",
+        backgroundColor: "#f00",
         position: "absolute",
         alignItems: 'center',
         justifyContent: 'center',

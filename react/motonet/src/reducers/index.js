@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import usuarioReducer from './usuarioReducers'
 import socketReducer from './socketReducer'
-import conductoresReducer from './conductoresReducer'
+import tipoViajeReducer from './tipoViajeReducer'
 
 export default combineReducers({
     usuarioReducer,
     socketReducer,
-    conductoresReducer
+    tipoViajeReducer
 });

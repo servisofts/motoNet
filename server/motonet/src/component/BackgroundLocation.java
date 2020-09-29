@@ -38,17 +38,31 @@ public class BackgroundLocation {
     public void registro(JSONObject obj, Router router) {
         JSONObject data = obj.getJSONObject("data");
         try {
-            JSONObject conductorActivo = new JSONObject();
-            conductorActivo.put("key", UUID.randomUUID().toString());
-            conductorActivo.put("key_usuario", obj.getString("key_usuario"));
-            conductorActivo.put("id_session", obj.getString("id"));
-            conductorActivo.put("fecha_on", "now()");
-            // conductorActivo.put("fecha_off", "");
-            conductorActivo.put("lat", data.getDouble("latitude"));
-            conductorActivo.put("lng", data.getDouble("longitude"));
-            conductorActivo.put("deegre", data.getDouble("deegre"));
-            Conexion.insertArray("conductor_activo", new JSONArray().put(conductorActivo));
-            obj.put("noSend",true);
+            String consulta = "select to_json(conductor_activo.*) as json \n" + "from conductor_activo \n"
+                    + "where key_usuario = '" + obj.getString("key_usuario") + "'";
+            JSONObject conductorJson = Conexion.ejecutarConsultaObject(consulta);
+            if (conductorJson.has("key")) {
+                String consultaUpdate = "UPDATE conductor_activo SET \n"+
+                    "lat = "+data.getDouble("latitude")+", \n"+
+                    "lng = "+data.getDouble("longitude")+", \n"+ 
+                    "deegre = "+data.getDouble("deegre")+", \n"+
+                    "fecha_on = now() \n"+
+                    " WHERE key = '"+conductorJson.getString("key")+"'";
+                Conexion.ejecutarUpdate(consultaUpdate);
+            } else {
+                JSONObject conductorActivo = new JSONObject();
+                conductorActivo.put("key", UUID.randomUUID().toString());
+                conductorActivo.put("key_usuario", obj.getString("key_usuario"));
+                conductorActivo.put("id_session", obj.getString("id"));
+                conductorActivo.put("fecha_on", "now()");
+                // conductorActivo.put("fecha_off", "");
+                conductorActivo.put("lat", data.getDouble("latitude"));
+                conductorActivo.put("lng", data.getDouble("longitude"));
+                conductorActivo.put("deegre", data.getDouble("deegre"));
+                Conexion.insertArray("conductor_activo", new JSONArray().put(conductorActivo));
+            }
+
+            obj.put("noSend", true);
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

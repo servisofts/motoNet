@@ -1,17 +1,6 @@
-
 import React from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    Animated,
-    Easing,
-    AppRegistry,
-    AsyncStorage
-} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-/* import storage from '../../Storage';
- */
 
 const Carga = (props) => {
     const [obj, setObj] = React.useState(false);
@@ -33,19 +22,6 @@ const Carga = (props) => {
                     }, true);
                     return <View />
                 } else {
-                    var estados = false
-                    Object.keys(props.state.usuarioReducer.usuarioDatos).map((key) => {
-                        var obj = props.state.usuarioReducer.usuarioDatos[key]
-                        if (obj.estado === 0) {
-                            estados = true
-                            return <View />
-                        }
-                    })
-                    if (estados) {
-                        props.state.usuarioReducer.estado = ""
-                        props.state.navigationReducer.replace("InicioPage");
-                        return <View />
-                    }
                     props.state.usuarioReducer.estado = ""
                     props.state.navigationReducer.replace("InicioPage");
                     return <View />;
@@ -67,7 +43,7 @@ const Carga = (props) => {
             return <View />;
         };
         yourFunction();
-       
+
         //VERIFICO EL USUARIO
 
     }
@@ -103,4 +79,4 @@ const initStates = (state) => {
     return { state }
 };
 export default connect(initStates)(Carga);
-AppRegistry.registerComponent('Carga', () => Carga);
+
