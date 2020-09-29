@@ -7,7 +7,7 @@ import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 am4core.useTheme(am4themes_animated);
 
-const LoginPage = (props) => {
+const InicioPage = (props) => {
     
     /*if (!props.state.usuarioReducer.usuarioLog) {
         props.history.push("/");
@@ -30,4 +30,4 @@ const initStates = (state) => {
 };
 
 
-export default connect(initStates)(LoginPage);
+export default connect(initStates)(InicioPage);
