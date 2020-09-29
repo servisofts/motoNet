@@ -5,7 +5,6 @@ const initialState = {
 export default (state, action) => {
     if (!state) return initialState
     if (action.component === "socket") {
-
         return {
             ...state,
             ...action
