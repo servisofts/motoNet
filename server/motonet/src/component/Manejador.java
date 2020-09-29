@@ -35,6 +35,10 @@ public class Manejador {
                     new Viaje(data, router);
                     break;
                 }
+                case "tipoViaje": {
+                    new TipoViaje(data, router);
+                    break;
+                }
                 default:
                     break;
             }
