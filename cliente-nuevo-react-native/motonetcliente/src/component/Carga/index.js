@@ -8,8 +8,16 @@ const Carga = (props) => {
 
     if (obj) {
         if (props.state.usuarioReducer.usuarioLog) {
-            props.state.navigationReducer.replace("InicioPage");
+            //si tengo un usuario
+            if (!props.state.viajesReducer.viaje) {
+                props.state.navigationReducer.replace("InicioPage");
+            }
+            props.state.navigationReducer.replace("ViajeEsperaPage");
+            //falta comprovar si tengo viaje 
+            // si no tengo viaje voy a incio
+            //si tengo viaje voy a la etapa que corresponda del viaje.
         }
+        props.state.usuarioReducer.estado = ""
         props.state.navigationReducer.replace("LoginPage");
         //setObj(false);
         return <View />
@@ -28,11 +36,7 @@ const Carga = (props) => {
 
         <View >
 
-            <Text style={{
-                fontSize: 30,
-                fontWeight:"bold"
-            }}>
-                Cargando....</Text>
+     
 
         </View>
     );

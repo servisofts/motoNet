@@ -3,6 +3,11 @@ import { ActivityIndicator, AsyncStorage, Text, TouchableOpacity, View } from 'r
 import { connect } from 'react-redux';
 
 const ConfirmacionBusqueda = (props) => {
+    if (props.state.viajesReducer.estado == "exito") {
+        props.state.viajesReducer.estado=""
+        props.navigation.navigate("ViajeEsperaPage")
+    }
+
     return (
         <View style={{
             flexDirection: 'row',
@@ -13,23 +18,36 @@ const ConfirmacionBusqueda = (props) => {
             <TouchableOpacity
                 onPress={() => {
                     var exito = true
-                    var datas = {}
+                    var destino = []
+                    var contador = 1
                     Object.keys(props.state.viajesReducer.ubicacion).map((key) => {
                         var obj = props.state.viajesReducer.ubicacion[key]
+
                         if (!obj.data) {
                             exito = false
                         }
-
+                        var dato = {
+                            index: contador,
+                            latitude: obj.data.latitude,
+                            longitude: obj.data.longitude,
+                            direccion: obj.data.direccion
+                        }
+                        destino.push(dato)
+                        contador++
                     })
-                    
+
                     if (exito) {
                         props.state.socketClienteReducer.sessiones["motonet"].send({
                             component: "viaje",
                             type: "buscar",
-                            data: props.state.viajesReducer.ubicacion,
+                            data: {
+                                destinos: destino
+                            },
+                            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                            key_tipo_viaje: "viaje",
                             estado: "cargando"
                         }, true);
-                        return<View/>
+                        return <View />
                     }
                     alert("falta rellenar datos en la carrera")
                 }}
@@ -43,38 +61,19 @@ const ConfirmacionBusqueda = (props) => {
                     borderRadius: 20,
                     backgroundColor: "red"
                 }}>
-                {props.state.viajesReducer.estado === "cargando" ? (
+                {/*  {props.state.viajesReducer.estado === "cargando" ? (
                     <ActivityIndicator size="small" color="#fff" />
-                ) : (
-                        <Text
-                            style={{
-                                color: '#fff',
-                                fontSize: 18,
-                            }}>
-                            Confirmar viaje
+                ) : ( */}
+                <Text
+                    style={{
+                        color: '#fff',
+                        fontSize: 18,
+                    }}>
+                    Confirmar viaje
                         </Text>
-                    )}
+                {/*   )} */}
             </TouchableOpacity>
-            <TouchableOpacity style={{
-             justifyContent: "center",
-             alignItems: 'center',
-             position: "absolute",
-             bottom: 10,
-             width: 180,
-             left:0,
-             height: 40,
-             borderRadius: 20,
-             backgroundColor: "red"
-            }}
-                onPress={() => {
-                    AsyncStorage.removeItem("motonet_usuarioLog");
-                    props.state.usuarioReducer.usuarioLog = false
-                    props.state.navigationReducer.replace("CargaPage")
-                    return <View />
-                }}
-            >
-                <Text>salir</Text>
-            </TouchableOpacity>
+           
         </View>
     )
 }

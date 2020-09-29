@@ -12,11 +12,19 @@ const ListaBusqueda = (props) => {
     if (!props.state.locationGoogleMapReducer.listaBusqueda) {
         return <View />
     }
+    
     var lista = props.state.locationGoogleMapReducer.listaBusqueda
+    const repuestaText = () => {
+        if (mostrar.estado) {
+            return mostrar.textOcultar
+        }
+        return mostrar.textMostrar
+    }
     const ModeloLista = () => {
         if (!mostrar.estado) {
             return <View />
         }
+       
 
         return (
             <View style={{
@@ -65,12 +73,7 @@ const ListaBusqueda = (props) => {
         )
     }
 
-    const repuestaText = () => {
-        if (mostrar.estado) {
-            return mostrar.textOcultar
-        }
-        return mostrar.textMostrar
-    }
+    
     return (
         <View
             style={{
@@ -99,6 +102,7 @@ const ListaBusqueda = (props) => {
                     backgroundColor: "#1f84f5",
                     alignItems: 'center',
                     justifyContent: 'center',
+                    marginTop: 20,
                 }}>
                 <Text style={{ color: "#fff" }}>
                     {repuestaText()}
