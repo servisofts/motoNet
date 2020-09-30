@@ -20,8 +20,8 @@ const ViajePage = (props) => {
     const [regionUbicacion, setRegionUbicacion] = React.useState({
         // latitude: props.ViajeReducer.data.destinos[0].lat,        
         // longitude: props.ViajeReducer.data.destinos[0].lng,
-        latitude: -17.779995215904652,
-        longitude: -63.18059826269746,
+        latitude: -17.784242,
+        longitude: -63.154193,
     });
 
     const [regionDestino, setRegionDestino] = React.useState({
@@ -104,19 +104,17 @@ const ViajePage = (props) => {
     return (
         <View>
             <MapView
+                showsUserLocation = {true}
                 style={styles.map}
                 initialRegion={region}
                 ref={map => { mapa = map }}
-            >
-                {getMarkerSelect(regionUbicacion)}
-                {getMarkerSelect(regionDestino)}
+            >                
+                {getMarkerSelect(regionUbicacion)}             
             </MapView>
             <PopupViajesComponet />
         </View>
     )
 }
-
-
 
 const styles = StyleSheet.create({
     map: {

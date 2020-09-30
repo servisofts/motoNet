@@ -79,4 +79,3 @@ const initStates = (state) => {
     return { state }
 };
 export default connect(initStates)(Carga);
-
