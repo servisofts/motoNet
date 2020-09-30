@@ -23,7 +23,7 @@ const Carga = (props) => {
                     return <View />
                 } else {
                     props.state.usuarioReducer.estado = ""
-                    props.state.navigationReducer.replace("InicioPage");
+                    props.state.navigationReducer.replace("ViajePage");
                     return <View />;
                 }
             }

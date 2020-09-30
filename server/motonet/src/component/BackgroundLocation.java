@@ -43,8 +43,8 @@ public class BackgroundLocation {
             JSONObject conductorJson = Conexion.ejecutarConsultaObject(consulta);
             if (conductorJson.has("key")) {
                 String consultaUpdate = "UPDATE conductor_activo SET \n"+
-                    "lat = "+data.getDouble("latitude")+", \n"+
-                    "lng = "+data.getDouble("longitude")+", \n"+ 
+                    "latitude = "+data.getDouble("latitude")+", \n"+
+                    "longitude = "+data.getDouble("longitude")+", \n"+ 
                     "deegre = "+data.getDouble("deegre")+", \n"+
                     "fecha_on = now() \n"+
                     " WHERE key = '"+conductorJson.getString("key")+"'";
@@ -56,8 +56,8 @@ public class BackgroundLocation {
                 conductorActivo.put("id_session", obj.getString("id"));
                 conductorActivo.put("fecha_on", "now()");
                 // conductorActivo.put("fecha_off", "");
-                conductorActivo.put("lat", data.getDouble("latitude"));
-                conductorActivo.put("lng", data.getDouble("longitude"));
+                conductorActivo.put("latitude", data.getDouble("latitude"));
+                conductorActivo.put("longitude", data.getDouble("longitude"));
                 conductorActivo.put("deegre", data.getDouble("deegre"));
                 Conexion.insertArray("conductor_activo", new JSONArray().put(conductorActivo));
             }

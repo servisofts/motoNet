@@ -3,6 +3,8 @@ import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import PopupViajesComponet from '../../Component/PopupViajesComponet';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Svg from '../../Svg';
 
 var mapa;
 const ViajePage = (props) => {
@@ -14,11 +16,28 @@ const ViajePage = (props) => {
         latitudeDelta: 0.07,
         longitudeDelta: 0.07,
     });
+
+    const [regionUbicacion, setRegionUbicacion] = React.useState({
+        // latitude: props.ViajeReducer.data.destinos[0].lat,        
+        // longitude: props.ViajeReducer.data.destinos[0].lng,
+        latitude: -17.779995215904652,
+        longitude: -63.18059826269746,
+    });
+
+    const [regionDestino, setRegionDestino] = React.useState({
+        // latitude: props.ViajeReducer.data.destinos[1].lat,
+        // longitude: props.ViajeReducer.data.destinos[1].lng,
+        latitude: -17.782553259696005,
+        longitude: -63.169304151088,
+    });
+
+
     /*   if (!props.state.locationReducer.isOpen) {
           props.state.locationReducer.open();
           return <View></View>
       }
    */
+
     if (!zoom) {
         const delay = ms => new Promise(res => setTimeout(res, ms));
         const yourFunction = async () => {
@@ -36,16 +55,16 @@ const ViajePage = (props) => {
             zoomout(obj);
     }
 
-    getMarkerSelect = () => {
-      /*   if (!this.state.marcar) {
-            return <View />
-        } */
+    getMarkerSelect = (props) => {
+        /*   if (!this.state.marcar) {
+              return <View />
+          } */
         return (
             <Marker
-                coordinate={region}
+                coordinate={props}
             >
                 <TouchableOpacity
-                    >
+                >
                     <Svg name="LogoMoto"
                         style={{
                             width: 25,
@@ -53,10 +72,10 @@ const ViajePage = (props) => {
                             fill: "#fff"
                         }} />
                 </TouchableOpacity>
-
             </Marker>
         )
     }
+
 
     const zoomin = (obj) => {
         obj = currentPos;
@@ -89,7 +108,8 @@ const ViajePage = (props) => {
                 initialRegion={region}
                 ref={map => { mapa = map }}
             >
-                {this.getMarkerSelect()}
+                {getMarkerSelect(regionUbicacion)}
+                {getMarkerSelect(regionDestino)}
             </MapView>
             <PopupViajesComponet />
         </View>
