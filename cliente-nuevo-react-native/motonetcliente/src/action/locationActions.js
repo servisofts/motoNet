@@ -52,3 +52,21 @@ export const repuestaUbicacion = (repuesta) => async (dispatch) => {
     })
 
 }   
+export const setMarkerOrigen = (repuesta) => async (dispatch) => {
+
+    dispatch({
+        component: "locationGoogle",
+        type: "markerOrigen",
+        repuesta
+    })
+
+}   
+export const setMarkerFin = (repuesta) => async (dispatch) => {
+
+    dispatch({
+        component: "locationGoogle",
+        type: "markerFin",
+        repuesta
+    })
+
+}   

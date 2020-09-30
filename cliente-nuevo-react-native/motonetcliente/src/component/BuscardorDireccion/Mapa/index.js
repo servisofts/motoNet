@@ -4,8 +4,6 @@ import Svg from '../../../Svg';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 const Mapa = (props) => {
-
-
     const [data, setdata] = React.useState({
         region: {
             latitude: -17.7799998333333332,
@@ -16,15 +14,14 @@ const Mapa = (props) => {
         origen: false,
         ubicacionActual: false
     })
-
-
     const getMarkerOrigen = () => {
-
         if (!props.state.locationGoogleMapReducer.markerUbicacion) {
             return <View />
         }
-
-        var locoation = { latitude: props.state.locationGoogleMapReducer.markerUbicacion.latitude, longitude: props.state.locationGoogleMapReducer.markerUbicacion.longitude };
+        var locoation = {
+            latitude: props.state.locationGoogleMapReducer.markerUbicacion.latitude,
+            longitude: props.state.locationGoogleMapReducer.markerUbicacion.longitude
+        };
         return (
             <Marker
                 coordinate={locoation}
@@ -33,14 +30,31 @@ const Mapa = (props) => {
                     style={{
                         width: 25,
                         height: 25,
-                        fill: "#000"
-
+                    }} />
+            </Marker>
+        )
+    }
+    const getMarkerFin = () => {
+        if (!props.state.locationGoogleMapReducer.markerUbicacionFin) {
+            return <View />
+        }
+        var locoation = {
+            latitude: props.state.locationGoogleMapReducer.markerUbicacionFin.latitude,
+            longitude: props.state.locationGoogleMapReducer.markerUbicacionFin.longitude
+        };
+        return (
+            <Marker
+                coordinate={locoation}
+            >
+                <Svg name="Logo"
+                    style={{
+                        width: 25,
+                        height: 25,
                     }} />
 
             </Marker>
         )
     }
-
     return (
         <MapView
             style={{
@@ -61,6 +75,7 @@ const Mapa = (props) => {
             }}
         >
             {getMarkerOrigen()}
+            {getMarkerFin()}
         </MapView>
     )
 }

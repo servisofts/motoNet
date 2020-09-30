@@ -1,17 +1,16 @@
 export const actualizarUbicacion = (dato) => async (dispatch) => {
     dispatch({
         component: "viaje",
-        type: "actualizarViaje",
+        type: "actualizarUbicacion",
         data: dato
     })
 
 }
-export const addViaje = (element) => async (dispatch) => {
+export const actualizarViaje = (dato) => async (dispatch) => {
     dispatch({
-        component: "popup",
-        estado: true,
-        type: "abrirPopup",
-        element: element,
+        component: "viaje",
+        type: "actualizarViaje",
+        data: dato
     })
 
 }
