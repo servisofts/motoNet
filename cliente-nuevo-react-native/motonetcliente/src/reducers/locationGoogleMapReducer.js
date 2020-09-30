@@ -1,17 +1,15 @@
 import { act } from "react-test-renderer";
-
 const initialState = {
     estado: "Not Found",
     repuestaMarketText: "",
     markerUbicacion: false,
+    markerUbicacionFin: false,
     listaBusqueda: false,
     escribir: false,
 }
 export default (state, action) => {
     if (!state) return initialState
-
     if (action.component == "locationGoogle") {
-
         switch (action.type) {
             case "geocode":
                 geocode(state, action);
@@ -25,17 +23,22 @@ export default (state, action) => {
             case "actualizar":
                 actualizar(state, action);
                 break;
+            case "markerOrigen":
+                markerOrigen(state, action);
+                break;
+            case "markerFin":
+                markerFin(state, action);
+                break;
         }
         state = { ...state };
     }
     return state;
 }
-
-const actualizar = (state, action) => {
-    state.estado = "exito";
-    state.type = action.type;
-    state.repuestaMarketText = action.repuesta
-
+const markerOrigen = (state, action) => {
+    state.markerUbicacion = action.data
+}
+const markerFin = (state, action) => {
+    state.markerFin = action.data
 }
 const geocode = (state, action) => {
     state.estado = action.estado;
@@ -45,7 +48,6 @@ const geocode = (state, action) => {
         state.markerUbicacion = action.data
         state.escribir = false
     }
-
 }
 const autoComplete = (state, action) => {
     state.type = action.type;

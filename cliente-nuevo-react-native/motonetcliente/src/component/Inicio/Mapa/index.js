@@ -13,6 +13,27 @@ const Mapa = (props) => {
         longitudeDelta: 0.07,
     });
 
+    const getMarkerFin = () => {
+        if (!props.state.locationGoogleMapReducer.markerUbicacionFin) {
+            return <View />
+        }
+        var locoation = {
+            latitude: props.state.locationGoogleMapReducer.markerUbicacionFin.latitude,
+            longitude: props.state.locationGoogleMapReducer.markerUbicacionFin.longitude
+        };
+        return (
+            <Marker
+                coordinate={locoation}
+            >
+                <Svg name="Logo"
+                    style={{
+                        width: 25,
+                        height: 25,
+                    }} />
+
+            </Marker>
+        )
+    }
 
     const getMarkerOrigen = () => {
 
@@ -41,7 +62,6 @@ const Mapa = (props) => {
                         fill: "#000"
 
                     }} />
-                {getMarkerOrigen()}
 
             </Marker>
         )
@@ -61,6 +81,8 @@ const Mapa = (props) => {
             initialRegion={region}
             ref={map => { mapa = map }}
         >
+            {getMarkerOrigen()}
+            {getMarkerFin()}
         </MapView>
     )
 }

@@ -22,6 +22,10 @@ export default (state, action) => {
             case "Addubicacion":
                 ubicacion(state, action);
                 break;
+            case "actualizarUbicacion":
+                actualizarUbicacion(state, action);
+                break;
+
             case "actualizarViaje":
                 actualizarViaje(state, action);
                 break;
@@ -41,8 +45,11 @@ export default (state, action) => {
     return state;
 }
 
-const actualizarViaje = (state, action) => {
+const actualizarUbicacion = (state, action) => {
     state.ubicacion = action.data
+}
+const actualizarViaje = (state, action) => {
+    state.viaje = action.data
 }
 const cancelarBusqueda = (state, action) => {
     state.type = action.type
