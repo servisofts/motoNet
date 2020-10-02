@@ -65,7 +65,7 @@ const ListaUsuarioPage = (props) => {
                     }
                     return (
                          <Grid container direction="row">
-                              <Grid item xs={8}>
+                              <Grid item xs={12} spacing={2} >
                                    <TableDetail
                                         title={"Usuarios"}
                                         head={[
@@ -87,9 +87,7 @@ const ListaUsuarioPage = (props) => {
                                    />
                               </Grid>
 
-                              <Grid item xs={4} className="secondary">
-                                   
-                              </Grid>
+                              
 
 
                          </Grid>

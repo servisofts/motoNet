@@ -1,42 +1,37 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color:#fff;
-
+  color: #fff;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
-.secondary{
-  background: rgb(231,51,73);
-background: -moz-linear-gradient(90deg, rgba(231,51,73,1) 11%, rgba(255,0,31,0.6867121848739496) 36%);
-background: -webkit-linear-gradient(90deg, rgba(231,51,73,1) 11%, rgba(255,0,31,0.6867121848739496) 36%);
-background: linear-gradient(90deg, rgba(231,51,73,1) 11%, rgba(255,0,31,0.6867121848739496) 36%);
-filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e73349",endColorstr="#ff001f",GradientType=1);
+.secondary {
+  background: rgb(231, 51, 73);
+  background: -moz-linear-gradient(90deg, rgba(231, 51, 73, 1) 11%, rgba(255, 0, 31, 0.6867121848739496) 36%);
+  background: -webkit-linear-gradient(90deg, rgba(231, 51, 73, 1) 11%, rgba(255, 0, 31, 0.6867121848739496) 36%);
+  background: linear-gradient(90deg, rgba(231, 51, 73, 1) 11%, rgba(255, 0, 31, 0.6867121848739496) 36%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e73349", endColorstr="#ff001f", GradientType=1);
 }
 
-.colorPrincipal{
+.colorPrincipal {
   background-color: #ff3333;
 }
 
-
-.page{
+.page {
   height: 100%;
   min-height: 100vh;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
-.center{
+
+.center {
   max-width: 90%;
   width: 500px;
   min-height: 500px;
@@ -48,23 +43,24 @@ filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e73349",endCo
   /* border: 1px solid #fff; */
 }
 
-.content{
-  
-}
+.content {}
 
 /* width */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 /* Track */
+
 ::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
   border-radius: 10px;
 }
 
 /* Handle */
+
 ::-webkit-scrollbar-thumb {
-  background:  rgb(85,210,246);
+  background: rgb(231, 51, 73);
   border-radius: 10px;
 }
