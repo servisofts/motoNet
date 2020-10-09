@@ -15,6 +15,7 @@ const ConfirmarViaje = (props) => {
             borderTopRightRadius: 20,
             backgroundColor: "red",
         }}>
+
             <View
                 style={{
                     flex: 1,
@@ -33,7 +34,7 @@ const ConfirmarViaje = (props) => {
                     fontSize: 20,
                     fontWeight: "bold"
                 }}>
-                    Su moto esta en camino.
+                    En camino...
                     </Text>
             </View>
 
@@ -66,7 +67,7 @@ const ConfirmarViaje = (props) => {
                         fontWeight: "bold",
                         fontSize: 15
                     }}>
-                        Nombre del Conductor
+                        Nombre del Usuario
                         </Text>
 
                     <Text style={{
@@ -101,20 +102,6 @@ const ConfirmarViaje = (props) => {
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    touch: {
-        width: "80%",
-        backgroundColor: "#fff",
-        height: 50,
-        paddingLeft: 15,
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-});
 
 const initStates = (state) => {
     return { state }

@@ -5,9 +5,10 @@ import {
     Text,
     TouchableOpacity,
     Animated,
-    StyleSheet
+    StyleSheet, AsyncStorage
 } from 'react-native';
 import * as viajesActions from '../../action/viajesActions'
+import * as locationActions from '../../action/locationActions'
 import Svg from '../../Svg';
 
 class ViajeEsperaPage extends Component {
@@ -18,8 +19,19 @@ class ViajeEsperaPage extends Component {
         super(props);
         this.state = {
             startValue: new Animated.Value(1),
+            obj: {},
             endValue: 1.3,
         };
+        var contador = 1
+        this.props.state.viajesReducer.viaje.destinos.map((data, key) => {
+            if (contador === 1) {
+                this.state.obj["inicio"] = data
+                contador++
+            } else {
+                this.state.obj["fin"] = data
+            }
+        })
+
     }
     componentDidMount() { // B
         Animated.loop(
@@ -32,6 +44,7 @@ class ViajeEsperaPage extends Component {
         ).start();
     }
     render() {
+
         if (this.props.state.viajesReducer.estado === "exito") {
             if (this.props.state.viajesReducer.type === "cancelarBusqueda") {
                 this.props.state.viajesReducer.estado = ""
@@ -48,8 +61,11 @@ class ViajeEsperaPage extends Component {
                         data: false
                     }
                 }
+                this.props.setMarkerFin(false)
+                this.props.setMarkerOrigen(false)
                 this.props.actualizarUbicacion(this.props.state.viajesReducer.ubicacion)
                 this.props.navigation.replace("InicioPage")
+                AsyncStorage.removeItem("motonet_viaje")
 
             }
             if (this.props.state.viajesReducer.type === "confirmarBusqueda") {
@@ -100,7 +116,7 @@ class ViajeEsperaPage extends Component {
                         fontSize: 9,
                         margin: 5,
 
-                    }}>{this.props.state.viajesReducer.ubicacion.inicio.value}</Text>
+                    }}>{this.state.obj.inicio.direccion}</Text>
 
                 </View>
                 <View style={{
@@ -137,7 +153,7 @@ class ViajeEsperaPage extends Component {
                         fontSize: 9,
                         margin: 5,
 
-                    }}>{this.props.state.viajesReducer.ubicacion.fin.value}</Text>
+                    }}>{this.state.obj.fin.direccion}</Text>
 
                 </View>
                 <Animated.View
@@ -190,7 +206,7 @@ class ViajeEsperaPage extends Component {
                     }}
 
                     style={{
-                        width: 80,
+                        width: 120,
                         height: 20,
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -234,12 +250,8 @@ class ViajeEsperaPage extends Component {
                         width: "80%",
                         justifyContent: 'space-between',
                     }}>
-                        <Text
-                            style={{ color: "#fff", fontSize: 10, }}
-                        >TIEMPO ESTIMADO</Text>
-                        <Text
-                            style={{ color: "#fff", fontSize: 10 }}
-                        >MONTO ESTIMADO</Text>
+                        <Text style={{ color: "#fff", fontSize: 10, }}>TIEMPO ESTIMADO</Text>
+                        <Text style={{ color: "#fff", fontSize: 10 }}>MONTO ESTIMADO</Text>
 
                     </View>
                 </View>
@@ -265,7 +277,8 @@ const initStates = (state) => {
     return { state }
 };
 const initActions = ({
-    ...viajesActions
+    ...viajesActions,
+    ...locationActions
 });
 
 

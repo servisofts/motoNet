@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, View, Text, Modal, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, SafeAreaView } from 'react-native';
+import { Platform, View, Text, Modal, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, SafeAreaView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../Svg';
 
@@ -18,8 +18,22 @@ const NaviDrawe = (props) => {
     if (!isVisible) {
         return <View></View>
     }
-    const handleClick = (pros) => {
-        props.navigation.navigate(pros);
+
+    const handleClick = (item) => {
+        switch (item) {
+            case "PerfilPage":
+                props.navigation.navigate(item)
+                return <View />
+            case "AyudaPage":
+                props.navigation.navigate(item)
+                return <View />
+            case "CerrarSesion":
+                AsyncStorage.removeItem("motonet_usuarioLog")
+                props.state.usuarioReducer.usuarioLog = false
+                props.navigation.replace("CargaPage")
+                return <View />
+        }
+
     }
 
     var letra = "#fff";
@@ -78,19 +92,21 @@ const NaviDrawe = (props) => {
 
                                 <View style={{
                                     flex: 1,
-                                    marginStart:20
+                                    marginStart: 20
                                 }}>
                                     <TouchableOpacity style={styles.sty}
-                                        onPress={() => { handleClick("PerfilPage") }}
-                                    >
-                                        <Text style={{ fontSize: 20, color: letra }} >Perfil</Text>
+                                        onPress={() => { handleClick("PerfilPage") }}>
+                                        <Text style={styles.texto} >Perfil</Text>
                                     </TouchableOpacity >
+
                                     <TouchableOpacity style={styles.sty} onPress={() => { handleClick("ListaCertificado") }} >
-                                        <Text style={{ fontSize: 20, color: letra }}>Viajes </Text>
+                                        <Text style={styles.texto}>Viajes </Text>
                                     </TouchableOpacity>
+
                                     <TouchableOpacity style={styles.sty} onPress={() => { handleClick("ListaAplicacion") }} >
-                                        <Text style={{ fontSize: 20, color: letra }}>Ayuda</Text>
+                                        <Text style={styles.texto}>Ayuda</Text>
                                     </TouchableOpacity>
+
                                     <TouchableOpacity style={styles.sty}>
                                         <Text style={{
                                             marginTop: 10,
@@ -98,6 +114,16 @@ const NaviDrawe = (props) => {
                                             fontSize: 20,
                                             color: "#fff",
                                         }} >Configuracion</Text>
+                                    </TouchableOpacity>
+
+                                    <TouchableOpacity style={styles.sty}
+                                        onPress={() => { handleClick("CerrarSesion") }}>
+                                        <Text style={{
+                                            marginTop: 10,
+                                            fontWeight: "bold",
+                                            fontSize: 20,
+                                            color: "#fff",
+                                        }} >Cerrar Sesion</Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
@@ -116,6 +142,12 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18,
         color: "#f00",
+    },
+    texto: {
+        marginTop: 10,
+        fontWeight: "bold",
+        fontSize: 20,
+        color: "#fff",
     },
     logo: {
         height: 150,

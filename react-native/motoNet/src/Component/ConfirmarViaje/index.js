@@ -4,24 +4,25 @@ import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-nativ
 
 const ConfirmarViaje = (props) => {
 
-    
+
     // console.log(objeto)
     //var datos = JSON.parse(objeto.data);
     if (props.state.ViajeReducer.estado === "error") {
         props.state.ViajeReducer.estado = "";
-        props.state.ViajeReducer.data=false;
-        return <View/>
+        props.state.ViajeReducer.data = false;
+        return <View />
     }
 
     if (props.state.ViajeReducer.estado === "exito") {
-        props.state.navigationReducer.replace("ViajePage"); 
-        return <View/>       
+        props.state.navigationReducer.replace("ViajePage");
+        return <View />
     }
-    
+
     if (!props.state.ViajeReducer.data) {
-       return <Text>No existe</Text>
+        return <Text>No existe</Text>
     }
     var datos = props.state.ViajeReducer.data;
+
     const AceptarViaje = () => {
         props.state.socketClienteReducer.sessiones["motonet"].send({
             component: "viaje",

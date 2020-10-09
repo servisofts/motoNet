@@ -122,7 +122,6 @@ const Login = (props) => {
                         }
                     )
                 }
-
             },
             function (error) {
                 console.log("Login fail with error: " + error);
@@ -130,7 +129,6 @@ const Login = (props) => {
         );
         LoginManager.logOut();
     }
-
 
 
     return (

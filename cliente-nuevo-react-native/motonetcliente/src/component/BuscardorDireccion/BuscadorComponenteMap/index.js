@@ -34,17 +34,22 @@ const BuscadorComponenteMap = (props) => {
             if (props.state.viajesReducer.ubicacion.fin.estado) {
                 props.state.viajesReducer.ubicacion.fin.data = props.state.locationGoogleMapReducer.data
                 props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
+
             }
         }
         if (props.state.locationGoogleMapReducer.type === "geocode") {
             if (props.state.viajesReducer.ubicacion.inicio.estado) {
                 props.state.viajesReducer.ubicacion.inicio.value = props.state.locationGoogleMapReducer.data.direccion
                 props.state.viajesReducer.ubicacion.inicio.data = props.state.locationGoogleMapReducer.data
+                props.setMarkerOrigen(props.state.locationGoogleMapReducer.data)
+
             }
             if (props.state.viajesReducer.ubicacion.fin.estado) {
-
                 props.state.viajesReducer.ubicacion.fin.data = props.state.locationGoogleMapReducer.data
                 props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
+                props.state.locationGoogleMapReducer.markerUbicacionFin = props.state.locationGoogleMapReducer.data
+                props.setMarkerFin(props.state.locationGoogleMapReducer.data)
+
             }
         }
         if (props.state.locationGoogleMapReducer.type === "actualizar") {
@@ -54,7 +59,7 @@ const BuscadorComponenteMap = (props) => {
             return <View />
         }
         actualizarUbicacion()
-        props.state.locationGoogleMapReducer.estado = "";
+       
     }
     const buscarInput = () => {
         return (

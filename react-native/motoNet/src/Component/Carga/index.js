@@ -22,7 +22,7 @@ const Carga = (props) => {
                     }, true);
                     return <View />
                 } else {
-                    props.state.usuarioReducer.estado = ""
+                    props.state.usuarioReducer.estado = "cargando"
                     props.state.navigationReducer.replace("InicioPage");
                     return <View />;
                 }
@@ -79,4 +79,3 @@ const initStates = (state) => {
     return { state }
 };
 export default connect(initStates)(Carga);
-
