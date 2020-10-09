@@ -22,8 +22,8 @@ const Carga = (props) => {
                     }, true);
                     return <View />
                 } else {
-                    props.state.usuarioReducer.estado = ""
-                    props.state.navigationReducer.replace("ViajePage");
+                    props.state.usuarioReducer.estado = "cargando"
+                    props.state.navigationReducer.replace("InicioPage");
                     return <View />;
                 }
             }

@@ -268,7 +268,6 @@ const RegistroUsuario = (props) => {
                         }} />
                     {registriIcono()}
                 </View>
-
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Nombres</Text>
@@ -279,8 +278,6 @@ const RegistroUsuario = (props) => {
                         autoCapitalize='none'
                     />
                 </View>
-
-
                 <View
                     style={styles.view}>
                     <Text style={styles.texto}>Apellidos</Text>
@@ -384,7 +381,6 @@ const RegistroUsuario = (props) => {
 
         </ScrollView>
     )
-
 }
 const styles = StyleSheet.create({
 

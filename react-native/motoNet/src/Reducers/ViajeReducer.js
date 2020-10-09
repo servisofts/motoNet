@@ -32,7 +32,7 @@ const confirmarBusqueda = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("motonetConductor_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonetConductor_viaje", JSON.stringify(action.data));        
     }
     if (state.estado === "error") {
         state.error = action.error
