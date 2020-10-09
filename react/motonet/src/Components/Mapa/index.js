@@ -33,16 +33,12 @@ export class Mapa extends Component {
         this.props.state.socketReducer.send(objSend);*/
     }
     componentWillUnmount() {
-
         //Termina de escuchar
         console.log("emtrp will mount")
 
     }
     render() {
 
-        if(this.props.state.socketReducer.socket){
-            return <div>vacio</div>
-        }
         return (
             <div style={{ height: '100vh', width: '100%' }}>
                 <GoogleMapReact

@@ -21,7 +21,10 @@ public class ViajeHilo {
                 objSend.put("type", "viajeEntrante");
                 objSend.put("data", objViaje);
                 objSend.put("estado", "exito");
-                SocketServer.sendUser(objSend.toString(), "1eab302f-5e84-41b2-bfca-7852eb52fc4a");
+
+
+                
+                SocketServer.sendUser(objSend.toString(), "a69b308e-50b2-4be2-bc07-fd0a9b0e55d0");
             }
         };
         thread.start();

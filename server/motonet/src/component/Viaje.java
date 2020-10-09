@@ -50,6 +50,7 @@ public class Viaje {
             objViaje.put("key", UUID.randomUUID().toString());
             objViaje.put("key_usuario", obj.getString("key_usuario"));
             objViaje.put("key_tipo_viaje", obj.getString("key_tipo_viaje"));
+            objViaje.put("key_conductor", "");
             objViaje.put("estado", 1);
             objViaje.put("fecha_on", "now()");
 
@@ -97,21 +98,22 @@ public class Viaje {
         try {
             String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
-            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_ACEPTO_CONDUCTOR, key_usuario);
+
             JSONObject viaje = getViajeAndDestinos(key_viaje);
-       
-            if (viaje.getInt("estado")==0) {
+
+            if (viaje.getInt("estado") == 0) {
                 obj.put("error", "viaje_cancelado");
                 obj.put("estado", "error");
                 return;
             }
-            if (viaje.has("key_conductor")) {
-                obj.put("error", "viaje_confirmado");
-                obj.put("estado", "error");
-                return;
+            if (viaje.getString("key_conductor").length() >0) {
+                    obj.put("error", "viaje_confirmado");
+                    obj.put("estado", "error");
+                    return;
             }
             Conexion.ejecutarUpdate(
                     "UPDATE viaje SET key_conductor = '" + key_usuario + "' WHERE key = '" + key_viaje + "'");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_ACEPTO_CONDUCTOR, key_usuario);
             viaje.put("key_conductor", key_usuario);
             JSONObject objSend = new JSONObject();
             objSend.put("component", "viaje");
