@@ -1,6 +1,5 @@
 import React from 'react';
 import Mapa from './Mapa';
-
 import { connect } from 'react-redux';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import ComponenteInicio from './ComponenteInicio';

@@ -1,16 +1,6 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
-import {
-    View, TouchableOpacity,
-    Text,
-    TextInput,
-    ScrollView,
-    StyleSheet,
-    SafeAreaView,
-    Image,
-     ActivityIndicator
-} from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, SafeAreaView, Image, ActivityIndicator } from 'react-native';
 import Svg from '../../Svg';
 import { LoginManager } from "react-native-fbsdk";
 import Theme from '../../Styles/Theme.json'
@@ -508,7 +498,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5,
     },
     view: {
@@ -517,8 +506,6 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         marginTop: 5,
         justifyContent: 'center',
-
-
     },
     texto: {
 

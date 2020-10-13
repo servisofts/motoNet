@@ -2,6 +2,7 @@ import React from 'react';
 import { Platform, View, Text, Modal, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, SafeAreaView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../Svg';
+import ConfirmarViaje from '../ConfirmarViaje';
 
 
 const NaviDrawe = (props) => {
@@ -32,8 +33,10 @@ const NaviDrawe = (props) => {
                 props.state.usuarioReducer.usuarioLog = false
                 props.navigation.replace("CargaPage")
                 return <View />
+            case "ConfirmarViaje":
+                console.log(item);             
+                return <ConfirmarViaje />
         }
-
     }
 
     var letra = "#fff";
@@ -103,7 +106,7 @@ const NaviDrawe = (props) => {
                                         <Text style={styles.texto}>Viajes </Text>
                                     </TouchableOpacity>
 
-                                    <TouchableOpacity style={styles.sty} onPress={() => { handleClick("ListaAplicacion") }} >
+                                    <TouchableOpacity style={styles.sty} onPress={() => { handleClick("ConfirmarViaje") }} >
                                         <Text style={styles.texto}>Ayuda</Text>
                                     </TouchableOpacity>
 

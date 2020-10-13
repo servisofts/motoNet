@@ -1,16 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-import {
-    View,
-    TouchableOpacity,
-    Text,
-    StyleSheet,
-    TouchableWithoutFeedback
-
-} from 'react-native';
-
-
+import { View, TouchableOpacity, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 
 const iniciarTurno = (props) => {
     if (props.state.backgroundLocationReducer.isOpen) {
@@ -27,14 +17,14 @@ const iniciarTurno = (props) => {
             justifyContent: 'center',
         }}>
 
-            <Text style={{fontSize:20,color:"#ccc"}}>
+            <Text style={{ fontSize: 20, color: "#ccc" }}>
                 Bienvenido
             </Text>
-            <Text style={{fontSize:30, color:"#fff"}}>
+            <Text style={{ fontSize: 30, color: "#fff" }}>
                 {props.state.usuarioReducer.usuarioDatos["Nombres"].dato}
                 {" " + props.state.usuarioReducer.usuarioDatos["Apellidos"].dato}.
                 </Text>
-                <Text style={{fontSize:20,color:"#ccc"}}>
+            <Text style={{ fontSize: 20, color: "#ccc" }}>
                 Para recibir viajes precione iniciar.
                 </Text>
             <TouchableOpacity
@@ -42,7 +32,7 @@ const iniciarTurno = (props) => {
                     props.state.backgroundLocationReducer.open()
                 }}
                 style={{
-                    marginTop:20,
+                    marginTop: 20,
                     width: 100,
                     height: 100,
                     borderRadius: 100,
