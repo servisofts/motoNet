@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import {
-    Text,
-    View,
-    TouchableOpacity,
-    Animated
-} from 'react-native';
+import { Text, View, TouchableOpacity, Animated } from 'react-native';
 
 import Login from '../../component/Login';
 class LoginPage extends Component {
@@ -22,7 +16,7 @@ class LoginPage extends Component {
                 flex: 1,
                 alignItems: 'center',
             }}>
-                <Login navigation={this.props.navigation}/>
+                <Login navigation={this.props.navigation} />
             </View>
 
 

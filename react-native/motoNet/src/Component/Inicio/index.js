@@ -1,6 +1,5 @@
 import React from 'react';
 import Mapa from './Mapa';
-
 import { connect } from 'react-redux';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import ComponenteInicio from './ComponenteInicio';
@@ -13,13 +12,13 @@ const Inicio = (props) => {
         props.state.componenteInicioReducer.navigate("ConfirmarViaje", props.dispatch);
     } */
 
-   // if (props.state.ViajeReducer.estado == "exito") {
-       // props.state.componenteInicioReducer.navigate("ConfirmarViaje", props.dispatch);
+    // if (props.state.ViajeReducer.estado == "exito") {
+    // props.state.componenteInicioReducer.navigate("ConfirmarViaje", props.dispatch);
     //} else {
-        if (props.state.componenteInicioReducer.seleccionado != "IniciarTurno" && !props.state.backgroundLocationReducer.isOpen) {
-            props.state.componenteInicioReducer.navigate("IniciarTurno", props.dispatch);
-        }
-   // }
+    if (props.state.componenteInicioReducer.seleccionado != "IniciarTurno" && !props.state.backgroundLocationReducer.isOpen) {
+        props.state.componenteInicioReducer.navigate("IniciarTurno", props.dispatch);
+    }
+    // }
 
     return (
         <View style={{
@@ -59,7 +58,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         top: 10,
-        left: 10,        
+        left: 10,
     },
 });
 
