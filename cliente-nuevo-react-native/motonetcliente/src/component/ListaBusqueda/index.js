@@ -27,7 +27,7 @@ const ListaBusqueda = (props) => {
                     return (
                         <TouchableOpacity
                             onPress={() => {
-                                props.onchage(obj)
+                                prowps.onchage(obj)
                             }}
                             style={{
                                 width: "100%",

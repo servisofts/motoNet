@@ -28,7 +28,7 @@ const TipoViajePage = (props) => {
             console.log(obj);
             list.push({
                 key,
-                descripcion: obj.descripcion,
+                descripcion: {dato:obj.descripcion},
             })
         })
         return list;
@@ -98,10 +98,7 @@ const TipoViajePage = (props) => {
 
                         </Grid>
 
-
                     </Grid>
-
-
 
                 )
             }}

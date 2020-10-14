@@ -8,6 +8,8 @@ import InicioPage from './Pages/InicioPage'
 import ListaUsuarioPage from './Pages/ListaUsuarioPage'
 import MapaPage from './Pages/MapaPage'
 import TipoViajePage from './Pages/TipoViajePage'
+import ParametrosPage from './Pages/ParametrosPage'
+import NotificacionPage from './Pages/NotificacionPage'
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
       <Route exact path='/ListaUsuario' component={ListaUsuarioPage} />
       <Route exact path='/MapaPage' component={MapaPage} />
       <Route exact path='/TipoViajePage' component={TipoViajePage} />
+      <Route exact path='/ParametrosPage' component={ParametrosPage} />
+      <Route exact path='/NotificacionPage' component={NotificacionPage} />
       
     </BrowserRouter>
   );

@@ -7,9 +7,7 @@ import BuscadorComponenteMap from '../BuscardorDireccion/BuscadorComponenteMap';
 import MarkerMedio from '../BuscardorDireccion/MarkerMedio';
 import ConfirmacionBusqueda from './ConfirmacionBusqueda';
 const Inicio = (props) => {
-    if (props.state.componenteInicioReducer.seleccionado != "IniciarTurno") {
-        props.state.componenteInicioReducer.navigate("IniciarTurno", props.dispatch);
-    }
+
     return (
         <View style={{
             flex: 1,
