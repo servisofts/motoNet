@@ -212,6 +212,7 @@ const NaviDrawer = (props) => {
                     {getButton({ name: "Usuarios nuevos", path: "ListaUsuario", icon: <AccountBox /> })}
                     {getButton({ name: "Mapa", path: "MapaPage", icon: <RoomIcon /> })}
                     {getButton({ name: "TipoViaje", path: "TipoViajePage", icon: <ExitToAppIcon /> })}
+                    
 
                     <div onClick={
                         () => {

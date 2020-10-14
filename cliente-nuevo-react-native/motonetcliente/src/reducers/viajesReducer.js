@@ -47,6 +47,7 @@ export default (state, action) => {
 
 const actualizarUbicacion = (state, action) => {
     state.ubicacion = action.data
+    
 }
 const actualizarViaje = (state, action) => {
     state.viaje = action.data

@@ -23,14 +23,17 @@ class ViajeEsperaPage extends Component {
             endValue: 1.3,
         };
         var contador = 1
-        this.props.state.viajesReducer.viaje.destinos.map((data, key) => {
-            if (contador === 1) {
-                this.state.obj["inicio"] = data
-                contador++
-            } else {
-                this.state.obj["fin"] = data
-            }
-        })
+        if (this.props.state.viajesReducer.viaje) {
+            this.props.state.viajesReducer.viaje.destinos.map((data, key) => {
+                if (contador === 1) {
+                    this.state.obj["inicio"] = data
+                    contador++
+                } else {
+                    this.state.obj["fin"] = data
+                }
+            })
+        }
+
 
     }
     componentDidMount() { // B
@@ -44,7 +47,7 @@ class ViajeEsperaPage extends Component {
         ).start();
     }
     render() {
-
+       
         if (this.props.state.viajesReducer.estado === "exito") {
             if (this.props.state.viajesReducer.type === "cancelarBusqueda") {
                 this.props.state.viajesReducer.estado = ""
@@ -72,7 +75,9 @@ class ViajeEsperaPage extends Component {
                 this.props.state.viajesReducer.estado = ""
                 this.props.navigation.replace("ComenzarCarreraPage");
             }
+            
         }
+        
         return (
             <View style={{
                 flex: 1,
