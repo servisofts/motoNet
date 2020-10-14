@@ -98,10 +98,7 @@ const TipoViajePage = (props) => {
 
                         </Grid>
 
-
                     </Grid>
-
-
 
                 )
             }}
