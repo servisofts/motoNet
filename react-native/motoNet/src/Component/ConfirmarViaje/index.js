@@ -1,10 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
+import Svg from '../../Svg';
 
 const ConfirmarViaje = (props) => {
 
+    const [obj, setObj] = React.useState(false);
 
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    if (!props.state.ViajeReducer.data) {
+        return <Text>No existe</Text>
+    } else {
+        var datos = props.state.ViajeReducer.data;
+    }
+
+    const yourFunction = async () => {
+        await delay(datos.parametros["Tiempo permitido para aceptar viaje conductor"] * 1000);
+        console.log("tiempooo");
+        setObj(true);
+        return <View />;
+    };
+    yourFunction();
+
+
+    if (obj) {
+        props.dispatch({
+            component: "viaje",
+            type: "cancelarBusquedaConductor"
+        });
+    }
+
+
+    const [precio, setPrecio] = React.useState(10)
     // console.log(objeto)
     //var datos = JSON.parse(objeto.data);
     if (props.state.ViajeReducer.estado === "error") {
@@ -13,20 +41,31 @@ const ConfirmarViaje = (props) => {
         return <View />
     }
 
-    if (props.state.ViajeReducer.estado === "exito") {
+    if (props.state.ViajeReducer.estado === "exito" && props.state.ViajeReducer.type == "confirmarBusqueda") {
         props.state.navigationReducer.replace("ViajePage");
         return <View />
     }
 
-    if (!props.state.ViajeReducer.data) {
-        return <Text>No existe</Text>
+    if (props.state.ViajeReducer.estado === "exito" && props.state.ViajeReducer.type == "cancelarBusquedaConductor") {
+        return <View />
     }
-    var datos = props.state.ViajeReducer.data;
+
 
     const AceptarViaje = () => {
         props.state.socketClienteReducer.sessiones["motonet"].send({
             component: "viaje",
             type: "confirmarBusqueda",
+            estado: "cargando",
+            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+            key_viaje: datos.key,
+        }, true);
+        return <View />
+    }
+
+    const CancelarViaje = () => {
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "viaje",
+            type: "cancelarBusquedaConductor",
             estado: "cargando",
             key_usuario: props.state.usuarioReducer.usuarioLog.key,
             key_viaje: datos.key,
@@ -73,22 +112,81 @@ const ConfirmarViaje = (props) => {
             <View style={{
                 flex: 1.5,
                 alignItems: 'center',
-                justifyContent: 'center',
+                justifyContent: 'space-between',
             }}>
+
+                <TouchableOpacity
+                    onPress={() => {
+                        setPrecio(precio + 1)
+                    }}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                    <Svg name="Arriba"
+                        style={{
+                            width: 50,
+                            height: 50,
+                            fill: "#fff"
+
+                        }} />
+                </TouchableOpacity>
+
                 <TouchableOpacity
                     onPress={AceptarViaje}
                     style={{
-                        width: 200,
-                        height: 200,
+                        width: 150,
+                        height: 150,
                         borderRadius: 100,
                         backgroundColor: "#fff",
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}>
                     <Text>
-                        CONFIRMAR VIAJE
-                </Text>
+                        {precio} bs.
+                    </Text>
                 </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={() => {
+                        setPrecio(precio - 1)
+                    }}
+                    style={{
+                        width: 50,
+                        height: 50,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                    <Svg name="Arriba"
+                        style={{
+                            width: 50,
+                            height: 50,
+                            fill: "#fff",
+                            transform: [
+                                { rotate: '180deg' }
+                            ]
+                        }} />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={CancelarViaje}
+                    style={{
+                        width: "20%",
+                        height: 30,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 20,
+                        borderColor: "#fff",
+                        borderWidth: 2,
+                    }}>
+                    <Text style={{
+                        color: "#fff"
+                    }}>
+                        Cancelar</Text>
+                </TouchableOpacity>
+
             </View>
 
             <View style={{

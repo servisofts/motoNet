@@ -1,10 +1,10 @@
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet ,TouchableOpacity,Text} from 'react-native';
 import PopupViajesComponet from '../../Component/PopupViajesComponet';
-import { TouchableOpacity } from 'react-native-gesture-handler';
 import Svg from '../../Svg';
+import RutaViaje from './RutaViaje';
 
 var mapa;
 const ViajePage = (props) => {
@@ -30,7 +30,6 @@ const ViajePage = (props) => {
         latitude: props.state.ViajeReducer.data.destinos[0].latitude,
         longitude: props.state.ViajeReducer.data.destinos[0].longitude,
     });
-
 
     /*   if (!props.state.locationReducer.isOpen) {
           props.state.locationReducer.open();
@@ -72,6 +71,7 @@ const ViajePage = (props) => {
                             fill: "#fff"
                         }} />
                 </TouchableOpacity>
+              
             </Marker>
         )
     }
@@ -104,15 +104,46 @@ const ViajePage = (props) => {
     return (
         <View>
             <MapView
-                showsUserLocation = {true}
+                showsUserLocation={true}
                 style={styles.map}
                 initialRegion={region}
                 ref={map => { mapa = map }}
-            >                
-                {getMarkerSelect(regionDestino)}             
-                {getMarkerSelect(regionUbicacion)}             
+            >
+                {getMarkerSelect(regionDestino)}
+                {getMarkerSelect(regionUbicacion)}
+                <RutaViaje />
             </MapView>
             <PopupViajesComponet />
+              <TouchableOpacity
+                    onPress={() => {
+                        props.state.socketClienteReducer.sessiones["motonet"].send({
+                            component: "locationGoogle",
+                            type: "route",
+                            estado: "cargando",
+                            data: {
+                                inicio: {
+                                    ...props.state.backgroundLocationReducer.data,
+                                },
+                                fin: {
+                                    latitude: props.state.ViajeReducer.data.destinos[0].latitude,
+                                    longitude: props.state.ViajeReducer.data.destinos[0].longitude,
+                                }
+                            }
+                        }, true);
+                    }}
+                    style={{
+                        width: 100,
+                        height: 100,
+                        borderRadius: 100,
+                        backgroundColor: "#f00",
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        position:"absolute"
+                    }}>
+                    <Text style={{ color: "#fff", fontSize: 10, fontWeight: 'bold', }} >
+                        simulacion
+                </Text>
+                </TouchableOpacity>
         </View>
     )
 }

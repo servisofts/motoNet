@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform, Text } from 'react-native';
+import { Platform, Text, View } from 'react-native';
 
 import Volver, { ReactComponent as Volverw } from '../img/volver.svg';
 
@@ -15,6 +15,7 @@ import Arreglo, { ReactComponent as Arreglow } from '../img/arreglo.svg';
 import MotoNetBW, { ReactComponent as MotoNetBWw } from '../img/MotoNetBR.svg';
 import MotoNetBR, { ReactComponent as MotoNetBRw } from '../img/MotoNetBW.svg';
 import MarkerMoto, { ReactComponent as MarkerMotow } from '../img/MarkerMoto.svg';
+import Arriba from '../img/flecha-arriba.svg';
 
 const Svg = (props) => {
     const isWeb = Platform.OS === 'web';
@@ -76,6 +77,9 @@ const Svg = (props) => {
                 <Volverw style={props.style} />
                 :
                 <Volver style={props.style} />
+        case "Arriba":
+            return (
+                <Arriba style={props.style} />)
 
         default:
             return <Text>SVG</Text>

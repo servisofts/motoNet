@@ -24,10 +24,10 @@ const TerminarTurno = (props) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                <Text style={{ color: "#fff",fontSize: 10,fontWeight: 'bold', }} >
-                   Terminar Turno
+                <Text style={{ color: "#fff", fontSize: 10, fontWeight: 'bold', }} >
+                    Terminar Turno
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity>            
         </View>
     )
 }
