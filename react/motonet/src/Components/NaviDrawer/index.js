@@ -209,7 +209,8 @@ const NaviDrawer = (props) => {
                 </div>
                 <Divider />
                 <List>
-                    {getButtonNotifi({ name: "Notificaciones", path: "Notificaciones", icon: <NotificationsIcon /> })}
+                    {/*getButtonNotifi({ name: "Notificacion", path: "Notificacion", icon: <NotificationsIcon /> })*/}
+                    {getButton({ name: "Notificacion", path: "NotificacionPage", icon: <NotificationsIcon /> })}
                     {getButton({ name: "Inicio", path: "Inicio", icon: <Home /> })}
                     {getButton({ name: "Usuarios nuevos", path: "ListaUsuario", icon: <AccountBox /> })}
                     {getButton({ name: "Mapa", path: "MapaPage", icon: <RoomIcon /> })}
