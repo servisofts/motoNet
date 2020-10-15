@@ -6,6 +6,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import TableDetail from '../../Components/Table';
+import TipoTarifaViaje from '../../Components/TipoTarifaViaje'
+import * as  tipoTarifaViajeActions from '../../Actions/tipoTarifaViaje';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,7 +31,7 @@ const TipoViajePage = (props) => {
             console.log(obj);
             list.push({
                 key,
-                descripcion: {dato:obj.descripcion},
+                descripcion: { dato: obj.descripcion },
             })
         })
         return list;
@@ -56,13 +59,15 @@ const TipoViajePage = (props) => {
     console.log('props.state.tipoViajeReducer.estado')
     console.log(props.state.tipoViajeReducer.data)
 
+
+
     return (
         <NaviDrawer title={"Lista Tipos de Viajes"} history={props.history}
 
             page={() => {
                 return (
                     <Grid container direction="row">
-                        <Grid item xs={12}>
+                        <Grid item xs={8}>
                             <form className={classes.root} noValidate autoComplete="off">
                                 <TextField id="descripcionLabel" label="descripción" />
 
@@ -71,7 +76,7 @@ const TipoViajePage = (props) => {
                                     console.log(descr)
                                     var objSend = {
                                         component: "tipoViaje",
-                                        type: "registro",
+                                        type: "getAll",
                                         estado: "cargando",
                                         key_usuario: props.state.usuarioReducer.usuarioLog.key,
                                         data: {
@@ -90,14 +95,18 @@ const TipoViajePage = (props) => {
                                     { id: 'descripcion', label: 'Descripción' },
                                 ]}
                                 data={getLista()}
-                                onAdd={(evt) => {
-                                    props.history.push("/Usuario/Registro")
-                                }}
-
+                                handleClick={
+                                    (key) => {
+                                        props.TipoTarifa(key);
+                                        return;
+                                    }
+                                }
                             />
 
                         </Grid>
-
+                        <Grid item xs={4}>
+                            <TipoTarifaViaje />
+                        </Grid>
                     </Grid>
 
                 )
@@ -110,5 +119,7 @@ const initStates = (state) => {
     return { state }
 };
 
-
-export default connect(initStates)(TipoViajePage);
+const initActions = {
+    ...tipoTarifaViajeActions
+};
+export default connect(initStates, initActions)(TipoViajePage);
