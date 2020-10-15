@@ -33,7 +33,7 @@ const RutaViaje = (props) => {
             ruta.push(obj.inicio);
             //ruta.push(obj.fin);
         })
-        
+
         return ruta;
     }
     return (
