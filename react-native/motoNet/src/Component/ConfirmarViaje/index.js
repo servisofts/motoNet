@@ -6,13 +6,27 @@ import Svg from '../../Svg';
 const ConfirmarViaje = (props) => {
 
     const [obj, setObj] = React.useState(false);
+    const [precio, setPrecio] = React.useState()
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
+    var datos;
     if (!props.state.ViajeReducer.data) {
         return <Text>No existe</Text>
     } else {
-        var datos = props.state.ViajeReducer.data;
+        datos = props.state.ViajeReducer.data;
+        Object.keys(props.state.ViajeReducer.data.movimientos).map((key) => {
+            var objMovimiento = props.state.ViajeReducer.data.movimientos[key];
+            console.log(objMovimiento)
+            switch (objMovimiento.tipo) {
+                case "inicio_busqueda":
+                    if (!precio) {
+                        setPrecio(objMovimiento.costo.monto)
+                    }
+                    break;
+            }
+            return <View />
+        })
     }
 
     const yourFunction = async () => {
@@ -32,7 +46,6 @@ const ConfirmarViaje = (props) => {
     }
 
 
-    const [precio, setPrecio] = React.useState(10)
     // console.log(objeto)
     //var datos = JSON.parse(objeto.data);
     if (props.state.ViajeReducer.estado === "error") {
@@ -50,6 +63,18 @@ const ConfirmarViaje = (props) => {
         return <View />
     }
 
+    const Negociar = () => {
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "viaje",
+            type: "negociarViajeConductor",
+            estado: "cargando",
+            costo: precio,
+            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+            key_viaje: datos.key,
+        }, true);
+        setObj(true);
+        return <View />
+    }
 
     const AceptarViaje = () => {
         props.state.socketClienteReducer.sessiones["motonet"].send({
@@ -135,7 +160,7 @@ const ConfirmarViaje = (props) => {
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                    onPress={AceptarViaje}
+                    onPress={Negociar}
                     style={{
                         width: 150,
                         height: 150,
@@ -144,8 +169,12 @@ const ConfirmarViaje = (props) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}>
+
                     <Text>
                         {precio} bs.
+                    </Text>
+                    <Text>
+                        Negociar
                     </Text>
                 </TouchableOpacity>
 
@@ -168,6 +197,23 @@ const ConfirmarViaje = (props) => {
                                 { rotate: '180deg' }
                             ]
                         }} />
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                    onPress={AceptarViaje}
+                    style={{
+                        width: "20%",
+                        height: 30,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 20,
+                        borderColor: "#fff",
+                        borderWidth: 2,
+                    }}>
+                    <Text style={{
+                        color: "#fff"
+                    }}>
+                        Aceptar</Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
