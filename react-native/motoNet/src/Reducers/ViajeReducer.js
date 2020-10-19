@@ -18,6 +18,9 @@ export default (state, action) => {
             case "cancelarBusquedaConductor":
                 cancelarBusquedaConductor(state, action);
                 break;
+            case "negociarViajeConductor":
+                negociarViajeConductor(state, action);
+                break;
         }
         state.type = action.type;
         state = { ...state };
@@ -46,6 +49,17 @@ const confirmarBusqueda = (state, action) => {
 
 const cancelarBusquedaConductor = (state, action) => {
     state.estado = action.estado
+    if (state.estado === "exito") {
+        state.data = action.data
+    }
+    if (state.estado === "error") {
+        state.error = action.error
+    }
+}
+
+const negociarViajeConductor = (state, action) => {
+    state.estado = action.estado
+    console.log(action.estado)
     if (state.estado === "exito") {
         state.data = action.data
     }

@@ -1,19 +1,58 @@
-import React from 'react';
-import { View, TouchableOpacity, } from 'react-native';
+import React, { useEffect } from 'react';
+import { View, TouchableOpacity, Text, DatePickerIOS, } from 'react-native';
 import Svg from '../../../Svg';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
+import Geolocation from '@react-native-community/geolocation';
+
+var mapa;
 const Mapa = (props) => {
     const [data, setdata] = React.useState({
         region: {
-            latitude: -17.7799998333333332,
-            longitude: -63.180598333333336,
-            latitudeDelta: 0.07,
-            longitudeDelta: 0.07,
+            latitude: 0,
+            longitude: 0,
+            latitudeDelta: 0,
+            longitudeDelta: 0,
+            isRender: false,
         },
         origen: false,
         ubicacionActual: false
     })
+
+    const positionActual = () => {
+        Geolocation.getCurrentPosition(
+            (position) => {
+                if (!data.region) {
+                    return <View />
+                }
+                if (data.region.isRender) {
+                    return <View />
+                }
+                data.region = {
+                    longitude: position.coords.longitude,
+                    latitude: position.coords.latitude,
+                    longitudeDelta: 0.01,
+                    latitudeDelta: 0.01,
+                    isRender: true,
+                }
+                mapa.animateToRegion(data.region, 3000);
+            },
+            (error) => {
+                // See error code charts below.
+                console.log(error.code, error.message);
+                throw error;
+            },
+            {
+                showLocationDialog: true,
+                forceRequestLocation: true,
+                enableHighAccuracy: true,
+                timeout: 15000,
+                maximumAge: 10000
+            }
+        );
+        return <View />
+    }
+
     const getMarkerOrigen = () => {
         if (!props.state.locationGoogleMapReducer.markerUbicacion) {
             return <View />
@@ -34,6 +73,7 @@ const Mapa = (props) => {
             </Marker>
         )
     }
+
     const getMarkerFin = () => {
         if (!props.state.locationGoogleMapReducer.markerUbicacionFin) {
             return <View />
@@ -51,19 +91,30 @@ const Mapa = (props) => {
                         width: 25,
                         height: 25,
                     }} />
-
             </Marker>
         )
     }
+
+    useEffect(() => {
+        // Actualiza el título del documento usando la API del navegador
+        positionActual();
+    });
+
+
     return (
-        <MapView
+
+        < MapView
             style={{
                 flex: 1,
                 width: '100%',
                 height: "100%",
             }}
-
+            ref={map => { mapa = map }}
+            showsUserLocation={true}
             initialRegion={data.region}
+            showsUserLocation={true}
+            showsCompass={true}
+            followsUserLocation={true}
             onRegionChangeComplete={(region) => {
                 props.state.socketClienteReducer.sessiones["motonet"].send({
                     component: "locationGoogle",
@@ -74,11 +125,34 @@ const Mapa = (props) => {
                 return <View />
             }}
         >
-            {getMarkerOrigen()}
-            {getMarkerFin()}
-        </MapView>
+            {/* {getMarkerOrigen()}
+            {getMarkerFin()} */}
+
+            <TouchableOpacity
+                style={{
+                    backgroundColor: "#000",
+                    position: "absolute",
+                    bottom: 200,
+                    right: 10
+                }}
+                onPress={() => {
+                    data.region = { isReder: false };
+                    setdata({ ...data })
+                    return <View />
+                }}
+            >
+                <Svg name="eliminar"
+                    style={{
+                        width: 50,
+                        height: 50,
+                        fill: "#000000"
+                    }} />
+            </TouchableOpacity>
+
+        </MapView >
     )
 }
+
 
 const initStates = (state) => {
     return { state }

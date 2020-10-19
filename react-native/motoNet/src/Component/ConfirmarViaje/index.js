@@ -6,6 +6,7 @@ import Svg from '../../Svg';
 const ConfirmarViaje = (props) => {
 
     const [obj, setObj] = React.useState(false);
+    const [isRedirect, setRedirect] = React.useState(true);
     const [precio, setPrecio] = React.useState()
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -35,16 +36,18 @@ const ConfirmarViaje = (props) => {
         setObj(true);
         return <View />;
     };
-    yourFunction();
-
-
+    if (!obj) {
+        yourFunction();
+    }
     if (obj) {
+        if (!isRedirect) {
+            return <View />;
+        }
         props.dispatch({
             component: "viaje",
             type: "cancelarBusquedaConductor"
         });
     }
-
 
     // console.log(objeto)
     //var datos = JSON.parse(objeto.data);
@@ -63,6 +66,12 @@ const ConfirmarViaje = (props) => {
         return <View />
     }
 
+    if (props.state.ViajeReducer.estado === "exito" && props.state.ViajeReducer.type == "negociarViajeConductor") {
+        if (isRedirect) {
+            setRedirect(false);
+        }
+    }
+
     const Negociar = () => {
         props.state.socketClienteReducer.sessiones["motonet"].send({
             component: "viaje",
@@ -72,7 +81,7 @@ const ConfirmarViaje = (props) => {
             key_usuario: props.state.usuarioReducer.usuarioLog.key,
             key_viaje: datos.key,
         }, true);
-        setObj(true);
+        setRedirect(false);
         return <View />
     }
 

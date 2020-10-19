@@ -6,7 +6,7 @@ import Svg from '../../Svg';
 const ConfirmarViaje = (props) => {
 
     var detalleViaje;
-    if (props.state.ViajeReducer.data.movimiento) {
+    if (props.state.ViajeReducer.data.movimientos) {
         console.log(props.state.ViajeReducer.data.movimientos[0].tipo)
         //detalleViaje = props.state.ViajeReducer.data.movimiento[]
     }

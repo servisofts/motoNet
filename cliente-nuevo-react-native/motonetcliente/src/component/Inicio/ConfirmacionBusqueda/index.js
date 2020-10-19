@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 
 const ConfirmacionBusqueda = (props) => {
     if (props.state.viajesReducer.estado == "exito") {
-        props.state.viajesReducer.estado=""
+        props.state.viajesReducer.estado = ""
         props.navigation.navigate("ViajeEsperaPage")
     }
 
     return (
         <View style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
-
+            position: "absolute",
+            bottom: 10,
+            width: "100%",
+            alignItems: "center"
         }}>
             <TouchableOpacity
                 onPress={() => {
@@ -54,10 +54,8 @@ const ConfirmacionBusqueda = (props) => {
                 style={{
                     justifyContent: "center",
                     alignItems: 'center',
-                    position: "absolute",
-                    bottom: 10,
-                    width: 180,
                     height: 40,
+                    width: "50%",
                     borderRadius: 20,
                     backgroundColor: "red"
                 }}>
@@ -73,7 +71,47 @@ const ConfirmacionBusqueda = (props) => {
                         </Text>
                 {/*   )} */}
             </TouchableOpacity>
-           
+
+            <View style={{
+                marginTop: 10,
+                flexDirection: "row",
+                justifyContent: "space-evenly",
+                width: "100%",
+            }}>
+
+                <TouchableOpacity style={{
+                    height: 100,
+                    borderRadius: 20,
+                    width: 150,
+                    backgroundColor: "#fff",
+                    borderColor: "red",
+                    borderWidth: 1,
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
+                    <Text>
+                        MOTO
+                    </Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity style={{
+                    height: 100,
+                    borderRadius: 20,
+                    width: 150,
+                    backgroundColor: "#fff",
+                    borderColor: "red",
+                    borderWidth: 1,
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
+                    <Text>
+                        TORITO
+                    </Text>
+                </TouchableOpacity>
+
+            </View>
+
+
         </View>
     )
 }

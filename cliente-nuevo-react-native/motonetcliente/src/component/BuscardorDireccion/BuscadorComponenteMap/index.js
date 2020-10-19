@@ -1,17 +1,12 @@
 import React from 'react';
-import {
-    View,
-    StyleSheet,
-    TextInput,
-    TouchableOpacity,
-    Text
-} from 'react-native';
+import { View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../../Svg';
 import ListaBusqueda from '../ListaBusqueda';
 import * as locationActions from '../../../action/locationActions'
 import * as viajesActions from '../../../action/viajesActions'
 import Geolocation from '@react-native-community/geolocation';
+
 const BuscadorComponenteMap = (props) => {
     const [data, setData] = React.useState({
         dataUbicacion: false,
@@ -25,6 +20,7 @@ const BuscadorComponenteMap = (props) => {
         props.actualizarUbicacion(props.state.viajesReducer.ubicacion)
         return <View />
     }
+
     if (props.state.locationGoogleMapReducer.estado === "exito") {
         if (props.state.locationGoogleMapReducer.type === "autoComplete") {
             if (props.state.viajesReducer.ubicacion.inicio.estado) {
@@ -36,14 +32,13 @@ const BuscadorComponenteMap = (props) => {
                 props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
 
             }
-
         }
+
         if (props.state.locationGoogleMapReducer.type === "geocode") {
             if (props.state.viajesReducer.ubicacion.inicio.estado) {
                 props.state.viajesReducer.ubicacion.inicio.value = props.state.locationGoogleMapReducer.data.direccion
                 props.state.viajesReducer.ubicacion.inicio.data = props.state.locationGoogleMapReducer.data
                 // props.setMarkerOrigen(props.state.locationGoogleMapReducer.data)
-
             }
             if (props.state.viajesReducer.ubicacion.fin.estado) {
                 props.state.viajesReducer.ubicacion.fin.data = props.state.locationGoogleMapReducer.data
@@ -62,8 +57,9 @@ const BuscadorComponenteMap = (props) => {
         props.state.locationGoogleMapReducer.type = ""
         props.state.locationGoogleMapReducer.estado = ""
         actualizarUbicacion()
-       
     }
+
+
     const buscarInput = () => {
         return (
             <View style={{
@@ -72,11 +68,9 @@ const BuscadorComponenteMap = (props) => {
                 top: 0,
                 width: "100%",
                 alignItems: 'center',
-
             }}>
                 <View
                     style={styles.buscar}>
-
                     <View style={{
                         flex: 1,
                         height: "100%",
@@ -88,7 +82,6 @@ const BuscadorComponenteMap = (props) => {
                     }}>
                         <Text style={{ color: "#fff" }}>
                             Inicio
-
                         </Text>
                     </View>
                     <View style={{
@@ -96,17 +89,14 @@ const BuscadorComponenteMap = (props) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexDirection: 'row',
-
                     }}>
 
-                        <TextInput
-                            style={{
-                                flex: 0.9,
-                                width: "90%",
-                                fontSize: 10,
-                                alignItems: 'center',
-
-                            }}
+                        <TextInput style={{
+                            flex: 0.9,
+                            width: "90%",
+                            fontSize: 10,
+                            alignItems: 'center',
+                        }}
                             onFocus={() => {
                                 props.state.viajesReducer.ubicacion.fin.estado = false
                                 props.state.viajesReducer.ubicacion.inicio.estado = true
@@ -115,7 +105,6 @@ const BuscadorComponenteMap = (props) => {
                             placeholder={"Calle"}
                             value={props.state.viajesReducer.ubicacion.inicio.value}
                             onChangeText={(texto) => hanlechage(texto)}
-
                         />
                         <TouchableOpacity
                             onPress={() => {
@@ -124,24 +113,22 @@ const BuscadorComponenteMap = (props) => {
                                 props.state.viajesReducer.ubicacion.inicio.value = ""
                                 props.state.viajesReducer.ubicacion.inicio.data = false
                                 actualizarUbicacion()
-
                             }}
                         >
                             <Svg name="eliminar"
                                 style={{
-                                    width: 25,
-                                    height: 25,
+                                    width: 20,
+                                    height: 20,
                                     fill: "#000000"
-
                                 }} />
                         </TouchableOpacity>
                     </View>
-
-
                 </View>
+
+
+
                 <View
                     style={styles.buscar}>
-
                     <View style={{
                         flex: 1,
                         height: "100%",
@@ -153,7 +140,6 @@ const BuscadorComponenteMap = (props) => {
                     }}>
                         <Text style={{ color: "#fff" }}>
                             Fin
-
                         </Text>
                     </View>
                     <View style={{
@@ -162,14 +148,12 @@ const BuscadorComponenteMap = (props) => {
                         justifyContent: 'center',
                         flexDirection: 'row',
                     }}>
-
                         <TextInput
                             style={{
                                 flex: 0.9,
                                 width: "90%",
                                 fontSize: 10,
                                 alignItems: 'center',
-
                             }}
                             onFocus={() => {
                                 props.state.viajesReducer.ubicacion.fin.estado = true
@@ -192,25 +176,25 @@ const BuscadorComponenteMap = (props) => {
                         >
                             <Svg name="eliminar"
                                 style={{
-                                    width: 25,
-                                    height: 25,
+                                    width: 20,
+                                    height: 20,
                                     fill: "#000000"
-
                                 }} />
                         </TouchableOpacity>
                     </View>
-
-
                 </View>
                 <ListaBusqueda onchage={hanlechageLista} />
-
             </View>
         )
     }
+
+
     const hanlechageLista = (obj) => {
         peticion(obj.direccion)
         return <View />
     };
+
+
     const peticion = (text) => {
         Geolocation.getCurrentPosition((info) => {
             data.ubicacionActual = {
@@ -230,9 +214,10 @@ const BuscadorComponenteMap = (props) => {
             }, true);
         });
     }
+
+
     const hanlechage = (text) => {
         if (text.length > 5) {
-
             if (props.state.viajesReducer.ubicacion.inicio.estado) {
                 props.state.viajesReducer.ubicacion.inicio.value = text
             }
@@ -241,7 +226,6 @@ const BuscadorComponenteMap = (props) => {
             }
             actualizarUbicacion()
             peticion(text)
-
         }
         if (props.state.viajesReducer.ubicacion.inicio.estado) {
             props.state.viajesReducer.ubicacion.inicio.value = text
@@ -256,6 +240,7 @@ const BuscadorComponenteMap = (props) => {
     };
 
 
+
     return (
         <View style={{
             width: "100%",
@@ -268,8 +253,9 @@ const BuscadorComponenteMap = (props) => {
             {buscarInput()}
         </View>
     )
-
 }
+
+
 const styles = StyleSheet.create({
     buscar: {
         width: 300,

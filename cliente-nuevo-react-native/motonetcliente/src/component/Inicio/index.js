@@ -5,7 +5,9 @@ import { View } from 'react-native';
 import ComponenteInicio from './ComponenteInicio';
 import BuscadorComponenteMap from '../BuscardorDireccion/BuscadorComponenteMap';
 import MarkerMedio from '../BuscardorDireccion/MarkerMedio';
+import ButtonPosition from '../BuscardorDireccion/ButtonPosition';
 import ConfirmacionBusqueda from './ConfirmacionBusqueda';
+
 const Inicio = (props) => {
 
     return (
@@ -15,9 +17,9 @@ const Inicio = (props) => {
             alignItems: "center"
         }}>
             <Mapa />
-            <MarkerMedio  navigation={props.navigation}/>
+            <MarkerMedio navigation={props.navigation} />           
             <BuscadorComponenteMap navigation={props.navigation} />
-            <ConfirmacionBusqueda navigation={props.navigation}/>
+            <ConfirmacionBusqueda navigation={props.navigation} />                    
         </View>
     )
 }
