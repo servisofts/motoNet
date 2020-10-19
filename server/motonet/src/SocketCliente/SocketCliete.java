@@ -14,6 +14,7 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
 import component.ManejadorServicio;
+import util.console;
 import Config.Config;
 import Router.Router;
 import SSL.SSL;
@@ -31,20 +32,20 @@ public class SocketCliete extends Thread {
 
     public static void StartServicio(String nombre) {
         if (!servicios_habilitados.has(nombre)) {
-            System.out.println("No existe el servicio");
+            console.log(console.ANSI_RED,"No existe el servicio");
             return;
         }
 
         JSONObject servicio = servicios_habilitados.getJSONObject(nombre);
         if (!servicio.has("pem")) {
-            System.out.println("No existe el pem.");
+            console.log(console.ANSI_RED,"No existe el pem.");
             JSONObject objSend = new JSONObject();
             objSend.put("component", "servicio");
             objSend.put("type", "getPem");
             objSend.put("estado", "cargando");
             objSend.put("key_servicio", servicio.getString("key"));
             Clientes.get("servicio").send(objSend.toString());
-            System.out.println("Pidiendo SHA a servicios.");
+            console.log(console.ANSI_RED,"Pidiendo SHA a servicios.");
             // return;
         }
         JSONObject config = new JSONObject();
@@ -57,7 +58,7 @@ public class SocketCliete extends Thread {
     }
 
     public static void Start(JSONObject config) {
-        System.out.println("**Conectando con 'servisofts." + config.getJSONObject("cert").getString("OU")
+       console.log(console.ANSI_RED,"**Conectando con 'servisofts." + config.getJSONObject("cert").getString("OU")
                 + "' Direccion: " + config.getString("ip") + ":" + config.getInt("puerto") + " **");
 
         // CONFIGURAMNO EL CLIENTE SOCKET Y CORREMOS EL HILO
@@ -72,8 +73,8 @@ public class SocketCliete extends Thread {
 
         } catch (Exception e) {
             ConexinesFallidas.put(config.getJSONObject("cert").getString("OU"), config);
-            System.out.println(e.getMessage());
-            System.out.println(
+            console.log(console.ANSI_RED,e.getMessage());
+            console.log(console.ANSI_RED,
                     "Error al conectar con el servidor 'servisofts." + config.getJSONObject("cert").getString("OU")
                             + "' Direccion: " + config.getString("ip") + ":" + config.getInt("puerto") + " **");
         }
@@ -121,7 +122,8 @@ public class SocketCliete extends Thread {
         response = new PrintWriter(socket.getOutputStream(), true);
         request = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         this.config = config;
-        System.out.println("SocketCliete is Running...");
+        console.log(console.ANSI_RED,"** Connectando con el server " + config.getJSONObject("cert").getString("OU") + " **");
+        // System.out.println("SocketCliete is Running...");
         Clientes.put(config.getJSONObject("cert").getString("OU"), this);
         ConexinesFallidas.remove(config.getJSONObject("cert").getString("OU"));
         this.start();
@@ -139,12 +141,13 @@ public class SocketCliete extends Thread {
             }
         } catch (Exception ex) {
             onError(ex);
+            ConexinesFallidas.put(config.getJSONObject("cert").getString("OU"), config);
             this.Open = false;
         }
     }
 
     private void onError(Exception ex) {
-        System.out.println("Error:" + ex.getLocalizedMessage());
+        console.log(console.ANSI_RED,"Error:" + ex.getLocalizedMessage());
     }
 
     private void onMesagge(String msg, JSONObject config) {
@@ -160,11 +163,11 @@ public class SocketCliete extends Thread {
 
         } catch (Exception e) {
             if (e.getMessage() != null) {
-                System.out.println("ERROR: SocketCliente: OnMensaje: " + e.getMessage());
+                console.log(console.ANSI_RED,"ERROR: SocketCliente: OnMensaje: " + e.getMessage());
 
             } else {
                 this.Open = false;
-                System.out.println("Session cliente close");
+                console.log(console.ANSI_RED,"Session cliente close");
                 SocketCliete.ConexinesFallidas.put(config.getJSONObject("cert").getString("OU"), config);
             }
 
@@ -173,7 +176,8 @@ public class SocketCliete extends Thread {
 
     public void send(String data) {
         // SocketCliete.StartServicio("usuario");
-        System.out.println("ENVIANDO AL SERVER" + data.toString());
+
+        console.log(console.ANSI_RED,"----->Send -> "+config.getJSONObject("cert").getString("OU") +" ------------START-------------- \n"+ data.toString() +"\n-------------------------------------END------------");
         response.println(data);
         response.flush();
     }

@@ -16,7 +16,7 @@ export const initSocket = (store, myProps) => {
         cert = RNFS.readFIleSync(cert+"/service.pem");
       const client = TcpSocket.createConnection({
             port: 10001,
-            host: "192.168.1.103",
+            host: "192.168.0.110",
             tls: true,
             //   tlsCheckValidity: true, // Disable validity checking
             tlsCert:cert // Self-signed certificate

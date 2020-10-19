@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 
 import Prueba from '../../Component/Prueba';
-import TiempoReal from '../../Component/Prueba/TiempoReal';
+
 class PruebaPage extends Component {
     static navigationOptions = {
         headerShown: false,
@@ -22,9 +22,9 @@ class PruebaPage extends Component {
             <View style={{
                 flex: 1,
                 alignItems: 'center',
-                backgroundColor: "#00000055",
+                backgroundColor: "#000fff",
             }}>
-               <TiempoReal navigation={this.props.navigation}/>
+            
             </View>
 
 

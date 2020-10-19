@@ -1,0 +1,12 @@
+{
+    "socket":{
+        "url":"ws://192.168.0.3:20004/",
+        "key":"undefined"
+    },
+
+    
+    "images":{
+        "url":"https://pasanakubolivia.com/server/imagesController",
+        "urlImage":"https://pasanakubolivia.com/server/images/"
+    }
+}

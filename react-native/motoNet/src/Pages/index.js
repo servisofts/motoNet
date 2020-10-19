@@ -6,17 +6,26 @@ import CargaPage from './CargaPage';
 import InicioPage from './InicioPage';
 import PruebaPage from './PruebaPage';
 import SocketClientePage from './SocketClientePage';
-
+import PedirMotoPage from './PedirMotoPage';
+import UsuarioPerfilPage from './UsuarioPerfilPage';
+import ConfirmarPage from './ConfirmarPage';
+import PerfilPage from './PerfilPage';
+import ViajePage from './ViajePage';
 
 export const getPages = () => {
     return {
         CargaPage,
+        ListaPaginasPage,
+        UsuarioPerfilPage,
         ConsolaPage,
         LoginPage,
         RegistroUsuarioPage,
         InicioPage,
         PruebaPage,
-        SocketClientePage
-
+        SocketClientePage,
+        PedirMotoPage,
+        ConfirmarPage,
+        PerfilPage,
+        ViajePage,
     }
 }

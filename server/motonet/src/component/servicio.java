@@ -9,6 +9,7 @@ import Config.Config;
 import SSL.SSL;
 import SocketCliente.SocketCliete;
 import SocketServer.SocketServer;
+import SocketWeb.SocketWeb;
 import util.Regex;
 
 import org.bouncycastle.util.encoders.Base64;
@@ -59,6 +60,7 @@ public class servicio {
 
             // Config.setSocketCliente(obj);
              SocketServer.Start(obj.getJSONObject("data").getInt("puerto"));
+             SocketWeb.Start(obj.getJSONObject("data").getInt("puerto_ws"));
           //  GlupApplication.openSpring();
 
 

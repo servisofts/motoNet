@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.motonet">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.motonet">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
@@ -9,17 +10,19 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     
     <application
+        android:usesCleartextTraffic="true"
       android:name=".MainApplication"
       android:label="@string/app_name"
       android:icon="@mipmap/ic_launcher"
       android:roundIcon="@mipmap/ic_launcher_round"
       android:allowBackup="false"
-      android:theme="@style/AppTheme">
+      android:theme="@style/AppTheme"
+        tools:targetApi="m">
 
         <service
             android:name=".geolocation.ForegroundService"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
     <!-- face -->
     <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
       <meta-data
