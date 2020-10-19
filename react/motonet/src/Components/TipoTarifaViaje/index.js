@@ -44,9 +44,6 @@ const TipoTarifaViaje = (props) => {
                                 <li>
                                     Descripcion: {JSON.stringify(obj.descripcion)}
                                 </li>
-                                <li>
-                                    Fecha: {JSON.stringify(obj.fecha_on)}
-                                </li>
                                 <div>
                                     <TextField id="montoLabel" label="Monto" />
                                     <Button variant="contained" color="secondary" onClick={() => {
