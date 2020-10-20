@@ -2,7 +2,9 @@ import React from 'react';
 import { View } from 'react-native';
 import Svg from '../../../Svg';
 const MarkerMedio = (props) => {
-
+    if(props.ventanaSelect == "DetalleDeViaje"){
+        return <View/>
+    }
     return (
         <View
             style={{

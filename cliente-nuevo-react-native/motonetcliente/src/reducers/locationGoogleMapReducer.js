@@ -29,6 +29,9 @@ export default (state, action) => {
             case "markerFin":
                 markerFin(state, action);
                 break;
+            case "route":
+                route(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -40,6 +43,15 @@ const markerOrigen = (state, action) => {
 const markerFin = (state, action) => {
     state.markerFin = action.data
 }
+const route = (state, action) => {
+    state.type = action.type;
+    state.estado = action.estado;
+    if (action.estado === "exito") {
+        state.route = action.data
+
+    }
+}
+
 const geocode = (state, action) => {
     state.estado = action.estado;
     state.type = action.type;

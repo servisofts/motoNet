@@ -81,14 +81,11 @@ const ListaUsuarioPage = (props) => {
                                         handleClick={
                                              (key) => {
                                                   props.changeSelectDato(key);
-                                                  return; 
+                                                  return;
                                              } 
                                         }
                                    />
                               </Grid>
-
-                              
-
 
                          </Grid>
                     )

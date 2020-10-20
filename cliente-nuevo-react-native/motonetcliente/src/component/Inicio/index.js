@@ -5,8 +5,14 @@ import { View } from 'react-native';
 import ComponenteInicio from './ComponenteInicio';
 import BuscadorComponenteMap from '../BuscardorDireccion/BuscadorComponenteMap';
 import MarkerMedio from '../BuscardorDireccion/MarkerMedio';
-import ConfirmacionBusqueda from './ConfirmacionBusqueda';
+import ButtonPosition from '../BuscardorDireccion/ButtonPosition';
+import TiposDeViajes from './TiposDeViajes';
+import DetalleDeViajes from './DetalleDeViajes';
+
+
 const Inicio = (props) => {
+
+    const [ventanaSelect, setVentanaSelect] = React.useState("tipoDeViaje");
 
     return (
         <View style={{
@@ -14,14 +20,17 @@ const Inicio = (props) => {
             justifyContent: "center",
             alignItems: "center"
         }}>
-            <Mapa />
-            <MarkerMedio  navigation={props.navigation}/>
+            <Mapa  ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect}/>
+            <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect}/>
             <BuscadorComponenteMap navigation={props.navigation} />
-            <ConfirmacionBusqueda navigation={props.navigation}/>
+            <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+            <DetalleDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
         </View>
     )
 }
+
 const initStates = (state) => {
     return { state }
 };
+
 export default connect(initStates)(Inicio);

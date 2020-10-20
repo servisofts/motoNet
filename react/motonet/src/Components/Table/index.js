@@ -221,7 +221,6 @@ export default function TableDetail(props) {
             props.handleClick(name);
             if (isret) {
                 return;
-
             }
         }
         let newSelected = [];

@@ -15,6 +15,9 @@ export default (state, action) => {
             case "autoComplete":
                 autoComplete(state, action);
                 break;
+            case "route":
+                route(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -24,6 +27,14 @@ const geocode = (state, action) => {
     state.estado = action.estado;
     if (action.estado === "exito") {
         state.data = action.data
+
+    }
+
+}
+const route = (state, action) => {
+    state.estado = action.estado;
+    if (action.estado === "exito") {
+        state.route = action.data
 
     }
 

@@ -16,7 +16,6 @@ export default (state, action) => {
             case "loginFacebook":
                 loginFacebook(state, action);
                 break;
-
             case "registro":
                 registro(state, action);
                 break;

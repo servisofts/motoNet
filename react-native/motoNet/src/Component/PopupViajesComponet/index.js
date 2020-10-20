@@ -5,6 +5,12 @@ import Svg from '../../Svg';
 
 const ConfirmarViaje = (props) => {
 
+    var detalleViaje;
+    if (props.state.ViajeReducer.data.movimientos) {
+        console.log(props.state.ViajeReducer.data.movimientos[0].tipo)
+        //detalleViaje = props.state.ViajeReducer.data.movimiento[]
+    }
+
     return (
         <View style={{
             position: "absolute",
@@ -34,7 +40,7 @@ const ConfirmarViaje = (props) => {
                     fontSize: 20,
                     fontWeight: "bold"
                 }}>
-                    En camino...
+                   {props.state.ViajeReducer.data.movimientos[0].tipo}
                     </Text>
             </View>
 
@@ -81,7 +87,7 @@ const ConfirmarViaje = (props) => {
 
                 <View style={{
                     flex: 1,
-                    alignItems:"center"
+                    alignItems: "center"
                 }}>
                     <Text style={{
                         color: "#fff",
@@ -95,7 +101,7 @@ const ConfirmarViaje = (props) => {
                         fontWeight: "bold",
                         fontSize: 15
                     }}>
-                       11:00
+                        11:00
                         </Text>
                 </View>
             </View>

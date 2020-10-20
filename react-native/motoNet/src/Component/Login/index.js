@@ -1,14 +1,6 @@
 import React from 'react';
-
 import { connect } from 'react-redux';
-import {
-    View, TouchableOpacity,
-    Text,
-    TextInput,
-    ScrollView,
-    StyleSheet,
-    NativeModules
-} from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, NativeModules } from 'react-native';
 import Svg from '../../Svg';
 import base64 from 'react-native-base64'
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from "react-native-fbsdk";

@@ -254,7 +254,6 @@ const RegistroUsuario = (props) => {
                             width: 100,
                             height: 100,
                             fill: "#fff"
-
                         }} />
                     {registriIcono()}
                 </View>

@@ -20,9 +20,12 @@ export default (state, action) => {
         state = { ...state };
     }
 
-    if (action.component == "viaje") {
+    if (action.component == "viaje") {        
         if (action.type == "viajeEntrante") {
-            state.seleccionado = "ConfirmarViaje";
+            state.seleccionado = "ConfirmarViaje";  
+        }
+        if (action.type == "cancelarBusquedaConductor") {            
+            state.seleccionado = "IniciarTurno";            
         }
         state = { ...state };
     }
