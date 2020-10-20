@@ -7,6 +7,7 @@ import * as locationActions from '../../../action/locationActions'
 import * as viajesActions from '../../../action/viajesActions'
 import Geolocation from '@react-native-community/geolocation';
 
+var secondTextInput;
 const BuscadorComponenteMap = (props) => {
     const [data, setData] = React.useState({
         dataUbicacion: false,
@@ -30,7 +31,6 @@ const BuscadorComponenteMap = (props) => {
             if (props.state.viajesReducer.ubicacion.fin.estado) {
                 props.state.viajesReducer.ubicacion.fin.data = props.state.locationGoogleMapReducer.data
                 props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
-
             }
         }
 
@@ -97,14 +97,18 @@ const BuscadorComponenteMap = (props) => {
                             fontSize: 10,
                             alignItems: 'center',
                         }}
+
                             onFocus={() => {
                                 props.state.viajesReducer.ubicacion.fin.estado = false
                                 props.state.viajesReducer.ubicacion.inicio.estado = true
                                 actualizarUbicacion()
                             }}
+                            onSubmitEditing={() => { secondTextInput.focus(); }}
+
                             placeholder={"Calle"}
                             value={props.state.viajesReducer.ubicacion.inicio.value}
                             onChangeText={(texto) => hanlechage(texto)}
+
                         />
                         <TouchableOpacity
                             onPress={() => {
@@ -124,7 +128,6 @@ const BuscadorComponenteMap = (props) => {
                         </TouchableOpacity>
                     </View>
                 </View>
-
 
 
                 <View
@@ -160,6 +163,7 @@ const BuscadorComponenteMap = (props) => {
                                 props.state.viajesReducer.ubicacion.inicio.estado = false
                                 actualizarUbicacion()
                             }}
+                            ref={(input) => { secondTextInput = input; }}
                             placeholder={"Calle"}
                             value={props.state.viajesReducer.ubicacion.fin.value}
                             onChangeText={(texto) => hanlechage(texto)}
@@ -188,12 +192,10 @@ const BuscadorComponenteMap = (props) => {
         )
     }
 
-
     const hanlechageLista = (obj) => {
         peticion(obj.direccion)
         return <View />
     };
-
 
     const peticion = (text) => {
         Geolocation.getCurrentPosition((info) => {
@@ -239,8 +241,6 @@ const BuscadorComponenteMap = (props) => {
         return <View />
     };
 
-
-
     return (
         <View style={{
             width: "100%",
@@ -254,7 +254,6 @@ const BuscadorComponenteMap = (props) => {
         </View>
     )
 }
-
 
 const styles = StyleSheet.create({
     buscar: {

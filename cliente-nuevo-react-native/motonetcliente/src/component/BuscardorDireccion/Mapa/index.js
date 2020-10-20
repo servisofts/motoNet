@@ -4,6 +4,7 @@ import Svg from '../../../Svg';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import Geolocation from '@react-native-community/geolocation';
+import RutaViaje from './RutaViaje';
 
 var mapa;
 const Mapa = (props) => {
@@ -100,9 +101,7 @@ const Mapa = (props) => {
         positionActual();
     });
 
-
     return (
-
         < MapView
             style={{
                 flex: 1,
@@ -116,6 +115,18 @@ const Mapa = (props) => {
             showsCompass={true}
             followsUserLocation={true}
             onRegionChangeComplete={(region) => {
+                if(props.ventanaSelect == "DetalleDeViaje"){
+                    return <View/>
+                }
+                if(props.state.locationGoogleMapReducer.data){
+                    var objTenp = props.state.locationGoogleMapReducer.data.latitude;
+                    if(region.latitude == objTenp.latitude 
+                    && region.longitude == objTenp.longitude ){
+                        return <View/>
+                    }
+                }
+                console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTPO SAFKJSAIFJASFJOASJFOASJFOASJFAS")
+              
                 props.state.socketClienteReducer.sessiones["motonet"].send({
                     component: "locationGoogle",
                     type: "geocode",
@@ -123,10 +134,11 @@ const Mapa = (props) => {
                     estado: "cargando"
                 }, true);
                 return <View />
-            }}
-        >
+            }}>
             {/* {getMarkerOrigen()}
             {getMarkerFin()} */}
+            
+            <RutaViaje />
 
             <TouchableOpacity
                 style={{
@@ -148,13 +160,12 @@ const Mapa = (props) => {
                         fill: "#000000"
                     }} />
             </TouchableOpacity>
-
         </MapView >
     )
 }
 
-
 const initStates = (state) => {
     return { state }
 };
+
 export default connect(initStates)(Mapa);
