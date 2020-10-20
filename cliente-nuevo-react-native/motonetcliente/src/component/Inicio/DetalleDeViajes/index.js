@@ -1,13 +1,28 @@
-import React from 'react';
-import { ActivityIndicator, AsyncStorage, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { useRef }  from 'react';
+import { ActivityIndicator, AsyncStorage, ScrollView, Text, TouchableOpacity, View, Animated} from 'react-native';
 import { connect } from 'react-redux';
 
 const DetalleDeViajes = (props) => {
+    
+    const fadeAnim = useRef(new Animated.Value(-100)).current;
+    const fadeIn = () => {
+        Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 500
+        }).start();
+    };
+
+    const fadeOut = () => {
+        Animated.timing(fadeAnim, {
+            toValue: -100,
+            duration: 1000
+        }).start();
+    };
 
     if (props.ventanaSelect != "DetalleDeViaje") {
         return <View />
     }
-
+ 
     if (props.state.locationGoogleMapReducer.estado == "cargando") {
         return <View />
     }
@@ -74,9 +89,9 @@ const DetalleDeViajes = (props) => {
     }
 
     return (
-        <View style={{
+        <Animated.View style={{
             position: "absolute",
-            bottom: 0,
+            bottom: fadeAnim,
             width: "100%",
         }}>
             <View style={{
@@ -144,7 +159,7 @@ const DetalleDeViajes = (props) => {
                     volver
                 </Text>
             </TouchableOpacity>
-        </View>
+        </Animated.View>
     )
 }
 const initStates = (state) => {
