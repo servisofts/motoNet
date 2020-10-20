@@ -17,7 +17,28 @@ import {
     GraphRequest,
     GraphRequestManager
 } from "react-native-fbsdk";
+import { GoogleSignin,statusCodes } from '@react-native-community/google-signin';
 
+GoogleSignin.configure();
+
+const signIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+     // this.setState({ userInfo });
+     console.log(userInfo);
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (e.g. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  };
 const Login = (props) => {
 
     const [obj, setObj] = React.useState({
@@ -74,9 +95,8 @@ const Login = (props) => {
 
     };
     const Correo = () => {
-        var b64 = base64.encode('Some string to encode to base64');
-/*         b64 = base64.decode('3weqweqwddsadasdasdasdasdwqe');
- */        alert(b64)
+        
+
         return <View />
 
     };
@@ -275,7 +295,7 @@ const Login = (props) => {
 
 
                         <TouchableOpacity
-                            onPress={Correo}
+                            onPress={signIn}
                             style={styles.google}>
                             <Svg name="google"
                                 style={{

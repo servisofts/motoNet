@@ -37,8 +37,14 @@ public class Viaje {
             case "cancelarBusqueda":
                 cancelarBusqueda(data, router);
                 break;
+            case "cancelarBusquedaConductor":
+                cancelarBusquedaConductor(data, router);
+                break;
             case "confirmarBusqueda":
                 confirmarBusqueda(data, router);
+                break;
+            case "negociarViajeConductor":
+                negociarViajeConductor(data, router);
                 break;
         }
     }
@@ -83,8 +89,10 @@ public class Viaje {
                 latlng_viaje.put("estado", 1);
                 Conexion.insertArray("latlng_viaje", new JSONArray().put(latlng_viaje));
             }
+            /// CALCULO E INSERTO EL PRECIO AL MOVIMIENTO INICIO BUSQUEDA
             JSONObject viajeMovimiento = nuevoMovimientoViaje(objViaje.getString("key"), Viaje.TIPO_INICIO_BUSQUEDA,
                     objViaje.getString("key_usuario"));
+            nuevoCostoMovimiento(viajeMovimiento.getString("key"), 10);
             JSONObject vieajeFormateado = getViajeAndDestinos(objViaje.getString("key"));
             ViajeHilo.buscar(vieajeFormateado);
             obj.put("data", vieajeFormateado);
@@ -93,6 +101,7 @@ public class Viaje {
             e.printStackTrace();
         }
     }
+    
 
     public void confirmarBusqueda(JSONObject obj, Router router) {
         try {
@@ -106,10 +115,10 @@ public class Viaje {
                 obj.put("estado", "error");
                 return;
             }
-            if (viaje.getString("key_conductor").length() >0) {
-                    obj.put("error", "viaje_confirmado");
-                    obj.put("estado", "error");
-                    return;
+            if (viaje.getString("key_conductor").length() > 0) {
+                obj.put("error", "viaje_confirmado");
+                obj.put("estado", "error");
+                return;
             }
             Conexion.ejecutarUpdate(
                     "UPDATE viaje SET key_conductor = '" + key_usuario + "' WHERE key = '" + key_viaje + "'");
@@ -118,6 +127,44 @@ public class Viaje {
             JSONObject objSend = new JSONObject();
             objSend.put("component", "viaje");
             objSend.put("type", "confirmarBusqueda");
+            objSend.put("data", viaje);
+            objSend.put("estado", "exito");
+            SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+            obj.put("data", viaje);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
+        }
+
+    }
+
+    public void negociarViajeConductor(JSONObject obj, Router router) {
+        try {
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+            double precio = obj.getDouble("costo");
+            JSONObject viaje = getViajeAndDestinos(key_viaje);
+
+            if (viaje.getInt("estado") == 0) {
+                obj.put("error", "viaje_cancelado");
+                obj.put("estado", "error");
+                return;
+            }
+            if (viaje.getString("key_conductor").length() > 0) {
+                obj.put("error", "viaje_confirmado");
+                obj.put("estado", "error");
+                return;
+            }
+            // Conexion.ejecutarUpdate(
+            // "UPDATE viaje SET key_conductor = '" + key_usuario + "' WHERE key = '" +
+            // key_viaje + "'");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_NEGOCIACION_CONDUCTOR, key_usuario);
+            nuevoCostoMovimiento(viajeMovimiento.getString("key"), precio);
+
+            viaje = getViajeAndDestinos(key_viaje);
+            JSONObject objSend = new JSONObject();
+            objSend.put("component", "viaje");
+            objSend.put("type", "negociarViajeConductor");
             objSend.put("data", viaje);
             objSend.put("estado", "exito");
             SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
@@ -145,50 +192,42 @@ public class Viaje {
 
     }
 
+    public void cancelarBusquedaConductor(JSONObject obj, Router router) {
+        try {
+
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_BUSQUEDA_CONDUCTOR,
+                    key_usuario);
+
+            // Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" +
+            // key_viaje + "'");
+
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            obj.put("estado", "error");
+
+        }
+
+    }
+
     public JSONObject getViajeAndDestinos(String key) throws SQLException {
 
-        String consulta = "";
-        consulta += "SELECT\n";
-        consulta += "to_json(rsfinal.*) as json\n";
-        consulta += "FROM (\n";
-        consulta += "    SELECT\n";
-        consulta += "        viaje.*,\n";
-        consulta += "        json_agg(to_json(latlng.*)) AS destinos,\n";
-        consulta += "(SELECT\n";
-        consulta += "        array_to_json(array_agg(viaje_movimiento.*))\n";
-        consulta += "    FROM\n";
-        consulta += "        viaje_movimiento\n";
-        consulta += "    WHERE\n";
-        consulta += "        viaje_movimiento.key_viaje = viaje.key ) AS movimientos\n";
-        consulta += "    FROM\n";
-        consulta += "        viaje,\n";
-        consulta += "        (\n";
-        consulta += "            SELECT\n";
-        consulta += "                latlng.*,\n";
-        consulta += "                latlng_viaje.index,\n";
-        consulta += "                latlng_viaje.key_viaje\n";
-        consulta += "            FROM\n";
-        consulta += "                latlng_viaje,\n";
-        consulta += "                latlng\n";
-        consulta += "            WHERE\n";
-        consulta += "                latlng_viaje.key_latlng = latlng.key\n";
-        consulta += "            ORDER BY\n";
-        consulta += "                (latlng_viaje.index) ASC) latlng\n";
-        consulta += "        WHERE\n";
-        consulta += "            viaje.key = '" + key + "'\n";
-        consulta += "            AND latlng.key_viaje = viaje.key\n";
-        consulta += "        GROUP BY\n";
-        consulta += "            viaje.key) rsfinal";
-        return Conexion.ejecutarConsultaObject(consulta);
+        String consulta = "select get_viaje_formateado('" + key + "') as json";
+        return Conexion.ejecutarFuncionObject(consulta);
     }
 
     public static final String TIPO_INICIO_BUSQUEDA = "inicio_busqueda";
     public static final String TIPO_CANCELO_BUSQUEDA = "cancelo_busqueda";
+    public static final String TIPO_CANCELO_BUSQUEDA_CONDUCTOR = "cancelo_busqueda_conductor";
     public static final String TIPO_NOTIFICO_CONDUCTOR = "notifico_conductor";
+    public static final String TIPO_NEGOCIACION_CONDUCTOR = "negociacion_conductor";
     public static final String TIPO_ACEPTO_CONDUCTOR = "acepto_conductor";
     public static final String TIPO_INICIO_VIAJE = "inicio_viaje";
 
-    public JSONObject nuevoMovimientoViaje(String key_viaje, String tipo, String key_referencia) throws SQLException {
+    public static JSONObject nuevoMovimientoViaje(String key_viaje, String tipo, String key_referencia)
+            throws SQLException {
         JSONObject viaje_movimiento = new JSONObject();
         viaje_movimiento.put("key", UUID.randomUUID().toString());
         viaje_movimiento.put("key_viaje", key_viaje);
@@ -197,6 +236,19 @@ public class Viaje {
         viaje_movimiento.put("fecha_on", "now()");
         viaje_movimiento.put("estado", 1);
         Conexion.insertArray("viaje_movimiento", new JSONArray().put(viaje_movimiento));
+
+        return viaje_movimiento;
+
+    }
+
+    public static JSONObject nuevoCostoMovimiento(String key_viaje_movimiento, double monto) throws SQLException {
+        JSONObject viaje_movimiento = new JSONObject();
+        viaje_movimiento.put("key", UUID.randomUUID().toString());
+        viaje_movimiento.put("key_viaje_movimiento", key_viaje_movimiento);
+        viaje_movimiento.put("monto", monto);
+        viaje_movimiento.put("fecha_on", "now()");
+        viaje_movimiento.put("estado", 1);
+        Conexion.insertArray("costo_viaje", new JSONArray().put(viaje_movimiento));
         return viaje_movimiento;
 
     }

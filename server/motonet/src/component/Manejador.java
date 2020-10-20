@@ -39,6 +39,18 @@ public class Manejador {
                     new TipoViaje(data, router);
                     break;
                 }
+                case "tipoTarifa": {
+                    new TipoTarifa(data, router);
+                    break;
+                }
+                case "parametrosViaje": {
+                    new ParametrosViaje(data, router);
+                    break;
+                }
+                case "seguimientoConductor": {
+                    new SeguimientoConductor(data, router);
+                    break;
+                }
                 default:
                     break;
             }

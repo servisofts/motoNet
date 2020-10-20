@@ -17,7 +17,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class TipoViaje {
+public class TipoTarifa {
 
     // DATA TABLE = usuario
 
@@ -29,7 +29,7 @@ public class TipoViaje {
     // correo CV
     // estado INT
 
-    public TipoViaje(JSONObject data, Router router) {
+    public TipoTarifa(JSONObject data, Router router) {
         switch (data.getString("type")) {
             case "getAll":
                 getAll(data, router);
@@ -43,7 +43,8 @@ public class TipoViaje {
     public void getAll(JSONObject obj, Router router) {
         try {
             String consulta = "";
-            consulta += "select get_all_tipo_viaje() as json";
+            consulta += "select array_to_json(array_agg(tipo_tarifa.*)) as json \n";
+            consulta += "from tipo_tarifa";
             JSONArray tiposViajes = Conexion.ejecutarConsultaArray(consulta);
             obj.put("data", tiposViajes);
             obj.put("estado", "exito");
@@ -62,7 +63,7 @@ public class TipoViaje {
             tipo_viaje.put("descripcion", data.getString("descripcion"));
             tipo_viaje.put("fecha_on", "now()");
             tipo_viaje.put("estado", 1);
-            Conexion.insertArray("tipo_viaje", new JSONArray().put(tipo_viaje));
+            Conexion.insertArray("tipo_tarifa", new JSONArray().put(tipo_viaje));
             obj.put("data", tipo_viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {
@@ -70,6 +71,7 @@ public class TipoViaje {
             e.printStackTrace();
             obj.put("estado", "error");
         }
+       
 
     }
 

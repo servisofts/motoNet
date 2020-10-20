@@ -173,6 +173,18 @@ public class Conexion {
         ps.close();
         return obj;
     }
+    public static JSONObject ejecutarFuncionObject(String consulta) throws SQLException {
+        PreparedStatement ps = getConexion().prepareStatement(consulta);
+        ResultSet rs = ps.executeQuery();
+        JSONObject obj = new JSONObject();
+        if (rs.next()) {
+            obj = rs.getString("json") != null ? new JSONObject(rs.getString("json")) : new JSONObject();
+        }
+        rs.close();
+        ps.close();
+        return obj;
+    }
+
 
     public static boolean save_backup() {
         boolean hecho = false;

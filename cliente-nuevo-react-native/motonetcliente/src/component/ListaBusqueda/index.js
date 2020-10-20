@@ -67,7 +67,7 @@ const ListaBusqueda = (props) => {
     const repuestaText = () => {
         if (mostrar.estado) {
             return mostrar.textOcultar
-        }
+        }__con
         return mostrar.textMostrar
     }
     return (
