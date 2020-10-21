@@ -215,7 +215,7 @@ const NaviDrawer = (props) => {
                     {getButton({ name: "Inicio", path: "Inicio", icon: <Home /> })}
                     {getButton({ name: "Usuarios nuevos", path: "ListaUsuario", icon: <AccountBox /> })}
                     {getButton({ name: "Mapa", path: "MapaPage", icon: <RoomIcon /> })}
-                    {getButton({ name: "AsociacionMotos", path: "AsociacionesMotoPage", icon: <MotorcycleIcon /> })}
+                    {getButton({ name: "ListaAsociacion", path: "ListaAsociacionMotoPage", icon: <MotorcycleIcon /> })}
                     {getButton({ name: "TipoViaje", path: "TipoViajePage", icon: <MergeTypeIcon /> })}
                     {getButton({ name: "Parametros", path: "ParametrosPage", icon: <StreetviewIcon /> })}
                     

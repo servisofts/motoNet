@@ -15,6 +15,9 @@ export default (state, action) => {
             case "seleccionarTipoViaje":
                 seleccionarTipoViaje(state, action);
                 break;
+            case "editarMontoTipoViaje":
+                editarMontoTipoViaje(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -34,13 +37,11 @@ const getAll = (state, action) => {
 }
 
 const seleccionarTipoViaje = (state, action) => {
-    state.estado = action.estado;
-    if (action.estado === "exito") {
-        if (!state.data) {
-            state.data = {}
-        }
-        action.data.map((obj, key) => {
-            state.data[obj.key] = obj;
-        });
-    }
+    state.key_tarifa = action.key_tarifa
+}
+
+
+const editarMontoTipoViaje = (state, action) => {
+    state.estado = action.estado
+    
 }
