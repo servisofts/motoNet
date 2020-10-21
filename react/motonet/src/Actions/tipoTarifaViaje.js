@@ -5,8 +5,7 @@ export const TipoTarifa = (data) => async (dispatch) => {
         {
             component:"tipoTarifa", //componet nombre tiene que ser igual al reducer
             type:"seleccionarTipoViaje",
-            estado:"cargando",
-            dataEnviada:data
+            key_tarifa:data
         }
     )
 }
