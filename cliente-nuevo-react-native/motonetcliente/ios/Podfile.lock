@@ -5,7 +5,6 @@ PODS:
   - DoubleConversion (1.1.6)
   - FBLazyVector (0.63.2)
   - FBReactNativeSpec (0.63.2):
-    - Folly (= 2020.01.13.00)
     - RCTRequired (= 0.63.2)
     - RCTTypeSafety (= 0.63.2)
     - React-Core (= 0.63.2)
