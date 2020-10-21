@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, TextInput, TouchableOpacity, Text } from 'react-native';
+import React, { useRef } from 'react';
+import { View, StyleSheet, TextInput, TouchableOpacity, Text, Animated } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../../Svg';
 import ListaBusqueda from '../ListaBusqueda';
@@ -8,7 +8,10 @@ import * as viajesActions from '../../../action/viajesActions'
 import Geolocation from '@react-native-community/geolocation';
 
 var secondTextInput;
+const valor_menor = -120;
+
 const BuscadorComponenteMap = (props) => {
+
     const [data, setData] = React.useState({
         dataUbicacion: false,
         mostrarTexto: false,
@@ -17,12 +20,57 @@ const BuscadorComponenteMap = (props) => {
         focusInput: false,
         ubicacion: props.state.viajesReducer.ubicacion
     })
+
+    const [isVisible, setIsVisible] = React.useState(false);
+    const fadeAnim = useRef(new Animated.Value(valor_menor)).current;
+
+    const fadeIn = () => {
+        Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 500
+        }).start();
+    };
+
+    const fadeOut = () => {
+        Animated.timing(fadeAnim, {
+            toValue: valor_menor,
+            duration: 500,
+        }).start(() => {
+            if (fadeAnim._value < valor_menor + 100) {
+                if (isVisible) {
+                    setIsVisible(false);
+                }
+            }
+        });
+    };
+
+    if (props.ventanaSelect != "tipoDeViaje") {
+        if (isVisible == true) {
+            fadeOut();
+        }
+    } else {
+        if (!isVisible) {
+            fadeIn();
+            setIsVisible(true)
+        }
+    }
+    if (!isVisible) {
+        return <View />
+    }
+
+
     const actualizarUbicacion = () => {
-        props.actualizarUbicacion(props.state.viajesReducer.ubicacion)
+        props.dispatch({
+            component: "viaje",
+            type: "actualizarUbicacion",
+            data: props.state.viajesReducer.ubicacion,
+            estado: "exito"
+        })
         return <View />
     }
 
     if (props.state.locationGoogleMapReducer.estado === "exito") {
+        props.state.locationGoogleMapReducer.estado = ""
         if (props.state.locationGoogleMapReducer.type === "autoComplete") {
             if (props.state.viajesReducer.ubicacion.inicio.estado) {
                 props.state.viajesReducer.ubicacion.inicio.value = props.state.locationGoogleMapReducer.data.direccion
@@ -32,6 +80,7 @@ const BuscadorComponenteMap = (props) => {
                 props.state.viajesReducer.ubicacion.fin.data = props.state.locationGoogleMapReducer.data
                 props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
             }
+            actualizarUbicacion()
         }
 
         if (props.state.locationGoogleMapReducer.type === "geocode") {
@@ -45,40 +94,36 @@ const BuscadorComponenteMap = (props) => {
                 props.state.viajesReducer.ubicacion.fin.value = props.state.locationGoogleMapReducer.data.direccion
                 props.state.locationGoogleMapReducer.markerUbicacionFin = props.state.locationGoogleMapReducer.data
                 // props.setMarkerFin(props.state.locationGoogleMapReducer.data)
-
             }
+            actualizarUbicacion()
         }
-        if (props.state.locationGoogleMapReducer.type === "actualizar") {
-            props.state.locationGoogleMapReducer.estado = ""
-            props.navigation.goBack();
-            setData({ ...data })
-            return <View />
-        }
-        props.state.locationGoogleMapReducer.type = ""
-        props.state.locationGoogleMapReducer.estado = ""
-        actualizarUbicacion()
     }
 
-
-    const buscarInput = () => {
+    const buscarInputNuevo = () => {
         return (
             <View style={{
                 flexDirection: 'column',
-                position: "absolute",
-                top: 0,
                 width: "100%",
                 alignItems: 'center',
             }}>
-                <View
-                    style={styles.buscar}>
+                <View style={{
+                    backgroundColor: "#fff",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    width: "80%",
+                    borderRadius: 20,
+                    height: 40,
+                    marginBottom: 10
+                }}>
                     <View style={{
                         flex: 1,
-                        height: "100%",
                         justifyContent: 'center',
                         alignItems: 'center',
                         backgroundColor: "#f00",
                         borderTopLeftRadius: 20,
                         borderBottomLeftRadius: 20,
+                        height: "100%"
                     }}>
                         <Text style={{ color: "#fff" }}>
                             Inicio
@@ -89,28 +134,29 @@ const BuscadorComponenteMap = (props) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexDirection: 'row',
+                        height: "100%",
                     }}>
-
                         <TextInput style={{
-                            flex: 0.9,
-                            width: "90%",
+                            flex: 1,
                             fontSize: 10,
                             alignItems: 'center',
+                            height: "100%",
+                            paddingLeft: 10
                         }}
-
                             onFocus={() => {
                                 props.state.viajesReducer.ubicacion.fin.estado = false
                                 props.state.viajesReducer.ubicacion.inicio.estado = true
                                 actualizarUbicacion()
                             }}
-                            onSubmitEditing={() => { secondTextInput.focus(); }}
-
                             placeholder={"Calle"}
                             value={props.state.viajesReducer.ubicacion.inicio.value}
                             onChangeText={(texto) => hanlechage(texto)}
-
                         />
-                        <TouchableOpacity
+
+                        <TouchableOpacity style={{
+                            marginEnd: 10,
+                            marginStart: 10,
+                        }}
                             onPress={() => {
                                 props.state.viajesReducer.ubicacion.fin.estado = false
                                 props.state.viajesReducer.ubicacion.inicio.estado = true
@@ -129,6 +175,156 @@ const BuscadorComponenteMap = (props) => {
                     </View>
                 </View>
 
+
+                <View style={{
+                    backgroundColor: "#fff",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    width: "80%",
+                    borderRadius: 20,
+                    height: 40,
+                }}>
+                    <View style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: "#f00",
+                        borderTopLeftRadius: 20,
+                        borderBottomLeftRadius: 20,
+                        height: "100%"
+                    }}>
+                        <Text style={{ color: "#fff" }}>
+                            Fin
+                        </Text>
+                    </View>
+                    <View style={{
+                        width: "80%",
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'row',
+                        height: "100%",
+                    }}>
+                        <TextInput style={{
+                            flex: 1,
+                            fontSize: 10,
+                            alignItems: 'center',
+                            height: "100%",
+                            paddingLeft: 10
+                        }}
+                            onFocus={() => {
+                                props.state.viajesReducer.ubicacion.fin.estado = true
+                                props.state.viajesReducer.ubicacion.inicio.estado = false
+                                actualizarUbicacion()
+                            }}
+                            placeholder={"Calle"}
+                            value={props.state.viajesReducer.ubicacion.fin.value}
+                            onChangeText={(texto) => hanlechage(texto)}
+                        />
+
+                        <TouchableOpacity style={{
+                            marginEnd: 10,
+                            marginStart: 10,
+                        }}
+                            onPress={() => {
+                                props.state.viajesReducer.ubicacion.fin.estado = true
+                                props.state.viajesReducer.ubicacion.fin.data = ""
+                                props.state.viajesReducer.ubicacion.inicio.estado = false
+                                props.state.viajesReducer.ubicacion.fin.value = ""
+                                actualizarUbicacion()
+                            }}
+                        >
+                            <Svg name="eliminar"
+                                style={{
+                                    width: 20,
+                                    height: 20,
+                                    fill: "#000000"
+                                }} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+                <ListaBusqueda onchage={hanlechageLista} />
+            </View>
+        )
+    }
+
+    const buscarInput = () => {
+        return (
+            <View style={{
+                flexDirection: 'column',
+                position: "absolute",
+                top: 0,
+                width: "100%",
+                alignItems: 'center',
+            }}>
+                <View style={{
+                    backgroundColor: "#fff",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    width: "80%",
+                    borderRadius: 20,
+                    height: 40,
+                }}>
+                    <View style={{
+                        flex: 1,
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: "#f00",
+                        borderTopLeftRadius: 20,
+                        borderBottomLeftRadius: 20,
+                        height: "100%"
+                    }}>
+                        <Text style={{ color: "#fff" }}>
+                            Inicio
+                        </Text>
+                    </View>
+                    <View style={{
+                        width: "80%",
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        flexDirection: 'row',
+                        height: "100%",
+                    }}>
+                        <TextInput style={{
+                            flex: 1,
+                            fontSize: 10,
+                            alignItems: 'center',
+                            height: "100%",
+                            paddingLeft: 10
+                        }}
+                            onFocus={() => {
+                                props.state.viajesReducer.ubicacion.fin.estado = false
+                                props.state.viajesReducer.ubicacion.inicio.estado = true
+                                actualizarUbicacion()
+                            }}
+                            onSubmitEditing={() => { secondTextInput.focus(); }}
+                            placeholder={"Calle"}
+                            value={props.state.viajesReducer.ubicacion.inicio.value}
+                            onChangeText={(texto) => hanlechage(texto)}
+                        />
+
+                        <TouchableOpacity style={{
+                            marginEnd: 10,
+                            marginStart: 10,
+                        }}
+                            onPress={() => {
+                                props.state.viajesReducer.ubicacion.fin.estado = false
+                                props.state.viajesReducer.ubicacion.inicio.estado = true
+                                props.state.viajesReducer.ubicacion.inicio.value = ""
+                                props.state.viajesReducer.ubicacion.inicio.data = false
+                                actualizarUbicacion()
+                            }}
+                        >
+                            <Svg name="eliminar"
+                                style={{
+                                    width: 20,
+                                    height: 20,
+                                    fill: "#000000"
+                                }} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
 
                 <View
                     style={styles.buscar}>
@@ -242,16 +438,18 @@ const BuscadorComponenteMap = (props) => {
     };
 
     return (
-        <View style={{
+        <Animated.View style={{
             width: "100%",
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'space-evenly',
             position: "absolute",
-            top: 20,
+            top: fadeAnim,            
             flexDirection: 'column',
+            height: 200,
+            marginTop: 10
         }}>
-            {buscarInput()}
-        </View>
+            {buscarInputNuevo()}
+        </Animated.View>
     )
 }
 
@@ -266,16 +464,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-
-        shadowColor: "#fff",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-
-        elevation: 5,
     },
     touchableOpacity: {
         width: 150,
@@ -307,5 +495,4 @@ const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates, initActions)(BuscadorComponenteMap);
-
+export default connect(initStates)(BuscadorComponenteMap);

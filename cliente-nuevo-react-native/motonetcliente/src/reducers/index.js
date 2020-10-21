@@ -19,6 +19,4 @@ export default combineReducers({
     usuarioReducer,
     viajesReducer,
     tipoViajesReducer,
-    
-
 });

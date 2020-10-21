@@ -4,14 +4,23 @@ import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 
 const RutaViaje = (props) => {
-
-    if (props.state.locationGoogleMapReducer.estado == "cargando") {
-        return <View />
-    }
-
+    
+  
     if (!props.state.locationGoogleMapReducer.route) {
+        if (props.state.locationGoogleMapReducer.estado != "cargando") {
+            props.state.socketClienteReducer.sessiones["motonet"].send({
+                component: "locationGoogle",
+                type: "route",
+                estado: "cargando",
+                data: {
+                    inicio: props.state.viajesReducer.ubicacion["inicio"].data,
+                    fin: props.state.viajesReducer.ubicacion["fin"].data
+                }
+            }, true);
+        }
         return <View />
     }
+ 
     const getRouteFormat = () => {
         var ruta = [];
         props.state.locationGoogleMapReducer.route.ruta.map((obj, key) => {

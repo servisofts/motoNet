@@ -23,6 +23,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createAppContainer } from 'react-navigation';
 import * as Pages from './src/pages';
 import * as socketCliente from './src/socketCliente'
+import NaviDrawer from './src/component/NaviDrawer';
 //--FIN--
 
 
@@ -69,10 +70,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <SafeAreaView style={{flex:1}}>
+        <SafeAreaView style={{ flex: 1 }}>
           <Container />
+          <NaviDrawer />
         </SafeAreaView>
-        </Provider>
+      </Provider>
     );
   }
 };
