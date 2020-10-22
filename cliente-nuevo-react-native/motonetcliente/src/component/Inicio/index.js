@@ -21,7 +21,7 @@ const Inicio = (props) => {
             justifyContent: "center",
             alignItems: "center"
         }}>
-            <Mapa />
+            <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
             <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
             <BuscadorComponenteMap ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} />
             <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
@@ -37,7 +37,7 @@ const Inicio = (props) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     top: 5,
-                    left: 10,                    
+                    left: 10,
                 }} >
                 <Svg name="menu"
                     style={{

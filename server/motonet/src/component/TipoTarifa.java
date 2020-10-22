@@ -37,6 +37,9 @@ public class TipoTarifa {
             case "registro":
                 registro(data, router);
                 break;
+            case "editarMontoTipoViaje":
+                editarMontoTipoViaje(data, router);
+                break;
         }
     }
 
@@ -44,7 +47,7 @@ public class TipoTarifa {
         try {
             String consulta = "";
             consulta += "select array_to_json(array_agg(tipo_tarifa.*)) as json \n";
-            consulta += "from tipo_tarifa";
+            consulta += "from tipo_tarifa where estado = 1";
             JSONArray tiposViajes = Conexion.ejecutarConsultaArray(consulta);
             obj.put("data", tiposViajes);
             obj.put("estado", "exito");
@@ -71,7 +74,37 @@ public class TipoTarifa {
             e.printStackTrace();
             obj.put("estado", "error");
         }
-       
+
+    }
+    public void editarMontoTipoViaje(JSONObject obj, Router router) {
+        JSONObject data = obj.getJSONObject("data");
+        try {
+            String key_usuario = obj.getString("key_usuario");
+            String key_tipo_viaje = obj.getString("key_tipo_viaje");
+            JSONObject tipo_tarifa = obj.getJSONObject("tarifa");
+            String key_tarifa = tipo_tarifa.getString("key");
+            JSONObject tipo_viaje = new JSONObject();
+            tipo_viaje.put("key", UUID.randomUUID().toString());
+            tipo_viaje.put("monto", data.getDouble("monto"));
+            tipo_viaje.put("key_tipo_viaje", key_tipo_viaje);
+            tipo_viaje.put("key_tipo_tarifa", key_tarifa);
+            tipo_viaje.put("fecha_on", "now()");
+            tipo_viaje.put("estado", 1);
+
+            Conexion.ejecutarUpdate(
+                    "UPDATE tipo_viaje_tipo_tarifa SET estado = 0 where key_tipo_viaje = '" + key_tipo_viaje + "' and key_tipo_tarifa = '" + key_tarifa + "'");
+
+            Conexion.insertArray("tipo_viaje_tipo_tarifa", new JSONArray().put(tipo_viaje));
+            
+            JSONObject tipo = new JSONObject();
+            tipo.put(tipo_tarifa.getString("descripcion"), tipo_viaje);
+            obj.put("data", tipo);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            obj.put("estado", "error");
+        }
 
     }
 

@@ -25,9 +25,9 @@ const NaviDrawer = (props) => {
         })
         return <View />
     }
-    // if (!props.state.usuarioReducer.usuarioDatos) {
-    //     return <View />
-    // }
+    if (!props.state.usuarioReducer.usuarioDatos) {
+        return <View />
+    }
     const fadeIn = () => {
         // Will change fadeAnim value to 1 in 5 seconds
 
@@ -46,22 +46,24 @@ const NaviDrawer = (props) => {
         // return <View></View>
     }
     var url = "";
-    // if (props.state.usuarioReducer.usuarioDatos["Foto perfil"]) {
-        //error no existe foto    
+    if (props.state.usuarioReducer.usuarioDatos["Foto perfil"]) {
+        //error no existe foto
         // return <View />
-        //url = urlFoto.urlImages + props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato + `?type=getPerfil&key_usuario=${props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}&date=${Date.now()}`;
-    // }
+        url = urlFoto.urlImages + props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato + `?type=getPerfil&key_usuario=${props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}&date=${Date.now()}`;
+    }
 
     var nombreUsuario = "";
-    // if (props.state.usuarioReducer.usuarioDatos["Nombres"]) {
-    //     nombreUsuario = props.state.usuarioReducer.usuarioDatos["Nombres"].dato + " " + props.state.usuarioReducer.usuarioDatos["Apellidos"].dato;
-    // }
-
+    if (props.state.usuarioReducer.usuarioDatos["Nombres"]) {
+        nombreUsuario = props.state.usuarioReducer.usuarioDatos["Nombres"].dato + " " + props.state.usuarioReducer.usuarioDatos["Apellidos"].dato;
+    }else{
+        nombreUsuario="not found"
+    }
 
     const handleClick = (item) => {
         console.log("asad")
         switch (item) {
             case "PerfilPage":
+                console.log(props.state.usuarioReducer.usuarioLog)
                 props.state.navigationReducer.navigate(item)
                 setVisible(false);
                 return <View />
@@ -71,7 +73,7 @@ const NaviDrawer = (props) => {
                 return <View />
             case "Cerrar":
                 setVisible(false);
-                AsyncStorage.removeItem("glup_usuario")
+                AsyncStorage.removeItem("motonet_usuarioLog")
                 props.state.usuarioReducer.usuarioLog = false
                 props.state.navigationReducer.replace("CargaPage")
                 return <View />
@@ -79,7 +81,6 @@ const NaviDrawer = (props) => {
     }
 
     return (
-
         <Modal
             transparent={true}
             visible={isVisible}
@@ -120,7 +121,6 @@ const NaviDrawer = (props) => {
                                     justifyContent: "center",
                                     alignItems: "center"
                                 }}>
-
                                     <View style={{
                                     }}>
                                         <Image style={{
@@ -142,7 +142,7 @@ const NaviDrawer = (props) => {
                                             fontSize: 18,
                                             fontWeight: "bold",
                                             textAlign: "center",
-                                            color: "#00b3de"
+                                            color: "red"
                                         }}>
                                             {nombreUsuario}
                                         </Text>
@@ -157,7 +157,7 @@ const NaviDrawer = (props) => {
                                             textAlign: "center"
                                         }}>
 
-                                            <View style={{
+                                            {/* <View style={{
                                                 flexDirection: "row"
                                             }}>
                                                 <Svg name="START"
@@ -185,14 +185,14 @@ const NaviDrawer = (props) => {
                                                         width: 25,
                                                         height: 25,
                                                     }} />
-                                            </View>
+                                            </View> */}
                                         </Text>
                                     </View>
                                 </View>
 
                                 <View style={{
                                     height: "100%",
-                                    width: "80%",
+                                    width: "90%",
                                 }}>
 
                                     <View style={{
@@ -200,58 +200,35 @@ const NaviDrawer = (props) => {
                                         backgroundColor: '#ccc'
                                     }} />
 
-                                    <ButtonNavi svg="NOTIFICACIONES" Nombre="NOTIFICACINES" onPress={handleClick} />
+                                    <ButtonNavi svg="Logo" Nombre="MIS VIAJES" onPress={handleClick} pagina="" />
 
                                     <View style={{
                                         height: 1,
                                         backgroundColor: '#ccc'
                                     }} />
 
-                                    <View style={{
-                                        height: 50,
-                                    }} />
+                                    <ButtonNavi svg="Logo" Nombre="PERFIL" onPress={handleClick} pagina="PerfilPage" />
 
                                     <View style={{
                                         height: 1,
                                         backgroundColor: '#ccc'
                                     }} />
 
-                                    <ButtonNavi svg="TUSGLUP" Nombre="TUS GLUP" onPress={handleClick} pagina="" />
+                                    <ButtonNavi svg="Logo" Nombre="BILLETERA" onPress={handleClick} pagina="" />
 
                                     <View style={{
                                         height: 1,
                                         backgroundColor: '#ccc'
                                     }} />
 
-                                    <ButtonNavi svg="MICUENTA" Nombre="MI CUENTA" onPress={handleClick} pagina="PerfilPage" />
+                                    <ButtonNavi svg="Logo" Nombre="AYUDA" onPress={handleClick} pagina="" />
 
                                     <View style={{
                                         height: 1,
                                         backgroundColor: '#ccc'
                                     }} />
 
-                                    <ButtonNavi svg="PAGO" Nombre="PAGO" onPress={handleClick} pagina="" />
-
-                                    <View style={{
-                                        height: 1,
-                                        backgroundColor: '#ccc'
-                                    }} />
-
-                                    <ButtonNavi svg="COMPARTIR" Nombre="COMPARTIR CON AMIGOS" onPress={handleClick} pagina="" />
-
-                                    <View style={{
-                                        height: 1,
-                                        backgroundColor: '#ccc'
-                                    }} />
-
-                                    <ButtonNavi svg="AYUDA" Nombre="AYUDA" onPress={handleClick} pagina="" />
-
-                                    <View style={{
-                                        height: 1,
-                                        backgroundColor: '#ccc'
-                                    }} />
-
-                                    <ButtonNavi svg="MICUENTA" Nombre="SALIR" onPress={handleClick} pagina="Cerrar" />
+                                    <ButtonNavi svg="Logo" Nombre="SALIR" onPress={handleClick} pagina="Cerrar" />
 
                                     <View style={{
                                         height: 1,
@@ -287,7 +264,7 @@ const styles = StyleSheet.create({
         borderRightColor: "#888",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#fffffff1"
+        backgroundColor: "#fff"
     },
     menus: {
         justifyContent: 'center',

@@ -7,7 +7,7 @@ const ButtonNavi = (props) => {
         <TouchableOpacity style={{
             flexDirection: "row",
             width: "100%",
-            height: 40,
+            height: 50,
             alignItems: "center",
         }}
             onPress={() => {
@@ -34,19 +34,6 @@ const ButtonNavi = (props) => {
 
             }}>{props.Nombre}</Text>
 
-            <View style={{ flex: 0.1 }}>
-                <Svg name="FLECHAVER"
-                    style={{
-
-                        width: 25,
-                        height: 25,
-                    }} />
-            </View>
-
-            <View style={{
-                height: 1,
-                backgroundColor: '#ccc'
-            }} />
         </TouchableOpacity>
     )
 }
