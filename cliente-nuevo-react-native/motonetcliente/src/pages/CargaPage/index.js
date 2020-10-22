@@ -23,6 +23,8 @@ class CargaPage extends Component {
       },
     })
   }
+
+
   componentDidMount() { // B
     Animated.loop(
       Animated.spring(this.state.startValue, {
@@ -30,9 +32,8 @@ class CargaPage extends Component {
         friction: 1,
         useNativeDriver: true,
       }),
-      { iterations: 3000 },
+      { iterations: 4000 },
     ).start();
-
   }
 
   render() {
@@ -70,8 +71,6 @@ class CargaPage extends Component {
             }}>MotoNet</Text>
 
         </Animated.View>
-
-       
           <Carga navigation={this.props.navigation} />
       </View>
     );
