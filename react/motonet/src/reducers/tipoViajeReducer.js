@@ -17,7 +17,34 @@ export default (state, action) => {
         }
         state = { ...state };
     }
+    if (action.component == "tipoTarifa") {
+        switch (action.type) {
+            case "editarMontoTipoViaje":
+                editarMontoTipoViaje(state, action);
+                break;
+        }
+        state = { ...state };
+    }
+    
     return state;
+}
+
+const editarMontoTipoViaje = (state, action) => {
+    if (action.estado == "exito") {
+        if (!state.data) {
+            state.data = {}
+        }
+          if (state.data[action.key_tipo_viaje]) {
+              if(!state.data[action.key_tipo_viaje].tarifas){
+                  state.data[action.key_tipo_viaje].tarifas= {};
+              }
+            state.data[action.key_tipo_viaje].tarifas={
+                ...state.data[action.key_tipo_viaje].tarifas,
+                ...action.data
+            }
+        }
+    }
+
 }
 const registro = (state, action) => {
     state.estado = action.estado
@@ -27,7 +54,6 @@ const registro = (state, action) => {
         }
         var obj = action.data;
         state.data[obj.key] = obj;
-
     }
 
 }

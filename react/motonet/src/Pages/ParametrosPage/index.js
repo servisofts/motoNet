@@ -2,7 +2,7 @@
 import React from 'react'
 import { connect } from 'react-redux';
 import NaviDrawer from '../../Components/NaviDrawer';
-import { CircularProgress, Grid } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import InputLabel from '@material-ui/core/InputLabel';

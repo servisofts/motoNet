@@ -48,7 +48,6 @@ const route = (state, action) => {
     state.estado = action.estado;
     if (action.estado === "exito") {
         state.route = action.data
-
     }
 }
 
@@ -61,6 +60,8 @@ const geocode = (state, action) => {
         state.escribir = false
     }
 }
+
+
 const autoComplete = (state, action) => {
     state.type = action.type;
     state.estado = action.estado;

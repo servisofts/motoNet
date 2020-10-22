@@ -1,5 +1,6 @@
 const initialState = {
-    openBar: false
+    openBar: false,
+    openBuscar: false
 }
 export default (state, action) => {
     if (!state) return initialState;
@@ -10,4 +11,5 @@ export default (state, action) => {
         }
     }
     return state
-} 
+}
+
