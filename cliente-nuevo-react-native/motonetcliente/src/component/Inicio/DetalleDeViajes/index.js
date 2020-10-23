@@ -3,7 +3,8 @@ import { ActivityIndicator, AsyncStorage, ScrollView, Text, TouchableOpacity, Vi
 import { connect } from 'react-redux';
 import Svg from '../../../Svg';
 
-const valor_menor = -300;
+const valor_menor = -380;
+var totalViaje;
 const DetalleDeViajes = (props) => {
 
     const [isVisible, setIsVisible] = React.useState(false);
@@ -12,7 +13,7 @@ const DetalleDeViajes = (props) => {
     const fadeIn = () => {
         Animated.timing(fadeAnim, {
             toValue: 0,
-            duration: 500
+            duration: 700
         }).start();
     };
 
@@ -48,7 +49,7 @@ const DetalleDeViajes = (props) => {
         return <View />
     }
 
-    const PedirViaje = () => {
+    const PedirViaje = (tarifas) => {
         var exito = true
         var destino = []
         var contador = 1
@@ -61,7 +62,7 @@ const DetalleDeViajes = (props) => {
                 index: contador,
                 latitude: obj.data.latitude,
                 longitude: obj.data.longitude,
-                direccion: obj.data.direccion
+                direccion: obj.data.direccion,
             }
             destino.push(dato)
             contador++
@@ -75,6 +76,7 @@ const DetalleDeViajes = (props) => {
                     destinos: destino
                 },
                 key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                costoViaje: parseFloat(totalViaje),
                 key_tipo_viaje: props.state.viajesReducer.key_tipo_viaje,
                 estado: "cargando"
             }, true);
@@ -100,7 +102,9 @@ const DetalleDeViajes = (props) => {
         var montoKm = tarifas["Monto por kilometro"]
         var totalTiempo = (montoTiempo.monto / (60)) * distancia;
         var totalDistancia = (montoKm.monto / 1000) * distancia;
-        var total = totalTiempo + totalDistancia;
+        var totalCalculado = totalTiempo + totalDistancia;
+        totalViaje = Math.round(totalCalculado / 60)
+
         return (
             <View style={{
                 width: "90%",
@@ -112,7 +116,7 @@ const DetalleDeViajes = (props) => {
                 <Text>Monto por tiempo {montoTiempo.monto}</Text>
                 <Text>Monto por km * distancia {totalDistancia}</Text>
                 <Text>Monto por tiempo * duracion {totalTiempo}</Text>
-                <Text>TOTAL {Math.round(total / 60)}bs.</Text>
+                <Text>TOTAL {totalViaje} bs.</Text>
             </View>
         )
     }
@@ -127,7 +131,7 @@ const DetalleDeViajes = (props) => {
                 width: "100%",
                 justifyContent: "center",
                 alignItems: "center"
-            }}>
+            }}> 
                 {getPrecio(route.distancia, route.duracion)}
             </View>
         )

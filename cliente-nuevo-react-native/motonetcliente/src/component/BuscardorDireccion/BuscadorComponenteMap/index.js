@@ -8,7 +8,7 @@ import * as viajesActions from '../../../action/viajesActions'
 import Geolocation from '@react-native-community/geolocation';
 
 var secondTextInput;
-const valor_menor = -120;
+const valor_menor = -200;
 
 const BuscadorComponenteMap = (props) => {
 
@@ -248,146 +248,6 @@ const BuscadorComponenteMap = (props) => {
         )
     }
 
-    const buscarInput = () => {
-        return (
-            <View style={{
-                flexDirection: 'column',
-                position: "absolute",
-                top: 0,
-                width: "100%",
-                alignItems: 'center',
-            }}>
-                <View style={{
-                    backgroundColor: "#fff",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    flexDirection: 'row',
-                    width: "80%",
-                    borderRadius: 20,
-                    height: 40,
-                }}>
-                    <View style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: "#f00",
-                        borderTopLeftRadius: 20,
-                        borderBottomLeftRadius: 20,
-                        height: "100%"
-                    }}>
-                        <Text style={{ color: "#fff" }}>
-                            Inicio
-                        </Text>
-                    </View>
-                    <View style={{
-                        width: "80%",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'row',
-                        height: "100%",
-                    }}>
-                        <TextInput style={{
-                            flex: 1,
-                            fontSize: 10,
-                            alignItems: 'center',
-                            height: "100%",
-                            paddingLeft: 10
-                        }}
-                            onFocus={() => {
-                                props.state.viajesReducer.ubicacion.fin.estado = false
-                                props.state.viajesReducer.ubicacion.inicio.estado = true
-                                actualizarUbicacion()
-                            }}
-                            onSubmitEditing={() => { secondTextInput.focus(); }}
-                            placeholder={"Calle"}
-                            value={props.state.viajesReducer.ubicacion.inicio.value}
-                            onChangeText={(texto) => hanlechage(texto)}
-                        />
-
-                        <TouchableOpacity style={{
-                            marginEnd: 10,
-                            marginStart: 10,
-                        }}
-                            onPress={() => {
-                                props.state.viajesReducer.ubicacion.fin.estado = false
-                                props.state.viajesReducer.ubicacion.inicio.estado = true
-                                props.state.viajesReducer.ubicacion.inicio.value = ""
-                                props.state.viajesReducer.ubicacion.inicio.data = false
-                                actualizarUbicacion()
-                            }}
-                        >
-                            <Svg name="eliminar"
-                                style={{
-                                    width: 20,
-                                    height: 20,
-                                    fill: "#000000"
-                                }} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-
-                <View
-                    style={styles.buscar}>
-                    <View style={{
-                        flex: 1,
-                        height: "100%",
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: "#f00",
-                        borderTopLeftRadius: 20,
-                        borderBottomLeftRadius: 20,
-                    }}>
-                        <Text style={{ color: "#fff" }}>
-                            Fin
-                        </Text>
-                    </View>
-                    <View style={{
-                        width: "80%",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'row',
-                    }}>
-                        <TextInput
-                            style={{
-                                flex: 0.9,
-                                width: "90%",
-                                fontSize: 10,
-                                alignItems: 'center',
-                            }}
-                            onFocus={() => {
-                                props.state.viajesReducer.ubicacion.fin.estado = true
-                                props.state.viajesReducer.ubicacion.inicio.estado = false
-                                actualizarUbicacion()
-                            }}
-                            ref={(input) => { secondTextInput = input; }}
-                            placeholder={"Calle"}
-                            value={props.state.viajesReducer.ubicacion.fin.value}
-                            onChangeText={(texto) => hanlechage(texto)}
-
-                        />
-                        <TouchableOpacity
-                            onPress={() => {
-                                props.state.viajesReducer.ubicacion.fin.estado = true
-                                props.state.viajesReducer.ubicacion.fin.data = ""
-                                props.state.viajesReducer.ubicacion.inicio.estado = false
-                                props.state.viajesReducer.ubicacion.fin.value = ""
-                                actualizarUbicacion()
-                            }}
-                        >
-                            <Svg name="eliminar"
-                                style={{
-                                    width: 20,
-                                    height: 20,
-                                    fill: "#000000"
-                                }} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-                <ListaBusqueda onchage={hanlechageLista} />
-            </View>
-        )
-    }
-
     const hanlechageLista = (obj) => {
         peticion(obj.direccion)
         return <View />
@@ -443,7 +303,7 @@ const BuscadorComponenteMap = (props) => {
             alignItems: 'center',
             justifyContent: 'space-evenly',
             position: "absolute",
-            top: fadeAnim,            
+            top: fadeAnim,
             flexDirection: 'column',
             height: 200,
             marginTop: 10
