@@ -10,7 +10,6 @@ import TiposDeViajes from './TiposDeViajes';
 import DetalleDeViajes from './DetalleDeViajes';
 import Svg from '../../Svg';
 
-
 const Inicio = (props) => {
 
     const [ventanaSelect, setVentanaSelect] = React.useState("tipoDeViaje");
@@ -25,7 +24,7 @@ const Inicio = (props) => {
             <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
             <BuscadorComponenteMap ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} />
             <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
-            <DetalleDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+            <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
             <TouchableOpacity
                 onPress={() => {
                     props.state.naviDrawerReducer.openBar()
@@ -47,7 +46,6 @@ const Inicio = (props) => {
                     }} />
             </TouchableOpacity>
         </View>
-
     )
 }
 

@@ -6,6 +6,8 @@ import EliminarIcono from '../img/cerrar.svg';
 import MarkerMoto from '../img/MarkerMoto.svg';
 import Ubicacion from '../img/ubicacion.svg';
 import Menu from '../img/menu.svg';
+import Volver from '../img/volver.svg';
+import Gps from '../img/gps.svg';
 
 const Svg = (props) => {
 
@@ -22,6 +24,10 @@ const Svg = (props) => {
             return <EliminarIcono style={props.style} />
         case "menu":
             return <Menu style={props.style} />
+        case "Volver":
+            return <Volver style={props.style} />
+        case "Gps":
+            return <Gps style={props.style} />
         default: return <Text>Not Found</Text>
     }
 }

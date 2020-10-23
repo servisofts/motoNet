@@ -76,8 +76,7 @@ const styles = StyleSheet.create({
         marginBottom: 20
     },
     ContenedorCampos: {
-        marginBottom: 10,
-        
+        marginBottom: 10,        
     }
 });
 

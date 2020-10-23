@@ -29,6 +29,11 @@ const DetalleDeViajes = (props) => {
         });
     };
 
+    if (props.state.viajesReducer.viaje) {
+        props.navigation.replace("ViajeEsperaPage");
+        return <View />
+    }
+
     if (props.ventanaSelect != "DetalleDeViaje") {
         if (isVisible == true) {
             fadeOut();
@@ -43,8 +48,7 @@ const DetalleDeViajes = (props) => {
         return <View />
     }
 
-
-    const PedirViaje = (objTipoViaje) => {
+    const PedirViaje = () => {
         var exito = true
         var destino = []
         var contador = 1
@@ -71,7 +75,7 @@ const DetalleDeViajes = (props) => {
                     destinos: destino
                 },
                 key_usuario: props.state.usuarioReducer.usuarioLog.key,
-                key_tipo_viaje: objTipoViaje.key,
+                key_tipo_viaje: props.state.viajesReducer.key_tipo_viaje,
                 estado: "cargando"
             }, true);
             return <View />
@@ -150,7 +154,7 @@ const DetalleDeViajes = (props) => {
                 <View style={{
                     flex: 1,
                     justifyContent: "center",
-                    alignItems: "center",                 
+                    alignItems: "center",
                 }}>
                     <Svg name="MarkerMoto"
                         style={{
@@ -184,7 +188,7 @@ const DetalleDeViajes = (props) => {
                             alignItems: "center",
                             justifyContent: "center",
                         }}
-                        onPress={() => PedirViaje(obj)}>
+                        onPress={() => PedirViaje()}>
                         <Text>
                             CONFIRMAR MOTONET
                         </Text>
@@ -194,14 +198,10 @@ const DetalleDeViajes = (props) => {
 
             <TouchableOpacity style={{
                 height: 50,
-                borderRadius: 100,
                 width: 50,
-                backgroundColor: "#fff",
-                borderColor: "#ccc",
-                borderWidth: 1,
                 alignItems: "center",
                 justifyContent: "center",
-                right: 0,
+                left: 0,
                 position: "absolute"
             }}
                 onPress={() => {
@@ -209,9 +209,12 @@ const DetalleDeViajes = (props) => {
                     props.setVentanaSelect("tipoDeViaje")
                     return <View />
                 }}>
-                <Text>
-                    volver
-                </Text>
+                <Svg name="Volver"
+                    style={{
+                        width: 30,
+                        height: 30,
+                        fill: "#000"
+                    }} />
             </TouchableOpacity>
         </Animated.View>
     )

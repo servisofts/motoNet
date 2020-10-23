@@ -61,7 +61,7 @@ const Mapa = (props) => {
 
     const OnRegionChangeComplete = (region) => {
 
-     
+
         console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTPO SAFKJSAIFJASFJOASJFOASJFOASJFAS")
 
         props.state.socketClienteReducer.sessiones["motonet"].send({
@@ -89,11 +89,10 @@ const Mapa = (props) => {
             onRegionChangeComplete={OnRegionChangeComplete}>
             {/* {getMarkerOrigen()}
             {getMarkerFin()} */}
-            <RutaViaje />
+            <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
 
             <TouchableOpacity
                 style={{
-                    backgroundColor: "#000",
                     position: "absolute",
                     bottom: 200,
                     right: 10
@@ -104,11 +103,11 @@ const Mapa = (props) => {
                     return <View />
                 }}
             >
-                <Svg name="eliminar"
+                <Svg name="Gps"
                     style={{
                         width: 50,
                         height: 50,
-                        fill: "#000000"
+                        fill: "#000"
                     }} />
             </TouchableOpacity>
         </MapView >

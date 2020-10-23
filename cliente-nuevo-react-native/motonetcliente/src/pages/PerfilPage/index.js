@@ -233,11 +233,11 @@ class PerfilPage extends Component {
                         top: 10,
                         left: 10,
                     }}>
-                    <Svg name="volver"
+                    <Svg name="Volver"
                         style={{
                             width: 30,
                             height: 30,
-                            fill: "#4D96CF"
+                            fill: "#000"
                         }} />
                 </TouchableOpacity>
 
