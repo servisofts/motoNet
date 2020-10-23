@@ -11,6 +11,8 @@ import TipoViajePage from './Pages/TipoViajePage'
 import ParametrosPage from './Pages/ParametrosPage'
 import NotificacionPage from './Pages/NotificacionPage'
 import AsociacionesMotoPage from './Pages/AsociacionesMotoPage'
+import ChatPage from './Pages/ChatPage'
+
 
 function App() {
   return (
@@ -24,6 +26,7 @@ function App() {
       <Route exact path='/ParametrosPage' component={ParametrosPage} />
       <Route exact path='/NotificacionPage' component={NotificacionPage} />
       <Route exact path='/AsociacionesMotoPage' component={AsociacionesMotoPage} />
+      <Route exact path='/ChatPage' component={ChatPage} />
       
     </BrowserRouter>
   );

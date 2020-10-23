@@ -25,6 +25,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import StreetviewIcon from '@material-ui/icons/Streetview';
 import MergeTypeIcon from '@material-ui/icons/MergeType';
 import MotorcycleIcon from '@material-ui/icons/Motorcycle';
+import CommentTypeIcon from '@material-ui/icons/Comment';
 import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import logoMotoInicio from '../../img/MotoNetBR.svg';
@@ -218,6 +219,7 @@ const NaviDrawer = (props) => {
                     {getButton({ name: "AsociacionMotos", path: "AsociacionesMotoPage", icon: <MotorcycleIcon /> })}
                     {getButton({ name: "TipoViaje", path: "TipoViajePage", icon: <MergeTypeIcon /> })}
                     {getButton({ name: "Parametros", path: "ParametrosPage", icon: <StreetviewIcon /> })}
+                    {getButton({ name: "Chat", path: "ChatPage", icon: <CommentTypeIcon /> })}
                     
 
                     <div onClick={
