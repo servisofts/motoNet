@@ -54,52 +54,24 @@ const Mapa = (props) => {
         return <View />
     }
 
-    const getMarkerOrigen = () => {
-        if (!props.state.locationGoogleMapReducer.markerUbicacion) {
-            return <View />
-        }
-        var locoation = {
-            latitude: props.state.locationGoogleMapReducer.markerUbicacion.latitude,
-            longitude: props.state.locationGoogleMapReducer.markerUbicacion.longitude
-        };
-        return (
-            <Marker
-                coordinate={locoation}
-            >
-                <Svg name="Logo"
-                    style={{
-                        width: 25,
-                        height: 25,
-                    }} />
-            </Marker>
-        )
-    }
-
-    const getMarkerFin = () => {
-        if (!props.state.locationGoogleMapReducer.markerUbicacionFin) {
-            return <View />
-        }
-        var locoation = {
-            latitude: props.state.locationGoogleMapReducer.markerUbicacionFin.latitude,
-            longitude: props.state.locationGoogleMapReducer.markerUbicacionFin.longitude
-        };
-        return (
-            <Marker
-                coordinate={locoation}
-            >
-                <Svg name="Logo"
-                    style={{
-                        width: 25,
-                        height: 25,
-                    }} />
-            </Marker>
-        )
-    }
-
     useEffect(() => {
         // Actualiza el título del documento usando la API del navegador
         positionActual();
     });
+
+    const OnRegionChangeComplete = (region) => {
+
+
+        console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTPO SAFKJSAIFJASFJOASJFOASJFOASJFAS")
+
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "locationGoogle",
+            type: "geocode",
+            data: region,
+            estado: "cargando"
+        }, true);
+        return <View />
+    }
 
     return (
         < MapView
@@ -114,35 +86,13 @@ const Mapa = (props) => {
             showsUserLocation={true}
             showsCompass={true}
             followsUserLocation={true}
-            onRegionChangeComplete={(region) => {
-                if(props.ventanaSelect == "DetalleDeViaje"){
-                    return <View/>
-                }
-                if(props.state.locationGoogleMapReducer.data){
-                    var objTenp = props.state.locationGoogleMapReducer.data.latitude;
-                    if(region.latitude == objTenp.latitude 
-                    && region.longitude == objTenp.longitude ){
-                        return <View/>
-                    }
-                }
-                console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTPO SAFKJSAIFJASFJOASJFOASJFOASJFAS")
-              
-                props.state.socketClienteReducer.sessiones["motonet"].send({
-                    component: "locationGoogle",
-                    type: "geocode",
-                    data: region,
-                    estado: "cargando"
-                }, true);
-                return <View />
-            }}>
+            onRegionChangeComplete={OnRegionChangeComplete}>
             {/* {getMarkerOrigen()}
             {getMarkerFin()} */}
-            
-            <RutaViaje />
+            <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
 
             <TouchableOpacity
                 style={{
-                    backgroundColor: "#000",
                     position: "absolute",
                     bottom: 200,
                     right: 10
@@ -153,11 +103,11 @@ const Mapa = (props) => {
                     return <View />
                 }}
             >
-                <Svg name="eliminar"
+                <Svg name="Gps"
                     style={{
                         width: 50,
                         height: 50,
-                        fill: "#000000"
+                        fill: "#000"
                     }} />
             </TouchableOpacity>
         </MapView >

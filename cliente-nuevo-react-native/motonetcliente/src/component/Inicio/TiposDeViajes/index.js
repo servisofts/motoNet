@@ -42,6 +42,14 @@ const TiposDeViajes = (props) => {
 
         if (exito) {
             props.state.viajesReducer.key_tipo_viaje = objTipoViaje.key;
+            //props.state.locationGoogleMapReducer.route = false;
+            props.dispatch({
+                component:"locationGoogle",
+                type:"route",
+                estado:"exito",
+                data:false
+            })
+            console.log("entro al renderrr.............")
             props.setVentanaSelect("DetalleDeViaje")
             return <View />
         }

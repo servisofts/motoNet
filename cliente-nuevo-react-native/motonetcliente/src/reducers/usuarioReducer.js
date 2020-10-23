@@ -16,7 +16,6 @@ export default (state, action) => {
             case "loginFacebook":
                 loginFacebook(state, action);
                 break;
-
             case "registro":
                 registro(state, action);
                 break;
@@ -49,6 +48,7 @@ const identificacion = (state, action) => {
         state.login = "login"
     }
 }
+
 const login = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
@@ -57,13 +57,14 @@ const login = (state, action) => {
         state.login = "login"
     }
 }
+
 const pedir = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
         alert("llego")
     }
-
 }
+
 const getById = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
@@ -75,6 +76,7 @@ const getById = (state, action) => {
         }
     }
 }
+
 const loginFacebook = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {

@@ -13,7 +13,7 @@ class ListasPage extends Component {
     static navigationOptions = {
         headerShown: false,
     }
-    constructor(props) { 
+    constructor(props) {
         super(props);
     }
     render() {

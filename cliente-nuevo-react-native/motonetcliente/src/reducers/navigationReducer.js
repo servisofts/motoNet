@@ -8,7 +8,6 @@ const initialState = {
             color: '#fff',
         },
         isBack: false,
-
     },
     navigation: false,
     setParams: (nav, params) => {

@@ -1,124 +1,253 @@
-import React from 'react';
-import { Platform, View, Text, Modal, StyleSheet, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, SafeAreaView, AsyncStorage } from 'react-native';
+import React, { useRef } from 'react';
+import { Platform, Image, View, Text, Modal, StyleSheet, Animated, TouchableWithoutFeedback, TouchableOpacity, ScrollView, Dimensions, SafeAreaView, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../Svg';
+/* import urlFoto from '../../Json/index.json'; */
+import ButtonNavi from './ButtonNavi';
 
-
-const NaviDrawe = (props) => {
-
+const NaviDrawer = (props) => {
     const [isVisible, setVisible] = React.useState(false);
-
+    const fadeAnim = useRef(new Animated.Value(0)).current;
 
 
     if (!props.state.naviDrawerReducer.openBar) {
-        props.state.naviDrawerReducer.openBar = () => {
-            setVisible(true);
-            return <View />
-            //llamar al action abrirnavidraer  y el action manda al reducer navidrawerreducer y el cambia el estado isOpen por true o false
+        props.dispatch({
+            component: "naviDrawer",
+            type: "addOpen",
+            openBar: () => {
+                setVisible(true);
+                Animated.timing(fadeAnim, {
+                    toValue: 500,
+                    duration: 100
+                }).start();
+                //llamar al action abrirnavidraer  y el action manda al reducer navidrawerreducer y el cambia el estado isOpen por true o false
+            }
+        })
+        return <View />
+    }
+    if (!props.state.usuarioReducer.usuarioDatos) {
+        return <View />
+    }
+    const fadeIn = () => {
+        // Will change fadeAnim value to 1 in 5 seconds
+
+    };
+
+    const fadeOut = () => {
+        // Will change fadeAnim value to 0 in 5 seconds
+
+    };
+    if (!isVisible) {
+        Animated.timing(fadeAnim, {
+            toValue: 0,
+            duration: 1000
+        }).start();
+        // setVisible(true)
+        // return <View></View>
+    }
+    var url = "";
+    if (props.state.usuarioReducer.usuarioDatos["Foto perfil"]) {
+        //error no existe foto
+        // return <View />
+        url = urlFoto.urlImages + props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato + `?type=getPerfil&key_usuario=${props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}&date=${Date.now()}`;
+    }
+
+    var nombreUsuario = "";
+    if (props.state.usuarioReducer.usuarioDatos["Nombres"]) {
+        nombreUsuario = props.state.usuarioReducer.usuarioDatos["Nombres"].dato + " " + props.state.usuarioReducer.usuarioDatos["Apellidos"].dato;
+    }else{
+        nombreUsuario="not found"
+    }
+
+    const handleClick = (item) => {
+        console.log("asad")
+        switch (item) {
+            case "PerfilPage":
+                console.log(props.state.usuarioReducer.usuarioLog)
+                props.state.navigationReducer.navigate(item)
+                setVisible(false);
+                return <View />
+            case "AyudaPage":
+                props.state.navigationReducer.navigate(item)
+                setVisible(false);
+                return <View />
+            case "Cerrar":
+                setVisible(false);
+                AsyncStorage.removeItem("motonet_usuarioLog")
+                props.state.usuarioReducer.usuarioLog = false
+                props.state.navigationReducer.replace("CargaPage")
+                return <View />
         }
     }
-    if (!isVisible) {
-        return <View></View>
-    }
-    const handleClick = (pros) => {
 
-    }
-    var letra = "#fff";
-    var colorContainer = "red";
     return (
         <Modal
-            animationType="fade"
             transparent={true}
             visible={isVisible}
             style={{
+                position: "absolute",
                 border: 0,
             }}
         >
-            <View style={{ width: Dimensions.get("window").width, height: "100%", position: "absolute", top: 0, }} >
+            <View style={{
+                width: Dimensions.get("window").width, height: "100%", position: "absolute", top: 0,
+            }} >
                 <TouchableWithoutFeedback onPress={() => {
                     setVisible(false);
-                }} style={{ flex: 1 }}>
+                }} style={{
+                    flex: 1
+                }}>
                     <View style={styles.contenedors2}>
                     </View>
+
                 </TouchableWithoutFeedback>
-                <View style={[styles.contenedors, { backgroundColor: colorContainer, }]}>
-                    <SafeAreaView style={{ padding: 0, flex: 1, width: "100%", margin: 0, }}>
-                        <ScrollView style={{ flex: 1, width: "100%", height: "100%" }}>
+
+                <View style={styles.contenedors}>
+                    <SafeAreaView style={{
+                        flex: 1,
+                        width: "100%",
+                    }}>
+                        <ScrollView style={{
+                            flex: 1,
+                            width: "100%",
+                            height: "100%"
+                        }}>
                             <View style={{
-                                flexDirection: "row",
-                                justifyContent: "center",
-                                paddingBottom: 50,
-                            }}>
+                                alignItems: "center"
+                            }} >
                                 <View style={{
-                                    width: "80%",
-                                    paddingTop: 20,
-                                    paddingBottom: 50,
-                                    alignItems: "center",
+                                    height: 280,
+                                    width: "100%",
+                                    justifyContent: "center",
+                                    alignItems: "center"
                                 }}>
-                                    <Svg name="Logo"
-                                        style={{
+                                    <View style={{
+                                    }}>
+                                        <Image style={{
                                             width: 130,
                                             height: 130,
+                                            borderRadius: 100,
+                                            borderWidth: 5,
+                                            borderColor: "#fff",
+                                        }} source={{
+                                            uri: url
                                         }} />
-                                    <TouchableOpacity style={styles.sty} onPress={() => { handleClick("Inicio") }}>
-                                        <Text style={{ fontSize: 20, color: letra }} >Perfil</Text>
-                                    </TouchableOpacity >
-                                    <TouchableOpacity style={styles.sty} onPress={() => { handleClick("ListaCertificado") }} >
-                                        <Text style={{ fontSize: 20, color: letra }}>Ayuda </Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.sty} onPress={() => { handleClick("ListaAplicacion") }} >
-                                        <Text style={{ fontSize: 20, color: letra }}>Aplicaciones</Text>
-                                    </TouchableOpacity>
-
-                                    <TouchableOpacity
-                                        style={styles.sty} onPress={() => { handleClick("ListaSiniestro") }} >
-                                        <Text style={{ fontSize: 20, color: letra }}>Prueba</Text>
-                                    </TouchableOpacity>
-
-
-
-                                    <TouchableOpacity
-                                        style={styles.sty}
-                                        onPress={() => {
-                                            AsyncStorage.removeItem("motonet_usuarioLog");
-                                            props.state.usuarioReducer.usuarioLog = false
-                                            props.state.navigationReducer.replace("CargaPage")
-                                            return<View/>
-                                        }}
-                                    >
+                                    </View>
+                                    <View style={{
+                                        marginTop: 20,
+                                        width: "80%",
+                                        alignItems: "center",
+                                    }}>
                                         <Text style={{
-                                            marginTop: 10,
+                                            fontSize: 18,
                                             fontWeight: "bold",
+                                            textAlign: "center",
+                                            color: "red"
+                                        }}>
+                                            {nombreUsuario}
+                                        </Text>
+                                    </View>
+                                    <View style={{
+                                        marginTop: 10,
+                                        alignItems: "center",
+                                    }}>
+                                        <Text style={{
                                             fontSize: 20,
-                                            color: "#fff",
-                                        }} >Salir</Text>
-                                    </TouchableOpacity>
+                                            fontWeight: "normal",
+                                            textAlign: "center"
+                                        }}>
+
+                                            {/* <View style={{
+                                                flexDirection: "row"
+                                            }}>
+                                                <Svg name="START"
+                                                    style={{
+                                                        width: 25,
+                                                        height: 25,
+                                                    }} />
+                                                <Svg name="START"
+                                                    style={{
+                                                        width: 25,
+                                                        height: 25,
+                                                    }} />
+                                                <Svg name="START"
+                                                    style={{
+                                                        width: 25,
+                                                        height: 25,
+                                                    }} />
+                                                <Svg name="START"
+                                                    style={{
+                                                        width: 25,
+                                                        height: 25,
+                                                    }} />
+                                                <Svg name="START"
+                                                    style={{
+                                                        width: 25,
+                                                        height: 25,
+                                                    }} />
+                                            </View> */}
+                                        </Text>
+                                    </View>
+                                </View>
+
+                                <View style={{
+                                    height: "100%",
+                                    width: "90%",
+                                }}>
+
+                                    <View style={{
+                                        height: 1,
+                                        backgroundColor: '#ccc'
+                                    }} />
+
+                                    <ButtonNavi svg="Logo" Nombre="MIS VIAJES" onPress={handleClick} pagina="" />
+
+                                    <View style={{
+                                        height: 1,
+                                        backgroundColor: '#ccc'
+                                    }} />
+
+                                    <ButtonNavi svg="Logo" Nombre="PERFIL" onPress={handleClick} pagina="PerfilPage" />
+
+                                    <View style={{
+                                        height: 1,
+                                        backgroundColor: '#ccc'
+                                    }} />
+
+                                    <ButtonNavi svg="Logo" Nombre="BILLETERA" onPress={handleClick} pagina="" />
+
+                                    <View style={{
+                                        height: 1,
+                                        backgroundColor: '#ccc'
+                                    }} />
+
+                                    <ButtonNavi svg="Logo" Nombre="AYUDA" onPress={handleClick} pagina="" />
+
+                                    <View style={{
+                                        height: 1,
+                                        backgroundColor: '#ccc'
+                                    }} />
+
+                                    <ButtonNavi svg="Logo" Nombre="SALIR" onPress={handleClick} pagina="Cerrar" />
+
+                                    <View style={{
+                                        height: 1,
+                                        backgroundColor: '#ccc'
+                                    }} />
+
                                 </View>
                             </View>
                         </ScrollView>
                     </SafeAreaView>
                 </View>
             </View>
-        </Modal>
+        </Modal >
     );
 }
 
-
 const styles = StyleSheet.create({
-
-
-    sty: {
-        marginTop: 40,
-        width: "100%",
-
-        fontWeight: 'bold',
-        fontSize: 18,
-        color: "#6e367e",
-        alignItems: "center"
-    },
     logo: {
         height: 150,
-
         width: "100%",
         fontWeight: 'bold',
         padding: 10,
@@ -128,16 +257,14 @@ const styles = StyleSheet.create({
     contenedors: {
         position: "absolute",
         flex: 1,
-        width: 500,
-        maxWidth: 150,
+        width: "60%",
         height: "100%",
         minHeight: Dimensions.get("window").height,
-
         borderRightWidth: 1,
         borderRightColor: "#888",
         justifyContent: "center",
-
         alignItems: "center",
+        backgroundColor: "#fff"
     },
     menus: {
         justifyContent: 'center',
@@ -150,13 +277,12 @@ const styles = StyleSheet.create({
         top: 0,
         height: "100%",
         minHeight: Dimensions.get("window").height,
-
         paddingTop: 50,
     },
 });
+
 const initStates = (state) => {
     return { state }
 };
 
-
-export default connect(initStates)(NaviDrawe);
+export default connect(initStates)(NaviDrawer);

@@ -1,70 +1,117 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
-import * as viajesActions from '../../action/viajesActions'
 
-class Carga extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            obj: false,
-            existe: true,
-            parser: false
-        };
-    }
+const Carga = (props) => {
 
-    componentDidMount() { // B
-        const delay = ms => new Promise(res => setTimeout(res, ms));
-        const yourFunction = async () => {
-            await delay(3000);
+    const [isRun, setIsRun] = React.useState(false);
+    const [obj, setObj] = React.useState(false);
+    const [redirect, setRedirect] = React.useState(false);
 
-            if (this.props.state.usuarioReducer.usuarioLog) {
-                //si tengo un usuario
-                AsyncStorage.getItem("motonet_viaje").then((value) => {
-                    if (!value) {
-                        this.state.existe = false
-                        // this.setState(this.state)
-                        this.props.state.navigationReducer.replace("InicioPage");
-                        return <View/>
-                    } else {
-                        this.state.parser = JSON.parse(value)
-                        this.props.state.viajesReducer.viaje = this.state.parser
-                        this.props.actualizarViaje(this.props.state.viajesReducer.viaje)
-                        this.props.state.navigationReducer.replace("ViajeEsperaPage");
-                        return <View/>
-                    }
-
-
-                    // this.props.state.navigationReducer.replace("ViajeEsperaPage");
-                });
-
-                //falta comprovar si tengo viaje 
-                // si no tengo viaje voy a incio
-                //si tengo viaje voy a la etapa que corresponda del viaje.
-            } else {
-                this.props.state.usuarioReducer.estado = ""
-                this.props.state.navigationReducer.replace("LoginPage");
-            }
-
-            return <View />;
-        };
-
-        yourFunction();
-    }
-    render() {
+    const ShowPage = () => {
         return (
-            <View >
+            <View>
+
             </View>
         );
     }
-}
+    if (redirect) {
+        props.state.navigationReducer.replace(redirect);
+        return <View />
+    }
 
+    if (obj) {
+        if (props.state.usuarioReducer.estado === "cargando") {
+            return <ShowPage />
+        }
+        if (props.state.cabeceraDatoReducer.estado === "cargando") {
+            return <ShowPage />
+        }
+        if (props.state.socketClienteReducer.sessiones["motonet"].isOpen) {
+            if (props.state.usuarioReducer.usuarioLog) {
+                //registro
+                var cabecera = "registro_cliente";
+                if (!props.state.cabeceraDatoReducer.data[cabecera]) {
+                    props.state.socketClienteReducer.sessiones["motonet"].send({
+                        component: "cabeceraDato",
+                        type: "getDatoCabecera",
+                        estado: "cargando",
+                        cabecera: cabecera
+                    });
+                    return <View />
+                }
+                if (!props.state.usuarioReducer.usuarioDatos) {
+                    props.state.socketClienteReducer.sessiones["motonet"].send({                        
+                        component: "usuario",
+                        type: "getById",
+                        key: props.state.usuarioReducer.usuarioLog.key,
+                        cabecera: cabecera,
+                        estado: "cargando"
+                    }, true);
+                    return <View />
+                } else {
+                    // var estados = false
+                    // Object.keys(props.state.usuarioReducer.usuarioDatos).map((key) => {
+                    //     var obj = props.state.usuarioReducer.usuarioDatos[key]
+                    //     if (key === "Foto perfil") {
+                    //         return <View />
+                    //     }
+                    //     if (obj.estado === 0) {
+                    //         estados = true
+                    //         return <View />
+                    //     }
+                    // })
+                    // if (estados) {
+                    //     props.state.usuarioReducer.estado = ""
+                    //     setRedirect("EsperandoConfirmacionPage");                      
+                    //     return <View />
+                    // }
+                    props.state.usuarioReducer.estado = ""
+                    setRedirect("InicioPage");
+                    return <View />;
+                }
+            } else {
+                props.state.usuarioReducer.estado = ""
+                setRedirect("LoginPage");
+            }
+            return <View />;
+        }
+        return <View />
+    } else {
+        const delay = ms => new Promise(res => setTimeout(res, ms));
+        const yourFunction = async () => {
+            await delay(1000);
+            console.log("ms");
+            setObj(true);
+            return <View />;
+        };
+
+        AsyncStorage.getItem("motonet_usuarioLog").then((value) => {
+            if (isRun) {
+                return;
+            }
+            if (!value) {
+                yourFunction();
+                return;
+            }
+            if (value.length <= 0) {
+                yourFunction();
+                return;
+
+            }
+            props.state.usuarioReducer.usuarioLog = JSON.parse(value)
+            yourFunction();
+            if (!isRun) {
+                setIsRun(true);
+            }
+        });
+    }
+    return (
+        <ShowPage />
+    );
+}
 const initStates = (state) => {
     return { state }
 };
-const initActions = ({
-    ...viajesActions
-});
 
-
-export default connect(initStates, initActions)(Carga);
+export default connect(initStates)(Carga);
