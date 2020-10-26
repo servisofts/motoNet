@@ -71,6 +71,7 @@ const Carga = (props) => {
                     return <View />;
                 }
             } else {
+                
                 props.state.usuarioReducer.estado = ""
                 setRedirect("LoginPage");
             }
