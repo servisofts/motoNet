@@ -2,6 +2,7 @@ import TcpSocket from 'react-native-tcp-socket';
 import {
     AsyncStorage
 } from 'react-native';
+
 const delay = ms => new Promise(res => setTimeout(res, ms));
 export const initSocket = (store) => {
     const open = (cert) => {
@@ -23,17 +24,17 @@ export const initSocket = (store) => {
                 nombre: cert.nombre,
                 send: (obj, isDispatch) => {
                     client.write(JSON.stringify(obj) + "\n");
-                    if(isDispatch) store.dispatch(obj);
+                    if (isDispatch) store.dispatch(obj);
                 }
             });
-        
+
             AsyncStorage.getItem("motonet_usuarioLog").then((value) => {
-                if(value.length<=0){
+                if (value.length <= 0) {
                     return;
                 }
                 var usr = JSON.parse(value);
-                var objSend = { 
-                 component: "usuario",
+                var objSend = {
+                    component: "usuario",
                     type: "identificacion",
                     data: usr,
                     estado: "cargando"
@@ -99,11 +100,11 @@ export const initSocket = (store) => {
     open({
         nombre: "motonet",
         port: 10004,
-        host: "192.168.0.3",
+        host: "192.168.0.15",
         tls: true,
         tlsCert: { uri: pem }
     })
 
-   
-  
+
+
 }
