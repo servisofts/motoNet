@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import {
-    View,
-    Text,
-    StyleSheet,
-    ScrollView,
-    ActivityIndicator,
-    TouchableOpacity,
-    TextInput
-} from 'react-native'
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity, TextInput } from 'react-native'
 import ButtonRegistro from '../../component/LoginComponent/ButtonRegistro'
 import MiCheckBox from '../../component/MiCheckBox';
 import Estado from '../../component/Estado';
 import IntlPhoneInput from 'react-native-intl-phone-input';
 import Svg from '../../Svg'
 import { connect } from 'react-redux'
+
 class RegistroUsuarioPage extends Component {
     static navigationOptions = {
         headerShown: false,
@@ -205,14 +198,15 @@ class RegistroUsuarioPage extends Component {
         }
 
         return (
-            <ScrollView
-                style={{
-                    flex: 1,
-                }}>
-                <View style={{
-                    backgroundColor: "#FC363B",
-                    flex: 1
-                }}>
+            <View style={{
+                backgroundColor: "#FC363B",
+                flex: 1,
+            }}>
+                <ScrollView
+                    style={{
+                        flex: 1,
+                    }}>
+
                     <View style={{
                         flex: 0.4,
                         alignItems: 'center',
@@ -336,8 +330,9 @@ class RegistroUsuarioPage extends Component {
                         </View>
 
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
+
         )
     }
 }

@@ -1,112 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { View, TouchableOpacity, Text, StyleSheet, TextInput } from 'react-native';
+import React from 'react'
+import { View, TouchableOpacity, Text, TextInput } from 'react-native';
 import Svg from '../../Svg';
 
-const ConfirmarViaje = (props) => {
-
-    const [obj, setObj] = React.useState(false);
-    const [isRedirect, setRedirect] = React.useState(true);
-    const [precio, setPrecio] = React.useState()
-
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-
-    var datos;
-    if (!props.state.ViajeReducer.data) {
-        return <Text>No existe</Text>
-    } else {
-        datos = props.state.ViajeReducer.data;
-        Object.keys(props.state.ViajeReducer.data.movimientos).map((key) => {
-            var objMovimiento = props.state.ViajeReducer.data.movimientos[key];
-            console.log(objMovimiento)
-            switch (objMovimiento.tipo) {
-                case "inicio_busqueda":
-                    if (!precio) {
-                        setPrecio(objMovimiento.costo.monto)
-                    }
-                    break;
-            }
-            return <View />
-        })
-    }
-
-    const yourFunction = async () => {
-        await delay(datos.parametros["Tiempo permitido para aceptar viaje conductor"] * 1000);
-        console.log("tiempooo");
-        setObj(true);
-        return <View />;
-    };
-    if (!obj) {
-        yourFunction();
-    }
-    if (obj) {
-        if (!isRedirect) {
-            return <View />;
-        }
-        props.dispatch({
-            component: "viaje",
-            type: "cancelarBusquedaConductor"
-        });
-    }
-
-    // console.log(objeto)
-    //var datos = JSON.parse(objeto.data);
-    if (props.state.ViajeReducer.estado === "error") {
-        props.state.ViajeReducer.estado = "";
-        props.state.ViajeReducer.data = false;
-        return <View />
-    }
-
-    if (props.state.ViajeReducer.estado === "exito" && props.state.ViajeReducer.type == "confirmarBusqueda") {
-        props.state.navigationReducer.replace("ViajePage");
-        return <View />
-    }
-
-    if (props.state.ViajeReducer.estado === "exito" && props.state.ViajeReducer.type == "cancelarBusquedaConductor") {
-        return <View />
-    }
-
-    if (props.state.ViajeReducer.estado === "exito" && props.state.ViajeReducer.type == "negociarViajeConductor") {
-        if (isRedirect) {
-            setRedirect(false);
-        }
-    }
-
-    const Negociar = () => {
-        props.state.socketClienteReducer.sessiones["motonet"].send({
-            component: "viaje",
-            type: "negociarViajeConductor",
-            estado: "cargando",
-            costo: precio,
-            key_usuario: props.state.usuarioReducer.usuarioLog.key,
-            key_viaje: datos.key,
-        }, true);
-        setRedirect(false);
-        return <View />
-    }
-
-    const AceptarViaje = () => {
-        props.state.socketClienteReducer.sessiones["motonet"].send({
-            component: "viaje",
-            type: "confirmarBusqueda",
-            estado: "cargando",
-            key_usuario: props.state.usuarioReducer.usuarioLog.key,
-            key_viaje: datos.key,
-        }, true);
-        return <View />
-    }
-
-    const CancelarViaje = () => {
-        props.state.socketClienteReducer.sessiones["motonet"].send({
-            component: "viaje",
-            type: "cancelarBusquedaConductor",
-            estado: "cargando",
-            key_usuario: props.state.usuarioReducer.usuarioLog.key,
-            key_viaje: datos.key,
-        }, true);
-        return <View />
-    }
-
+const BotonesViaje = () => {
     return (
         <View style={{
             position: "absolute",
@@ -314,21 +210,4 @@ const ConfirmarViaje = (props) => {
     )
 }
 
-const styles = StyleSheet.create({
-    touch: {
-        width: "80%",
-        backgroundColor: "#fff",
-        height: 50,
-        paddingLeft: 15,
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-    },
-});
-
-const initStates = (state) => {
-    return { state }
-};
-export default connect(initStates)(ConfirmarViaje);
+export default BotonesViaje;

@@ -36,7 +36,7 @@ const Mapa = (props) => {
                     latitudeDelta: 0.01,
                     isRender: true,
                 }
-                mapa.animateToRegion(data.region, 3000);
+                mapa.animateToRegion(data.region, 1500);
             },
             (error) => {
                 // See error code charts below.
@@ -74,23 +74,22 @@ const Mapa = (props) => {
     }
 
     return (
-        < MapView
-            style={{
-                flex: 1,
-                width: '100%',
-                height: "100%",
-            }}
-            ref={map => { mapa = map }}
-            showsUserLocation={true}
-            initialRegion={data.region}
-            showsUserLocation={true}
-            showsCompass={true}
-            followsUserLocation={true}
-            onRegionChangeComplete={OnRegionChangeComplete}>
-            {/* {getMarkerOrigen()}
+        <View style={{ width: "100%", height: "100%" }}>
+            < MapView
+                style={{
+                    flex: 1,
+                    width: '100%',
+                    height: "100%",
+                }}
+                ref={map => { mapa = map }}
+                showsUserLocation={true}
+                initialRegion={data.region}
+                onRegionChangeComplete={OnRegionChangeComplete}>
+                {/* {getMarkerOrigen()}
             {getMarkerFin()} */}
-            <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
+                <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
 
+            </MapView >
             <TouchableOpacity
                 style={{
                     position: "absolute",
@@ -107,10 +106,10 @@ const Mapa = (props) => {
                     style={{
                         width: 50,
                         height: 50,
-                        fill: "#000"
+                        fill: "#f00"
                     }} />
             </TouchableOpacity>
-        </MapView >
+        </View>
     )
 }
 

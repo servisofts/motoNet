@@ -98,7 +98,7 @@ const TiposDeViajes = (props) => {
                 justifyContent: "space-evenly",
                 width: "100%",
             }}>
-                <ScrollView horizontal={true} style={{
+                <ScrollView horizontal={true} contentContainerStyle={{flexGrow:1, justifyContent:"center"}} style={{
                     flex: 1,
                 }}>
                     {ListaTiposDeViajes()}

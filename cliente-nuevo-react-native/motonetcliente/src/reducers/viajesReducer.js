@@ -25,7 +25,6 @@ export default (state, action) => {
             case "actualizarUbicacion":
                 actualizarUbicacion(state, action);
                 break;
-
             case "actualizarViaje":
                 actualizarViaje(state, action);
                 break;
@@ -38,6 +37,9 @@ export default (state, action) => {
             case "cancelarBusqueda":
                 cancelarBusqueda(state, action);
                 break;
+            case "negociarViajeConductor":
+                negociarViajeConductor(state, action);
+                break;
 
         }
         state = { ...state };
@@ -47,7 +49,7 @@ export default (state, action) => {
 
 const actualizarUbicacion = (state, action) => {
     state.ubicacion = action.data
-    
+
 }
 const actualizarViaje = (state, action) => {
     state.viaje = action.data
@@ -55,6 +57,7 @@ const actualizarViaje = (state, action) => {
 const cancelarBusqueda = (state, action) => {
     state.type = action.type
     state.estado = action.estado
+    AsyncStorage.removeItem("motonet_viaje");
 }
 
 const confirmarBusqueda = (state, action) => {
@@ -66,9 +69,19 @@ const confirmarBusqueda = (state, action) => {
     }
 }
 const buscar = (state, action) => {
+    state.type = action.type
     state.estado = action.estado
     if (action.estado === "exito") {
         state.viaje = action.data
         AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const negociarViajeConductor = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        // AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
 }

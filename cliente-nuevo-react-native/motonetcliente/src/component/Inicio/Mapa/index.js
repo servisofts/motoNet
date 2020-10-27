@@ -45,15 +45,6 @@ const Mapa = (props) => {
         return (
             <Marker
                 coordinate={locoation}
-                onRegionChangeComplete={(region) => {
-                    props.state.socketClienteReducer.sessiones["motonet"].send({
-                        component: "locationGoogle",
-                        type: "geocode",
-                        data: region,
-                        estado: "cargando"
-                    }, true);
-                    return <View />
-                }}
             >
                 <Svg name="LogoGlup"
                     style={{
@@ -69,12 +60,7 @@ const Mapa = (props) => {
     return (
         <MapView
             onRegionChangeComplete={(region) => {
-                props.state.socketClienteReducer.sessiones["motonet"].send({
-                    component: "locationGoogle",
-                    type: "geocode",
-                    data: region,
-                    estado: "cargando"
-                }, true);
+                props.onRegionChange(region);
                 return <View />
             }}
             style={styles.map}

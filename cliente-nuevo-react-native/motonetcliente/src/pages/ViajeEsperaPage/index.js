@@ -69,13 +69,115 @@ class ViajeEsperaPage extends Component {
             }
         }
 
+
+        const estaNegociando = () => {
+            var existe = true;
+
+            if (existe && !this.props.state.viajesReducer.viaje.movimientos) {
+                // return <View />
+                existe = false;
+            }
+
+            if (existe && !this.props.state.viajesReducer.viaje.movimientos["negociacion_conductor"]) {
+                // return <View />
+                existe = false;
+            }
+
+            if (existe && !this.props.state.viajesReducer.viaje.movimientos["negociacion_conductor"].costo) {
+                existe = false;
+            }
+            if (existe) {
+                return (
+                    <View style={{
+                        width: "100%",
+                        alignItems: "center"
+                    }}>
+                        <Text style={{
+                            color: "#fff"
+                        }}>
+                            {this.props.state.viajesReducer.viaje.movimientos["negociacion_conductor"].costo.monto}
+                        </Text>
+
+                        <View style={{
+                            width: "100%",
+                            flexDirection: "row",
+                            justifyContent: "space-evenly"
+                        }}>
+                            <TouchableOpacity
+                                style={{
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderRadius: 5,
+                                    height: 50,
+                                    backgroundColor: "#fff",
+                                    width: "30%"
+
+                                }}
+                                onPress={() => {
+                                    this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                                        component: "viaje",
+                                        type: "cancelarBusqueda",
+                                        key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                                        key_viaje: this.props.state.viajesReducer.viaje.key,
+                                        estado: "cargando"
+                                    }, true);
+                                }}>
+                                <Text>Confirmar</Text>
+                            </TouchableOpacity>
+
+                            <TouchableOpacity
+                                style={{
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderRadius: 5,
+                                    height: 50,
+                                    backgroundColor: "#fff",
+                                    width: "30%"
+                                }}>
+                                <Text>Buscar otro viaje</Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                )
+            } else {
+                return (
+                    <Animated.View
+                        style={[
+                            styles.square,
+                            {
+                                transform: [
+                                    {
+                                        scale: this.state.startValue,
+                                    },
+                                ],
+                            },
+                        ]}
+                    >
+
+                        <Svg name="Logo"
+                            style={{
+                                width: 100,
+                                height: 100,
+                            }} />
+                        <Text style={
+                            {
+                                marginTop: 10,
+                                fontSize: 30,
+                                fontWeight: "bold",
+                                color: "#fff"
+                            }}>MotoNet</Text>
+
+                    </Animated.View>
+                )
+            }
+        }
+
         return (
             <View style={{
                 flex: 1,
                 backgroundColor: "red",
                 alignItems: 'center',
             }}>
-
                 <View style={{
                     flex: 1
                 }}>
@@ -99,7 +201,6 @@ class ViajeEsperaPage extends Component {
                                 fill: "#f00"
 
                             }} />
-
                         <Text style={{
                             color: "red",
                             fontSize: 13,
@@ -114,7 +215,6 @@ class ViajeEsperaPage extends Component {
                             margin: 5,
 
                         }}>{this.state.obj.inicio.direccion}</Text>
-
                     </View>
 
                     <View style={{
@@ -154,36 +254,12 @@ class ViajeEsperaPage extends Component {
 
 
                 <View style={{
-                    flex: 1
+                    flex: 1,
+                    width: "100%"
                 }}>
 
-                    <Animated.View
-                        style={[
-                            styles.square,
-                            {
-                                transform: [
-                                    {
-                                        scale: this.state.startValue,
-                                    },
-                                ],
-                            },
-                        ]}
-                    >
+                    {estaNegociando()}
 
-                        <Svg name="Logo"
-                            style={{
-                                width: 100,
-                                height: 100,
-                            }} />
-                        <Text style={
-                            {
-                                marginTop: 10,
-                                fontSize: 30,
-                                fontWeight: "bold",
-                                color: "#fff"
-                            }}>MotoNet</Text>
-
-                    </Animated.View>
                 </View>
 
                 <View style={{
