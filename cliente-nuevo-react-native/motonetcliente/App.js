@@ -70,8 +70,8 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <StatusBar barStyle={"light-content"} backgroundColor={"#f00"} />
-        <SafeAreaView style={{ flex: 1 }}>
+        <SafeAreaView style={{ flex: 1, backgroundColor:"#f00" }}>
+          <StatusBar barStyle={"light-content"} translucent />
           <Container />
           <NaviDrawer />
         </SafeAreaView>

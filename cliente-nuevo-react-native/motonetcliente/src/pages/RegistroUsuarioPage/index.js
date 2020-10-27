@@ -198,14 +198,15 @@ class RegistroUsuarioPage extends Component {
         }
 
         return (
-            <ScrollView
-                style={{
-                    flex: 1,
-                }}>
-                <View style={{
-                    backgroundColor: "#FC363B",
-                    flex: 1
-                }}>
+            <View style={{
+                backgroundColor: "#FC363B",
+                flex: 1,
+            }}>
+                <ScrollView
+                    style={{
+                        flex: 1,
+                    }}>
+
                     <View style={{
                         flex: 0.4,
                         alignItems: 'center',
@@ -329,8 +330,9 @@ class RegistroUsuarioPage extends Component {
                         </View>
 
                     </View>
-                </View>
-            </ScrollView>
+                </ScrollView>
+            </View>
+
         )
     }
 }

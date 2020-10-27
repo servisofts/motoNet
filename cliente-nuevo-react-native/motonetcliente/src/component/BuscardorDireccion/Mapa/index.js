@@ -36,7 +36,7 @@ const Mapa = (props) => {
                     latitudeDelta: 0.01,
                     isRender: true,
                 }
-                mapa.animateToRegion(data.region, 3000);
+                mapa.animateToRegion(data.region, 1500);
             },
             (error) => {
                 // See error code charts below.
@@ -84,9 +84,6 @@ const Mapa = (props) => {
                 ref={map => { mapa = map }}
                 showsUserLocation={true}
                 initialRegion={data.region}
-                showsUserLocation={true}
-                showsCompass={true}
-                followsUserLocation={true}
                 onRegionChangeComplete={OnRegionChangeComplete}>
                 {/* {getMarkerOrigen()}
             {getMarkerFin()} */}
@@ -109,7 +106,7 @@ const Mapa = (props) => {
                     style={{
                         width: 50,
                         height: 50,
-                        fill: "#000"
+                        fill: "#f00"
                     }} />
             </TouchableOpacity>
         </View>
