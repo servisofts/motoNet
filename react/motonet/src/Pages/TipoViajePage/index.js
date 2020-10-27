@@ -76,7 +76,7 @@ const TipoViajePage = (props) => {
                                     console.log(descr)
                                     var objSend = {
                                         component: "tipoViaje",
-                                        type: "getAll",
+                                        type: "registro",
                                         estado: "cargando",
                                         key_usuario: props.state.usuarioReducer.usuarioLog.key,
                                         data: {

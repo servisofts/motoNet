@@ -305,6 +305,8 @@ export default function TableDetail(props) {
                                                     return;
                                                 }
                                                 return (
+                                                    //.dato para objeto json
+                                                    //sin .dato para objeto string
                                                     <TableCell >{row[obj.id].dato}  </TableCell>
                                                 )
                                             })}

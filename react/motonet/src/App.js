@@ -11,12 +11,7 @@ import TipoViajePage from './Pages/TipoViajePage'
 import ParametrosPage from './Pages/ParametrosPage'
 import NotificacionPage from './Pages/NotificacionPage'
 import AsociacionesMotoPage from './Pages/AsociacionesMotoPage'
-<<<<<<< HEAD
-import ChatPage from './Pages/ChatPage'
-
-=======
 import ListaAsociacionMotoPage from './Pages/ListaAsociacionMotoPage'
->>>>>>> 2fbb7a534d51585de00ae137e841dcc0dd430844
 
 function App() {
   return (
@@ -30,11 +25,7 @@ function App() {
       <Route exact path='/ParametrosPage' component={ParametrosPage} />
       <Route exact path='/NotificacionPage' component={NotificacionPage} />
       <Route exact path='/AsociacionesMotoPage' component={AsociacionesMotoPage} />
-<<<<<<< HEAD
-      <Route exact path='/ChatPage' component={ChatPage} />
-=======
       <Route exact path='/ListaAsociacionMotoPage' component={ListaAsociacionMotoPage} />
->>>>>>> 2fbb7a534d51585de00ae137e841dcc0dd430844
       
     </BrowserRouter>
   );
