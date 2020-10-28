@@ -208,7 +208,7 @@ const ConfirmarViaje = (props) => {
                         }} />
                 </TouchableOpacity>
 
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     onPress={AceptarViaje}
                     style={{
                         width: "20%",
@@ -223,7 +223,7 @@ const ConfirmarViaje = (props) => {
                         color: "#fff"
                     }}>
                         Aceptar</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
 
                 <TouchableOpacity
                     onPress={CancelarViaje}
