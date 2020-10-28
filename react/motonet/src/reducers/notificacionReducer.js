@@ -43,5 +43,3 @@ const getAll = (state, action) => {
         });
     }
 }
-
-
