@@ -5,6 +5,7 @@ import InicioPage from './InicioPage';
 import ViajeEsperaPage from './ViajeEsperaPage';
 import ComenzarCarreraPage from './ComenzarCarreraPage';
 import PerfilPage from './PerfilPage';
+import ViajeInicioPage from './ViajeInicioPage';
 
 export const getPages = () => {
     return {
@@ -15,5 +16,6 @@ export const getPages = () => {
         ViajeEsperaPage,
         ComenzarCarreraPage,
         PerfilPage,
+        ViajeInicioPage,
     }
 }

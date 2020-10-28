@@ -63,11 +63,17 @@ class ViajeEsperaPage extends Component {
                 this.props.navigation.replace("InicioPage")
                 AsyncStorage.removeItem("motonet_viaje")
             }
-            if (this.props.state.viajesReducer.type === "confirmarBusqueda") {
-                this.props.state.viajesReducer.estado = ""
-                this.props.navigation.replace("ComenzarCarreraPage");
+            if(this.props.state.viajesReducer.viaje.movimientos){
+                if (this.props.state.viajesReducer.viaje.movimientos["inicio_viaje"]) {
+                    this.props.navigation.replace("ViajeInicioPage");
+                }
             }
+            
+
         }
+
+
+
 
 
         const estaNegociando = () => {
@@ -116,7 +122,7 @@ class ViajeEsperaPage extends Component {
                                 onPress={() => {
                                     this.props.state.socketClienteReducer.sessiones["motonet"].send({
                                         component: "viaje",
-                                        type: "cancelarBusqueda",
+                                        type: "confirmarBusqueda",
                                         key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
                                         key_viaje: this.props.state.viajesReducer.viaje.key,
                                         estado: "cargando"
@@ -133,6 +139,15 @@ class ViajeEsperaPage extends Component {
                                     height: 50,
                                     backgroundColor: "#fff",
                                     width: "30%"
+                                }}
+                                onPress={() => {
+                                    this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                                        component: "viaje",
+                                        type: "notificarSiguiente",
+                                        key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                                        key_viaje: this.props.state.viajesReducer.viaje.key,
+                                        estado: "cargando"
+                                    }, true);
                                 }}>
                                 <Text>Buscar otro viaje</Text>
                             </TouchableOpacity>
