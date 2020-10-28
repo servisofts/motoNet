@@ -12,6 +12,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 
 import TableDetail from '../../Components/Table';
+import TableNewMe from '../../Components/TableNewMe';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -85,7 +86,7 @@ const ParametrosPages = (props) => {
     console.log(props.state.parametrosViajeReducer.data)
 
     return (
-        <NaviDrawer title={"Lista Parametros Viajes"} history={props.history}
+        <NaviDrawer title={"Parametros Viajes"} history={props.history}
 
             page={() => {
                 return (
@@ -142,7 +143,7 @@ const ParametrosPages = (props) => {
                                 </Button>
                         </Grid>
                         <Grid item xs={12}>
-                            <TableDetail
+                            <TableNewMe
                                 title={"Tipo de Parametro"}
                                 head={[
                                     { id: 'descripcion', label: 'DESCRIPCION' },

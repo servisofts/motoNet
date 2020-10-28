@@ -3,10 +3,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import NaviDrawer from '../../Components/NaviDrawer';
 import TableDetail from '../../Components/Table';
+import TableNewMe from '../../Components/TableNewMe';
 import { CircularProgress, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 //import PerfilUsuario from '../../Components/PerfilUsuario'
 import * as  cargarDatosPersonalesActions from '../../Actions/cargarDatosPersonalesActions';
+
 
 //elemnts
 
@@ -40,7 +42,7 @@ const ListaUsuarioPage = (props) => {
 
 
      return (
-          <NaviDrawer title={"Lista de nuevos usuarios."} history={props.history}
+          <NaviDrawer title={"Usuarios nuevos"} history={props.history}
 
                page={() => {
                     if (!props.state.socketReducer.socket) {
@@ -66,7 +68,7 @@ const ListaUsuarioPage = (props) => {
                     return (
                          <Grid container direction="row">
                               <Grid item xs={12} spacing={2} >
-                                   <TableDetail
+                                   <TableNewMe
                                         title={"Usuarios"}
                                         head={[
                                              { id: 'Nombres', label: 'Nombres' },

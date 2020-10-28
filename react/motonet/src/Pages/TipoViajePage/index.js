@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import TableDetail from '../../Components/Table';
 import TipoTarifaViaje from '../../Components/TipoTarifaViaje'
 import * as  tipoTarifaViajeActions from '../../Actions/tipoTarifaViaje';
+import TableNewMe from '../../Components/TableNewMe';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -62,7 +63,7 @@ const TipoViajePage = (props) => {
 
 
     return (
-        <NaviDrawer title={"Lista Tipos de Viajes"} history={props.history}
+        <NaviDrawer title={"Tipos de Viajes"} history={props.history}
 
             page={() => {
                 return (
@@ -89,7 +90,7 @@ const TipoViajePage = (props) => {
                                 </Button>
                             </form>
 
-                            <TableDetail
+                            <TableNewMe
                                 title={"Tipo de Viajes"}
                                 head={[
                                     { id: 'descripcion', label: 'Descripción' },
@@ -98,6 +99,7 @@ const TipoViajePage = (props) => {
                                 handleClick={
                                     (key) => {
                                         props.TipoTarifa(key);
+                                       //console.log("entrooo",key)
                                         return;
                                     }
                                 }
