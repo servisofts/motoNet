@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import NaviDrawer from '../../Components/NaviDrawer';
-import TableDetail from '../../Components/Table';
 import TableNewMe from '../../Components/TableNewMe';
 import { CircularProgress, Grid } from '@material-ui/core';
 import { Link } from 'react-router-dom';
