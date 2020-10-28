@@ -5,7 +5,6 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import TableDetail from '../../Components/Table';
 import TipoTarifaViaje from '../../Components/TipoTarifaViaje'
 import * as  tipoTarifaViajeActions from '../../Actions/tipoTarifaViaje';
 import TableNewMe from '../../Components/TableNewMe';
