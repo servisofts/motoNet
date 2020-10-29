@@ -2,7 +2,6 @@ import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import PopupViajesComponet from '../../Component/PopupViajesComponet';
 import Svg from '../../Svg';
 import RutaViaje from './RutaViaje';
 
@@ -16,26 +15,6 @@ const ViajePage = (props) => {
         latitudeDelta: 0.07,
         longitudeDelta: 0.07,
     });
-
-    const [regionUbicacion, setRegionUbicacion] = React.useState({
-        // latitude: props.ViajeReducer.data.destinos[0].lat,        
-        // longitude: props.ViajeReducer.data.destinos[0].lng,
-        latitude: props.state.ViajeReducer.data.destinos[1].latitude,
-        longitude: props.state.ViajeReducer.data.destinos[1].longitude,
-    });
-
-    const [regionDestino, setRegionDestino] = React.useState({
-        // latitude: props.ViajeReducer.data.destinos[1].lat,
-        // longitude: props.ViajeReducer.data.destinos[1].lng,        
-        latitude: props.state.ViajeReducer.data.destinos[0].latitude,
-        longitude: props.state.ViajeReducer.data.destinos[0].longitude,
-    });
-
-    /*   if (!props.state.locationReducer.isOpen) {
-          props.state.locationReducer.open();
-          return <View></View>
-      }
-   */
 
     if (!zoom) {
         const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -52,28 +31,6 @@ const ViajePage = (props) => {
             zoomin(obj);
         else
             zoomout(obj);
-    }
-
-    getMarkerSelect = (props) => {
-        /*   if (!this.state.marcar) {
-              return <View />
-          } */
-        return (
-            <Marker
-                coordinate={props}
-            >
-                <TouchableOpacity
-                >
-                    <Svg name="LogoMoto"
-                        style={{
-                            width: 25,
-                            height: 25,
-                            fill: "#fff"
-                        }} />
-                </TouchableOpacity>
-
-            </Marker>
-        )
     }
 
 
@@ -109,41 +66,10 @@ const ViajePage = (props) => {
                 initialRegion={region}
                 ref={map => { mapa = map }}
             >
-                {getMarkerSelect(regionDestino)}
-                {getMarkerSelect(regionUbicacion)}
                 <RutaViaje />
             </MapView>
-            <PopupViajesComponet />
-            <TouchableOpacity
-                onPress={() => {
-                    props.state.socketClienteReducer.sessiones["motonet"].send({
-                        component: "locationGoogle",
-                        type: "route",
-                        estado: "cargando",
-                        data: {
-                            inicio: {
-                                ...props.state.backgroundLocationReducer.data,
-                            },
-                            fin: {
-                                latitude: props.state.ViajeReducer.data.destinos[0].latitude,
-                                longitude: props.state.ViajeReducer.data.destinos[0].longitude,
-                            }
-                        }
-                    }, true);
-                }}
-                style={{
-                    width: 100,
-                    height: 100,
-                    borderRadius: 100,
-                    backgroundColor: "#f00",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    position: "absolute"
-                }}>
-                <Text style={{ color: "#fff", fontSize: 10, fontWeight: 'bold', }} >
-                    simulacion
-                </Text>
-            </TouchableOpacity>
+         
+            
         </View>
     )
 }
