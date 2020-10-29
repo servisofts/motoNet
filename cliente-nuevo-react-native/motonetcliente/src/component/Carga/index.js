@@ -1,114 +1,127 @@
 import React from 'react';
-import { View, Text, AsyncStorage } from 'react-native';
+import { View, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
+import AppParams from '../../Json/index.json'
+const delay = ms => new Promise(res => setTimeout(res, ms));
+var cabecera = "registro_cliente";
 
 const Carga = (props) => {
+    const [validaciones, setValidaciones] = React.useState({
+        tiempoEspera: false,
+        socket: false,
+        usuario: false,
+        viaje: false
+    });
+    const [paginaDestino, setPaginaDestino] = React.useState(false);
 
-    const [isRun, setIsRun] = React.useState(false);
-    const [obj, setObj] = React.useState(false);
-    const [redirect, setRedirect] = React.useState(false);
-
-    const ShowPage = () => {
-        return (
-            <View>
-
-            </View>
-        );
+    //Compruebo si existe ek navigation
+    if (!props.navigation) {
+        return <Text>No existe navegacion</Text>
     }
-    if (redirect) {
-        props.state.navigationReducer.replace(redirect);
-        return <View />
-    }
-
-    if (obj) {
-        if (props.state.usuarioReducer.estado === "cargando") {
-            return <ShowPage />
-        }
-        if (props.state.cabeceraDatoReducer.estado === "cargando") {
-            return <ShowPage />
-        }
-        if (props.state.socketClienteReducer.sessiones["motonet"].isOpen) {
-            if (props.state.usuarioReducer.usuarioLog) {
-                //registro
-                var cabecera = "registro_cliente";
-                if (!props.state.cabeceraDatoReducer.data[cabecera]) {
-                    props.state.socketClienteReducer.sessiones["motonet"].send({
-                        component: "cabeceraDato",
-                        type: "getDatoCabecera",
-                        estado: "cargando",
-                        cabecera: cabecera
-                    });
-                    return <View />
-                }
-                if (!props.state.usuarioReducer.usuarioDatos) {
-                    props.state.socketClienteReducer.sessiones["motonet"].send({                        
-                        component: "usuario",
-                        type: "getById",
-                        key: props.state.usuarioReducer.usuarioLog.key,
-                        cabecera: cabecera,
-                        estado: "cargando"
-                    }, true);
-                    return <View />
-                } else {
-                    // var estados = false
-                    // Object.keys(props.state.usuarioReducer.usuarioDatos).map((key) => {
-                    //     var obj = props.state.usuarioReducer.usuarioDatos[key]
-                    //     if (key === "Foto perfil") {
-                    //         return <View />
-                    //     }
-                    //     if (obj.estado === 0) {
-                    //         estados = true
-                    //         return <View />
-                    //     }
-                    // })
-                    // if (estados) {
-                    //     props.state.usuarioReducer.estado = ""
-                    //     setRedirect("EsperandoConfirmacionPage");                      
-                    //     return <View />
-                    // }
-                    props.state.usuarioReducer.estado = ""
-                    setRedirect("InicioPage");
-                    return <View />;
-                }
-            } else {
-                
-                props.state.usuarioReducer.estado = ""
-                setRedirect("LoginPage");
-            }
-            return <View />;
-        }
-        return <View />
-    } else {
-        const delay = ms => new Promise(res => setTimeout(res, ms));
-        const yourFunction = async () => {
+    if (!validaciones.tiempoEspera) {
+        const EsperarAwait = async () => {
             await delay(1000);
-            console.log("ms");
-            setObj(true);
+            validaciones.tiempoEspera = "exito";
+            setValidaciones({ ...validaciones });
             return <View />;
         };
-
+        validaciones.tiempoEspera = true;
+        setValidaciones({ ...validaciones });
+        EsperarAwait();
+        return <View />
+    }
+    if (validaciones.tiempoEspera != "exito") {
+        return <View />
+    }
+    if (!validaciones.socket) {
+        if (props.state.socketClienteReducer.sessiones[AppParams.socket.name].isOpen) {
+            validaciones.socket = true;
+            setValidaciones({ ...validaciones });
+            return <View />;
+        }
+    }
+    if (!validaciones.usuario) {
         AsyncStorage.getItem("motonet_usuarioLog").then((value) => {
-            if (isRun) {
-                return;
-            }
             if (!value) {
-                yourFunction();
+                validaciones.usuario = "no_existe";
+                setValidaciones({ ...validaciones });
                 return;
-            }
-            if (value.length <= 0) {
-                yourFunction();
-                return;
-
             }
             props.state.usuarioReducer.usuarioLog = JSON.parse(value)
-            yourFunction();
-            if (!isRun) {
-                setIsRun(true);
-            }
+            validaciones.usuario = "existe";
+            setValidaciones({ ...validaciones });
+            return;
+
         });
+        validaciones.usuario = "cargando";
+        setValidaciones({ ...validaciones });
+        return <View />
+    }
+    if (validaciones.usuario == "cargando") {
+        return <View />
+    }
+
+    if (validaciones.usuario == "no_existe") {
+        if (!props.state.cabeceraDatoReducer.data[cabecera]) {
+            if (props.state.cabeceraDatoReducer.estado == "cargando") {
+                return <View />
+            }
+            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                component: "cabeceraDato",
+                type: "getDatoCabecera",
+                estado: "cargando",
+                cabecera: cabecera
+            });
+            return <View />
+        }
+        props.navigation.replace("LoginPage");
+    }
+
+    if (validaciones.usuario == "existe") {
+        if (!props.state.usuarioReducer.usuarioDatos) {
+            if (props.state.usuarioReducer.estado == "cargando") {
+                return <View />
+            }
+            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                component: "usuario",
+                type: "getById",
+                key: props.state.usuarioReducer.usuarioLog.key,
+                cabecera: cabecera,
+                estado: "cargando"
+            }, true);
+            return <View />
+        }
+
+    }
+
+    if (!validaciones.viaje) {
+        AsyncStorage.getItem("motonet_viaje").then((value) => {
+            if (!value) {
+                validaciones.viaje = "no_existe";
+                setValidaciones({ ...validaciones });
+                return;
+            }
+            // props.state.usuarioReducer.usuarioLog = JSON.parse(value)
+            validaciones.viaje = "existe";
+            setValidaciones({ ...validaciones });
+            return;
+
+        });
+        validaciones.viaje = "cargando";
+        setValidaciones({ ...validaciones });
+        return <View />
+    }
+    if (validaciones.viaje == "cargando") {
+        return <View />
+    }
+    if (validaciones.viaje == "no_existe") {
+        props.navigation.replace("InicioPage");
+    }
+    if (validaciones.viaje == "existe") {
+        props.navigation.replace("ViajeInicioPage");
     }
     return (
-        <ShowPage />
+        <View />
     );
 }
 const initStates = (state) => {

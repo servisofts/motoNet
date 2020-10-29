@@ -9,11 +9,11 @@ class ViajeInicioPage extends Component {
     static navigationOptions = {
         headerShown: false,
     }
-        
+
     constructor(props) {
         super(props);
     }
-    
+
 
     render() {
         return (
@@ -23,6 +23,9 @@ class ViajeInicioPage extends Component {
                 alignItems: "center"
             }}>
                 <MapaViaje />
+
+               
+
                 <TouchableOpacity
                     onPress={() => {
                         this.props.state.naviDrawerReducer.openBar()
@@ -33,7 +36,7 @@ class ViajeInicioPage extends Component {
                         position: "absolute",
                         alignItems: 'center',
                         justifyContent: 'center',
-                        top: 5,
+                        top: 15,
                         left: 10,
                     }} >
                     <Svg name="menu"

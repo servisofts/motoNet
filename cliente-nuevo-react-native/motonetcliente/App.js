@@ -7,7 +7,7 @@
  */
 import React, { Component } from 'react';
 import {
-  View, SafeAreaView, StatusBar
+  View, SafeAreaView, StatusBar, Platform
 } from 'react-native';
 
 
@@ -70,8 +70,11 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <SafeAreaView style={{ flex: 1, backgroundColor:"#f00" }}>
-          <StatusBar barStyle={"light-content"} translucent />
+        <SafeAreaView style={{
+          flex: 1, backgroundColor: "#ccc",
+          paddingTop: Platform.OS === 'android' ? 25 : 0
+        }}>
+          <StatusBar barStyle="light-content" backgroundColor="red" translucent />
           <Container />
           <NaviDrawer />
         </SafeAreaView>

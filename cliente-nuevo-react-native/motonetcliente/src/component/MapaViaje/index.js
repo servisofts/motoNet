@@ -9,41 +9,41 @@ const Mapa = (props) => {
 
     const [data, setdata] = React.useState({
         region: {
-            latitude: 0,
-            longitude: 0,
-            latitudeDelta: 0,
-            longitudeDelta: 0,
+            latitude: -17.78629,
+            longitude: -63.18117,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1,
             isRender: false,
         },
         origen: false,
         ubicacionActual: false
     })
 
-    
-
     const getMarkerSelect = () => {
         /*   if (!this.state.marcar) {
               return <View />
           } */
 
-        if (!props.state.posicionConductorReducer.posicionConductor.posicion) {
+        if (!props.state.posicionConductorReducer.posicion) {
             return <View />
         }
 
-        if (props.state.posicionConductorReducer.posicionConductor.posicion) {
-            return (
-                <Marker
-                    coordinate={props}
-                >
-                    <Svg name="LogoMoto"
-                        style={{
-                            width: 25,
-                            height: 25,
-                            fill: "#fff"
-                        }} />
-                </Marker>
-            )
-        }
+        var posicion = props.state.posicionConductorReducer.posicion
+
+        return (
+            <Marker
+                coordinate={{
+                    latitude: posicion.latitude,
+                    longitude: posicion.longitude
+                }}>
+                <Svg name="Logo"
+                    style={{
+                        width: 25,
+                        height: 25,
+                        fill: "#fff"
+                    }} />
+            </Marker>
+        )
     }
 
     const getMarker = () => {
@@ -84,7 +84,7 @@ const Mapa = (props) => {
                 {/* <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} /> */}
 
             </MapView >
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={{
                     position: "absolute",
                     bottom: 200,
@@ -102,7 +102,7 @@ const Mapa = (props) => {
                         height: 50,
                         fill: "#f00"
                     }} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
     )
 }

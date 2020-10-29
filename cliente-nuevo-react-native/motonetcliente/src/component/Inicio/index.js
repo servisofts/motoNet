@@ -35,8 +35,8 @@ const Inicio = (props) => {
                     position: "absolute",
                     alignItems: 'center',
                     justifyContent: 'center',
-                    top: 5,
-                    left: 10,
+                    top: 15,
+                    left: 5,                    
                 }} >
                 <Svg name="menu"
                     style={{
