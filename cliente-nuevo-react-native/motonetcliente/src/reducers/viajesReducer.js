@@ -39,7 +39,10 @@ export default (state, action) => {
                 break;
             case "negociarViajeConductor":
                 negociarViajeConductor(state, action);
-                break;        
+                break;
+            case "cancelarViajeCliente":
+                cancelarViajeCliente(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -82,5 +85,13 @@ const negociarViajeConductor = (state, action) => {
     if (action.estado === "exito") {
         state.viaje = action.data
         // AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const cancelarViajeCliente = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data       
     }
 }

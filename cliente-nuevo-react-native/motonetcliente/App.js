@@ -71,7 +71,8 @@ class App extends Component {
     return (
       <Provider store={store}>
         <SafeAreaView style={{
-          flex: 1, backgroundColor: "#ccc",
+          flex: 1,
+          backgroundColor: "#ccc",
           paddingTop: Platform.OS === 'android' ? 25 : 0
         }}>
           <StatusBar barStyle="light-content" backgroundColor="red" translucent />
