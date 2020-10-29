@@ -5,9 +5,9 @@ import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import TableDetail from '../../Components/Table';
 import TipoTarifaViaje from '../../Components/TipoTarifaViaje'
 import * as  tipoTarifaViajeActions from '../../Actions/tipoTarifaViaje';
+import TableNewMe from '../../Components/TableNewMe';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -62,7 +62,7 @@ const TipoViajePage = (props) => {
 
 
     return (
-        <NaviDrawer title={"Lista Tipos de Viajes"} history={props.history}
+        <NaviDrawer title={"Tipos de Viajes"} history={props.history}
 
             page={() => {
                 return (
@@ -76,7 +76,7 @@ const TipoViajePage = (props) => {
                                     console.log(descr)
                                     var objSend = {
                                         component: "tipoViaje",
-                                        type: "getAll",
+                                        type: "registro",
                                         estado: "cargando",
                                         key_usuario: props.state.usuarioReducer.usuarioLog.key,
                                         data: {
@@ -89,7 +89,7 @@ const TipoViajePage = (props) => {
                                 </Button>
                             </form>
 
-                            <TableDetail
+                            <TableNewMe
                                 title={"Tipo de Viajes"}
                                 head={[
                                     { id: 'descripcion', label: 'Descripción' },
@@ -98,6 +98,7 @@ const TipoViajePage = (props) => {
                                 handleClick={
                                     (key) => {
                                         props.TipoTarifa(key);
+                                       //console.log("entrooo",key)
                                         return;
                                     }
                                 }

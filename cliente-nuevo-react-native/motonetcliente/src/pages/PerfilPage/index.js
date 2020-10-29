@@ -230,7 +230,7 @@ class PerfilPage extends Component {
                     onPress={() => this.props.navigation.goBack()}
                     style={{
                         position: "absolute",
-                        top: 10,
+                        top: 20,
                         left: 10,
                     }}>
                     <Svg name="Volver"

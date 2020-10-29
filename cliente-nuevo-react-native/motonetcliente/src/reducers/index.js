@@ -8,6 +8,7 @@ import locationGoogleMapReducer from './locationGoogleMapReducer';
 import usuarioReducer from './usuarioReducer';
 import viajesReducer from './viajesReducer';
 import tipoViajesReducer from './tipoViajesReducer';
+import posicionConductorReducer from './posicionConductorReducer';
 
 export default combineReducers({
     navigationReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
     usuarioReducer,
     viajesReducer,
     tipoViajesReducer,
+    posicionConductorReducer,
 });

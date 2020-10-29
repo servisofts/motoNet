@@ -1,3 +1,6 @@
 {
+    "socket":{
+        "name":"motonet"
+    },
     "urlImages":"http://glupapp.com/images/"
 }

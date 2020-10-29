@@ -39,8 +39,7 @@ export default (state, action) => {
                 break;
             case "negociarViajeConductor":
                 negociarViajeConductor(state, action);
-                break;
-
+                break;        
         }
         state = { ...state };
     }

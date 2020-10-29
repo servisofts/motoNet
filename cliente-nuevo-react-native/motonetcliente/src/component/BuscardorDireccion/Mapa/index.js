@@ -10,10 +10,10 @@ var mapa;
 const Mapa = (props) => {
     const [data, setdata] = React.useState({
         region: {
-            latitude: 0,
-            longitude: 0,
-            latitudeDelta: 0,
-            longitudeDelta: 0,
+            latitude: -17.78629, 
+            longitude: -63.18117,
+            latitudeDelta: 0.2,
+            longitudeDelta: 0.2,
             isRender: false,
         },
         origen: false,
@@ -56,7 +56,7 @@ const Mapa = (props) => {
 
     useEffect(() => {
         // Actualiza el título del documento usando la API del navegador
-        positionActual();
+       // positionActual();
     });
 
     const OnRegionChangeComplete = (region) => {

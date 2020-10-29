@@ -11,8 +11,8 @@ export default (state, action) => {
 
     if (action.component == "asociacionMoto") {
         switch (action.type) {
-            case "Registro":
-                Registro(state, action);
+            case "registro":
+                registro(state, action);
                 break;
             case "getAll":
                 getAll(state, action);
@@ -24,8 +24,15 @@ export default (state, action) => {
     return state;
 }
 
-const Registro = (state, action) => {
+const registro = (state, action) => {
     state.estado = action.estado
+    if (action.estado === "exito") {
+        if (!state.data) {
+            state.data = {}
+        }
+        var obj = action.data;
+        state.data[obj.key] = obj;
+    }
 }
 
 const getAll = (state, action) => {
@@ -35,7 +42,7 @@ const getAll = (state, action) => {
             state.data = {}
         }
         action.data.map((obj, key) => {
-            state.data[obj.key_usuario] = JSON.parse(obj.data);
+            state.data[obj.key] =obj;
         });
     }
 }

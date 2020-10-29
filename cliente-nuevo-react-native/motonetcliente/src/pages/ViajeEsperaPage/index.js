@@ -63,12 +63,12 @@ class ViajeEsperaPage extends Component {
                 this.props.navigation.replace("InicioPage")
                 AsyncStorage.removeItem("motonet_viaje")
             }
-            if (this.props.state.viajesReducer.type === "confirmarBusqueda") {
-                this.props.state.viajesReducer.estado = ""
-                this.props.navigation.replace("ComenzarCarreraPage");
+            if (this.props.state.viajesReducer.viaje.movimientos) {
+                if (this.props.state.viajesReducer.viaje.movimientos["inicio_viaje"]) {
+                    this.props.navigation.replace("ViajeInicioPage");
+                }
             }
         }
-
 
         const estaNegociando = () => {
             var existe = true;
@@ -116,7 +116,7 @@ class ViajeEsperaPage extends Component {
                                 onPress={() => {
                                     this.props.state.socketClienteReducer.sessiones["motonet"].send({
                                         component: "viaje",
-                                        type: "cancelarBusqueda",
+                                        type: "confirmarBusqueda",
                                         key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
                                         key_viaje: this.props.state.viajesReducer.viaje.key,
                                         estado: "cargando"
@@ -133,6 +133,15 @@ class ViajeEsperaPage extends Component {
                                     height: 50,
                                     backgroundColor: "#fff",
                                     width: "30%"
+                                }}
+                                onPress={() => {
+                                    this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                                        component: "viaje",
+                                        type: "notificarSiguiente",
+                                        key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                                        key_viaje: this.props.state.viajesReducer.viaje.key,
+                                        estado: "cargando"
+                                    }, true);
                                 }}>
                                 <Text>Buscar otro viaje</Text>
                             </TouchableOpacity>
@@ -179,12 +188,12 @@ class ViajeEsperaPage extends Component {
                 alignItems: 'center',
             }}>
                 <View style={{
-                    flex: 1
+                    flex: 1,
                 }}>
                     <View style={{
                         width: "90%",
                         height: 35,
-                        marginTop: 20,
+                        marginTop: 50,
                         alignItems: 'center',
                         justifyContent: 'center',
                         backgroundColor: "#fff",
@@ -195,11 +204,9 @@ class ViajeEsperaPage extends Component {
                     }}>
                         <Svg name="ubicacion"
                             style={{
-
                                 width: 25,
                                 height: 25,
                                 fill: "#f00"
-
                             }} />
                         <Text style={{
                             color: "red",
@@ -213,7 +220,6 @@ class ViajeEsperaPage extends Component {
                             flex: 0.9,
                             fontSize: 9,
                             margin: 5,
-
                         }}>{this.state.obj.inicio.direccion}</Text>
                     </View>
 
