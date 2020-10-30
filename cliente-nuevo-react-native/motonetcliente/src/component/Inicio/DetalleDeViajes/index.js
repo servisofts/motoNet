@@ -154,7 +154,6 @@ const DetalleDeViajes = (props) => {
                 borderRightWidth: 2,
                 flex: 1,
             }}>
-
                 <View style={{
                     flex: 1,
                     justifyContent: "center",
@@ -214,7 +213,6 @@ const DetalleDeViajes = (props) => {
                             </TouchableOpacity>
                         )
                     }
-
                 </View>
             </View>
 

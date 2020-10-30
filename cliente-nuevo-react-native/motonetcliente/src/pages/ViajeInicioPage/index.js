@@ -34,7 +34,6 @@ class ViajeInicioPage extends Component {
         return <View />
     }
 
-
     closeModal() {
         this.setState({
             abrirModal: false
@@ -43,7 +42,6 @@ class ViajeInicioPage extends Component {
     }
 
     render() {
-
         return (
             <View style={{
                 flex: 1,
@@ -88,9 +86,7 @@ class ViajeInicioPage extends Component {
                         CANCELAR VIAJE
                     </Text>
                 </TouchableOpacity>
-
                 <CancelarViaje navigation={this.props.navigation} />
-
             </View >
         )
     }
