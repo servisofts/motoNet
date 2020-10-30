@@ -113,6 +113,8 @@ const CancelarViaje = (props) => {
                         }}
                         onPress={() => {
                             AsyncStorage.removeItem("motonet_viaje");
+                            props.state.viajesReducer.viaje = false;
+                            props.navigation.replace("CargaPage");
                         }}>
                         <Text>
                             CANCELAR MOTONET
@@ -133,7 +135,7 @@ const CancelarViaje = (props) => {
                     //props.state.locationGoogleMapReducer.route = false;
                     //props.setVentanaSelect("tipoDeViaje")
                     AsyncStorage.removeItem("motonet_viaje");
-                    return <View />
+                    props.navigation.replace("CargaPage");
                 }}>
                 <Svg name="Close"
                     style={{

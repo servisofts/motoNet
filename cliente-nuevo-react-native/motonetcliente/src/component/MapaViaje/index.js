@@ -11,8 +11,8 @@ const Mapa = (props) => {
         region: {
             latitude: -17.78629,
             longitude: -63.18117,
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1,
+            latitudeDelta: 0.08,
+            longitudeDelta: 0.08,
             isRender: false,
         },
         origen: false,
@@ -22,14 +22,11 @@ const Mapa = (props) => {
     const getMarkerSelect = () => {
         /*   if (!this.state.marcar) {
               return <View />
-          } */
-
+        } */
         if (!props.state.posicionConductorReducer.posicion) {
             return <View />
         }
-
         var posicion = props.state.posicionConductorReducer.posicion
-
         return (
             <Marker
                 coordinate={{
@@ -40,27 +37,27 @@ const Mapa = (props) => {
                     style={{
                         width: 25,
                         height: 25,
-                        fill: "#fff"
+                        fill: "#fff",
+                        transform: [{ rotate: posicion.deegre + 'deg' }]
                     }} />
             </Marker>
         )
     }
 
-    const getMarker = () => {
-        if (!props.state.locationReducer.data) {
+    const getMarkerInicio = () => {
+        if (!props.state.viajesReducer.viaje) {
             return <View />
         }
-        var data = props.state.locationReducer.data;
-        var json = { latitude: data.latitude, longitude: data.longitude };
+        var dato = props.state.viajesReducer.viaje.destinos[0];
+        var json = { latitude: dato.latitude, longitude: dato.longitude };
         return (
             <Marker
                 coordinate={json}
             >
-                <Svg name="MarkerMoto"
+                <Svg name="Marcador"
                     style={{
-                        width: 50,
-                        height: 50,
-                        transform: [{ rotate: data.deegre + 'deg' }]
+                        width: 20,
+                        height: 20,
                     }} />
             </Marker>
         )
@@ -78,9 +75,11 @@ const Mapa = (props) => {
                 showsUserLocation={true}
                 initialRegion={data.region}>
                 {/* {getMarkerOrigen()}
-            {getMarkerFin()} */}
+                {getMarkerFin()} */}
 
+                {getMarkerInicio()}
                 {getMarkerSelect()}
+
                 {/* <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} /> */}
 
             </MapView >

@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, Alert } from 'react-native';
 import Svg from '../../Svg';
 import MapaViaje from '../../component/MapaViaje';
-import CancelarViaje from '../../component/ModalComponet/CancelarViaje';
+import CancelarViaje from '../../component/InicioViajeComponet/CancelarViaje';
 import AppParams from "../../Json"
+import EstadoViaje from '../../component/InicioViajeComponet/EstadoViaje';
 
 class ViajeInicioPage extends Component {
 
@@ -18,8 +19,6 @@ class ViajeInicioPage extends Component {
             abrirModal: false
         }
     }
-
-
 
     Cancelar() {
         this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
@@ -43,7 +42,6 @@ class ViajeInicioPage extends Component {
         return <View />
     }
 
-
     render() {
 
         return (
@@ -53,38 +51,22 @@ class ViajeInicioPage extends Component {
                 alignItems: "center"
             }}>
                 <MapaViaje />
-
-                <View
-                    style={{
-                        width: "90%",
-                        height: 50,
-                        position: "absolute",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: "#fff",
-                        top: 30,
-                        borderRadius: 10
-                    }} >
-                    <Text>
-                        Estado del viaje
-                    </Text>
-                </View>
-
+                <EstadoViaje />
                 <TouchableOpacity
                     onPress={() => {
                         // this.Cancelar()
                         Alert.alert(
-                            "Alert Title",
-                            "My Alert Msg",
+                            "Alerta",
+                            "Al aceptar la cancelación, puede que tenga un costo",
                             [
                                 {
-                                    text: "Cancel",
+                                    text: "Cancelar",
                                     onPress: () => console.log("Cancel Pressed"),
                                     style: "cancel"
                                 },
                                 {
                                     text: "Aceptar",
-                                    onPress: () => console.log("OK Pressed")
+                                    onPress: () => this.Cancelar()
                                 }
                             ],
                             { cancelable: false }
@@ -103,11 +85,11 @@ class ViajeInicioPage extends Component {
                     <Text style={{
                         color: "#fff"
                     }}>
-                        CANCELAR
+                        CANCELAR VIAJE
                     </Text>
                 </TouchableOpacity>
 
-                <CancelarViaje />
+                <CancelarViaje navigation={this.props.navigation} />
 
             </View >
         )

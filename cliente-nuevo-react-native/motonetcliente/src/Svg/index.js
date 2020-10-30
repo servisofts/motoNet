@@ -9,6 +9,7 @@ import Menu from '../img/menu.svg';
 import Volver from '../img/volver.svg';
 import Gps from '../img/gps.svg';
 import Close from '../img/close.svg';
+import Marcador from '../img/marcador.svg';
 
 const Svg = (props) => {
 
@@ -31,6 +32,8 @@ const Svg = (props) => {
             return <Gps style={props.style} />
         case "Close":
             return <Close style={props.style} />
+        case "Marcador":
+            return <Marcador style={props.style} />
         default: return <Text>Not Found</Text>
     }
 }

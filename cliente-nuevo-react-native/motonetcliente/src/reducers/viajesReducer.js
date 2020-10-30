@@ -43,6 +43,12 @@ export default (state, action) => {
             case "cancelarViajeCliente":
                 cancelarViajeCliente(state, action);
                 break;
+            case "cancelarViajeConductor":
+                cancelarViajeConductor(state, action);
+                break;
+            case "notificarSiguiente":
+                notificarSiguiente(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -84,7 +90,7 @@ const negociarViajeConductor = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
         state.viaje = action.data
-        // AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
 }
 
@@ -92,6 +98,25 @@ const cancelarViajeCliente = (state, action) => {
     state.type = action.type
     state.estado = action.estado
     if (action.estado === "exito") {
-        state.viaje = action.data       
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const cancelarViajeConductor = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const notificarSiguiente = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
 }

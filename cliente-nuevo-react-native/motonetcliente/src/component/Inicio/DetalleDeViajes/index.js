@@ -88,7 +88,7 @@ const DetalleDeViajes = (props) => {
     const getPrecio = (distancia, duracion) => {
         var keyTipoViaje = props.state.viajesReducer.key_tipo_viaje;
         if (!keyTipoViaje) {
-            return <Text>Error. (keyTipoViaje) Not found</Text>
+            return <Text style={{ color: "#ccc" }}>Error. (keyTipoViaje) Not found</Text>
         }
         var TipoViaje = props.state.tipoViajesReducer.data[keyTipoViaje];
         if (!TipoViaje) {
@@ -131,7 +131,7 @@ const DetalleDeViajes = (props) => {
                 width: "100%",
                 justifyContent: "center",
                 alignItems: "center"
-            }}> 
+            }}>
                 {getPrecio(route.distancia, route.duracion)}
             </View>
         )
@@ -181,22 +181,40 @@ const DetalleDeViajes = (props) => {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <TouchableOpacity
-                        style={{
-                            height: 40,
-                            borderRadius: 20,
-                            width: 200,
-                            backgroundColor: "#fff",
-                            borderColor: "#f00",
-                            borderWidth: 2,
-                            alignItems: "center",
-                            justifyContent: "center",
-                        }}
-                        onPress={() => PedirViaje()}>
-                        <Text>
-                            CONFIRMAR MOTONET
-                        </Text>
-                    </TouchableOpacity>
+                    {props.state.viajesReducer.estado == "cargando" ? (
+                        <View
+                            style={{
+                                height: 40,
+                                borderRadius: 20,
+                                width: 200,
+                                backgroundColor: "#fff",
+                                borderColor: "#f00",
+                                borderWidth: 2,
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}>
+                            <ActivityIndicator color="red" size="small" />
+                        </View>
+                    ) : (
+                            <TouchableOpacity
+                                style={{
+                                    height: 40,
+                                    borderRadius: 20,
+                                    width: 200,
+                                    backgroundColor: "#fff",
+                                    borderColor: "#f00",
+                                    borderWidth: 2,
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                }}
+                                onPress={() => PedirViaje()}>
+                                <Text>
+                                    CONFIRMAR MOTONET
+                            </Text>
+                            </TouchableOpacity>
+                        )
+                    }
+
                 </View>
             </View>
 
