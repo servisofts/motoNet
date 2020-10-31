@@ -10,10 +10,10 @@ var mapa;
 const Mapa = (props) => {
     const [data, setdata] = React.useState({
         region: {
-            latitude: -17.78629, 
+            latitude: -17.78629,
             longitude: -63.18117,
-            latitudeDelta: 0.2,
-            longitudeDelta: 0.2,
+            latitudeDelta: 0.08,
+            longitudeDelta: 0.08,
             isRender: false,
         },
         origen: false,
@@ -56,11 +56,10 @@ const Mapa = (props) => {
 
     useEffect(() => {
         // Actualiza el título del documento usando la API del navegador
-       // positionActual();
+        // positionActual();
     });
 
     const OnRegionChangeComplete = (region) => {
-
 
         console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTPO SAFKJSAIFJASFJOASJFOASJFOASJFAS")
 

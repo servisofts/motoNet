@@ -91,7 +91,6 @@ const Carga = (props) => {
             }, true);
             return <View />
         }
-
     }
 
     if (!validaciones.viaje) {
@@ -101,7 +100,7 @@ const Carga = (props) => {
                 setValidaciones({ ...validaciones });
                 return;
             }
-            // props.state.usuarioReducer.usuarioLog = JSON.parse(value)
+            props.state.viajesReducer.viaje = JSON.parse(value)
             validaciones.viaje = "existe";
             setValidaciones({ ...validaciones });
             return;
@@ -114,12 +113,19 @@ const Carga = (props) => {
     if (validaciones.viaje == "cargando") {
         return <View />
     }
+
     if (validaciones.viaje == "no_existe") {
         props.navigation.replace("InicioPage");
     }
+
     if (validaciones.viaje == "existe") {
-        props.navigation.replace("ViajeInicioPage");
+        if(props.state.viajesReducer.viaje.key_conductor.length >0){
+            props.navigation.replace("ViajeInicioPage");
+        }else{
+            props.navigation.replace("ViajeEsperaPage");
+        }
     }
+
     return (
         <View />
     );

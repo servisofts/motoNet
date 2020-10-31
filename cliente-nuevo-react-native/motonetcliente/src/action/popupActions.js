@@ -1,6 +1,5 @@
 export const cerrarPopup = () => async (dispatch) =>{
     dispatch({
-
         component:"popup", 
         estado:false,
         type:"cerrarPopup",
@@ -15,17 +14,14 @@ export const abrirPopup = (element) => async (dispatch) =>{
         type:"abrirPopup",
         element:element,
     })
-
 }
 export const cerrarPopupNotificacion= () => async (dispatch) =>{
     dispatch({
-
         component:"popupNotificacion", 
         estadoNotificacion:false,
         type:"cerrarPopupNotificacion",
         barra:true
     })
-
 }
 export const abrirPopupNotificacion = (element) => async (dispatch) =>{
     dispatch({
@@ -34,5 +30,4 @@ export const abrirPopupNotificacion = (element) => async (dispatch) =>{
         type:"abrirPopupNotificacion",
         element:element,
     })
-
 }

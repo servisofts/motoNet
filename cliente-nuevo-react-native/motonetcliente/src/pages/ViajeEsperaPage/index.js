@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TouchableOpacity, Animated, StyleSheet, AsyncStorage } from 'react-native';
+import { View, Text, TouchableOpacity, Animated, StyleSheet, AsyncStorage, ActivityIndicator } from 'react-native';
 import * as viajesActions from '../../action/viajesActions'
 import * as locationActions from '../../action/locationActions'
 import Svg from '../../Svg';
@@ -162,7 +162,6 @@ class ViajeEsperaPage extends Component {
                             },
                         ]}
                     >
-
                         <Svg name="Logo"
                             style={{
                                 width: 100,
@@ -318,33 +317,48 @@ class ViajeEsperaPage extends Component {
                         </View>
                     </View>
 
-                    <TouchableOpacity
-                        style={{
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            borderRadius: 5,
-                            height: 50,
-                            backgroundColor: "#fff",
-                            width: "80%"
-                        }}
-                        onPress={() => {
-                            this.props.state.socketClienteReducer.sessiones["motonet"].send({
-                                component: "viaje",
-                                type: "cancelarBusqueda",
-                                key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                                key_viaje: this.props.state.viajesReducer.viaje.key,
-                                estado: "cargando"
-                            }, true);
-                        }}>
-                        <Text>Cancelar carrera</Text>
-                    </TouchableOpacity>
-
+                    {this.props.state.viajesReducer.estado == "cargando" ? (
+                        <View
+                            style={{
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderRadius: 5,
+                                height: 50,
+                                backgroundColor: "#fff",
+                                width: "80%"
+                            }}>
+                            <ActivityIndicator color="red" size="small" />
+                        </View>
+                    ) : (
+                            <TouchableOpacity
+                                style={{
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    borderRadius: 5,
+                                    height: 50,
+                                    backgroundColor: "#fff",
+                                    width: "80%"
+                                }}
+                                onPress={() => {
+                                    this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                                        component: "viaje",
+                                        type: "cancelarBusqueda",
+                                        key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                                        key_viaje: this.props.state.viajesReducer.viaje.key,
+                                        estado: "cargando"
+                                    }, true);
+                                }}>
+                                <Text>CANCELAR VIAJE</Text>
+                            </TouchableOpacity>
+                        )
+                    }
                 </View>
-
             </View>
         );
     }
 };
+
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

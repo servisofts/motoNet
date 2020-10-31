@@ -12,7 +12,7 @@ const initialState = {
             data: false
         }
     },
-    posicion: false
+    posicion: false,
 }
 export default (state, action) => {
     if (!state) return initialState
