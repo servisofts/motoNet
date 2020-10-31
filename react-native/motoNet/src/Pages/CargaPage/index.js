@@ -35,32 +35,8 @@ class CargaPage extends Component {
       }),
       { iterations: 1000 },
     ).start();
-
-    if (Platform.OS === 'android') {
-      Linking.getInitialURL().then(url => {
-        this.navigate(url);
-      });
-    } else {
-      Linking.addEventListener('url', this.handleOpenURL);
-    }
   }
-
-  componentWillUnmount() { // C
-    Linking.removeEventListener('url', this.handleOpenURL);
-  }
-  handleOpenURL = (event) => { // D
-    this.navigate(event.url);
-  }
-  navigate = (url) => { // E
-    const { navigate } = this.props.navigation;
-    const route = url.replace(/.*?:\/\//g, '');
-    const id = route.match(/\/([^\/]+)\/?$/)[1];
-    const routeName = route.split('/')[0];
-
-    if (routeName === 'glup') {
-      this.props.navigation.navigate('Perfil', { id, name: 'chris' })
-    };
-  }
+  
   render() {
     return (
       <View style={{
@@ -89,7 +65,7 @@ class CargaPage extends Component {
 
             }} />
         </Animated.View>
-        <Carga />
+        <Carga navigation={this.props.navigation}/>
       </View>
 
     );

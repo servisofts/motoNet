@@ -1,12 +1,12 @@
 import React from 'react';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, AsyncStorage } from 'react-native';
 import Svg from '../../Svg';
 import RutaViaje from './RutaViaje';
 
 var mapa;
-const ViajePage = (props) => {
+const ViajeInicioPage = (props) => {
     const [zoom, setZoom] = React.useState(false);
     const [currentPos, setCurrentPos] = React.useState(false);
     const [region, setRegion] = React.useState({
@@ -68,7 +68,24 @@ const ViajePage = (props) => {
             >
                 <RutaViaje />
             </MapView>
-         
+            <TouchableOpacity style={{
+                position:"absolute",
+                bottom:10,
+                backgroundColor:"#f00",
+                width:200,
+                height:40,
+                justifyContent:"center",
+                alignItems:"center"
+            }}
+                onPress={()=>{
+                    AsyncStorage.removeItem("motonet_viaje");
+                    props.state.ViajeReducer.data= false;
+                    props.navigation.replace("CargaPage");
+
+                }}
+            >
+                <Text>CANCELAR</Text>
+            </TouchableOpacity>
             
         </View>
     )
@@ -84,4 +101,4 @@ const styles = StyleSheet.create({
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(ViajePage);
+export default connect(initStates)(ViajeInicioPage);

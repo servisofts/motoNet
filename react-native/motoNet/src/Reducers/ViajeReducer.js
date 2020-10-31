@@ -21,6 +21,9 @@ export default (state, action) => {
             case "negociarViajeConductor":
                 negociarViajeConductor(state, action);
                 break;
+            case "notificarSiguiente":
+                notificarSiguiente(state, action);
+                break;
         }
         state.type = action.type;
         state = { ...state };
@@ -40,7 +43,7 @@ const confirmarBusqueda = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("motonetConductor_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -62,8 +65,18 @@ const negociarViajeConductor = (state, action) => {
     console.log(action.estado)
     if (state.estado === "exito") {
         state.data = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
     }
 }
+
+const notificarSiguiente = (state, action) => {
+    state.estado = action.estado
+    if (state.estado === "exito") {
+        state.data = false;
+        AsyncStorage.removeItem("motonet_viaje");
+    }
+}
+

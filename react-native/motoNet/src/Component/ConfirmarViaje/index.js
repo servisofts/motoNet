@@ -7,7 +7,7 @@ const ConfirmarViaje = (props) => {
 
     const [obj, setObj] = React.useState(false);
     const [isRedirect, setRedirect] = React.useState(true);
-    const [precio, setPrecio] = React.useState()
+    const [precio, setPrecio] = React.useState(0)
 
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -58,7 +58,7 @@ const ConfirmarViaje = (props) => {
     }
 
     if (props.state.ViajeReducer.estado === "exito" && props.state.ViajeReducer.type == "confirmarBusqueda") {
-        props.state.navigationReducer.replace("ViajePage");
+        props.state.navigationReducer.replace("ViajeInicioPage");
         return <View />
     }
 

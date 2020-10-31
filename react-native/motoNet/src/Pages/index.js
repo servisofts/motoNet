@@ -10,7 +10,7 @@ import PedirMotoPage from './PedirMotoPage';
 import UsuarioPerfilPage from './UsuarioPerfilPage';
 import ConfirmarPage from './ConfirmarPage';
 import PerfilPage from './PerfilPage';
-import ViajePage from './ViajePage';
+import ViajeInicioPage from './ViajeInicioPage';
 
 export const getPages = () => {
     return {
@@ -26,6 +26,6 @@ export const getPages = () => {
         PedirMotoPage,
         ConfirmarPage,
         PerfilPage,
-        ViajePage,
+        ViajeInicioPage,
     }
 }
