@@ -119,9 +119,18 @@ const Carga = (props) => {
     }
 
     if (validaciones.viaje == "existe") {
-        if(props.state.viajesReducer.viaje.key_conductor.length >0){
+        if(props.state.viajesReducer.estado !="cargando"){
+            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                component: "viaje",
+                type: "getViaje",
+                key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                key_viaje: props.state.viajesReducer.viaje.key,
+                estado: "cargando"
+            }, true);
+        }        
+        if (props.state.viajesReducer.viaje.key_conductor.length > 0) {
             props.navigation.replace("ViajeInicioPage");
-        }else{
+        } else {
             props.navigation.replace("ViajeEsperaPage");
         }
     }

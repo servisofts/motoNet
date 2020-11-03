@@ -6,6 +6,7 @@ const initialState = {
     markerUbicacionFin: false,
     listaBusqueda: false,
     escribir: false,
+    route:{},
 }
 export default (state, action) => {
     if (!state) return initialState

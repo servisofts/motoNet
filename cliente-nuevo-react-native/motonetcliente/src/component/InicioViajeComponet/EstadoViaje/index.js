@@ -19,6 +19,22 @@ const CancelarViaje = (props) => {
         mensaje = "el conductor esta llegando a tu ubicación"
     }
 
+    if (props.state.viajesReducer.viaje.movimientos["conductor_llego_destino"]) {
+        mensaje = "el conductor esta afuera"
+    }
+
+    if (props.state.viajesReducer.viaje.movimientos["inicio_ruta"]) {
+        mensaje = "Inicio tu viaje..."
+    }
+
+    if (props.state.viajesReducer.viaje.movimientos["conductor_termino_viaje"]) {
+        mensaje = "llegamos a tu destino"
+    }
+
+    if (props.state.viajesReducer.viaje.movimientos["conductor_cobro_viaje"]) {
+        mensaje = "ok"         
+    }
+
     if (!mensaje) {
         return <View />
     }

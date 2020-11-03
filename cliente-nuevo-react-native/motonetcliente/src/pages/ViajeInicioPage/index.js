@@ -6,6 +6,7 @@ import MapaViaje from '../../component/MapaViaje';
 import CancelarViaje from '../../component/InicioViajeComponet/CancelarViaje';
 import AppParams from "../../Json"
 import EstadoViaje from '../../component/InicioViajeComponet/EstadoViaje';
+import { stat } from 'react-native-fs';
 
 class ViajeInicioPage extends Component {
 
@@ -20,18 +21,62 @@ class ViajeInicioPage extends Component {
         }
     }
 
+
     Cancelar() {
-        this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-            component: "viaje",
-            type: "cancelarViajeCliente",
-            key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-            key_viaje: this.props.state.viajesReducer.viaje.key,
-            estado: "cargando"
-        }, true);
+
+        if (this.props.state.viajesReducer.viaje.movimientos["inicio_ruta"]) {
+            return <View />
+        }
+
+        return (
+            <TouchableOpacity
+                onPress={() => {
+                    Alert.alert(
+                        "Alerta",
+                        "Al aceptar la cancelación, puede que tenga un costo",
+                        [
+                            {
+                                text: "Cancelar",
+                                onPress: () => console.log("Cancel Pressed"),
+                                style: "cancel"
+                            },
+                            {
+                                text: "Aceptar",
+                                onPress: () => {
+                                    this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                                        component: "viaje",
+                                        type: "cancelarViajeCliente",
+                                        key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                                        key_viaje: this.props.state.viajesReducer.viaje.key,
+                                        estado: "cargando"
+                                    }, true);
+                                }
+                            }
+                        ],
+                        { cancelable: false }
+                    );
+                }}
+                style={{
+                    width: "90%",
+                    height: 50,
+                    position: "absolute",
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    backgroundColor: "#f00",
+                    bottom: 30,
+                    borderRadius: 10
+                }} >
+                <Text style={{
+                    color: "#fff"
+                }}>
+                    CANCELAR VIAJE
+                    </Text>
+            </TouchableOpacity>
+
+        )
         // this.setState({
         //     abrirModal: true
         // })
-        return <View />
     }
 
     closeModal() {
@@ -41,7 +86,14 @@ class ViajeInicioPage extends Component {
         return <View />
     }
 
+
     render() {
+
+
+        if (this.props.state.viajesReducer.viaje.movimientos["conductor_cobro_viaje"]) {
+            this.props.navigation.replace("CalificarViajePage");
+        }
+
         return (
             <View style={{
                 flex: 1,
@@ -50,42 +102,7 @@ class ViajeInicioPage extends Component {
             }}>
                 <MapaViaje />
                 <EstadoViaje />
-                <TouchableOpacity
-                    onPress={() => {
-                        // this.Cancelar()
-                        Alert.alert(
-                            "Alerta",
-                            "Al aceptar la cancelación, puede que tenga un costo",
-                            [
-                                {
-                                    text: "Cancelar",
-                                    onPress: () => console.log("Cancel Pressed"),
-                                    style: "cancel"
-                                },
-                                {
-                                    text: "Aceptar",
-                                    onPress: () => this.Cancelar()
-                                }
-                            ],
-                            { cancelable: false }
-                        );
-                    }}
-                    style={{
-                        width: "90%",
-                        height: 50,
-                        position: "absolute",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: "#f00",
-                        bottom: 30,
-                        borderRadius: 10
-                    }} >
-                    <Text style={{
-                        color: "#fff"
-                    }}>
-                        CANCELAR VIAJE
-                    </Text>
-                </TouchableOpacity>
+                {this.Cancelar()}
                 <CancelarViaje navigation={this.props.navigation} />
             </View >
         )

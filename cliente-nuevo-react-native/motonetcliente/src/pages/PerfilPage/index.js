@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, TouchableOpacity, StyleSheet, TextInput, Image, BackHandler } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, TextInput, Image, BackHandler, Dimensions } from 'react-native';
 import * as popupActions from '../../action/popupActions'
 import Svg from '../../Svg';
 import ImagePicker from 'react-native-image-picker';
@@ -8,7 +8,9 @@ import FieldsPerfil from '../../component/FieldsPerfil';
 import ImageResizer from 'react-native-image-resizer';
 import RNFS from 'react-native-fs'
 import urlFoto from '../../Json/index.json';
+import PerfilConductorPage from '../PerfilConductorPage';
 
+const { width, height } = Dimensions.get("screen");
 class PerfilPage extends Component {
     static navigationOptions = {
         headerShown: false,
@@ -161,8 +163,10 @@ class PerfilPage extends Component {
 
         return (
             <View style={{
-                flex: 1,
-                backgroundColor: "#fff"
+             
+                backgroundColor: "#fff",
+                width,
+                height,
             }}>
                 <View style={{
                     flex: 1,
@@ -226,7 +230,7 @@ class PerfilPage extends Component {
                     <FieldsPerfil datos={datos} />
                 </View>
 
-                <TouchableOpacity
+                {/* <TouchableOpacity
                     onPress={() => this.props.navigation.goBack()}
                     style={{
                         position: "absolute",
@@ -239,7 +243,9 @@ class PerfilPage extends Component {
                             height: 30,
                             fill: "#000"
                         }} />
-                </TouchableOpacity>
+                </TouchableOpacity> */}
+
+                <PerfilConductorPage />
 
             </View>
         );

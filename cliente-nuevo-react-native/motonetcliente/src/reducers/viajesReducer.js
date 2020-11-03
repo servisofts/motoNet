@@ -49,6 +49,27 @@ export default (state, action) => {
             case "notificarSiguiente":
                 notificarSiguiente(state, action);
                 break;
+            case "movimiento":
+                movimientos(state, action);
+                break;
+            case "conductorLlegoDestino":
+                conductorLlegoDestino(state, action);
+                break;
+            case "inicioDeRuta":
+                inicioDeRuta(state, action);
+                break;
+            case "terminarViaje":
+                terminarViaje(state, action);
+                break;
+            case "cobrarViaje":
+                cobrarViaje(state, action);
+                break;
+            case "getViaje":
+                getViaje(state, action);
+                break;
+            case "calificarViajeCliente":
+                calificarViajeCliente(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -112,6 +133,7 @@ const cancelarViajeConductor = (state, action) => {
     }
 }
 
+
 const notificarSiguiente = (state, action) => {
     state.type = action.type
     state.estado = action.estado
@@ -120,3 +142,68 @@ const notificarSiguiente = (state, action) => {
         AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
 }
+
+const movimientos = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const conductorLlegoDestino = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const inicioDeRuta = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const terminarViaje = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const cobrarViaje = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.removeItem("motonet_viaje");
+    }
+}
+
+const getViaje = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+
+    }
+}
+
+const calificarViajeCliente = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.viaje = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
