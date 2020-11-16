@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import urlFoto from '../../Json/index.json';
-import { View, Text, Image, ActivityIndicator, TouchableOpacity, StyleSheet, TextInput, Dimensions } from 'react-native';
+import { View, Text, Image, ActivityIndicator, TouchableOpacity, StyleSheet, TextInput, Dimensions, TouchableNativeFeedback } from 'react-native';
 import Svg from '../../Svg';
 
-
 const { width, height } = Dimensions.get("screen");
+
+const numStars = 5
+
 class CalificarViajePage extends Component {
 
     static navigationOptions = {
@@ -17,6 +19,7 @@ class CalificarViajePage extends Component {
         this.state = {
             fotoPerfilUri: false,
             calificacion: "",
+            rating: 0
         }
     };
 
@@ -29,6 +32,10 @@ class CalificarViajePage extends Component {
     //     this.state.fotoPerfilUri = url;
     // }
 
+    rate = star => {
+        this.setState({ rating: star });
+    }
+
 
     handleChange = (event, id) => {
         this.state[id] = {
@@ -38,7 +45,24 @@ class CalificarViajePage extends Component {
         return <View />
     };
 
+
+
     render() {
+
+        let start = [];
+        for (let x = 1; x <= numStars; x++) {
+            start.push(
+                <TouchableOpacity
+                    key={x}
+                    onPress={() => {
+                        this.rate(x);
+                    }}
+                >
+                    <Star filled={x <= this.state.rating ? true : false} />
+                </TouchableOpacity>
+            )
+        }
+
         return (
             <View style={{
                 flex: 1,
@@ -96,36 +120,9 @@ class CalificarViajePage extends Component {
                         marginTop: 30,
                         flexDirection: "row"
                     }}>
-                        <Svg name="Star"
-                            style={{
-                                width: 25,
-                                height: 25,
-                                fill: "red"
-                            }} />
-                        <Svg name="Star"
-                            style={{
-                                width: 25,
-                                height: 25,
-                                fill: "red"
-                            }} />
-                        <Svg name="Star"
-                            style={{
-                                width: 25,
-                                height: 25,
-                                fill: "red"
-                            }} />
-                        <Svg name="Star"
-                            style={{
-                                width: 25,
-                                height: 25,
-                                fill: "red"
-                            }} />
-                        <Svg name="Star"
-                            style={{
-                                width: 25,
-                                height: 25,
-                                fill: "red"
-                            }} />
+
+                        {start}
+
                     </View>
 
                 </View>
@@ -171,11 +168,15 @@ class CalificarViajePage extends Component {
                                     width: width / 1.1,
                                 }}
                                 onPress={() => {
+                                    var datos = []
+                                    datos.push(this.state.calificacion);
+                                    datos.push(this.state.rating)
                                     this.props.state.socketClienteReducer.sessiones["motonet"].send({
                                         component: "viaje",
                                         type: "calificarViajeCliente",
                                         key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
                                         key_viaje: this.props.state.viajesReducer.viaje.key,
+                                        data: datos,
                                         estado: "cargando"
                                     }, true);
                                 }}>
@@ -188,6 +189,35 @@ class CalificarViajePage extends Component {
         );
     }
 }
+
+
+class Star extends React.Component {
+    render() {
+        return (
+            <View>
+                {this.props.filled ? (
+                    <Svg name="Star"
+                        style={{
+                            width: 25,
+                            height: 25,
+                            fill: "red",
+                            margin: 5
+                        }} />
+                ) : (
+                        <Svg name="Staron"
+                            style={{
+                                width: 25,
+                                height: 25,
+                                fill: "red",
+                                margin: 5
+                            }} />
+                    )}
+            </View>
+        )
+    }
+}
+
+
 const styles = StyleSheet.create({
     contenedorInput: {
         width: width / 1.1,

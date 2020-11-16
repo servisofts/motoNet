@@ -89,7 +89,6 @@ class ViajeInicioPage extends Component {
 
     render() {
 
-
         if (this.props.state.viajesReducer.viaje.movimientos["conductor_cobro_viaje"]) {
             this.props.navigation.replace("CalificarViajePage");
         }

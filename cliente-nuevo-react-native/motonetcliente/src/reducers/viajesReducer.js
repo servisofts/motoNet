@@ -78,11 +78,12 @@ export default (state, action) => {
 
 const actualizarUbicacion = (state, action) => {
     state.ubicacion = action.data
-
 }
+
 const actualizarViaje = (state, action) => {
     state.viaje = action.data
 }
+
 const cancelarBusqueda = (state, action) => {
     state.type = action.type
     state.estado = action.estado
@@ -97,6 +98,7 @@ const confirmarBusqueda = (state, action) => {
         AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
 }
+
 const buscar = (state, action) => {
     state.type = action.type
     state.estado = action.estado
