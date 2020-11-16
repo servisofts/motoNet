@@ -91,8 +91,8 @@ const Login = (props) => {
                                     console.log(error)
                                 } else {
                                     console.log(result)
-/*                                     props.loginFacebook(props.state.socketClienteReducer.sessiones["motonet"], result);
- */                                    data = result;
+                                    //props.loginFacebook(props.state.socketClienteReducer.sessiones["motonet"], result);
+                                    data = result;
                                     setFace(data);
                                     LoginManager.logOut();
                                 }
