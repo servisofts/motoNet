@@ -7,6 +7,7 @@ import notificacionReducer from './notificacionReducer'
 import tipoTarifaViajeReducer from './tipoTarifaViajeReducer'
 import seguimientoConductorReducer from './seguimientoConductorReducer'
 import asociacionMotoReducer from './asociacionMotoReducer'
+import historialViajeReducer from './historialViajeReducer'
 
 export default combineReducers({
     usuarioReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
     notificacionReducer,
     tipoTarifaViajeReducer,
     seguimientoConductorReducer,
-    asociacionMotoReducer
+    asociacionMotoReducer,
+    historialViajeReducer,
 });

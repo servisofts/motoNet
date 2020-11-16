@@ -1,0 +1,35 @@
+.table {
+    text-align: left;
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+.table td,
+.table th {
+    border: 1px solid rgb(192, 192, 192);
+    padding: 8px;
+}
+
+.table tr:nth-child(even) {
+    background-color: #FDECEC; /*colores de la tabla td*/
+}
+
+.table tr:hover {
+    background-color: #F7DFDF; /*colores para el hover*/
+}
+
+.table th { /* colores de la tabla head */
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: center;
+    color: white;
+    background: rgb(231, 51, 73);
+    background: -moz-linear-gradient(90deg, rgba(231, 51, 73, 1) 11%, rgba(255, 0, 31, 0.6867121848739496) 36%);
+    background: -webkit-linear-gradient(90deg, rgba(231, 51, 73, 1) 11%, rgba(255, 0, 31, 0.6867121848739496) 36%);
+    background: linear-gradient(90deg, rgba(231, 51, 73, 1) 11%, rgba(255, 0, 31, 0.6867121848739496) 36%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#e73349", endColorstr="#ff001f", GradientType=1);
+}
+
+.tituloAndFloat {
+    align-items: center;
+}

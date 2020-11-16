@@ -18,6 +18,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import ListAltIcon from '@material-ui/icons/ListAlt';
 import AccountBox from '@material-ui/icons/AccountBox';
 import Home from '@material-ui/icons/Home';
 import RoomIcon from '@material-ui/icons/Room';
@@ -147,6 +148,10 @@ const NaviDrawer = (props) => {
         return (
             <ListItem button key={data.name} selected={props.title == data.name} onClick={() => {
                 if (props.title == data.name) { return };
+                if (data.name == 'Salir') {
+                    sessionStorage.removeItem("usuarioLog");
+                    window.location.href = "/";
+                }
                 props.history.push("/" + data.path);
             }}>
                 <ListItemIcon>
@@ -220,14 +225,8 @@ const NaviDrawer = (props) => {
                     {getButton({ name: "Tipos de Viajes", path: "TipoViajePage", icon: <MergeTypeIcon /> })}
                     {getButton({ name: "Parametros Viajes", path: "ParametrosPage", icon: <StreetviewIcon /> })}
                     {getButton({ name: "Chat", path: "ChatPage", icon: <CommentTypeIcon /> })}
-                    
-
-                    <div onClick={
-                        () => {
-                            sessionStorage.removeItem("usuarioLog");
-                            window.location.href = "/";
-                        }
-                    }>Salir</div>
+                    {getButton({ name: "Historial de Viajes", path: "HistorialViajePage", icon: <ListAltIcon /> })}
+                    {getButton({ name: "Salir", path: "Salir", icon: <ExitToAppIcon /> })}
                 </List>
 
             </Drawer>
