@@ -85,7 +85,7 @@ const Mapa = (props) => {
                 initialRegion={data.region}
                 onRegionChangeComplete={OnRegionChangeComplete}>
                 {/* {getMarkerOrigen()}
-            {getMarkerFin()} */}
+                {getMarkerFin()} */}
                 <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
 
             </MapView >
