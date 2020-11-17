@@ -11,6 +11,8 @@ import UsuarioPerfilPage from './UsuarioPerfilPage';
 import ConfirmarPage from './ConfirmarPage';
 import PerfilPage from './PerfilPage';
 import ViajeInicioPage from './ViajeInicioPage';
+import CalificacionViajePage from './CalificacionViajePage';
+import HistorialViajesPage from './HistorialViajesPage';
 
 export const getPages = () => {
     return {
@@ -27,5 +29,7 @@ export const getPages = () => {
         ConfirmarPage,
         PerfilPage,
         ViajeInicioPage,
+        CalificacionViajePage,
+        HistorialViajesPage
     }
 }

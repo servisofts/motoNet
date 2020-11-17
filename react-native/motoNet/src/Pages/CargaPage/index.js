@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform, Linking, Animated } from 'react-native';
+import { View, Text, StyleSheet, Platform, Linking, Animated,AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Carga from '../../Component/Carga';
 import Svg from '../../Svg';

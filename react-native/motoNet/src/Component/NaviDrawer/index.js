@@ -3,19 +3,17 @@ import { Platform, View, Text, Modal, StyleSheet, TouchableWithoutFeedback, Touc
 import { connect } from 'react-redux';
 import Svg from '../../Svg';
 import ConfirmarViaje from '../ConfirmarViaje';
-
-
 const NaviDrawe = (props) => {
 
     const [isVisible, setVisible] = React.useState(false);
 
-    if (!props.state.naviDrawerReducer.openBar) {
+    
         props.state.naviDrawerReducer.openBar = () => {
             setVisible(true);
             return <View />
             //llamar al action abrirnavidraer  y el action manda al reducer navidrawerreducer y el cambia el estado isOpen por true o false
         }
-    }
+    
     if (!isVisible) {
         return <View></View>
     }
@@ -25,7 +23,7 @@ const NaviDrawe = (props) => {
             case "PerfilPage":
                 props.navigation.navigate(item)
                 return <View />
-            case "AyudaPage":
+            case "HistorialViajesPage":
                 props.navigation.navigate(item)
                 return <View />
             case "CerrarSesion":
@@ -34,7 +32,7 @@ const NaviDrawe = (props) => {
                 props.navigation.replace("CargaPage")
                 return <View />
             case "ConfirmarViaje":
-                console.log(item);             
+                console.log(item);
                 return <ConfirmarViaje />
         }
     }
@@ -102,7 +100,7 @@ const NaviDrawe = (props) => {
                                         <Text style={styles.texto} >Perfil</Text>
                                     </TouchableOpacity >
 
-                                    <TouchableOpacity style={styles.sty} onPress={() => { handleClick("ListaCertificado") }} >
+                                    <TouchableOpacity style={styles.sty} onPress={() => { handleClick("HistorialViajesPage") }} >
                                         <Text style={styles.texto}>Viajes </Text>
                                     </TouchableOpacity>
 

@@ -5,6 +5,7 @@ import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import ComponenteInicio from './ComponenteInicio';
 import TerminarTurno from '../TerminarTurno';
 import Svg from '../../Svg';
+import BarraDeEstado from './BarraDeEstado';
 
 const Inicio = (props) => {
 
@@ -27,9 +28,10 @@ const Inicio = (props) => {
             alignItems: "center"
         }}>
             <Mapa />
+            <BarraDeEstado/>
             <ComponenteInicio />
             <TerminarTurno />
-
+            
             <TouchableOpacity
                 onPress={() => {
                     props.state.naviDrawerReducer.openBar()

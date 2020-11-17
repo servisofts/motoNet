@@ -12,10 +12,14 @@ const ConfirmarViaje = (props) => {
     const delay = ms => new Promise(res => setTimeout(res, ms));
 
     var datos;
+    
     if (!props.state.ViajeReducer.data) {
         return <Text>No existe</Text>
     } else {
         datos = props.state.ViajeReducer.data;
+        if(datos.estado == 0){
+            return <View/>
+        }
         Object.keys(props.state.ViajeReducer.data.movimientos).map((key) => {
             var objMovimiento = props.state.ViajeReducer.data.movimientos[key];
             console.log(objMovimiento)

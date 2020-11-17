@@ -67,10 +67,10 @@ const Home = createStackNavigator(
       headerTitleStyle: {
         color: Theme.colors.secondary,
       },
-      headerRight: () => (
-        <View />
-      ),
-      headerLeft: () => goBackButton(navigation),
+      // headerRight: () => (
+      //   <View />
+      // ),
+      // headerLeft: () => goBackButton(navigation),
     }),
   }
 );

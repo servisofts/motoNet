@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, AsyncStorage ,Text} from 'react-native';
+import { View, AsyncStorage, Text } from 'react-native';
 import { connect } from 'react-redux';
 import AppParams from '../../Json/index.json'
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -39,10 +39,16 @@ const Carga = (props) => {
             setValidaciones({ ...validaciones });
             return <View />;
         }
+        return <View />;
     }
     if (!validaciones.usuario) {
         AsyncStorage.getItem("motonet_usuarioLog").then((value) => {
             if (!value) {
+                validaciones.usuario = "no_existe";
+                setValidaciones({ ...validaciones });
+                return;
+            }
+            if (value.length <= 0) {
                 validaciones.usuario = "no_existe";
                 setValidaciones({ ...validaciones });
                 return;
@@ -101,7 +107,7 @@ const Carga = (props) => {
                 setValidaciones({ ...validaciones });
                 return;
             }
-            // props.state.usuarioReducer.usuarioLog = JSON.parse(value)
+            props.state.ViajeReducer.data = JSON.parse(value)
             validaciones.viaje = "existe";
             setValidaciones({ ...validaciones });
             return;
@@ -118,6 +124,12 @@ const Carga = (props) => {
         props.navigation.replace("InicioPage");
     }
     if (validaciones.viaje == "existe") {
+        props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+            component: "viaje",
+            type: "getViaje",
+            estado: "cargando",
+            
+        });
         props.navigation.replace("ViajeInicioPage");
     }
     return (

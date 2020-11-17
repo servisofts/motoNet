@@ -42,6 +42,9 @@ const iniciarTurno = (props) => {
                 }}>
                 <Text>Iniciar</Text>
             </TouchableOpacity>
+            <Text style={{ marginTop:20 , fontSize: 20, color: "#ccc" }}>
+                Para recibir viajes precione iniciar.
+                </Text>
 
         </View>
     )
