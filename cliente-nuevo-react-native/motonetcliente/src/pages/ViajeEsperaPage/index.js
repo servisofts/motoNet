@@ -317,7 +317,7 @@ class ViajeEsperaPage extends Component {
                         </View>
                     </View>
 
-                    {this.props.state.viajesReducer.estado == "cargando" ? (
+                    {this.props.state.viajesReducer.type == "cancelarBusqueda" && this.props.state.viajesReducer.estado == "cargando" ? (
                         <View
                             style={{
                                 alignItems: 'center',

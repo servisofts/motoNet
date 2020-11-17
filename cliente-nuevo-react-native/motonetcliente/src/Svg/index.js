@@ -10,6 +10,8 @@ import Volver from '../img/volver.svg';
 import Gps from '../img/gps.svg';
 import Close from '../img/close.svg';
 import Marcador from '../img/marcador.svg';
+import Star from '../img/star.svg';
+import Staron from '../img/star-on.svg';
 
 const Svg = (props) => {
 
@@ -34,6 +36,11 @@ const Svg = (props) => {
             return <Close style={props.style} />
         case "Marcador":
             return <Marcador style={props.style} />
+        case "Star":
+            return <Star style={props.style} />
+        case "Staron":
+            return <Staron style={props.style} />
+
         default: return <Text>Not Found</Text>
     }
 }

@@ -148,6 +148,10 @@ const ParametrosPages = (props) => {
                                     { id: 'valor', label: 'VALOR' },
                                     { id: 'medida', label: 'MEDIDA' },
                                 ]}
+                                order={{
+                                    key: "descripcion",
+                                    dir: "desc"
+                               }}
                                 data={getLista()}
                                 onAdd={(evt) => {
                                     props.history.push("/Usuario/Registro")

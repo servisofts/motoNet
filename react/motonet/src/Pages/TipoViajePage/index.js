@@ -94,6 +94,10 @@ const TipoViajePage = (props) => {
                                 head={[
                                     { id: 'descripcion', label: 'Descripción' },
                                 ]}
+                                order={{
+                                    key: "descripcion",
+                                    dir: "desc"
+                               }}
                                 data={getLista()}
                                 handleClick={
                                     (key) => {

@@ -6,6 +6,8 @@ import ViajeEsperaPage from './ViajeEsperaPage';
 import ComenzarCarreraPage from './ComenzarCarreraPage';
 import PerfilPage from './PerfilPage';
 import ViajeInicioPage from './ViajeInicioPage';
+import PerfilConductorPage from './PerfilConductorPage';
+import CalificarViajePage from './CalificarViajePage';
 
 export const getPages = () => {
     return {
@@ -17,5 +19,7 @@ export const getPages = () => {
         ComenzarCarreraPage,
         PerfilPage,
         ViajeInicioPage,
+        PerfilConductorPage,
+        CalificarViajePage
     }
 }

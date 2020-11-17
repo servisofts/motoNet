@@ -12,6 +12,7 @@ import ParametrosPage from './Pages/ParametrosPage'
 import NotificacionPage from './Pages/NotificacionPage'
 import AsociacionesMotoPage from './Pages/AsociacionesMotoPage'
 import ListaAsociacionMotoPage from './Pages/ListaAsociacionMotoPage'
+import HistorialViajePage from './Pages/HistorialViajePage'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <Route exact path='/NotificacionPage' component={NotificacionPage} />
       <Route exact path='/AsociacionesMotoPage' component={AsociacionesMotoPage} />
       <Route exact path='/ListaAsociacionMotoPage' component={ListaAsociacionMotoPage} />
+      <Route exact path='/HistorialViajePage' component={HistorialViajePage} />
       
     </BrowserRouter>
   );

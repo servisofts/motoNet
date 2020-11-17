@@ -103,6 +103,10 @@ const ListaAsociacionMotoPage = (props) => {
                                     { id: 'Descripcion', label: 'Descripcion' },
                                     { id: 'Direccion', label: 'Direccion' },
                                 ]}
+                                order={{
+                                    key: "UsuarioResponsable",
+                                    dir: "desc"
+                               }}
                                 data={getLista()}
                                 onAdd={(evt) => {
                                     props.history.push("/Usuario/Registro")

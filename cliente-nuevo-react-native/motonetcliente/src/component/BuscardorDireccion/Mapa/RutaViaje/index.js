@@ -26,11 +26,12 @@ const RutaViaje = (props) => {
 
     const getRouteFormat = () => {
         var ruta = [];
+        if(!props.state.locationGoogleMapReducer.route.ruta){
+            return ruta;
+        }
         props.state.locationGoogleMapReducer.route.ruta.map((obj, key) => {
             ruta.push(obj.inicio);
-            //ruta.push(obj.fin);
         })
-
         return ruta;
     }
     return (

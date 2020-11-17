@@ -1,3 +1,4 @@
+
 //libs
 import React from 'react';
 import { connect } from 'react-redux';
@@ -12,7 +13,7 @@ import * as  cargarDatosPersonalesActions from '../../Actions/cargarDatosPersona
 //elemnts
 
 
-const ListaUsuarioPage = (props) => {
+const HistorialViajePage = (props) => {
 
      if (!props.state.usuarioReducer.usuarioLog) {
           props.history.push("/Carga");
@@ -41,7 +42,7 @@ const ListaUsuarioPage = (props) => {
 
 
      return (
-          <NaviDrawer title={"Usuarios nuevos"} history={props.history}
+          <NaviDrawer title={"Historial de Viajes"} history={props.history}
 
                page={() => {
                     if (!props.state.socketReducer.socket) {
@@ -68,12 +69,12 @@ const ListaUsuarioPage = (props) => {
                          <Grid container direction="row">
                               <Grid item xs={12} spacing={2} >
                                    <TableNewMe
-                                        title={"Usuarios"}
+                                        title={"Historial de Viajes"}
                                         head={[
-                                             { id: 'Nombres', label: 'Nombres' },
-                                             { id: 'Apellidos', label: 'Apellidos' },
-                                             { id: 'Telefono', label: 'Telefono' },
-                                             { id: 'Correo', label: 'Correo' },
+                                             { id: 'Nombres', label: 'Descripcion' },
+                                             { id: 'Apellidos', label: 'Inicio' },
+                                             { id: 'Telefono', label: 'Final' },
+                                             { id: 'Correo', label: 'Fecha' },
                                         ]}
                                         order={{
                                              key: "Nombres",
@@ -107,5 +108,4 @@ const initActions = {
      ...cargarDatosPersonalesActions
 };
 
-export default connect(initStates, initActions)(ListaUsuarioPage);
-
+export default connect(initStates, initActions)(HistorialViajePage);

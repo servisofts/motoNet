@@ -9,6 +9,7 @@ import ButtonPosition from '../BuscardorDireccion/ButtonPosition';
 import TiposDeViajes from './TiposDeViajes';
 import DetalleDeViajes from './DetalleDeViajes';
 import Svg from '../../Svg';
+import PerfilConductorPage from '../../pages/PerfilConductorPage';
 
 const Inicio = (props) => {
 
@@ -24,7 +25,7 @@ const Inicio = (props) => {
             <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
             <BuscadorComponenteMap ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} />
             <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
-            <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+            <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />            
             <TouchableOpacity
                 onPress={() => {
                     props.state.naviDrawerReducer.openBar()

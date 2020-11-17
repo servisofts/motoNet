@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import FloatButtom from '../../Components/FloatButtom'
-import * as  cargarDatosPersonalesActions from '../../Actions/cargarDatosPersonalesActions';
 import { Grid, TextField } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
 import "./index.css";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
 
 
-class TableNewMe extends Component {
+class TableNewMe2 extends Component {
     constructor(props) {
         super(props)
         this.state = {
             order: {
-                key: "fecha_on",
-                dir: "desc"
+                key: "descripcion",
+                dir: "asc"
             },
             busqueda: {
                 value: ""
             }
-        }
-        if (props.order) {
-            this.state.order = props.order;
         }
     }
 
@@ -69,8 +64,8 @@ class TableNewMe extends Component {
         const ordenador = (listaKeys) => {
             //hacer metodo de ordenamiento
             listaKeys.sort(function (a, b) {
-                var textA = datito[a][keyOrder].dato.toLowerCase();
-                var textB = datito[b][keyOrder].dato.toLowerCase();
+                var textA = datito[a][keyOrder];
+                var textB = datito[b][keyOrder];
                 if (dirOrder == "asc") {
                     return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
                 } else {
@@ -88,7 +83,7 @@ class TableNewMe extends Component {
             listaKeys.map((key) => {
                 var obj = datito[key];
                 var str = JSON.stringify(obj);
-                var expreg = new RegExp("dato.:.*?" + val + ".*?(,|})", "i");
+                var expreg = new RegExp(":.*?" + val + ".*?(,|})", "i");
                 if (expreg.test(str)) {
                     arr2.push(key);
                 }
@@ -125,7 +120,7 @@ class TableNewMe extends Component {
     render() {
         return (
             <div style={{ overflow: 'auto', display: 'block' }}>
-                <div className="tituloAndFloat" >
+                <div className="tituloAndFloat">
                     <Grid container direction="row">
                         <Grid item xs={10}>
                             <h1 style={{
@@ -134,15 +129,17 @@ class TableNewMe extends Component {
                                 {this.props.title}
                             </h1>
                         </Grid>
+
                         <Grid item xs={2}>
                             <FloatButtom onClick={this.props.onAdd} />
                         </Grid>
-                    </Grid>
-                    <Grid container direction="row">
-                        <Grid item xs={10}>
+                        <Grid xs={12}>
                             <div style={{
                                 marginBottom: 30,
-                                height: 55, 
+                                height: 55,
+                                //borderRadius: 20,
+                                //overflow: "hidden",
+                                //border: "3px solid #aaa"
                             }}>
                                 <TextField
                                     id="outlined-full-width"
@@ -170,9 +167,10 @@ class TableNewMe extends Component {
                             </div>
                         </Grid>
                     </Grid>
-
                 </div>
-                <table className="table">
+                <table className="table" style={{
+                    width: "100%"
+                }}>
                     <thead >
                         {this.renderTableHeader()}
                     </thead>
@@ -189,8 +187,6 @@ const initStates = (state) => {
     return { state }
 };
 
-const initActions = {
-    ...cargarDatosPersonalesActions
-};
 
-export default connect(initStates, initActions)(TableNewMe);
+
+export default connect(initStates)(TableNewMe2);

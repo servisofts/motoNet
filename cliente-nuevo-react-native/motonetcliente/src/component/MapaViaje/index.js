@@ -20,9 +20,7 @@ const Mapa = (props) => {
     })
 
     const getMarkerSelect = () => {
-        /*   if (!this.state.marcar) {
-              return <View />
-        } */
+        
         if (!props.state.posicionConductorReducer.posicion) {
             return <View />
         }
@@ -61,6 +59,12 @@ const Mapa = (props) => {
                     }} />
             </Marker>
         )
+    }
+
+
+    const PartidaMotonet = () => {
+        
+
     }
 
     return (
