@@ -12,6 +12,8 @@ import Close from '../img/close.svg';
 import Marcador from '../img/marcador.svg';
 import Star from '../img/star.svg';
 import Staron from '../img/star-on.svg';
+import LogoFacebook from '../img/facebook.svg';
+import LogoEmail from '../img/google.svg';
 
 const Svg = (props) => {
 
@@ -40,6 +42,10 @@ const Svg = (props) => {
             return <Star style={props.style} />
         case "Staron":
             return <Staron style={props.style} />
+        case "LogoFacebook":
+            return <LogoFacebook style={props.style} />
+        case "LogoEmail":
+            return <LogoEmail style={props.style} />
 
         default: return <Text>Not Found</Text>
     }

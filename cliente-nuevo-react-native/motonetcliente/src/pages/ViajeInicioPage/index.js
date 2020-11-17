@@ -21,7 +21,6 @@ class ViajeInicioPage extends Component {
         }
     }
 
-
     Cancelar() {
 
         if (this.props.state.viajesReducer.viaje.movimientos["inicio_ruta"]) {

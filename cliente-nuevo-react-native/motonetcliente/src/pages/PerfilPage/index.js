@@ -11,17 +11,16 @@ import urlFoto from '../../Json/index.json';
 import PerfilConductorPage from '../PerfilConductorPage';
 
 const { width, height } = Dimensions.get("screen");
+
+
 class PerfilPage extends Component {
-    static navigationOptions = {
-        headerShown: false,
-    }
+
     constructor(props) {
         super(props);
         this.state = {
             popup: false,
             fotoPerfilUri: false
-        }
-        this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+        }     
     }
 
     componentWillMount() {
@@ -163,7 +162,6 @@ class PerfilPage extends Component {
 
         return (
             <View style={{
-             
                 backgroundColor: "#fff",
                 width,
                 height,
@@ -245,7 +243,7 @@ class PerfilPage extends Component {
                         }} />
                 </TouchableOpacity> */}
 
-                <PerfilConductorPage />
+                {/* <PerfilConductorPage /> */}
 
             </View>
         );

@@ -16,7 +16,13 @@ class LoginPage extends Component {
                 flex: 1,
                 alignItems: 'center',
             }}>
+
+
+                
                 <Login navigation={this.props.navigation} />
+
+
+
             </View>
 
 
