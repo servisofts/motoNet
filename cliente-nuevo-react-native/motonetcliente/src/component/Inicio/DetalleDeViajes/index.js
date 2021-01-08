@@ -109,14 +109,44 @@ const DetalleDeViajes = (props) => {
             <View style={{
                 width: "90%",
             }}>
-                <Text>Tipo viaje: {TipoViaje.descripcion}</Text>
-                <Text>distancia: {distancia / 1000} km</Text>
-                <Text>tiempo: {Math.round(duracion / 60) - 1} a {Math.round(duracion / 60) + 1} minutos.</Text>
-                <Text>Monto por kilometro {montoKm.monto}</Text>
+
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between",
+                    marginBottom: 20
+                }}>
+                    <Text style={{
+                        fontSize: 15,
+                        fontWeight: "bold"
+                    }}>TIPO DE VIAJE:</Text>
+                    <Text style={{
+                        fontSize: 15,
+                        fontWeight: "bold"
+                    }}>{TipoViaje.descripcion}</Text>
+                </View>
+
+                {/* <Text>Tipo viaje: {TipoViaje.descripcion}</Text> */}
+                {/* <Text>distancia: {distancia / 1000} km</Text> */}
+                {/* <Text>Tiempo: {Math.round(duracion / 60) - 1} a {Math.round(duracion / 60) + 1} minutos.</Text> */}
+                {/* <Text>Monto por kilometro {montoKm.monto}</Text>
                 <Text>Monto por tiempo {montoTiempo.monto}</Text>
                 <Text>Monto por km * distancia {totalDistancia}</Text>
-                <Text>Monto por tiempo * duracion {totalTiempo}</Text>
-                <Text>TOTAL {totalViaje} bs.</Text>
+                <Text>Monto por tiempo * duracion {totalTiempo}</Text>  */}
+
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between"
+                }}>
+                    <Text style={{
+                        fontSize: 15,
+                        fontWeight: "bold"
+                    }}>TOTAL:</Text>
+                    <Text style={{
+                        fontSize: 15,
+                        fontWeight: "bold"
+                    }}>Bs. {totalViaje}</Text>
+                </View>
+                {/* <Text>TOTAL {totalViaje} bs.</Text> */}
             </View>
         )
     }
@@ -183,31 +213,35 @@ const DetalleDeViajes = (props) => {
                     {props.state.viajesReducer.estado == "cargando" ? (
                         <View
                             style={{
-                                height: 40,
-                                borderRadius: 20,
-                                width: 200,
-                                backgroundColor: "#fff",
+                                height: 50,
+                                borderRadius: 2,
+                                width: "90%",
+                                backgroundColor: "red",
                                 borderColor: "#f00",
                                 borderWidth: 2,
                                 alignItems: "center",
                                 justifyContent: "center",
                             }}>
-                            <ActivityIndicator color="red" size="small" />
+                            <ActivityIndicator color="#fff" size="small" />
                         </View>
                     ) : (
                             <TouchableOpacity
                                 style={{
-                                    height: 40,
-                                    borderRadius: 20,
-                                    width: 200,
-                                    backgroundColor: "#fff",
+                                    height: 50,
+                                    borderRadius: 2,
+                                    width: "90%",
+                                    backgroundColor: "red",
                                     borderColor: "#f00",
                                     borderWidth: 2,
                                     alignItems: "center",
                                     justifyContent: "center",
                                 }}
                                 onPress={() => PedirViaje()}>
-                                <Text>
+                                <Text style={{
+                                    fontSize: 15,
+                                    fontWeight: "bold",
+                                    color: "#fff",
+                                }}>
                                     CONFIRMAR MOTONET
                             </Text>
                             </TouchableOpacity>

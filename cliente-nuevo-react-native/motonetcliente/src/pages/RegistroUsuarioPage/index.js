@@ -199,7 +199,7 @@ class RegistroUsuarioPage extends Component {
 
         return (
             <View style={{
-                backgroundColor: "#FC363B",
+                backgroundColor: "red",
                 flex: 1,
             }}>
                 <ScrollView

@@ -19,7 +19,6 @@ class LoginPage extends Component {
                 <Login navigation={this.props.navigation} />
             </View>
 
-
         );
     }
 };

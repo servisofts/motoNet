@@ -9,7 +9,6 @@ const NaviDrawer = (props) => {
     const [isVisible, setVisible] = React.useState(false);
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
-
     if (!props.state.naviDrawerReducer.openBar) {
         props.dispatch({
             component: "naviDrawer",
@@ -75,7 +74,7 @@ const NaviDrawer = (props) => {
                 setVisible(false);
                 AsyncStorage.removeItem("motonet_usuarioLog")
                 props.state.usuarioReducer.usuarioLog = false
-                props.state.navigationReducer.replace("CargaPage")
+                props.state.navigationReducer.replace("CargaPage") 
                 return <View />
         }
     }

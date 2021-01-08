@@ -25,19 +25,20 @@ const Inicio = (props) => {
             <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
             <BuscadorComponenteMap ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} />
             <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
-            <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />            
+            <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
             <TouchableOpacity
                 onPress={() => {
                     props.state.naviDrawerReducer.openBar()
                 }}
                 style={{
-                    width: 50,
-                    height: 50,
+                    width: 60,
+                    height: 60,
                     position: "absolute",
                     alignItems: 'center',
                     justifyContent: 'center',
-                    top: 15,
-                    left: 5,
+                    top: 0,
+                    left: 0,
+
                 }} >
                 <Svg name="menu"
                     style={{

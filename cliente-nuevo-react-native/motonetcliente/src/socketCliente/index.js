@@ -23,7 +23,7 @@ export const initSocket = (store) => {
                 nombre: cert.nombre,
                 send: (obj, isDisp) => {
                     client.write(JSON.stringify(obj) + "\n");
-                    if(isDisp){
+                    if (isDisp) {
                         store.dispatch({
                             ...obj
                         });
@@ -31,12 +31,12 @@ export const initSocket = (store) => {
                 }
             });
             AsyncStorage.getItem("motonet_usuarioLog").then((value) => {
-                if(value.length<=0){
+                if (value.length <= 0) {
                     return;
                 }
                 var usr = JSON.parse(value);
-                var objSend = { 
-                 component: "usuario",
+                var objSend = {
+                    component: "usuario",
                     type: "identificacion",
                     data: usr,
                     estado: "cargando"
@@ -65,7 +65,7 @@ export const initSocket = (store) => {
         });
         client.on('close', function () {
             console.log("SOCKET CLOSE")
-           
+
             const delay = ms => new Promise(res => setTimeout(res, ms));
             const yourFunction = async () => {
                 await delay(5000);
@@ -103,7 +103,7 @@ export const initSocket = (store) => {
     open({
         nombre: "motonet",
         port: 10004,
-        host: "192.168.0.15",
+        host: "www.motonet.com.bo",
         tls: true,
         tlsCert: { uri: pem }
     })
