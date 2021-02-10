@@ -52,7 +52,6 @@ public class Usuario {
         obj.put("estado", "exito");
         String deviceKey = obj.getString("deviceKey");
         session.setKeyDevice(deviceKey);
-        
         try {
             JSONObject data = obj.getJSONObject("data");
             session.setKeyUsuario(data.getString("key"));    

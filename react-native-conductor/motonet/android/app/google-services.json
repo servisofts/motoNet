@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "926725397773",
+    "project_id": "motonet-conductor",
+    "storage_bucket": "motonet-conductor.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:926725397773:android:2938964bf9ddf31fbda444",
+        "android_client_info": {
+          "package_name": "com.servisofts.motonetconductor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "926725397773-f9gnn74v13ejmo38qs0cuiahjdqjqjfa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcNXIjYZR9wjtfuPQTdwA-8wnYFpnL4Ls"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "926725397773-f9gnn74v13ejmo38qs0cuiahjdqjqjfa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

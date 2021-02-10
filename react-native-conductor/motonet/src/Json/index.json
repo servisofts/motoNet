@@ -1,0 +1,11 @@
+{
+    "socket":{
+        "name":"motonet"
+    },
+    "urlImages":"https://www.motonet.com/images/",
+    "storage":{
+        "usuarioLog":"usuarioLog",
+        "isBackgroundLocation":"is_background_location",
+        "fbtoken":"FIREBASE_TOKEN"
+    }
+}
