@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { } from "..";
-import {
-    Text,
-    View,
-    TouchableOpacity,
-    Animated
-} from 'react-native';
+import { Text, View, TouchableOpacity, Animated } from 'react-native';
 import RegistroUsuario from '../../Component/RegistroUsuario';
 
 class RegistroUsuarioPage extends Component {

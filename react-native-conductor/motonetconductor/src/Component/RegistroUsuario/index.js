@@ -240,207 +240,211 @@ const RegistroUsuario = (props) => {
     };
 
     return (
-        <ScrollView
-            style={{
-                flex: 1,
-                width: '100%',
-                backgroundColor: Theme.colors.fondo,
-
-            }}>
-            <View style={{
-                flex: 1,
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}>
+        <View>
+            <ScrollView
+                style={{
+                    flex: 1,
+                    backgroundColor: Theme.colors.fondo
+                }}>
 
                 <View style={{
                     flex: 1,
-                    marginTop: 30,
-                    width: "80%",
-                    height: 100,
                     alignItems: 'center',
-                    flexDirection: 'row',
-                    justifyContent: 'space-around',
+                    justifyContent: 'center',
                 }}>
 
-                    <Svg name="logoCompletoRecurso"
-                        style={{
-                            width: 100,
-                            height: 100,
-                            fill: "#fff"
-                        }} />
-                    {registriIcono()}
-                </View>
-                <View
-                    style={styles.view}>
-                    <Text style={styles.texto}>Nombres</Text>
-                    <TextInput placeholder="Ingrese un nombre" style={styles.input}
-                        style={(obj.nombres.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "nombres")}
-                        value={obj.nombres.value}
-                        autoCapitalize='none'
-                    />
-                </View>
-                <View
-                    style={styles.view}>
-                    <Text style={styles.texto}>Apellidos</Text>
-                    <TextInput placeholder="Ingrese un apellido"
-                        style={(obj.apellidos.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "apellidos")}
-                        value={obj.apellidos.value}
-                        autoCapitalize='none'
-                    />
-                </View>
-                <View
-                    style={styles.view}>
-                    <Text style={styles.texto}>CI</Text>
-                    <TextInput placeholder="Ingrese su cédula de indentidad"
-                        style={(obj.ci.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "ci")}
-                        value={obj.ci.value}
-                        keyboardType='numeric'
-                        autoCapitalize='none'
-                    />
-                </View>
-                <View
-                    style={styles.view}>
-                    <Text style={styles.texto}>Correo</Text>
-                    <TextInput placeholder="Ingrese un correo válido"
-                        style={(obj.correo.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "correo")}
-                        value={obj.correo.value}
-                        autoCapitalize='none'
-                    />
-                </View>
-                <View
-                    style={styles.view}>
-                    <Text style={styles.texto}>Telefono</Text>
                     <View style={{
                         flex: 1,
+                        marginTop: 30,
+                        width: "80%",
+                        height: 100,
                         alignItems: 'center',
-                        justifyContent: 'center',
                         flexDirection: 'row',
-                        borderRadius: 10,
-                        backgroundColor: "#EAEAE2",
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: -2,
-                        },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 3.84,
-                        elevation: 5,
+                        justifyContent: 'space-around',
                     }}>
-                        <IntlPhoneInput
-                            onChangeText={onChangeText}
-                            defaultCountry="BO"
-                            lang="en"
-                            flagStyle={{
-                                fontSize: 12,
-                                marginLeft: 0
-                            }}
-                            modalContainer={{
-                                backgroundColor: "#fff",
-                            }}
-                            filterInputStyle={{
-                                backgroundColor: "#fff",
-                                borderColor: "#000",
-                                borderWidth: 2,
-                                borderRadius: 10,
-                                color: "#fff",
-                            }}
-                            countryStyle={{
-                                borderColor: "#fff",
-                                color: "#fff"
-                            }}
-                            countryModalStyle={{
-                                borderColor: "#fff",
-                                color: "#fff"
-                            }}
 
-                            containerStyle={{
-                                backgroundColor: false,
-                                borderRadius: 0,
-                                padding: 0,
-                                ...styles.input
-                            }}
-                            phoneInputStyle={{
-                                color: "#000",
-
-                            }}
-                            dialCodeTextStyle={{
-                                color: "#000"
-                            }}
-                            closeButtonStyle={{
-                                backgroundColor: "#2c4b81",
-                            }}
-                            closeTextStyle={{
-                                color: "#fff",
-                            }}
-                            modalCountryItemCountryNameStyle={{
-                                color: "#000",
-                            }}
-                            modalCountryItemCountryDialCodeStyle={{
-                                color: "#000",
-                            }}
+                        <Svg name="logoCompleto"
+                            style={{
+                                width: 100,
+                                height: 100,
+                                fill: "#fff"
+                            }} />
+                        {registriIcono()}
+                    </View>
+                    <View
+                        style={styles.view}>
+                        <Text style={styles.texto}>Nombres</Text>
+                        <TextInput placeholder="Ingrese un nombre" style={styles.input}
+                            style={(obj.nombres.error ? styles.error : styles.input)}
+                            onChangeText={text => hanlechage(text, "nombres")}
+                            value={obj.nombres.value}
+                            autoCapitalize='none'
                         />
                     </View>
-                </View>
-                <View
-                    style={styles.view}>
-                    <Text style={styles.texto}>Contraseña</Text>
-                    <TextInput placeholder="Ingresar contraseña" style={(obj.pass.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "pass")}
-                        value={obj.pass.value}
-                        autoCapitalize='none'
-                        secureTextEntry
-                    />
-                </View>
-                <View
-                    style={styles.view}>
-                    <Text style={styles.texto}>Confirmar contraseña</Text>
-                    <TextInput placeholder="Confirme su contraseña" style={(obj.confirmar.error ? styles.error : styles.input)}
-                        onChangeText={text => hanlechage(text, "confirmar")}
-                        value={obj.confirmar.value}
-                        secureTextEntry
-                        autoCapitalize='none'
-                    />
-                </View>
-                <TouchableOpacity
-                    style={styles.touch3}>
-                    {props.state.usuarioReducer.estado === "cargando" ? (
-                        <ActivityIndicator size="small" color="#fff" />
-                    ) : (
-                            <Text
-                                onPress={Registrar}
-                                style={{
-                                    color: '#fff',
-                                    fontSize: 18,
-                                }}>
-                                Registrar
-                            </Text>
-                        )}
-                </TouchableOpacity>
-                <TouchableOpacity
-                    onPress={() => props.navigation.goBack()}
-                    style={{
-                        width: 50,
-                        height: 50,
-                        position: "absolute",
-                        top: 10,
-                        left: 0,
-                        alignItems: 'center',
-                    }}>
-                    <Svg name="volver"
-                        style={{
-                            width: 30,
-                            height: 30,
-                            fill: "#fff"
-                        }} />
-                </TouchableOpacity>
-            </View>
+                    <View
+                        style={styles.view}>
+                        <Text style={styles.texto}>Apellidos</Text>
+                        <TextInput placeholder="Ingrese un apellido"
+                            style={(obj.apellidos.error ? styles.error : styles.input)}
+                            onChangeText={text => hanlechage(text, "apellidos")}
+                            value={obj.apellidos.value}
+                            autoCapitalize='none'
+                        />
+                    </View>
+                    <View
+                        style={styles.view}>
+                        <Text style={styles.texto}>CI</Text>
+                        <TextInput placeholder="Ingrese su cédula de indentidad"
+                            style={(obj.ci.error ? styles.error : styles.input)}
+                            onChangeText={text => hanlechage(text, "ci")}
+                            value={obj.ci.value}
+                            keyboardType='numeric'
+                            autoCapitalize='none'
+                        />
+                    </View>
+                    <View
+                        style={styles.view}>
+                        <Text style={styles.texto}>Correo</Text>
+                        <TextInput placeholder="Ingrese un correo válido"
+                            style={(obj.correo.error ? styles.error : styles.input)}
+                            onChangeText={text => hanlechage(text, "correo")}
+                            value={obj.correo.value}
+                            autoCapitalize='none'
+                        />
+                    </View>
+                    <View
+                        style={styles.view}>
+                        <Text style={styles.texto}>Telefono</Text>
+                        <View style={{
+                            flex: 1,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'row',
+                            borderRadius: 10,
+                            backgroundColor: "#EAEAE2",
+                            shadowColor: "#000",
+                            shadowOffset: {
+                                width: 0,
+                                height: -2,
+                            },
+                            shadowOpacity: 0.25,
+                            shadowRadius: 3.84,
+                            elevation: 5,
+                        }}>
+                            <IntlPhoneInput
+                                onChangeText={onChangeText}
+                                defaultCountry="BO"
+                                lang="en"
+                                flagStyle={{
+                                    fontSize: 12,
+                                    marginLeft: 0
+                                }}
+                                modalContainer={{
+                                    backgroundColor: "#fff",
+                                }}
+                                filterInputStyle={{
+                                    backgroundColor: "#fff",
+                                    borderColor: "#000",
+                                    borderWidth: 2,
+                                    borderRadius: 10,
+                                    color: "#fff",
+                                }}
+                                countryStyle={{
+                                    borderColor: "#fff",
+                                    color: "#fff"
+                                }}
+                                countryModalStyle={{
+                                    borderColor: "#fff",
+                                    color: "#fff"
+                                }}
 
-        </ScrollView>
+                                containerStyle={{
+                                    backgroundColor: false,
+                                    borderRadius: 0,
+                                    padding: 0,
+                                    ...styles.input
+                                }}
+                                phoneInputStyle={{
+                                    color: "#000",
+
+                                }}
+                                dialCodeTextStyle={{
+                                    color: "#000"
+                                }}
+                                closeButtonStyle={{
+                                    backgroundColor: "#2c4b81",
+                                }}
+                                closeTextStyle={{
+                                    color: "#fff",
+                                }}
+                                modalCountryItemCountryNameStyle={{
+                                    color: "#000",
+                                }}
+                                modalCountryItemCountryDialCodeStyle={{
+                                    color: "#000",
+                                }}
+                            />
+                        </View>
+                    </View>
+                    <View
+                        style={styles.view}>
+                        <Text style={styles.texto}>Contraseña</Text>
+                        <TextInput placeholder="Ingresar contraseña" style={(obj.pass.error ? styles.error : styles.input)}
+                            onChangeText={text => hanlechage(text, "pass")}
+                            value={obj.pass.value}
+                            autoCapitalize='none'
+                            secureTextEntry
+                        />
+                    </View>
+                    <View
+                        style={styles.view}>
+                        <Text style={styles.texto}>Confirmar contraseña</Text>
+                        <TextInput placeholder="Confirme su contraseña" style={(obj.confirmar.error ? styles.error : styles.input)}
+                            onChangeText={text => hanlechage(text, "confirmar")}
+                            value={obj.confirmar.value}
+                            secureTextEntry
+                            autoCapitalize='none'
+                        />
+                    </View>
+                    <TouchableOpacity
+                        style={styles.touch3}>
+                        {props.state.usuarioReducer.estado === "cargando" ? (
+                            <ActivityIndicator size="small" color="#fff" />
+                        ) : (
+                                <Text
+                                    onPress={Registrar}
+                                    style={{
+                                        color: '#fff',
+                                        fontSize: 18,
+                                    }}>
+                                    Registrar
+                                </Text>
+                            )}
+                    </TouchableOpacity>
+
+                </View>
+
+            </ScrollView>
+            <TouchableOpacity
+                onPress={() => props.navigation.goBack()}
+                style={{
+                    width: 40,
+                    height: 40,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    alignItems: 'center',
+                    justifyContent: "center",
+                    // backgroundColor: "#ccc"
+                }}>
+                <Svg name="volver"
+                    style={{
+                        width: 20,
+                        height: 20,
+                        fill: "#000"
+                    }} />
+            </TouchableOpacity>
+        </View>
     )
 }
 const styles = StyleSheet.create({
@@ -453,7 +457,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         flexDirection: 'row',
         borderRadius: 25,
-
     },
     touchDoc: {
         flex: 1,
@@ -474,7 +477,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5,
     },
     input: {
@@ -494,7 +496,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5,
     },
     inputTelf: {
@@ -527,16 +528,15 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5,
     },
     touch3: {
-        marginTop: 10,
+        marginTop: 30,
         flex: 1,
-        borderWidth: 3,
+        // borderWidth: 3,
         borderColor: "#fff",
-        backgroundColor: "#2c4b81",
-        width: "50%",
+        backgroundColor: Theme.colors.button,
+        width: "80%",
         height: 40,
         marginBottom: 10,
         alignItems: 'center',
@@ -550,7 +550,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-
         elevation: 5,
     },
     touch4: {
@@ -582,8 +581,8 @@ const styles = StyleSheet.create({
 
         width: '100%',
         textAlign: "left",
-        color: "#000",
-        fontSize: 17,
+        color: "#fff",
+        fontSize: 12,
         margin: 5,
     }
 
