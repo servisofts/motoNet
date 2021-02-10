@@ -99,7 +99,7 @@ export const initSocket = (store) => {
     open({
         nombre: "motonet",
         port: 10004,
-        host: "www.motonet.com.bo",
+        host: "www.servisofts.com",
         tls: true,
         tlsCert: { uri: pem }
     })
