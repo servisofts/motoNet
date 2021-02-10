@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "131766266450",
+    "project_id": "motonet-cliente",
+    "storage_bucket": "motonet-cliente.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:131766266450:android:e962e7568f651e4983cd8b",
+        "android_client_info": {
+          "package_name": "com.servisofts.motonetcliente"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "131766266450-os9tp6p7d2tdk41qdshrp3cp7clli1ri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB36nAsMDIupna_AW4lj1d_Vgi5f-K8fsI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "131766266450-os9tp6p7d2tdk41qdshrp3cp7clli1ri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,12 @@
+{
+    "socket": {
+        "name": "clinica_nj"
+    },
+    "storage": {
+        "urlLog": "clinica_usuarioLog",
+        "deviceKey": "clinica_deviceKey",
+        "fbtoken": "FIREBASE_TOKEN"
+    },
+    "_urlImages": "http://192.168.0.3:30006/",
+    "urlImages": "https://clinicaniñojesus.com.bo/images/"
+}
