@@ -2,53 +2,57 @@ package component;
 
 import org.json.JSONObject;
 
-import Router.Router;
+import Server.SSSAbstract.SSSessionAbstract;
 import util.console;
 
 public class Manejador {
 
-    public Manejador(JSONObject data, Router router) {
+    public Manejador(JSONObject data, SSSessionAbstract session) {
         console.log(console.ANSI_BLUE," Manejador Socket Server -> : "+data.getString("component"));
         if (!data.isNull("component")) {
             switch (data.getString("component")) {
                 case "usuario": {
-                    new Usuario(data, router);
+                    new Usuario(data, session);
+                    break;
+                }
+                case "mensajeSocket": {
+                    MensajeSocket.onMensaje(data, session);
                     break;
                 }
                 case "cabeceraDato": {
-                    new CabeceraDato(data, router);
+                    new CabeceraDato(data, session);
                     break;
                 }
                 case "location": {
-                    new Location(data, router);
+                    new Location(data, session);
                     break;
                 }
                 case "backgroundLocation": {
-                    new BackgroundLocation(data, router);
+                    new BackgroundLocation(data, session);
                     break;
                 }
                 case "locationGoogle": {
-                    new LocationGoogle(data, router);
+                    new LocationGoogle(data, session);
                     break;
                 }
                 case "viaje": {
-                    new Viaje(data, router);
+                    new Viaje(data, session);
                     break;
                 }
                 case "tipoViaje": {
-                    new TipoViaje(data, router);
+                    new TipoViaje(data, session);
                     break;
                 }
                 case "tipoTarifa": {
-                    new TipoTarifa(data, router);
+                    new TipoTarifa(data, session);
                     break;
                 }
                 case "parametrosViaje": {
-                    new ParametrosViaje(data, router);
+                    new ParametrosViaje(data, session);
                     break;
                 }
                 case "seguimientoConductor": {
-                    new SeguimientoConductor(data, router);
+                    new SeguimientoConductor(data, session);
                     break;
                 }
                 default:

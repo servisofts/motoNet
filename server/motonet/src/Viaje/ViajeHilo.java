@@ -8,7 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import SocketServer.SocketServer;
+import Server.SSSAbstract.SSServerAbstract;
 import component.Viaje;
 import conexion.Conexion;
 
@@ -42,7 +42,8 @@ public class ViajeHilo {
                      objSend.put("estado", "exito");
                      
                      for (int i = 0; i < conductoresCercanos.length(); i++) {
-                        SocketServer.sendUser(objSend.toString(), conductoresCercanos.getJSONObject(i).getString("key_usuario"));
+                        SSServerAbstract.sendUser(objSend.toString(), conductoresCercanos.getJSONObject(i).getString("key_usuario"));
+                        // SocketServer.sendUser(objSend.toString(), conductoresCercanos.getJSONObject(i).getString("key_usuario"));
                         JSONObject viajeMovimiento = Viaje.nuevoMovimientoViaje(objViaje.getString("key"), Viaje.TIPO_NOTIFICO_CONDUCTOR, conductoresCercanos.getJSONObject(i).getString("key_usuario"));
                     }
                     

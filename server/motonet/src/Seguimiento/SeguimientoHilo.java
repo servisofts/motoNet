@@ -5,27 +5,26 @@ import java.util.Map.Entry;
 
 import org.json.JSONObject;
 
-import Router.Router;
-import SocketWeb.SocketWeb;
+import Server.SSSAbstract.SSServerAbstract;
+import Server.SSSAbstract.SSSessionAbstract;
 import conexion.Conexion;
 
 public class SeguimientoHilo extends Thread {
-    private static HashMap<String, String> ESCUCHAS = new HashMap<>();
+    private static HashMap<String, SSSessionAbstract> ESCUCHAS = new HashMap<>();
     public static boolean isRun = false;
 
-    
-    public static void setEscucha(String key) {
-        if(!isRun){
+    public static void setEscucha(SSSessionAbstract session) {
+        if (!isRun) {
             new SeguimientoHilo();
         }
-        ESCUCHAS.put("key", key);
+        ESCUCHAS.put(session.getIdSession(), session);
     }
 
-    public static void removeEscucha(String key) {
-        ESCUCHAS.remove(key);
+    public static void removeEscucha(SSSessionAbstract session) {
+        ESCUCHAS.remove(session.getIdSession());
     }
 
-    public SeguimientoHilo(){
+    public SeguimientoHilo() {
         isRun = true;
         this.start();
     }
@@ -35,18 +34,19 @@ public class SeguimientoHilo extends Thread {
         try {
             String eventos;
             while (isRun) {
-                if(ESCUCHAS.entrySet().size()<=0){
-                    this.isRun =false;
+                if (ESCUCHAS.entrySet().size() <= 0) {
+                    this.isRun = false;
                     return;
                 }
                 JSONObject obj = new JSONObject();
                 obj.put("component", "seguimientoConductor");
                 obj.put("type", "changePosition");
                 obj.put("estado", "exito");
-                JSONObject objResp = Conexion.ejecutarFuncionObject("select get_conductores_activos_cercanos() as json");
+                JSONObject objResp = Conexion
+                        .ejecutarFuncionObject("select get_conductores_activos_cercanos() as json");
                 obj.put("data", objResp);
-                for (Entry<String, String> me : ESCUCHAS.entrySet()) {
-                    SocketWeb.sessiones.get(me.getValue()).send(obj.toString());
+                for (Entry<String, SSSessionAbstract> me : ESCUCHAS.entrySet()) {
+                    me.getValue().send(obj.toString());
                 }
                 Thread.sleep(5000);
             }

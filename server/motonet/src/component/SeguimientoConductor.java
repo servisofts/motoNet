@@ -6,9 +6,8 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import conexion.*;
-import Router.Router;
 import Seguimiento.SeguimientoHilo;
-import SocketCliente.SocketCliete;
+import Server.SSSAbstract.SSSessionAbstract;
 import util.*;
 
 import org.json.JSONArray;
@@ -27,24 +26,24 @@ public class SeguimientoConductor {
     // correo CV
     // estado INT
 
-    public SeguimientoConductor(JSONObject data, Router router) {
+    public SeguimientoConductor(JSONObject data, SSSessionAbstract session) {
         switch (data.getString("type")) {
             case "startAll":
-                startAll(data, router);
+                startAll(data, session);
                 break;
             case "stopAll":
-                stopAll(data, router);
+                stopAll(data, session);
                 break;
         }
     }
 
-    public void startAll(JSONObject obj, Router router) {
-        SeguimientoHilo.setEscucha((((SocketWeb.Session) router.getSession()).getId()));
+    public void startAll(JSONObject obj, SSSessionAbstract session) {
+        SeguimientoHilo.setEscucha(session);
 
         // SocketCliete.send("usuario", obj, router);
     }
-    public void stopAll(JSONObject obj, Router router) {
-        SeguimientoHilo.removeEscucha((((SocketWeb.Session) router.getSession()).getId()));
+    public void stopAll(JSONObject obj, SSSessionAbstract session) {
+        SeguimientoHilo.removeEscucha(session);
         // SocketCliete.send("usuario", obj, router);
 
     }

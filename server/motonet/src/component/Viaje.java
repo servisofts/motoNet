@@ -6,9 +6,6 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import conexion.*;
-import Router.Router;
-import SocketCliente.SocketCliete;
-import SocketServer.SocketServer;
 import Viaje.LatLng;
 import Viaje.ViajeHilo;
 import util.*;
@@ -16,6 +13,9 @@ import util.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import Server.SSSAbstract.SSServerAbstract;
+import Server.SSSAbstract.SSSessionAbstract;
 
 public class Viaje {
 
@@ -29,27 +29,27 @@ public class Viaje {
     // correo CV
     // estado INT
 
-    public Viaje(JSONObject data, Router router) {
+    public Viaje(JSONObject data, SSSessionAbstract session) {
         switch (data.getString("type")) {
             case "buscar":
-                buscar(data, router);
+                buscar(data, session);
                 break;
             case "cancelarBusqueda":
-                cancelarBusqueda(data, router);
+                cancelarBusqueda(data, session);
                 break;
             case "cancelarBusquedaConductor":
-                cancelarBusquedaConductor(data, router);
+                cancelarBusquedaConductor(data, session);
                 break;
             case "confirmarBusqueda":
-                confirmarBusqueda(data, router);
+                confirmarBusqueda(data, session);
                 break;
             case "negociarViajeConductor":
-                negociarViajeConductor(data, router);
+                negociarViajeConductor(data, session);
                 break;
         }
     }
 
-    public void buscar(JSONObject obj, Router router) {
+    public void buscar(JSONObject obj, SSSessionAbstract session) {
         JSONObject data = obj.getJSONObject("data");
         try {
             JSONObject objViaje = new JSONObject();
@@ -103,7 +103,7 @@ public class Viaje {
     }
     
 
-    public void confirmarBusqueda(JSONObject obj, Router router) {
+    public void confirmarBusqueda(JSONObject obj, SSSessionAbstract session) {
         try {
             String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
@@ -129,7 +129,8 @@ public class Viaje {
             objSend.put("type", "confirmarBusqueda");
             objSend.put("data", viaje);
             objSend.put("estado", "exito");
-            SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+            SSServerAbstract.sendUser(objSend.toString() ,viaje.getString("key_usuario"));
+            // SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
             obj.put("data", viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {
@@ -138,7 +139,7 @@ public class Viaje {
 
     }
 
-    public void negociarViajeConductor(JSONObject obj, Router router) {
+    public void negociarViajeConductor(JSONObject obj, SSSessionAbstract session) {
         try {
             String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
@@ -167,7 +168,8 @@ public class Viaje {
             objSend.put("type", "negociarViajeConductor");
             objSend.put("data", viaje);
             objSend.put("estado", "exito");
-            SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+            SSServerAbstract.sendUser(objSend.toString() ,viaje.getString("key_usuario"));
+            // SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
             obj.put("data", viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {
@@ -176,7 +178,7 @@ public class Viaje {
 
     }
 
-    public void cancelarBusqueda(JSONObject obj, Router router) {
+    public void cancelarBusqueda(JSONObject obj, SSSessionAbstract session) {
         try {
 
             String key_usuario = obj.getString("key_usuario");
@@ -192,7 +194,7 @@ public class Viaje {
 
     }
 
-    public void cancelarBusquedaConductor(JSONObject obj, Router router) {
+    public void cancelarBusquedaConductor(JSONObject obj, SSSessionAbstract session) {
         try {
 
             String key_usuario = obj.getString("key_usuario");
