@@ -5,8 +5,9 @@
         "primary2": "#000",
         "secondary": "#fff",
         "boder": "#eeeeee",
-        "fondo": "#fff",
-        "borderTextError": "#F5F11F"
+        "fondo": "red",
+        "borderTextError": "#F5F11F",
+        "button": "#000"
     },
     "gradient": {
         "primary": [

@@ -63,7 +63,6 @@ SSPushNotification(store)
 const Home = createStackNavigator(
   Pages.getPages(),
   {
-
     defaultNavigationOptions: ({ navigation }) => ({
       headerBackground: () =>
         <LinearGradient colors={Theme.gradient.primary} style={{
@@ -74,7 +73,6 @@ const Home = createStackNavigator(
           backgroundColor: "#000",
           position: "absolute"
         }}>
-
         </LinearGradient>
       ,
       headerTitleStyle: {
@@ -113,7 +111,7 @@ class App extends Component {
     console.log("ENTRO COMPONENT DID MOUNT")
     BackgroundLocation.init(store);
     HttpConection.init(store);
-    
+
     SSSocketNative.init(store);
 
 

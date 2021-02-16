@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Platform, Linking, Animated, AsyncStorage } from 'react-native';
+import { View, Text, StyleSheet, Platform, Linking, Animated, AsyncStorage, Dimensions } from 'react-native';
 import Carga from '../../Component/Carga';
 import Svg from '../../Svg';
 import ImgFondoCruces from '../../Component/ImgFondoCruces';
@@ -11,7 +11,7 @@ class CargaPage extends Component {
     super(props);
     this.state = {
       startValue: new Animated.Value(1),
-      endValue: 1.5,
+      endValue: 1.3,
     };
 
   }
@@ -32,16 +32,17 @@ class CargaPage extends Component {
       <View style={{
         flex: 1,
         alignItems: 'center',
-        backgroundColor: "white",
+        // backgroundColor: "white",
+        backgroundColor: "red",
         justifyContent: 'center',
       }}>
-
-        <ImgFondoCruces />
         <Animated.View
           style={[
             {
-              marginTop: 100,
-              width: 200,
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%"
             },
             {
               transform: [
@@ -52,11 +53,10 @@ class CargaPage extends Component {
             },
           ]}
         >
-          <Svg name="logoCompletoRecurso"
+          <Svg name="logoCompleto"
             style={{
-              width: 200,
-              height: 200,
-
+              width: Dimensions.get("window").width * 0.6,
+              height: Dimensions.get("window").width * 0.6,
             }} />
         </Animated.View>
         <Carga navigation={this.props.navigation} />
