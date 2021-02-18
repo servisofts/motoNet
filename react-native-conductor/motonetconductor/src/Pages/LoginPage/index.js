@@ -4,11 +4,10 @@ import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, Native
 import Svg from '../../Svg';
 import base64 from 'react-native-base64'
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from "react-native-fbsdk";
-import Theme from '../../Styles/Theme.json'
+import AppParams from '../../Json';
+import Styles from '../../Styles';
 
 const LoginPage = (props) => {
-
-
     const [obj, setObj] = React.useState({
         usr: {
             value: "",
@@ -19,6 +18,7 @@ const LoginPage = (props) => {
             error: false
         },
     });
+
 
     if (props.state.usuarioReducer.estado === "exito") {
         props.navigation.estado = ""
@@ -135,7 +135,7 @@ const LoginPage = (props) => {
     return (
         <View style={{
             flex: 1,
-            backgroundColor: Theme.colors.fondo
+            backgroundColor: Styles.colors.primary
         }}>
             <ScrollView>
                 <View style={{
@@ -219,7 +219,7 @@ const LoginPage = (props) => {
                                 }
                                 setObj({ ...obj })
                                 if (exito) {
-                                    props.state.socketClienteReducer.sessiones["clinica_nj"].send({
+                                    props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
                                         component: "usuario",
                                         type: "login",
                                         data: datas,
@@ -368,13 +368,13 @@ const styles = StyleSheet.create({
     },
     touch2Error: {
         flex: 1,
-        backgroundColor: "#EAEAE2",
+        backgroundColor: "#ff0000",
         width: "80%",
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderColor: "#f00",
+        borderColor: "#fff",
         borderWidth: 1,
         paddingLeft: 15,
         borderRadius: 10,
@@ -408,7 +408,7 @@ const styles = StyleSheet.create({
     },
     touch4: {
         flex: 1,
-        backgroundColor: Theme.colors.button,
+        backgroundColor: Styles.colors.button,
         width: "80%",
         height: 40,
         // borderColor: "#fff",
@@ -433,4 +433,9 @@ const initStates = (state) => {
     return { state }
 };
 
+LoginPage.navigationOptions = (nav)=>{
+    return {
+        headerShown:false
+    }
+}
 export default connect(initStates)(LoginPage);

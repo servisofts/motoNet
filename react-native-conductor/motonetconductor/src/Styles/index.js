@@ -1,12 +1,13 @@
 export default {
     "barStyle": "light-content",
     "colors": {
-        "primary": "#012",
-        "primary2": "#000",
-        "secondary": "#fff",
+        "primary": "#ff0000",
+        "primary2": "#ff0000",
+        "secondary": "#000",
         "boder": "#eeeeee",
         "fondo": "#fff",
-        "borderTextError": "#F5F11F"
+        "borderTextError": "#F5F11F",
+        "button":"#ff0000"
     },
     "gradient": {
         "primary": [
