@@ -14,10 +14,10 @@ import * as  cargarDatosPersonalesActions from '../../Actions/cargarDatosPersona
 
 const ListaUsuarioPage = (props) => {
 
-     if (!props.state.usuarioReducer.usuarioLog) {
-          props.history.push("/Carga");
-          return <div />
-     }
+     // if (!props.state.usuarioReducer.usuarioLog) {
+     //      props.history.push("/Carga");
+     //      return <div />
+     // }
 
 
      const getLista = () => {
@@ -30,9 +30,9 @@ const ListaUsuarioPage = (props) => {
                list.push({
                     key,
                     Nombres: obj.Nombres,
-                    Apellidos: obj.Apellidos,
-                    Correo: obj.Correo,
-                    Telefono: obj.Telefono,
+                    //Apellidos: obj.Apellidos,
+                   // Correo: obj.Correo,
+                   // Telefono: obj.Telefono,
                })
           })
 
@@ -58,7 +58,7 @@ const ListaUsuarioPage = (props) => {
                               component: "usuario",
                               type: "getAllNuevo",
                               estado: "cargando",
-                              cabecera: "registro_cliente",
+                              cabecera: "registro_conductor",
                               data: ""
                          };
                          props.state.socketReducer.send(objSend);
@@ -71,9 +71,9 @@ const ListaUsuarioPage = (props) => {
                                         title={"Usuarios"}
                                         head={[
                                              { id: 'Nombres', label: 'Nombres' },
-                                             { id: 'Apellidos', label: 'Apellidos' },
-                                             { id: 'Telefono', label: 'Telefono' },
-                                             { id: 'Correo', label: 'Correo' },
+                                          //   { id: 'Apellidos', label: 'Apellidos' },
+                                            // { id: 'Telefono', label: 'Telefono' },
+                                             //{ id: 'Correo', label: 'Correo' },
                                         ]}
                                         order={{
                                              key: "Nombres",
