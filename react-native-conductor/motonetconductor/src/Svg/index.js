@@ -5,7 +5,6 @@ import { Platform, Text, View } from 'react-native';
 import LogoCompleto from '../img/logoCompleto.svg';
 import Volver from '../img/volver.svg';
 
-
 import BisaSegurosRecurso from '../img/bisaSegurosRecurso.svg';
 import BtnAzul from '../img/btnAzul.svg';
 import BtnRojo from '../img/btnRojo.svg';
