@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text } from 'react-native';
 import { ThemeColors } from 'react-navigation';
 import RecuperarPass from '../../Component/RecuperarPass';
-import Theme from '../../Styles/Theme.json'
+import Styles from '../../Styles';
 
 class RecuperarPassPage extends Component {
 
@@ -14,7 +14,7 @@ class RecuperarPassPage extends Component {
         return (
             <View style={{
                 flex: 1,
-                backgroundColor: Theme.colors.fondo
+                backgroundColor: Styles.colors.primary
             }}>
                 <RecuperarPass navigation={this.props.navigation} />
             </View>

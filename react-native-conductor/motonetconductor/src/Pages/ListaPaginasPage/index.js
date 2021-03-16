@@ -7,8 +7,8 @@ import {
 } from 'react-native';
 import * as Pages from '../../Pages'
 import { connect } from 'react-redux';
+import Styles from '../../Styles';
 
-import Theme from '../../Styles/Theme.json'
 class ListaPaginasPage extends Component {
     static navigationOptions = {
         headerShown: false,
@@ -31,7 +31,7 @@ class ListaPaginasPage extends Component {
 
             <View
                 style={{
-                    backgroundColor: Theme.colors.fondo,
+                    backgroundColor: Styles.colors.fondo,
                     flex: 1,
                     alignItems: "center",
 

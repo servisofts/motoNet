@@ -32,7 +32,6 @@ import { Provider } from 'react-redux';
 
 import LinearGradient from 'react-native-linear-gradient';
 
-import Theme from './src/Styles/Theme.json';
 import NaviDrawer from './src/Component/NaviDrawer';
 
 import SSPushNotification from './src/SSPushNotification';
@@ -40,7 +39,6 @@ import SSPushNotification from './src/SSPushNotification';
 //IMPORT SSSocketNative
 import * as SSSocketNative from './src/SSSocketNative';
 import BarraDeDesconeccion from './src/SSSocketNative/BarraDeDesconeccion';
-
 import AlertaDesconectado from './src/SSSocketNative/AlertaDesconectado';
 
 // import * as socketCliente from './src/socketCliente'
@@ -48,6 +46,7 @@ import * as HttpConection from './src/HttpConection'
 import DisconectBarra from './src/Component/DisconectBarra';
 import AppStateChange from './src/AppStateChange';
 import * as BackgroundLocation from './src/BackgroundLocation'
+import Styles from './src/Styles';
 
 const store = createStore(
   Reducer,
@@ -65,7 +64,7 @@ const Home = createStackNavigator(
   {
     defaultNavigationOptions: ({ navigation }) => ({
       headerBackground: () =>
-        <LinearGradient colors={Theme.gradient.primary} style={{
+        <LinearGradient colors={Styles.gradient.primary} style={{
           height: "100%",
           width: "100%",
           top: 0,
@@ -76,7 +75,7 @@ const Home = createStackNavigator(
         </LinearGradient>
       ,
       headerTitleStyle: {
-        color: Theme.colors.secondary,
+        color: Styles.colors.secondary,
       },
       cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS
       // headerRight: () => (
@@ -121,8 +120,8 @@ class App extends Component {
       <Provider store={store}>
         <AppStateChange store={store} />
 
-        <SafeAreaView style={{ backgroundColor: Theme.colors.primary }}>
-          <StatusBar barStyle={Theme.barStyle} backgroundColor='#777' />
+        <SafeAreaView style={{ backgroundColor: Styles.colors.primary }}>
+          <StatusBar barStyle={Styles.barStyle} backgroundColor={Styles.colors.primary} />
 
           <View style={{
             width: "100%",

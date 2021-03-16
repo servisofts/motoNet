@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, SafeAreaView, Image, ActivityIndicator } from 'react-native';
 import Svg from '../../Svg';
 import { LoginManager } from "react-native-fbsdk";
-import Theme from '../../Styles/Theme.json'
 import Estado from '../Estado';
 import IntlPhoneInput from 'react-native-intl-phone-input';
 import * as usuarioActions from '../../Actions/usuarioActions'
 import AppParam from '../../Json/index.json'
+import Styles from '../../Styles';
 const RegistroUsuario = (props) => {
     const [respuesta, setRespuesta] = React.useState({ registro: "registro" })
     const [paisCodigo, setCodigo] = React.useState()
@@ -52,7 +52,6 @@ const RegistroUsuario = (props) => {
                 setObj({ ...obj });
                 setRespuesta(props.navigation.state.params);
                 return <View />
-            case "registro":
                 setRespuesta(props.navigation.state.params);
                 return <View />
             default:
@@ -244,7 +243,7 @@ const RegistroUsuario = (props) => {
             <ScrollView
                 style={{
                     flex: 1,
-                    backgroundColor: Theme.colors.fondo
+                    backgroundColor: Styles.colors.primary
                 }}>
 
                 <View style={{
@@ -535,7 +534,7 @@ const styles = StyleSheet.create({
         flex: 1,
         // borderWidth: 3,
         borderColor: "#fff",
-        backgroundColor: Theme.colors.button,
+        backgroundColor: Styles.colors.secondary,
         width: "80%",
         height: 40,
         marginBottom: 10,
