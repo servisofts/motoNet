@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, SafeAreaView, Image, ActivityIndicator } from 'react-native';
 import Svg from '../../Svg';
-import Theme from '../../Styles/Theme.json'
 import Estado from '../Estado';
 import AppParam from '../../Json/index.json'
 import ImgFondoCruces from '../ImgFondoCruces'

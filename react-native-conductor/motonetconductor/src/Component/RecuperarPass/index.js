@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, NativeModules } from 'react-native';
 import Svg from '../../Svg';
-import Theme from '../../Styles/Theme.json'
+import Styles from '../../Styles';
 
 const RecuperarPass = (props) => {
 
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
 
     touch4: {
         marginTop: 10,
-        backgroundColor: Theme.colors.button,
+        backgroundColor: Styles.colors.secondary,
         width: "100%",
         height: 45,
         alignItems: 'center',

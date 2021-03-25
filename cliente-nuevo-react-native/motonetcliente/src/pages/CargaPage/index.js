@@ -71,7 +71,7 @@ class CargaPage extends Component {
             }}>MotoNet</Text>
 
         </Animated.View>
-          <Carga navigation={this.props.navigation} />
+        <Carga navigation={this.props.navigation} />
       </View>
     );
   }

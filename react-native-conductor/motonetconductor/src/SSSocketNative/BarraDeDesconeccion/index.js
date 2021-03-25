@@ -11,6 +11,7 @@ import {
 
 import * as SSSocketNative from '../../SSSocketNative';
 import ContenidoBarra from './ContenidoBarra';
+import Styles from '../../Styles';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 var lastPing = new Date().getTime();
@@ -102,7 +103,7 @@ const BarraDeDesconeccion = (props) => {
                 style={{
                     backgroundColor: pan.y.interpolate({
                         inputRange: [0, Dimensions.get("window").height],
-                        outputRange: ["#777777", "#777777F8"]
+                        outputRange: [Styles.colors.primary+"00", Styles.colors.primary+"F8"]
                     }),
                     height: pan.y.interpolate({
                         inputRange: [0, Dimensions.get("window").height],

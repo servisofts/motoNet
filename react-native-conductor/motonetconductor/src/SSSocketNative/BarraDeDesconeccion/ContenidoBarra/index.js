@@ -13,9 +13,19 @@ const ContenidoBarra = (props) => {
             var expresion = /\[(.*?)\m/
             var expresion2 = /\[.*?\m/
             if (typeof data == "object") {
-                data = JSON.stringify(data);
+                try {
+                    data = JSON.stringify(data);
+                } catch (error) {
+                    data = error.message;                    
+                }
             }
-            var arr = data.split(expresion2);
+            var arr;
+
+            try {
+                arr = data.split(expresion2);
+            } catch (error) {
+                arr = [];
+            }
             var dataFinal = "";
             var color = "#000";
             arr.map((dt) => {

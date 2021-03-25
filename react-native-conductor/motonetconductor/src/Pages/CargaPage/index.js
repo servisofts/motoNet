@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Platform, Linking, Animated, AsyncStorage, Dime
 import Carga from '../../Component/Carga';
 import Svg from '../../Svg';
 import ImgFondoCruces from '../../Component/ImgFondoCruces';
+import Styles from '../../Styles';
 class CargaPage extends Component {
   static navigationOptions = ({ navigation }) => (
     { headerShown: false }
@@ -33,7 +34,7 @@ class CargaPage extends Component {
         flex: 1,
         alignItems: 'center',
         // backgroundColor: "white",
-        backgroundColor: "red",
+        backgroundColor: Styles.colors.primary,
         justifyContent: 'center',
       }}>
         <Animated.View

@@ -1,4 +1,5 @@
 import React from 'react';
+import { View,Text,ActivityIndicator } from 'react-native';
 
 
 const Estado = (props) => {
