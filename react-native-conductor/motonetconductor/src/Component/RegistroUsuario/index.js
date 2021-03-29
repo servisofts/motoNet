@@ -407,9 +407,9 @@ const RegistroUsuario = (props) => {
                     </View>
                     <TouchableOpacity
                         style={styles.touch3}>
-                        {props.state.usuarioReducer.estado === "cargando" ? (
+                        {/* {props.state.usuarioReducer.estado === "cargando" ? (
                             <ActivityIndicator size="small" color="#fff" />
-                        ) : (
+                        ) : ( */}
                                 <Text
                                     onPress={Registrar}
                                     style={{
@@ -418,7 +418,7 @@ const RegistroUsuario = (props) => {
                                     }}>
                                     Registrar
                                 </Text>
-                            )}
+                            {/* )} */}
                     </TouchableOpacity>
 
                 </View>

@@ -4,83 +4,65 @@ import { connect } from 'react-redux';
 import NaviDrawer from '../../Components/NaviDrawer';
 import TableNewMe from '../../Components/TableNewMe';
 import { CircularProgress, Grid } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 //import PerfilUsuario from '../../Components/PerfilUsuario'
 import * as  cargarDatosPersonalesActions from '../../Actions/cargarDatosPersonalesActions';
-import * as  GetAllRoleUsuario from '../../SSPetitions/GetAllRoleUsuario';
 
 //elemnts
 
-const ListaUsuarioPage = (props) => {
-     // if (!props.state.usuarioReducer.usuarioLog) {
-     //      props.history.push("/");
+const ConductorListaPage = (props) => {
+
+     // if (!props.state.secretariaReducer.usuarioLog) {
+     //      props.history.push("/Carga");
      //      return <div />
      // }
 
      const getLista = () => {
           var list = [];
-          var data = props.state.usuarioReducer.data;
+          var data = props.state.conductorReducer.data;
           Object.keys(data).map((key) => {
                var obj = data[key];
-
-               // var cabecera = "";
-               var cabecera = obj.usuario.key_cabecera;
-               // if (props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera]) {
-               //      cabecera = props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera].descripcion
-               // }
-               // if(cabecera!="registro_administrador"){
-               //      return;
-               // }
                list.push({
                     key,
-                    Key: { dato: key },
+                    Key:{dato:key},
+                    CI: obj.data.CI,
                     Nombres: obj.data.Nombres,
                     Apellidos: obj.data.Apellidos,
                     Correo: obj.data.Correo,
                     Telefono: obj.data.Telefono,
                     fecha_on: { dato: new Date(obj.usuario.fecha_on).toLocaleString() },
-                    key_cabecera: { dato: cabecera },
-                    cambiarRol: { dato: true }
+                    Editar: { dato: "Edit" }
                })
           })
-
           return list;
      }
 
 
      return (
-
-          <NaviDrawer title={"Lista de Administradores"} history={props.history}
+          <NaviDrawer title={"Lista de Conductores"} history={props.history}
 
                page={() => {
-                    if (!props.state.usuarioReducer.data) {
+
+                    if (!props.state.conductorReducer.data) {
                          if (!props.state.socketReducer.socket) {
                               return <CircularProgress color="#fff" style={{ display: "block" }} />
                          }
-                         if (props.state.usuarioReducer.estado == "cargando") {
+                         if (props.state.conductorReducer.estado == "cargando") {
                               return <CircularProgress color="#fff" style={{ display: "block" }} />
                          }
-                         if (props.state.usuarioReducer.estado == "error") {
-                              return <div>{props.state.usuarioReducer.error}</div>
+                         if (props.state.conductorReducer.estado == "error") {
+                              return <div>{props.state.conductorReducer.error}</div>
                          }
                          var objSend = {
                               component: "usuario",
-                              type: "getAll",
+                              type: "getAllCabecera",
                               estado: "cargando",
-                              cabecera: "registro_administrador",
+                              cabecera: "registro_conductor",
                               data: ""
                          };
                          props.state.socketReducer.send(objSend);
-                         //JSON.stringify(props.state.usuarioReducer.data)
                          return <CircularProgress color="#fff" style={{ display: "block" }} />
                     }
-
-                    var petition = GetAllRoleUsuario.ejecutar({
-                    }, props);
-                    if (!petition.estado) {
-                         return petition.component
-                    }
-                    var rolesUsuario = petition.data;
-
                     return (
                          <Grid container direction="row">
                               <Grid item xs={12}>
@@ -88,13 +70,13 @@ const ListaUsuarioPage = (props) => {
                                         title={"Conductores"}
                                         head={[
                                              { id: 'Key', label: 'key' },
+                                             { id: 'CI', label: 'CI' },
                                              { id: 'Nombres', label: 'Nombres' },
                                              { id: 'Apellidos', label: 'Apellidos' },
                                              { id: 'Telefono', label: 'Telefono' },
                                              { id: 'Correo', label: 'Correo' },
-                                             { id: 'fecha_on', label: 'Fecha Creacion' },
-                                             { id: 'key_cabecera', label: 'key_cabecera' },
-                                             { id: 'cambiarRol', label: 'ROL' },
+                                             { id: 'fecha_on', label: 'Creacion' },
+                                             { id: 'Editar', label: 'Editar' },
                                         ]}
                                         order={{
                                              key: "fecha_on",
@@ -102,11 +84,18 @@ const ListaUsuarioPage = (props) => {
                                         }}
                                         data={getLista()}
                                         onAdd={(evt) => {
-                                             props.history.push("/UsuarioRegistroPage")
+                                             props.history.push("/ConductorRegistroPage")
                                         }}
                                         handleClick={
                                              (key) => {
-                                                  props.changeSelectDato(key);
+                                                  props.history.push("/ConductorPerfilPage/" + key)
+                                                  return;
+                                             }
+                                        }
+                                        editClick={
+                                             (key) => {
+                                                  // props.history.push("/DoctorRegistroPage/" + key)
+                                                  props.history.push("/ConductorRegistroPage/" + key)
                                                   return;
                                              }
                                         }
@@ -127,5 +116,5 @@ const initActions = {
      ...cargarDatosPersonalesActions
 };
 
-export default connect(initStates, initActions)(ListaUsuarioPage);
+export default connect(initStates, initActions)(ConductorListaPage);
 
