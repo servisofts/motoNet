@@ -1,5 +1,12 @@
 
+
 import myProps from './myProps.json'
+
+
+//import myProps from './myPropsRicky.json'
+
+
+
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -23,7 +30,7 @@ const SocketComp = (store) => {
         openSocket(url);
         if (store.getState().socketReducer.estado !== "conectado") {
             // Reconnect();
-         
+
         }
         return;
     }
@@ -39,25 +46,46 @@ const SocketComp = (store) => {
                 mensaje: 'conectado con exito',
                 reintent: 0,
                 socket: socket,
-                send:(obj)=>{
-                    socket.send(JSON.stringify(obj)+"\n");
+                send: (obj) => {
+                    socket.send(JSON.stringify(obj) + "\n");
                     store.dispatch(obj);
                 }
             });
             reintent = 0;
+
+            var usr = JSON.parse(sessionStorage.getItem("usuarioLog"), false);
+            const uuidv4 = () => {
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+                    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+            }
+            var keyDevice= sessionStorage.getItem("keyDevice",null);
+            if(!keyDevice){
+                keyDevice= uuidv4()
+            }
+            var objSend = {
+                component: "usuario",
+                type: "identificacion",
+                data: usr,
+                deviceKey: keyDevice,
+                estado: "cargando"
+            };
+            socket.send(JSON.stringify(objSend) + "\n");
         }
         socket.onclose = () => {
             console.log('close')
 
-                Reconnect();
-                
+
+            Reconnect();
+
             store.dispatch({
                 component: 'socket',
                 type: 'close',
                 estado: 'desconectado close',
                 mensaje: 'conexion Perdida',
                 socket: false,
-                send:(obj)=>{
+                send: (obj) => {
                     console.log("Sin conexion, no se puede enviar el mensaje");
                 }
             });
@@ -69,7 +97,7 @@ const SocketComp = (store) => {
                 component: 'socket',
                 type: 'error',
                 estado: 'Error',
-                mensaje: 'conexion erronea o Perdida',
+                mensaje: 'conexion erroenea o  Perdida',
                 socket: false,
             });
         }
