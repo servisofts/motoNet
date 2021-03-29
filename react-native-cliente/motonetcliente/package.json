@@ -17,7 +17,7 @@
     "@react-navigation/native": "^5.8.9",
     "moment": "^2.29.1",
     "react": "16.13.1",
-    "react-native": "^0.63.3",
+    "react-native": "^0.64.0",
     "react-native-base64": "^0.1.0",
     "react-native-fbsdk": "^2.0.0",
     "react-native-fs": "^2.16.6",
