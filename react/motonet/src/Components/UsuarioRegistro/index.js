@@ -13,7 +13,7 @@ const UsuarioRegistro = (props) => {
     if (!props.state.cabeceraDatosReducer.data[cabecera]) {
         if (!props.state.socketReducer.socket) {
             return (
-                <div>No hay coneccion con el socket</div>
+                <div>No hay conexión con el socket</div>
             )
         }
         if (props.state.cabeceraDatosReducer.estado == "cargando") {

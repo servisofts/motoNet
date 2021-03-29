@@ -30,6 +30,13 @@ const ListaUsuarioPage = (props) => {
                // if(cabecera!="registro_administrador"){
                //      return;
                // }
+               /*var cabecera = "";
+               if (props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera]) {
+                    cabecera = props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera].descripcion
+               }
+               if(cabecera!="registro_administrador"){
+                    return;
+               }*/
                list.push({
                     key,
                     Key: { dato: key },

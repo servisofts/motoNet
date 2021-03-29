@@ -121,7 +121,11 @@ const NaviDrawer = (props) => {
     const getButton = (data) => {
         return (
             <ListItem button key={data.name} selected={props.title == data.name} onClick={() => {
-                if (props.title == data.name) { return };
+               // if (props.title == data.name) { return };
+               if (data.name == 'Salir') {
+                sessionStorage.removeItem("usuarioLog");
+                window.location.href = "/";
+            }
                 props.history.push("/" + data.path);
             }}>
                 <ListItemIcon>
@@ -242,7 +246,10 @@ const NaviDrawer = (props) => {
                     {getButton({ name: "Parametros Viajes", path: "ParametrosPage", icon: <StreetviewIcon /> })}
                     {getButton({ name: "Chat", path: "ChatPage", icon: <CommentTypeIcon /> })}
                     {getButton({ name: "Historial de Viajes", path: "HistorialViajePage", icon: <ListAltIcon /> })}
-                    {getButton({ name: "Salir", path: "Salir", icon: <ExitToAppIcon /> })}
+                    {getButton({
+                        name: "Salir", path: "Salir", icon: <ExitToAppIcon />,
+                       
+                    })}
                 </List>
 
             </Drawer>
