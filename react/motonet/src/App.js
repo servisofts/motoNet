@@ -15,6 +15,7 @@ import ListaAsociacionMotoPage from './Pages/ListaAsociacionMotoPage'
 import HistorialViajePage from './Pages/HistorialViajePage'
 
 import ListaAdministradorPage from './Pages/ListaAdministradorPage'
+import UsuarioRegistroPage from './Pages/UsuarioRegistroPage'
 import ListaUsuarioPage from './Pages/ListaUsuarioPage'
 
 import ConductorListaPage from './Pages/ConductorListaPage'
@@ -29,6 +30,7 @@ function App() {
       <Route exact path='/Login' component={LoginPage} />
       <Route exact path='/Inicio' component={InicioPage} />
       <Route exact path='/ListaUsuario' component={ListaUsuarioPage} />
+      <Route exact path='/UsuarioRegistroPage' component={UsuarioRegistroPage} />
       <Route exact path='/ListaConductor' component={ListaConductorPage} />
       <Route exact path='/MapaPage' component={MapaPage} />
       <Route exact path='/TipoViajePage' component={TipoViajePage} />
