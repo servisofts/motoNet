@@ -41,7 +41,7 @@ const ListaUsuarioPage = (props) => {
 
 
      return (
-          <NaviDrawer title={"Usuarios nuevos"} history={props.history}
+          <NaviDrawer title={"Lista Administrador"} history={props.history}
 
                page={() => {
                     if (!props.state.socketReducer.socket) {
@@ -58,17 +58,18 @@ const ListaUsuarioPage = (props) => {
                               component: "usuario",
                               type: "getAllNuevo",
                               estado: "cargando",
-                              cabecera: "registro_conductor",
+                              cabecera: "registro_administrador",
                               data: ""
                          };
                          props.state.socketReducer.send(objSend);
+                         //JSON.stringify(props.state.usuarioReducer.data)
                          return <CircularProgress color="#fff" style={{ display: "block" }} />
                     }
                     return (
                          <Grid container direction="row">
                               <Grid item xs={12} spacing={2} >
                                    <TableNewMe
-                                        title={"Usuarios"}
+                                        title={"Administradores"}
                                         head={[
                                              { id: 'Nombres', label: 'Nombres' },
                                           //   { id: 'Apellidos', label: 'Apellidos' },
@@ -81,7 +82,7 @@ const ListaUsuarioPage = (props) => {
                                         }}
                                         data={getLista()}
                                         onAdd={(evt) => {
-                                             props.history.push("/Usuario/Registro")
+                                             props.history.push("/UsuarioRegistroPage")
                                         }}
                                         handleClick={
                                              (key) => {

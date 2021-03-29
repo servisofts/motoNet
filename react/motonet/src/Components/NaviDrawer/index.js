@@ -219,7 +219,8 @@ const NaviDrawer = (props) => {
                     {/*getButtonNotifi({ name: "Notificacion", path: "Notificacion", icon: <NotificationsIcon /> })*/}
                     {getButton({ name: "Notificaciones", path: "NotificacionPage", icon: <NotificationsIcon /> })}
                     {getButton({ name: "Inicio", path: "Inicio", icon: <Home /> })}
-                    {getButton({ name: "Usuarios nuevos", path: "ListaUsuario", icon: <AccountBox /> })}
+                    {getButton({ name: "Lista Administrador", path: "ListaAdministrador", icon: <AccountBox /> })}
+                    {getButton({ name: "Lista Conductor", path: "ListaConductor", icon: <AccountBox /> })}
                     {getButton({ name: "Mapa", path: "MapaPage", icon: <RoomIcon /> })}
                     {getButton({ name: "Lista Asociacion", path: "ListaAsociacionMotoPage", icon: <MotorcycleIcon /> })}
                     {getButton({ name: "Tipos de Viajes", path: "TipoViajePage", icon: <MergeTypeIcon /> })}

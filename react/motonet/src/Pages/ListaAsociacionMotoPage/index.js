@@ -44,11 +44,11 @@ const ListaAsociacionMotoPage = (props) => {
         <NaviDrawer title={"Lista Asociacion"} history={props.history}
             page={() => {
                 if (!props.state.socketReducer.socket) {
-                    return <div style={{ color: "#000" }}>cargando</div>
+                    return <div style={{ color: "#000" }}>cargandoo</div>
                 }
 
                 if (props.state.asociacionMotoReducer.estado == "cargando") {
-                    return <div>cargando</div>
+                    return <div>cargando1</div>
                 }
                 if (props.state.asociacionMotoReducer.estado == "error") {
                     return <div>{props.state.asociacionMotoReducer.error}</div>
