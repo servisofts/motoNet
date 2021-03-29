@@ -66,7 +66,7 @@ class EsperandoConfirmacionPage extends Component {
                 style={{
                     fontSize: 12,
                     fontWeight: "bold",
-                    color: "#666",
+                    color: "#000",
                     width: "100%",
                     textAlign: "center"
                 }}>{texto}</Text>
@@ -125,7 +125,7 @@ class EsperandoConfirmacionPage extends Component {
                         alignItems: "center"
                     }}>
                         <View style={{
-                            backgroundColor: "#2c4b81",
+                            backgroundColor: "#f00",
                             borderRadius: 20,
                             width: 400,
                             height: Dimensions.get("window").height*0.5,
@@ -176,7 +176,7 @@ class EsperandoConfirmacionPage extends Component {
                             borderWidth: 2,
                             borderRadius: 100,
                             borderColor: "#fff",
-                            backgroundColor: '#2c4b81',
+                            backgroundColor: '#f00',
                             alignItems: 'center',
                             justifyContent: 'center',
                             flexDirection: 'column',
