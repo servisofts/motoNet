@@ -13,6 +13,9 @@ import NotificacionPage from './Pages/NotificacionPage'
 import AsociacionesMotoPage from './Pages/AsociacionesMotoPage'
 import ListaAsociacionMotoPage from './Pages/ListaAsociacionMotoPage'
 import HistorialViajePage from './Pages/HistorialViajePage'
+import ConductorListaPage from './Pages/ConductorListaPage'
+import ConductorPerfilPage from './Pages/ConductorPerfilPage'
+import ConductorRegistroPage from './Pages/ConductorRegistroPage'
 
 function App() {
   return (
@@ -28,6 +31,9 @@ function App() {
       <Route exact path='/AsociacionesMotoPage' component={AsociacionesMotoPage} />
       <Route exact path='/ListaAsociacionMotoPage' component={ListaAsociacionMotoPage} />
       <Route exact path='/HistorialViajePage' component={HistorialViajePage} />
+      <Route exact path='/ConductorListaPage' component={ConductorListaPage} />
+      <Route exact path='/ConductorPerfilPage/:key' component={ConductorPerfilPage} />
+      <Route exact path='/ConductorRegistroPage' component={ConductorRegistroPage} />
       
     </BrowserRouter>
   );

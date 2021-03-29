@@ -8,6 +8,9 @@ import tipoTarifaViajeReducer from './tipoTarifaViajeReducer'
 import seguimientoConductorReducer from './seguimientoConductorReducer'
 import asociacionMotoReducer from './asociacionMotoReducer'
 import historialViajeReducer from './historialViajeReducer'
+import conductorReducer from './conductorReducer'
+import cabeceraDatosReducer from './cabeceraDatosReducer'
+import rolReducer from './rolReducer'
 
 export default combineReducers({
     usuarioReducer,
@@ -19,4 +22,7 @@ export default combineReducers({
     seguimientoConductorReducer,
     asociacionMotoReducer,
     historialViajeReducer,
+    conductorReducer,
+    cabeceraDatosReducer,
+    rolReducer
 });
