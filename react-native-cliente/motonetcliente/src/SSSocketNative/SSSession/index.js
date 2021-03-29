@@ -298,7 +298,7 @@ class SSSession {
                                 type: "identificacion",
                                 data: usuario,
                                 token: token,
-                                fbapp: "clinica_nj_android",
+                                fbapp: "motonet_android",
                                 estado: "cargando"
                             };
                             _instance.send(objSend);

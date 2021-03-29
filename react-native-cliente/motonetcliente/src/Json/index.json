@@ -1,9 +1,9 @@
 {
     "socket": {
-        "name": "clinica_nj"
+        "name": "motonet"
     },
     "storage": {
-        "urlLog": "clinica_usuarioLog",
+        "urlLog": "motonet_usuarioLog",
         "deviceKey": "clinica_deviceKey",
         "fbtoken": "FIREBASE_TOKEN"
     },
