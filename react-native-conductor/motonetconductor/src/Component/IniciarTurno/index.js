@@ -148,7 +148,7 @@ const iniciarTurno = (props) => {
             width: "80%",
             height: "50%",
             borderRadius: 20,
-            backgroundColor: "#2c4b81",
+            backgroundColor: "#f00",
             alignItems: 'center',
             justifyContent: 'center',
         }}>
