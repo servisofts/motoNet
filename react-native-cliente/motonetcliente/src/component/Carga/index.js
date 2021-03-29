@@ -89,7 +89,7 @@ const Carga = (props) => {
                 return "Buscando datos de usuario...";
             } else {//Cuando existe Datos de usuario
 
-                props.navigation.replace("InicioPage");
+                props.navigation.replace("ServicioPage");
                 // return <View />
                 return "Esperando viaje..."
 
