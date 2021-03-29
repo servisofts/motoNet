@@ -9,7 +9,7 @@ import ImgFondoCruces from '../../component/ImgFondoCruces';
 
 class RegistroUsuarioPage extends Component {
     static navigationOptions = {
-        headerShown: true,
+        headerShown: false,
     }
     constructor(props) {
         super(props);
@@ -192,7 +192,7 @@ class RegistroUsuarioPage extends Component {
                         dato: getKeyDato("Facebook key"),
                         data: id
                     })
-                    this.props.registro(this.props.state.socketClienteReducer.sessiones["clinica_nj"], jsonFinal);
+                    this.props.registro(this.props.state.socketClienteReducer.sessiones["motonet"], jsonFinal);
                     break;
                 case "gmail":
                     var id = this.props.navigation.state.params.data.id;
@@ -200,11 +200,11 @@ class RegistroUsuarioPage extends Component {
                         dato: getKeyDato("Gmail Key"),
                         data: id
                     })
-                    this.props.registro(this.props.state.socketClienteReducer.sessiones["clinica_nj"], jsonFinal);
+                    this.props.registro(this.props.state.socketClienteReducer.sessiones["motonet"], jsonFinal);
                     break;
                 default:
                     //console.log("entroo")
-                    this.props.registro(this.props.state.socketClienteReducer.sessiones["clinica_nj"], jsonFinal);
+                    this.props.registro(this.props.state.socketClienteReducer.sessiones["motonet"], jsonFinal);
             }
             return <View />
         }
@@ -265,25 +265,22 @@ class RegistroUsuarioPage extends Component {
         return (
 
             <View style={{
-                // backgroundColor: "#fff",
+                backgroundColor: "#f00",
                 flex: 1
             }}>
 
-                <ImgFondoCruces />
-
                 <ScrollView>
-
                     <View style={{
                         // flex: 1,
                         alignItems: 'center',
                         justifyContent: 'center',
                         // backgroundColor: "#ccc",
-                        height: 220,
+                        height: 160,
                     }}>
                         <Svg name="logoCompletoRecurso"
                             style={{
-                                width: 150,
-                                height: 150,
+                                width: 100,
+                                height: 100,
                             }} />
                     </View>
 
@@ -387,8 +384,8 @@ class RegistroUsuarioPage extends Component {
                                 <ActivityIndicator color="#fff" size="small" />
                             </View >
                         ) : (
-                                <ButtonRegistro titulo="REGISTRAR" estilo="CreateRegister" click={this.Registrar} />
-                            )
+                            <ButtonRegistro titulo="REGISTRAR" estilo="CreateRegister" click={this.Registrar} />
+                        )
                         }
 
                     </View>
@@ -405,7 +402,7 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     Input: {
-        backgroundColor: "#EAEAE2",
+        backgroundColor: "#fff",
         borderRadius: 10,
         color: "#000",
         borderColor: "#EAEAE2",
@@ -440,7 +437,7 @@ const styles = StyleSheet.create({
     texto: {
         width: '80%',
         // textAlign: "left",
-        color: "#000",
+        color: "#fff",
         fontSize: 15,
         margin: 5,
     }

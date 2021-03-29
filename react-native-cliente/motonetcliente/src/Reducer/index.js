@@ -23,6 +23,9 @@ import locationEmergenciaReducer from './locationEmergenciaReducer'
 import locationGoogleMapReducer from './locationGoogleMapReducer'
 import publicidadReducer from './publicidadReducer'
 
+import tipoViajesReducer from './tipoViajesReducer';
+import viajesReducer from './viajesReducer';
+
 export default combineReducers({
     navigationReducer,
     socketClienteReducer,
@@ -47,4 +50,6 @@ export default combineReducers({
     locationEmergenciaReducer,
     locationGoogleMapReducer,
     publicidadReducer,
+    tipoViajesReducer,
+    viajesReducer,
 });

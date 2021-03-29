@@ -1,7 +1,7 @@
 export default {
     "barStyle": "light-content",
     "colors": {
-        "primary": "#00a5ce",
+        "primary": "#ff0000",
         "primary2": "#000",
         "secondary": "#fff",
         "boder": "#eeeeee",

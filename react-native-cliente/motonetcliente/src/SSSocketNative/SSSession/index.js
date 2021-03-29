@@ -186,7 +186,8 @@ class SSSession {
         var isFinal = re.test(decoderdata);
         if (isFinal) {
             decoderdata = decoderdata.replace(re, "");
-            var mensajeFinal = this.dataTemporal + decoderdata;
+            var test = decoderdata.split(/---SSkey---/);
+            var mensajeFinal = this.dataTemporal + test[0];
             this.dataTemporal = "";
             var datajson = false;
             try {
@@ -297,7 +298,7 @@ class SSSession {
                                 component: "usuario",
                                 type: "identificacion",
                                 data: usuario,
-                                token: token,
+                                deviceKey: token,
                                 fbapp: "motonet_android",
                                 estado: "cargando"
                             };
