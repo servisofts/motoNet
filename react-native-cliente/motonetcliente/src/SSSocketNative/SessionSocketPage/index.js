@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 
 import * as SSSocketNative from '..';
-var _SocketName = "clinica_nj";
+var _SocketName = "motonet";
 class SessionSocketPage extends Component {
     static navigationOptions = {
         headerShown: false,
