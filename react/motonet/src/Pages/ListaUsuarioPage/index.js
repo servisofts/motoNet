@@ -24,9 +24,9 @@ const ListaUsuarioPage = (props) => {
 
                // var cabecera = "";
                var cabecera = obj.usuario.key_cabecera;
-               // if (props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera]) {
-               //      cabecera = props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera].descripcion
-               // }
+               if (props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera]) {
+                    cabecera = props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera].descripcion
+               }
                // if(cabecera!="registro_administrador"){
                //      return;
                // }

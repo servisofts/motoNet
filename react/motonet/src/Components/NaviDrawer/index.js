@@ -31,7 +31,7 @@ import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import logoMotoInicio from '../../img/MotoNetBR.svg';
 import * as GetAllRoles from '../../SSPetitions/GetAllRoles'
-
+import UsuarioCabeceras from '../../Components/UsuarioCabeceras'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -180,6 +180,11 @@ const NaviDrawer = (props) => {
                     [classes.appBarShift]: open,
                 }), "secondary"]}
             >
+                  <div style={{
+                        display: "none"
+                    }}>
+                        <UsuarioCabeceras />
+                    </div>
                 <Toolbar>
                     <Grid xs={2}>
                         <IconButton
