@@ -31,7 +31,7 @@ import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import logoMotoInicio from '../../img/MotoNetBR.svg';
 import * as GetAllRoles from '../../SSPetitions/GetAllRoles'
-
+import UsuarioCabeceras from '../../Components/UsuarioCabeceras'
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -121,7 +121,11 @@ const NaviDrawer = (props) => {
     const getButton = (data) => {
         return (
             <ListItem button key={data.name} selected={props.title == data.name} onClick={() => {
-                if (props.title == data.name) { return };
+               // if (props.title == data.name) { return };
+               if (data.name == 'Salir') {
+                sessionStorage.removeItem("usuarioLog");
+                window.location.href = "/";
+            }
                 props.history.push("/" + data.path);
             }}>
                 <ListItemIcon>
@@ -180,6 +184,11 @@ const NaviDrawer = (props) => {
                     [classes.appBarShift]: open,
                 }), "secondary"]}
             >
+                  <div style={{
+                        display: "none"
+                    }}>
+                        <UsuarioCabeceras />
+                    </div>
                 <Toolbar>
                     <Grid xs={2}>
                         <IconButton
@@ -227,14 +236,20 @@ const NaviDrawer = (props) => {
                     {/*getButtonNotifi({ name: "Notificacion", path: "Notificacion", icon: <NotificationsIcon /> })*/}
                     {getButton({ name: "Notificaciones", path: "NotificacionPage", icon: <NotificationsIcon /> })}
                     {getButton({ name: "Inicio", path: "Inicio", icon: <Home /> })}
+
                     {getButton({ name: "Usuarios nuevos", path: "ListaUsuario", icon: <AccountBox /> })}
+                    {getButton({ name: "Conductores", path: "ConductorListaPage", icon: <AccountBox /> })}
+
                     {getButton({ name: "Mapa", path: "MapaPage", icon: <RoomIcon /> })}
                     {getButton({ name: "Lista Asociacion", path: "ListaAsociacionMotoPage", icon: <MotorcycleIcon /> })}
                     {getButton({ name: "Tipos de Viajes", path: "TipoViajePage", icon: <MergeTypeIcon /> })}
                     {getButton({ name: "Parametros Viajes", path: "ParametrosPage", icon: <StreetviewIcon /> })}
                     {getButton({ name: "Chat", path: "ChatPage", icon: <CommentTypeIcon /> })}
                     {getButton({ name: "Historial de Viajes", path: "HistorialViajePage", icon: <ListAltIcon /> })}
-                    {getButton({ name: "Salir", path: "Salir", icon: <ExitToAppIcon /> })}
+                    {getButton({
+                        name: "Salir", path: "Salir", icon: <ExitToAppIcon />,
+                       
+                    })}
                 </List>
 
             </Drawer>

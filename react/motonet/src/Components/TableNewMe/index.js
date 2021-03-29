@@ -107,6 +107,11 @@ class TableNewMe extends Component {
                     {
                         this.props.head.map((obj2, key2) => {
                             var dato = usuario[obj2.id];
+                            if (obj2.id == "key" || obj2.id == "Key") {
+                                return (<td style={{ maxWidth: 80, fontSize: 10, }}>
+                                    {dato.dato}
+                                </td>)
+                            }
                             if (!dato) {
                                 return <span>NULL</span>
                             }

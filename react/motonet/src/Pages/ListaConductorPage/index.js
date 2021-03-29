@@ -24,19 +24,12 @@ const ListaUsuarioPage = (props) => {
 
                // var cabecera = "";
                var cabecera = obj.usuario.key_cabecera;
-               if (props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera]) {
-                    cabecera = props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera].descripcion
-               }
+               // if (props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera]) {
+               //      cabecera = props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera].descripcion
+               // }
                // if(cabecera!="registro_administrador"){
                //      return;
                // }
-               /*var cabecera = "";
-               if (props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera]) {
-                    cabecera = props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera].descripcion
-               }
-               if(cabecera!="registro_administrador"){
-                    return;
-               }*/
                list.push({
                     key,
                     Key: { dato: key },
@@ -55,7 +48,9 @@ const ListaUsuarioPage = (props) => {
 
 
      return (
+
           <NaviDrawer title={"Lista de Administradores"} history={props.history}
+
                page={() => {
                     if (!props.state.usuarioReducer.data) {
                          if (!props.state.socketReducer.socket) {
@@ -75,6 +70,7 @@ const ListaUsuarioPage = (props) => {
                               data: ""
                          };
                          props.state.socketReducer.send(objSend);
+                         //JSON.stringify(props.state.usuarioReducer.data)
                          return <CircularProgress color="#fff" style={{ display: "block" }} />
                     }
 
@@ -89,7 +85,7 @@ const ListaUsuarioPage = (props) => {
                          <Grid container direction="row">
                               <Grid item xs={12}>
                                    <TableNewMe
-                                        title={"Usuarios"}
+                                        title={"Conductores"}
                                         head={[
                                              { id: 'Key', label: 'key' },
                                              { id: 'Nombres', label: 'Nombres' },
