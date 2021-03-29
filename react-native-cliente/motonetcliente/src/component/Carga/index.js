@@ -88,6 +88,11 @@ const Carga = (props) => {
                 props.state.usuarioReducer.estado = "cargando";
                 return "Buscando datos de usuario...";
             } else {//Cuando existe Datos de usuario
+
+                props.navigation.replace("ServicioPage");
+                // return <View />
+                return "Esperando viaje..."
+
                 if (!props.state.emergenciaReducer.estadoConsultado) {//Cuando el viaje no se consultado
                     if (props.state.emergenciaReducer.estado == "cargando") { //Cuando el viaje esta cargando
                         return "Esperando viaje..."
@@ -103,7 +108,7 @@ const Carga = (props) => {
                 } else { //Cuando el viaje ya se consulto
                     if (!props.state.emergenciaReducer.data) {  //Cuando no tenemos viaje
                         //Verificamos los datos de el usuario;
-                        props.navigation.replace("ServicioPage");
+                        props.navigation.replace("InicioPage");
                         return "Ir al inicio."
                     } else {//Cuando tenemos viaje
                         if (!props.state.emergenciaReducer.data.movimientos) {

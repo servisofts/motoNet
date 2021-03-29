@@ -149,7 +149,7 @@ const registro = (state, action) => {
     }
     if (action.estado === "exito") {
         state.usuarioLog = action.data
-        AsyncStorage.setItem("clinica_usuarioLog", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_usuarioLog", JSON.stringify(action.data));
     }
 }
 const registroFacebook = (state, action) => {
