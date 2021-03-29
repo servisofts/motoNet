@@ -27,7 +27,7 @@ const Inicio = (props) => {
             <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
             <TouchableOpacity
                 onPress={() => {
-                    props.state.naviDrawerReducer.openBar()
+                    props.navigation.goBack()
                 }}
                 style={{
                     width: 60,
@@ -39,7 +39,7 @@ const Inicio = (props) => {
                     left: 0,
 
                 }} >
-                <Svg name="menu"
+                <Svg name="Close"
                     style={{
                         width: 20,
                         height: 20,

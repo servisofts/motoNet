@@ -105,6 +105,7 @@ const BuscadorComponenteMap = (props) => {
                 flexDirection: 'column',
                 width: "100%",
                 alignItems: 'center',
+                // backgroundColor:"#ccc"
             }}>
                 <View style={{
                     backgroundColor: "#fff",
@@ -305,8 +306,9 @@ const BuscadorComponenteMap = (props) => {
             position: "absolute",
             top: fadeAnim,
             flexDirection: 'column',
-            height: 200,
-            marginTop: 10
+            // height: 200,
+            marginTop: 50,
+            // backgroundColor: "#ccc"
         }}>
             {buscarInputNuevo()}
         </Animated.View>
