@@ -22,6 +22,8 @@ import ConductorListaPage from './Pages/ConductorListaPage'
 import ConductorPerfilPage from './Pages/ConductorPerfilPage'
 import ConductorRegistroPage from './Pages/ConductorRegistroPage'
 
+import PublicidadPage from './Pages/PublicidadPage';
+
 
 function App() {
   return (
@@ -42,6 +44,7 @@ function App() {
       <Route exact path='/ConductorListaPage' component={ConductorListaPage} />
       <Route exact path='/ConductorPerfilPage/:key' component={ConductorPerfilPage} />
       <Route exact path='/ConductorRegistroPage' component={ConductorRegistroPage} />
+      <Route exact path='/PublicidadPage' component={PublicidadPage} />
       
     </BrowserRouter>
   );

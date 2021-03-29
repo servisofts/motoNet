@@ -7,7 +7,7 @@
 
     
     "images":{
-        "url":"https://pasanakubolivia.com/server/imagesController",
-        "urlImage":"https://pasanakubolivia.com/server/images/"
+        "url":"http://192.168.0.199:30004/",
+        "urlImage":"http://192.168.0.199:30004/"
     }
 }

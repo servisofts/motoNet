@@ -11,6 +11,9 @@ import historialViajeReducer from './historialViajeReducer'
 import conductorReducer from './conductorReducer'
 import cabeceraDatosReducer from './cabeceraDatosReducer'
 import rolReducer from './rolReducer'
+import imagePickerReducer from './imagePickerReducer'
+import publicidadReducer from './publicidadReducer'
+
 
 export default combineReducers({
     usuarioReducer,
@@ -24,5 +27,7 @@ export default combineReducers({
     historialViajeReducer,
     conductorReducer,
     cabeceraDatosReducer,
-    rolReducer
+    rolReducer,
+    imagePickerReducer,
+    publicidadReducer
 });
