@@ -30,6 +30,7 @@ import CommentTypeIcon from '@material-ui/icons/Comment';
 import { Grid } from '@material-ui/core';
 import { connect } from 'react-redux';
 import logoMotoInicio from '../../img/MotoNetBR.svg';
+import * as GetAllRoles from '../../SSPetitions/GetAllRoles'
 
 const drawerWidth = 240;
 
@@ -109,6 +110,13 @@ const NaviDrawer = (props) => {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    var petition = GetAllRoles.ejecutar({
+    }, props);
+    if (!petition.estado) {
+        return petition.component
+    }
+    var roles = petition.data;
 
     const getButton = (data) => {
         return (
