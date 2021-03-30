@@ -33,6 +33,7 @@ import Sinubicacion from '../img/sinubicacion.svg';
 import Error from '../img/error.svg';
 import Gps from '../img/gps.svg';
 import Cerrar from '../img/cerrar.svg';
+import Ubicacion from '../img/ubicacion.svg';
 
 const Svg = (props) => {
 
@@ -103,6 +104,8 @@ const Svg = (props) => {
             return <Gps style={props.style} />
         case "Cerrar":
             return <Cerrar style={props.style} />
+        case "Ubicacion":
+            return <Ubicacion style={props.style} />
         default: return <Text>Not Found</Text>
     }
 }

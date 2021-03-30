@@ -16,6 +16,8 @@ import ConfirmarPageAux from './ConfirmarPageAux';
 
 import InicioPage from './InicioPage';
 import ServicioPage from './ServicioPage';
+import ViajeEsperaPage from './ViajeEsperaPage';
+import ViajeInicioPage from './ViajeInicioPage';
 
 export const getPages = () => {
     return {
@@ -37,6 +39,8 @@ export const getPages = () => {
 
         InicioPage,
         ServicioPage,
+        ViajeEsperaPage,
+        ViajeInicioPage,
 
     }
 }

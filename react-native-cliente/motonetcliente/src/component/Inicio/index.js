@@ -37,8 +37,7 @@ const Inicio = (props) => {
                     justifyContent: 'center',
                     top: 0,
                     left: 0,
-
-                }} >
+                }}>
                 <Svg name="Close"
                     style={{
                         width: 20,

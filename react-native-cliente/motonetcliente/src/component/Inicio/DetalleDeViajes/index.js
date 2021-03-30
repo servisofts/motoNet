@@ -30,7 +30,7 @@ const DetalleDeViajes = (props) => {
         });
     };
 
-    if (props.state.viajesReducer.viaje) {
+    if (props.state.viajesReducer.data) {
         props.navigation.replace("ViajeEsperaPage");
         return <View />
     }
@@ -225,27 +225,27 @@ const DetalleDeViajes = (props) => {
                             <ActivityIndicator color="#fff" size="small" />
                         </View>
                     ) : (
-                            <TouchableOpacity
-                                style={{
-                                    height: 50,
-                                    borderRadius: 2,
-                                    width: "90%",
-                                    backgroundColor: "red",
-                                    borderColor: "#f00",
-                                    borderWidth: 2,
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                }}
-                                onPress={() => PedirViaje()}>
-                                <Text style={{
-                                    fontSize: 15,
-                                    fontWeight: "bold",
-                                    color: "#fff",
-                                }}>
-                                    CONFIRMAR MOTONET
+                        <TouchableOpacity
+                            style={{
+                                height: 50,
+                                borderRadius: 2,
+                                width: "90%",
+                                backgroundColor: "red",
+                                borderColor: "#f00",
+                                borderWidth: 2,
+                                alignItems: "center",
+                                justifyContent: "center",
+                            }}
+                            onPress={() => PedirViaje()}>
+                            <Text style={{
+                                fontSize: 15,
+                                fontWeight: "bold",
+                                color: "#fff",
+                            }}>
+                                CONFIRMAR MOTONET
                             </Text>
-                            </TouchableOpacity>
-                        )
+                        </TouchableOpacity>
+                    )
                     }
                 </View>
             </View>
@@ -259,11 +259,11 @@ const DetalleDeViajes = (props) => {
                 position: "absolute"
             }}
                 onPress={() => {
-                    //props.state.locationGoogleMapReducer.route = false;
+                    props.state.locationGoogleMapReducer.route = true;
                     props.setVentanaSelect("tipoDeViaje")
                     return <View />
                 }}>
-                <Svg name="Volver"
+                <Svg name="Cerrar"
                     style={{
                         width: 30,
                         height: 30,

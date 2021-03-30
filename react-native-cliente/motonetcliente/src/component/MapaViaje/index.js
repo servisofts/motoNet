@@ -2,22 +2,24 @@ import React, { useEffect, useRef } from 'react';
 import { View, TouchableOpacity, Text, DatePickerIOS, Animated } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-import MarkerAmbulancia from './MarkerAmbulancia';
+// import MarkerAmbulancia from './MarkerAmbulancia';
 var mapa;
 
 const Mapa = (props) => {
     const [data, setdata] = React.useState({
         region: {
-            latitude: 0,
-            longitude: 0,
-            latitudeDelta: 0.02,
-            longitudeDelta: 0.02,
+            latitude: -17.78629,
+            longitude: -63.18117,
+            latitudeDelta: 0.08,
+            longitudeDelta: 0.08,
             isRender: false,
         },
         origen: false,
         ubicacionActual: false
     })
-    var pos = props.state.locationEmergenciaReducer.region;
+    // var pos = props.state.locationGoogleMapReducer.region;
+    var pos = props.state.viajesReducer.data.destinos[0];
+    console.log(pos)
     if (!data.region.isRender) {
         if (pos) {
             data.region = {
@@ -35,7 +37,8 @@ const Mapa = (props) => {
         // if (!props.state.emergenciaReducer.data) {
         //     return <View />
         // }
-        // var dato = props.state.emergenciaReducer.data.destinos[0];
+        // var dato = props.state.viajesReducer.data.destinos[0];
+        console.log(data)
         var json = { latitude: data.region.latitude, longitude: data.region.longitude };
         return (
             <Marker
@@ -63,7 +66,7 @@ const Mapa = (props) => {
 
     return (
         <View style={{ width: "100%", height: "100%" }}>
-            < MapView
+            <MapView
                 style={{
                     flex: 1,
                     width: '100%',
@@ -76,7 +79,7 @@ const Mapa = (props) => {
                 {getMarkerFin()} */}
 
                 {getMarkerInicio()}
-                <MarkerAmbulancia />
+                {/* <MarkerAmbulancia /> */}
                 {/* {getPosicionConductor()} */}
 
                 {/* <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} /> */}
