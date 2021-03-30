@@ -47,7 +47,7 @@ const ShowImagePicker = (props) => {
       <div style={{
         width: 500,
         maxWidth: "90%",
-        height: 200,
+        height: "auto",
         backgroundColor: "#fff",
         borderRadius: 20,
         justifyContent: "center",
@@ -66,7 +66,7 @@ const ShowImagePicker = (props) => {
           document.getElementById("fileIn").click();
         }} id="init" >
           <div style={{
-            backgroundColor: 'rgb(44, 75, 129) ',
+            backgroundColor: 'rgb(231, 51, 73) ',
             padding: 10,
             color: "#fff",
             flex: 1,
@@ -77,7 +77,7 @@ const ShowImagePicker = (props) => {
         </div>
         <div onClick={props.init} id="init" >
           <div style={{
-            backgroundColor: 'rgb(44, 75, 129) ',
+            backgroundColor: 'rgb(231, 51, 73) ',
             padding: 10,
             color: "#fff",
             flex: 1,

@@ -8,7 +8,8 @@ const getUsuario = () => {
 
 const initialState = {
     estado: "",
-    usuarioLog: getUsuario()
+    usuarioLog: getUsuario(),
+    dataUsuario:{},
 }
 
 export default (state, action) => {
@@ -41,7 +42,13 @@ export default (state, action) => {
                 break;
             case "cambiarPassByCodigo":
                 cambiarPassByCodigo(state, action);
-                break;           
+                break;
+            case "insertarDato":
+                insertarDato(state, action);
+                break;
+            case "eliminar":
+                eliminar(state, action);
+                break;
 
         }
         state.type = action.type;
@@ -105,13 +112,13 @@ const getAll = (state, action) => {
 const getById = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
-        if (!state.dataEmergencia) {
-            state.dataEmergencia = {};
+        if (!state.dataUsuario) {
+            state.dataUsuario = {};
         }
         if (action.data[0]) {
-            state.dataEmergencia[action.key] = JSON.parse(action.data[0].data)
+            state.dataUsuario[action.key] = JSON.parse(action.data[0].data)
         } else {
-            state.dataEmergencia[action.key] = {};
+            state.dataUsuario[action.key] = {};
         }
     }
 }
@@ -144,5 +151,47 @@ const cambiarPassByCodigo = (state, action) => {
     }
     if (action.estado === "error") {
         state.errorEmailRecuperado = action.error
+    }
+}
+
+const insertarDato = (state, action) => {
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        if (!state.data) {
+            return;
+        }
+        if (!state.data[action.key_usuario]) {
+            return;
+        }
+        if (action.dato) {
+            if (action.data.length > 0) {
+                state.data[action.key_usuario].data[action.dato] = action.data[0]
+            } else {
+                state.data[action.key_usuario].data[action.dato] = true;
+            }
+        } else {
+            var usrTemp = {};
+            action.data.map((obj, key) => {
+                Object.keys(state.data[action.key_usuario].data).map((keyDatoAdmin) => {
+                    var datoTemp = state.data[action.key_usuario].data[keyDatoAdmin];
+                    if (datoTemp.key == obj.key) {
+                        usrTemp[keyDatoAdmin] = obj;
+                    }
+                });
+            });
+            state.data[action.key_usuario].data = usrTemp;
+        }
+
+    }
+}
+const eliminar = (state, action) => {
+    state.estado = action.estado;
+    if (action.estado === "exito") {
+        if (state.data[action.key_admin]) {
+            delete state.data[action.key_admin];
+        }
+       /* if (state.data[action.key_especialidad]) {
+            delete state.data[action.key_especialidad][action.key_doctor];
+        }*/
     }
 }
