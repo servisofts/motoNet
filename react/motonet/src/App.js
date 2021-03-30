@@ -33,6 +33,7 @@ function App() {
       <Route exact path='/Inicio' component={InicioPage} />
       <Route exact path='/ListaUsuario' component={ListaUsuarioPage} />
       <Route exact path='/UsuarioRegistroPage' component={UsuarioRegistroPage} />
+      <Route exact path='/UsuarioRegistroPage/:key' component={UsuarioRegistroPage} />
       <Route exact path='/ListaConductor' component={ListaConductorPage} />
       <Route exact path='/MapaPage' component={MapaPage} />
       <Route exact path='/TipoViajePage' component={TipoViajePage} />

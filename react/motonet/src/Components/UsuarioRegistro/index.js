@@ -10,6 +10,17 @@ const UsuarioRegistro = (props) => {
     const [objValores, setObjValores] = React.useState({});
     const [objErrores, setObjErrores] = React.useState({});
 
+    const [Accion, setAccion] = React.useState(false);
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     if (!props.state.cabeceraDatosReducer.data[cabecera]) {
         if (!props.state.socketReducer.socket) {
             return (
@@ -31,6 +42,30 @@ const UsuarioRegistro = (props) => {
         )
     }
     var datosCabecera = props.state.cabeceraDatosReducer.data[cabecera];
+
+    if (!Accion) {
+        if (props.key_usuario) {
+            var user = "";
+            if (props.state.usuarioReducer.data[props.key_usuario]) {
+                user = props.state.usuarioReducer.data[props.key_usuario];
+            }
+            var objChange = {};
+            datosCabecera.map((obj, key) => {
+                objChange[key] = (!user.data[obj.dato.descripcion] ? "" : user.data[obj.dato.descripcion].dato);
+            })
+            setObjValores({ ...objChange });
+            setAccion("Editar")
+            return <div />
+        } else if (!props.key_usuario) {
+            setAccion("Crear")
+        }
+    }
+
+    if (props.state.usuarioReducer.estado == "exito" && props.state.usuarioReducer.type == "insertarDato") {
+        handleClickOpen()
+        props.state.usuarioReducer.estado = false
+    }
+
     const getLista = () => {
 
         return datosCabecera.map((obj, key) => {
@@ -90,41 +125,89 @@ const UsuarioRegistro = (props) => {
                 estado: ""
             })
         }
-        return (
-            <Button className="secondary txtBlanco" variant="contained" onClick={() => {
-                var error = false;
-                var arrDatos = [];
-                datosCabecera.map((obj, key) => {
-                    if (!objValores[key]) {
-                        if (obj.dato.requerido) {
-                            objErrores[key] = true;
-                            error = true;
-                        }
-                    } else {
-                        objErrores[key] = false;
-                        arrDatos.push({
-                            dato: obj,
-                            data: objValores[key]
-                        })
-                    }
-                });
-                setObjErrores({ ...objErrores })
 
-                if (!error) {
-                    console.log(objSend);
-                    var objSend = {
-                        component: "usuario",
-                        type: "registro",
-                        estado: "cargando",
-                        cabecera: cabecera,
-                        data: arrDatos
+        if (Accion == "Crear") {
+            return (
+                <Button className="secondary txtBlanco" variant="contained" onClick={() => {
+                    var error = false;
+                    var arrDatos = [];
+                    datosCabecera.map((obj, key) => {
+                        if (!objValores[key]) {
+                            if (obj.dato.requerido) {
+                                objErrores[key] = true;
+                                error = true;
+                            }
+                        } else {
+                            objErrores[key] = false;
+                            arrDatos.push({
+                                dato: obj,
+                                data: objValores[key]
+                            })
+                        }
+                    });
+                    setObjErrores({ ...objErrores })
+
+                    if (!error) {
+                        console.log(objSend);
+                        var objSend = {
+                            component: "usuario",
+                            type: "registro",
+                            estado: "cargando",
+                            cabecera: cabecera,
+                            data: arrDatos
+                        }
+                        props.state.socketReducer.send(objSend)
                     }
-                    props.state.socketReducer.send(objSend)
-                }
-            }}>
-                crear
-            </Button>
-        )
+                }}>
+                    crear
+                </Button>
+            )
+        } else if (Accion == "Editar") {
+            return (
+                <Button variant="contained" className="secondary txtBlanco" onClick={() => {
+                    var error = false;
+                    var arrDatos = [];
+                    datosCabecera.map((obj, key) => {
+                        if (!objValores[key]) {
+                            if (obj.dato.requerido) {
+                                if (obj.dato.descripcion == "Correo") {
+                                    objErrores[key] = false;
+                                    arrDatos.push({
+                                        dato: obj,
+                                        data: ""
+                                    })
+                                } else {
+                                    objErrores[key] = true;
+                                    error = true;
+                                }
+                            }
+                        } else {
+                            objErrores[key] = false;
+                            arrDatos.push({
+                                dato: obj,
+                                data: objValores[key]
+                            })
+                        }
+                    });
+                    setObjErrores({ ...objErrores })
+
+                    if (!error) {
+                        // console.log(objSend);
+                        var objSend = {
+                            component: "usuario",
+                            type: "insertarDato",
+                            estado: "cargando",
+                            cabecera: cabecera,
+                            data: arrDatos,
+                            key_usuario: props.key_usuario
+                        }
+                        props.state.socketReducer.send(objSend)
+                    }
+                }}>
+                    EDITAR
+                </Button>
+            )
+        }
     }
     return (
         <Grid
@@ -138,7 +221,7 @@ const UsuarioRegistro = (props) => {
                 xs={12}
                 md={8}
             >
-              
+
                 {getLista()}
                 <Grid xs={12}
                     container

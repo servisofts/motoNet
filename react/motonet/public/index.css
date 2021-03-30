@@ -43,6 +43,8 @@ code {
   /* border: 1px solid #fff; */
 }
 
+.txtBlanco{color: #fff !important;}
+
 /* width */
 
 ::-webkit-scrollbar {

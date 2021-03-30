@@ -91,7 +91,7 @@ const Publicidad = (props) => {
 
     const getSubirFoto = () => {
         return (<Grid>
-            <Button color={"primary"} variant={"outlined"} onClick={() => {
+            <Button color={"secondary"} variant={"outlined"} onClick={() => {
                 props.state.imagePickerReducer.respose = (b64) => {
                     //respuesta con b64                                          
                     var objSubirFoto = {
