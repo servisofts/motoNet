@@ -19,7 +19,7 @@ class ServicioPage extends Component {
     constructor(props) {
         super(props);
         props.state.navigationReducer.setParams(props.navigation, {
-            title: "Inicio",
+            title: "sf",
             headerShown: false,
             headerTitleStyle: {
                 color: '#fff',
@@ -28,40 +28,41 @@ class ServicioPage extends Component {
     }
 
 
-
     render() {
         return (
-
             <View style={{
                 flex: 1,
+                backgroundColor: "#fff"
             }}>
-
-                <ImgFondoCruces />
-
+                {/* <ImgFondoCruces /> */}
                 <ScrollView>
                     <View style={{
                         minHeight: Dimensions.get("window").height,
                     }}>
                         <View style={{
                             flexDirection: "row",
-                            // justifyContent: "space-evenly",
-                            // height: 200,
-                            marginTop: Dimensions.get('window').width * 0.08,
-                            // alignItems:"center"
-                            // backgroundColor:"#ccc"
+                            justifyContent: "center",
+                            height: Dimensions.get('window').height * 0.25,
+                            // backgroundColor: "#ccc"
                         }}>
-                            {/* <ButtonServicioComponent navigation={this.props.navigation} page="ConsultaPage" nombreServicio={"CONSULTA DE \n ESPECIALISTA"} nameSvg="farmacia" /> */}
+                            <View style={{
+                                width: "70%",
+                                height: "65%",
+                                borderColor: "#f00",
+                                borderWidth: 2,
+                                borderRadius: 30,
+                                position: "absolute",
+                                bottom: 10
+                                // justifyContent:"center",
+                                // alignItems: "center"
+                            }}>
+                                <Text style={{
+                                    textAlign: "center"
+                                }}>
+                                    Buen dia! {"\n"} edson {"\n"} en que podemos ayudarte?
+                                </Text>
+                            </View>
 
-                            <ButtonComponent name={"BtnSos"} onPress={() => {
-                                this.props.navigation.navigate("ConfirmarUbicacionPage");
-                                // alert("sd")
-                            }} relleno={() => {
-                                return (
-                                    <Text style={estilos.sos}>
-                                        SOS
-                                    </Text>
-                                )
-                            }} />
                         </View>
 
                         <View style={{
@@ -70,50 +71,35 @@ class ServicioPage extends Component {
                             <FlatList
                                 data={[
                                     {
-                                        page: "ConsultaPage",
-                                        nombreServicio: "CONSULTA DE \n ESPECIALISTA",
+                                        page: "InicioPage",
+                                        nombreServicio: "TRANSPORTE",
                                         nameSvg: "Consulta"
                                     },
                                     {
-                                        page: "AutorizacionesPage",
-                                        nombreServicio: "AUTORIZACIONES \n DE SEGURO",
+                                        page: "InicioPage",
+                                        nombreServicio: "PEDIDO",
                                         nameSvg: "Autorizacion"
                                     },
                                     {
-                                        page: "LaboratorioPage",
-                                        nombreServicio: "LABORATORIO",
+                                        page: "InicioPage",
+                                        nombreServicio: "MENSAJERIA",
                                         nameSvg: "laboratorio"
                                     },
-                                    {
-                                        page: "AnalisisPage",
-                                        nombreServicio: "IMAGENOLOGIA",
-                                        nameSvg: "imagenologia"
-                                    },
-                                    {
-                                        page: "FarmaciaPage",
-                                        nombreServicio: "FARMACIA",
-                                        nameSvg: "farmacia"
-                                    },
-                                    {
-                                        page: "CentroDeAtencionPage",
-                                        nombreServicio: "CONTÁCTENOS",
-                                        nameSvg: "centroAtencion"
-                                    }
                                 ]}
                                 renderItem={({ item }) => {
                                     return (
                                         <View style={{
-                                            flex: 0.5,
+                                            // flex: 1,
                                             justifyContent: "center",
                                             alignItems: "center",
-
+                                            // backgroundColor:"#ccc"
                                         }}>
                                             <ButtonServicioComponent navigation={this.props.navigation} page={item.page} nombreServicio={item.nombreServicio} nameSvg={item.nameSvg} />
                                         </View>
                                     )
                                 }}
                                 keyExtractor={(item) => item.id}
-                                numColumns={3}
+                                numColumns={1}
                                 style={{
                                     width: "100%"
                                 }}

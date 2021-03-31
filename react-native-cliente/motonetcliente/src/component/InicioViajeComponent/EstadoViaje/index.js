@@ -7,29 +7,29 @@ const EstadoViaje = (props) => {
     var mensaje = false;
 
     var tamanho = Dimensions.get("window").height * 0.1;
-    if (!props.state.emergenciaReducer.data) {
+    if (!props.state.viajesReducer.data) {
         return <View />
     }
 
-    if (props.state.emergenciaReducer.data.movimientos["inicio_emergencia"]) {
+    if (props.state.viajesReducer.data.movimientos["inicio_viaje"]) {
         // mensaje = "Esperando confirmacion."
-        mensaje = "ESPERANDO CONFIRMACIÓN",
+        mensaje = "Esperando Conductor...",
             tamanho = Dimensions.get("window").height * 0.1
     }
 
-    if (props.state.emergenciaReducer.data.movimientos["acepto_secretaria"]) {
+    if (props.state.viajesReducer.data.movimientos["acepto_secretaria"]) {
         // mensaje = "Estamos en busca de tu ambulancia";
         mensaje = "ESTAMOS EN BUSCA DE TU AMBULANCIA";
         tamanho = Dimensions.get("window").height * 0.1
     }
 
-    if (props.state.emergenciaReducer.data.movimientos["acepto_conductor"]) {
+    if (props.state.viajesReducer.data.movimientos["acepto_conductor"]) {
         // mensaje = "Tu ambulancia viene en camino";
         mensaje = "TU AMBULANCIA VIENE EN CAMINO";
         tamanho = Dimensions.get("window").height * 0.1
     }
 
-    if (props.state.emergenciaReducer.data.movimientos["ambulancia_cerca"]) {
+    if (props.state.viajesReducer.data.movimientos["ambulancia_cerca"]) {
         // mensaje = "Ya llegó tu Ambulancia";
         mensaje = "YA LLEGÓ TU AMBULANCIA";
         tamanho = Dimensions.get("window").height * 0.1
@@ -58,8 +58,8 @@ const EstadoViaje = (props) => {
                 elevation: 3,
             }} >
             <Text style={{
-                color: "#2C4C7E",
-                fontSize: Dimensions.get("window").height * 0.05,
+                color: "#f00",
+                fontSize: Dimensions.get("window").height * 0.03,
                 fontWeight: "bold"
             }}>
                 {mensaje}

@@ -127,10 +127,10 @@ class App extends Component {
     return (
       <Provider store={store}>
         <AppStateChange store={store} />
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#799cb3" }}>
-          <StatusBar barStyle={"light-content"} backgroundColor='#799cb3' />
-          <BarraDeDesconeccion socketName={"clinica_nj"} color={"#799cb3"} />
-          <AlertaDesconectado socketName={"clinica_nj"} />
+        <SafeAreaView style={{ flex: 1, backgroundColor: "#ff0000" }}>
+          <StatusBar barStyle={"light-content"} backgroundColor='#ff0000' />
+          <BarraDeDesconeccion socketName={"motonet"} color={"#ff0000"} />
+          <AlertaDesconectado socketName={"motonet"} />
           <Container />
           <NaviDrawer />
         </SafeAreaView>

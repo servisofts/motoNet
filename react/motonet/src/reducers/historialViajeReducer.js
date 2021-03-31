@@ -29,8 +29,7 @@ const getAll = (state, action) => {
             state.data = {}
         }
         action.data.map((obj, key) => {
-            state.data[obj.key_usuario] = JSON.parse(obj.data);
+            state.data[obj.key] = obj;
         });
     }
 }
-

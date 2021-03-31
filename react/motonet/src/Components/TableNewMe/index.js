@@ -8,6 +8,8 @@ import "./index.css";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SearchIcon from '@material-ui/icons/Search';
+import EditIcon from '@material-ui/icons/Edit';
+import { DeleteOutline } from '@material-ui/icons';
 
 
 class TableNewMe extends Component {
@@ -41,6 +43,19 @@ class TableNewMe extends Component {
         }
 
         let header = this.props.head;
+        if (this.props.onDelete) {
+            // header.push({ id: 'Delete', label: 'Eliminar' })
+            var exist = false;
+            header.map((obj) => {
+                if (obj.id == "Delete") {
+                    exist = true;
+                }
+            });
+            if (!exist) {
+                header.push({ id: 'Delete', label: 'Eliminar' })
+            }
+        }
+
         return header.map((obj, key) => {
             return <th key={key} onClick={() => {
                 if (obj.id == this.state.order.key) {
@@ -110,6 +125,40 @@ class TableNewMe extends Component {
                             if (obj2.id == "key" || obj2.id == "Key") {
                                 return (<td style={{ maxWidth: 80, fontSize: 10, }}>
                                     {dato.dato}
+                                </td>)
+                            }
+                            if (obj2.id == "Editar") {
+                                return (
+                                    <td style={{ maxWidth: 80, fontSize: 10, alignItems: 'center', justifyContent: 'center', }}>
+                                        <div style={{ flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: "center" }}
+                                            onClick={(evt) => {
+                                                this.props.editClick(usuario.key);
+                                                evt.preventDefault()
+                                                evt.stopPropagation();
+                                            }}>
+                                            <EditIcon style={{
+                                                width: 35,
+                                                height: 35,
+                                                fill: '#FFBF36',
+                                                textAlign: 'center'
+                                            }} />
+                                        </div>
+                                    </td>)
+                            }
+                            if (obj2.id == "Delete") {
+                                return (<td style={{ maxWidth: 80, fontSize: 10, alignItems: 'center', justifyContent: 'center', }}>
+                                    <div style={{ flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: "center" }}
+                                        onClick={() => {
+                                            this.props.onDelete(usuario.key);
+                                        }}>
+
+                                        <DeleteOutline style={{
+                                            width: 35,
+                                            height: 35,
+                                            fill: '#f02',
+                                            textAlign: 'center'
+                                        }} />
+                                    </div>
                                 </td>)
                             }
                             if (!dato) {

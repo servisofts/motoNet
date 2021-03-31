@@ -1,6 +1,5 @@
 import React from 'react'
-import { View, Text, Image, Dimensions } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
 import Svg from '../../Svg';
 import Styles from '../../Styles';
 
@@ -11,34 +10,34 @@ const ButtonServicioComponent = (props) => {
             alignItems: "center",
             marginTop: Dimensions.get('window').width * 0.02,
 
-            // backgroundColor: "#ccc",
+            // backgroundColosr: "#ccc",
             // width: "100%",
             // padding: 10
         }}>
             <TouchableOpacity
                 style={{
                     // width: "50%",
-
-                    'width': Dimensions.get('window').width * 0.23,
+                    'width': Dimensions.get('window').width * 0.7,
                     // height: "50%",
-                    'height': Dimensions.get('window').width * 0.23,
-                    borderRadius: 100,
+                    height: 90,
+                    borderRadius: 30,
                     justifyContent: "center",
                     alignItems: "center",
-                    textAlign: "center",
-                    backgroundColor: "#13386E",
-                    ...Styles.sombra    
-
-                    // padding:
+                    backgroundColor: "#fff",
+                    borderColor: "#f00",
+                    borderWidth: 2,
+                    ...Styles.sombra
                 }}
-                onPress={
-                    () => {
-                        //alert(props.nombre)
-                        props.navigation.navigate(props.page);
-                    }
-                }
-            >
-                <Svg name={props.nameSvg}
+                onPress={() => {
+                    // alert("dssd")
+                    props.navigation.navigate(props.page);
+                }}>
+                <Text style={{
+                    color: "#f00"
+                }}>
+                    {props.nombreServicio}
+                </Text>
+                {/* <Svg name={props.nameSvg}
                     style={{
                         position: "absolute",
                         width: Dimensions.get('window').width * 0.12,
@@ -46,10 +45,10 @@ const ButtonServicioComponent = (props) => {
                         fill:"#fff"
                         // 'height': Dimensions.get('window').height * 0.25,
 
-                    }} />
+                    }} /> */}
             </TouchableOpacity>
 
-            <View style={{
+            {/* <View style={{
                 alignContent: "center",
                 // height: 35,
                 marginTop: Dimensions.get('window').width * 0.01
@@ -58,12 +57,12 @@ const ButtonServicioComponent = (props) => {
                     textAlign: "center",
                     // fontStyle: "italic",
                     fontWeight: "500",
-                    fontSize:Dimensions.get('window').width * 0.03,
+                    fontSize: Dimensions.get('window').width * 0.03,
                     color: "#2C4C7E"
                 }}>
                     {props.nombreServicio}
                 </Text>
-            </View>
+            </View> */}
 
         </View>
     )

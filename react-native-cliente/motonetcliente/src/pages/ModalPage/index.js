@@ -4,7 +4,6 @@ import ImageViewer from 'react-native-image-zoom-viewer';
 import ModalError from '../../component/ModalError';
 import ModalImage from '../../component/ModalImage';
 import ModalSuccess from '../../component/ModalSuccess';
-import RecuperarPass from '../../component/RecuperarPass2'
 
 class ModalPage extends Component {
   constructor(props) {

@@ -17,8 +17,8 @@ const ButtonRegistro = (props) => {
                         width: 35,
                         height: 35,
                     }} />) : (
-                    < Text style={styles.Texto}>{props.titulo}</Text>
-                )
+                < Text style={styles.Texto}>{props.titulo}</Text>
+            )
             }
         </TouchableOpacity >
     )
@@ -29,32 +29,36 @@ const styles = StyleSheet.create({
         // flex: 0.8,
         color: "#fff",
         width: '100%',
+        fontSize: 13
     },
     sign: {
         marginTop: 20,
-        width: "40%",
+        width: "50%",
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        // backgroundColor: "#2176E7",
-        backgroundColor: "#2c4b81",
+        backgroundColor: "#f00",
+        borderColor: "#fff",
+        borderWidth: 2,
         borderRadius: 10,
         shadowColor: "#000",
         shadowOpacity: 0.15,
         shadowRadius: 3.84,
-        elevation: 5,
+        // elevation: 5,
         marginRight: 5
     },
     create: {
         marginTop: 20,
-        width: "40%",
+        width: "50%",
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
         // backgroundColor: "#a4a4a4",
-        backgroundColor: "#2c4b81",
+        backgroundColor: "#f00",
+        borderColor: "#fff",
+        borderWidth: 2,
         borderRadius: 10,
         shadowColor: "#000",
         shadowOpacity: 0.15,
@@ -96,7 +100,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        backgroundColor: "#2c4b81",
+        backgroundColor: "#f00",
+        borderColor: "#fff",
+        borderWidth: 2,
         borderRadius: 10,
         shadowColor: "#000",
         shadowOpacity: 0.15,

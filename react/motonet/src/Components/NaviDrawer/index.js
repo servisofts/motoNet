@@ -32,6 +32,7 @@ import { connect } from 'react-redux';
 import logoMotoInicio from '../../img/MotoNetBR.svg';
 import * as GetAllRoles from '../../SSPetitions/GetAllRoles'
 import UsuarioCabeceras from '../../Components/UsuarioCabeceras'
+import ImageIcon from '@material-ui/icons/Image';
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -246,6 +247,7 @@ const NaviDrawer = (props) => {
                     {getButton({ name: "Parametros Viajes", path: "ParametrosPage", icon: <StreetviewIcon /> })}
                     {getButton({ name: "Chat", path: "ChatPage", icon: <CommentTypeIcon /> })}
                     {getButton({ name: "Historial de Viajes", path: "HistorialViajePage", icon: <ListAltIcon /> })}
+                    {getButton({ name: "Publicidad", path: "PublicidadPage", icon: <ImageIcon /> })}
                     {getButton({
                         name: "Salir", path: "Salir", icon: <ExitToAppIcon />,
                        

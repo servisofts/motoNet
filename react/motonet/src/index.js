@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{Component} from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
@@ -11,6 +11,8 @@ import reduxThunk from 'redux-thunk';
 import reducers from './reducers';
 import nativeSocket from './_nativeSocket';
 
+import ShowImagePicker from './elementsM/ImagePickerWeb';
+
 
 const store = createStore(
   reducers,
@@ -21,11 +23,43 @@ const store = createStore(
 //conexion socket con ricky
 nativeSocket(store);
 
+export default class AppMobile extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    };
+  }
+  componentDidMount() {
+
+    store.dispatch({
+      component: 'imagePicker',
+      type: 'exito',
+      estado: 'exito',
+      url: "",
+      imagePicker: (calback) => {
+        if (calback == false) {
+          this.setState({ imagePicker: false, });
+          return <div />
+        } else {
+          this.setState({ imagePicker: true, calback: calback });
+          return <div />
+        }
+
+      },
+    });
+  }
+  render() {
+    return (
+      <Provider store={store}>
+    
+        <App />
+        {this.state.imagePicker ? (<ShowImagePicker calback={this.state.calback} />) : (<div />)}
+      </Provider>
+    );
+  }
+}
+
 ReactDOM.render(
-  <Provider store={store}>
-
-      <App />
-
-  </Provider>,
+  <AppMobile/>,
   document.getElementById('root')
 );

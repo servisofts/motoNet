@@ -22,6 +22,8 @@ import ConductorListaPage from './Pages/ConductorListaPage'
 import ConductorPerfilPage from './Pages/ConductorPerfilPage'
 import ConductorRegistroPage from './Pages/ConductorRegistroPage'
 
+import PublicidadPage from './Pages/PublicidadPage';
+
 
 function App() {
   return (
@@ -31,6 +33,7 @@ function App() {
       <Route exact path='/Inicio' component={InicioPage} />
       <Route exact path='/ListaUsuario' component={ListaUsuarioPage} />
       <Route exact path='/UsuarioRegistroPage' component={UsuarioRegistroPage} />
+      <Route exact path='/UsuarioRegistroPage/:key' component={UsuarioRegistroPage} />
       <Route exact path='/ListaConductor' component={ListaConductorPage} />
       <Route exact path='/MapaPage' component={MapaPage} />
       <Route exact path='/TipoViajePage' component={TipoViajePage} />
@@ -42,6 +45,7 @@ function App() {
       <Route exact path='/ConductorListaPage' component={ConductorListaPage} />
       <Route exact path='/ConductorPerfilPage/:key' component={ConductorPerfilPage} />
       <Route exact path='/ConductorRegistroPage' component={ConductorRegistroPage} />
+      <Route exact path='/PublicidadPage' component={PublicidadPage} />
       
     </BrowserRouter>
   );

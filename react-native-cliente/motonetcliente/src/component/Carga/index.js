@@ -88,32 +88,37 @@ const Carga = (props) => {
                 props.state.usuarioReducer.estado = "cargando";
                 return "Buscando datos de usuario...";
             } else {//Cuando existe Datos de usuario
-                if (!props.state.emergenciaReducer.estadoConsultado) {//Cuando el viaje no se consultado
-                    if (props.state.emergenciaReducer.estado == "cargando") { //Cuando el viaje esta cargando
+
+                // props.navigation.replace("ServicioPage");
+                // return <View />
+                // return "Esperando viaje..."
+
+                if (!props.state.viajesReducer.estadoConsultado) {//Cuando el viaje no se consultado
+                    if (props.state.viajesReducer.estado == "cargando") { //Cuando el viaje esta cargando
                         return "Esperando viaje..."
                     }
                     props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                        component: "emergencia",
+                        component: "viaje",
                         type: "getViajeByKeyUsuario",
                         key_usuario: props.state.usuarioReducer.usuarioLog.key,
                         estado: "cargando"
                     }, true);
-                    props.state.emergenciaReducer.estado = "cargando";
+                    props.state.viajesReducer.estado = "cargando";
                     return "Buscando viaje...";
                 } else { //Cuando el viaje ya se consulto
-                    if (!props.state.emergenciaReducer.data) {  //Cuando no tenemos viaje
+                    if (!props.state.viajesReducer.data) {  //Cuando no tenemos viaje
                         //Verificamos los datos de el usuario;
-                        props.navigation.replace("ServicioPage");
+                        props.navigation.replace("InicioPage");
                         return "Ir al inicio."
                     } else {//Cuando tenemos viaje
-                        if (!props.state.emergenciaReducer.data.movimientos) {
+                        if (!props.state.viajesReducer.data.movimientos) {
                             return "No hay movimientos";
                         }
-                        if (!props.state.emergenciaReducer.data.movimientos["acepto_secretaria"]) {
-                            props.navigation.replace("EmergenciaEsperaPage");
+                        if (!props.state.viajesReducer.data.movimientos["inicio_viaje"]) {
+                            props.navigation.replace("ViajeEsperaPage");
                             return "Ir a confirmar espera.";
                         } else {
-                            props.navigation.replace("EmergenciaViajePage");
+                            props.navigation.replace("ViajeInicioPage");
                             return "Ir al viaje.";
                         }
                     }

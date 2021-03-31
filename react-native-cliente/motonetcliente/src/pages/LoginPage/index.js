@@ -77,7 +77,7 @@ export class LoginPage extends Component {
 
 
     clearSession = () => {
-        AsyncStorage.removeItem("clinica_usuarioLog")
+        AsyncStorage.removeItem("motonet_usuarioLog")
         //props.state.usuarioReducer.usuarioLog = false
     };
 
@@ -113,7 +113,7 @@ export class LoginPage extends Component {
         this.setState({ ...this.state })
 
         if (exito) {
-            this.props.state.socketClienteReducer.sessiones["clinica_nj"].send({
+            this.props.state.socketClienteReducer.sessiones["motonet"].send({
                 component: "usuario",
                 type: "login",
                 data: datas,
@@ -134,7 +134,7 @@ export class LoginPage extends Component {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             console.log(userInfo.user)
-            this.props.state.socketClienteReducer.sessiones["clinica_nj"].send({
+            this.props.state.socketClienteReducer.sessiones["motonet"].send({
                 component: "usuario",
                 type: "loginGmail",
                 estado: "cargando",
@@ -156,7 +156,7 @@ export class LoginPage extends Component {
     };
 
     fbRequest = (result) => {
-        this.props.state.socketClienteReducer.sessiones["clinica_nj"].send({
+        this.props.state.socketClienteReducer.sessiones["motonet"].send({
             component: "usuario",
             type: "loginFacebook",
             estado: "cargando",
@@ -256,14 +256,11 @@ export class LoginPage extends Component {
         return (
 
             <View style={{
-                backgroundColor: "#fff",
+                backgroundColor: "#f00",
                 flex: 1
             }} >
 
-                <ImgFondoCruces />
-
                 <ScrollView>
-
                     <View style={{
                         alignItems: 'center',
                         justifyContent: 'center',
@@ -311,10 +308,11 @@ export class LoginPage extends Component {
 
 
                         <View style={{
-                            marginTop: 20,
-                            width: "100%",
-                            justifyContent: "center",
+                            marginTop: 10,
+                            width: "80%",
+                            // justifyContent: "center",
                             flexDirection: "row",
+                            justifyContent: "space-evenly"
                         }}>
 
                             {/* {this.props.state.usuarioReducer.estado == "cargando" ? (
@@ -332,7 +330,7 @@ export class LoginPage extends Component {
                         }}>
                             <Text style={{
                                 marginTop: 15,
-                                color: "#999z",
+                                color: "#fff",
                                 fontSize: 14,
                             }}>
                                 ¿Olvidaste tu contraseña?
@@ -371,8 +369,8 @@ export class LoginPage extends Component {
                         <ActivityIndicator color="#2C4C7E" size="large" />
                     </View>
                 ) : (
-                        <View />
-                    )}
+                    <View />
+                )}
 
                 < ModalPage
                     ventana="ModalError"
@@ -391,16 +389,16 @@ export class LoginPage extends Component {
 const styles = StyleSheet.create({
     contenedorInput: {
         marginTop: 20,
-        width: "100%",
-        paddingStart: 40,
-        paddingEnd: 40,
+        width: "80%",
+        // paddingStart: 40,
+        // paddingEnd: 40,
     },
     Input: {
-        backgroundColor: "#EAEAE2",
+        backgroundColor: "#fff",
         borderRadius: 10,
         color: "#000",
         borderColor: "#EAEAE2",
-        borderWidth: 1,
+        borderWidth: 2,
         padding: 10,
         elevation: 5,
     },
