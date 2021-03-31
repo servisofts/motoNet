@@ -12,12 +12,9 @@ const EstadoViaje = (props) => {
         return <View />
     }
 
-    if (props.state.ViajeReducer.data.movimientos["acepto_conductor"]) {
-        mensaje = "Dirijete a recojer al paciente."
-    }
 
-    if (props.state.ViajeReducer.data.movimientos["ambulancia_cerca"]) {
-        mensaje = "Ya estas llegando."
+    if (props.state.ViajeReducer.data.movimientos["inicio_viaje"]) {
+        mensaje = "Dirijete a recojer al cliente."
     }
     if (props.state.ViajeReducer.data.movimientos["conductor_llego_destino"]) {
         mensaje = "Espera a el cliente. Recuerda se amable."
@@ -44,7 +41,7 @@ const EstadoViaje = (props) => {
                     position: "absolute",
                     alignItems: 'center',
                     justifyContent: 'center',
-                    backgroundColor: "#2c4c7e",
+                    backgroundColor: "#f00",
                     top: 30,
                     borderRadius: 10
                 }} >

@@ -9,7 +9,7 @@ const TerminarTurno = (props) => {
     return (
         <View style={{
             position: "absolute",
-            top: 300
+            top: 400
         }}>
             <TouchableOpacity
                 onPress={() => {
@@ -19,12 +19,12 @@ const TerminarTurno = (props) => {
                     width: 200,
                     height: 50,
                     borderRadius: 20,
-                    backgroundColor: "#2c4b81",
+                    backgroundColor: "#f00",
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
                 <Text style={{ color: "#fff", fontSize: 15, fontWeight: 'bold', }} >
-                    Terminar Turno
+                    Desactivarse
                 </Text>
             </TouchableOpacity>
         </View>

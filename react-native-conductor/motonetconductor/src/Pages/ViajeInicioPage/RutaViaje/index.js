@@ -16,22 +16,20 @@ const RutaViaje = (props) => {
     }
 
     var dato = props.state.ViajeReducer.data;
-    var json = { latitude: dato.latitude, longitude: dato.longitude };
-    return (
-        <View>
+    return dato.destinos.map((obj,index) => {
+        var json = { latitude: obj.latitude, longitude: obj.longitude };
+        return (
             <Marker
                 coordinate={json}
                 style={{ width: 40, height: 40 }}
                 resizeMode="contain"
+                title={(index+1)+""}
+                
             >
-                {/* <Svg name="volver"
-                    style={{
-                        width: 40,
-                        height: 40,
-                    }} /> */}
             </Marker>
-        </View>
-    )
+        )
+    })
+
 }
 const initStates = (state) => {
     return { state }

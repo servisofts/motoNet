@@ -3,7 +3,7 @@ export default {
     "colors": {
         "primary": "#ff0000",
         "primary2": "#ff0000",
-        "secondary": "#000",
+        "secondary": "#fff",
         "boder": "#eeeeee",
         "fondo": "#fff",
         "borderTextError": "#F5F11F",
@@ -11,8 +11,8 @@ export default {
     },
     "gradient": {
         "primary": [
-            "#799cb3",
-            "#547a9e"
+            "#f00",
+            "#f66"
         ]
     },
     sombra: {

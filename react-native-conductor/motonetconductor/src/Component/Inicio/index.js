@@ -3,7 +3,7 @@ import Mapa from './Mapa';
 import { connect } from 'react-redux';
 import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import ComponenteInicio from './ComponenteInicio';
-import TerminarTurno from '../TerminarTurno';
+import TerminarTurno from './TerminarTurno';
 import Svg from '../../Svg';
 import BarraDeEstado from './BarraDeEstado';
 
@@ -39,8 +39,8 @@ const Inicio = (props) => {
                 style={styles.icono}>
                 <Svg name="logoRecurso"
                     style={{
-                        width: 50,
-                        height: 50,
+                        width: 40,
+                        height: 40,
                         fill: "#fff"
                     }} />
             </TouchableOpacity>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     icono: {
         width: 65,
         height: 65,
-        borderColor: "#2c4b8155",
+        borderColor: "#ff0000",
         borderWidth: 2,
         borderRadius: 100,
         backgroundColor: "#fff",

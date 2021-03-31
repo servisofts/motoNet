@@ -7,7 +7,7 @@ const BarraDeEstado = (props) => {
 
     var mensaje, mensaje2 = false;
     mensaje = "Activado"
-    mensaje2 = "esperando una alerta..."
+    mensaje2 = "esperando un viaje..."
 
     if (!mensaje && !mensaje2) {
         return <View />
@@ -18,11 +18,11 @@ const BarraDeEstado = (props) => {
 
     const getLats = () => {
         if (!props.state.backgroundLocationReducer.last) {
-            return <ActivityIndicator  size="small" color="#0000ff"/>
+            return <ActivityIndicator  size="small" color="#ff0000"/>
         }
         return (<Text style={{
             fontSize: 15,
-            color: "#2c4b81"
+            color: "#f00"
         }}>
             {props.state.backgroundLocationReducer.last.toLocaleTimeString()}
         </Text>)
@@ -31,19 +31,19 @@ const BarraDeEstado = (props) => {
         <View
             style={{
                 width: "90%",
-                height: 120,
+                height: 220,
                 position: "absolute",
                 alignItems: 'center',
                 justifyContent: 'center',
                 backgroundColor: "#fff",
                 borderWidth: 3,
-                borderColor: "#2c4b81",
+                borderColor: "#f00",
                 top: "15%",
                 borderRadius: 20
             }} >
                 <Text style={{
                     fontSize: 20,
-                    color: "#2c4b81", 
+                    color: "#f00", 
                     fontWeight:'bold',
                     textAlign:'center'
                 }}>
@@ -51,7 +51,7 @@ const BarraDeEstado = (props) => {
                 </Text>
                 <Text style={{
                     fontSize: 20,
-                    color: "#2c4b81", 
+                    color: "#f00", 
                     textAlign:'center',
                     paddingBottom: 10,
                 }}>
@@ -61,7 +61,7 @@ const BarraDeEstado = (props) => {
                 
                 <Text style={{
                     fontSize: 13,
-                    color: "#2c4b81",
+                    color: "#f00",
                 }}>
                     Ubicación última ves enviada a las :
                 </Text>

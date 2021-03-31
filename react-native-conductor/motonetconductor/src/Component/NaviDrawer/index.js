@@ -99,7 +99,7 @@ const NaviDrawe = (props) => {
                                     height: 200,
                                     justifyContent: "center"
                                 }}>
-                                    <Svg name="logoCompletoRecurso"
+                                    <Svg name="logoRecurso"
                                         style={{
                                             width: 130,
                                             height: 130,
@@ -138,7 +138,7 @@ const NaviDrawe = (props) => {
                                             marginTop: 10,
                                             fontWeight: "bold",
                                             fontSize: 20,
-                                            color: "#2c4b81",
+                                            color: "#f99",
                                         }} >Cerrar Sesión</Text>
                                     </TouchableOpacity>
                                 </View>
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         marginTop: 10,
         fontWeight: "bold",
         fontSize: 20,
-        color: "#2c4b81",
+        color: "#f00",
     },
     logo: {
         height: 150,

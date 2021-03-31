@@ -78,7 +78,7 @@ const iniciarTurno = (props) => {
                 alignItems: "center",
                 position: "absolute"
             }}>
-                <ActivityIndicator color="#2C4C7E" size="large" />
+                <ActivityIndicator color="#f00" size="large" />
             </View>
         )
     }
@@ -92,7 +92,7 @@ const iniciarTurno = (props) => {
                 width: 300,
                 height: 250,
                 borderRadius: 20,
-                backgroundColor: "#2c4b81",
+                backgroundColor: "#f00",
                 alignItems: 'center',
                 justifyContent: 'center',
             }}>
@@ -142,6 +142,23 @@ const iniciarTurno = (props) => {
         return <View />
     }
 
+    const getSaludo = ()=>{
+        var dia = new Date();
+        var horas = dia.getHours();
+        if(horas>=0 && horas<5 ){
+            return "Buenas noches";    
+        }
+        if(horas>=5 && horas<12 ){
+            return "Buenos dias";    
+        }
+        if(horas>=12 && horas<19 ){
+            return "Buenas tardes";    
+        }
+        if(horas>=19 && horas<24 ){
+            return "Buenas noches";    
+        }
+        return "Bienvenido son las "+horas+" ";
+    }
     return (
         <View style={{
             position: "absolute",
@@ -153,8 +170,8 @@ const iniciarTurno = (props) => {
             justifyContent: 'center',
         }}>
 
-            <Text style={{ fontSize: 20, color: "#ccc" }}>
-                Bienvenido
+            <Text style={{ fontSize: 20, color: "#fff" }}>
+                {getSaludo()}
             </Text>
             <Text style={{ fontSize: 30, color: "#fff", textAlign: 'center' }}>
                 {props.state.usuarioReducer.usuarioDatos["Nombres"].dato}
@@ -175,7 +192,10 @@ const iniciarTurno = (props) => {
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                <Text>Iniciar Turno</Text>
+                <Text style={{
+                    color:"#f00",
+                    fontWeight:"bold"
+                }}>Activarse</Text>
             </TouchableOpacity>
         </View>
     )

@@ -53,7 +53,7 @@ const ViajeInicioPage = (props) => {
             return;
         }
         props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-            component: "emergencia",
+            component: "viaje",
             type: "getViajeByKeyUsuario",
             key_usuario: props.state.usuarioReducer.usuarioLog.key,
             estado: "cargando"
@@ -188,7 +188,6 @@ const ViajeInicioPage = (props) => {
                 initialRegion={region}
                 ref={map => { mapa = map }}
                 provider={PROVIDER_GOOGLE}
-
             >
                 <RutaViaje />
             </MapView>
@@ -197,6 +196,7 @@ const ViajeInicioPage = (props) => {
             <IniciarViaje />
             <TerminarViaje navigation={props.navigation} />
             <CanceloViajeCliente navigation={props.navigation} />
+            <CancelarViaje navigation={props.navigation} />
             <ConductorLlego />
             <CobrarViaje />
             {/* {cancelarViaje()} */}

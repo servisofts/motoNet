@@ -11,22 +11,19 @@ const CancelarViaje = (props) => {
     const [isVisible, setIsVisible] = React.useState(false);
     const fadeAnim = useRef(new Animated.Value(valor_menor)).current;
 
-
     if (!props.state.ViajeReducer.data) {
         return <View />
     }
 
-    if (props.state.ViajeReducer.data.estado == 1) {
-        return <View />
-    }
-    if (props.state.ViajeReducer.data.movimientos["conductor_cobro_viaje"]) {
-        props.navigation.replace("CalificacionViajePage");
-        return <View />
-    }
+
+    // if (props.state.ViajeReducer.data.movimientos["conductor_cobro_viaje"]) {
+    //     props.navigation.replace("CalificacionViajePage");
+    //     return <View />
+    // }
     const fadeIn = () => {
         Animated.timing(fadeAnim, {
             toValue: 0,
-            duration: 700
+            duration: 1000,
         }).start();
     };
 
@@ -66,7 +63,7 @@ const CancelarViaje = (props) => {
         }}>
             <View style={{
                 width: "100%",
-                height: 300,
+                height: 150,
                 borderTopRightRadius: 30,
                 borderTopLeftRadius: 30,
                 backgroundColor: "#fff",
@@ -82,12 +79,12 @@ const CancelarViaje = (props) => {
                     justifyContent: "center",
                     alignItems: "center",
                 }}>
-                    <Svg name="MarkerMoto"
+                    {/* <Svg name="MarkerMoto"
                         style={{
                             width: 50,
                             height: 50,
                             fill: "#000"
-                        }} />
+                        }} /> */}
                 </View>
 
                 <View style={{

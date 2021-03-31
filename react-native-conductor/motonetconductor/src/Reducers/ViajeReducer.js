@@ -11,7 +11,7 @@ export default (state, action) => {
         state = initialState;
         state = { ...state };
     }
-    if (action.component == "emergencia") {
+    if (action.component == "viaje") {
         switch (action.type) {
             case "getAllConductor":
                 getAllConductor(state, action);
