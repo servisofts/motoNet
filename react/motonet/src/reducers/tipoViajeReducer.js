@@ -1,5 +1,6 @@
 const initialState = {
     estado: "",
+    tipoViaje:{}
 }
 
 export default (state, action) => {
@@ -14,6 +15,9 @@ export default (state, action) => {
             case "registro":
                 registro(state, action);
                 break;
+            case "getById":
+                getById(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -25,7 +29,7 @@ export default (state, action) => {
         }
         state = { ...state };
     }
-    
+
     return state;
 }
 
@@ -34,11 +38,11 @@ const editarMontoTipoViaje = (state, action) => {
         if (!state.data) {
             state.data = {}
         }
-          if (state.data[action.key_tipo_viaje]) {
-              if(!state.data[action.key_tipo_viaje].tarifas){
-                  state.data[action.key_tipo_viaje].tarifas= {};
-              }
-            state.data[action.key_tipo_viaje].tarifas={
+        if (state.data[action.key_tipo_viaje]) {
+            if (!state.data[action.key_tipo_viaje].tarifas) {
+                state.data[action.key_tipo_viaje].tarifas = {};
+            }
+            state.data[action.key_tipo_viaje].tarifas = {
                 ...state.data[action.key_tipo_viaje].tarifas,
                 ...action.data
             }
@@ -66,6 +70,16 @@ const getAll = (state, action) => {
         action.data.map((obj, key) => {
             state.data[obj.key] = obj;
         });
+    }
+}
+
+const getById = (state, action) => {
+    state.estado = action.estado;
+    if (action.estado === "exito") {
+        if (!state.tipoViaje) {
+            state.tipoViaje = {}
+        }
+        state.tipoViaje[action.data.key] = action.data;
     }
 }
 
