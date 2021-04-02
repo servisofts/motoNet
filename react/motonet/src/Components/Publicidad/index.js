@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TextField from '@material-ui/core/TextField'
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Button, CircularProgress } from '@material-ui/core';
-import { useForm } from 'react-hook-form';
+// import { useForm } from 'react-hook-form';
 import TableNewMe2 from '../TableNewMe2';
 
 import AppParams from "../../_nativeSocket/myProps.json"
@@ -57,10 +57,10 @@ const useStyles = makeStyles((theme) => ({
 
 const Publicidad = (props) => {
 
-    const { register, handleSubmit, errors } = useForm();
+    // const { register, handleSubmit, errors } = useForm();
     const [keyEliminar, setKeyEliminar] = React.useState(false);
     const onSubmit = data => console.log(data);
-    console.log(errors);
+    // console.log(errors);
 
     const classes = useStyles();
 
