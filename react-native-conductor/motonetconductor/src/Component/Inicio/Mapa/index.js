@@ -226,7 +226,6 @@ const Mapa = (props) => {
                             width: 60,
                             height: 60,
                             fill: "#fff",
-
                         }} />
                 </Animated.View>
 
