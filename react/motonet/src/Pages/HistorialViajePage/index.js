@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 //import PerfilUsuario from '../../Components/PerfilUsuario'
 import * as  cargarDatosPersonalesActions from '../../Actions/cargarDatosPersonalesActions';
 import * as GetUsuarioByKey from '../../SSPetitions/GetUsuarioByKey'
+import * as GetTipoViajeByKey from '../../SSPetitions/GetTipoViajeByKey';
 
 
 //elemnts
@@ -40,6 +41,19 @@ const HistorialViajePage = (props) => {
                     return getUsuario.component
                }
                /*datos usuario*/
+
+               /*datos tipoViaje*/
+              /* var getTipViajeKey = GetTipoViajeByKey.ejecutar({
+                    key_usuario: obj.key_usuario,
+                    key_tipo_viaje: obj.key_tipo_viaje,
+               }, props);
+               var objTipoViaje = getTipViajeKey.data;
+               if (!getTipViajeKey.estado) {
+                    return getTipViajeKey.component
+               }*/
+               
+               /*datos tipoViaje*/
+
                list.push({
                     key,
                     Key: obj.key,
