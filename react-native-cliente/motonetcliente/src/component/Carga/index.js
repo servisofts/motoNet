@@ -108,7 +108,7 @@ const Carga = (props) => {
                 } else { //Cuando el viaje ya se consulto
                     if (!props.state.viajesReducer.data) {  //Cuando no tenemos viaje
                         //Verificamos los datos de el usuario;
-                        props.navigation.replace("InicioPage");
+                        props.navigation.replace("ServicioPage");
                         return "Ir al inicio."
                     } else {//Cuando tenemos viaje
                         if (!props.state.viajesReducer.data.movimientos) {
