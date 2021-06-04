@@ -8,6 +8,7 @@ import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
 
+import com.facebook.react.BuildConfig;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactInstanceManager;
