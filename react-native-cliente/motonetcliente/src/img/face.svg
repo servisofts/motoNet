@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36">
+  <title>face</title>
+  <g>
+    <rect width="36" height="36" rx="4" fill="#2d88ff"/>
+    <path d="M346.2,656.5h-3.7v-3c0-.8.7-.7,1.5-.7h1.5V649h-3a4.5,4.5,0,0,0-4.5,4.5v3h-3v3.7h3v8.3h4.5v-8.3h2.3Z" transform="translate(-323 -641)" fill="#fff"/>
+  </g>
+</svg>

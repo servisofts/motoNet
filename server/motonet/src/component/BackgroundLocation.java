@@ -50,7 +50,7 @@ public class BackgroundLocation {
                 JSONObject conductorActivo = new JSONObject();
                 conductorActivo.put("key", UUID.randomUUID().toString());
                 conductorActivo.put("key_usuario", obj.getString("key_usuario"));
-                conductorActivo.put("id_session", obj.getString("id"));
+                //conductorActivo.put("id_session", obj.getString("id"));
                 conductorActivo.put("fecha_on", "now()");
                 // conductorActivo.put("fecha_off", "");
                 conductorActivo.put("latitude", data.getDouble("latitude"));

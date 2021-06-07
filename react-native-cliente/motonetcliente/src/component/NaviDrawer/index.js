@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import Svg from '../../Svg';
 import urlFoto from '../../Json/index.json';
 import ButtonNavi from './ButtonNavi';
+import AppParams from '../../Json';
+import STheme from '../../STheme';
 
 const NaviDrawer = (props) => {
 
@@ -69,7 +71,7 @@ const NaviDrawer = (props) => {
                 width: 100,
                 height: 100,
                 borderRadius: 200,
-                borderWidth:0,
+                borderWidth: 0,
             }} />
         )
     }
@@ -92,7 +94,7 @@ const NaviDrawer = (props) => {
                 return <View />
             case "Cerrar":
                 setVisible(false);
-                AsyncStorage.removeItem("clinica_usuarioLog")
+                AsyncStorage.removeItem(AppParams.storage.urlLog)
                 props.state.usuarioReducer.usuarioLog = false
                 props.state.usuarioReducer.usuarioDatos = false;
                 props.state.usuarioReducer.cargaLoaded = true
@@ -106,7 +108,7 @@ const NaviDrawer = (props) => {
         <Modal
             transparent={true}
             visible={isVisible}
-            
+
             style={{
                 position: "absolute",
                 border: 0,
@@ -162,9 +164,9 @@ const NaviDrawer = (props) => {
                                                 borderWidth: 1,
                                                 borderRadius: 100,
                                                 margin: 10,
-                                                padding:0,
-                                                justifyContent:"center",
-                                                alignItems:"center"
+                                                padding: 0,
+                                                justifyContent: "center",
+                                                alignItems: "center"
                                             }}>
                                             {getFotoPerfil()}
                                         </View>
@@ -213,12 +215,7 @@ const NaviDrawer = (props) => {
                                             backgroundColor: '#ccc'
                                         }} /> */}
 
-                                        <ButtonNavi svg="Consulta" Nombre="MIS CONSULTAS" onPress={handleClick} pagina="ListaConsultaPage" />
 
-                                        <View style={{
-                                            height: 1,
-                                            backgroundColor: '#ccc',
-                                        }} />
 
                                         <ButtonNavi svg="MiCuenta" Nombre="MI CUENTA" onPress={handleClick} pagina="PerfilPage" />
 
@@ -235,7 +232,7 @@ const NaviDrawer = (props) => {
                                             backgroundColor: '#ccc'
                                         }} />
 
-                                        <ButtonNavi svg="Salir" Nombre="SALIR" onPress={handleClick} pagina="Cerrar" color="#944"/>
+                                        <ButtonNavi svg="Salir" Nombre="SALIR" onPress={handleClick} pagina="Cerrar" color="#944" />
 
                                         <View style={{
                                             height: 1,
@@ -272,7 +269,7 @@ const styles = StyleSheet.create({
         borderRightColor: "#888",
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#fff"
+        backgroundColor: STheme.color.background,
     },
     menus: {
         justifyContent: 'center',

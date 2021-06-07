@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { act } from 'react-test-renderer';
+import AppParams from '../Json';
 const initialState = {
     estado: "Not Found",
     estadoEmail: false,
@@ -66,15 +67,18 @@ const identificacion = (state, action) => {
             return;
         }
         state.usuarioLog = action.data;
-        AsyncStorage.setItem("clinica_usuarioLog", JSON.stringify(action.data));
+        AsyncStorage.setItem(AppParams.storage.urlLog, JSON.stringify(action.data));
         state.login = "login"
     }
 }
 const login = (state, action) => {
     state.estado = action.estado
+    if (action.estado === "error") {
+        state.error = action.error;
+    }
     if (action.estado === "exito") {
         state.usuarioLog = action.data;
-        AsyncStorage.setItem("clinica_usuarioLog", JSON.stringify(action.data));
+        AsyncStorage.setItem(AppParams.storage.urlLog, JSON.stringify(action.data));
         state.login = action.data
     }
 }
@@ -123,7 +127,7 @@ const loginFacebook = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
         state.usuarioLog = action.data;
-        AsyncStorage.setItem("clinica_usuarioLog", JSON.stringify(action.data));
+        AsyncStorage.setItem(AppParams.storage.urlLog, JSON.stringify(action.data));
         state.login = action.data
     }
     if (action.estado === "error") {
@@ -135,7 +139,7 @@ const loginGmail = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
         state.usuarioLog = action.data;
-        AsyncStorage.setItem("clinica_usuarioLog", JSON.stringify(action.data));
+        AsyncStorage.setItem(AppParams.storage.urlLog, JSON.stringify(action.data));
         state.login = action.data
     }
     if (action.estado === "error") {

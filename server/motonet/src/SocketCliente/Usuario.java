@@ -122,10 +122,10 @@ public class Usuario {
                 //     }
                 // }
                 String correo = session.getPendiente("correo").getString("data");
-                String pass = session.getPendiente("pass").getString("data");
+               // String pass = session.getPendiente("pass").getString("data");
                 JSONObject infoUser = new JSONObject();
                 infoUser.put("correo", correo);
-                infoUser.put("pass", pass);
+                infoUser.put("pass", "");
                 System.out.println("ENIO EL CORREO");
                 new EmailRegistroUsr(infoUser).start();
                 System.out.println("NOTIFICAR QUE SE REGISTRO UN NUEVO USUARIO");

@@ -37,6 +37,7 @@ import * as HttpConection from './src/HttpConection'
 import * as SSSocketNative from './src/SSSocketNative'
 import BarraDeDesconeccion from './src/SSSocketNative/BarraDeDesconeccion';
 import AlertaDesconectado from './src/SSSocketNative/AlertaDesconectado';
+import STheme from './src/STheme';
 
 
 const store = createStore(
@@ -77,7 +78,9 @@ const Home = createStackNavigator(
         showLabel: false,
         color: "#fff",
       },
-
+      cardStyle:{
+        backgroundColor:STheme.color.background
+      },
       headerTintColor: "#fff",
 
       headerTitle: () => (
@@ -126,13 +129,12 @@ class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <AppStateChange store={store} />
-        <SafeAreaView style={{ flex: 1, backgroundColor: "#ff0000" }}>
-          <StatusBar barStyle={"light-content"} backgroundColor='#ff0000' />
-          <BarraDeDesconeccion socketName={"motonet"} color={"#ff0000"} />
-          <AlertaDesconectado socketName={"motonet"} />
+        {/* <AppStateChange store={store} /> */}
+        <SafeAreaView style={{ flex: 1, backgroundColor: STheme.color.background }}>
+          <StatusBar barStyle={"light-content"} backgroundColor={STheme.color.background} />
+          <BarraDeDesconeccion socketName={"motonet"} color={STheme.color.backgroundColor} />
           <Container />
-          <NaviDrawer />
+          {/* <NaviDrawer /> */}
         </SafeAreaView>
       </Provider>
     );

@@ -19,6 +19,7 @@ const BarraDeDesconeccion = (props) => {
     if (!SessionActual) {
         return <View />;
     }
+    
     var config = SessionActual.getConfig();
     const getEstado = () => {
         var backColor = "";
@@ -44,7 +45,7 @@ const BarraDeDesconeccion = (props) => {
     }
     const HacerPing = async () => {
         var curTime = new Date().getTime();
-        if (curTime - lastPing > 5000) {
+        if (curTime - lastPing > 20000) {
             lastPing = new Date().getTime();
             SessionActual.ping();
         }
@@ -53,6 +54,7 @@ const BarraDeDesconeccion = (props) => {
     };
 
     HacerPing();
+    return <View/>
     return (
         <View style={{
             backgroundColor: (!props.color ? "#777" : props.color),

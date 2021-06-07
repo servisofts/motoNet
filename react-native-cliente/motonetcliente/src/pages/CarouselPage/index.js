@@ -28,15 +28,7 @@ class CarouselPage extends Component {
 
         if (this.props.state.publicidadReducer.estado == "cargando") {
             return (
-                <View style={{
-                    'height': Dimensions.get('window').height * 0.35,
-                    width: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: "#fff"
-                }}>
-                    <ActivityIndicator size="large" color="#2C4C7E" />
-                </View>
+                <ActivityIndicator size="large" color="#2C4C7E" />
             )
         }
 

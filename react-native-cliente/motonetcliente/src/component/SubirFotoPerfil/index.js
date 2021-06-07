@@ -88,7 +88,7 @@ const SubirFotoPerfil = (props) => {
                 key_usuario: User.key,
                 dato: "Foto perfil"
             }
-            props.state.socketClienteReducer.sessiones["clinica_nj"].send(objSend, true)
+            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(objSend, true)
             props.handleClik(false)
         }
         return <View />

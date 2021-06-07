@@ -25,7 +25,7 @@
         <activity android:name="com.servisofts.motonetcliente.SplashScreen"
             android:label="@string/app_name"
             android:theme="@style/SplashTheme"
-            >
+			android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
