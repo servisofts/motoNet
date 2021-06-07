@@ -8,7 +8,15 @@ import util.console;
 public class Manejador {
 
     public Manejador(JSONObject data, SSSessionAbstract session) {
-        console.log(console.ANSI_BLUE," Manejador Socket Server -> : "+data.getString("component"));
+        if (!data.isNull("component")) {
+           
+        boolean showLog = true;
+            if (data.getString("component").equals("socketTest")) {
+                showLog = false;
+            }
+            if (showLog)
+                console.log(console.ANSI_BLUE, " Manejador Socket Server -> : " + data.getString("component"));
+
         if (!data.isNull("component")) {
             switch (data.getString("component")) {
                 case "usuario": {
@@ -39,6 +47,10 @@ public class Manejador {
                     new Viaje(data, session);
                     break;
                 }
+                case "historialViaje": {
+                    new HistorialViaje(data, session);
+                    break;
+                }
                 case "tipoViaje": {
                     new TipoViaje(data, session);
                     break;
@@ -55,11 +67,20 @@ public class Manejador {
                     new SeguimientoConductor(data, session);
                     break;
                 }
+                case "publicidad": {
+                    new Publicidad(data, session);
+                    break;
+                }
+                  case "rol": {
+                    new Rol(data, session);
+                    break;
+                }
                 default:
                     break;
             }
         } else {
             data.put("error", "No existe el componente");
+        }
         }
     }
 

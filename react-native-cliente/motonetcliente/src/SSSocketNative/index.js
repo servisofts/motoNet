@@ -14,6 +14,7 @@ export const init = (_store) => {
     store = _store;
     Log("Estore inicializado.");
     insertInReducer();
+    
 }
 const insertInReducer = () => {
     var states = store.getState();
@@ -26,8 +27,8 @@ const insertInReducer = () => {
                     states.socketClienteReducer.sessiones[key] = {
                         isOpen: true,
                         estado: "conectado",
-                        send: (json) => {
-                            sess.send(json);
+                        send: (json,isDisp) => {
+                            sess.send(json,isDisp);
                         }
                     }
                     return;

@@ -3,5 +3,8 @@
     "java.dependency.syncWithFolderExplorer": false,
     "java.project.referencedLibraries": [
         "lib/**/*.jar"
+    ],
+    "java.project.sourcePaths": [
+        "src"
     ]
 }

@@ -1,51 +1,65 @@
 import React from 'react'
 import { View, Text, Image, Dimensions, TouchableOpacity } from 'react-native'
 import Svg from '../../Svg';
-import Styles from '../../Styles';
+import STheme from '../../STheme';
 
 const ButtonServicioComponent = (props) => {
     return (
         <View style={{
             // justifyContent:"center",
             alignItems: "center",
-            marginTop: Dimensions.get('window').width * 0.02,
+            marginTop: 8,
+            width: "100%",
 
-            // backgroundColosr: "#ccc",
             // width: "100%",
             // padding: 10
         }}>
             <TouchableOpacity
                 style={{
                     // width: "50%",
-                    'width': Dimensions.get('window').width * 0.7,
                     // height: "50%",
-                    height: 90,
-                    borderRadius: 30,
+                    width: "90%",
+                    height: 110,
+                    backgroundColor: STheme.color.primary,
+                    borderBottomWidth: 2,
+                    borderLeftWidth: 1,
+                    borderRightWidth: 1,
+                    borderColor: STheme.color.textb + "22",
+                    borderRadius: 8,
                     justifyContent: "center",
-                    alignItems: "center",
-                    backgroundColor: "#fff",
-                    borderColor: "#f00",
-                    borderWidth: 2,
-                    ...Styles.sombra
+                    padding: 12,
+                    // borderColor: "#f00",
+                    // borderWidth: 2, 
+                    flexDirection: "row",
                 }}
                 onPress={() => {
                     // alert("dssd")
                     props.navigation.navigate(props.page);
                 }}>
-                <Text style={{
-                    color: "#f00"
+                <View style={{
+                    flex: 1,
+                    height: "100%",
+                    justifyContent: "center"
                 }}>
-                    {props.nombreServicio}
-                </Text>
-                {/* <Svg name={props.nameSvg}
-                    style={{
-                        position: "absolute",
-                        width: Dimensions.get('window').width * 0.12,
-                        height: Dimensions.get('window').width * 0.12,
-                        fill:"#fff"
-                        // 'height': Dimensions.get('window').height * 0.25,
-
-                    }} /> */}
+                    <Text style={{
+                        color: STheme.color.textb,
+                        fontSize: 22,
+                        fontWeight: "bold"
+                    }}>
+                        {props.nombreServicio}
+                    </Text>
+                    <Text style={{
+                        color: STheme.color.textb,
+                        fontSize: 14,
+                    }}>
+                        {props.detalle}
+                    </Text>
+                </View>
+                <View style={{
+                    width: 100,
+                }}>
+                    <Svg name={props.nameSvg} />
+                </View>
             </TouchableOpacity>
 
             {/* <View style={{

@@ -1,0 +1,19 @@
+{
+    "color": {
+        "primary": "#ffffff",
+        "background": "#f20022",
+        "text": "#fff",
+        "textb":"#000000",
+        "placeholder": "#ddd",
+        "card": "#22222299"
+        
+    },
+    "_color": {
+        "primary": "#1C3652",
+        "background": "#000000",
+        "text": "#1C3652",
+        "textb":"#ffffff",
+        "placeholder": "#1C3652",
+        "card": "#22222299"
+    }
+}

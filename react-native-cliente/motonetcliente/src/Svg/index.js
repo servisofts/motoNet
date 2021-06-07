@@ -8,8 +8,10 @@ import CentroAtencion from '../img/iconRecursoCentroAtencion.svg';
 import Farmacia from '../img/iconRecursoFarmacia.svg';
 import Imagenologia from '../img/iconRecursoImagenologia.svg';
 import Laboratorio from '../img/iconRecursoLaboratorio.svg';
-import LogoCompleto from '../img/logoCompletoRecurso.svg';
-import LogoRecurso from '../img/logoRecurso.svg';
+// import LogoCompleto from '../img/logoCompletoRecurso.svg';
+// import LogoRecurso from '../img/logoRecurso.svg';
+import LogoCompleto from '../img/motonet.svg';
+import LogoRecurso from '../img/motonet.svg';
 import NacionalSegurosRecurso from '../img/NacionalSegurosRecurso.svg';
 import LogoFacebook from '../img/facebook.svg';
 import LogoEmail from '../img/google.svg';
@@ -34,16 +36,33 @@ import Error from '../img/error.svg';
 import Gps from '../img/gps.svg';
 import Cerrar from '../img/cerrar.svg';
 import Ubicacion from '../img/ubicacion.svg';
+import Mensajeria from '../img/mensajeria.svg';
+import Pedidos from '../img/pedidos.svg';
+import Transporte from '../img/transporte.svg';
+import STheme from '../STheme';
 
-const Svg = (props) => {
-
+const Svg = (propsa) => {
+    var props = { ...propsa }
+    if (!props.style) {
+        props.style = {
+            width: "100%",
+            height: "100%",
+            fill: "#fff"
+        }
+    }
+    if (props.resource) {
+        return (Platform.OS == "web" ? <img style={props.style} src={props.resource.default} /> : <props.resource.default style={props.style} />);
+    }
     switch (props.name) {
         case "btnRojo":
             return <BtnRojo style={props.style} />
         case "btnAzul":
             return <BtnAzul style={props.style} />
         case "logoCompletoRecurso":
-            return <LogoCompleto style={props.style} />
+            return <LogoCompleto style={{
+                fill: STheme.color.primary,
+                ...props.style
+            }} />
         case "logoRecurso":
             return <LogoRecurso style={props.style} />
         case "alianza":
@@ -106,6 +125,12 @@ const Svg = (props) => {
             return <Cerrar style={props.style} />
         case "Ubicacion":
             return <Ubicacion style={props.style} />
+        case "mensajeria":
+            return <Mensajeria style={props.style} />
+        case "pedidos":
+            return <Pedidos style={props.style} />
+        case "transporte":
+            return <Transporte style={props.style} />
         default: return <Text>Not Found</Text>
     }
 }

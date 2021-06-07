@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, TouchableOpacity, Text, Dimensions } from 'react-native';
 import Svg from '../../Svg';
-import Styles from '../../Styles'
 const ButtonComponent = (props) => {
 
     return (

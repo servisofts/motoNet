@@ -30,6 +30,9 @@ public class ServerHttp {
                     "** Iniciando HTTP-SERVER " + Config.getJSON().getString("ss") + " en el puerto " + puerto + " **");
             server = HttpServer.create(new InetSocketAddress(puerto), 0);
             HttpContext context = server.createContext("/");
+            HttpContext contextManejador = server.createContext("/manejador");
+
+            contextManejador.setHandler(HandleRequestManejador::handle);
             context.setHandler(ServerHttp::handleRequest);
             server.start();
         } catch (IOException e) {
@@ -56,9 +59,10 @@ public class ServerHttp {
                 key = parametros.get("key_usuario");
                 file = getPerfil(file, imgName, key);
                 break;
-            case "glup":
+     
+                case "publicidad":
                 key = parametros.get("key");
-                file = getGlup(file, imgName, key);
+                file = publicidad(file, imgName, key);
                 break;
         }
         // System.out.println(type);
@@ -111,9 +115,10 @@ public class ServerHttp {
         String url = Config.getJSON("files").getString("url") + key_usuario + "/perfil/" + imgName;
         return new File(url);
     }
-    private static File getGlup(File file, String imgName, String key) throws IOException {
-        String url = Config.getJSON("files").getString("url_glup") + key + "/" + imgName;
+
+
+    private static File publicidad(File file, String imgName, String key) throws IOException {
+        String url = Config.getJSON("files").getString("url_publicidad") + key + "/" + imgName;
         return new File(url);
     }
-
 }

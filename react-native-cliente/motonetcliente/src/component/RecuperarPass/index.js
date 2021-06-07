@@ -46,7 +46,6 @@ const RecuperarPass = (props) => {
             flex: 1,
         }}>
 
-            <ImgFondoCruces />
 
             <ScrollView>
 
@@ -67,8 +66,6 @@ const RecuperarPass = (props) => {
                             style={{
                                 width: 200,
                                 height: 200,
-                                fill: "#fff"
-
                             }} />
                     </View>
 
@@ -110,41 +107,41 @@ const RecuperarPass = (props) => {
                                 <ActivityIndicator color="#fff" size="small" />
                             </View>
                         ) : (
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        var datas = {}
-                                        var exito = true;
-                                        for (const key in obj) {
-                                            if (!obj[key].value || obj[key].value.length <= 0) {
-                                                obj[key].error = true;
-                                                exito = false;
-                                            } else {
-                                                obj[key].error = false;
-                                                datas[key] = obj[key].value
-                                            }
+                            <TouchableOpacity
+                                onPress={() => {
+                                    var datas = {}
+                                    var exito = true;
+                                    for (const key in obj) {
+                                        if (!obj[key].value || obj[key].value.length <= 0) {
+                                            obj[key].error = true;
+                                            exito = false;
+                                        } else {
+                                            obj[key].error = false;
+                                            datas[key] = obj[key].value
                                         }
-                                        setObj({ ...obj })
-                                        if (exito) {
-                                            props.state.socketClienteReducer.sessiones["clinica_nj"].send({
-                                                component: "usuario",
-                                                type: "recuperarPass",
-                                                data: obj.usr.value,
-                                                estado: "cargando"
-                                            }, true);
-                                        }
-                                        // obj.usr = ""
-                                        // setObj({ ...obj })
-                                    }}
-                                    /*onPress={() => props.navigation.navigate("CodigoRecibidoPage")}*/
-                                    style={styles.touch4}>
-                                    <Text
-                                        style={{
-                                            color: '#fff',
-                                        }} >
-                                        Enviar
+                                    }
+                                    setObj({ ...obj })
+                                    if (exito) {
+                                        props.state.socketClienteReducer.sessiones["clinica_nj"].send({
+                                            component: "usuario",
+                                            type: "recuperarPass",
+                                            data: obj.usr.value,
+                                            estado: "cargando"
+                                        }, true);
+                                    }
+                                    // obj.usr = ""
+                                    // setObj({ ...obj })
+                                }}
+                                /*onPress={() => props.navigation.navigate("CodigoRecibidoPage")}*/
+                                style={styles.touch4}>
+                                <Text
+                                    style={{
+                                        color: '#fff',
+                                    }} >
+                                    Enviar
                         </Text>
-                                </TouchableOpacity>
-                            )
+                            </TouchableOpacity>
+                        )
                         }
 
                         <TouchableOpacity
@@ -209,7 +206,7 @@ const styles = StyleSheet.create({
         width: "80%",
         height: 40,
         margin: 2,
-        marginTop:20,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
@@ -235,7 +232,7 @@ const styles = StyleSheet.create({
         width: "80%",
         height: 40,
         margin: 2,
-        marginTop:20,
+        marginTop: 20,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
@@ -248,7 +245,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 2,
-    },   
+    },
 });
 const initStates = (state) => {
     return { state }

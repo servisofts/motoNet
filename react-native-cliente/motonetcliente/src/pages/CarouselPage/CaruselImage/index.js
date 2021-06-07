@@ -48,7 +48,7 @@ class CaruselImage extends Component {
 
         return (
             <View style={{
-                'height': Dimensions.get('window').height * 0.35,
+                height: 200,
             }}>
                 <View style={{
                     width: "100%",

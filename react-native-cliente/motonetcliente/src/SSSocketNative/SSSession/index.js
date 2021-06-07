@@ -166,10 +166,19 @@ class SSSession {
             this.socket.end();
         }
     }
-    send(mensaje) {
+    hiloTimeOut = async (data) => {
+        await delay(3000)
+        data.estado = "timeout"
+        this.store.dispatch(data)
+    }
+    send(mensaje, isDispatch) {
         this.colaMensaje.setMensaje(mensaje);
         this.socket.write(JSON.stringify(mensaje) + "\n");
-        // if (isDispatch) store.dispatch(obj);
+        if (isDispatch) {
+            this.store.dispatch(mensaje);
+            this.hiloTimeOut(mensaje);
+        };
+
     }
     getConfig() {
         return this.config;

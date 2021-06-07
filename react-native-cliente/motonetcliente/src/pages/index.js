@@ -18,6 +18,7 @@ import InicioPage from './InicioPage';
 import ServicioPage from './ServicioPage';
 import ViajeEsperaPage from './ViajeEsperaPage';
 import ViajeInicioPage from './ViajeInicioPage';
+import PedidosRegistroPage from './PedidosRegistroPage';
 
 export const getPages = () => {
     return {
@@ -41,6 +42,7 @@ export const getPages = () => {
         ServicioPage,
         ViajeEsperaPage,
         ViajeInicioPage,
+        PedidosRegistroPage,
 
     }
 }

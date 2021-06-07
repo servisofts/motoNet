@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Animated, Dimensions } from 'react-native';
 import Carga from '../../component/Carga';
 import ImgFondoCruces from '../../component/ImgFondoCruces';
+import STheme from '../../STheme';
 import Svg from '../../Svg';
-import Styles from '../../Styles';
 
 class CargaPage extends Component {
   static navigationOptions = {
@@ -31,7 +31,7 @@ class CargaPage extends Component {
     return (
       <View style={{
         flex: 1,
-        backgroundColor: Styles.colors.primary,
+        backgroundColor: STheme.color.background,
         alignItems: 'center',
         justifyContent: 'center',
       }}>

@@ -4,7 +4,9 @@ import { View, Text } from 'react-native';
 import RecuperarPass from '../../component/RecuperarPass';
 
 class RecuperarPassPage extends Component {
-
+    static navigationOptions = {
+        headerShown: false
+    }
     constructor(props) {
         super(props);
     }
@@ -20,9 +22,7 @@ class RecuperarPassPage extends Component {
         }
 
         return (
-            <>
-                <RecuperarPass navigation={this.props.navigation} />
-            </>
+            <RecuperarPass navigation={this.props.navigation} />
         )
     }
 }
