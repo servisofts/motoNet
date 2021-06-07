@@ -22,41 +22,41 @@ const BuscadorComponenteMap = (props) => {
     })
 
     const [isVisible, setIsVisible] = React.useState(false);
-    const fadeAnim = useRef(new Animated.Value(valor_menor)).current;
+    // const fadeAnim = useRef(new Animated.Value(valor_menor)).current;
 
-    const fadeIn = () => {
-        Animated.timing(fadeAnim, {
-            toValue: 0,
-            duration: 500
-        }).start();
-    };
+    // const fadeIn = () => {
+    //     Animated.timing(fadeAnim, {
+    //         toValue: 0,
+    //         duration: 500
+    //     }).start();
+    // };
 
-    const fadeOut = () => {
-        Animated.timing(fadeAnim, {
-            toValue: valor_menor,
-            duration: 500,
-        }).start(() => {
-            if (fadeAnim._value < valor_menor + 100) {
-                if (isVisible) {
-                    setIsVisible(false);
-                }
-            }
-        });
-    };
+    // const fadeOut = () => {
+    //     Animated.timing(fadeAnim, {
+    //         toValue: valor_menor,
+    //         duration: 500,
+    //     }).start(() => {
+    //         if (fadeAnim._value < valor_menor + 100) {
+    //             if (isVisible) {
+    //                 setIsVisible(false);
+    //             }
+    //         }
+    //     });
+    // };
 
-    if (props.ventanaSelect != "tipoDeViaje") {
-        if (isVisible == true) {
-            fadeOut();
-        }
-    } else {
-        if (!isVisible) {
-            fadeIn();
-            setIsVisible(true)
-        }
-    }
-    if (!isVisible) {
-        return <View />
-    }
+    // if (props.ventanaSelect != "tipoDeViaje") {
+    //     if (isVisible == true) {
+    //         fadeOut();
+    //     }
+    // } else {
+    //     if (!isVisible) {
+    //         fadeIn();
+    //         setIsVisible(true)
+    //     }
+    // }
+    // if (!isVisible) {
+    //     return <View />
+    // }
 
 
     const actualizarUbicacion = () => {
@@ -244,7 +244,7 @@ const BuscadorComponenteMap = (props) => {
                         </TouchableOpacity> */}
                     </View>
                 </View>
-                <ListaBusqueda onchage={hanlechageLista} />
+                {/* <ListaBusqueda onchage={hanlechageLista} /> */}
             </View>
         )
     }
@@ -299,19 +299,21 @@ const BuscadorComponenteMap = (props) => {
     };
 
     return (
-        <Animated.View style={{
-            width: "100%",
-            alignItems: 'center',
-            justifyContent: 'space-evenly',
-            position: "absolute",
-            top: fadeAnim,
-            flexDirection: 'column',
-            // height: 200,
-            marginTop: 50,
-            // backgroundColor: "#ccc"
-        }}>
+        // <Animated.View style={{
+        //     width: "100%",
+        //     alignItems: 'center',
+        //     justifyContent: 'space-evenly',
+        //     position: "absolute",
+        //     top: fadeAnim,
+        //     flexDirection: 'column',
+        //     // height: 200,
+        //     marginTop: 50,
+        //     // backgroundColor: "#ccc"
+        // }}>
+        <View>
             {buscarInputNuevo()}
-        </Animated.View>
+        </View>
+        // </Animated.View>
     )
 }
 

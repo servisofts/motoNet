@@ -8,6 +8,7 @@ import MarkerMedio from '../BuscardorDireccion/MarkerMedio';
 import TiposDeViajes from './TiposDeViajes';
 import DetalleDeViajes from './DetalleDeViajes';
 import Svg from '../../Svg';
+import BarraSuperiorBuscador from '../BarraSuperiorBuscador';
 // import PerfilConductorPage from '../../pages/Per/filConductorPage';
 
 const Inicio = (props) => {
@@ -18,14 +19,22 @@ const Inicio = (props) => {
         <View style={{
             flex: 1,
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            width: "100%"
         }}>
-            <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
-            <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
-            <BuscadorComponenteMap2 ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} />
-            <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
-            <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
-            <TouchableOpacity
+            <BarraSuperiorBuscador goBack={() => { props.navigation.goBack(); }} cventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} />
+
+            <View style={{
+                flex: 1,
+                width: "100%"
+            }}>
+                <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+                <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+                {/* <BuscadorComponenteMap2 ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} /> */}
+                <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+                <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+            </View>
+            {/* <TouchableOpacity
                 onPress={() => {
                     props.navigation.goBack()
                 }}
@@ -44,7 +53,7 @@ const Inicio = (props) => {
                         height: 20,
                         fill: "#000",
                     }} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
         </View>
     )
 }
