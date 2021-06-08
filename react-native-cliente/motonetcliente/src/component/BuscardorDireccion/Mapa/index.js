@@ -83,7 +83,8 @@ const Mapa = (props) => {
                 ref={map => { mapa = map }}
                 showsUserLocation={true}
                 initialRegion={data.region}
-                onRegionChangeComplete={OnRegionChangeComplete}>
+                onRegionChangeComplete={OnRegionChangeComplete}
+            >
                 {/* {getMarkerOrigen()}
                 {getMarkerFin()} */}
                 <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />

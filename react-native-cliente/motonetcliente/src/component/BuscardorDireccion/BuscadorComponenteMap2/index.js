@@ -8,9 +8,9 @@ import * as viajesActions from '../../../action/viajesActions'
 import Geolocation from '@react-native-community/geolocation';
 
 var secondTextInput;
-const valor_menor = -200;
 
 const BuscadorComponenteMap = (props) => {
+
 
     const [data, setData] = React.useState({
         dataUbicacion: false,
@@ -20,44 +20,6 @@ const BuscadorComponenteMap = (props) => {
         focusInput: false,
         ubicacion: props.state.viajesReducer.ubicacion
     })
-
-    const [isVisible, setIsVisible] = React.useState(false);
-    // const fadeAnim = useRef(new Animated.Value(valor_menor)).current;
-
-    // const fadeIn = () => {
-    //     Animated.timing(fadeAnim, {
-    //         toValue: 0,
-    //         duration: 500
-    //     }).start();
-    // };
-
-    // const fadeOut = () => {
-    //     Animated.timing(fadeAnim, {
-    //         toValue: valor_menor,
-    //         duration: 500,
-    //     }).start(() => {
-    //         if (fadeAnim._value < valor_menor + 100) {
-    //             if (isVisible) {
-    //                 setIsVisible(false);
-    //             }
-    //         }
-    //     });
-    // };
-
-    // if (props.ventanaSelect != "tipoDeViaje") {
-    //     if (isVisible == true) {
-    //         fadeOut();
-    //     }
-    // } else {
-    //     if (!isVisible) {
-    //         fadeIn();
-    //         setIsVisible(true)
-    //     }
-    // }
-    // if (!isVisible) {
-    //     return <View />
-    // }
-
 
     const actualizarUbicacion = () => {
         props.dispatch({
@@ -107,54 +69,58 @@ const BuscadorComponenteMap = (props) => {
                 alignItems: 'center',
                 // backgroundColor:"#ccc"
             }}>
-                <View style={{
-                    backgroundColor: "#fff",
+                <TouchableOpacity style={{
+                    // backgroundColor: "#fff",
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'row',
                     width: "90%",
-                    borderRadius: 20,
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                    borderRadius: 5,
                     height: 40,
                     marginBottom: 5
+                }} onPress={() => {
+                    props.state.viajesReducer.ubicacion.fin.estado = false
+                    props.state.viajesReducer.ubicacion.inicio.estado = true
+                    actualizarUbicacion()
                 }}>
                     <View style={{
-                        flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: "#f00",
-                        borderTopLeftRadius: 20,
-                        borderBottomLeftRadius: 20,
-                        height: "100%"
+                        width: 40,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor:"#ccc"
                     }}>
-                        <Text style={{ color: "#fff" }}>
-                            Inicio
-                        </Text>
+                        <Svg name={"MarkerW"}
+                            style={{
+                                width: 20,
+                                height: 20,
+                                fill: "#fff"
+                            }} />
                     </View>
-                    <View style={{
-                        width: "80%",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'row',
-                        height: "100%",
-                    }}>
-                        <TextInput style={{
-                            flex: 1,
-                            fontSize: 10,
-                            alignItems: 'center',
-                            height: "100%",
-                            paddingLeft: 10
-                        }}
-                            onFocus={() => {
-                                props.state.viajesReducer.ubicacion.fin.estado = false
-                                props.state.viajesReducer.ubicacion.inicio.estado = true
-                                actualizarUbicacion()
-                            }}
-                            placeholder={"Calle"}
-                            value={props.state.viajesReducer.ubicacion.inicio.value}
-                            onChangeText={(texto) => hanlechage(texto)}
-                        />
 
-                        {/* <TouchableOpacity style={{
+                    <Text style={{
+                        flex: 1,
+                        fontSize: 10,
+                        alignItems: 'center',
+                        height: "100%",
+                        fontSize: 13,
+                        color: "#fff",
+                        // paddingLeft: 10,
+                        // backgroundColor:"#ccc"
+                    }}
+                    // onFocus={() => {
+                    //     props.state.viajesReducer.ubicacion.fin.estado = false
+                    //     props.state.viajesReducer.ubicacion.inicio.estado = true
+                    //     actualizarUbicacion()
+                    // }}
+                    // placeholder={"Calle"}
+                    // value = {props.state.viajesReducer.ubicacion.inicio.value}
+                    onChangeText={(texto) => hanlechage(texto)}
+                    >
+                        {props.state.viajesReducer.ubicacion.inicio.value}
+                    </Text>
+                    {/* <TouchableOpacity style={{
                             marginEnd: 10,
                             marginStart: 10,
                         }}
@@ -164,8 +130,7 @@ const BuscadorComponenteMap = (props) => {
                                 props.state.viajesReducer.ubicacion.inicio.value = ""
                                 props.state.viajesReducer.ubicacion.inicio.data = false
                                 actualizarUbicacion()
-                            }}
-                        >
+                            }}>
                             <Svg name="Cerrar"
                                 style={{
                                     width: 20,
@@ -173,79 +138,53 @@ const BuscadorComponenteMap = (props) => {
                                     fill: "#000000"
                                 }} />
                         </TouchableOpacity> */}
-                    </View>
-                </View>
+                </TouchableOpacity>
 
-
-                <View style={{
-                    backgroundColor: "#fff",
+                <TouchableOpacity style={{
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'row',
                     width: "90%",
-                    borderRadius: 20,
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                    borderRadius: 5,
                     height: 40,
-                }}>
+                }} onPress={() => {
+                    props.state.viajesReducer.ubicacion.fin.estado = true
+                    props.state.viajesReducer.ubicacion.inicio.estado = false
+                    actualizarUbicacion()
+                    props.setVentanaBusqueda(true)
+                }} >
+                    <View style={{
+                        width: 40,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor:"#ccc"
+                    }}>
+                        <Svg name={"Pointer"}
+                            style={{
+                                width: 20,
+                                height: 20,
+                                fill: "#fff"
+                            }} />
+                    </View>
+
                     <View style={{
                         flex: 1,
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        backgroundColor: "#f00",
-                        borderTopLeftRadius: 20,
-                        borderBottomLeftRadius: 20,
-                        height: "100%"
-                    }}>
-                        <Text style={{ color: "#fff" }}>
-                            Fin
-                        </Text>
-                    </View>
-                    <View style={{
-                        width: "80%",
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        flexDirection: 'row',
+                        // alignItems: 'center',
+                        justifyContent: "center",
                         height: "100%",
                     }}>
-                        <TextInput style={{
-                            flex: 1,
-                            fontSize: 10,
-                            alignItems: 'center',
-                            height: "100%",
-                            paddingLeft: 10
-                        }}
-                            onFocus={() => {
-                                props.state.viajesReducer.ubicacion.fin.estado = true
-                                props.state.viajesReducer.ubicacion.inicio.estado = false
-                                actualizarUbicacion()
-                            }}
-                            placeholder={"Calle"}
-                            value={props.state.viajesReducer.ubicacion.fin.value}
-                            onChangeText={(texto) => hanlechage(texto)}
-                        />
-
-                        {/* <TouchableOpacity style={{
-                            marginEnd: 10,
-                            marginStart: 10,
-                        }}
-                            onPress={() => {
-                                props.state.viajesReducer.ubicacion.fin.estado = true
-                                props.state.viajesReducer.ubicacion.fin.data = ""
-                                props.state.viajesReducer.ubicacion.inicio.estado = false
-                                props.state.viajesReducer.ubicacion.fin.value = ""
-                                actualizarUbicacion()
-                            }}
-                        >
-                            <Svg name="Cerrar"
-                                style={{
-                                    width: 20,
-                                    height: 20,
-                                    fill: "#000000"
-                                }} />
-                        </TouchableOpacity> */}
+                        <Text style={{
+                            fontSize: 13,
+                            color: "#fff",
+                        }}>
+                            {props.state.viajesReducer.ubicacion.fin.value}
+                        </Text>
                     </View>
-                </View>
+                </TouchableOpacity>
                 {/* <ListaBusqueda onchage={hanlechageLista} /> */}
-            </View>
+            </View >
         )
     }
 
@@ -274,7 +213,6 @@ const BuscadorComponenteMap = (props) => {
         });
     }
 
-
     const hanlechage = (text) => {
         if (text.length > 5) {
             if (props.state.viajesReducer.ubicacion.inicio.estado) {
@@ -299,21 +237,9 @@ const BuscadorComponenteMap = (props) => {
     };
 
     return (
-        // <Animated.View style={{
-        //     width: "100%",
-        //     alignItems: 'center',
-        //     justifyContent: 'space-evenly',
-        //     position: "absolute",
-        //     top: fadeAnim,
-        //     flexDirection: 'column',
-        //     // height: 200,
-        //     marginTop: 50,
-        //     // backgroundColor: "#ccc"
-        // }}>
         <View>
             {buscarInputNuevo()}
         </View>
-        // </Animated.View>
     )
 }
 

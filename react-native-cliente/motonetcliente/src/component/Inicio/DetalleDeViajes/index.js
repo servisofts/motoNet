@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { ActivityIndicator, AsyncStorage, ScrollView, Text, TouchableOpacity, View, Animated, Easing } from 'react-native';
+import { ActivityIndicator, AsyncStorage, ScrollView, Text, TouchableOpacity, View, Animated, Easing, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../../Svg';
 
@@ -107,8 +107,23 @@ const DetalleDeViajes = (props) => {
 
         return (
             <View style={{
-                width: "90%",
+                width: "100%",
             }}>
+
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "space-between"
+                }}>
+                    <Text style={{
+                        fontSize: 15,
+                        fontWeight: "bold"
+                    }}>Efectivo</Text>
+                    <Text style={{
+                        fontSize: 15,
+                        fontWeight: "bold"
+                    }}>Bs. {totalViaje}</Text>
+                </View>
+                {/* <Text>TOTAL {totalViaje} bs.</Text> */}
 
                 <View style={{
                     flexDirection: "row",
@@ -133,20 +148,7 @@ const DetalleDeViajes = (props) => {
                 <Text>Monto por km * distancia {totalDistancia}</Text>
                 <Text>Monto por tiempo * duracion {totalTiempo}</Text>  */}
 
-                <View style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between"
-                }}>
-                    <Text style={{
-                        fontSize: 15,
-                        fontWeight: "bold"
-                    }}>TOTAL:</Text>
-                    <Text style={{
-                        fontSize: 15,
-                        fontWeight: "bold"
-                    }}>Bs. {totalViaje}</Text>
-                </View>
-                {/* <Text>TOTAL {totalViaje} bs.</Text> */}
+
             </View>
         )
     }
@@ -174,83 +176,99 @@ const DetalleDeViajes = (props) => {
         }}>
             <View style={{
                 width: "100%",
-                height: 300,
-                borderTopRightRadius: 30,
-                borderTopLeftRadius: 30,
+                // height: Dimensions.get('window').height * 0.3,
+                height: 250,
+                borderTopRightRadius: 20,
+                borderTopLeftRadius: 20,
                 backgroundColor: "#fff",
-                borderColor: "#ccc",
-                borderTopWidth: 2,
-                borderLeftWidth: 2,
-                borderRightWidth: 2,
+                // borderColor: "#ccc",
                 flex: 1,
             }}>
-                <View style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}>
-                    <Svg name="MarkerMoto"
-                        style={{
-                            width: 50,
-                            height: 50,
-                            fill: "#000"
-                        }} />
-                </View>
 
                 <View style={{
                     flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center"
+                    margin: 10,
                 }}>
-                    {getDetalleRuta()}
-                </View>
 
-                <View style={{
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                }}>
-                    {props.state.viajesReducer.estado == "cargando" ? (
-                        <View
-                            style={{
-                                height: 50,
-                                borderRadius: 2,
-                                width: "90%",
-                                backgroundColor: "red",
-                                borderColor: "#f00",
-                                borderWidth: 2,
-                                alignItems: "center",
+                    <View style={{
+                        flex: 1,
+                        // backgroundColor: "#ccc"
+                    }}>
+                        <Text>
+                            Confirme el viaje
+                    </Text>
+                        <View style={{
+                            flexDirection: "row",
+                        }}>
+
+                            <View style={{
+                                flex: 0.5,
                                 justifyContent: "center",
+                                // alignItems: "center",
                             }}>
-                            <ActivityIndicator color="#fff" size="small" />
-                        </View>
-                    ) : (
-                        <TouchableOpacity
-                            style={{
-                                height: 50,
-                                borderRadius: 2,
-                                width: "90%",
-                                backgroundColor: "red",
-                                borderColor: "#f00",
-                                borderWidth: 2,
-                                alignItems: "center",
+                                <Text>30 min Aprox</Text>
+                            </View>
+
+                            <View style={{
+                                flex: 0.5,
                                 justifyContent: "center",
-                            }}
-                            onPress={() => PedirViaje()}>
-                            <Text style={{
-                                fontSize: 15,
-                                fontWeight: "bold",
-                                color: "#fff",
+                                alignItems: "center",
                             }}>
-                                CONFIRMAR MOTONET
+                                {props.state.viajesReducer.estado == "cargando" ? (
+                                    <View
+                                        style={{
+                                            height: 50,
+                                            borderRadius: 2,
+                                            width: "90%",
+                                            backgroundColor: "red",
+                                            borderColor: "#f00",
+                                            borderWidth: 2,
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                        }}>
+                                        <ActivityIndicator color="#fff" size="small" />
+                                    </View>
+                                ) : (
+                                    <TouchableOpacity
+                                        style={{
+                                            height: 40,
+                                            borderRadius: 10,
+                                            width: 140,
+                                            backgroundColor: "red",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                        }}
+                                        onPress={() => PedirViaje()}>
+                                        <Text style={{
+                                            fontSize: 15,
+                                            fontWeight: "bold",
+                                            color: "#fff",
+                                        }}>
+                                            Confirmar
                             </Text>
-                        </TouchableOpacity>
-                    )
-                    }
+                                    </TouchableOpacity>
+                                )
+                                }
+                            </View>
+
+                        </View>
+
+                    </View>
+
+                    <View style={{
+                        flex: 1,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor: "#ccc"
+                    }}>
+                        {getDetalleRuta()}
+                    </View>
+
                 </View>
+
             </View>
 
-            <TouchableOpacity style={{
+            {/* <TouchableOpacity style={{
                 height: 50,
                 width: 50,
                 alignItems: "center",
@@ -269,8 +287,9 @@ const DetalleDeViajes = (props) => {
                         height: 30,
                         fill: "#000"
                     }} />
-            </TouchableOpacity>
-        </Animated.View>
+            </TouchableOpacity> */}
+
+        </Animated.View >
     )
 }
 const initStates = (state) => {

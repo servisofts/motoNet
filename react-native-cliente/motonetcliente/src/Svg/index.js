@@ -40,6 +40,12 @@ import Mensajeria from '../img/mensajeria.svg';
 import Pedidos from '../img/pedidos.svg';
 import Transporte from '../img/transporte.svg';
 import STheme from '../STheme';
+import Pointer from '../img/pointer.svg';
+import MarkerW from '../img/markerW.svg';
+import Moto from '../img/moto.svg';
+import Torito from '../img/torito.svg';
+import Reloj from '../img/reloj.svg';
+import Arrow from '../img/arrow.svg';
 
 const Svg = (propsa) => {
     var props = { ...propsa }
@@ -131,6 +137,18 @@ const Svg = (propsa) => {
             return <Pedidos style={props.style} />
         case "transporte":
             return <Transporte style={props.style} />
+        case "Pointer":
+            return <Pointer style={props.style} />
+        case "MarkerW":
+            return <MarkerW style={props.style} />
+        case "Moto":
+            return <Moto style={props.style} />
+        case "Torito":
+            return <Torito style={props.style} />
+        case "Reloj":
+            return <Reloj style={props.style} />
+        case "Arrow":
+            return <Arrow style={props.style} />
         default: return <Text>Not Found</Text>
     }
 }

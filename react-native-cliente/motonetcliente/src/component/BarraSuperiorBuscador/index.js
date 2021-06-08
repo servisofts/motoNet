@@ -70,9 +70,9 @@ class BarraSuperiorBuscador extends Component {
                             height: "100%",
                             justifyContent: "center",
                             alignItems: "center",
-                        }} 
-                        activeOpacity={0.9} 
-                        onPress={this.props.goBack}>
+                        }}
+                            activeOpacity={0.9}
+                            onPress={this.props.goBack}>
                             {!this.props.goBack ? <View /> : <Svg resource={require('../../img/arrow.svg')}
                                 style={{
                                     width: "50%",
@@ -97,9 +97,9 @@ class BarraSuperiorBuscador extends Component {
                     <View style={{
                         justifyContent: "center",
                         flex: 1,
-                        // backgroundColor: "#fff"
+                        backgroundColor: STheme.color.background
                     }}>
-                        <BuscadorComponenteMap2 navigation={this.props.navigation} />
+                        <BuscadorComponenteMap2 setVentanaBusqueda={this.props.setVentanaBusqueda} navigation={this.props.navigation} />
                     </View>
 
                 </View>
