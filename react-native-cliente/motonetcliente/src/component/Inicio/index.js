@@ -22,12 +22,14 @@ const Inicio = (props) => {
         if (ventanaBusqueda == false) {
             return <View />
         } else {
-            console.log("entroo")
             return (
                 <ListaBusqueda ventanaBusqueda={ventanaBusqueda} setVentanaBusqueda={setVentanaBusqueda} />
             )
         }
     }
+
+   
+
 
     return (
         <View style={{
@@ -38,7 +40,7 @@ const Inicio = (props) => {
             <View style={{
                 width: "100%",
                 height: 160,
-                backgroundColor: "#fff"
+                backgroundColor: "#fff",
             }}>
                 <BarraSuperiorBuscador goBack={() => { props.navigation.goBack(); }} ventanaBusqueda={ventanaBusqueda} setVentanaBusqueda={setVentanaBusqueda} navigation={props.navigation} />
 
@@ -50,7 +52,7 @@ const Inicio = (props) => {
                 justifyContent: "center",
                 alignItems: "center",
             }}>
-                <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+                <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} in/>
                 <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
                 {/* <BuscadorComponenteMap2 ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} /> */}
                 <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
@@ -58,6 +60,7 @@ const Inicio = (props) => {
             </View>
 
             {VentaBusqueda()}
+
 
         </View>
     )

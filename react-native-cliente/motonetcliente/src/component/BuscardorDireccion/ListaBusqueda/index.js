@@ -7,7 +7,6 @@ import Geolocation from '@react-native-community/geolocation';
 
 const ListaBusqueda = (props) => {
 
-
     const [data, setData] = React.useState({
         dataUbicacion: false,
         mostrarTexto: false,
@@ -16,7 +15,6 @@ const ListaBusqueda = (props) => {
         focusInput: false,
         ubicacion: props.state.viajesReducer.ubicacion
     })
-
 
     const [mostrar, setMostrar] = React.useState({
         textOcultar: "Ocultar Lista",
@@ -47,20 +45,18 @@ const ListaBusqueda = (props) => {
                         <>
                             <TouchableOpacity
                                 onPress={() => {
-                                    props.onchage(obj)
+                                    console.log(obj.place_id)
+
+                                    getDetail(obj.place_id)
                                 }}
                                 style={{
                                     width: "95%",
                                     height: 60,
                                     flex: 1,
-                                    // backgroundColor: "#1f84f5",
-                                    // borderRadius: 20,
                                     margin: 5,
-                                    // padding: 10,
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     flexDirection: 'row',
-
                                 }}>
                                 <View style={{
                                     width: 50,
@@ -124,6 +120,39 @@ const ListaBusqueda = (props) => {
                 estado: "cargando"
             }, true);
         });
+    }
+    // if (props.state.locationGoogleReducer.estado == "cargando") {
+    //     return (
+    //         <View><Text>dsfdsf</Text></View>
+    //     )
+    // }
+    if (props.state.locationGoogleReducer.estado == "exito" && props.state.locationGoogleReducer.type == "detail") {
+        let datos = props.state.locationGoogleReducer.datosDetail
+        var mapa = props.state.locationGoogleReducer.mapa_instance;
+        if (mapa) {
+            mapa.animateToRegion({
+                latitude: datos.latitude,
+                longitude: datos.longitude,
+                latitudeDelta: 0.08,
+                longitudeDelta: 0.08,
+            }, 1000);
+        }
+        props.state.locationGoogleReducer.estado = false
+        props.setVentanaBusqueda(false)
+
+    }
+
+    const getDetail = (place_key) => {
+
+
+
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "locationGoogle",
+            type: "detail",
+            place_id: place_key,
+            estado: "cargando"
+        }, true);
+
     }
 
     const hanlechage = (text) => {
@@ -234,6 +263,60 @@ const ListaBusqueda = (props) => {
 
             <ScrollView>
                 {ModeloLista()}
+
+                <View style={{
+                    flex: 1,
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                }}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            // props.onchage(obj)
+                        }}
+                        style={{
+                            width: "95%",
+                            height: 60,
+                            flex: 1,
+                            margin: 5,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'row',
+                        }}>
+                        <View style={{
+                            width: 50,
+                            height: "100%",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            // backgroundColor: "#000"
+                        }}>
+                            <View style={{
+                                width: 40,
+                                height: 40,
+                                backgroundColor: "#e9eaee",
+                                borderRadius: 100,
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}>
+                                <Svg name="Pointer"
+                                    style={{
+                                        width: 30,
+                                        height: 30,
+                                        fill: "#484848"
+                                    }} />
+                            </View>
+                        </View>
+                        <View style={{
+                            flex: 1,
+                        }}>
+                            <Text style={{
+                                color: "#000",
+                                fontSize: 13,
+                                margin: 5,
+                                fontWeight: "bold"
+                            }}>Ingrese ubicación en el mapa</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
             </ScrollView>
 
         </View>

@@ -18,7 +18,7 @@ class ViajeEsperaPage extends Component {
         };
         var contador = 1
         if (this.props.state.viajesReducer.data) {
-            console.log(this.props.state.viajesReducer.data)
+            // console.log(this.props.state.viajesReducer.data)
             this.props.state.viajesReducer.data.destinos.map((data, key) => {
                 if (contador === 1) {
                     this.state.obj["inicio"] = data

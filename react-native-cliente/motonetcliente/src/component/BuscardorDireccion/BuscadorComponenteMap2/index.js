@@ -11,7 +11,6 @@ var secondTextInput;
 
 const BuscadorComponenteMap = (props) => {
 
-
     const [data, setData] = React.useState({
         dataUbicacion: false,
         mostrarTexto: false,
@@ -211,30 +210,7 @@ const BuscadorComponenteMap = (props) => {
                 estado: "cargando"
             }, true);
         });
-    }
-
-    const hanlechage = (text) => {
-        if (text.length > 5) {
-            if (props.state.viajesReducer.ubicacion.inicio.estado) {
-                props.state.viajesReducer.ubicacion.inicio.value = text
-            }
-            if (props.state.viajesReducer.ubicacion.fin.estado) {
-                props.state.viajesReducer.ubicacion.fin.value = text
-            }
-            actualizarUbicacion()
-            peticion(text)
-        }
-        if (props.state.viajesReducer.ubicacion.inicio.estado) {
-            props.state.viajesReducer.ubicacion.inicio.value = text
-
-        }
-        if (props.state.viajesReducer.ubicacion.fin.estado) {
-            props.state.viajesReducer.ubicacion.fin.value = text
-
-        }
-        actualizarUbicacion()
-        return <View />
-    };
+    }  
 
     return (
         <View>
