@@ -1,20 +1,36 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../../Svg';
+import STheme from '../../../STheme';
+import Geolocation from '@react-native-community/geolocation';
+
 const ListaBusqueda = (props) => {
+
+    const [data, setData] = React.useState({
+        dataUbicacion: false,
+        mostrarTexto: false,
+        ubicacionActual: props.ubicacionActual || false,
+        repuestaInput: false,
+        focusInput: false,
+        ubicacion: props.state.viajesReducer.ubicacion
+    })
+
     const [mostrar, setMostrar] = React.useState({
         textOcultar: "Ocultar Lista",
         textMostrar: "Mostrar Lista",
         estado: true
     })
 
-    if (!props.state.locationGoogleMapReducer.listaBusqueda) {
-        return <View />
-    }
+    // if (!props.state.locationGoogleMapReducer.listaBusqueda) {
+    //     return <View />
+    // }
+
     var lista = props.state.locationGoogleMapReducer.listaBusqueda
+
     const ModeloLista = () => {
-        if (!mostrar.estado) {
+
+        if (!lista) {
             return <View />
         }
 
@@ -26,43 +42,150 @@ const ListaBusqueda = (props) => {
             }}>
                 {lista.map((obj) => {
                     return (
-                        <TouchableOpacity
-                            onPress={() => {
-                                props.onchage(obj)
-                            }}
-                            style={{
-                                width: "100%",
-                                height: 50,
-                                flex: 1,
-                                backgroundColor: "#1f84f5",
-                                borderRadius: 20,
-                                margin: 5,
-                                padding: 10,
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                flexDirection: 'row',
+                        <>
+                            <TouchableOpacity
+                                onPress={() => {
+                                    console.log(obj.place_id)
 
-                            }}>
-                            <View style={{ flex: 0.2, }}>
-                                <Svg name="ubicacion"
-                                    style={{
-                                        width: 25,
-                                        height: 25,
-                                        fill: "#ffffff"
+                                    getDetail(obj.place_id)
+                                }}
+                                style={{
+                                    width: "95%",
+                                    height: 60,
+                                    flex: 1,
+                                    margin: 5,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    flexDirection: 'row',
+                                }}>
+                                <View style={{
+                                    width: 50,
+                                    height: "100%",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    // backgroundColor: "#000"
+                                }}>
+                                    <Svg name="Reloj"
+                                        style={{
+                                            width: 40,
+                                            height: 40,
+                                            fill: "#ffffff"
+                                        }} />
+                                </View>
 
-                                    }} />
-                            </View>
-                            <Text style={{
-                                color: "#ffffff",
-                                fontSize: 12,
-                                flex: 2,
-                                margin: 5,
-                            }}>{obj.direccion}</Text>
-                        </TouchableOpacity>
+                                <View style={{
+                                    flex: 1,
+                                }}>
+                                    <View style={{
+                                        flex: 1,
+                                        justifyContent: "center",
+                                    }}>
+                                        <Text style={{
+                                            color: "#000",
+                                            fontSize: 13,
+                                            margin: 5,
+                                        }}>{obj.direccion}</Text>
+                                    </View>
+
+                                    <View style={{
+                                        height: 1.2,
+                                        width: "96%",
+                                        backgroundColor: "#a4a4a4"
+                                    }}>
+                                    </View>
+                                </View>
+                            </TouchableOpacity>
+                        </>
                     )
                 })}
             </View>
         )
+    }
+
+    const peticion = (text) => {
+        Geolocation.getCurrentPosition((info) => {
+            data.ubicacionActual = {
+                latitude: info.coords.latitude,
+                longitude: info.coords.longitude
+            }
+            var direccions = false
+
+            props.state.socketClienteReducer.sessiones["motonet"].send({
+                component: "locationGoogle",
+                type: "autoComplete",
+                data: {
+                    direccion: text,
+                    ...data.ubicacionActual
+                },
+                estado: "cargando"
+            }, true);
+        });
+    }
+    // if (props.state.locationGoogleReducer.estado == "cargando") {
+    //     return (
+    //         <View><Text>dsfdsf</Text></View>
+    //     )
+    // }
+    if (props.state.locationGoogleReducer.estado == "exito" && props.state.locationGoogleReducer.type == "detail") {
+        let datos = props.state.locationGoogleReducer.datosDetail
+        var mapa = props.state.locationGoogleReducer.mapa_instance;
+        if (mapa) {
+            mapa.animateToRegion({
+                latitude: datos.latitude,
+                longitude: datos.longitude,
+                latitudeDelta: 0.08,
+                longitudeDelta: 0.08,
+            }, 1000);
+        }
+        props.state.locationGoogleReducer.estado = false
+        props.setVentanaBusqueda(false)
+
+    }
+
+    const getDetail = (place_key) => {
+
+
+
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "locationGoogle",
+            type: "detail",
+            place_id: place_key,
+            estado: "cargando"
+        }, true);
+
+    }
+
+    const hanlechage = (text) => {
+        if (text.length > 5) {
+            if (props.state.viajesReducer.ubicacion.inicio.estado) {
+                props.state.viajesReducer.ubicacion.inicio.value = text
+            }
+            if (props.state.viajesReducer.ubicacion.fin.estado) {
+                props.state.viajesReducer.ubicacion.fin.value = text
+            }
+            actualizarUbicacion()
+            peticion(text)
+        }
+        if (props.state.viajesReducer.ubicacion.inicio.estado) {
+            props.state.viajesReducer.ubicacion.inicio.value = text
+
+        }
+        if (props.state.viajesReducer.ubicacion.fin.estado) {
+            props.state.viajesReducer.ubicacion.fin.value = text
+
+        }
+        actualizarUbicacion()
+        return <View />
+    };
+
+    const actualizarUbicacion = () => {
+        props.dispatch({
+            component: "viaje",
+            type: "actualizarUbicacion",
+            data: props.state.viajesReducer.ubicacion,
+            estado: "exito"
+        })
+        return <View />
     }
 
     const repuestaText = () => {
@@ -71,41 +194,130 @@ const ListaBusqueda = (props) => {
         }
         return mostrar.textMostrar
     }
+
     return (
-        <View
-            style={{
-                flex: 1,
-                width: "80%",
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 20,
-                position: 'absolute',
-                top: 70,
+        <View style={{
+            flex: 1,
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            backgroundColor: "#fff"
+        }}>
+
+            <View style={{
+                height: 80,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: STheme.color.background
             }}>
-            <TouchableOpacity
-                onPress={() => {
-                    if (!mostrar.estado) {
-                        mostrar.estado = true
-                        setMostrar({ ...mostrar })
-                        return <View />
-                    }
-                    mostrar.estado = false
-                    setMostrar({ ...mostrar })
-                }}
-                style={{
-                    width: 100,
-                    height: 35,
-                    borderRadius: 20,
-                    backgroundColor: "#1f84f5",
+
+                <View style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    width: "90%",
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                    borderRadius: 5,
+                    height: 40,
+                }}>
+                    <TouchableOpacity style={{
+                        width: 50,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor:"#ccc"
+                    }} onPress={() => {
+                        props.setVentanaBusqueda(false)
+                    }}>
+                        <Svg name={"Arrow"}
+                            style={{
+                                width: 20,
+                                height: 20,
+                                fill: "#fff"
+                            }} />
+                    </TouchableOpacity>
+
+                    {/* </View> */}
+
+                    <TextInput style={{
+                        flex: 1,
+                        fontSize: 10,
+                        alignItems: 'center',
+                        height: "100%",
+                        fontSize: 13,
+                        color: "#fff",
+                        // paddingLeft: 10,
+                        // backgroundColor:"#ccc"
+                    }}
+                        onFocus={() => {
+                            props.state.viajesReducer.ubicacion.fin.estado = false
+                            props.state.viajesReducer.ubicacion.inicio.estado = true
+                            actualizarUbicacion()
+                        }}
+                        placeholder={"Calle"}
+                        // value={props.state.viajesReducer.ubicacion.inicio.value}
+                        onChangeText={(texto) => hanlechage(texto)}
+                    />
+                </View>
+            </View>
+
+            <ScrollView>
+                {ModeloLista()}
+
+                <View style={{
+                    flex: 1,
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
-                <Text style={{ color: "#fff" }}>
-                    {repuestaText()}
-                </Text>
-            </TouchableOpacity>
-            {ModeloLista()}
-
+                    <TouchableOpacity
+                        onPress={() => {
+                            // props.onchage(obj)
+                        }}
+                        style={{
+                            width: "95%",
+                            height: 60,
+                            flex: 1,
+                            margin: 5,
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            flexDirection: 'row',
+                        }}>
+                        <View style={{
+                            width: 50,
+                            height: "100%",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            // backgroundColor: "#000"
+                        }}>
+                            <View style={{
+                                width: 40,
+                                height: 40,
+                                backgroundColor: "#e9eaee",
+                                borderRadius: 100,
+                                justifyContent: "center",
+                                alignItems: "center"
+                            }}>
+                                <Svg name="Pointer"
+                                    style={{
+                                        width: 30,
+                                        height: 30,
+                                        fill: "#484848"
+                                    }} />
+                            </View>
+                        </View>
+                        <View style={{
+                            flex: 1,
+                        }}>
+                            <Text style={{
+                                color: "#000",
+                                fontSize: 13,
+                                margin: 5,
+                                fontWeight: "bold"
+                            }}>Ingrese ubicación en el mapa</Text>
+                        </View>
+                    </TouchableOpacity>
+                </View>
+            </ScrollView>
 
         </View>
     )

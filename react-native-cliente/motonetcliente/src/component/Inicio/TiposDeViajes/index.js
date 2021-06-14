@@ -1,8 +1,13 @@
 import React from 'react';
 import { ActivityIndicator, AsyncStorage, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
+import Svg from '../../../Svg';
+import STheme from '../../../STheme';
 
 const TiposDeViajes = (props) => {
+
+    const [Obj, setObj] = React.useState(false)
+    const [Select, setSelect] = React.useState("Moto")
 
     if (props.ventanaSelect != "tipoDeViaje") {
         return <View />
@@ -21,7 +26,7 @@ const TiposDeViajes = (props) => {
         return <View />
     }
 
-    const EnviarDetalleViaje = (objTipoViaje) => {
+    const EnviarDetalleViaje = () => {
         var exito = true
         var destino = []
         var contador = 1
@@ -41,13 +46,13 @@ const TiposDeViajes = (props) => {
         })
 
         if (exito) {
-            props.state.viajesReducer.key_tipo_viaje = objTipoViaje.key;
+            props.state.viajesReducer.key_tipo_viaje = Obj.key;
             //props.state.locationGoogleMapReducer.route = false;
             props.dispatch({
-                component:"locationGoogle",
-                type:"route",
-                estado:"exito",
-                data:false
+                component: "locationGoogle",
+                type: "route",
+                estado: "exito",
+                data: false
             })
             console.log("entro al renderrr.............")
             props.setVentanaSelect("DetalleDeViaje")
@@ -56,53 +61,160 @@ const TiposDeViajes = (props) => {
         alert("falta rellenar datos en la carrera")
     }
 
+    const mostrarPedido = (obj, svg) => {
+        if (obj.descripcion == Select) {
 
-    const ListaTiposDeViajes = () => {
-        return Object.keys(props.state.tipoViajesReducer.data).map((key) => {
-            var obj = props.state.tipoViajesReducer.data[key];
+            if (!Obj) {
+                setObj(obj)
+            }
+
             return (
                 <TouchableOpacity style={{
-                    height: 100,
+                    height: 80,
                     borderRadius: 20,
                     width: 150,
-                    marginRight: 10,
-                    marginLeft: 10,
-                    backgroundColor: "#fff",
                     borderColor: "red",
                     borderWidth: 1,
                     alignItems: "center",
                     justifyContent: "center"
-                }}
-                    onPress={() => {
-                        EnviarDetalleViaje(obj)
-                    }}
-                >
-                    <Text>
-                        {obj.descripcion}
-                    </Text>
+                }}>
+                    <View style={{
+                        // width: 90,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor: "#ccc",
+                        flexDirection: "row"
+                    }}>
+                        <Svg name={svg}
+                            style={{
+                                width: 50,
+                                height: 50,
+                                // fill: "#000"
+                            }} />
+                        <Text style={{
+                            color: "#000",
+                            fontSize: 15,
+                            fontWeight: "bold"
+                        }}>
+                            {obj.descripcion}
+                        </Text>
+                    </View>
                 </TouchableOpacity>
             )
+        } else {
+            return (
+                <TouchableOpacity style={{
+                    height: 80,
+                    borderRadius: 20,
+                    width: 150,
+                    alignItems: "center",
+                    justifyContent: "center"
+                }} onPress={() => {
+                    setObj(obj)
+                    setSelect(obj.descripcion)
+                }}>
+                    <View style={{
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor: "#ccc",
+                        flexDirection: "row"
+                    }}>
+                        <Svg name={svg}
+                            style={{
+                                width: 50,
+                                height: 50,
+                            }} />
+                        <Text style={{
+                            color: "#000",
+                            fontSize: 15,
+                            fontWeight: "bold"
+                        }}>
+                            {obj.descripcion}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+            )
+        }
+
+    }
+
+
+    const ListaTiposDeViajes = () => {
+        return Object.keys(props.state.tipoViajesReducer.data).map((key) => {
+            var obj = props.state.tipoViajesReducer.data[key];
+            if (obj.descripcion === "Moto") {
+                return (
+                    <>
+                        {mostrarPedido(obj, "Moto")}
+                    </>
+                )
+            }
+            if (obj.descripcion === "Torito") {
+                return (
+                    <>
+                        { mostrarPedido(obj, "Torito")}
+                    </>
+                )
+            }
         })
     }
 
     return (
         <View style={{
             position: "absolute",
-            bottom: 10,
+            bottom: 0,
             width: "100%",
-            alignItems: "center"
+            alignItems: "center",
+            backgroundColor: "#fff"
         }}>
             <View style={{
                 marginTop: 10,
-                flexDirection: "row",
-                justifyContent: "space-evenly",
+                // flexDirection: "row",
+                // justifyContent: "space-evenly",
                 width: "100%",
             }}>
-                <ScrollView horizontal={true} contentContainerStyle={{flexGrow:1, justifyContent:"center"}} style={{
+                {/* <ScrollView horizontal={true} contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }} style={{
                     flex: 1,
+                }}> */}
+                {/* {ListaTiposDeViajes()} */}
+                {/* </ScrollView> */}
+                <View style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-around"
                 }}>
                     {ListaTiposDeViajes()}
-                </ScrollView>
+                </View>
+
+                <View style={{
+                    width: "100%",
+                    // backgroundColor: "#ccc",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: 70
+                }}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            EnviarDetalleViaje()
+                        }}
+                        style={{
+                            width: "90%",
+                            height: 50,
+                            // position: "absolute",
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            backgroundColor: "#f00",
+                            borderRadius: 5
+                        }}>
+                        <Text style={{
+                            fontSize: 18,
+                            color: STheme.color.text
+                        }}>
+                            Pedir ahora
+                    </Text>
+                    </TouchableOpacity>
+                </View>
+
             </View>
         </View>
     )

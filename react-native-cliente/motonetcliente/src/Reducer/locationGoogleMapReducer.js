@@ -69,6 +69,5 @@ const autoComplete = (state, action) => {
     if (action.estado === "exito") {
         state.listaBusqueda = action.data
         state.escribir = true
-
     }
 }

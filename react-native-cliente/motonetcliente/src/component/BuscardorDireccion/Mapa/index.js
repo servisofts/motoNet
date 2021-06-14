@@ -59,10 +59,19 @@ const Mapa = (props) => {
         // positionActual();
     });
 
+
+    // const positionGetLista = () => {
+    //     let region = {
+    //         latitude: -17.78439,
+    //         longitude: -63.14317,
+    //         latitudeDelta: 0.08,
+    //         longitudeDelta: 0.08,
+    //     }
+    //     mapa.animateToRegion(region, 1500);
+    // }
+
     const OnRegionChangeComplete = (region) => {
-
-        console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTPO SAFKJSAIFJASFJOASJFOASJFOASJFAS")
-
+        // console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTO")
         props.state.socketClienteReducer.sessiones["motonet"].send({
             component: "locationGoogle",
             type: "geocode",
@@ -74,30 +83,31 @@ const Mapa = (props) => {
 
     return (
         <View style={{ width: "100%", height: "100%" }}>
-            < MapView
+            <MapView
                 style={{
                     flex: 1,
                     width: '100%',
                     height: "100%",
                 }}
-                ref={map => { mapa = map }}
+                ref={map => {
+                    mapa = map;
+                    props.state.locationGoogleReducer.mapa_instance = map;
+                }}
                 showsUserLocation={true}
-                initialRegion={data.region}
+                initialRegion={props.state.locationGoogleReducer.region}
                 onRegionChangeComplete={OnRegionChangeComplete}>
-                {/* {getMarkerOrigen()}
-                {getMarkerFin()} */}
                 <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
-
-            </MapView >
-            {/* <TouchableOpacity
+            </MapView>
+            <TouchableOpacity
                 style={{
                     position: "absolute",
                     bottom: 200,
                     right: 10
                 }}
                 onPress={() => {
-                    data.region = { isReder: false };
-                    setdata({ ...data })
+                    // data.region = { isReder: false };
+                    // setdata({ ...data })
+                    positionGetLista()
                     return <View />
                 }}
             >
@@ -107,10 +117,11 @@ const Mapa = (props) => {
                         height: 50,
                         fill: "#f00"
                     }} />
-            </TouchableOpacity> */}
+            </TouchableOpacity>
         </View>
     )
 }
+
 
 const initStates = (state) => {
     return { state }
