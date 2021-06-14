@@ -7,6 +7,7 @@ import BottomContent from '../../component/BottomContent';
 import SSCrollView from '../../component/SScrollView';
 import STextImput from '../../component/STextImput';
 import STheme from '../../STheme';
+import Productos from './Productos';
 
 class PedidosRegistroPage extends Component {
     static navigationOptions = {
@@ -30,7 +31,8 @@ class PedidosRegistroPage extends Component {
                 nota: {
                     label: "Nota",
                     placeholder: "Nota",
-                    type: "text"
+                    type: "textarea",
+                    height: 120,
                 },
             }
         };
@@ -38,7 +40,7 @@ class PedidosRegistroPage extends Component {
 
     getInput(name) {
         return (<View style={{
-            marginBottom: 16,
+            marginBottom: 8,
         }}>
             <STextImput theme={"2"} {...this.state.datos[name]} ref={(ref) => this._ref[name] = ref} />
         </View>)
@@ -63,8 +65,8 @@ class PedidosRegistroPage extends Component {
                             width: "90%"
                         }}>
                             <Text style={{
-                                marginTop: 16,
-                                marginBottom: 16,
+                                marginTop: 8,
+                                marginBottom: 8,
                                 fontSize: 16,
                                 fontWeight: "bold",
                                 color: STheme.color.textb
@@ -72,15 +74,9 @@ class PedidosRegistroPage extends Component {
                             {this.getInput("nombre")}
                             {this.getInput("telefono")}
                             {this.getInput("nota")}
-                            <Text style={{
-                                marginTop: 16,
-                                marginBottom: 16,
-                                fontSize: 16,
-                                fontWeight: "600",
-                                color: STheme.color.textb
-                            }}>¿Que necesitas que te llevemos?</Text>
+                            <Productos />
                         </View>
-                        <BottomContent>
+                        {/* <BottomContent>
                             <Boton1 type={"1"}
                                 label={"Registrarse"}
                                 cargando={this.props.state.usuarioReducer.estado == "cargando"}
@@ -91,7 +87,7 @@ class PedidosRegistroPage extends Component {
                                     })
                                 }}
                             />
-                        </BottomContent>
+                        </BottomContent> */}
                     </View>
                 </SSCrollView>
             </View>

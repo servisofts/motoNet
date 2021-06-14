@@ -26,6 +26,7 @@ export default class STextImput extends Component<tprops> {
                     labelColor: STheme.color.textb,
                     boderColor: STheme.color.textb,
                     placeholder: STheme.color.textb,
+                    color: STheme.color.textb
                 }
                 return;
             default:
@@ -33,6 +34,7 @@ export default class STextImput extends Component<tprops> {
                     labelColor: STheme.color.text,
                     boderColor: STheme.color.text,
                     placeholder: STheme.color.placeholder,
+                    color: STheme.color.text
                 }
                 return;
         }
@@ -56,6 +58,16 @@ export default class STextImput extends Component<tprops> {
             return false;
         }
         return this.state.value ? this.state.isSecure : false
+    }
+    getTextArea() {
+        if (this.props.type != "textarea") {
+            return false;
+        }
+        return {
+            textAlignVertical: "top",
+            multiline: true,
+            numberOfLines: 5,
+        }
     }
     getVerPass() {
         if (this.props.type != "password") {
@@ -86,24 +98,32 @@ export default class STextImput extends Component<tprops> {
 
         </TouchableOpacity>
     }
+    getLabel() {
+        if (!this.props.label) return <View />
+        return (<Text style={{
+            color: this.theme.labelColor,
+            height: 25,
+        }}>{this.props.label + (this.state.error ? "**" : "")}</Text>)
+    }
     getImput({ }) {
         return (
             <View style={{
                 width: "100%",
             }}>
-                <Text style={{
-                    color: this.theme.labelColor,
-                    height: 25,
-                }}>{this.props.label + (this.state.error ? "**" : "")}</Text>
+
+                {this.getLabel()}
                 <View>
                     <TextInput style={{
                         width: "100%",
-                        height: 50,
+                        height: this.props.height ? this.props.height : 50,
                         borderWidth: 1,
                         borderColor: this.theme.boderColor,
                         borderRadius: 4,
                         paddingStart: 8,
                     }}
+
+                        {...this.getTextArea()}
+
                         value={this.state.value}
                         onChangeText={(text) => {
                             this.setState({ value: text });
@@ -111,7 +131,7 @@ export default class STextImput extends Component<tprops> {
                         secureTextEntry={this.getIsSecure()}
                         placeholder={this.props.placeholder}
                         placeholderTextColor={this.theme.placeholder}
-                        color={STheme.color.text}
+                        color={this.theme.color}
                         autoCapitalize='none'
                     />
                     {this.getVerPass()}

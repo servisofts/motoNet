@@ -20,6 +20,12 @@ const TYPES = {
     "3": {
         backgroundColor: "transparent",
         color: STheme.color.text
+    },
+    "4": {
+        backgroundColor: "transparent",
+        color: STheme.color.background,
+        borderWidth: 1,
+        borderColor: STheme.color.background,
     }
 }
 export default class Boton1 extends Component<tprops> {
@@ -48,6 +54,7 @@ export default class Boton1 extends Component<tprops> {
                 justifyContent: "center",
                 alignItems: "center",
                 borderRadius: 4,
+                ...this.type
             }} onPress={() => {
                 if (this.props.cargando) return;
                 if (this.props.onPress) this.props.onPress()
