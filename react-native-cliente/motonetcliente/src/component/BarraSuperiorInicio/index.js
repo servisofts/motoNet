@@ -128,7 +128,12 @@ class BarraSuperiorInicio extends Component {
                             // fontFamily:"myFont"
                         }}>{"¿ Como podemos ayudarte hoy ?"}</Text>
                     </View>
-
+                    <View style={{
+                        width: 45,
+                        height: "80%",
+                        justifyContent: "center",
+                        alignItems: "center",
+                    }}></View>
 
                 </View>
 

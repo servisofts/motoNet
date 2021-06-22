@@ -46,7 +46,7 @@ class ServicioPage extends Component {
                 nameSvg: "pedidos"
             },
             {
-                page: "InicioPage",
+                page: "MensajeriaRegistroPage",
                 nombreServicio: "Mensajería",
                 detalle: "Servicio de mensajería",
                 nameSvg: "mensajeria"
@@ -98,7 +98,7 @@ class ServicioPage extends Component {
                         </View>
                     </SSCrollView>
                 </View>
-
+                            
                 <NaviDrawer navigation={this.props.navigation} />
             </View>
         );

@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { ActivityIndicator, AsyncStorage, ScrollView, Text, TouchableOpacity, View, Animated, Easing, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
+import STheme from '../../../STheme';
 import Svg from '../../../Svg';
 
 const valor_menor = -380;
@@ -111,16 +112,17 @@ const DetalleDeViajes = (props) => {
             }}>
 
                 <View style={{
+                    width: 140,
                     flexDirection: "row",
                     justifyContent: "space-between"
                 }}>
                     <Text style={{
-                        fontSize: 15,
-                        fontWeight: "bold"
+                        fontSize: 14,
+                        color: STheme.color.textb
                     }}>Efectivo</Text>
                     <Text style={{
-                        fontSize: 15,
-                        fontWeight: "bold"
+                        fontSize: 12,
+                        color: STheme.color.textb
                     }}>Bs. {totalViaje}</Text>
                 </View>
                 {/* <Text>TOTAL {totalViaje} bs.</Text> */}
@@ -131,12 +133,12 @@ const DetalleDeViajes = (props) => {
                     marginBottom: 20
                 }}>
                     <Text style={{
-                        fontSize: 15,
-                        fontWeight: "bold"
-                    }}>TIPO DE VIAJE:</Text>
+                        fontSize: 12,
+                        color: STheme.color.textb
+                    }}>Tipo de pago</Text>
                     <Text style={{
-                        fontSize: 15,
-                        fontWeight: "bold"
+                        fontSize: 12,
+                        color: STheme.color.textb
                     }}>{TipoViaje.descripcion}</Text>
                 </View>
 
@@ -194,20 +196,35 @@ const DetalleDeViajes = (props) => {
                         flex: 1,
                         // backgroundColor: "#ccc"
                     }}>
-                        <Text>
+                        <Text style={{
+                            color: STheme.color.textb,
+                            fontSize: 14,
+
+                        }}>
                             Confirme el viaje
-                    </Text>
+                        </Text>
                         <View style={{
                             flexDirection: "row",
                         }}>
 
                             <View style={{
-                                flex: 0.5,
+                                flex: 1,
                                 justifyContent: "center",
                                 // alignItems: "center",
                             }}>
-                                <Text>30 min Aprox</Text>
+                                <Text style={{
+                                    color: STheme.color.textb,
+                                    fontSize: 16,
+                                    fontWeight: "bold"
+                                }}>30 min Aprox.</Text>
+                                <Text style={{
+                                    color: STheme.color.textb,
+                                    fontSize: 12,
+                                }}>
+                                    22 min tiempo perdido
+                                </Text>
                             </View>
+
 
                             <View style={{
                                 flex: 0.5,
@@ -232,8 +249,8 @@ const DetalleDeViajes = (props) => {
                                     <TouchableOpacity
                                         style={{
                                             height: 40,
-                                            borderRadius: 10,
-                                            width: 140,
+                                            borderRadius: 4,
+                                            width: 110,
                                             backgroundColor: "red",
                                             alignItems: "center",
                                             justifyContent: "center",
@@ -245,7 +262,7 @@ const DetalleDeViajes = (props) => {
                                             color: "#fff",
                                         }}>
                                             Confirmar
-                            </Text>
+                                        </Text>
                                     </TouchableOpacity>
                                 )
                                 }

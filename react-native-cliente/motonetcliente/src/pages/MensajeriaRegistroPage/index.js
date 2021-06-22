@@ -7,9 +7,8 @@ import BottomContent from '../../component/BottomContent';
 import SSCrollView from '../../component/SScrollView';
 import STextImput from '../../component/STextImput';
 import STheme from '../../STheme';
-import Productos from './Productos';
 
-class PedidosRegistroPage extends Component {
+class MensajeriaRegistroPage extends Component {
     static navigationOptions = {
         headerShown: false,
     }
@@ -51,7 +50,7 @@ class PedidosRegistroPage extends Component {
             flex: 1,
             backgroundColor: STheme.color.primary
         }}>
-            <BarraSuperiorDireccion title={"Pedidos"} navigation={this.props.navigation} goBack={() => { this.props.navigation.goBack() }} />
+            <BarraSuperiorDireccion title={"Mensajeria"} goBack={() => { this.props.navigation.goBack() }} />
             <View style={{
                 flex: 1,
             }}>
@@ -70,11 +69,16 @@ class PedidosRegistroPage extends Component {
                                 fontSize: 16,
                                 fontWeight: "bold",
                                 color: STheme.color.textb
-                            }}>Detalle del encargo</Text>
+                            }}>Detalle del envío</Text>
+                            <Text style={{
+                                marginBottom: 8,
+                                fontSize: 12,
+                                fontWeight: "bold",
+                                color: STheme.color.textb
+                            }}>Remitente</Text>
                             {this.getInput("nombre")}
                             {this.getInput("telefono")}
                             {this.getInput("nota")}
-                            <Productos />
                         </View>
                         {/* <BottomContent>
                             <Boton1 type={"1"}
@@ -97,4 +101,4 @@ class PedidosRegistroPage extends Component {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(PedidosRegistroPage);
+export default connect(initStates)(MensajeriaRegistroPage);
