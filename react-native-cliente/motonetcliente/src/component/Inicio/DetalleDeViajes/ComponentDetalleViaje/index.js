@@ -1,55 +1,15 @@
 import React, { useRef } from 'react';
 import { ActivityIndicator, AsyncStorage, ScrollView, Text, TouchableOpacity, View, Animated, Easing, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
-import STheme from '../../../STheme';
-import ComponenentDetalleViaje from './ComponentDetalleViaje';
-import Svg from '../../../Svg';
+import STheme from '../../../../STheme';
+import Svg from '../../../../Svg';
+import Boton1 from '../../../Boton1';
 
-const valor_menor = -380;
 var totalViaje;
-const DetalleDeViajes = (props) => {
 
-    const [isVisible, setIsVisible] = React.useState(false);
-    const fadeAnim = useRef(new Animated.Value(valor_menor)).current;
+const ComponentDetalleViaje = (props) => {
 
-    const fadeIn = () => {
-        Animated.timing(fadeAnim, {
-            toValue: 0,
-            duration: 700
-        }).start();
-    };
 
-    const fadeOut = () => {
-        Animated.timing(fadeAnim, {
-            toValue: valor_menor,
-            duration: 500,
-        }).start(() => {
-            if (fadeAnim._value < valor_menor + 100) {
-                if (isVisible) {
-                    setIsVisible(false);
-                }
-            }
-        });
-    };
-
-    if (props.state.viajesReducer.data) {
-        props.navigation.replace("ViajeEsperaPage");
-        return <View />
-    }
-
-    if (props.ventanaSelect != "DetalleDeViaje") {
-        if (isVisible == true) {
-            fadeOut();
-        }
-    } else {
-        if (!isVisible) {
-            fadeIn();
-            setIsVisible(true)
-        }
-    }
-    if (!isVisible) {
-        return <View />
-    }
 
     const PedirViaje = (tarifas) => {
         var exito = true
@@ -211,135 +171,113 @@ const DetalleDeViajes = (props) => {
     }
 
     return (
-        <Animated.View style={{
-            // position: "absolute",
-            bottom: fadeAnim,
+
+        <View style={{
+            position: "absolute",
             width: "100%",
+            // height: Dimensions.get('window').height * 0.3,
+            height: 220,
+            borderTopRightRadius: 20,
+            borderTopLeftRadius: 20,
+            backgroundColor: "#fff",
+            // borderColor: "#ccc",
+            flex: 1,
+            bottom: 0
         }}>
 
-            <ComponenentDetalleViaje botonConfirmar={true} />
-            {/* <View style={{
-                width: "100%",
-                // height: Dimensions.get('window').height * 0.3,
-                height: 220,
-                borderTopRightRadius: 20,
-                borderTopLeftRadius: 20,
-                backgroundColor: "#fff",
-                // borderColor: "#ccc",
+            <View style={{
                 flex: 1,
+                margin: 10,
             }}>
-
                 <View style={{
                     flex: 1,
-                    margin: 10,
+                    // justifyContent:"center",
+                    // alignItems:"center"
                 }}>
                     <View style={{
-                        flex: 1,
-                        // justifyContent:"center",
-                        // alignItems:"center"
+                        marginBottom: 15,
+                        // backgroundColor:"#ccc"
+                    }}>
+                        <Text style={{
+                            color: STheme.color.textb,
+                            fontSize: 14,
+                        }}>
+                            Confirme el viaje
+                        </Text>
+
+                    </View>
+
+                    <View style={{
+                        flexDirection: "row",
+                        // backgroundColor: "#ccc"
                     }}>
                         <View style={{
-                            marginBottom: 15,
-                            // backgroundColor:"#ccc"
+                            flex: 1,
+                            justifyContent: "center",
+                            // alignItems: "center",
                         }}>
                             <Text style={{
                                 color: STheme.color.textb,
-                                fontSize: 14,
-                            }}>
-                                Confirme el viaje
+                                fontSize: 16,
+                                fontWeight: "bold"
+                            }}>30 min Aprox.
                             </Text>
 
+                            <Text style={{
+                                color: STheme.color.textb,
+                                fontSize: 12,
+                            }}>
+                                22 min tiempo perdido
+                            </Text>
                         </View>
 
                         <View style={{
-                            flexDirection: "row",
-                            // backgroundColor: "#ccc"
+                            flex: 0.5,
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}>
-                            <View style={{
-                                flex: 1,
-                                justifyContent: "center",
-                                // alignItems: "center",
-                            }}>
-                                <Text style={{
-                                    color: STheme.color.textb,
-                                    fontSize: 16,
-                                    fontWeight: "bold"
-                                }}>30 min Aprox.
-                                </Text>
 
-                                <Text style={{
-                                    color: STheme.color.textb,
-                                    fontSize: 12,
-                                }}>
-                                    22 min tiempo perdido
-                                </Text>
-                            </View>
-
-
-                            <View style={{
-                                flex: 0.5,
-                                justifyContent: "center",
-                                alignItems: "center",
-                            }}>
-                                {props.state.viajesReducer.estado == "cargando" ? (
-                                    <View
-                                        style={{
-                                            height: 50,
-                                            borderRadius: 2,
-                                            width: "90%",
-                                            backgroundColor: "red",
-                                            borderColor: "#f00",
-                                            borderWidth: 2,
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                        }}>
-                                        <ActivityIndicator color="#fff" size="small" />
-                                    </View>
-                                ) : (
-                                    <TouchableOpacity
-                                        style={{
-                                            height: 40,
-                                            borderRadius: 4,
-                                            width: 110,
-                                            backgroundColor: "red",
-                                            alignItems: "center",
-                                            justifyContent: "center",
-                                        }}
-                                        onPress={() => PedirViaje()}>
-                                        <Text style={{
-                                            fontSize: 15,
-                                            fontWeight: "bold",
-                                            color: "#fff",
-                                        }}>
-                                            Confirmar
-                                        </Text>
-                                    </TouchableOpacity>
-                                )
-                                }
-                            </View>
-
+                            {!props.botonConfirmar ?
+                                <Boton1 type="1"
+                                    label="Cancelar"
+                                    cargando={props.state.viajesReducer.type == "cancelarBusqueda" && props.state.viajesReducer.estado == "cargando"}
+                                    onPress={() => {
+                                        props.state.locationGoogleMapReducer.route = true;
+                                        props.state.socketClienteReducer.sessiones["motonet"].send({
+                                            component: "viaje",
+                                            type: "cancelarBusqueda",
+                                            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                                            key_viaje: props.state.viajesReducer.data.key,
+                                            estado: "cargando"
+                                        }, true);
+                                    }} />
+                                :
+                                <Boton1 type="1"
+                                    label="Confirmar"
+                                    cargando={props.state.viajesReducer.estado == "cargando"}
+                                    onPress={() => PedirViaje()} />
+                            }
                         </View>
-
-                    </View>
-
-                    <View style={{
-                        flex: 1,
-                        width: "100%",
-                        height: "100%",
-                        // backgroundColor: "#ccc"
-                    }}>
-                        {getDetalleRuta()}
                     </View>
                 </View>
 
-            </View> */}
+                <View style={{
+                    flex: 1,
+                    width: "100%",
+                    height: "100%",
+                    // backgroundColor: "#ccc"
+                }}>
+                    {getDetalleRuta()}
+                </View>
+            </View>
 
-        </Animated.View >
+        </View>
+
     )
 }
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(DetalleDeViajes);
+export default connect(initStates)(ComponentDetalleViaje);
 
 

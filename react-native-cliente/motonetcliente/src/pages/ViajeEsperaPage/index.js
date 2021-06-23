@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, Animated, StyleSheet, AsyncStorage, Activ
 import * as viajesActions from '../../action/viajesActions'
 import * as locationActions from '../../action/locationActions'
 import Svg from '../../Svg';
+import ComponentDetalleViaje from '../../component/Inicio/DetalleDeViajes/ComponentDetalleViaje';
 
 class ViajeEsperaPage extends Component {
     static navigationOptions = {
@@ -39,6 +40,46 @@ class ViajeEsperaPage extends Component {
             }),
             { iterations: 3000 },
         ).start();
+    }
+
+    CancelarViaje = () => {
+        if (this.props.state.viajesReducer.type == "cancelarBusqueda" && this.props.state.viajesReducer.estado == "cargando") {
+            return (
+                <View
+                    style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        borderRadius: 5,
+                        height: 50,
+                        backgroundColor: "#fff",
+                        width: "80%"
+                    }}>
+                    <ActivityIndicator color="red" size="small" />
+                </View>
+            )
+        }
+
+        <TouchableOpacity
+            style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderRadius: 5,
+                height: 50,
+                backgroundColor: "#fff",
+                width: "80%"
+            }}
+            onPress={() => {
+                this.props.state.locationGoogleMapReducer.route = true;
+                this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                    component: "viaje",
+                    type: "cancelarBusqueda",
+                    key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                    key_viaje: this.props.state.viajesReducer.data.key,
+                    estado: "cargando"
+                }, true);
+            }}>
+            <Text>CANCELAR VIAJE</Text>
+        </TouchableOpacity>
     }
 
     render() {
@@ -157,31 +198,24 @@ class ViajeEsperaPage extends Component {
                 )
             } else {
                 return (
-                    <Animated.View
-                        style={[
-                            styles.square,
-                            {
-                                transform: [
-                                    {
-                                        scale: this.state.startValue,
-                                    },
-                                ],
-                            },
-                        ]}
-                    >
-                        <Svg name="Logo"
+                    <View style={{
+                        width: "100%",
+                        alignItems: "center"
+                    }}>
+                        <Svg name="logoCompletoRecurso"
                             style={{
-                                width: 100,
-                                height: 100,
+                                width: 120,
+                                height: 120,
                             }} />
-                        <Text style={
-                            {
-                                marginTop: 10,
-                                fontSize: 30,
-                                fontWeight: "bold",
-                                color: "#fff"
-                            }}>MotoNet</Text>
-                    </Animated.View>
+                        <Text style={{
+                            marginTop: 20,
+                            fontSize: 15,
+                            fontWeight: "bold",
+                            color: "#fff",
+                            textAlign: "center"
+                        }}>Estamos buscando un conductor.{'\n'}
+                            por favor aguarda un momento.</Text>
+                    </View>
                 )
             }
         }
@@ -192,174 +226,102 @@ class ViajeEsperaPage extends Component {
                 backgroundColor: "red",
                 alignItems: 'center',
             }}>
-                <View style={{
-                    flex: 1,
-                }}>
-                    <View style={{
-                        width: "90%",
-                        height: 35,
-                        marginTop: 50,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: "#fff",
-                        borderRadius: 5,
-                        flexDirection: 'row',
-                        borderColor: "#fff",
-                        borderWidth: 2,
-                    }}>
-                        <Svg name="Ubicacion"
-                            style={{
-                                width: 25,
-                                height: 25,
-                                fill: "#f00"
-                            }} />
-                        <Text style={{
-                            color: "red",
-                            fontSize: 13,
-                            margin: 5,
-                        }}>
-                            Inicio
-                        </Text>
 
-                        <Text style={{
-                            flex: 0.9,
-                            fontSize: 9,
-                            margin: 5,
-                        }}>{this.state.obj.inicio.direccion}</Text>
+                <View style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    width: "90%",
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                    borderRadius: 5,
+                    height: 40,
+                    marginTop: 30,
+                    marginBottom: 10
+                }} >
+                    <View style={{
+                        width: 40,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor:"#ccc"
+                    }}>
+                        <Svg name={"MarkerW"}
+                            style={{
+                                width: 20,
+                                height: 20,
+                                fill: "#fff"
+                            }} />
                     </View>
 
                     <View style={{
-                        width: "90%",
-                        height: 35,
-                        marginTop: 20,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: "#fff",
-                        borderRadius: 5,
-                        flexDirection: 'row',
+                        flex: 1,
+                        // alignItems: 'center',
+                        justifyContent: "center",
+                        height: "100%",
                     }}>
-                        <Svg name="Ubicacion"
-                            style={{
-                                width: 25,
-                                height: 25,
-                                fill: "#f00"
-                            }} />
-
                         <Text style={{
-                            color: "red",
-                            margin: 5,
                             fontSize: 13,
+                            color: "#fff",
                         }}>
-                            Fin
+                            {this.state.obj.inicio.direccion}
                         </Text>
-
-                        <Text style={{
-                            flex: 0.9,
-                            fontSize: 9,
-                            margin: 5,
-
-                        }}>{this.state.obj.fin.direccion}</Text>
-
                     </View>
                 </View>
 
+                <View style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    width: "90%",
+                    borderColor: "#fff",
+                    borderWidth: 2,
+                    borderRadius: 5,
+                    height: 40,
+                }} >
+                    <View style={{
+                        width: 40,
+                        justifyContent: "center",
+                        alignItems: "center",
+                        // backgroundColor:"#ccc"
+                    }}>
+                        <Svg name={"Pointer"}
+                            style={{
+                                width: 20,
+                                height: 20,
+                                fill: "#fff"
+                            }} />
+                    </View>
+
+                    <View style={{
+                        flex: 1,
+                        // alignItems: 'center',
+                        justifyContent: "center",
+                        height: "100%",
+                    }}>
+                        <Text style={{
+                            fontSize: 13,
+                            color: "#fff",
+                        }}>
+                            {this.state.obj.fin.direccion}
+                        </Text>
+                    </View>
+                </View>
 
                 <View style={{
                     flex: 1,
-                    width: "100%"
+                    width: "100%",
+                    // backgroundColor: "#ccc",
+                    justifyContent: "center",
+                    // marginTop: 100
+                    marginBottom: 220
                 }}>
 
                     {estaNegociando()}
 
                 </View>
 
-                <View style={{
-                    flex: 1,
-                    width: "100%",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
+                <ComponentDetalleViaje />
 
-                    <View style={{
-                        width: "80%",
-                        borderWidth: 2,
-                        borderColor: "#fff",
-                        borderRadius: 10,
-                        alignItems: 'center',
-                        marginBottom: 20,
-                        height: 100
-                    }}>
-                        <Text
-                            style={{
-                                color: "#fff"
-                            }}>
-                            Detalle del pedido
-                        </Text>
-
-                        <View style={{
-                            marginTop: 10,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            width: "80%",
-                            justifyContent: 'space-between',
-                        }}>
-                            <Text
-                                style={{ color: "#fff", fontSize: 10, }}
-                            >TIPO DE PAGO</Text>
-                            <Text
-                                style={{ color: "#fff", fontSize: 10 }}
-                            >TIEMPO PERDIDO</Text>
-                        </View>
-
-                        <View style={{
-                            marginTop: 10,
-                            flexDirection: 'row',
-                            alignItems: 'center',
-                            width: "80%",
-                            justifyContent: 'space-between',
-                        }}>
-                            <Text style={{ color: "#fff", fontSize: 10, }}>TIEMPO ESTIMADO</Text>
-                            <Text style={{ color: "#fff", fontSize: 10 }}>MONTO ESTIMADO</Text>
-                        </View>
-                    </View>
-
-                    {this.props.state.viajesReducer.type == "cancelarBusqueda" && this.props.state.viajesReducer.estado == "cargando" ? (
-                        <View
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                borderRadius: 5,
-                                height: 50,
-                                backgroundColor: "#fff",
-                                width: "80%"
-                            }}>
-                            <ActivityIndicator color="red" size="small" />
-                        </View>
-                    ) : (
-                        <TouchableOpacity
-                            style={{
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                borderRadius: 5,
-                                height: 50,
-                                backgroundColor: "#fff",
-                                width: "80%"
-                            }}
-                            onPress={() => {
-                                this.props.state.locationGoogleMapReducer.route = true;
-                                this.props.state.socketClienteReducer.sessiones["motonet"].send({
-                                    component: "viaje",
-                                    type: "cancelarBusqueda",
-                                    key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                                    key_viaje: this.props.state.viajesReducer.data.key,
-                                    estado: "cargando"
-                                }, true);
-                            }}>
-                            <Text>CANCELAR VIAJE</Text>
-                        </TouchableOpacity>
-                    )
-                    }
-                </View>
             </View>
         );
     }
