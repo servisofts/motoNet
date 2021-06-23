@@ -16,16 +16,14 @@ const MarkerMedio = (props) => {
                 bottom: "50%",
                 borderRadius: 100,
                 borderColor: '#fff',
-                paddingBottom: 100
+                // paddingBottom: 60
             }}>
             <Svg name="Milocation"
                 style={{
                     width: 30,
                     height: 30,
                     fill: "#000"
-
                 }} />
-
             {/* {getMarkerOrigen()} */}
         </View>
     )
