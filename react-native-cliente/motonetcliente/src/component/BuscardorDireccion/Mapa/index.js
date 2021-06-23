@@ -82,7 +82,11 @@ const Mapa = (props) => {
     }
 
     return (
-        <View style={{ width: "100%", height: "100%" }}>
+        <View style={{
+            width: "100%",
+            height: "100%",
+            paddingBottom: 100
+        }}>
             <MapView
                 style={{
                     flex: 1,

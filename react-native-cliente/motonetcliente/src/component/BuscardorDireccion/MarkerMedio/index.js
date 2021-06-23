@@ -16,6 +16,7 @@ const MarkerMedio = (props) => {
                 bottom: "50%",
                 borderRadius: 100,
                 borderColor: '#fff',
+                paddingBottom: 100
             }}>
             <Svg name="Milocation"
                 style={{
