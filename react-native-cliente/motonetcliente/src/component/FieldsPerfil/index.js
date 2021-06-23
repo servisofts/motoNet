@@ -14,8 +14,15 @@ const FieldsPerfil = ({ datos }) => {
     return (
 
         <View style={{
-            width:"100%"
+            width: "100%"
         }}>
+            <Text style={{
+                color: "#000",
+                fontSize: 16,
+                marginBottom: 4,
+                marginTop: 10,
+                fontWeight: "bold"
+            }}>Información personal</Text>
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Nombre</Text>
                 <Text style={styles.TextCampo}>
@@ -36,6 +43,13 @@ const FieldsPerfil = ({ datos }) => {
                 <LineHorizontal />
             </View>
 
+            <Text style={{
+                color: "#000",
+                fontSize: 16,
+                marginTop: 10,
+                marginBottom: 4,
+                fontWeight: "bold"
+            }}>Información de contacto</Text>
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Correo</Text>
                 <Text style={styles.TextCampo}>{datos["Correo"].dato}</Text>
@@ -50,9 +64,9 @@ const FieldsPerfil = ({ datos }) => {
                 <Text style={styles.TextCampo}>{datos["Telefono"].dato}</Text>
             </View>
 
-            {/* <View style={styles.line}>
+            <View style={styles.line}>
                 <LineHorizontal />
-            </View> */}
+            </View>
 
             {/* <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Edad</Text>                
@@ -66,17 +80,18 @@ const FieldsPerfil = ({ datos }) => {
 const styles = StyleSheet.create({
     TextTitulo: {
         marginBottom: 2,
-        color: "#2C4C7E"
+        fontSize: 12,
+        color: "#222222"
     },
     TextCampo: {
-        fontSize: 20,
+        fontSize: 16,
         color: "#000"
     },
-    line: {    
-        marginBottom: 20
+    line: {
+        marginBottom: 10
     },
     ContenedorCampos: {
-        marginBottom: 10,
+        marginBottom: 8,
     }
 });
 

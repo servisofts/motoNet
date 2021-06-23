@@ -13,7 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import SubirFotoPerfil from '../../component/SubirFotoPerfil';
 import BarraSuperior from '../../component/BarraSuperior';
 //import PerfilConductorPage from '../PerfilConductorPage';
-
+import Boton1 from '../../component/Boton1';
 // const { width, height } = Dimensions.get("window");
 
 
@@ -110,8 +110,12 @@ class PerfilPage extends Component {
                     }}>
                         <View style={{
                             height: 250,
+                            width: "100%",
                             // backgroundColor: "#ccc",
-                            justifyContent: "center"
+                            justifyContent: "center",
+                            alignItems: "center",
+                            // borderBottomWidth:2,
+                            // borderColor:"#999"
                         }}>
                             <TouchableOpacity
                                 onPress={() => { this.handleClik(true) }}
@@ -120,10 +124,10 @@ class PerfilPage extends Component {
                                 }}>
                                 {!this.state.fotoPerfilUri ? (
                                     <View style={{
-                                        width: 150,
-                                        height: 150,
+                                        width: 120,
+                                        height: 120,
                                         borderWidth: 1,
-                                        borderColor: "#000",
+                                        borderColor: "#999",
                                         borderRadius: 100,
                                     }}>
                                     </View>
@@ -131,19 +135,47 @@ class PerfilPage extends Component {
                                     //<Image source={this.state.fotoPerfilUri}
                                     <Image source={{ uri: this.state.fotoPerfilUri }}
                                         style={{
-                                            width: 150,
-                                            height: 150,
+                                            width: 120,
+                                            height: 120,
                                             borderWidth: 1,
-                                            borderColor: "#000",
+                                            borderColor: "#999",
                                             borderRadius: 100,
                                         }} />
                                 )
                                 }
                             </TouchableOpacity>
+                            <Text style={{
+                                color: "#000",
+                                fontWeight: "bold",
+                                fontSize: 18,
+                            }}>Maria jose zuniga</Text>
+                            <View style={{
+                                width: "90%",
+                                maxWidth: 500,
+                                height: 80,
+                                flexDirection: "row",
+                                alignItems: "center",
+                                justifyContent: "space-around"
+                            }}>
+                                <View style={{
+                                    width: "45%",
+                                    height: 50,
+                                }}>
+                                    <Boton1 type={"1"} label={"Cambiar foto"} />
+                                </View>
+                                <View style={{
+                                    width: "45%",
+                                    height: 50,
+                                }}>
+                                    <Boton1 type={"4"} label={"Quitar foto"} />
+                                </View>
+                            </View>
                         </View>
                         <View style={{
-                            width: "80%",
+                            width: "90%",
+                            maxWidth: 600
                         }}>
+
                             <FieldsPerfil datos={datos} />
                         </View>
 

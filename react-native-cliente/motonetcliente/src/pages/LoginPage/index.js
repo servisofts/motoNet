@@ -96,7 +96,8 @@ class LoginPage extends Component {
                                     }
                                 }}
                             />
-                            <Boton1 type={"2"}
+                            <Boton1
+                                type={"2"}
                                 label={(<Text>Aun no tienes una cuenta? <Text style={{ color: STheme.color.background, fontWeight: "bold" }}>Registrate</Text></Text>)}
                                 onPress={() => {
                                     this.props.navigation.navigate("RegistroUsuarioPage", { registro: " " })
