@@ -11,13 +11,16 @@ import urlFoto from '../../Json/index.json';
 import ImgFondoCruces from '../../component/ImgFondoCruces';
 import { ScrollView } from 'react-native-gesture-handler';
 import SubirFotoPerfil from '../../component/SubirFotoPerfil';
+import BarraSuperior from '../../component/BarraSuperior';
 //import PerfilConductorPage from '../PerfilConductorPage';
 
 // const { width, height } = Dimensions.get("window");
 
 
 class PerfilPage extends Component {
-
+    static navigationOptions = {
+        headerShown: false
+    }
     constructor(props) {
         super(props);
         this.state = {
@@ -94,8 +97,9 @@ class PerfilPage extends Component {
                 flex: 1,
                 alignItems: "center"
             }}>
-                <ImgFondoCruces />
-
+                <BarraSuperior title={"Perfil"} goBack={() => {
+                    this.props.navigation.goBack();
+                }} />
                 <ScrollView style={{
                     width: "100%"
                 }}>
@@ -124,16 +128,16 @@ class PerfilPage extends Component {
                                     }}>
                                     </View>
                                 ) : (
-                                        //<Image source={this.state.fotoPerfilUri}
-                                        <Image source={{ uri: this.state.fotoPerfilUri }}
-                                            style={{
-                                                width: 150,
-                                                height: 150,
-                                                borderWidth: 1,
-                                                borderColor: "#000",
-                                                borderRadius: 100,
-                                            }} />
-                                    )
+                                    //<Image source={this.state.fotoPerfilUri}
+                                    <Image source={{ uri: this.state.fotoPerfilUri }}
+                                        style={{
+                                            width: 150,
+                                            height: 150,
+                                            borderWidth: 1,
+                                            borderColor: "#000",
+                                            borderRadius: 100,
+                                        }} />
+                                )
                                 }
                             </TouchableOpacity>
                         </View>

@@ -5,7 +5,7 @@ import ButtonComponent from '../../component/ButtonComponent';
 import ButtonServicioComponent from '../../component/ButtonServicioComponent';
 import ImgFondoCruces from '../../component/ImgFondoCruces';
 import Svg from '../../Svg'
-import NaviDrawer from '../../component/NaviDrawer';
+import NaviDrawer2 from '../../component/NaviDrawer2';
 import ImgComponent from '../../component/ImgComponent';
 import CarouselPage from '../CarouselPage';
 import BarraSuperior from '../../component/BarraSuperior';
@@ -98,8 +98,8 @@ class ServicioPage extends Component {
                         </View>
                     </SSCrollView>
                 </View>
-                            
-                <NaviDrawer navigation={this.props.navigation} />
+
+                <NaviDrawer2 navigation={this.props.navigation} />
             </View>
         );
     }

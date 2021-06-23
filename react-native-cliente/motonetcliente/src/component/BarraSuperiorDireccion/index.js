@@ -11,7 +11,6 @@ class BarraSuperiorDireccion extends Component {
         this.state = {
             anim: new Animated.Value(0),
         };
-
     }
 
     startAnimation() {
@@ -54,7 +53,7 @@ class BarraSuperiorDireccion extends Component {
                 ]
             }}>
 
-                <View style={{
+            <View style={{
                     flex: 1
                 }}>
                     <View style={{
@@ -102,7 +101,7 @@ class BarraSuperiorDireccion extends Component {
                         <BuscadorComponenteMapSingle setVentanaBusqueda={this.props.setVentanaBusqueda} navigation={this.props.navigation} />
                     </View>
 
-                </View>
+            </View>
 
             </Animated.View>
         );
