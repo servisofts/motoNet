@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { connect } from 'react-redux';
 import NaviDrawer from '../../Components/NaviDrawer';
@@ -11,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import TableNewMe from '../../Components/TableNewMe';
+import DP_Parametro_popup from "./DP_Parametro_popup";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
 const ParametrosPages = (props) => {
 
     const classes = useStyles();
+
+    const [visible, setVisible] = React.useState(false);
+    const [keySeleccionada, setKeySeleccionada] = React.useState(false);
 
     const [medida, setMedida] = React.useState('');
     const [open, setOpen] = React.useState(false);
@@ -157,11 +160,18 @@ const ParametrosPages = (props) => {
                                     dir: "desc"
                                }}
                                 data={getLista()}
-                               
+                                handleClick={
+                                    (key) => {
+                                        setVisible(true);
+                                        setKeySeleccionada(key);
+                                        return;
+                                    }
+                                }
+            
 
                             />
                         </Grid>
-
+                        <DP_Parametro_popup isVisible={visible} keyParam={keySeleccionada} onClose={setVisible} history={props.history} />
                     </Grid >
 
                 )

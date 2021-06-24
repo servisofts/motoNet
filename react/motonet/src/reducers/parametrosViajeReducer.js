@@ -14,6 +14,9 @@ export default (state, action) => {
             case "registro":
                 registro(state, action);
                 break;
+            case "modificar":
+                modificar(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -40,6 +43,17 @@ const getAll = (state, action) => {
         action.data.map((obj, key) => {
             state.data[obj.key] = obj;
         });
+    }
+}
+
+const modificar = (state, action) => {
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        if (!state.data) {
+            state.data = {}
+        }
+        //state.dataParametro[action.key] = JSON.parse(action.data[0].data)
+
     }
 }
 
