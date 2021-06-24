@@ -76,6 +76,90 @@ class NaviDrawer2 extends Component {
 
         </TouchableOpacity>
     }
+    getPerfil() {
+        var cabecera = "registro_cliente";
+        var datos = this.props.state.usuarioReducer.usuarioDatos;
+        if (!datos) {
+            if (this.props.state.usuarioReducer.estado == "cargando") {
+                return <ActivityIndicator />
+            }
+            this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                component: "usuario",
+                type: "getById",
+                key: this.props.state.usuarioReducer.usuarioLog.key,
+                cabecera: cabecera,
+                estado: "cargando"
+            }, true);
+            return <ActivityIndicator />
+        }
+
+        var nombre = datos["Nombres"];
+        if (nombre) {
+            nombre = nombre.dato;
+        }
+        var apellidos = datos["Apellidos"];
+        if (apellidos) {
+            apellidos = apellidos.dato;
+        }
+        return (
+            <View style={{
+                height: 120,
+                borderBottomEndRadius: 16,
+                borderBottomStartRadius: 16,
+                overflow: "hidden"
+            }}>
+                <Image
+                    style={{
+                        width: "100%",
+                        height: "100%",
+                        position: 'absolute',
+                        backgroundColor: "#fff",
+                        resizeMode: "stretch"
+                    }}
+                    source={require("../../img/titlebar.png")}
+                />
+                <View style={{
+                    width: "100%",
+                    flex: 1,
+                    justifyContent: "center",
+                    flexDirection: "row",
+                    alignItems: "center"
+                }}>
+                    <View style={{
+                        width: 100,
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }}>
+                        <View style={{
+                            width: 70,
+                            height: 70,
+                            borderRadius: 100,
+                            backgroundColor: "#fff"
+                        }}>
+
+                        </View>
+                    </View>
+                    <TouchableOpacity style={{
+                        flex: 1,
+                    }} onPress={() => {
+                        if (this.props.navigation) {
+                            this.props.navigation.navigate("PerfilPage");
+                        }
+                    }}>
+                        <Text style={{
+                            color: "#fff",
+                            fontSize: 16,
+                        }}>{nombre} {apellidos}</Text>
+                        <Text style={{
+                            color: "#fff",
+                            fontSize: 14,
+                            fontWeight: "bold"
+                        }}>Ver perfil</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
+    }
     render() {
         this.props.state.naviDrawerReducer.openBar = () => {
             this.setState({ isOpen: true, })
@@ -111,62 +195,8 @@ class NaviDrawer2 extends Component {
                                 })
                             }]
                         }}>
-                            <View style={{
-                                height: 120,
-                                borderBottomEndRadius: 16,
-                                borderBottomStartRadius: 16,
-                                overflow: "hidden"
-                            }}>
-                                <Image
-                                    style={{
-                                        width: "100%",
-                                        height: "100%",
-                                        position: 'absolute',
-                                        backgroundColor: "#fff",
-                                        resizeMode: "stretch"
-                                    }}
-                                    source={require("../../img/titlebar.png")}
-                                />
-                                <View style={{
-                                    width: "100%",
-                                    flex: 1,
-                                    justifyContent: "center",
-                                    flexDirection: "row",
-                                    alignItems: "center"
-                                }}>
-                                    <View style={{
-                                        width: 100,
-                                        justifyContent: "center",
-                                        alignItems: "center"
-                                    }}>
-                                        <View style={{
-                                            width: 70,
-                                            height: 70,
-                                            borderRadius: 100,
-                                            backgroundColor: "#fff"
-                                        }}>
+                            {this.getPerfil()}
 
-                                        </View>
-                                    </View>
-                                    <TouchableOpacity style={{
-                                        flex: 1,
-                                    }} onPress={() => {
-                                        if (this.props.navigation) {
-                                            this.props.navigation.navigate("PerfilPage");
-                                        }
-                                    }}>
-                                        <Text style={{
-                                            color: "#fff",
-                                            fontSize: 16,
-                                        }}>Maria Jose Zuñiga</Text>
-                                        <Text style={{
-                                            color: "#fff",
-                                            fontSize: 14,
-                                            fontWeight: "bold"
-                                        }}>Ver perfil</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
                             <View style={{
                                 flex: 1,
                                 width: "100%",

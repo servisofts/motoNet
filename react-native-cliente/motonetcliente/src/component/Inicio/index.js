@@ -52,7 +52,7 @@ const Inicio = (props) => {
                 justifyContent: "center",
                 alignItems: "center",
             }}>
-                <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} in />
+                <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect}/>
                 <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
                 {/* <BuscadorComponenteMap2 ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} /> */}
                 <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />

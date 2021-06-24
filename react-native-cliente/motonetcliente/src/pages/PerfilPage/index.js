@@ -84,12 +84,30 @@ class PerfilPage extends Component {
         // var url = urlFoto.urlImages + this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato + `?type=getPerfil&key_usuario=${this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}&date=${Date.now()}`;
         // this.state.fotoPerfilUri = url;
 
-        if (!this.props.state.usuarioReducer.usuarioDatos) {
-            return <Text>No existe usuarioDato</Text>
-        }
+        var cabecera = "registro_cliente";
         var datos = this.props.state.usuarioReducer.usuarioDatos;
-        //var datos = JSON.parse(objeto.data);
+        if (!datos) {
+            if (this.props.state.usuarioReducer.estado == "cargando") {
+                return <ActivityIndicator />
+            }
+            this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                component: "usuario",
+                type: "getById",
+                key: this.props.state.usuarioReducer.usuarioLog.key,
+                cabecera: cabecera,
+                estado: "cargando"
+            }, true);
+            return <ActivityIndicator />
+        }
 
+        var nombre = datos["Nombres"];
+        if (nombre) {
+            nombre = nombre.dato;
+        }
+        var apellidos = datos["Apellidos"];
+        if (apellidos) {
+            apellidos = apellidos.dato;
+        }
         return (
             <View style={{
                 backgroundColor: "#fff",
@@ -148,7 +166,7 @@ class PerfilPage extends Component {
                                 color: "#000",
                                 fontWeight: "bold",
                                 fontSize: 18,
-                            }}>Maria jose zuniga</Text>
+                            }}>{nombre} {apellidos}</Text>
                             <View style={{
                                 width: "90%",
                                 maxWidth: 500,
