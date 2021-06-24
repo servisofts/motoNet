@@ -188,9 +188,10 @@ class TableNewMe extends Component {
                                 {this.props.title}
                             </h1>
                         </Grid>
+                        {(this.props.onAdd) ?
                         <Grid item xs={2}>
                             <FloatButtom onClick={this.props.onAdd} />
-                        </Grid>
+                        </Grid> : ""}
                     </Grid>
                     <Grid container direction="row">
                         <Grid item xs={10}>
