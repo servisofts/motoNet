@@ -94,8 +94,8 @@ const ConductorListaPage = (props) => {
                                         }
                                         editClick={
                                              (key) => {
-                                                  // props.history.push("/DoctorRegistroPage/" + key)
                                                   props.history.push("/ConductorRegistroPage/" + key)
+                                                 // props.history.push("/ConductorRegistroPage/" + key)
                                                   return;
                                              }
                                         }

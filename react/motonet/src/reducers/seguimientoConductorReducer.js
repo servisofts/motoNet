@@ -27,14 +27,18 @@ export default (state, action) => {
 
 const startAll = (state, action) => {
     state.estado = action.estado;
+    state.isRun=true;
 
 }
 
 const stopAll = (state, action) => {
-    state.estado = action.estado
+    state.estado = action.estado;
+    state.data=false;
+    state.isRun=false;
 
 }
 
 const changePosition = (state, action) => {
-        state.data = action.data
+        state.data = action.data;
+        state.isRun=true;
 }

@@ -1,4 +1,3 @@
-
 import React from 'react'
 import { connect } from 'react-redux';
 import NaviDrawer from '../../Components/NaviDrawer';
@@ -11,6 +10,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Button from '@material-ui/core/Button';
 import TableNewMe from '../../Components/TableNewMe';
+import DP_Parametro_popup from "./DP_Parametro_popup";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -32,6 +32,9 @@ const useStyles = makeStyles((theme) => ({
 const ParametrosPages = (props) => {
 
     const classes = useStyles();
+
+    const [visible, setVisible] = React.useState(false);
+    const [keySeleccionada, setKeySeleccionada] = React.useState(false);
 
     const [medida, setMedida] = React.useState('');
     const [open, setOpen] = React.useState(false);
@@ -91,8 +94,8 @@ const ParametrosPages = (props) => {
                     <Grid container direction="row">
                         <Grid item xs={8}>
                             <form className={classes.root} noValidate autoComplete="off">
-                                <TextField id="descripcionLabel" label="descripción" />
-                                <TextField id="valorLabel" label="Valor" />
+                                <TextField id="descripcionLabel" label="Descripción" required />
+                                <TextField id="valorLabel" label="Valor" required type="number"/>
                                 <FormControl className={classes.formControl}>
                                     <InputLabel id="medidaLabel">Medida</InputLabel>
                                     <Select
@@ -103,6 +106,7 @@ const ParametrosPages = (props) => {
                                         onOpen={handleOpen}
                                         value={medida}
                                         onChange={handleChange}
+                                        
                                     >
                                         <MenuItem value="">
                                             <em>Ninguno</em>
@@ -120,6 +124,9 @@ const ParametrosPages = (props) => {
                                 var descr = document.getElementById("descripcionLabel").value;
                                 var valor = document.getElementById("valorLabel").value;
                                 var medida = document.getElementById("medidaLabel").value;
+                                if((descr == "") || (valor == "") || (medida == "")){
+                                    return;
+                                }
                                 console.log(descr)
                                 console.log(valor)
                                 console.log(medida)
@@ -153,13 +160,18 @@ const ParametrosPages = (props) => {
                                     dir: "desc"
                                }}
                                 data={getLista()}
-                                onAdd={(evt) => {
-                                    props.history.push("/Usuario/Registro")
-                                }}
+                                handleClick={
+                                    (key) => {
+                                        setVisible(true);
+                                        setKeySeleccionada(key);
+                                        return;
+                                    }
+                                }
+            
 
                             />
                         </Grid>
-
+                        <DP_Parametro_popup isVisible={visible} keyParam={keySeleccionada} onClose={setVisible} history={props.history} />
                     </Grid >
 
                 )

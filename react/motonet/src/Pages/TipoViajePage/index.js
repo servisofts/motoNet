@@ -69,10 +69,14 @@ const TipoViajePage = (props) => {
                     <Grid container direction="row">
                         <Grid item xs={8}>
                             <form className={classes.root} noValidate autoComplete="off">
-                                <TextField id="descripcionLabel" label="descripción" />
+                                <TextField id="descripcionLabel" label="Descripción" required />
 
                                 <Button variant="contained" color="secondary" onClick={() => {
                                     var descr = document.getElementById("descripcionLabel").value;
+                                    if(descr==""){
+                                        document.getElementById("descripcionLabel").focus();
+                                        return ;
+                                    }
                                     console.log(descr)
                                     var objSend = {
                                         component: "tipoViaje",

@@ -4,7 +4,7 @@ import STheme from '../../STheme';
 
 type tprops = {
     label: String,
-    type: String,
+    type: String,   
     onPress: Function,
     cargando: Boolean,
 }

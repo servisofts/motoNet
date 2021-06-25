@@ -1,5 +1,6 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet,TouchableOpacity } from 'react-native'
+import Svg from '../../Svg'
 import LineHorizontal from '../LineHorizontal'
 
 const FieldsPerfil = ({ datos }) => {
@@ -25,9 +26,15 @@ const FieldsPerfil = ({ datos }) => {
             }}>Información personal</Text>
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Nombre</Text>
-                <Text style={styles.TextCampo}>
-                    {!datos["Nombres"].dato ? "" : datos["Nombres"].dato}
-                </Text>
+                <TouchableOpacity style={styles.edit_content}>
+                    <Text style={styles.TextCampo}>
+                        {!datos["Nombres"].dato ? "" : datos["Nombres"].dato}
+                    </Text>
+                    <Svg resource={require("../../img/edit.svg")} style={{
+                        width: 20,
+                        height: 20,
+                    }} />
+                </TouchableOpacity>
             </View>
 
             <View style={styles.line}>
@@ -36,7 +43,13 @@ const FieldsPerfil = ({ datos }) => {
 
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Apellidos</Text>
-                <Text style={styles.TextCampo}>{datos["Apellidos"].dato}</Text>
+                <TouchableOpacity style={styles.edit_content}>
+                    <Text style={styles.TextCampo}>{datos["Apellidos"].dato}</Text>
+                    <Svg resource={require("../../img/edit.svg")} style={{
+                        width: 20,
+                        height: 20,
+                    }} />
+                </TouchableOpacity>
             </View>
 
             <View style={styles.line}>
@@ -52,7 +65,14 @@ const FieldsPerfil = ({ datos }) => {
             }}>Información de contacto</Text>
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Correo</Text>
-                <Text style={styles.TextCampo}>{datos["Correo"].dato}</Text>
+                <TouchableOpacity style={styles.edit_content}>
+                    <Text style={styles.TextCampo}>{datos["Correo"].dato}</Text>
+                    <Svg resource={require("../../img/edit.svg")} style={{
+                        width: 20,
+                        height: 20,
+                    }} />
+                </TouchableOpacity>
+
             </View>
 
             <View style={styles.line}>
@@ -61,7 +81,13 @@ const FieldsPerfil = ({ datos }) => {
 
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Telefono</Text>
-                <Text style={styles.TextCampo}>{datos["Telefono"].dato}</Text>
+                <TouchableOpacity style={styles.edit_content}>
+                    <Text style={styles.TextCampo}>{datos["Telefono"].dato}</Text>
+                    <Svg resource={require("../../img/edit.svg")} style={{
+                        width: 20,
+                        height: 20,
+                    }} />
+                </TouchableOpacity>
             </View>
 
             <View style={styles.line}>
@@ -84,6 +110,7 @@ const styles = StyleSheet.create({
         color: "#222222"
     },
     TextCampo: {
+        flex: 1,
         fontSize: 16,
         color: "#000"
     },
@@ -92,6 +119,9 @@ const styles = StyleSheet.create({
     },
     ContenedorCampos: {
         marginBottom: 8,
+    },
+    edit_content: {
+        flexDirection: "row"
     }
 });
 

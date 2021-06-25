@@ -45,6 +45,7 @@ function App() {
       <Route exact path='/ConductorListaPage' component={ConductorListaPage} />
       <Route exact path='/ConductorPerfilPage/:key' component={ConductorPerfilPage} />
       <Route exact path='/ConductorRegistroPage' component={ConductorRegistroPage} />
+      <Route exact path='/ConductorRegistroPage/:key' component={ConductorRegistroPage} />
       <Route exact path='/PublicidadPage' component={PublicidadPage} />
       
     </BrowserRouter>
