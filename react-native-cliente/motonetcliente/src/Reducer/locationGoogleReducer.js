@@ -30,6 +30,9 @@ export default (state, action) => {
             case "detail":
                 detail(state, action);
                 break;
+            case "Miubicacion":
+                Miubicacion(state, action);
+                break;
         }
         state.type = action.type
         state = { ...state };
@@ -75,4 +78,9 @@ const detail = (state, action) => {
     if (action.estado === "exito") {
         state.datosDetail = action.data
     }
+}
+
+
+const Miubicacion = (state, action) => {
+    state.region = action.data
 }

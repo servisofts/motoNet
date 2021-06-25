@@ -10,6 +10,7 @@ import DetalleDeViajes from './DetalleDeViajes';
 import Svg from '../../Svg';
 import BarraSuperiorBuscador from '../BarraSuperiorBuscador';
 import ListaBusqueda from '../BuscardorDireccion/ListaBusqueda';
+import MapaAux from '../BuscardorDireccion/MapaAux';
 // import PerfilConductorPage from '../../pages/Per/filConductorPage';
 
 const Inicio = (props) => {
@@ -27,9 +28,6 @@ const Inicio = (props) => {
             )
         }
     }
-
-
-
 
     return (
         <View style={{
@@ -52,8 +50,9 @@ const Inicio = (props) => {
                 justifyContent: "center",
                 alignItems: "center",
             }}>
-                <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} in />
-                <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
+                <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect}/>
+                {/* <MapaAux ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect}/> */}
+                {/* <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} /> */}
                 {/* <BuscadorComponenteMap2 ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} /> */}
                 <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
                 <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />

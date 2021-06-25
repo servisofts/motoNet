@@ -9,8 +9,6 @@ var totalViaje;
 
 const ComponentDetalleViaje = (props) => {
 
-
-
     const PedirViaje = (tarifas) => {
         var exito = true
         var destino = []
@@ -139,7 +137,6 @@ const ComponentDetalleViaje = (props) => {
                         </Text>
                     </TouchableOpacity>
                 </View>
-
 
                 {/* <Text>Tipo viaje: {TipoViaje.descripcion}</Text> */}
                 {/* <Text>distancia: {distancia / 1000} km</Text> */}

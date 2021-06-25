@@ -1,13 +1,18 @@
 import React, { useEffect } from 'react';
 import { View, TouchableOpacity, Text, DatePickerIOS, } from 'react-native';
 import Svg from '../../../Svg';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { connect } from 'react-redux';
 import Geolocation from '@react-native-community/geolocation';
 import RutaViaje from './RutaViaje';
 
+const delay = ms => new Promise(res => setTimeout(res, ms));
 var mapa;
 const Mapa = (props) => {
+
+    const [zoom, setZoom] = React.useState(false);
+    const [currentPos, setCurrentPos] = React.useState(false);
+
     const [data, setdata] = React.useState({
         region: {
             latitude: -17.78629,
@@ -20,45 +25,44 @@ const Mapa = (props) => {
         ubicacionActual: false
     })
 
-    const positionActual = () => {
+
+    const getposition = () => {
         Geolocation.getCurrentPosition(
             (position) => {
-                if (!data.region) {
-                    return <View />
-                }
-                if (data.region.isRender) {
-                    return <View />
-                }
-                data.region = {
-                    longitude: position.coords.longitude,
+                setCurrentPos(position);
+                props.dispatch({
+                    component: "locationGoogle",
+                    type: "Miubicacion",
+                    data: position,
+                })
+                mapa.animateToRegion({
                     latitude: position.coords.latitude,
-                    longitudeDelta: 0.01,
-                    latitudeDelta: 0.01,
-                    isRender: true,
-                }
-                mapa.animateToRegion(data.region, 1500);
+                    longitude: position.coords.longitude,
+                    latitudeDelta: 0.002,
+                    longitudeDelta: 0.002
+                }, 1000)
             },
             (error) => {
-                // See error code charts below.
                 console.log(error.code, error.message);
-                throw error;
             },
-            {
-                showLocationDialog: true,
-                forceRequestLocation: true,
-                enableHighAccuracy: true,
-                timeout: 15000,
-                maximumAge: 10000
-            }
+            { timeout: 30000, enableHighAccuracy: true, maximumAge: 75000 }
         );
+        if (!currentPos) {
+            return <View />
+        }
+        mapa.animateToRegion({
+            latitude: currentPos.coords.latitude,
+            longitude: currentPos.coords.longitude,
+            latitudeDelta: 0.002,
+            longitudeDelta: 0.002
+        }, 1000)
         return <View />
     }
 
-    useEffect(() => {
-        // Actualiza el título del documento usando la API del navegador
-        // positionActual();
-    });
-
+    // useEffect(() => {
+    //     // Actualiza el título del documento usando la API del navegador
+    //     // positionActual();
+    // });
 
     // const positionGetLista = () => {
     //     let region = {
@@ -69,6 +73,15 @@ const Mapa = (props) => {
     //     }
     //     mapa.animateToRegion(region, 1500);
     // }
+
+    if (!zoom) {
+        const yourFunction = async () => {
+            await delay(500);
+            getposition();
+        };
+        setZoom(true);
+        yourFunction();
+    }
 
     const OnRegionChangeComplete = (region) => {
         // console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTO")
@@ -97,8 +110,10 @@ const Mapa = (props) => {
                     mapa = map;
                     props.state.locationGoogleReducer.mapa_instance = map;
                 }}
+                initialRegion={data.region}
+                provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                initialRegion={props.state.locationGoogleReducer.region}
+                // initialRegion={props.state.locationGoogleReducer.region}
                 onRegionChangeComplete={OnRegionChangeComplete}>
                 <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
             </MapView>
@@ -111,10 +126,9 @@ const Mapa = (props) => {
                 onPress={() => {
                     // data.region = { isReder: false };
                     // setdata({ ...data })
-                    positionGetLista()
+                    getposition()
                     return <View />
-                }}
-            >
+                }}>
                 <Svg name="Gps"
                     style={{
                         width: 50,

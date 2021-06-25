@@ -4,9 +4,9 @@ import Svg from '../../../Svg';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { connect } from 'react-redux';
 import Geolocation from '@react-native-community/geolocation';
-import Styles from '../../../Styles';
-import AppParams from '../../../Json';
-import { get } from 'react-native/Libraries/Utilities/PixelRatio';
+// import Styles from '../../../Styles';
+// import AppParams from '../../../Json';
+// import { get } from 'react-native/Libraries/Utilities/PixelRatio';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 var mapa = false;
 
@@ -92,17 +92,17 @@ const Mapa = (props) => {
                 initialRegion={data.region}
                 provider={PROVIDER_GOOGLE}
                 showsUserLocation={true}
-                showsMyLocationButton={true}
-                onRegionChangeComplete={(region) => {
-                    props.state.locationEmergenciaReducer.region = region;
-                    props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                        component: "locationGoogle",
-                        type: "geocode",
-                        data: region,
-                        estado: "cargando"
-                    }, true);
-                    return <View />
-                }}
+                // showsMyLocationButton={true}
+                // onRegionChangeComplete={(region) => {
+                //     props.state.locationEmergenciaReducer.region = region;
+                //     props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                //         component: "locationGoogle",
+                //         type: "geocode",
+                //         data: region,
+                //         estado: "cargando"
+                //     }, true);
+                //     return <View />
+                // }}
             >
                 {/* {getMarkerOrigen()} */}
             </MapView>
