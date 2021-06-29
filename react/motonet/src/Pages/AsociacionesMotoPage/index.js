@@ -162,7 +162,7 @@ const AsociacionesMotoPage = (props) => {
                                                     key_usuario: props.state.usuarioReducer.usuarioLog.key,
                                                     data: dataSend
                                                 };
-                                                //props.state.socketReducer.send(objSend);
+                                                props.state.socketReducer.send(objSend);
                                                 handleClickOpen()
                                                 
                                                 //alert(JSON.stringify(objSend))
