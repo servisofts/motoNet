@@ -13,7 +13,6 @@ const FieldsPerfil = ({ datos }) => {
     }
 
     return (
-
         <View style={{
             width: "100%"
         }}>
