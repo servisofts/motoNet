@@ -112,12 +112,12 @@ const NaviDrawer = (props) => {
         setOpen(false);
     };
 
-    var petition = GetAllRoles.ejecutar({
-    }, props);
-    if (!petition.estado) {
-        return petition.component
-    }
-    var roles = petition.data;
+    // var petition = GetAllRoles.ejecutar({
+    // }, props);
+    // if (!petition.estado) {
+    //     return petition.component
+    // }
+    // var roles = petition.data;
 
     const getButton = (data) => {
         return (

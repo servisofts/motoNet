@@ -51,12 +51,8 @@ const Inicio = (props) => {
                 alignItems: "center",
             }}>
                 <Mapa ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect}/>
-<<<<<<< HEAD
                 {/* <MapaAux ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect}/> */}
                 {/* <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} /> */}
-=======
-                <MarkerMedio navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
->>>>>>> 8fecab67d86b7dcd0ac91f375aa1bb850618d42e
                 {/* <BuscadorComponenteMap2 ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} navigation={props.navigation} /> */}
                 <TiposDeViajes ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
                 <DetalleDeViajes navigation={props.navigation} ventanaSelect={ventanaSelect} setVentanaSelect={setVentanaSelect} />
