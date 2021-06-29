@@ -8,6 +8,8 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import AsociacionMoto from './DP_AsociacionMoto';
+import DP_AsociacionMoto from './DP_AsociacionMoto';
 
 
 var cabecera = "registro_conductor";
@@ -29,7 +31,9 @@ const ConductorRegistro = (props) => {
     const [objValoresCheck, setObjValoresCheck] = React.useState({});
     const [objErroresCheck, setObjErroresCheck] = React.useState({});
 
-
+    if(props.key_usuario){
+        //alert("ff")
+    }
     if (!props.state.cabeceraDatosReducer.data[cabecera]) {
         if (!props.state.socketReducer.socket) {
             return (
@@ -56,6 +60,26 @@ const ConductorRegistro = (props) => {
     if (!Accion) {
         if (props.key_usuario) {
             var conductor = "";
+            if (!props.state.conductorReducer.data) {
+                if (!props.state.socketReducer.socket) {
+                     return <CircularProgress color="#fff" style={{ display: "block" }} />
+                }
+                if (props.state.conductorReducer.estado == "cargando") {
+                     return <CircularProgress color="#fff" style={{ display: "block" }} />
+                }
+                if (props.state.conductorReducer.estado == "error") {
+                     return <div>{props.state.conductorReducer.error}</div>
+                }
+                var objSend = {
+                     component: "usuario",
+                     type: "getAllCabecera",
+                     estado: "cargando",
+                     cabecera: "registro_conductor",
+                     data: ""
+                };
+                props.state.socketReducer.send(objSend);
+                return <CircularProgress color="#fff" style={{ display: "block" }} />
+           }
             if (props.state.conductorReducer.data[props.key_usuario]) {
                 conductor = props.state.conductorReducer.data[props.key_usuario];
             }
@@ -257,7 +281,7 @@ const ConductorRegistro = (props) => {
             <Grid
                 container
                 justify="center"
-                xs={12}
+                xs={6}
                 md={8}
             >
                 {getFotoPerfil()}
@@ -269,12 +293,20 @@ const ConductorRegistro = (props) => {
                 }} /> */}
 
 
-                <Grid xs={8}
+                <Grid xs={12}
                     container
                     justify="center"
                     style={{ marginTop: 20 }}
                 >
                     {getButtonCrear()}
+                </Grid>
+                <Grid xs={12}
+                    container
+                    //justify="center"
+                    style={{ marginTop: 50 }}
+                >
+                    
+                    <DP_AsociacionMoto conductor={conductor} history={props.history}  />
                 </Grid>
             </Grid>
 
