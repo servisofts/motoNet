@@ -8,7 +8,7 @@ import NaviDrawer from '../../Components/NaviDrawer';
 // am4core.useTheme(am4themes_animated);
 
 const InicioPage = (props) => {
-    
+
     /*if (!props.state.usuarioReducer.usuarioLog) {
         props.history.push("/");
         return <div />
