@@ -175,8 +175,15 @@ class TableNewMe extends Component {
             )
         })
     }
+    getButtonAdd = () => {
+        if (!this.props.onAdd) {
+            return <div />
+        }
+        return <FloatButtom onClick={this.props.onAdd} />
+    }
 
     render() {
+        
         return (
             <div style={{ overflow: 'auto', display: 'block' }}>
                 <div className="tituloAndFloat" >
@@ -188,10 +195,10 @@ class TableNewMe extends Component {
                                 {this.props.title}
                             </h1>
                         </Grid>
-                        {(this.props.onAdd) ?
+                       
                         <Grid item xs={2}>
-                            <FloatButtom onClick={this.props.onAdd} />
-                        </Grid> : ""}
+                             {this.getButtonAdd()}
+                        </Grid>
                     </Grid>
                     <Grid container direction="row">
                         <Grid item xs={10}>

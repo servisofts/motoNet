@@ -65,7 +65,7 @@ const ListaAsociacionMotoPage = (props) => {
                 }
                 return (
                     <Grid container direction="row">
-                        <Grid item xs={12} spacing={2}>
+                        {/* <Grid item xs={12} spacing={2}>
                             <form className={classes.root} noValidate autoComplete="off">
                                 <TextField id="responsableLabel" label="Responsable" />
                                 <TextField id="descripcionLabel" label="Descripción" />
@@ -93,7 +93,7 @@ const ListaAsociacionMotoPage = (props) => {
                                     Agregar a Lista
                                 </Button>
                             </form>
-                        </Grid>
+                        </Grid> */}
                         <Grid item xs={12}  >
 
                             <TableNewMe
@@ -109,7 +109,7 @@ const ListaAsociacionMotoPage = (props) => {
                                }}
                                 data={getLista()}
                                 onAdd={(evt) => {
-                                    props.history.push("/Usuario/Registro")
+                                    props.history.push("/AsociacionesMotoPage")
                                 }}
                                 // handleClick={
                                 //     (key) => {
