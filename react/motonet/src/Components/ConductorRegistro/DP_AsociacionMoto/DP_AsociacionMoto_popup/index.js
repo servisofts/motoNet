@@ -121,6 +121,7 @@ const DP_AsociacionMoto_popup = (props) => {
                                 }
                                 props.state.socketReducer.send(objSend)
                                 return;*/
+                                alert(props.conductor.key + " / "+ key)
                             }
                         }
 

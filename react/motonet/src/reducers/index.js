@@ -13,6 +13,7 @@ import cabeceraDatosReducer from './cabeceraDatosReducer'
 import rolReducer from './rolReducer'
 import imagePickerReducer from './imagePickerReducer'
 import publicidadReducer from './publicidadReducer'
+import conductorAsociacionMotoReducer from './conductorAsociacionMotoReducer'
 
 
 export default combineReducers({
@@ -29,5 +30,6 @@ export default combineReducers({
     cabeceraDatosReducer,
     rolReducer,
     imagePickerReducer,
-    publicidadReducer
+    publicidadReducer,
+    conductorAsociacionMotoReducer
 });

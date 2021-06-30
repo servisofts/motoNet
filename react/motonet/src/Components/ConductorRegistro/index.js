@@ -95,6 +95,8 @@ const ConductorRegistro = (props) => {
         }
     }
 
+    //alert(JSON.stringify(props.state.conductorReducer.data[props.key_usuario])+"regis")
+
     if (props.state.conductorReducer.estado == "exito" && props.state.conductorReducer.type == "insertarDato") {
         handleClickOpen()
         props.state.conductorReducer.estado = false
@@ -306,7 +308,7 @@ const ConductorRegistro = (props) => {
                     style={{ marginTop: 50 }}
                 >
                     
-                    <DP_AsociacionMoto conductor={conductor} history={props.history}  />
+                    <DP_AsociacionMoto conductor={props.state.conductorReducer.data[props.key_usuario]} history={props.history}  />
                 </Grid>
             </Grid>
 
