@@ -19,6 +19,7 @@ import ServicioPage from './ServicioPage';
 import ViajeEsperaPage from './ViajeEsperaPage';
 import ViajeInicioPage from './ViajeInicioPage';
 import PedidosRegistroPage from './PedidosRegistroPage';
+import BuscarDireccionPage from './BuscarDireccionPage';
 import MensajeriaRegistroPage from './MensajeriaRegistroPage';
 
 export const getPages = () => {
@@ -44,7 +45,8 @@ export const getPages = () => {
         ViajeEsperaPage,
         ViajeInicioPage,
         PedidosRegistroPage,
-        MensajeriaRegistroPage
+        MensajeriaRegistroPage,
+        BuscarDireccionPage
 
     }
 }

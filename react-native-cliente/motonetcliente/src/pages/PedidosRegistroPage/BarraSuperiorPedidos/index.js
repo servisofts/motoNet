@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, Dimensions, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
-import STheme from '../../STheme';
-import Svg from '../../Svg';
-import BuscadorComponenteMapSingle from '../BuscardorDireccion/BuscadorComponenteMapSingle';
-import BuscardorNuevo from '../BuscardorNuevo';
+import STheme from '../../../STheme';
+import Svg from '../../../Svg';
+import BuscardorNuevo from '../../../component/BuscardorNuevo';
 
-class BarraSuperiorDireccion extends Component {
+class BarraSuperiorPedidos extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -73,7 +72,7 @@ class BarraSuperiorDireccion extends Component {
                         }}
                             activeOpacity={0.9}
                             onPress={this.props.goBack}>
-                            {!this.props.goBack ? <View /> : <Svg resource={require('../../img/arrow.svg')}
+                            {!this.props.goBack ? <View /> : <Svg resource={require('../../../img/arrow.svg')}
                                 style={{
                                     width: "50%",
                                     height: "50%",
@@ -88,10 +87,25 @@ class BarraSuperiorDireccion extends Component {
                         }}>
                             {this.getTitle("Barra")}
                         </View>
-                        <View style={{
-                            width: 45,
+                        <TouchableOpacity style={{
+                            width: 150,
+                            // backgroundColor:"#000",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            flexDirection: "row",
+                        }} onPress={() => {
+                            this.props.pedir();
                         }}>
-                        </View>
+                            <Text style={{
+                                color: "#fff",
+                                marginRight: 4,
+                                fontWeight: "bold"
+                            }}>Solicitar servicio</Text>
+                            <Svg resource={require("../../../img/addicon.svg")} style={{
+                                width: 20,
+                                height: 20,
+                            }} />
+                        </TouchableOpacity>
                     </View>
 
                     <View style={{
@@ -99,7 +113,7 @@ class BarraSuperiorDireccion extends Component {
                         flex: 1,
                         backgroundColor: STheme.color.background
                     }}>
-                        <BuscardorNuevo navigation={this.props.navigation} />
+                        <BuscardorNuevo navigation={this.props.navigation} label={"Donde llevaremos el encargo"} />
                     </View>
 
                 </View>
@@ -111,4 +125,4 @@ class BarraSuperiorDireccion extends Component {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(BarraSuperiorDireccion);
+export default connect(initStates)(BarraSuperiorPedidos);

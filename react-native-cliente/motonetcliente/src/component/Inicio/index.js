@@ -7,7 +7,6 @@ import BuscadorComponenteMap2 from '../BuscardorDireccion/BuscadorComponenteMap2
 import MarkerMedio from '../BuscardorDireccion/MarkerMedio';
 import TiposDeViajes from './TiposDeViajes';
 import DetalleDeViajes from './DetalleDeViajes';
-import Svg from '../../Svg';
 import BarraSuperiorBuscador from '../BarraSuperiorBuscador';
 import ListaBusqueda from '../BuscardorDireccion/ListaBusqueda';
 import MapaAux from '../BuscardorDireccion/MapaAux';

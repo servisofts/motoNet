@@ -76,7 +76,10 @@ const repaintUbicacion = (state, action) => {
 const detail = (state, action) => {
     state.estado = action.estado;
     if (action.estado === "exito") {
-        state.datosDetail = action.data
+        state.datosDetail = {
+            ...action.data,
+            direccion: action.dirSearch
+        }
     }
 }
 

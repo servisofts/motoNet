@@ -50,7 +50,6 @@ const ListaBusqueda = (props) => {
                             <TouchableOpacity
                                 onPress={() => {
                                     console.log(obj.place_id)
-
                                     getDetail(obj.place_id)
                                 }}
                                 style={{

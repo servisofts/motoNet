@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native'
 import { connect } from 'react-redux';
-import BarraSuperiorDireccion from '../../component/BarraSuperiorDireccion';
+import BarraSuperiorPedidos from './BarraSuperiorPedidos';
 import Boton1 from '../../component/Boton1';
 import BottomContent from '../../component/BottomContent';
 import SSCrollView from '../../component/SScrollView';
@@ -51,7 +51,14 @@ class PedidosRegistroPage extends Component {
             flex: 1,
             backgroundColor: STheme.color.primary
         }}>
-            <BarraSuperiorDireccion title={"Pedidos"} navigation={this.props.navigation} goBack={() => { this.props.navigation.goBack() }} />
+            <BarraSuperiorPedidos
+                pedir={() => {
+                    // console.log("Pedir barra")
+                }}
+                title={"Pedidos"}
+                navigation={this.props.navigation}
+                goBack={() => { this.props.navigation.goBack() }}
+            />
             <View style={{
                 flex: 1,
             }}>
@@ -76,18 +83,6 @@ class PedidosRegistroPage extends Component {
                             {this.getInput("nota")}
                             <Productos />
                         </View>
-                        {/* <BottomContent>
-                            <Boton1 type={"1"}
-                                label={"Registrarse"}
-                                cargando={this.props.state.usuarioReducer.estado == "cargando"}
-                                onPress={() => {
-                                    Object.keys(this.state.datos).map((key) => {
-                                        this._ref[key].verify();
-
-                                    })
-                                }}
-                            />
-                        </BottomContent> */}
                     </View>
                 </SSCrollView>
             </View>
