@@ -24,6 +24,9 @@ export default class Productos extends Component {
         };
         this._ref = {};
     }
+    getProductos = () => {
+        return this.state.productos;
+    }
     getInput(name) {
         return (<View style={{
             marginBottom: 8,
@@ -168,17 +171,17 @@ export default class Productos extends Component {
                 <TouchableOpacity style={{
                     width: 40,
                     height: "100%",
-                    justifyContent:"center",
-                    alignItems:"center"
-                }} onPress={()=>{
+                    justifyContent: "center",
+                    alignItems: "center"
+                }} onPress={() => {
                     delete this.state.productos[key];
-                    this.setState({productos:this.state.productos})
+                    this.setState({ productos: this.state.productos })
                 }}>
                     <Svg name={"Eliminar"} style={{
-                        width:20,
-                        height:20,
-                        fill:"#000"
-                    }}/>
+                        width: 20,
+                        height: 20,
+                        fill: "#000"
+                    }} />
                 </TouchableOpacity>
             </View>
         })

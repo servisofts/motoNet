@@ -2,7 +2,7 @@ import React, { Component, useRef } from 'react';
 import { View, StyleSheet, TextInput, TouchableOpacity, Text, Animated } from 'react-native';
 import Svg from '../../Svg';
 
-class BuscardorNuevo extends Component {
+class BuscardorNuevoBlack extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -27,11 +27,11 @@ class BuscardorNuevo extends Component {
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'row',
-                    width: "90%",
-                    borderColor: this.props.color != "negro" ? "#fff" : "#000",
-                    borderWidth: 2,
+                    width: "100%",
+                    borderColor: this.state.error ? "#f00" : "#666",
+                    borderWidth: 1,
                     borderRadius: 5,
-                    height: 40,
+                    height: 50,
                 }} onPress={() => {
                     this.props.navigation.navigate("BuscarDireccionPage", {
                         select: (data) => {
@@ -49,7 +49,7 @@ class BuscardorNuevo extends Component {
                             style={{
                                 width: 20,
                                 height: 20,
-                                fill: "#fff"
+                                fill: "#333"
                             }} />
                     </View>
 
@@ -62,7 +62,7 @@ class BuscardorNuevo extends Component {
                         textAlignVertical: "center",
                         height: "100%",
                         fontSize: 13,
-                        color: "#fff",
+                        color: "#000",
                     }}
                         numberOfLines={1}
                         onChangeText={(texto) => hanlechage(texto)}
@@ -80,4 +80,4 @@ class BuscardorNuevo extends Component {
 // };
 
 // export default connect(initStates)(BuscardorNuevo);
-export default BuscardorNuevo;
+export default BuscardorNuevoBlack;

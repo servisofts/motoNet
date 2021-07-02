@@ -5,7 +5,7 @@ import STheme from '../../../STheme';
 import Svg from '../../../Svg';
 import BuscardorNuevo from '../../../component/BuscardorNuevo';
 
-class BarraSuperiorPedidos extends Component {
+class BarraSuperiorMensajeria extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,7 +40,7 @@ class BarraSuperiorPedidos extends Component {
         return (
             <Animated.View style={{
                 width: "100%",
-                height: 100,
+                height: 50,
                 flexDirection: "row",
                 // backgroundColor: "#fff",
                 transform: [
@@ -94,8 +94,7 @@ class BarraSuperiorPedidos extends Component {
                             alignItems: "center",
                             flexDirection: "row",
                         }} onPress={() => {
-                            var dir = this.direccion.getValue();
-                            this.props.pedir(dir);
+                            this.props.pedir();
                         }}>
                             <Text style={{
                                 color: "#fff",
@@ -109,16 +108,14 @@ class BarraSuperiorPedidos extends Component {
                         </TouchableOpacity>
                     </View>
 
-                    <View style={{
+                    {/* <View style={{
                         justifyContent: "center",
                         flex: 1,
                         backgroundColor: STheme.color.background
                     }}>
-                        <BuscardorNuevo
-                            ref={(ref) => { this.direccion = ref }}
-                            navigation={this.props.navigation} label={"Donde llevaremos el encargo"} />
+                        <BuscardorNuevo navigation={this.props.navigation} label={"Donde llevaremos el encargo"} />
                     </View>
-
+ */}
                 </View>
 
             </Animated.View>
@@ -128,4 +125,4 @@ class BarraSuperiorPedidos extends Component {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(BarraSuperiorPedidos);
+export default connect(initStates)(BarraSuperiorMensajeria);

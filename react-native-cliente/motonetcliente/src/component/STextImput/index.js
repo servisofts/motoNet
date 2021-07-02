@@ -24,7 +24,7 @@ export default class STextImput extends Component<tprops> {
             case "2":
                 this.theme = {
                     labelColor: STheme.color.textb,
-                    boderColor: STheme.color.textb,
+                    boderColor: "#666",
                     placeholder: STheme.color.textb,
                     color: STheme.color.textb
                 }
@@ -39,6 +39,9 @@ export default class STextImput extends Component<tprops> {
                 return;
         }
 
+    }
+    getValue(){
+        return this.state.value;
     }
     verify() {
 
@@ -103,7 +106,7 @@ export default class STextImput extends Component<tprops> {
         return (<Text style={{
             color: this.theme.labelColor,
             height: 25,
-        }}>{this.props.label + (this.state.error ? "**" : "")}</Text>)
+        }}>{this.props.label + (this.state.error ? "*" : "")}</Text>)
     }
     getImput({ }) {
         return (
@@ -117,7 +120,7 @@ export default class STextImput extends Component<tprops> {
                         width: "100%",
                         height: this.props.height ? this.props.height : 50,
                         borderWidth: 1,
-                        borderColor: this.theme.boderColor,
+                        borderColor: (this.state.error ? "#f00" : this.theme.boderColor),
                         borderRadius: 4,
                         paddingStart: 8,
                     }}

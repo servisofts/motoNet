@@ -45,6 +45,50 @@ class PedidosRegistroPage extends Component {
             <STextImput theme={"2"} {...this.state.datos[name]} ref={(ref) => this._ref[name] = ref} />
         </View>)
     }
+    pedirViaje(direccion) {
+        var isValid = true;
+
+        // var direccionI = this.direccionInicio.getValue();
+
+        if (!direccion) {
+            alert("Ingrese a donde llevaremos el encargo.")
+            isValid = false;
+        }
+        var nombre = this._ref["nombre"].verify();
+        if (!nombre) {
+            console.log("entro");
+            isValid = false
+        };
+        var telefono = this._ref["telefono"].verify();
+        if (!telefono) {
+            console.log("entro");
+            isValid = false
+        };
+        var nota = this._ref["nota"].getValue();
+
+
+        var productos = this.productos.getProductos();
+
+        if (Object.keys(productos).length <= 0) {
+            alert("Ingrese por lo menos 1 producto.")
+            isValid = false
+        }
+        if (!isValid) {
+            return;
+        }
+        var OBJ = {
+            tipo_viaje: "pedido",
+            inicio: {
+                nombre: nombre,
+                telefono: telefono,
+                nota: nota,
+            },
+            productos: productos,
+            direccion
+
+        }
+        console.log(OBJ)
+    }
     render() {
         return (<View style={{
             width: "100%",
@@ -52,8 +96,8 @@ class PedidosRegistroPage extends Component {
             backgroundColor: STheme.color.primary
         }}>
             <BarraSuperiorPedidos
-                pedir={() => {
-                    // console.log("Pedir barra")
+                pedir={(direccion) => {
+                    this.pedirViaje(direccion);
                 }}
                 title={"Pedidos"}
                 navigation={this.props.navigation}
@@ -81,7 +125,7 @@ class PedidosRegistroPage extends Component {
                             {this.getInput("nombre")}
                             {this.getInput("telefono")}
                             {this.getInput("nota")}
-                            <Productos />
+                            <Productos ref={(ref) => { this.productos = ref; }} />
                         </View>
                     </View>
                 </SSCrollView>
