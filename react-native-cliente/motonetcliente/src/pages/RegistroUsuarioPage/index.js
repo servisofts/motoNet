@@ -19,32 +19,38 @@ class RegistroUsuarioPage extends Component {
                 nombres: {
                     label: "Nombres",
                     ph: "Ingresar nombres",
-                    type: "text"
+                    type: "text",
+                    key_db: "Nombres",
                 },
                 apellidos: {
                     label: "Apellidos",
                     ph: "Ingresar apellidos",
-                    type: "text"
+                    type: "text",
+                    key_db: "Apellidos",
                 },
                 telefono: {
                     label: "Telefono",
                     ph: "Ingresar telefono",
-                    type: "text"
+                    type: "text",
+                    key_db: "Telefono",
                 },
                 ci: {
-                    label: "Carner de identidad",
+                    label: "Carnet de identidad",
                     ph: "Ingresar ci",
-                    type: "text"
+                    type: "text",
+                    key_db: "CI",
                 },
                 correo: {
                     label: "Correo",
                     ph: "Ingresar correo",
-                    type: "email"
+                    type: "email",
+                    key_db: "Correo",
                 },
                 pass: {
                     label: "Contraseña",
                     ph: "Ingresar contraseña",
-                    type: "password"
+                    type: "password",
+                    key_db: "Password",
                 },
                 rep_pass: {
                     label: "Confirmar contraseña",
@@ -65,6 +71,35 @@ class RegistroUsuarioPage extends Component {
             </View>)
         })
     }
+    getKeyDato = (keyDescripcion) => {
+        var key = "undefined"
+        var cabecera = "registro_cliente";
+        for (let i = 0; i < this.props.state.cabeceraDatoReducer.data[cabecera].length; i++) {
+            const obj = this.props.state.cabeceraDatoReducer.data[cabecera][i];
+            if (obj.dato.descripcion == keyDescripcion) {
+                return obj;
+            }
+        }
+        return {
+            key
+        }
+    }
+    getDatoCabecera = () => {
+        if (this.props.state.cabeceraDatoReducer.estado == "cargando") {
+            return <View />
+        }
+        if (!this.props.state.cabeceraDatoReducer.data["registro_cliente"]) {
+            var objSend = {
+                component: "cabeceraDato",
+                type: "getDatoCabecera",
+                estado: "cargando",
+                cabecera: "registro_cliente"
+            }
+            this.props.state.socketClienteReducer.sessiones["motonet"].send(objSend, true);
+            return <View />
+        }
+        return <View />
+    }
     render() {
         return (<View style={{
             width: "100%",
@@ -80,6 +115,7 @@ class RegistroUsuarioPage extends Component {
                         width: "100%",
                         alignItems: "center",
                     }}>
+                        {this.getDatoCabecera()}
                         <View style={{
                             width: "90%"
                         }}>
@@ -90,10 +126,20 @@ class RegistroUsuarioPage extends Component {
                                 label={"Registrarse"}
                                 cargando={this.props.state.usuarioReducer.estado == "cargando"}
                                 onPress={() => {
+                                    var isValid = true;
+                                    var arr = [];
                                     Object.keys(this.state.datos).map((key) => {
-                                            this._ref[key].verify();
-
+                                        var data = this.state.datos[key];
+                                        this._ref[key].verify();
+                                        if (data["key_db"]) {
+                                            var cabeceraDato = this.getKeyDato(data["key_db"]);
+                                            arr.push({
+                                                dato: cabeceraDato,
+                                                data: data,
+                                            })
+                                        }
                                     })
+                                    console.log(arr);
                                 }}
                             />
                         </BottomContent>

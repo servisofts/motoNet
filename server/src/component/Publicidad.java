@@ -1,8 +1,11 @@
 package component;
 
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.UUID;
 import conexion.*;
+import util.FilesManager;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -77,11 +80,11 @@ public class Publicidad {
     public void subirFoto(JSONObject obj, SSSessionAbstract session) {
         try {
 
-            //String b64 = obj.getString("data");
+            String b64 = obj.getString("data");
             String key = UUID.randomUUID().toString();
             String key_usuario = obj.getString("key_usuario");
-            //byte[] foto = Base64.getDecoder().decode(b64.getBytes("UTF-8"));
-            //String url = FilesManager.guardar_file_type(foto, "publicidad.png", key, "url_publicidad");
+            byte[] foto = Base64.getDecoder().decode(b64.getBytes("UTF-8"));
+            String url = FilesManager.guardar_file_type(foto, "publicidad.png", key, "url_publicidad");
             JSONObject especialidad = new JSONObject();
             especialidad.put("key", key);
             especialidad.put("fecha_on", "now()");

@@ -27,27 +27,27 @@ public class Viaje {
 
     public Viaje(JSONObject data, SSSessionAbstract session) {
         switch (data.getString("type")) {
-        case "buscar":
-            buscar(data, session);
-            break;
-        case "cancelarBusqueda":
-            cancelarBusqueda(data, session);
-            break;
-        case "cancelarBusquedaConductor":
-            cancelarBusquedaConductor(data, session);
-            break;
-        case "cancelarViajeCliente":
-            cancelarViajeCliente(data, session);
-            break;
-        case "confirmarBusqueda":
-            confirmarBusqueda(data, session);
-            break;
-        case "negociarViajeConductor":
-            negociarViajeConductor(data, session);
-            break;
-        case "getViajeByKeyUsuario":
-            getViajeByKeyUsuario(data, session);
-            break;
+            case "buscar":
+                buscar(data, session);
+                break;
+            case "cancelarBusqueda":
+                cancelarBusqueda(data, session);
+                break;
+            case "cancelarBusquedaConductor":
+                cancelarBusquedaConductor(data, session);
+                break;
+            case "cancelarViajeCliente":
+                cancelarViajeCliente(data, session);
+                break;
+            case "confirmarBusqueda":
+                confirmarBusqueda(data, session);
+                break;
+            case "negociarViajeConductor":
+                negociarViajeConductor(data, session);
+                break;
+            case "getViajeByKeyUsuario":
+                getViajeByKeyUsuario(data, session);
+                break;
         }
     }
 
@@ -79,6 +79,15 @@ public class Viaje {
     }
 
     public void buscar(JSONObject obj, SSSessionAbstract session) {
+        JSONObject data = obj.getJSONObject("data");
+
+        JSONObject viaje = new JSONObject();
+        viaje.put("key", UUID.randomUUID().toString());
+        
+
+    }
+
+    public void buscar1(JSONObject obj, SSSessionAbstract session) {
         JSONObject data = obj.getJSONObject("data");
         try {
             JSONObject objViaje = new JSONObject();
@@ -133,10 +142,11 @@ public class Viaje {
 
     public void confirmarBusqueda(JSONObject obj, SSSessionAbstract session) {
         try {
-            //String key_usuario = obj.getString("key_usuario");
+            // String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
             String key_conductor = obj.getString("key_conductor");
-            //String key_movimiento = obj.getString("key_movimiento"); // AGREGAR EL KET MOVIMIENTO ACEPTADO AL VIAJE
+            // String key_movimiento = obj.getString("key_movimiento"); // AGREGAR EL KET
+            // MOVIMIENTO ACEPTADO AL VIAJE
 
             JSONObject viaje = getViajeAndDestinos(key_viaje);
 
@@ -152,7 +162,8 @@ public class Viaje {
             }
             Conexion.ejecutarUpdate(
                     "UPDATE viaje SET key_conductor = '" + key_conductor + "' WHERE key = '" + key_viaje + "'");
-            //JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_INICIO_VIAJE, key_usuario);
+            // JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje,
+            // Viaje.TIPO_INICIO_VIAJE, key_usuario);
             viaje = getViajeAndDestinos(key_viaje);
             JSONObject objSend = new JSONObject();
             objSend.put("component", "viaje");
@@ -211,9 +222,10 @@ public class Viaje {
     public void cancelarBusqueda(JSONObject obj, SSSessionAbstract session) {
         try {
 
-            //String key_usuario = obj.getString("key_usuario");
+            // String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
-            //JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_BUSQUEDA, key_usuario);
+            // JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje,
+            // Viaje.TIPO_CANCELO_BUSQUEDA, key_usuario);
             Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" + key_viaje + "'");
             obj.put("estado", "exito");
         } catch (Exception e) {
@@ -227,9 +239,10 @@ public class Viaje {
     public void cancelarViajeCliente(JSONObject obj, SSSessionAbstract session) {
         try {
 
-            //String key_usuario = obj.getString("key_usuario");
+            // String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
-            //JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_VIAJE, key_usuario);
+            // JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje,
+            // Viaje.TIPO_CANCELO_VIAJE, key_usuario);
             Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" + key_viaje + "'");
             obj.put("estado", "exito");
         } catch (Exception e) {
@@ -243,10 +256,11 @@ public class Viaje {
     public void cancelarBusquedaConductor(JSONObject obj, SSSessionAbstract session) {
         try {
 
-            //String key_usuario = obj.getString("key_usuario");
-            //String key_viaje = obj.getString("key_viaje");
-            //JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_BUSQUEDA_CONDUCTOR,
-            //        key_usuario);
+            // String key_usuario = obj.getString("key_usuario");
+            // String key_viaje = obj.getString("key_viaje");
+            // JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje,
+            // Viaje.TIPO_CANCELO_BUSQUEDA_CONDUCTOR,
+            // key_usuario);
 
             // Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" +
             // key_viaje + "'");
