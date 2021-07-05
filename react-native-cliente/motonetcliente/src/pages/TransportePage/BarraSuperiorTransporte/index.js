@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, Dimensions, TouchableOpacity } from 'react-native';
-import { connect } from 'react-redux';
 import STheme from '../../../STheme';
 import Svg from '../../../Svg';
 import BuscardorNuevo from '../../../component/BuscardorNuevo';
 
-class BarraSuperiorPedidos extends Component {
+class BarraSuperiorTransporte extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,6 +23,15 @@ class BarraSuperiorPedidos extends Component {
         this.startAnimation();
     }
 
+    getDirecciones() {
+        var dir = this.direccion.getValue();
+        var dir2 = this.direccion2.getValue();
+        return {
+            inicio: dir,
+            destino: dir2,
+        }
+    }
+
     getTitle(text) {
         var text = text
         if (this.props.title) {
@@ -40,7 +48,7 @@ class BarraSuperiorPedidos extends Component {
         return (
             <Animated.View style={{
                 width: "100%",
-                height: 100,
+                height: 180,
                 flexDirection: "row",
                 // backgroundColor: "#fff",
                 transform: [
@@ -87,7 +95,7 @@ class BarraSuperiorPedidos extends Component {
                         }}>
                             {this.getTitle("Barra")}
                         </View>
-                        <TouchableOpacity style={{
+                        {/* <TouchableOpacity style={{
                             width: 150,
                             // backgroundColor:"#000",
                             justifyContent: "center",
@@ -106,7 +114,7 @@ class BarraSuperiorPedidos extends Component {
                                 width: 20,
                                 height: 20,
                             }} />
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
                     </View>
 
                     <View style={{
@@ -115,9 +123,24 @@ class BarraSuperiorPedidos extends Component {
                         backgroundColor: STheme.color.background
                     }}>
                         <BuscardorNuevo
-                            icon={"MarkerW"}
                             ref={(ref) => { this.direccion = ref }}
-                            navigation={this.props.navigation} label={"Donde llevaremos el encargo"} />
+                            navigation={this.props.navigation} label={"Donde nos encontramos?"}
+                            icon={"MarkerW"}
+                            onChange={(direccion) => {
+                                this.props.onChangeDir1(direccion);
+                            }}
+                        />
+                        <View style={{
+                            height: 16,
+                        }}></View>
+                        <BuscardorNuevo
+                            ref={(ref) => { this.direccion2 = ref }}
+                            navigation={this.props.navigation} label={"A donde iremos?"}
+                            icon={"Pointer"}
+                            onChange={(direccion) => {
+                                this.props.onChangeDir2(direccion);
+                            }}
+                        />
                     </View>
 
                 </View>
@@ -126,7 +149,4 @@ class BarraSuperiorPedidos extends Component {
         );
     }
 }
-const initStates = (state) => {
-    return { state }
-};
-export default connect(initStates)(BarraSuperiorPedidos);
+export default BarraSuperiorTransporte;

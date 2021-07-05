@@ -108,9 +108,6 @@ class MensajeriaRegistroPage extends Component {
         }
         var OBJ = {
             tipo_viaje: "mensajeria",
-            direcciones:{
-                 
-            },
             paquete: {
                 tipo,
                 foto,
@@ -120,16 +117,19 @@ class MensajeriaRegistroPage extends Component {
                 telefono: telefonoD,
                 nota: notaD,
             },
-            destino: {
+            fin: {
                 nombre: nombreR,
                 telefono: telefonoR,
                 nota: notaR
             },
-            direccionI,
-            direccionF
+            direccionInicio: direccionI,
+            direccionFin: direccionF
 
         }
         console.log(OBJ)
+        this.props.navigation.navigate("ViajePedirYBuscar", {
+            data: OBJ
+        });
     }
     render() {
         return (<View style={{

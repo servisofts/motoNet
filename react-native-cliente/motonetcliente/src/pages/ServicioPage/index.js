@@ -34,7 +34,7 @@ class ServicioPage extends Component {
     getServicios() {
         return [
             {
-                page: "InicioPage",
+                page: "TransportePage",
                 nombreServicio: "Transporte",
                 detalle: "A todo destino",
                 nameSvg: "transporte"

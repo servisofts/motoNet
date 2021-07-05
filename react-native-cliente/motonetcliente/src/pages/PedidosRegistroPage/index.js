@@ -84,9 +84,12 @@ class PedidosRegistroPage extends Component {
                 nota: nota,
             },
             productos: productos,
-            direccion
+            direccionInicio:direccion,
 
         }
+        this.props.navigation.navigate("ViajePedirYBuscar",{
+            data:OBJ
+        });
         console.log(OBJ)
     }
     render() {

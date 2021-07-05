@@ -23,10 +23,12 @@ export default class BuscarDireccionPage extends Component {
             type: "lista",
         };
     }
+
     seleccionar = (dataUbicacion) => {
         // console.log("UBICACION SELECCIONADA");
         // console.log(dataUbicacion);
         this.setState({ ubicacion: dataUbicacion });
+       
         if (this.props.navigation.state.params.select) {
             this.props.navigation.state.params.select(dataUbicacion);
         }
@@ -40,7 +42,7 @@ export default class BuscarDireccionPage extends Component {
                 this.setState({ type: "mapa" })
             }} />
         } else {
-            return <MapaAutoComplete   value={this.state.ubicacion}  seleccionar={(dt) => this.seleccionar(dt)} changeType={() => {
+            return <MapaAutoComplete value={this.state.ubicacion} seleccionar={(dt) => this.seleccionar(dt)} changeType={() => {
                 this.setState({ type: "lista" })
             }} />
         }

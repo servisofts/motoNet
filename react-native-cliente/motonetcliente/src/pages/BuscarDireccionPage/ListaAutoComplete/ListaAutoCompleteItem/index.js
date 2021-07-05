@@ -13,6 +13,10 @@ class ListaAutoCompleteItem extends Component<tprops> {
     }
     getDetail = () => {
         // this.setState({ dir: this.props.direccion })
+        if (this.props.latLng) {
+            if (this.props.seleccionar) this.props.seleccionar(this.props.latLng);
+            return <View />
+        }
         this.props.state.socketClienteReducer.sessiones["motonet"].send({
             component: "locationGoogle",
             type: "detail",

@@ -1,5 +1,5 @@
 import React, { Component, useRef } from 'react';
-import { View, StyleSheet, TextInput, TouchableOpacity, Text, Animated } from 'react-native';
+import { View, StyleSheet, TextInput, TouchableOpacity, Text, Animated, AsyncStorage } from 'react-native';
 import Svg from '../../Svg';
 
 class BuscardorNuevo extends Component {
@@ -13,8 +13,29 @@ class BuscardorNuevo extends Component {
         this.setState({ error: bool })
     }
     getValue = () => {
-        this.setState({ error: false})
+        this.setState({ error: false })
         return this.state.direccion
+    }
+    insertarHistorial = (dir) => {
+        AsyncStorage.getItem("historialDirecciones").then((res) => {
+            var arr = {};
+            try {
+                arr = JSON.parse(res);
+            } catch (error) {
+                arr = {}
+            }
+            if (!arr) arr = {};
+
+            arr[dir.latitude + dir.longitude] = {
+                ...dir,
+                fecha: new Date().getTime(),
+            };
+            AsyncStorage.setItem("historialDirecciones", JSON.stringify(arr));
+        });
+    }
+    hanlechage = (data) => {
+        this.insertarHistorial(data)
+        if (this.props.onChange) this.props.onChange(data);
     }
     render() {
         return (
@@ -35,17 +56,20 @@ class BuscardorNuevo extends Component {
                 }} onPress={() => {
                     this.props.navigation.navigate("BuscarDireccionPage", {
                         select: (data) => {
+                            // console.log(data);
                             this.setState({ value: data.direccion, direccion: data, })
+                            this.hanlechage(data)
                         },
                         direccion: this.state.direccion,
                     })
+
                 }}>
                     <View style={{
                         width: 40,
                         justifyContent: "center",
                         alignItems: "center",
                     }}>
-                        <Svg name={"MarkerW"}
+                        <Svg name={this.props.icon}
                             style={{
                                 width: 20,
                                 height: 20,
@@ -65,7 +89,7 @@ class BuscardorNuevo extends Component {
                         color: "#fff",
                     }}
                         numberOfLines={1}
-                        onChangeText={(texto) => hanlechage(texto)}
+                    // onChangeText={(texto) => this.hanlechage(texto)}
                     >
                         {this.state.value}
                     </Text>
