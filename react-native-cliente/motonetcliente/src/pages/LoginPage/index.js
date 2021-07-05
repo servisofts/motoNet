@@ -64,7 +64,7 @@ class LoginPage extends Component {
                             <View style={{ height: 20 }}></View>
                             <STextImput label={"Contraseña"} placeholder={"Ingresar contraseña"} type={"password"} ref={(ref) => this._ref["pass"] = ref} />
                             <Boton1 type={"3"}
-                                label={(<Text>{"¿Olvido su contraseña?"} <Text style={{ color: STheme.color.text, fontWeight: "bold", textDecorationLine: "underline" }}>Restablecer</Text></Text>)}
+                                label={(<Text>{"¿Olvidó su contraseña?"} <Text style={{ color: STheme.color.text, fontWeight: "bold", textDecorationLine: "underline" }}>Restablecer</Text></Text>)}
                                 onPress={() => {
                                     this.props.navigation.navigate("RecuperarPassPage");
                                 }} />
@@ -98,7 +98,7 @@ class LoginPage extends Component {
                             />
                             <Boton1
                                 type={"2"}
-                                label={(<Text>Aun no tienes una cuenta? <Text style={{ color: STheme.color.background, fontWeight: "bold" }}>Registrate</Text></Text>)}
+                                label={(<Text>¿Aún no tienes una cuenta? <Text style={{ color: STheme.color.background, fontWeight: "bold" }}>Regístrate</Text></Text>)}
                                 onPress={() => {
                                     this.props.navigation.navigate("RegistroUsuarioPage", { registro: " " })
                                 }} />

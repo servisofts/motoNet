@@ -27,8 +27,8 @@ class RegistroUsuarioPage extends Component {
                     type: "text"
                 },
                 telefono: {
-                    label: "Telefono",
-                    ph: "Ingresar telefono",
+                    label: "Teléfono",
+                    ph: "Ingresar teléfono",
                     type: "text"
                 },
                 ci: {
