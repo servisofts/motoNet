@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import conexion.*;
-import Router.Router;
-import SocketCliente.SocketCliete;
-import SocketServer.SocketServer;
+import Server.SSSAbstract.SSSessionAbstract;
 import Viaje.LatLng;
 import Viaje.ViajeHilo;
 import util.*;
@@ -29,21 +27,21 @@ public class TipoTarifa {
     // correo CV
     // estado INT
 
-    public TipoTarifa(JSONObject data, Router router) {
+    public TipoTarifa(JSONObject data, SSSessionAbstract session) {
         switch (data.getString("type")) {
             case "getAll":
-                getAll(data, router);
+                getAll(data, session);
                 break;
             case "registro":
-                registro(data, router);
+                registro(data, session);
                 break;
             case "editarMontoTipoViaje":
-                editarMontoTipoViaje(data, router);
+                editarMontoTipoViaje(data, session);
                 break;
         }
     }
 
-    public void getAll(JSONObject obj, Router router) {
+    public void getAll(JSONObject obj, SSSessionAbstract session) {
         try {
             String consulta = "";
             consulta += "select array_to_json(array_agg(tipo_tarifa.*)) as json \n";
@@ -56,7 +54,7 @@ public class TipoTarifa {
         }
     }
 
-    public void registro(JSONObject obj, Router router) {
+    public void registro(JSONObject obj, SSSessionAbstract session) {
         JSONObject data = obj.getJSONObject("data");
         try {
 
@@ -76,7 +74,7 @@ public class TipoTarifa {
         }
 
     }
-    public void editarMontoTipoViaje(JSONObject obj, Router router) {
+    public void editarMontoTipoViaje(JSONObject obj, SSSessionAbstract session) {
         JSONObject data = obj.getJSONObject("data");
         try {
             String key_usuario = obj.getString("key_usuario");

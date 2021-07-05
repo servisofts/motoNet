@@ -2,7 +2,8 @@ package SocketCliente;
 
 import org.json.JSONObject;
 
-import Router.Router;
+import Server.SSSAbstract.SSServerAbstract;
+import Server.SSSAbstract.SSSessionAbstract;
 import util.console;
 
 public class ManejadorCliente {
@@ -19,8 +20,8 @@ public class ManejadorCliente {
                 console.log(console.ANSI_RED,"Component Not Found -> : "+action.getString("component"));
         }
         if (action.has("router")) {
-            Router router = Router.peticiones.get(action.getString("router"));
-            router.sendRespuesta(action);
+            SSSessionAbstract sesion =  SSServerAbstract.getSession(action.getString("router"));
+            sesion.send(action.toString());            
             return;
         }
     }

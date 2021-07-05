@@ -6,9 +6,6 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import conexion.*;
-import Router.Router;
-import SocketCliente.SocketCliete;
-import SocketServer.SocketServer;
 import Viaje.LatLng;
 import Viaje.ViajeHilo;
 import util.*;
@@ -16,6 +13,9 @@ import util.*;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import Server.SSSAbstract.SSServerAbstract;
+import Server.SSSAbstract.SSSessionAbstract;
 
 public class Viaje {
 
@@ -29,27 +29,60 @@ public class Viaje {
     // correo CV
     // estado INT
 
-    public Viaje(JSONObject data, Router router) {
+    public Viaje(JSONObject data, SSSessionAbstract session) {
         switch (data.getString("type")) {
-            case "buscar":
-                buscar(data, router);
-                break;
-            case "cancelarBusqueda":
-                cancelarBusqueda(data, router);
-                break;
-            case "cancelarBusquedaConductor":
-                cancelarBusquedaConductor(data, router);
-                break;
-            case "confirmarBusqueda":
-                confirmarBusqueda(data, router);
-                break;
-            case "negociarViajeConductor":
-                negociarViajeConductor(data, router);
-                break;
+        case "buscar":
+            buscar(data, session);
+            break;
+        case "cancelarBusqueda":
+            cancelarBusqueda(data, session);
+            break;
+        case "cancelarBusquedaConductor":
+            cancelarBusquedaConductor(data, session);
+            break;
+        case "cancelarViajeCliente":
+            cancelarViajeCliente(data, session);
+            break;
+        case "confirmarBusqueda":
+            confirmarBusqueda(data, session);
+            break;
+        case "negociarViajeConductor":
+            negociarViajeConductor(data, session);
+            break;
+        case "getViajeByKeyUsuario":
+            getViajeByKeyUsuario(data, session);
+            break;
         }
     }
 
-    public void buscar(JSONObject obj, Router router) {
+    public void getViajeByKeyUsuario(JSONObject obj, SSSessionAbstract session) {
+        try {
+
+            String key_usuario = obj.getString("key_usuario");
+            String consulta = "";
+            consulta += "select to_json(viaje.*) as json\n";
+            consulta += "from viaje\n";
+            consulta += "where estado = 1\n";
+            consulta += "AND (key_usuario = '" + key_usuario + "'\n";
+            consulta += "OR key_conductor = '" + key_usuario + "')\n";
+            consulta += "LIMIT 1\n";
+            JSONObject viajeActual = Conexion.ejecutarConsultaObject(consulta);
+            if (viajeActual.has("key")) {
+                JSONObject viaje = getViajeAndDestinos(viajeActual.getString("key"));
+                obj.put("data", viaje);
+            } else {
+                obj.put("data", false);
+            }
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            obj.put("estado", "error");
+
+        }
+
+    }
+
+    public void buscar(JSONObject obj, SSSessionAbstract session) {
         JSONObject data = obj.getJSONObject("data");
         try {
             JSONObject objViaje = new JSONObject();
@@ -101,12 +134,13 @@ public class Viaje {
             e.printStackTrace();
         }
     }
-    
 
-    public void confirmarBusqueda(JSONObject obj, Router router) {
+    public void confirmarBusqueda(JSONObject obj, SSSessionAbstract session) {
         try {
             String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
+            String key_conductor = obj.getString("key_conductor");
+            String key_movimiento = obj.getString("key_movimiento"); // AGREGAR EL KET MOVIMIENTO ACEPTADO AL VIAJE
 
             JSONObject viaje = getViajeAndDestinos(key_viaje);
 
@@ -121,15 +155,16 @@ public class Viaje {
                 return;
             }
             Conexion.ejecutarUpdate(
-                    "UPDATE viaje SET key_conductor = '" + key_usuario + "' WHERE key = '" + key_viaje + "'");
-            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_ACEPTO_CONDUCTOR, key_usuario);
-            viaje.put("key_conductor", key_usuario);
+                    "UPDATE viaje SET key_conductor = '" + key_conductor + "' WHERE key = '" + key_viaje + "'");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_INICIO_VIAJE, key_usuario);
+            viaje = getViajeAndDestinos(key_viaje);
             JSONObject objSend = new JSONObject();
             objSend.put("component", "viaje");
             objSend.put("type", "confirmarBusqueda");
             objSend.put("data", viaje);
             objSend.put("estado", "exito");
-            SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+            SSServerAbstract.sendUser(objSend.toString(), key_conductor);
+            // SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
             obj.put("data", viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {
@@ -138,7 +173,7 @@ public class Viaje {
 
     }
 
-    public void negociarViajeConductor(JSONObject obj, Router router) {
+    public void negociarViajeConductor(JSONObject obj, SSSessionAbstract session) {
         try {
             String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
@@ -167,7 +202,8 @@ public class Viaje {
             objSend.put("type", "negociarViajeConductor");
             objSend.put("data", viaje);
             objSend.put("estado", "exito");
-            SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+            SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+            // SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
             obj.put("data", viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {
@@ -176,7 +212,7 @@ public class Viaje {
 
     }
 
-    public void cancelarBusqueda(JSONObject obj, Router router) {
+    public void cancelarBusqueda(JSONObject obj, SSSessionAbstract session) {
         try {
 
             String key_usuario = obj.getString("key_usuario");
@@ -192,7 +228,23 @@ public class Viaje {
 
     }
 
-    public void cancelarBusquedaConductor(JSONObject obj, Router router) {
+    public void cancelarViajeCliente(JSONObject obj, SSSessionAbstract session) {
+        try {
+
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_VIAJE, key_usuario);
+            Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" + key_viaje + "'");
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            e.printStackTrace();
+            obj.put("estado", "error");
+
+        }
+
+    }
+
+    public void cancelarBusquedaConductor(JSONObject obj, SSSessionAbstract session) {
         try {
 
             String key_usuario = obj.getString("key_usuario");
@@ -221,6 +273,7 @@ public class Viaje {
     public static final String TIPO_INICIO_BUSQUEDA = "inicio_busqueda";
     public static final String TIPO_CANCELO_BUSQUEDA = "cancelo_busqueda";
     public static final String TIPO_CANCELO_BUSQUEDA_CONDUCTOR = "cancelo_busqueda_conductor";
+    public static final String TIPO_CANCELO_VIAJE = "cancelo_viaje";
     public static final String TIPO_NOTIFICO_CONDUCTOR = "notifico_conductor";
     public static final String TIPO_NEGOCIACION_CONDUCTOR = "negociacion_conductor";
     public static final String TIPO_ACEPTO_CONDUCTOR = "acepto_conductor";

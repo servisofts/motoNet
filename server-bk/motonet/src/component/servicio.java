@@ -7,9 +7,11 @@ import java.security.cert.X509Certificate;
 
 import Config.Config;
 import SSL.SSL;
+import Server.ServerSocket.ServerSocket;
+import Server.ServerSocketWeb.ServerSocketWeb;
+import ServerHttp.ServerHttp;
 import SocketCliente.SocketCliete;
-import SocketServer.SocketServer;
-import SocketWeb.SocketWeb;
+
 import util.Regex;
 
 import org.bouncycastle.util.encoders.Base64;
@@ -57,14 +59,13 @@ public class servicio {
     private void initServer(JSONObject obj) {
         if (obj.getString("estado").equals("exito")) {
 
-
             // Config.setSocketCliente(obj);
-             SocketServer.Start(obj.getJSONObject("data").getInt("puerto"));
-             SocketWeb.Start(obj.getJSONObject("data").getInt("puerto_ws"));
-          //  GlupApplication.openSpring();
+            new ServerSocket(obj.getJSONObject("data").getInt("puerto"));
+            new ServerSocketWeb(obj.getJSONObject("data").getInt("puerto_ws"));
+            ServerHttp.Start(obj.getJSONObject("data").getInt("puerto_http"));
+            // GlupApplication.openSpring();
 
-
-           JSONObject objSend = new JSONObject();
+            JSONObject objSend = new JSONObject();
             objSend.put("component", "servicio");
             objSend.put("type", "getServicioHabilitado");
             objSend.put("key", obj.getJSONObject("data").getString("key"));

@@ -16,8 +16,8 @@ import javax.net.ssl.SSLSocketFactory;
 import component.ManejadorServicio;
 import util.console;
 import Config.Config;
-import Router.Router;
 import SSL.SSL;
+import Server.SSSAbstract.SSSessionAbstract;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -164,7 +164,6 @@ public class SocketCliete extends Thread {
         } catch (Exception e) {
             if (e.getMessage() != null) {
                 console.log(console.ANSI_RED,"ERROR: SocketCliente: OnMensaje: " + e.getMessage());
-
             } else {
                 this.Open = false;
                 console.log(console.ANSI_RED,"Session cliente close");
@@ -176,7 +175,6 @@ public class SocketCliete extends Thread {
 
     public void send(String data) {
         // SocketCliete.StartServicio("usuario");
-
         console.log(console.ANSI_RED,"----->Send -> "+config.getJSONObject("cert").getString("OU") +" ------------START-------------- \n"+ data.toString() +"\n-------------------------------------END------------");
         response.println(data);
         response.flush();
@@ -188,9 +186,8 @@ public class SocketCliete extends Thread {
         Clientes.get(server).response.flush();
     }
 
-    public static void send(String server, JSONObject data, Router router) {
-
-        data.put("router", Router.setPeticion(router));
+    public static void send(String server, JSONObject data, SSSessionAbstract session) {
+        data.put("router", session.getIdSession());
         Clientes.get(server).response.println(data);
         Clientes.get(server).response.flush();
 

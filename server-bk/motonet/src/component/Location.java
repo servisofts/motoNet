@@ -6,9 +6,7 @@ import java.sql.SQLException;
 import java.util.UUID;
 
 import conexion.*;
-import Router.Router;
-import SocketCliente.SocketCliete;
-import SocketServer.SocketServer;
+import Server.SSSAbstract.SSSessionAbstract;
 import util.*;
 
 import org.json.JSONArray;
@@ -27,25 +25,25 @@ public class Location {
     // correo CV
     // estado INT
 
-    public Location(JSONObject data, Router router) {
+    public Location(JSONObject data, SSSessionAbstract session) {
         switch (data.getString("type")) {
             case "registro":
-                registro(data, router);
+                registro(data, session);
                 break;
             default:
-                defaultType(data, router);
+                defaultType(data, session);
         }
     }
 
-    public void registro(JSONObject obj, Router router) {
+    public void registro(JSONObject obj, SSSessionAbstract session) {
         System.out.println(obj.toString());
-        SocketServer.sendAll(obj.toString());
-        SocketCliete.send("geolocation", obj, router);
+        // SocketServer.sendAll(obj.toString());
+        // SocketCliete.send("geolocation", obj, session);
     }
 
-    public void defaultType(JSONObject obj, Router router) {
+    public void defaultType(JSONObject obj, SSSessionAbstract session) {
         System.out.println(obj.toString());
-        SocketCliete.send("geolocation", obj, router);
+        // SocketCliete.send("geolocation", obj, session);
 
     }
 }
