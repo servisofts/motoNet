@@ -38,7 +38,7 @@ export default class DetalleViaje extends Component {
                     })
                 }]
             }}>
-                <ComponentDetalleViaje />
+                <ComponentDetalleViaje tipo_viaje={this.props.tipo_viaje} duracion={this.props.duracion} />
             </Animated.View >
         );
     }

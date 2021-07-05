@@ -42,7 +42,13 @@ export default class ViajePedirYBuscar extends Component {
         })
     }
     setTiempoDuracion(data) {
-        console.log(data);
+        if (
+           !this.state.duracion
+        ) {
+            this.setState({ duracion: data })
+            console.log(data);
+        }
+       
     }
     render() {
         this.data = this.props.navigation.getParam("data");
@@ -85,7 +91,7 @@ export default class ViajePedirYBuscar extends Component {
                             direccion2={this.data.direccionFin}
                         />
                     </MapView>
-                    <DetalleViaje />
+                    <DetalleViaje tipo_viaje={this.data} duracion={this.state.duracion} />
                 </View>
             </View>
         );
