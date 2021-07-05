@@ -64,23 +64,52 @@ const RecuperarPass = (props) => {
                         }}>
                         <Svg name="logoCompletoRecurso"
                             style={{
-                                width: 200,
-                                height: 200,
+                                width: 100,
+                                height: 100,
                             }} />
                     </View>
 
                     <View
                         style={{
-                            width: "80%",
+                            marginTop: 20,
+                            width: '100%',
+                            alignItems: 'center',
+                            // flexDirection: 'column',
+                        }}>
+                        <Text style={styles.textoTitulo}>Recuperar contraseña</Text>
+                    </View>
+
+                    <View
+                        style={{
+                            marginTop: 10,
+                            width: '100%',
+                            alignItems: 'center',
+                            // flexDirection: 'column',
+                        }}>
+                        <Text style={styles.texto}>Por favor ingresar su correo electrónico para recuperar su contraseña</Text>
+                    </View>
+
+                    <View
+                        style={{
+                            width: "90%",
                             marginTop: 30,
-                            // backgroundColor: "#ccc"
+                            alignItems: 'center',
+                            backgroundColor: "#fff",
+                            padding:10,
+                            borderRadius:10
                         }}>
 
-                        <Text style={styles.texto}>Recuperar contraseña:</Text>
+                            <View
+                             style={{
+                                width: "100%",
+                                //marginTop: 30,
+                                alignItems: 'center',
+                                padding:10
+                            }}> 
 
                         <TextInput
-                            style={!obj.usr.error ? styles.touch2 : styles.touch2Error}
-                            placeholder={"Ingrese su correo electrónico"}
+                            style={!obj.usr.error ? styles.touch2 : styles.touch2Error }
+                            placeholder={"Ingresar correo"}
                             onChangeText={text => hanlechage(text, "usr")}
                             value={obj.usr.value}
                             autoCapitalize='none'
@@ -90,17 +119,17 @@ const RecuperarPass = (props) => {
                             keyboardType={'email-address'}
                             autoCorrect={false}
                             underlineColorAndroid={'transparent'}
+                            
                         />
-                    </View>
 
-                    <View
+<View
                         style={{
                             marginTop: 10,
-                            width: '80%',
+                            width: '100%',
                             alignItems: 'center',
                             justifyContent: "center",
                             // backgroundColor:"#ccc",
-                            marginBottom: 20
+                            //marginBottom: 20
                         }}>
                         {props.state.usuarioReducer.estadoEmail == "cargando" ? (
                             <View style={styles.touch4}>
@@ -153,14 +182,19 @@ const RecuperarPass = (props) => {
                             }}>
                             <Text
                                 style={{
-                                    color: '#fff',
-                                    padding: 10,
+                                    color: '#F7001D',
+                                    //padding: 10,
                                 }} >
-                                Verificar Codigo
+                                Verificar Código
                         </Text>
                         </TouchableOpacity>
 
                     </View>
+
+                        </View>
+                    </View>
+
+                    
                 </View>
             </ScrollView>
         </View>
@@ -169,19 +203,20 @@ const RecuperarPass = (props) => {
 const styles = StyleSheet.create({
 
     touch2: {
-        backgroundColor: "#EAEAE2",
+        backgroundColor: "#F7F7F7",
         width: "100%",
         height: 50,
         paddingLeft: 15,
-        borderRadius: 10,
+        borderRadius: 5,
         shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 2,
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
+        color:"#707070"
     },
     touch2Error: {
         backgroundColor: "#EAEAE2",
@@ -202,49 +237,59 @@ const styles = StyleSheet.create({
     },
 
     touch4: {
-        backgroundColor: "#2C4C7E",
-        width: "80%",
+        backgroundColor: "#F7001D",
+        width: "100%",
         height: 40,
         margin: 2,
-        marginTop: 20,
+        marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 2,
+        borderRadius: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
     },
 
 
     texto: {
-        color: "#000",
+        color: "#fff",
         fontSize: 15,
+        textAlign:"center"
+    },
+
+    textoTitulo: {
+        color: "#fff",
+        fontSize: 27,
+        fontWeight:'bold'
     },
 
     touch5: {
-        backgroundColor: "#a4a4a4",
-        width: "80%",
+        backgroundColor: "#fff",
+        borderStyle:"solid",
+        borderColor:"#F7001D",
+        width: "100%",
         height: 40,
-        margin: 2,
-        marginTop: 20,
+        //margin: 2,
+        marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
         borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 2,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        //elevation: 2,
+        borderWidth: 2,
     },
 });
 const initStates = (state) => {

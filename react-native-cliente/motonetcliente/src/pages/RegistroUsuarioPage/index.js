@@ -130,16 +130,27 @@ class RegistroUsuarioPage extends Component {
                                     var arr = [];
                                     Object.keys(this.state.datos).map((key) => {
                                         var data = this.state.datos[key];
-                                        this._ref[key].verify();
+                                        var value = this._ref[key].verify();
+                                        if (!value) isValid = false;
                                         if (data["key_db"]) {
                                             var cabeceraDato = this.getKeyDato(data["key_db"]);
                                             arr.push({
                                                 dato: cabeceraDato,
-                                                data: data,
+                                                data: value,
                                             })
                                         }
                                     })
-                                    console.log(arr);
+                                    if (isValid) {
+                                        var objSend = {
+                                            component: "usuario",
+                                            type: "registro",
+                                            estado: "cargando",
+                                            cabecera: "registro_cliente",
+                                            data: arr
+                                        }
+                                        this.props.state.socketClienteReducer.sessiones["motonet"].send(objSend, true);
+                                    }
+
                                 }}
                             />
                         </BottomContent>
