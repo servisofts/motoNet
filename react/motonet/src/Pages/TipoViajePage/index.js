@@ -68,7 +68,7 @@ const TipoViajePage = (props) => {
                 return (
                     <Grid container direction="row">
                         <Grid item xs={8}>
-                            <form className={classes.root} noValidate autoComplete="off">
+                            {/* <form className={classes.root} noValidate autoComplete="off">
                                 <TextField id="descripcionLabel" label="Descripción" required />
 
                                 <Button variant="contained" color="secondary" onClick={() => {
@@ -91,7 +91,7 @@ const TipoViajePage = (props) => {
                                 }}>
                                     Agregar a Lista
                                 </Button>
-                            </form>
+                            </form> */}
 
                             <TableNewMe
                                 title={"Tipo de Viajes"}

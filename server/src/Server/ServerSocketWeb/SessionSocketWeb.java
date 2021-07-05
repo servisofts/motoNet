@@ -47,7 +47,10 @@ public class SessionSocketWeb extends SSSessionAbstract {
             fut = this.miSession.getRemote().sendStringByFuture(mensaje);
             fut.get(2, TimeUnit.SECONDS); // wait for send to complete.
         } catch (Exception e) {
-            e.printStackTrace();
+            // e.printStackTrace();
+            System.out.println("Error al enviar mensaje ws");
+            miSession.close();
+
         }
     }
 
