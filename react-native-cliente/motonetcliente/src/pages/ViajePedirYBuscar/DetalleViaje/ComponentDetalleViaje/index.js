@@ -45,7 +45,10 @@ const ComponentDetalleViaje = (props) => {
         // alert("falta rellenar datos en la carrera")
     }
 
-    const getPrecio = (distancia, duracion) => {
+    const getPrecio = (distancia, duracion, data) => {
+
+        // Object.keys(data)=>()
+
         // var keyTipoViaje = props.state.viajesReducer.key_tipo_viaje;
         // if (!keyTipoViaje) {
         //     return <Text style={{ color: "#ccc" }}>Error. (keyTipoViaje) Not found</Text>
@@ -168,6 +171,21 @@ const ComponentDetalleViaje = (props) => {
         )
     }
 
+    const getAllPrecio = () => {
+        if (props.state.tipoViajesReducer.estado == "cargado") {
+            return <ActivityIndicator color="#000" />
+        }
+        if (!props.state.tipoViajesReducer.data) {
+            props.state.socketClienteReducer.sessiones["motonet"].send({
+                component: "tipoViaje",
+                type: "getAll",
+                key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                estado: "cargando"
+            }, true);
+            return <View />
+        }
+    }
+
     return (
 
         <View style={{
@@ -182,6 +200,8 @@ const ComponentDetalleViaje = (props) => {
             flex: 1,
             bottom: 0
         }}>
+
+            {getAllPrecio()}
 
             <View style={{
                 flex: 1,
@@ -225,7 +245,7 @@ const ComponentDetalleViaje = (props) => {
                                 color: STheme.color.textb,
                                 fontSize: 12,
                             }}>
-                                22 min tiempo perdido
+
                             </Text>
                         </View>
 
@@ -234,8 +254,6 @@ const ComponentDetalleViaje = (props) => {
                             justifyContent: "center",
                             alignItems: "center",
                         }}>
-
-
                             <Boton1 type="1"
                                 label="Confirmar"
                                 cargando={props.state.viajesReducer.estado == "cargando"}
@@ -253,7 +271,6 @@ const ComponentDetalleViaje = (props) => {
                     {getDetalleRuta()}
                 </View>
             </View>
-
         </View>
 
     )

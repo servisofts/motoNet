@@ -24,6 +24,8 @@ class BarraSuperior extends Component {
         this.startAnimation();
     }
 
+
+
     getTitle(text) {
         var text = text
         if (this.props.title) {
@@ -36,11 +38,61 @@ class BarraSuperior extends Component {
             // fontFamily:"myFont"
         }}>{text}</Text>)
     }
+
+
+    getTextFieldDireccion = (svg, direccion) => {
+
+        if (!direccion) {
+            return <View />
+        }
+
+        return (
+            <View style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'row',
+                width: "90%",
+                borderColor: this.props.color != "negro" ? "#fff" : "#000",
+                borderWidth: 2,
+                borderRadius: 5,
+                height: 40,
+            }}>
+                <View style={{
+                    width: 40,
+                    justifyContent: "center",
+                    alignItems: "center",
+                }}>
+                    <Svg name={svg}
+                        style={{
+                            width: 20,
+                            height: 20,
+                            fill: "#fff"
+                        }} />
+                </View>
+
+                <Text style={{
+                    flex: 1,
+                    fontSize: 10,
+                    height: 40,
+                    alignItems: 'center',
+                    justifyContent: "center",
+                    textAlignVertical: "center",
+                    height: "100%",
+                    fontSize: 13,
+                    color: "#fff",
+                }}
+                    numberOfLines={1}>
+                    {direccion.direccion}
+                </Text>
+            </View>
+        )
+    }
+
     render() {
         return (
             <Animated.View style={{
                 width: "100%",
-                height: 200,
+                height: (this.props.tipo_viaje === "pedido" ? 150 : 200),
                 flexDirection: "row",
                 // backgroundColor: "#fff",
                 transform: [
@@ -89,10 +141,14 @@ class BarraSuperior extends Component {
                             {this.getTitle(this.props.title)}
                         </View>
                     </View>
+
                     <View style={{
                         height: 150,
+                        justifyContent: "space-evenly",
+                        alignItems: "center"
                     }}>
-
+                        {this.getTextFieldDireccion("MarkerW", this.props.direccion1)}
+                        {this.getTextFieldDireccion("Pointer", this.props.direccion2)}
                     </View>
                 </View>
 

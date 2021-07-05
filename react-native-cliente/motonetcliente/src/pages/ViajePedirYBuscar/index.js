@@ -51,9 +51,13 @@ export default class ViajePedirYBuscar extends Component {
                 flex: 1,
                 backgroundColor: "#fff",
             }}>
-                <BarraSuperior title={this.data.tipo_viaje} goBack={() => {
-                    this.props.navigation.goBack();
-                }} />
+                <BarraSuperior title={this.data.tipo_viaje}
+                    tipo_viaje={this.data.tipo_viaje}
+                    direccion1={this.data.direccionInicio}
+                    direccion2={this.data.direccionFin}
+                    goBack={() => {
+                        this.props.navigation.goBack();
+                    }} />
                 <View style={{
                     flex: 1,
                 }}>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../../../Svg'
 type tprops = {
@@ -26,6 +26,7 @@ class ListaAutoCompleteItem extends Component<tprops> {
         }, true);
     }
 
+
     render() {
 
         if (this.props.state.locationGoogleReducer.estado == "exito" && this.props.state.locationGoogleReducer.type == "detail") {
@@ -34,12 +35,18 @@ class ListaAutoCompleteItem extends Component<tprops> {
             console.log(this.props.direccion)
             // datos.direccion = this.state.direccion
             if (this.props.seleccionar) this.props.seleccionar(datos);
-
         }
+
         return (
             <TouchableOpacity
                 onPress={() => {
                     this.getDetail();
+                    // alert("dfgdf")
+                }}
+                onLongPress={() => {
+                    // alert(this.props.keyUbicacion)
+                    if (this.props.longPress) this.props.longPress();
+                    // this.deleteAddress(this.props.keyUbicacion)
                 }}
                 style={{
                     width: "95%",
