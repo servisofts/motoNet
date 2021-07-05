@@ -51,6 +51,9 @@ export default (state, action) => {
             case "cambiarPassByCodigo":
                 cambiarPassByCodigo(state, action);
                 break;
+            case "insertarDato":
+                insertarDato(state, action);
+                break;
         }
         state.type = action.type;
         state.lastSend = new Date();
@@ -200,5 +203,21 @@ const cambiarPassByCodigo = (state, action) => {
     }
     if (action.estado === "error") {
         state.errorEmailRecuperado = action.error
+    }
+}
+
+
+const insertarDato = (state, action) => {
+    state.estado = action.estado
+    state.estadoInsertar = action.estado
+    if (action.estado === "exito") {
+        if (action.key_datos.length > 0) {
+            action.key_datos.map((key, i) => {
+                console.log(key);
+                state.usuarioDatos[key] = action.data[i]
+            })
+        } else {
+            state.usuarioDatos = true;
+        }
     }
 }
