@@ -11,6 +11,7 @@ import BuscarDireccionPage from './BuscarDireccionPage';
 import MensajeriaRegistroPage from './MensajeriaRegistroPage';
 import TransportePage from './TransportePage';
 import ViajePedirYBuscar from './ViajePedirYBuscar';
+import ViajeEsperaPage from './ViajeEsperaPage';
 // import ConfirmarPage from './ConfirmarPage';
 // import ChatPage from './ChatPage';
 // import EmergenciaEsperaPage from './EmergenciaEsperaPage';
@@ -37,7 +38,8 @@ export const getPages = () => {
         MensajeriaRegistroPage,
         TransportePage,
         BuscarDireccionPage,
-        ViajePedirYBuscar
+        ViajePedirYBuscar,
+        ViajeEsperaPage
 
         // ConfirmarPage,
         // ChatPage,

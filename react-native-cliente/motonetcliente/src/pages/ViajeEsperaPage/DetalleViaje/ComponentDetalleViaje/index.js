@@ -9,30 +9,19 @@ var totalViaje;
 
 const ComponentDetalleViaje = (props) => {
 
-    let data = props.tipo_viaje
-    let key_viaje = ""
+    // let data = props.tipo_viaje
 
     // console.log("edson " + JSON.stringify(data))
 
-    const PedirViaje = (tiempo, distancia) => {
-        var exito = true        
+    const cancelarViaje = () => {
+        console.log(props.state.viajesReducer.data)
+        var exito = true
         if (exito) {
             props.state.socketClienteReducer.sessiones["motonet"].send({
                 component: "viaje",
-                type: "buscar",
-                data: {
-                    key_tipo_viaje: key_viaje,
-                    tiempo: tiempo,
-                    distancia: distancia,
-                    monto_estimado: totalViaje,
-                    direccion_inicio: data.direccionInicio,
-                    direccion_fin: data.direccionFin,
-                    pedidos: data.productos,
-                    paquete: data.paquete,
-                    detalle_p1: data.inicio,
-                    detalle_p2: data.fin,
-                    key_usuario: props.state.usuarioReducer.usuarioLog.key,
-                },
+                type: "cancelarBusqueda",
+                key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                key_viaje: props.state.viajesReducer.data.key,
                 estado: "cargando"
             }, true);
             return <View />
@@ -43,51 +32,8 @@ const ComponentDetalleViaje = (props) => {
 
     const getDetalleRuta = () => {
 
-        var tipos_de_viajes = props.state.tipoViajesReducer.data;
-        if (!tipos_de_viajes) {
-            return <View />
-        }
-        var TipoViaje = false;
-        var distancia = false
-        var duracion = false
-        Object.keys(tipos_de_viajes).map((key) => {
-            var obj = tipos_de_viajes[key];
-            var codigo = props.tipo_viaje.tipo_viaje;
-            if (codigo == "transporte") {
-                codigo += "-" + props.tipo_viaje.tipo;
-            }
-            if (obj.codigo == codigo) {
-                TipoViaje = obj;
-            }
-        })
-
-        key_viaje = TipoViaje.key
-
-        var dataDis = props.duracion
-        if (TipoViaje.codigo == "pedido") {
-            dataDis = { duracion: 1000, distancia: 5000 };
-        }
-
-        if (!dataDis) {
-            return <ActivityIndicator color="#000" />
-        }
-
-        duracion = dataDis.duracion
-        distancia = dataDis.distancia
-
-        if (!TipoViaje) {
-            return <Text>Error. (TipoViaje) Not found</Text>
-        }
-        var tarifas = TipoViaje.tarifas;
-        if (!tarifas) {
-            return <Text>Error. (tarifas) Not found</Text>
-        }
-        var montoTiempo = tarifas["Monto por tiempo"]
-        var montoKm = tarifas["Monto por kilometro"]
-        var totalTiempo = (montoTiempo.monto / (60)) * duracion;
-        var totalDistancia = (montoKm.monto / 1000) * distancia;
-        var totalCalculado = totalTiempo + totalDistancia;
-        totalViaje = Math.round(totalCalculado)
+        // var tipos_de_viajes = props.state.tipoViajesReducer.data;
+        
 
         return (
             <View style={{
@@ -125,14 +71,14 @@ const ComponentDetalleViaje = (props) => {
                                 color: STheme.color.textb,
                                 fontSize: 16,
                                 fontWeight: "bold"
-                            }}>{(duracion / 60).toFixed(0)} min Aprox.
+                            }}>343 min Aprox.
                             </Text>
 
                             <Text style={{
                                 color: STheme.color.textb,
                                 fontSize: 12,
                             }}>
-                                {(distancia / 1000).toFixed(1)} km Aprox
+                             434 km Aprox
                             </Text>
                         </View>
 
@@ -142,9 +88,9 @@ const ComponentDetalleViaje = (props) => {
                             alignItems: "center",
                         }}>
                             <Boton1 type="1"
-                                label="Confirmar"
+                                label="Cancelar"
                                 cargando={props.state.viajesReducer.estado == "cargando"}
-                                onPress={() => PedirViaje((duracion / 60).toFixed(0), (distancia / 1000).toFixed(1))} />
+                                onPress={() => cancelarViaje()} />
                         </View>
                     </View>
                 </View>
@@ -240,21 +186,21 @@ const ComponentDetalleViaje = (props) => {
         )
     }
 
-    const getAllPrecio = () => {
-        if (props.state.tipoViajesReducer.estado == "cargando") {
-            return <ActivityIndicator color="#000" />
-        }
-        if (!props.state.tipoViajesReducer.data) {
-            props.state.socketClienteReducer.sessiones["motonet"].send({
-                component: "tipoViaje",
-                type: "getAll",
-                key_usuario: props.state.usuarioReducer.usuarioLog.key,
-                estado: "cargando"
-            }, true);
-            return <View />
-        }
-        return <View />
-    }
+    // const getAllPrecio = () => {
+    //     if (props.state.tipoViajesReducer.estado == "cargando") {
+    //         return <ActivityIndicator color="#000" />
+    //     }
+    //     if (!props.state.tipoViajesReducer.data) {
+    //         props.state.socketClienteReducer.sessiones["motonet"].send({
+    //             component: "tipoViaje",
+    //             type: "getAll",
+    //             key_usuario: props.state.usuarioReducer.usuarioLog.key,
+    //             estado: "cargando"
+    //         }, true);
+    //         return <View />
+    //     }
+    //     return <View />
+    // }
 
     return (
 
@@ -271,9 +217,10 @@ const ComponentDetalleViaje = (props) => {
             bottom: 0
         }}>
 
-            {getAllPrecio()}
+            {/* {getAllPrecio()} */}
 
             {getDetalleRuta()}
+            {/* <Text>dsfdsfsd</Text> */}
 
         </View >
 
