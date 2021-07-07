@@ -16,6 +16,7 @@ import Svg from "../../Svg";
 import AppParam from "../../Json/index.json";
 //import ImgFondoCruces from '../../component/ImgFondoCruces';
 import BarraSuperior from "../../component/BarraSuperior";
+import STextInput from '../../component/STextImput';
 
 class NuevoPassPage extends Component {
   //para que no muestre el encabezado por defecto
@@ -68,20 +69,27 @@ class NuevoPassPage extends Component {
     //     exito = false;
     // }
 
+      if (this.state.pass.value != this.state.confirmarPass.value) {
+         this.state.confirmarPass.error = true;
+         alert("La contraseña no coinciden")
+        exito = false;
+     }
+
     this.setState({ ...this.state });
 
     if (exito) {
-      this.props.state.socketClienteReducer.sessiones["motonet"].send(
-        {
-          component: "usuario",
-          type: "cambiarPassByCodigo",
-          data: this.state.pass.value,
-          estado: "cargando",
-          usuario_recuperado: this.props.state.usuarioReducer.usuarioRecuperado,
-        },
-        true
-      );
-
+      // this.props.state.socketClienteReducer.sessiones["motonet"].send(
+      //   {
+      //     component: "usuario",
+      //     type: "cambiarPassByCodigo",
+      //     data: this.state.pass.value,
+      //     estado: "cargando",
+      //     usuario_recuperado: this.props.state.usuarioReducer.usuarioRecuperado,
+      //   },
+      //   true
+      // );
+      
+      //alert("sì registra")
     //alert(JSON.stringify(this.props.state.usuarioReducer.usuarioRecuperado))
       return <View />;
     }
@@ -161,9 +169,9 @@ class NuevoPassPage extends Component {
                   onChangeText={(text) => this.handleChange(text, "pass")}
                   value={this.state.pass.value}
                   autoCapitalize="none"
-                  secureTextEntry
+                  type="password"
                 />
-            
+                
                 <TextInput
                   style={
                     this.state.confirmarPass.error ? styles.error : styles.input
@@ -250,6 +258,7 @@ const styles = StyleSheet.create({
     // shadowOpacity: 0.25,
     // shadowRadius: 3.84,
     // elevation: 5,
+    //color:"#000"
   },
   touch3: {
     marginTop: 15,

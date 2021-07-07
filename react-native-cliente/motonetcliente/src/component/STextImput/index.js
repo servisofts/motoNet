@@ -124,9 +124,9 @@ export default class STextImput extends Component<tprops> {
                         borderRadius: 4,
                         paddingStart: 8,
                     }}
-
+                        
                         {...this.getTextArea()}
-
+                        //type={this.props.type == "email" ? "email" : ""}
                         value={this.state.value}
                         onChangeText={(text) => {
                             this.setState({ value: text });
