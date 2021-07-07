@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, NativeModules, ActivityIndicator } from 'react-native';
 import Svg from '../../Svg';
 import ImgFondoCruces from '../ImgFondoCruces'
+import BarraSuperior from '../../component/BarraSuperior';
 
 const RecuperarPass = (props) => {
 
@@ -46,9 +47,9 @@ const RecuperarPass = (props) => {
             flex: 1,
         }}>
 
-
+            <BarraSuperior title={" "} goBack={() => { props.navigation.goBack() }} />
             <ScrollView>
-
+            
                 <View style={{
                     width: "100%",
                     alignItems: "center",
@@ -151,13 +152,14 @@ const RecuperarPass = (props) => {
                                     }
                                     setObj({ ...obj })
                                     if (exito) {
-                                        props.state.socketClienteReducer.sessiones["clinica_nj"].send({
+                                        props.state.socketClienteReducer.sessiones["motonet"].send({
                                             component: "usuario",
                                             type: "recuperarPass",
                                             data: obj.usr.value,
                                             estado: "cargando"
                                         }, true);
                                     }
+                                    //alert(obj.usr.value)
                                     // obj.usr = ""
                                     // setObj({ ...obj })
                                 }}
@@ -219,21 +221,22 @@ const styles = StyleSheet.create({
         color:"#707070"
     },
     touch2Error: {
-        backgroundColor: "#EAEAE2",
+        backgroundColor: "#F7F7F7",
         width: "100%",
         height: 50,
         paddingLeft: 15,
         borderRadius: 10,
         shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 2,
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
         borderColor: "red",
-        borderWidth: 1
+        borderWidth: 1,
+        color:"#707070"
     },
 
     touch4: {
@@ -280,7 +283,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderRadius: 10,
+        borderRadius: 5,
         // shadowColor: "#000",
         // shadowOffset: {
         //     width: 0,

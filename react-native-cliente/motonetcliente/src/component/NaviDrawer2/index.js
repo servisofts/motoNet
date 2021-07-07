@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback, Animated, Image, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
+import AppParams from '../../Json';
 import Svg from '../../Svg';
 
 class NaviDrawer2 extends Component {

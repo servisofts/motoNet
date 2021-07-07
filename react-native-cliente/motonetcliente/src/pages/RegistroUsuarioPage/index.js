@@ -101,6 +101,10 @@ class RegistroUsuarioPage extends Component {
         return <View />
     }
     render() {
+        //Dentro de render verifico si registro usuario con usuarioLog
+        if(this.props.state.usuarioReducer.usuarioLog){
+            this.props.navigation.replace("CargaPage")
+        }
         return (<View style={{
             width: "100%",
             flex: 1,
@@ -150,6 +154,8 @@ class RegistroUsuarioPage extends Component {
                                         }
                                         this.props.state.socketClienteReducer.sessiones["motonet"].send(objSend, true);
                                     }
+
+                                    
 
                                 }}
                             />

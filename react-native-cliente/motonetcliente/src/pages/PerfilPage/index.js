@@ -237,6 +237,7 @@ class PerfilPage extends Component {
               style={{
                 width: "90%",
                 maxWidth: 600,
+                marginBottom:10
               }}
             >
               <FieldsPerfil datos={datos} />
