@@ -78,16 +78,16 @@ class NuevoPassPage extends Component {
     this.setState({ ...this.state });
 
     if (exito) {
-      // this.props.state.socketClienteReducer.sessiones["motonet"].send(
-      //   {
-      //     component: "usuario",
-      //     type: "cambiarPassByCodigo",
-      //     data: this.state.pass.value,
-      //     estado: "cargando",
-      //     usuario_recuperado: this.props.state.usuarioReducer.usuarioRecuperado,
-      //   },
-      //   true
-      // );
+      this.props.state.socketClienteReducer.sessiones["motonet"].send(
+        {
+          component: "usuario",
+          type: "cambiarPassByCodigo",
+          data: this.state.pass.value,
+          estado: "cargando",
+          usuario_recuperado: this.props.state.usuarioReducer.usuarioRecuperado,
+        },
+        true
+      );
       
       //alert("sì registra")
     //alert(JSON.stringify(this.props.state.usuarioReducer.usuarioRecuperado))

@@ -161,15 +161,15 @@ class RegistroUsuarioPage extends Component {
                                         }
                                     })
                                     if (isValid) {
-                                        // var objSend = {
-                                        //     component: "usuario",
-                                        //     type: "registro",
-                                        //     estado: "cargando",
-                                        //     cabecera: "registro_cliente",
-                                        //     data: arr
-                                        // }
-                                        // this.props.state.socketClienteReducer.sessiones["motonet"].send(objSend, true);
-                                        alert("Registrar")
+                                        var objSend = {
+                                            component: "usuario",
+                                            type: "registro",
+                                            estado: "cargando",
+                                            cabecera: "registro_cliente",
+                                            data: arr
+                                        }
+                                        this.props.state.socketClienteReducer.sessiones["motonet"].send(objSend, true);
+                                        //alert("Registrar")
                                     }
 
                                     
