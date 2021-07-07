@@ -91,6 +91,7 @@ const actualizarViaje = (state, action) => {
 const cancelarBusqueda = (state, action) => {
     state.type = action.type
     state.estado = action.estado
+    state.data = false
     AsyncStorage.removeItem("motonet_viaje");
 }
 

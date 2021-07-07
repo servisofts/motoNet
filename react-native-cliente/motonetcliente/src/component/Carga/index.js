@@ -25,7 +25,11 @@ class Carga extends Component {
     }
     redirect() {
         if (this.props.state.usuarioReducer.usuarioLog) {
-            this.props.navigation.replace("ServicioPage");
+            if (this.props.state.viajesReducer.data) {
+                this.props.navigation.replace("ViajeEsperaPage");
+            } else {
+                this.props.navigation.replace("ServicioPage");
+            }
         }
         this.props.navigation.replace("LoginPage");
     }
@@ -40,11 +44,19 @@ class Carga extends Component {
             this.props.state.usuarioReducer.usuarioCargado = true;
             try {
                 this.props.state.usuarioReducer.usuarioLog = JSON.parse(value)
+                this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                    component: "viaje",
+                    type: "getViajeByKeyUsuario",
+                    key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                    estado: "cargando"
+                }, true);
             } catch (error) {
+                console.log(error)
                 this.props.state.usuarioReducer.usuarioLog = false;
             }
         });
     }
+
 
     render() {
         this.validate();

@@ -3,11 +3,12 @@ import { connect } from 'react-redux'
 import { View, Text } from 'react-native';
 import BarraSuperior from './BarraSuperior';
 import DetalleViaje from './DetalleViaje';
-import MapView, { Marker } from 'react-native-maps';
-import RutaViaje from './RutaViaje';
+// import MapView, { Marker } from 'react-native-maps';
+// import RutaViaje from './RutaViaje';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
-class ViajePedirYBuscar extends Component {
+class ViajeEsperaPage extends Component {
+
     static navigationOptions = {
         headerShown: false,
     }
@@ -17,31 +18,32 @@ class ViajePedirYBuscar extends Component {
         };
 
     }
-    getMarker1 = () => {
-        if (!this.data.direccionInicio) return <View />
-        // console.log(this.state.direccion1)
-        return <Marker coordinate={this.data.direccionInicio} />
-    }
-    getMarker2 = () => {
-        if (!this.data.direccionFin) return <View />
-        // console.log(this.state.direccion1)
-        return <Marker coordinate={this.data.direccionFin} />
-    }
-    componentDidMount() {
-        this.center();
-    }
-    center = async () => {
-        await delay(500);
-        this.mapa.fitToCoordinates([this.data.direccionInicio, this.data.direccionFin], {
-            edgePadding: {
-                top: 300,
-                bottom: 500,
-                left: 50,
-                right: 50,
-            },
-            animated: true,
-        })
-    }
+    // getMarker1 = () => {
+    //     if (!this.data.direccionInicio) return <View />
+    //     // console.log(this.state.direccion1)
+    //     return <Marker coordinate={this.data.direccionInicio} />
+    // }
+    // getMarker2 = () => {
+    //     if (!this.data.direccionFin) return <View />
+    //     // console.log(this.state.direccion1)
+    //     return <Marker coordinate={this.data.direccionFin} />
+    // }
+    // componentDidMount() {
+    //     this.center();
+    // }
+    // center = async () => {
+    //     await delay(500);
+    //     this.mapa.fitToCoordinates([this.data.direccionInicio, this.data.direccionFin], {
+    //         edgePadding: {
+    //             top: 300,
+    //             bottom: 500,
+    //             left: 50,
+    //             right: 50,
+    //         },
+    //         animated: true,
+    //     })
+    // }
+
     setTiempoDuracion(data) {
         if (
             !this.state.duracion
@@ -50,30 +52,30 @@ class ViajePedirYBuscar extends Component {
             console.log(data);
         }
     }
+
     render() {
 
-        if (this.props.state.viajesReducer.data) {
+        if (!this.props.state.viajesReducer.data) {
             // console.log("dfdf")
-            this.props.navigation.replace("ViajeEsperaPage");
+            this.props.navigation.replace("ServicioPage");
         }
 
+
         this.data = this.props.navigation.getParam("data");
+
         return (
             <View style={{
                 flex: 1,
                 backgroundColor: "#fff",
             }}>
-                <BarraSuperior title={this.data.tipo_viaje}
-                    tipo_viaje={this.data.tipo_viaje}
-                    direccion1={this.data.direccionInicio}
-                    direccion2={this.data.direccionFin}
-                    goBack={() => {
-                        this.props.navigation.goBack();
-                    }} />
+                <BarraSuperior
+                    data={this.props.state.viajesReducer.data}
+                />
                 <View style={{
                     flex: 1,
+                    backgroundColor: "#f00"
                 }}>
-                    <MapView
+                    {/* <MapView
                         style={{
                             width: "100%",
                             flex: 1,
@@ -95,18 +97,19 @@ class ViajePedirYBuscar extends Component {
                             setTiempoDuracion={(data) => { this.setTiempoDuracion(data) }}
                             direccion1={this.data.direccionInicio}
                             direccion2={this.data.direccionFin}
-                        />
-                    </MapView>
-                    <DetalleViaje tipo_viaje={this.data} duracion={this.state.duracion} />
+                        /> */}
+                    {/* </MapView> */}
+                    <DetalleViaje />
                 </View>
             </View>
         );
     }
 }
 
+
 const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates)(ViajePedirYBuscar);
+export default connect(initStates)(ViajeEsperaPage);
 
