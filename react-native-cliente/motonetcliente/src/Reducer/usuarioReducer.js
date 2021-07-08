@@ -2,7 +2,7 @@ import { AsyncStorage } from 'react-native';
 import { act } from 'react-test-renderer';
 import AppParams from '../Json';
 const initialState = {
-    estado: "Not Found",
+    estado: false,
     estadoEmail: false,
     history: [],
     usuarioLog: false,

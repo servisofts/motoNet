@@ -1,11 +1,18 @@
-import React, { Component } from 'react';
-import { View, Text, Modal, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import ImageViewer from 'react-native-image-zoom-viewer';
-import ModalEditarPerfil from '../../component/ModalEditarPerfil';
-import ModalError from '../../component/ModalError';
-import ModalImage from '../../component/ModalImage';
-import ModalSuccess from '../../component/ModalSuccess';
-import RecuperarPass from '../../component/RecuperarPass2'
+import React, { Component } from "react";
+import {
+  View,
+  Text,
+  Modal,
+  TouchableOpacity,
+  StyleSheet,
+  Platform,
+} from "react-native";
+import ImageViewer from "react-native-image-zoom-viewer";
+import ModalEditarPerfil from "../../component/ModalEditarPerfil";
+import ModalError from "../../component/ModalError";
+import ModalImage from "../../component/ModalImage";
+import ModalSuccess from "../../component/ModalSuccess";
+//import RecuperarPass from '../../component/RecuperarPass2'
 
 class ModalPage extends Component {
   constructor(props) {
@@ -23,34 +30,27 @@ class ModalPage extends Component {
         // this.btnRecuperarPass.bind(this)
         // alert("assa")
         return (
-          < ModalImage
+          <ModalImage
             fotoUriAux={this.props.fotoUriAux}
             callbackAfterCloseModal={this.props.callbackAfterCloseModal}
-            otherParamsToSend={this.props.otherParamsToSend} />
-        )
+            otherParamsToSend={this.props.otherParamsToSend}
+          />
+        );
       case "ModalSuccess":
         return (
           <ModalSuccess
             closeModal={this.props.closeModal}
             replacePage={this.props.replacePage}
           />
-        )
+        );
       case "ModalError":
-        return (
-          <ModalError
-            closeModal={this.props.closeModal}
-          />
-        )
+        return <ModalError closeModal={this.props.closeModal} mensaje={this.props.mensaje} />;
 
       case "ModalEditarPerfil":
-        return (
-          <ModalEditarPerfil
-            closeModal={this.props.closeModal}
-          />
-        )
+        return <ModalEditarPerfil closeModal={this.props.closeModal} />;
     }
-    return <View />
-  }
+    return <View />;
+  };
 
   render() {
     return (

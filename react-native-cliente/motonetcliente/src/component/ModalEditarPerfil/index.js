@@ -5,7 +5,7 @@ import Svg from '../../Svg';
 import ImageViewer from 'react-native-image-zoom-viewer';
 // import styles from './styles'
 
-class ModalError extends Component {
+class ModalEditarPerfil extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -66,14 +66,14 @@ class ModalError extends Component {
                                     style={{
                                         width: 70,
                                         height: 70,
-                                        fill: "#F7001D"
+                                        fill: "#a4a4a4"
                                     }} />
                                 <Text style={{
                                     // color: "#B7B8BC",
                                     color: "#a4a4a4",
                                     fontSize: 18
                                 }}  >
-                                    {this.props.mensaje}
+                                    DATOS INCORRECTOS.
                                     </Text>
 
                             </View>
@@ -89,10 +89,10 @@ class ModalError extends Component {
                                     style={{
                                         width: "60%",
                                         height: 40,
-                                        backgroundColor: "#F7001D",
+                                        backgroundColor: "#2C4C7E",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        borderRadius: 10
+                                        borderRadius: 20
                                     }}
                                 >
                                     <Text style={{
@@ -219,4 +219,4 @@ const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates)(ModalError);
+export default connect(initStates)(ModalEditarPerfil);
