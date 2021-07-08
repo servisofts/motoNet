@@ -31,9 +31,9 @@ public class Usuario {
             case "identificacion":
                 identificaion(data, session);
                 break;
-            case "recuperarPass":
-                recuperarPass(data, session);
-                break;
+            // case "recuperarPass":
+            //     recuperarPass(data, session);
+            //     break;
             default:
                 defaultType(data, session);
         }
@@ -53,9 +53,9 @@ public class Usuario {
     }
     public void recuperarPass(JSONObject obj, SSSessionAbstract session) {
         //String texto  = obj.getString("data");
-        JSONObject data = new JSONObject();
-        data.put("key", "sa323-23r2r-2r-23r-23r");
-        obj.put("data",data);
+        // JSONObject data = new JSONObject();
+        // data.put("key", "sa323-23r2r-2r-23r-23r");
+        // obj.put("data",data);
         obj.put("estado", "exito");
     }
 

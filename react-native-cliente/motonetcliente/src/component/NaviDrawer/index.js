@@ -113,10 +113,6 @@ const NaviDrawer = (props) => {
                 position: "absolute",
                 border: 0,
             }}>
-
-
-
-
             <View style={{
                 width: Dimensions.get("window").width, height: "100%", position: "absolute", top: 0,
             }} >
@@ -129,15 +125,11 @@ const NaviDrawer = (props) => {
                     </View>
 
                 </TouchableWithoutFeedback>
-
-
                 <View style={styles.contenedors}>
-
                     <ScrollView style={{
                         height: "100%",
                         width: "100%"
                     }}>
-
                         <SafeAreaView style={{
                             flex: 1,
                             width: "100%",
@@ -156,7 +148,6 @@ const NaviDrawer = (props) => {
                                         justifyContent: "center",
                                         alignItems: "center"
                                     }}>
-
                                         <View
                                             style={{
                                                 width: 100,
@@ -170,7 +161,6 @@ const NaviDrawer = (props) => {
                                             }}>
                                             {getFotoPerfil()}
                                         </View>
-
                                         <View style={{
                                             marginTop: 20,
                                             width: "80%",

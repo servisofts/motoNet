@@ -8,6 +8,7 @@ import Viaje.LatLng;
 import Viaje.ViajeHilo;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import Server.SSSAbstract.SSServerAbstract;
@@ -80,10 +81,135 @@ public class Viaje {
 
     public void buscar(JSONObject obj, SSSessionAbstract session) {
         JSONObject data = obj.getJSONObject("data");
-
         JSONObject viaje = new JSONObject();
         viaje.put("key", UUID.randomUUID().toString());
-        
+        viaje.put("key_usuario", data.getString("key_usuario"));
+        viaje.put("key_tipo_viaje", data.getString("key_tipo_viaje"));
+        viaje.put("fecha_on", "now()");
+        viaje.put("estado", 1);
+        viaje.put("tiempo", data.getDouble("tiempo"));
+        viaje.put("distancia", data.getDouble("distancia"));
+        viaje.put("monto_estimado", data.getDouble("monto_estimado"));
+        try {
+            Conexion.insertObject("viaje", viaje);
+        } catch (Exception e) {
+            obj.put("estado", "error");
+            System.out.println("Error al insertar viaje");
+            return;
+        }
+        // DESTINOS
+        if (data.has("paquete")) {
+            JSONObject paquete = data.getJSONObject("paquete");
+            paquete.put("key_viaje", viaje.get("key"));
+            try {
+                Conexion.insertObject("viaje_paquete", paquete);
+            } catch (Exception e) {
+                obj.put("estado", "error");
+                System.out.println("Error al insertar paquete");
+                return;
+            }
+        }
+        if (data.has("pedidos")) {
+            JSONObject pedidos = data.getJSONObject("pedidos");
+            for (String key : pedidos.keySet()) {
+                JSONObject pedido = pedidos.getJSONObject(key);
+                pedido.put("key", UUID.randomUUID().toString());
+                pedido.put("key_viaje", viaje.getString("key"));
+                try {
+                    Conexion.insertObject("pedido", pedido);
+                } catch (Exception e) {
+                    obj.put("estado", "error");
+                    System.out.println("Error al insertar pedido");
+                    return;
+                }
+              
+            }
+        }
+        if (data.has("detalle_p1")) {
+            JSONObject detalle = data.getJSONObject("detalle_p1");
+            JSONObject detallep1 = new JSONObject();
+            detallep1.put("key", UUID.randomUUID().toString());
+            detallep1.put("key_viaje", viaje.getString("key"));
+            detallep1.put("nombre", detalle.getString("nombre"));
+            detallep1.put("telefono", detalle.getString("telefono"));
+            detallep1.put("nota", detalle.getString("nota"));
+            detallep1.put("fecha_on", "now()");
+            detallep1.put("estado", 1);
+            detallep1.put("tipo", "p1");
+            try {
+                Conexion.insertObject("viaje_detalle", detallep1);
+            } catch (Exception e) {
+                obj.put("estado", "error");
+                System.out.println("Error al insertar detallep1");
+                return;
+            }
+        }
+        if (data.has("detalle_p2")) {
+            JSONObject detalle = data.getJSONObject("detalle_p2");
+            JSONObject detallep2 = new JSONObject();
+            detallep2.put("key", UUID.randomUUID().toString());
+            detallep2.put("key_viaje", viaje.getString("key"));
+            detallep2.put("nombre", detalle.getString("nombre"));
+            detallep2.put("telefono", detalle.getString("telefono"));
+            detallep2.put("nota", detalle.getString("nota"));
+            detallep2.put("fecha_on", "now()");
+            detallep2.put("estado", 1);
+            detallep2.put("tipo", "p2");
+            try {
+                Conexion.insertObject("viaje_detalle", detallep2);
+            } catch (Exception e) {
+                obj.put("estado", "error");
+                System.out.println("Error al insertar detallep2");
+                return;
+            }
+        }
+        if (data.has("direccion_inicio")) {
+            JSONObject dir = data.getJSONObject("direccion_inicio");
+            JSONObject direccionInicio = new JSONObject();
+            direccionInicio.put("key", UUID.randomUUID().toString());
+            direccionInicio.put("direccion", dir.getString("direccion"));
+            direccionInicio.put("latitude", dir.getDouble("latitude"));
+            direccionInicio.put("longitude", dir.getDouble("longitude"));
+            direccionInicio.put("fecha_on", "now()");
+            direccionInicio.put("estado", 1);
+            direccionInicio.put("tipo", "inicio");
+            direccionInicio.put("key_viaje", viaje.getString("key"));
+            try {
+                Conexion.insertObject("direccion", direccionInicio);
+            } catch (Exception e) {
+                obj.put("estado", "error");
+                System.out.println("Error al insertar direccion");
+                return;
+            }
+
+        }
+        if (data.has("direccion_fin")) {
+            JSONObject dir = data.getJSONObject("direccion_fin");
+            JSONObject direccionFin = new JSONObject();
+            direccionFin.put("key", UUID.randomUUID().toString());
+            direccionFin.put("direccion", dir.getString("direccion"));
+            direccionFin.put("latitude", dir.getDouble("latitude"));
+            direccionFin.put("longitude", dir.getDouble("longitude"));
+            direccionFin.put("fecha_on", "now()");
+            direccionFin.put("estado", 1);
+            direccionFin.put("tipo", "fin");
+            direccionFin.put("key_viaje", viaje.getString("key"));
+            try {
+                Conexion.insertObject("direccion", direccionFin);
+            } catch (Exception e) {
+                obj.put("estado", "error");
+                System.out.println("Error al insertar direccion");
+                return;
+            }
+        }
+        try {
+            JSONObject viajeSend = getViajeAndDestinos(viaje.getString("key"));
+            obj.put("data", viajeSend);
+            obj.put("estado", "exito");
+
+        } catch (JSONException | SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -222,10 +348,9 @@ public class Viaje {
     public void cancelarBusqueda(JSONObject obj, SSSessionAbstract session) {
         try {
 
-            // String key_usuario = obj.getString("key_usuario");
+            String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
-            // JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje,
-            // Viaje.TIPO_CANCELO_BUSQUEDA, key_usuario);
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_BUSQUEDA, key_usuario);
             Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" + key_viaje + "'");
             obj.put("estado", "exito");
         } catch (Exception e) {

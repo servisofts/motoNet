@@ -61,7 +61,10 @@ public class Usuario {
                 confirmarDatos(data);
                 break;
             }
-
+            case "recuperarPass": {
+                recuperarPass(data);
+                break;
+            }
         }
     }
 
@@ -107,22 +110,26 @@ public class Usuario {
                 session.setKeyUsuario(data.getString("key"));
                 // JSONObject info = session.getPendiente("carnetDeIdentidad");
                 // if (info != null) {
-                //     byte[] front;
-                //     try {
-                //         front = Base64.getDecoder().decode(info.getString("front").getBytes("UTF-8"));
-                //         byte[] back = Base64.getDecoder().decode(info.getString("back").getBytes("UTF-8"));
-                //         info.put("front", FilesManager.guardar_file_(front, "front.png", data.getString("key"), "ci"));
-                //         info.put("back", FilesManager.guardar_file_(back, "back.png", data.getString("key"), "ci"));
-                //     } catch (UnsupportedEncodingException | JSONException e) {
-                //         // TODO Auto-generated catch block
-                //         e.printStackTrace();
-                //     } catch (IOException e) {
-                //         // TODO Auto-generated catch block
-                //         e.printStackTrace();
-                //     }
+                // byte[] front;
+                // try {
+                // front =
+                // Base64.getDecoder().decode(info.getString("front").getBytes("UTF-8"));
+                // byte[] back =
+                // Base64.getDecoder().decode(info.getString("back").getBytes("UTF-8"));
+                // info.put("front", FilesManager.guardar_file_(front, "front.png",
+                // data.getString("key"), "ci"));
+                // info.put("back", FilesManager.guardar_file_(back, "back.png",
+                // data.getString("key"), "ci"));
+                // } catch (UnsupportedEncodingException | JSONException e) {
+                // // TODO Auto-generated catch block
+                // e.printStackTrace();
+                // } catch (IOException e) {
+                // // TODO Auto-generated catch block
+                // e.printStackTrace();
+                // }
                 // }
                 String correo = session.getPendiente("correo").getString("data");
-               // String pass = session.getPendiente("pass").getString("data");
+                // String pass = session.getPendiente("pass").getString("data");
                 JSONObject infoUser = new JSONObject();
                 infoUser.put("correo", correo);
                 infoUser.put("pass", "");
@@ -159,5 +166,19 @@ public class Usuario {
             // System.out.println(obj.toString());
         }
 
+    }
+    public void recuperarPass(JSONObject obj) {
+        if (obj.getString("estado").equals("exito")) {
+            JSONObject data = obj.getJSONObject("data");
+            String correo = data.getString("correo");
+            String codigo = data.getString("codigo");
+            JSONObject infoUser = new JSONObject();
+            infoUser.put("correo", correo);
+            infoUser.put("codigo", codigo);
+            System.out.println("ENIO EL CORREO");
+            new EmailRecuperarPass(infoUser).start();
+            System.out.println("NOTIFICAR QUE SE RECUPERO UNA CONTRASENHA");
+
+        }
     }
 }

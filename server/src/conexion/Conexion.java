@@ -51,19 +51,19 @@ public class Conexion {
                         return con;
                     }
                 }
-                console.log(console.ANSI_YELLOW,"Conectando a la base de datos...");
+                console.log(console.ANSI_YELLOW, "Conectando a la base de datos...");
                 System.out.println();
                 con = DriverManager.getConnection("jdbc:postgresql://" + ip + ":" + puerto + "/" + bd_name, usuario,
                         contrasena);
-                        console.log(console.ANSI_YELLOW,"Conexion exitosa postgres");
+                console.log(console.ANSI_YELLOW, "Conexion exitosa postgres");
                 return con;
             } catch (SQLException e) {
                 // restore_backup();
-                console.log(console.ANSI_YELLOW,"Base de datos restaurada exitosamente");
+                console.log(console.ANSI_YELLOW, "Base de datos restaurada exitosamente");
             }
             return con;
         } catch (Exception e) {
-            console.log(console.ANSI_YELLOW,"Error en la conexion: " + e.getLocalizedMessage());
+            console.log(console.ANSI_YELLOW, "Error en la conexion: " + e.getLocalizedMessage());
             return null;
         }
     }
@@ -77,6 +77,7 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public static void Transacction_end() {
         try {
             if (!con.getAutoCommit())
@@ -85,6 +86,7 @@ public class Conexion {
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public static void commit() {
         try {
             con.commit();
@@ -92,6 +94,7 @@ public class Conexion {
             // Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public static void rollback() {
         try {
             con.rollback();
@@ -99,6 +102,7 @@ public class Conexion {
             // Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
     public void rollback(Savepoint savepoint) {
         try {
             con.rollback(savepoint);
@@ -109,6 +113,10 @@ public class Conexion {
 
     public static PreparedStatement preparedStatement(String query) throws SQLException {
         return getConexion().prepareStatement(query);
+    }
+
+    public static void insertObject(String nombre_tabla, JSONObject json) throws SQLException {
+        insertArray(nombre_tabla, new JSONArray().put(json));
     }
 
     public static void insertArray(String nombre_tabla, JSONArray json) throws SQLException {
@@ -173,6 +181,7 @@ public class Conexion {
         ps.close();
         return obj;
     }
+
     public static JSONObject ejecutarFuncionObject(String consulta) throws SQLException {
         PreparedStatement ps = getConexion().prepareStatement(consulta);
         ResultSet rs = ps.executeQuery();
@@ -185,7 +194,6 @@ public class Conexion {
         return obj;
     }
 
-
     public static boolean save_backup() {
         boolean hecho = false;
         Process proceso;
@@ -195,7 +203,7 @@ public class Conexion {
         path += bd_name;
         // C:\Program Files\PostgreSQL\12\bin
         try {
-            console.log(console.ANSI_YELLOW,"Guardando backup en " + path);
+            console.log(console.ANSI_YELLOW, "Guardando backup en " + path);
             System.out.println();
             File pgdump = new File(ruta_pg_dump);
             if (pgdump.exists()) {
