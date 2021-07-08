@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, StyleSheet, TouchableWithoutFeedback, ActivityIndicator, PermissionsAndroid } from 'react-native';
 import Svg from '../../Svg';
 import Geolocation from '@react-native-community/geolocation';
+import * as SSBackgroundLocation from '../../SSBackgroundLocation'
+
 import * as Permisos from '../../Permisos';
 const iniciarTurno = (props) => {
 
@@ -138,7 +140,9 @@ const iniciarTurno = (props) => {
             type: "Miubicacion",
             estado: false
         });
-        props.state.backgroundLocationReducer.open()
+        SSBackgroundLocation.getInstance().start();
+        //  SSBackgroundLocation.getInstance().start();
+        // props.state.backgroundLocationReducer.open()
         return <View />
     }
 

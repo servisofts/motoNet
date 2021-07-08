@@ -45,7 +45,9 @@ import AlertaDesconectado from './src/SSSocketNative/AlertaDesconectado';
 import * as HttpConection from './src/HttpConection'
 import DisconectBarra from './src/Component/DisconectBarra';
 import AppStateChange from './src/AppStateChange';
-import * as BackgroundLocation from './src/BackgroundLocation'
+// import * as BackgroundLocation from './src/BackgroundLocation'
+import * as SSBackgroundLocation from './src/SSBackgroundLocation';
+
 import Styles from './src/Styles';
 
 const store = createStore(
@@ -57,7 +59,9 @@ const store = createStore(
 // socketCliente.initSocket(store);
 HttpConection.init(store);
 SSSocketNative.init(store);
-BackgroundLocation.init(store);
+// BackgroundLocation.init(store);
+SSBackgroundLocation.init(store);
+
 SSPushNotification(store)
 const Home = createStackNavigator(
   Pages.getPages(),
@@ -108,8 +112,9 @@ class App extends Component {
   }
   componentDidMount() {
     console.log("ENTRO COMPONENT DID MOUNT")
-    BackgroundLocation.init(store);
+    // BackgroundLocation.init(store);
     HttpConection.init(store);
+    SSBackgroundLocation.init(store);
 
     SSSocketNative.init(store);
 

@@ -68,16 +68,16 @@ const open = (newState, action) => {
     return newState;
 }
 const onLocationChange = (newState, action) => {
-    if (!newState.isOpen) {
-        return newState;
-    }
+    // if (!newState.isOpen) {
+    //     return newState;
+    // }
     newState.estado = "exito";
     newState.data = action.data;
     newState.last = action.last;
-    newState.history.push(action.data);
-    if (newState.history.length > 20) {
-        newState.history = newState.history.slice(newState.history.length - 6, newState.history.length - 1)
-    }
+    // newState.history.push(action.data);
+    // if (newState.history.length > 20) {
+    //     newState.history = newState.history.slice(newState.history.length - 6, newState.history.length - 1)
+    // }
     // console.log(newState.data)
     return newState;
 }
