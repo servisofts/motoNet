@@ -44,9 +44,7 @@ class ListaAutoCompleteItem extends Component<tprops> {
                     // alert("dfgdf")
                 }}
                 onLongPress={() => {
-                    // alert(this.props.keyUbicacion)
                     if (this.props.longPress) this.props.longPress();
-                    // this.deleteAddress(this.props.keyUbicacion)
                 }}
                 style={{
                     width: "95%",

@@ -3,6 +3,9 @@ import { connect } from 'react-redux'
 import { View, Text } from 'react-native';
 import BarraSuperior from './BarraSuperior';
 import DetalleViaje from './DetalleViaje';
+import Svg from '../../Svg';
+import STheme from '../../STheme';
+import ModalOferta from './ModalOferta';
 // import MapView, { Marker } from 'react-native-maps';
 // import RutaViaje from './RutaViaje';
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -18,31 +21,6 @@ class ViajeEsperaPage extends Component {
         };
 
     }
-    // getMarker1 = () => {
-    //     if (!this.data.direccionInicio) return <View />
-    //     // console.log(this.state.direccion1)
-    //     return <Marker coordinate={this.data.direccionInicio} />
-    // }
-    // getMarker2 = () => {
-    //     if (!this.data.direccionFin) return <View />
-    //     // console.log(this.state.direccion1)
-    //     return <Marker coordinate={this.data.direccionFin} />
-    // }
-    // componentDidMount() {
-    //     this.center();
-    // }
-    // center = async () => {
-    //     await delay(500);
-    //     this.mapa.fitToCoordinates([this.data.direccionInicio, this.data.direccionFin], {
-    //         edgePadding: {
-    //             top: 300,
-    //             bottom: 500,
-    //             left: 50,
-    //             right: 50,
-    //         },
-    //         animated: true,
-    //     })
-    // }
 
     setTiempoDuracion(data) {
         if (
@@ -58,10 +36,10 @@ class ViajeEsperaPage extends Component {
         if (!this.props.state.viajesReducer.data) {
             // console.log("dfdf")
             this.props.navigation.replace("ServicioPage");
+            return <View />
         }
 
-
-        this.data = this.props.navigation.getParam("data");
+        // this.data = this.props.navigation.getParam("data");
 
         return (
             <View style={{
@@ -73,34 +51,21 @@ class ViajeEsperaPage extends Component {
                 />
                 <View style={{
                     flex: 1,
-                    backgroundColor: "#f00"
+                    backgroundColor: "#f00",
+                    // justifyContent:"center",
+                    paddingTop: 50,
+                    alignItems: "center",
+                    backgroundColor: STheme.color.background,
                 }}>
-                    {/* <MapView
+                    <Svg name={"logoCompletoRecurso"}
                         style={{
-                            width: "100%",
-                            flex: 1,
-                        }}
-                        ref={(ref) => { this.mapa = ref }}
-                        onMapReady={() => {
-                            this.center();
-                        }}
-                        initialRegion={{
-                            latitude: this.data.direccionInicio.latitude,
-                            longitude: this.data.direccionInicio.longitude,
-                            latitudeDelta: 0.03,
-                            longitudeDelta: 0.03,
-
-                        }}>
-                        {this.getMarker1()}
-                        {this.getMarker2()}
-                        <RutaViaje
-                            setTiempoDuracion={(data) => { this.setTiempoDuracion(data) }}
-                            direccion1={this.data.direccionInicio}
-                            direccion2={this.data.direccionFin}
-                        /> */}
-                    {/* </MapView> */}
+                            width: 200,
+                            height: 200,
+                            fill: "#fff"
+                        }} />
                     <DetalleViaje />
                 </View>
+                {/* <ModalOferta /> */}
             </View>
         );
     }

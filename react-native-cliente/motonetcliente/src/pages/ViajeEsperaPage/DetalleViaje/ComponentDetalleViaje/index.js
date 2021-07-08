@@ -33,7 +33,6 @@ const ComponentDetalleViaje = (props) => {
     const getDetalleRuta = () => {
 
         // var tipos_de_viajes = props.state.tipoViajesReducer.data;
-        
 
         return (
             <View style={{
@@ -78,7 +77,7 @@ const ComponentDetalleViaje = (props) => {
                                 color: STheme.color.textb,
                                 fontSize: 12,
                             }}>
-                             434 km Aprox
+                                434 km Aprox
                             </Text>
                         </View>
 
@@ -216,14 +215,10 @@ const ComponentDetalleViaje = (props) => {
             flex: 1,
             bottom: 0
         }}>
-
             {/* {getAllPrecio()} */}
-
             {getDetalleRuta()}
-            {/* <Text>dsfdsfsd</Text> */}
 
         </View >
-
     )
 }
 const initStates = (state) => {

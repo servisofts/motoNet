@@ -20,11 +20,8 @@ class BarraSuperior extends Component {
         }).start();
     }
     componentDidMount() {
-
         this.startAnimation();
     }
-
-
 
     getTitle(text) {
         var text = text
@@ -39,25 +36,11 @@ class BarraSuperior extends Component {
         }}>{text}</Text>)
     }
 
-
     getTextFieldDireccion = (svg, direccion) => {
 
-        console.log(direccion)
-        let direccionfinal = ""
-
-        if (!direccion.direccion_inicio.direccion == true || direccion.direccion_inicio.direccion) {
+        if (!direccion) {
             return <View />
-        } else {
-            direccionfinal = direccion.direccion_inicio.direccion
         }
-
-        if (!direccion.direccion_fin) {
-            return <View />
-        } else {
-            direccionfinal = direccion.direccion_fin.direccion
-        }
-
-
 
         return (
             <View style={{
@@ -95,7 +78,7 @@ class BarraSuperior extends Component {
                     color: "#fff",
                 }}
                     numberOfLines={1}>
-                    {direccionfinal}
+                    {direccion.direccion}
                 </Text>
             </View>
         )
@@ -160,8 +143,8 @@ class BarraSuperior extends Component {
                         justifyContent: "space-evenly",
                         alignItems: "center"
                     }}>
-                        {this.getTextFieldDireccion("MarkerW", this.props.data)}
-                        {this.getTextFieldDireccion("Pointer", this.props.data)}
+                        {this.getTextFieldDireccion("MarkerW", this.props.data.direccion_inicio)}
+                        {this.getTextFieldDireccion("Pointer", this.props.data.direccion_fin)}
                     </View>
                 </View>
 
