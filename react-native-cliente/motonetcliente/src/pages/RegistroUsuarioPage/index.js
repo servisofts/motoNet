@@ -132,12 +132,28 @@ class RegistroUsuarioPage extends Component {
                                 onPress={() => {
                                     var isValid = true;
                                     var arr = [];
+                                    var validarPass = "";
                                     Object.keys(this.state.datos).map((key) => {
                                         var data = this.state.datos[key];
                                         var value = this._ref[key].verify();
                                         if (!value) isValid = false;
+                                        //alert("dato:" + value + " ** " + JSON.stringify(data));
+                                        if(data.type=="password"){
+                                            if(validarPass == ""){
+                                                validarPass = value;
+                                            }else{
+                                                if(validarPass != value){
+                                                    alert("La contraseña no coinciden")
+                                                    validarPass="";
+                                                    isValid = false
+                                                    return <div/>
+                                                }
+                                            }
+                                            
+                                        }
                                         if (data["key_db"]) {
                                             var cabeceraDato = this.getKeyDato(data["key_db"]);
+                                            //alert(JSON.stringify(cabeceraDato) + " " + value)
                                             arr.push({
                                                 dato: cabeceraDato,
                                                 data: value,
@@ -153,6 +169,7 @@ class RegistroUsuarioPage extends Component {
                                             data: arr
                                         }
                                         this.props.state.socketClienteReducer.sessiones["motonet"].send(objSend, true);
+                                        //alert("Registrar")
                                     }
 
                                     
