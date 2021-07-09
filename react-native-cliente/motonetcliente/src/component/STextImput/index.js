@@ -14,6 +14,7 @@ export default class STextImput extends Component<tprops> {
         super(props);
         this.state = {
             error: false,
+            value: props.defaultValue,
             isSecure: true,
         };
         this.initTheme()
@@ -40,7 +41,7 @@ export default class STextImput extends Component<tprops> {
         }
 
     }
-    getValue(){
+    getValue() {
         return this.state.value;
     }
     verify() {
@@ -124,7 +125,7 @@ export default class STextImput extends Component<tprops> {
                         borderRadius: 4,
                         paddingStart: 8,
                     }}
-                        
+
                         {...this.getTextArea()}
                         //type={this.props.type == "email" ? "email" : ""}
                         value={this.state.value}

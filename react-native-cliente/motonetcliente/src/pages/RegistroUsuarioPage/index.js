@@ -67,6 +67,37 @@ class RegistroUsuarioPage extends Component {
   getInputs() {
     return Object.keys(this.state.datos).map((key) => {
       var obj = this.state.datos[key];
+      var value = "";
+      if (this.state.dataRegistro) {
+        switch (this.tipo_registro) {
+          case "facebook":
+            if (key == "pass" || key == "rep_pass") {
+              return <View />
+            }
+            if (key == "nombres") {
+              value = this.state.dataRegistro.first_name + " " + (!this.state.dataRegistro.middle_name ? "" : this.state.dataRegistro.middle_name);
+            }
+            if (key == "apellidos") {
+              value = this.state.dataRegistro.last_name;
+
+            }
+            break;
+          case "gmail":
+            if (key == "pass" || key == "rep_pass") {
+              return <View />
+            }
+            if (key == "nombres") {
+              value = this.state.dataRegistro.givenName;
+            }
+            if (key == "apellidos") {
+              value = this.state.dataRegistro.familyName;
+            }
+            if (key == "correo") {
+              value = this.state.dataRegistro.email;
+            }
+            break;
+        }
+      }
       return (
         <View
           style={{
@@ -76,6 +107,7 @@ class RegistroUsuarioPage extends Component {
           <STextImput
             label={obj.label}
             placeholder={obj.ph}
+            defaultValue={value}
             type={obj.type}
             ref={(ref) => (this._ref[key] = ref)}
           />
@@ -86,6 +118,7 @@ class RegistroUsuarioPage extends Component {
   getKeyDato = (keyDescripcion) => {
     var key = "undefined";
     var cabecera = "registro_cliente";
+    // console.log(this.props.state.cabecreraDatoReducer.data[cabecera])
     for (
       let i = 0;
       i < this.props.state.cabeceraDatoReducer.data[cabecera].length;
@@ -121,6 +154,15 @@ class RegistroUsuarioPage extends Component {
   };
   render() {
     //Dentro de render verifico si registro usuario con usuarioLog
+    this.tipo_registro = this.props.navigation.getParam("registro");
+    if (this.tipo_registro == "facebook" || this.tipo_registro == "gmail") {
+      var data = this.props.navigation.getParam("data");
+      if (!this.state.dataRegistro) {
+        this.setState({ dataRegistro: data });
+        return <View />
+      }
+    }
+
     if (this.props.state.usuarioReducer.usuarioLog) {
       this.props.navigation.replace("CargaPage");
     }
@@ -171,6 +213,7 @@ class RegistroUsuarioPage extends Component {
               <View
                 style={{
                   width: "90%",
+                  flex: 1,
                 }}
               >
                 {this.getInputs()}
@@ -188,6 +231,9 @@ class RegistroUsuarioPage extends Component {
                     var validarPass = "";
                     Object.keys(this.state.datos).map((key) => {
                       var data = this.state.datos[key];
+                      if (!this._ref[key]) {
+                        return;
+                      }
                       var value = this._ref[key].verify();
                       if (!value) isValid = false;
                       //alert("dato:" + value + " ** " + JSON.stringify(data));
@@ -214,6 +260,24 @@ class RegistroUsuarioPage extends Component {
                         });
                       }
                     });
+                    if (this.state.dataRegistro) {
+                      switch (this.tipo_registro) {
+                        case "facebook":
+                          var cabeceraDato = this.getKeyDato("Facebook key");
+                          arr.push({
+                            dato: cabeceraDato,
+                            data: this.state.dataRegistro.id,
+                          });
+                          break;
+                        case "gmail":
+                          var cabeceraDato = this.getKeyDato("Gmail Key");
+                          arr.push({
+                            dato: cabeceraDato,
+                            data: this.state.dataRegistro.id,
+                          });
+                          break;
+                      }
+                    }
                     if (isValid) {
                       var objSend = {
                         component: "usuario",
@@ -227,7 +291,8 @@ class RegistroUsuarioPage extends Component {
                       ].send(objSend, true);
                       //alert("Registrar")
                     }
-                  }}
+                  }
+                  }
                 />
               </BottomContent>
             </View>

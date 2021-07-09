@@ -19,8 +19,8 @@ class LoginPage extends Component {
     super(props);
     this._ref = {};
     this.state = {
-        modalVisible: false,
-        mensaje: "",
+      modalVisible: false,
+      mensaje: "",
     };
   }
 
@@ -29,17 +29,20 @@ class LoginPage extends Component {
       this.props.navigation.replace("ServicioPage");
       return <View />;
     }
-    if (this.props.state.usuarioReducer.estado == "error") {
-      this.props.state.usuarioReducer.estado = "";
-      if (this.props.state.usuarioReducer.error == "error_datos") {
-        if (this._ref["pass"]) {
-          //alert("Error en los datos.");
-          this.state.mensaje = "Error en los datos."
-          this.state.modalVisible = true;
-          this._ref["pass"].clear();
+    if (this.props.state.usuarioReducer.type == "login") {
+      if (this.props.state.usuarioReducer.estado == "error") {
+        this.props.state.usuarioReducer.estado = "";
+        if (this.props.state.usuarioReducer.error == "error_datos") {
+          if (this._ref["pass"]) {
+            //alert("Error en los datos.");
+            this.state.mensaje = "Error en los datos."
+            this.state.modalVisible = true;
+            this._ref["pass"].clear();
+          }
         }
       }
     }
+
     return (
       <View
         style={{
@@ -175,8 +178,8 @@ class LoginPage extends Component {
                   alignItems: "center",
                 }}
               >
-                <LoginFace />
-                <LoginGmail />
+                <LoginFace navigation={this.props.navigation} />
+                <LoginGmail navigation={this.props.navigation} />
               </View>
             </View>
           </BottomContent>

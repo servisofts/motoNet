@@ -5,16 +5,28 @@ import {
     AccessToken, GraphRequest,
     GraphRequestManager
 } from "react-native-fbsdk";
+import { connect } from 'react-redux';
 import Svg from '../../../Svg';
+import AppParams from '../../../Json';
 
-export default class LoginFace extends Component {
+
+class LoginFace extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
     }
+    consulta = (result) => {
+        this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+            component: "usuario",
+            type: "loginFacebook",
+            estado: "cargando",
+            data: result
+        }, true);
+        this.setState({ data: result });
+    }
     _fbAuth = () => {
-        var superProps = this.fbRequest;
+        var consultar = this.consulta;
         LoginManager.logInWithPermissions(["public_profile"]).then(
             function (result) {
                 if (result.isCancelled) {
@@ -27,8 +39,8 @@ export default class LoginFace extends Component {
                                     console.log(error)
                                 } else {
                                     console.log(result)
-                                    superProps(result);
                                     LoginManager.logOut();
+                                    consultar(result);
                                 }
                             }
                             const infoRequest = new GraphRequest(
@@ -56,12 +68,33 @@ export default class LoginFace extends Component {
         LoginManager.logOut();
     }
     render() {
+        if (this.props.state.usuarioReducer.type === "loginFacebook") {
+            if (this.props.state.usuarioReducer.estado === "exito") {
+                this.props.state.usuarioReducer.estado = ""
+                this.props.navigation.replace("CargaPage")
+                return <View />
+            }
+            if (this.props.state.usuarioReducer.estado === "error") {
+                this.props.navigation.navigate("RegistroUsuarioPage", {
+                    data: this.state.data,
+                    registro: "facebook"
+                })
+                return <View />
+            }
+        }
+
         return (
             <TouchableOpacity style={{
                 width: 50,
-            }} onPress={()=>{this._fbAuth()}}>
+            }} onPress={() => { this._fbAuth() }}>
                 <Svg resource={require("../../../img/face.svg")} />
             </TouchableOpacity>
         );
     }
 }
+
+const initStates = (state) => {
+    return { state };
+};
+
+export default connect(initStates)(LoginFace);
