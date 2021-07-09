@@ -5,7 +5,7 @@ import Svg from '../../Svg';
 import ImageViewer from 'react-native-image-zoom-viewer';
 // import styles from './styles'
 
-class ModalSuccess extends Component {
+class ModalEditarPerfil extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -24,13 +24,10 @@ class ModalSuccess extends Component {
         return (
             <TouchableWithoutFeedback
                 onPress={() => {
-                    // this.props.callbackAfterRecuperarPass(0, this.props.otherParamsToSend);
                     this.props.closeModal();
-                    console.log("tou")
                 }}>
                 <View style={styles.container}
                     onPress={() => {
-                        console.log("sds")
                     }} >
                     <TouchableWithoutFeedback
                         // disabled={false}
@@ -65,18 +62,18 @@ class ModalSuccess extends Component {
                                 alignItems: "center"
                             }}>
 
-                                <Svg name={"Success"}
+                                <Svg name={"Error"}
                                     style={{
                                         width: 70,
                                         height: 70,
-                                        fill: "#0CAD27"
+                                        fill: "#a4a4a4"
                                     }} />
                                 <Text style={{
                                     // color: "#B7B8BC",
                                     color: "#a4a4a4",
                                     fontSize: 18
                                 }}  >
-                                     {this.props.mensaje} 
+                                    DATOS INCORRECTOS.
                                     </Text>
 
                             </View>
@@ -87,16 +84,15 @@ class ModalSuccess extends Component {
                             }}>
                                 <TouchableOpacity
                                     onPress={() => {
-                                        //this.props.replacePage() //NO FUNCA
                                         this.props.closeModal()
                                     }}
                                     style={{
                                         width: "60%",
                                         height: 40,
-                                        backgroundColor: "#F7001D",
+                                        backgroundColor: "#2C4C7E",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        borderRadius: 10
+                                        borderRadius: 20
                                     }}
                                 >
                                     <Text style={{
@@ -223,4 +219,4 @@ const initStates = (state) => {
     return { state }
 };
 
-export default connect(initStates)(ModalSuccess);
+export default connect(initStates)(ModalEditarPerfil);

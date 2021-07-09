@@ -1,8 +1,32 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { View, Text, TouchableOpacity } from 'react-native'
 import Boton1 from '../../../component/Boton1'
 
 const ModalOferta = (props) => {
+
+    const buscarOtro = () => {
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "viaje",
+            type: "denegarOferta",
+            estado: "cargando",
+            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+            key_viaje: props.data.key_viaje
+        }, true);
+        return <View />
+    }
+
+    const aceptarConductor = () => {
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "viaje",
+            type: "confirmarBusqueda",
+            estado: "cargando",
+            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+            key_viaje: props.data.key_viaje
+        }, true);
+        return <View />
+    }
+
     return (
         <View style={{
             flex: 1,
@@ -22,6 +46,7 @@ const ModalOferta = (props) => {
 
                 <View>
                     <Text>Condutor</Text>
+                    <Text>Costo: {props.data.costo.monto}</Text>
                 </View>
 
                 <View style={{
@@ -40,7 +65,7 @@ const ModalOferta = (props) => {
                         <Boton1
                             label="Aceptar"
                             type="1"
-                            onPress={() => { alert("dsd") }}
+                            onPress={() => { aceptarConductor() }}
                             cargando={false} />
                     </View>
 
@@ -51,7 +76,7 @@ const ModalOferta = (props) => {
                         <Boton1
                             label="Buscar Otro"
                             type="4"
-                            onPress={() => { alert("dsd") }}
+                            onPress={() => { buscarOtro() }}
                             cargando={false} />
                     </View>
 
@@ -61,4 +86,8 @@ const ModalOferta = (props) => {
     )
 }
 
-export default ModalOferta
+
+const initStates = (state) => {
+    return { state }
+};
+export default connect(initStates)(ModalOferta);

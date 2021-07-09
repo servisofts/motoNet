@@ -74,6 +74,9 @@ export default (state, action) => {
             case "getViajeByKeyUsuario":
                 getViajeByKeyUsuario(state, action);
                 break;
+            case "denegarOferta":
+                denegarOferta(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -117,7 +120,7 @@ const negociarViajeConductor = (state, action) => {
     state.type = action.type
     state.estado = action.estado
     if (action.estado === "exito") {
-        state.data = false;
+        state.data = action.data;
         AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
 }
@@ -228,3 +231,10 @@ const getViajeByKeyUsuario = (state, action) => {
     }
 }
 
+const denegarOferta = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.data = action.data
+    }
+}

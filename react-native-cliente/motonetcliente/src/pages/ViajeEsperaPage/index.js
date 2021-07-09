@@ -19,7 +19,6 @@ class ViajeEsperaPage extends Component {
         super(props);
         this.state = {
         };
-
     }
 
     setTiempoDuracion(data) {
@@ -31,15 +30,31 @@ class ViajeEsperaPage extends Component {
         }
     }
 
+    getConductorOferta = () => {
+        if (this.props.state.viajesReducer.data.movimientos["negociacion_conductor"]) {
+            console.log(this.props.state.viajesReducer.data.movimientos["negociacion_conductor"])
+            // this.props.navigation.replace("ServicioPage");
+            return (
+                <ModalOferta data={this.props.state.viajesReducer.data.movimientos["negociacion_conductor"]} />
+            )
+        }
+        // console.log("dsd")
+    }
+
     render() {
 
+        if (this.props.state.viajesReducer.data.movimientos["inicio_viaje"]) {
+            this.props.navigation.replace("InicioViajePage");
+            return <View />
+        }
+
+
         if (!this.props.state.viajesReducer.data) {
-            // console.log("dfdf")
             this.props.navigation.replace("ServicioPage");
             return <View />
         }
 
-        // this.data = this.props.navigation.getParam("data");
+        this.data = this.props.navigation.getParam("data");
 
         return (
             <View style={{
@@ -65,7 +80,10 @@ class ViajeEsperaPage extends Component {
                         }} />
                     <DetalleViaje />
                 </View>
+
+                {this.getConductorOferta()}
                 {/* <ModalOferta /> */}
+
             </View>
         );
     }
