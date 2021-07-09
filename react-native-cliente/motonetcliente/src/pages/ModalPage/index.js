@@ -41,6 +41,7 @@ class ModalPage extends Component {
           <ModalSuccess
             closeModal={this.props.closeModal}
             replacePage={this.props.replacePage}
+            mensaje={this.props.mensaje} 
           />
         );
       case "ModalError":

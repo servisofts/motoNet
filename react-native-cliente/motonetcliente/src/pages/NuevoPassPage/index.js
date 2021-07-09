@@ -17,6 +17,7 @@ import AppParam from "../../Json/index.json";
 //import ImgFondoCruces from '../../component/ImgFondoCruces';
 import BarraSuperior from "../../component/BarraSuperior";
 import STextInput from '../../component/STextImput';
+import ModalPage from "../ModalPage";
 
 class NuevoPassPage extends Component {
   //para que no muestre el encabezado por defecto
@@ -26,6 +27,9 @@ class NuevoPassPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalVisible: false,
+      mensaje: "",
+      modal:"",
       pass: {
         value: "",
         error: false,
@@ -71,7 +75,10 @@ class NuevoPassPage extends Component {
 
       if (this.state.pass.value != this.state.confirmarPass.value) {
          this.state.confirmarPass.error = true;
-         alert("La contraseña no coinciden")
+         //alert("La contraseña no coinciden")
+         this.state.modalVisible = true;
+         this.state.mensaje = "La contraseñas escritas no coinciden. Inténtelo de nuevo."
+         this.state.modal = "ModalError"
         exito = false;
      }
 
@@ -100,7 +107,12 @@ class NuevoPassPage extends Component {
       this.props.state.usuarioReducer.estadoEmail == "exito" &&
       this.props.state.usuarioReducer.type == "cambiarPassByCodigo"
     ) {
-      alert("Contraseña modificada exitosamente");
+      //alert("Contraseña modificada exitosamente");
+      //alerta//
+      this.state.mensaje = "Contraseña modificada exitosamente"
+      this.state.modalVisible = true;
+      this.state.modal = "ModalSuccess";
+
       this.props.state.usuarioReducer.estadoEmail = false;
       this.props.navigation.replace("LoginPage");
     }
@@ -210,6 +222,16 @@ class NuevoPassPage extends Component {
             </View>
           </View>
         </ScrollView>
+        <ModalPage
+          ventana={this.state.modal}
+          //mensaje="La contraseñas escritas no coinciden. Inténtelo de nuevo. "
+          mensaje={this.state.mensaje}
+          ModalVisible={this.state.modalVisible}
+          closeModal={() => {
+            this.state.modalVisible = false;
+            this.setState({ ...this.state });
+          }}
+        />
       </View>
     );
   }

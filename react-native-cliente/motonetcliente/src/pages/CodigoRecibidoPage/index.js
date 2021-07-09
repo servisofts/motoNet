@@ -11,6 +11,7 @@ import {
 //import ImgFondoCruces from '../../component/ImgFondoCruces';
 import Svg from "../../Svg";
 import BarraSuperior from "../../component/BarraSuperior";
+import ModalPage from "../ModalPage";
 
 class CodigoRecibidoPage extends Component {
   //para que no muestre el encabezado por defecto
@@ -21,6 +22,9 @@ class CodigoRecibidoPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalVisible: false,
+      mensaje: "",
+      modal:"",
       codigo: {
         value: "",
         error: false,
@@ -41,10 +45,14 @@ class CodigoRecibidoPage extends Component {
       this.props.state.usuarioReducer.estadoEmail == "exito" &&
       this.props.state.usuarioReducer.type == "verificarCodigoPass"
     ) {
-      alert("Codigo confirmado...");
+      //alert("Codigo confirmado...");
       this.props.state.usuarioReducer.estadoEmail = false;
       this.props.navigation.navigate("NuevoPassPage");
       this.state.codigo.value = "";
+      //alerta//
+      this.state.mensaje = "Código confirmado..."
+      this.state.modalVisible = true;
+      this.state.modal = "ModalSuccess";
       this.setState({ ...this.state });
     }
 
@@ -52,10 +60,14 @@ class CodigoRecibidoPage extends Component {
       this.props.state.usuarioReducer.estadoEmail == "error" &&
       this.props.state.usuarioReducer.type == "verificarCodigoPass"
     ) {
-      alert("Codigo incorrecto...");
+      //alert("Codigo incorrecto...");
       this.props.state.usuarioReducer.estadoEmail = false;
       // this.props.navigation.navigate("NuevoPassPage")
       this.state.codigo.value = "";
+      //alerta//
+      this.state.mensaje = "Código incorrecto..."
+      this.state.modalVisible = true;
+      this.state.modal = "ModalError";
       this.setState({ ...this.state });
     }
 
@@ -182,6 +194,16 @@ class CodigoRecibidoPage extends Component {
             </View>
           </View>
         </ScrollView>
+        <ModalPage
+          ventana={this.state.modal}
+          //mensaje="La contraseñas escritas no coinciden. Inténtelo de nuevo. "
+          mensaje={this.state.mensaje}
+          ModalVisible={this.state.modalVisible}
+          closeModal={() => {
+            this.state.modalVisible = false;
+            this.setState({ ...this.state });
+          }}
+        />
       </View>
     );
   }
