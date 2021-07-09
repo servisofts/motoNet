@@ -16,15 +16,19 @@ const RutaViaje = (props) => {
     }
 
     var dato = props.state.ViajeReducer.data;
-    return dato.destinos.map((obj,index) => {
+    return ["direccion_inicio", "direccion_fin"].map((index) => {
+        var obj = dato[index];
+        if (!obj) {
+            return <View />
+        }
         var json = { latitude: obj.latitude, longitude: obj.longitude };
         return (
             <Marker
                 coordinate={json}
                 style={{ width: 40, height: 40 }}
                 resizeMode="contain"
-                title={(index+1)+""}
-                
+                title={(index + 1) + ""}
+
             >
             </Marker>
         )

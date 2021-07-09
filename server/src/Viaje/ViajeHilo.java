@@ -22,15 +22,15 @@ public class ViajeHilo {
         Thread thread = new Thread() {
             @Override
             public void run() {
-                JSONArray destinos = objViaje.getJSONArray("destinos");
-                JSONObject destino_inicio = destinos.getJSONObject(0);
+                // JSONArray destinos = objViaje.getJSONArray("destinos");
+                JSONObject direccion_inicio = objViaje.getJSONObject("direccion_inicio");
 
                 JSONObject parametros = objViaje.getJSONObject("parametros");
                 String radioDeBusqueda = parametros.getString("Distancia minima permitida para recibir viaje como conductor");
                 JSONArray conductoresCercanos;
                 try {
-                    String consulta = "SELECT array_to_json(array_agg(calculo.*)) as json FROM (\n" + "SELECT \n" + "|/ (((" + destino_inicio.getDouble("latitude")
-                            + " - ver.latitude) ^ 2) + ((" +  destino_inicio.getDouble("longitude") + " - ver.longitude) ^ 2)) AS resultado,\n" + "ver.*\n"
+                    String consulta = "SELECT array_to_json(array_agg(calculo.*)) as json FROM (\n" + "SELECT \n" + "|/ (((" + direccion_inicio.getDouble("latitude")
+                            + " - ver.latitude) ^ 2) + ((" +  direccion_inicio.getDouble("longitude") + " - ver.longitude) ^ 2)) AS resultado,\n" + "ver.*\n"
                             + "FROM conductor_activo ver) calculo\n" + "WHERE\n"
                             + "calculo.resultado <= ((0.000009) * (" + radioDeBusqueda + ")) limit "+LIMITE;
                      
@@ -43,7 +43,6 @@ public class ViajeHilo {
                      
                      for (int i = 0; i < conductoresCercanos.length(); i++) {
                         SSServerAbstract.sendUser(objSend.toString(), conductoresCercanos.getJSONObject(i).getString("key_usuario"));
-                        // SocketServer.sendUser(objSend.toString(), conductoresCercanos.getJSONObject(i).getString("key_usuario"));
                         JSONObject viajeMovimiento = Viaje.nuevoMovimientoViaje(objViaje.getString("key"), Viaje.TIPO_NOTIFICO_CONDUCTOR, conductoresCercanos.getJSONObject(i).getString("key_usuario"));
                     }
                     

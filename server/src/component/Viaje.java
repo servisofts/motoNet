@@ -46,6 +46,9 @@ public class Viaje {
             case "negociarViajeConductor":
                 negociarViajeConductor(data, session);
                 break;
+            case "denegarOferta":
+                denegarOferta(data, session);
+                break;
             case "getViajeByKeyUsuario":
                 getViajeByKeyUsuario(data, session);
                 break;
@@ -122,7 +125,7 @@ public class Viaje {
                     System.out.println("Error al insertar pedido");
                     return;
                 }
-              
+
             }
         }
         if (data.has("detalle_p1")) {
@@ -203,8 +206,12 @@ public class Viaje {
             }
         }
         try {
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(viaje.getString("key"), Viaje.TIPO_INICIO_BUSQUEDA,
+                    viaje.getString("key_usuario"));
+            nuevoCostoMovimiento(viajeMovimiento.getString("key"), viaje.getDouble("monto_estimado"));
             JSONObject viajeSend = getViajeAndDestinos(viaje.getString("key"));
             obj.put("data", viajeSend);
+            ViajeHilo.buscar(viajeSend);
             obj.put("estado", "exito");
 
         } catch (JSONException | SQLException e) {
@@ -268,9 +275,9 @@ public class Viaje {
 
     public void confirmarBusqueda(JSONObject obj, SSSessionAbstract session) {
         try {
-            // String key_usuario = obj.getString("key_usuario");
+            String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
-            String key_conductor = obj.getString("key_conductor");
+            // String key_conductor = obj.getString("key_conductor");
             // String key_movimiento = obj.getString("key_movimiento"); // AGREGAR EL KET
             // MOVIMIENTO ACEPTADO AL VIAJE
 
@@ -281,22 +288,22 @@ public class Viaje {
                 obj.put("estado", "error");
                 return;
             }
-            if (viaje.getString("key_conductor").length() > 0) {
-                obj.put("error", "viaje_confirmado");
-                obj.put("estado", "error");
-                return;
-            }
-            Conexion.ejecutarUpdate(
-                    "UPDATE viaje SET key_conductor = '" + key_conductor + "' WHERE key = '" + key_viaje + "'");
-            // JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje,
-            // Viaje.TIPO_INICIO_VIAJE, key_usuario);
+            // if (viaje.getString("key_conductor").length() > 0) {
+            // obj.put("error", "viaje_confirmado");
+            // obj.put("estado", "error");
+            // return;
+            // }
+            // Conexion.ejecutarUpdate(
+            // "UPDATE viaje SET key_conductor = '" + key_conductor + "' WHERE key = '" +
+            // key_viaje + "'");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_INICIO_VIAJE, key_usuario);
             viaje = getViajeAndDestinos(key_viaje);
             JSONObject objSend = new JSONObject();
             objSend.put("component", "viaje");
             objSend.put("type", "confirmarBusqueda");
             objSend.put("data", viaje);
             objSend.put("estado", "exito");
-            SSServerAbstract.sendUser(objSend.toString(), key_conductor);
+            SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_conductor"));
             // SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
             obj.put("data", viaje);
             obj.put("estado", "exito");
@@ -318,14 +325,13 @@ public class Viaje {
                 obj.put("estado", "error");
                 return;
             }
-            if (viaje.getString("key_conductor").length() > 0) {
+            if (!viaje.has("key_conductor")) {
                 obj.put("error", "viaje_confirmado");
                 obj.put("estado", "error");
                 return;
             }
-            // Conexion.ejecutarUpdate(
-            // "UPDATE viaje SET key_conductor = '" + key_usuario + "' WHERE key = '" +
-            // key_viaje + "'");
+            Conexion.ejecutarUpdate(
+                    "UPDATE viaje SET key_conductor = '" + key_usuario + "' WHERE key = '" + key_viaje + "'");
             JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_NEGOCIACION_CONDUCTOR, key_usuario);
             nuevoCostoMovimiento(viajeMovimiento.getString("key"), precio);
 
@@ -337,6 +343,33 @@ public class Viaje {
             objSend.put("estado", "exito");
             SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_usuario"));
             // SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+            obj.put("data", viaje);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            obj.put("estado", "error");
+        }
+    }
+
+    public void denegarOferta(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+
+            JSONObject viaje = getViajeAndDestinos(key_viaje);
+            String key_conductor = viaje.getString("key_conductor");
+            JSONObject movimiento = viaje.getJSONObject("movimientos").getJSONObject(TIPO_NEGOCIACION_CONDUCTOR);
+            if (movimiento != null) {
+                Conexion.ejecutarUpdate(
+                        "UPDATE viaje_movimiento SET estado = 0 WHERE key = '" + movimiento.getString("key") + "'");
+            }
+            Conexion.ejecutarUpdate("UPDATE viaje SET key_conductor = '' WHERE key = '" + key_viaje + "'");
+            viaje = getViajeAndDestinos(key_viaje);
+            JSONObject objSend = new JSONObject();
+            objSend.put("component", "viaje");
+            objSend.put("type", "denegarOferta");
+            objSend.put("data", viaje);
+            objSend.put("estado", "exito");
+            SSServerAbstract.sendUser(objSend.toString(), key_conductor);
             obj.put("data", viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {

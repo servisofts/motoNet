@@ -19,6 +19,14 @@ const ConfirmarViaje = (props) => {
         return <Text>No existe</Text>
     } else {
         datos = props.state.ViajeReducer.data;
+        // if (datos.key_conductor != props.state.usuarioReducer.usuarioLog.key) {
+        //     props.dispatch({
+        //         component: "viaje",
+        //         type: "borrarViaje",
+        //         estado: "exito"
+        //     })
+        //     return <View />
+        // }
         if (datos.estado == 0) {
             props.dispatch({
                 component: "viaje",
@@ -120,7 +128,7 @@ const ConfirmarViaje = (props) => {
 
                 }}>
                     Viaje entrante.
-                    </Text>
+                </Text>
                 <TextInput
                     style={{
                         ...styles.touch,
@@ -128,7 +136,7 @@ const ConfirmarViaje = (props) => {
                     }}
                     placeholder={""}
                     editable={false}
-                    value={datos.destinos[0].direccion}
+                    value={datos.direccion_inicio.direccion}
                     autoCapitalize='none'
                 />
                 <Text style={{
