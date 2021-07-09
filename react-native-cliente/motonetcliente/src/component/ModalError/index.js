@@ -66,14 +66,14 @@ class ModalError extends Component {
                                     style={{
                                         width: 70,
                                         height: 70,
-                                        fill: "#a4a4a4"
+                                        fill: "#F7001D"
                                     }} />
                                 <Text style={{
                                     // color: "#B7B8BC",
                                     color: "#a4a4a4",
                                     fontSize: 18
                                 }}  >
-                                    DATOS INCORRECTOS.
+                                    {this.props.mensaje}
                                     </Text>
 
                             </View>
@@ -89,10 +89,10 @@ class ModalError extends Component {
                                     style={{
                                         width: "60%",
                                         height: 40,
-                                        backgroundColor: "#2C4C7E",
+                                        backgroundColor: "#F7001D",
                                         alignItems: "center",
                                         justifyContent: "center",
-                                        borderRadius: 20
+                                        borderRadius: 10
                                     }}
                                 >
                                     <Text style={{
