@@ -12,6 +12,7 @@ import MensajeriaRegistroPage from './MensajeriaRegistroPage';
 import TransportePage from './TransportePage';
 import ViajePedirYBuscar from './ViajePedirYBuscar';
 import ViajeEsperaPage from './ViajeEsperaPage';
+import InicioViajePage from './InicioViajePage';
 // import ConfirmarPage from './ConfirmarPage';
 // import ChatPage from './ChatPage';
 // import EmergenciaEsperaPage from './EmergenciaEsperaPage';
@@ -39,7 +40,8 @@ export const getPages = () => {
         TransportePage,
         BuscarDireccionPage,
         ViajePedirYBuscar,
-        ViajeEsperaPage
+        ViajeEsperaPage,
+        InicioViajePage
 
         // ConfirmarPage,
         // ChatPage,
