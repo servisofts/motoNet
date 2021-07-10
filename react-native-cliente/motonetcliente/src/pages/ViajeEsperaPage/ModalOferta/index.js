@@ -11,7 +11,7 @@ const ModalOferta = (props) => {
             type: "denegarOferta",
             estado: "cargando",
             key_usuario: props.state.usuarioReducer.usuarioLog.key,
-            key_viaje: props.data.key_viaje
+            key_viaje: props.data.key
         }, true);
         return <View />
     }
@@ -22,7 +22,21 @@ const ModalOferta = (props) => {
             type: "confirmarBusqueda",
             estado: "cargando",
             key_usuario: props.state.usuarioReducer.usuarioLog.key,
-            key_viaje: props.data.key_viaje
+            key_viaje: props.data.key
+        }, true);
+        return <View />
+    }
+
+    const getCondutor = () => {
+        if (props.state.usuarioReducer.data.estado == "cargando") {
+            return <View />
+        }
+        props.state.socketClienteReducer.sessiones["motonet"].send({
+            component: "usuario",
+            type: "confirmarBusqueda",
+            estado: "cargando",
+            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+            key_viaje: props.data.key
         }, true);
         return <View />
     }
@@ -37,16 +51,16 @@ const ModalOferta = (props) => {
             justifyContent: "center",
             alignItems: "center",
         }}>
+
             <View style={{
                 width: 300,
                 height: 250,
                 backgroundColor: "#fff",
                 borderRadius: 20
             }}>
-
                 <View>
                     <Text>Condutor</Text>
-                    <Text>Costo: {props.data.costo.monto}</Text>
+                    <Text>Costo: {JSON.stringify(props.data.movimientos["negociacion_conductor"].costo.monto)}</Text>
                 </View>
 
                 <View style={{
@@ -57,7 +71,6 @@ const ModalOferta = (props) => {
                     alignItems: "center",
                     // backgroundColor: "#ccc"
                 }}>
-
                     <View style={{
                         // flex: 1,
                         width: 100

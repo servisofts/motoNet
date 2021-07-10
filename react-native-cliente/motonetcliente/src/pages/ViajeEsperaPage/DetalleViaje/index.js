@@ -3,6 +3,7 @@ import { View, Text, Animated, TouchableOpacity } from 'react-native';
 import STheme from '../../../STheme';
 // import Svg from '../../../Svg';
 import ComponentDetalleViaje from './ComponentDetalleViaje';
+
 export default class DetalleViaje extends Component {
     constructor(props) {
         super(props);
@@ -38,7 +39,7 @@ export default class DetalleViaje extends Component {
                     })
                 }]
             }}>
-                <ComponentDetalleViaje />
+                <ComponentDetalleViaje data={this.props.data} />
             </Animated.View >
         );
     }
