@@ -89,12 +89,10 @@ class ViajeEsperaPage extends Component {
 
                 {this.getConductorOferta()}
                 {/* <ModalOferta /> */}
-
             </View>
         );
     }
 }
-
 
 const initStates = (state) => {
     return { state }
