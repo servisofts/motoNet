@@ -10,6 +10,7 @@ import { stat } from 'react-native-fs';
 import Geolocation from '@react-native-community/geolocation';
 import STheme from '../../STheme';
 import Boton1 from '../../component/Boton1';
+import BarraViaje from '../../component/BarraViaje'
 
 class InicioViajePage extends Component {
 
@@ -52,59 +53,39 @@ class InicioViajePage extends Component {
         );
     }
 
-    Cancelar() {
+    cancelar() {
 
         // if (this.props.state.emergenciaReducer.data.movimientos["inicio_ruta"]) {
         //     return <View />
         // }
 
         return (
-            <TouchableOpacity
-                onPress={() => {
-                    Alert.alert(
-                        "Alerta",
-                        "Al aceptar la cancelación, puede que tenga un costo",
-                        [
-                            {
-                                text: "Cancelar",
-                                onPress: () => console.log("Cancel Pressed"),
-                                style: "cancel"
-                            },
-                            {
-                                text: "Aceptar",
-                                onPress: () => {
-                                    this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                                        component: "emergencia",
-                                        type: "cancelarViajeCliente",
-                                        key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                                        key_viaje: this.props.state.emergenciaReducer.data.key,
-                                        estado: "cargando"
-                                    }, true);
-                                    //this.props.navigation.replace("CargaPage");
-                                    return <View />
-                                }
-                            }
-                        ],
-                        { cancelable: false }
-                    );
-                }}
-                style={{
-                    width: "90%",
-                    height: 50,
-                    position: "absolute",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: "#2C4C7E",
-                    bottom: 30,
-                    borderRadius: 10
-                }} >
-                <Text style={{
-                    color: "#fff"
-                }}>
-                    CANCELAR
-                </Text>
-            </TouchableOpacity>
-
+            Alert.alert(
+                "Cancelar",
+                "Al aceptar la cancelación, puede que tenga un costo",
+                [
+                    {
+                        text: "Cancelar",
+                        onPress: () => console.log("Cancel Pressed"),
+                        style: "cancel"
+                    },
+                    {
+                        text: "Aceptar",
+                        onPress: () => {
+                            this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                                component: "viaje",
+                                type: "cancelarViajeCliente",
+                                key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                                key_viaje: this.props.state.viajesReducer.data.key,
+                                estado: "cargando"
+                            }, true);
+                            //this.props.navigation.replace("CargaPage");
+                            return <View />
+                        }
+                    }
+                ],
+                { cancelable: false }
+            )
         )
         // this.setState({
         //     abrirModal: true
@@ -143,7 +124,6 @@ class InicioViajePage extends Component {
                         }}>
                             Estado:
                         </Text>
-
                     </View>
 
                     <View style={{
@@ -155,12 +135,7 @@ class InicioViajePage extends Component {
                             justifyContent: "center",
                             // alignItems: "center",
                         }}>
-                            <Text style={{
-                                color: STheme.color.textb,
-                                fontSize: 16,
-                                fontWeight: "bold"
-                            }}>Conductor Viene
-                            </Text>
+                            <EstadoViaje />
                         </View>
 
                         <View style={{
@@ -169,7 +144,7 @@ class InicioViajePage extends Component {
                             alignItems: "center",
                         }}>
                             <Boton1 type="1"
-                                label="Cancelar"
+                                label="Chat"
                                 cargando={false}
                             // cargando={props.state.viajesReducer.estado == "cargando"}
                             // onPress={() => cancelarViaje()} 
@@ -197,7 +172,6 @@ class InicioViajePage extends Component {
                         // alignItems: "center",
                         // backgroundColor: "#000"
                     }}>
-
                         <View style={{
                             flexDirection: "row"
                         }}>
@@ -205,14 +179,35 @@ class InicioViajePage extends Component {
                                 backgroundColor: "#ccc",
                                 width: 60,
                                 height: 60,
-                                borderRadius: 100
+                                borderRadius: 100,
+                                margin: 10
                             }}>
                             </View>
-
-                            <Text>Ricardo Paz Demiquel</Text>
+                            <View style={{
+                                // backgroundColor: "#ccc",
+                                width: "100%",
+                                justifyContent: "center"
+                            }}>
+                                <Text style={{
+                                    color: "#000"
+                                }}>Ricardo Paz Demiquel</Text>
+                                <View style={{
+                                    flexDirection: "row",
+                                    alignItems: "center"
+                                }}>
+                                    <Text style={{
+                                        fontWeight: "bold",
+                                        color: STheme.color.background
+                                    }}>Ver perfil  </Text>
+                                    <Svg name={"Rightarrow"}
+                                        style={{
+                                            width: 15,
+                                            height: 15,
+                                            fill: STheme.color.background
+                                        }} />
+                                </View>
+                            </View>
                         </View>
-
-
 
                         <View style={{
                         }}>
@@ -229,57 +224,14 @@ class InicioViajePage extends Component {
                                     return <View />
                                 }}>
                                 <Text>
-                                    Consejos la app y mensajes
+                                    Tiempo estimado de llegada
                                     <Text style={{
-                                        color: "#f00",
+                                        color: "#000",
                                         fontWeight: "bold"
-                                    }}> Ver</Text>
+                                    }}> 5 min</Text>
                                 </Text>
                             </TouchableOpacity>
                         </View>
-
-
-
-                        {/* <View style={{
-                            width: "100%",
-                            height: "100%",
-                            justifyContent: "space-evenly",
-                            // backgroundColor: "#ccc"
-                        }}>
-                            <View style={{
-                                flexDirection: "row",
-                            }}>
-                                <View style={{
-                                    flex: 1,
-                                    // backgroundColor:"#000"
-                                }}>
-                                    <Text style={{
-                                        fontSize: 14,
-                                        color: STheme.color.textb
-                                    }}>Efectivo</Text>
-                                    <Text style={{
-                                        fontSize: 12,
-                                        color: STheme.color.textb
-                                    }}>Tipo de pago</Text>
-                                </View>
-
-                                <View style={{
-                                    flex: 1,
-                                }}>
-                                    <Text style={{
-                                        fontSize: 14,
-                                        color: STheme.color.textb
-                                    }}>Bs. {33}
-                                    </Text>
-                                    <Text style={{
-                                        fontSize: 12,
-                                        color: STheme.color.textb
-                                    }}>Monto estimado
-                                    </Text>
-                                </View>
-                            </View>
-                        </View> */}
-
                     </View>
                 </View>
             </View>
@@ -288,42 +240,46 @@ class InicioViajePage extends Component {
 
     render() {
 
-        if (!this.props.state.viajesReducer.data) {
+        if (this.props.state.viajesReducer.data.movimientos["cancelo_viaje"]) {
+            // alert("cancelado")
+            console.log(this.props.state.viajesReducer.data)
             this.props.navigation.replace("CargaPage");
+            this.props.state.viajesReducer.data = false
             return <View />
         }
 
         return (
-            <View style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center"
-            }}>
-                {/* <MapaViaje /> */}
-                <EstadoViaje />
-
+            <>
+                <BarraViaje title="Trasporte" onpress={() => this.cancelar()} />
 
                 <View style={{
-                    position: "absolute",
-                    width: "100%",
-                    // height: Dimensions.get('window').height * 0.3,
-                    height: 220,
-                    borderTopRightRadius: 20,
-                    borderTopLeftRadius: 20,
-                    backgroundColor: "#fff",
-                    // borderColor: "#ccc",
                     flex: 1,
-                    bottom: 0
+                    justifyContent: "center",
+                    alignItems: "center",
+                    backgroundColor: "#ccc"
                 }}>
-                    {/* {getAllPrecio()} */}
-                    {this.getDetalleRuta()}
 
+                    <MapaViaje />
+
+                    <View style={{
+                        position: "absolute",
+                        width: "100%",
+                        // height: Dimensions.get('window').height * 0.3,
+                        height: 220,
+                        borderTopRightRadius: 20,
+                        borderTopLeftRadius: 20,
+                        backgroundColor: "#fff",
+                        // borderColor: "#ccc",
+                        flex: 1,
+                        bottom: 0
+                    }}>
+                        {/* {getAllPrecio()} */}
+                        {this.getDetalleRuta()}
+                    </View >
+                    {/* {this.Cancelar()} */}
+                    {/* <CancelarViaje navigation={this.props.navigation} /> */}
                 </View >
-
-                {/* {this.Cancelar()} */}
-                {/* <CancelarViaje navigation={this.props.navigation} /> */}
-
-            </View >
+            </>
         )
     }
 }

@@ -7,7 +7,6 @@ const EstadoViaje = (props) => {
 
     var mensaje = "Conductor cerca";
 
-    var tamanho = Dimensions.get("window").height * 0.1;
     if (!props.state.viajesReducer.data) {
         return <View />
     }
@@ -18,18 +17,15 @@ const EstadoViaje = (props) => {
 
     // if (props.state.viajesReducer.data.movimientos["acepto_secretaria"]) {
     //     mensaje = "Estamos en busca de tu ambulancia";
-    //     tamanho = Dimensions.get("window").height * 0.1
     // }
 
     // if (props.state.viajesReducer.data.movimientos["acepto_conductor"]) {
     //     mensaje = "Tu ambulancia viene en camino";
-    //     tamanho = Dimensions.get("window").height * 0.1
     // }
 
     // if (props.state.viajesReducer.data.movimientos["ambulancia_cerca"]) {
     //     mensaje = "Ya llegó tu Ambulancia";
 
-    //     tamanho = Dimensions.get("window").height * 0.25
     // }
 
     if (!mensaje) {
@@ -37,21 +33,10 @@ const EstadoViaje = (props) => {
     }
 
     return (
-        <View
-            style={{
-                width: "95%",
-                minHeight: tamanho,
-                position: "absolute",
-                alignItems: 'center',
-                justifyContent: 'center',
-                backgroundColor: "#2C4C7E",
-                top: 10,
-                borderRadius: 10,
-                padding: 10
-            }} >
+        <View>
             <Text style={{
-                color: "#fff",
-                fontSize: Dimensions.get("window").height * 0.02,
+                color: "#000",
+                fontSize: 15,
                 fontWeight: "bold"
             }}>
                 {mensaje}

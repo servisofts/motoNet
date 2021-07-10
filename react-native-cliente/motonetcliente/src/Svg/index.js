@@ -46,6 +46,7 @@ import Moto from '../img/moto.svg';
 import Torito from '../img/torito.svg';
 import Reloj from '../img/reloj.svg';
 import Arrow from '../img/arrow.svg';
+import Rightarrow from '../img/rightarrow.svg';
 
 const Svg = (propsa) => {
     var props = { ...propsa }
@@ -149,6 +150,8 @@ const Svg = (propsa) => {
             return <Reloj style={props.style} />
         case "Arrow":
             return <Arrow style={props.style} />
+        case "Rightarrow":
+            return <Rightarrow style={props.style} />
         default: return <Text>Not Found</Text>
     }
 }

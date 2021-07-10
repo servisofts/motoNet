@@ -11,7 +11,7 @@ const ComponentDetalleViaje = (props) => {
 
     // let data = props.tipo_viaje
 
-    // console.log("edson " + JSON.stringify(data))
+    console.log("edson " + JSON.stringify(props.data))
 
     const cancelarViaje = () => {
         console.log(props.state.viajesReducer.data)
@@ -31,9 +31,7 @@ const ComponentDetalleViaje = (props) => {
 
 
     const getDetalleRuta = () => {
-
         // var tipos_de_viajes = props.state.tipoViajesReducer.data;
-
         return (
             <View style={{
                 flex: 1,
@@ -70,14 +68,14 @@ const ComponentDetalleViaje = (props) => {
                                 color: STheme.color.textb,
                                 fontSize: 16,
                                 fontWeight: "bold"
-                            }}>343 min Aprox.
+                            }}>Bs {props.data.monto_estimado}
                             </Text>
 
                             <Text style={{
                                 color: STheme.color.textb,
                                 fontSize: 12,
                             }}>
-                                434 km Aprox
+                                {props.data.distancia} km Aprox
                             </Text>
                         </View>
 
@@ -135,13 +133,13 @@ const ComponentDetalleViaje = (props) => {
                                     <Text style={{
                                         fontSize: 14,
                                         color: STheme.color.textb
-                                    }}>Bs. {totalViaje}
+                                    }}>Bs. {props.data.monto_estimado}
                                     </Text>
-                                    <Text style={{
+                                    {/* <Text style={{
                                         fontSize: 12,
                                         color: STheme.color.textb
                                     }}>Monto estimado
-                                    </Text>
+                                    </Text> */}
                                 </View>
                             </View>
                             {/* <Text style={{

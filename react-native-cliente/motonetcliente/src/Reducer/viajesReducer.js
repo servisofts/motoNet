@@ -77,6 +77,9 @@ export default (state, action) => {
             case "denegarOferta":
                 denegarOferta(state, action);
                 break;
+            case "sinConductores":
+                sinConductores(state, action);
+                break;
         }
         state = { ...state };
     }
@@ -232,6 +235,14 @@ const getViajeByKeyUsuario = (state, action) => {
 }
 
 const denegarOferta = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.data = action.data
+    }
+}
+
+const sinConductores = (state, action) => {
     state.type = action.type
     state.estado = action.estado
     if (action.estado === "exito") {

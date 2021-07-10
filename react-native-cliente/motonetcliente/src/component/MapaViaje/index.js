@@ -17,9 +17,12 @@ const Mapa = (props) => {
         origen: false,
         ubicacionActual: false
     })
+
+    // console.log(props.state.viajesReducer.data)
+
     // var pos = props.state.locationGoogleMapReducer.region;
-    var pos = props.state.viajesReducer.data.destinos[0];
-    console.log(pos)
+    var pos = props.state.viajesReducer.data.direccion_inicio;
+
     if (!data.region.isRender) {
         if (pos) {
             data.region = {
@@ -38,7 +41,7 @@ const Mapa = (props) => {
         //     return <View />
         // }
         // var dato = props.state.viajesReducer.data.destinos[0];
-        console.log(data)
+        // console.log(data)
         var json = { latitude: data.region.latitude, longitude: data.region.longitude };
         return (
             <Marker
@@ -65,7 +68,11 @@ const Mapa = (props) => {
     }
 
     return (
-        <View style={{ width: "100%", height: "100%" }}>
+        <View style={{
+            width: "100%",
+            height: "100%",
+            paddingBottom: 200
+        }}>
             <MapView
                 style={{
                     flex: 1,

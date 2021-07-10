@@ -26,7 +26,7 @@ class ViajeEsperaPage extends Component {
             !this.state.duracion
         ) {
             this.setState({ duracion: data })
-            console.log(data);
+            // console.log(data);
         }
     }
 
@@ -35,7 +35,7 @@ class ViajeEsperaPage extends Component {
             console.log(this.props.state.viajesReducer.data.movimientos["negociacion_conductor"])
             // this.props.navigation.replace("ServicioPage");
             return (
-                <ModalOferta data={this.props.state.viajesReducer.data.movimientos["negociacion_conductor"]} />
+                <ModalOferta data={this.props.state.viajesReducer.data} />
             )
         }
         // console.log("dsd")
@@ -43,14 +43,20 @@ class ViajeEsperaPage extends Component {
 
     render() {
 
-        if (this.props.state.viajesReducer.data.movimientos["inicio_viaje"]) {
-            this.props.navigation.replace("InicioViajePage");
+        if (!this.props.state.viajesReducer.data) {
+            this.props.navigation.replace("ServicioPage");
             return <View />
         }
 
-
-        if (!this.props.state.viajesReducer.data) {
+        if (this.props.state.viajesReducer.data.movimientos["sin_conductor"]) {
+            alert("no se encontro conductor")
             this.props.navigation.replace("ServicioPage");
+            this.props.state.viajesReducer.data = false
+            return <View />
+        }
+
+        if (this.props.state.viajesReducer.data.movimientos["inicio_viaje"]) {
+            this.props.navigation.replace("InicioViajePage");
             return <View />
         }
 
@@ -78,17 +84,15 @@ class ViajeEsperaPage extends Component {
                             height: 200,
                             fill: "#fff"
                         }} />
-                    <DetalleViaje />
+                    <DetalleViaje data={this.props.state.viajesReducer.data} />
                 </View>
 
                 {this.getConductorOferta()}
                 {/* <ModalOferta /> */}
-
             </View>
         );
     }
 }
-
 
 const initStates = (state) => {
     return { state }
