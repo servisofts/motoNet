@@ -92,6 +92,7 @@ const BarraDeDesconeccion = (props) => {
     };
 
     HacerPing();
+    return <View />
     var heightBar = Dimensions.get("window").height * 0.035;
     return (
         <>
@@ -103,7 +104,7 @@ const BarraDeDesconeccion = (props) => {
                 style={{
                     backgroundColor: pan.y.interpolate({
                         inputRange: [0, Dimensions.get("window").height],
-                        outputRange: [Styles.colors.primary+"00", Styles.colors.primary+"F8"]
+                        outputRange: [Styles.colors.primary + "00", Styles.colors.primary + "F8"]
                     }),
                     height: pan.y.interpolate({
                         inputRange: [0, Dimensions.get("window").height],
@@ -139,7 +140,7 @@ const BarraDeDesconeccion = (props) => {
                         zIndex: 999,
 
                     }}>
-                    <ContenidoBarra closeBar={closeBar}/>
+                    <ContenidoBarra closeBar={closeBar} />
                 </View>
 
                 <View style={{

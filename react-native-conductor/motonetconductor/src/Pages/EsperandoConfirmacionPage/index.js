@@ -6,6 +6,8 @@ import PushNotification from "react-native-push-notification";
 import Svg from '../../Svg';
 import MapView, { Marker } from 'react-native-maps';
 import AppParams from "../../Json/index.json"
+import * as SSBackgroundLocation from '../../SSBackgroundLocation'
+
 class EsperandoConfirmacionPage extends Component {
     static navigationOptions = {
         headerShown: false,
@@ -77,7 +79,7 @@ class EsperandoConfirmacionPage extends Component {
             this.notificacion()
             this.props.state.usuarioReducer.estado = ""
         }
-   
+
         return (
             <View style={{
                 flex: 1,
@@ -108,8 +110,8 @@ class EsperandoConfirmacionPage extends Component {
                         marginBottom: 30,
                     }}>
                         <View style={{
-                            width: Dimensions.get("window").width*0.3,
-                            height: Dimensions.get("window").width*0.3,
+                            width: Dimensions.get("window").width * 0.3,
+                            height: Dimensions.get("window").width * 0.3,
                             alignItems: 'center',
                             justifyContent: 'center',
 
@@ -128,7 +130,7 @@ class EsperandoConfirmacionPage extends Component {
                             backgroundColor: "#f00",
                             borderRadius: 20,
                             width: 400,
-                            height: Dimensions.get("window").height*0.5,
+                            height: Dimensions.get("window").height * 0.5,
                             maxWidth: "90%",
                             alignItems: 'center',
                             justifyContent: 'center',
@@ -141,7 +143,7 @@ class EsperandoConfirmacionPage extends Component {
                                 textAlign: "center"
                             }}>
                                 Estamos verificando tu usuario. Por favor ten paciencia.
-                              </Text>
+                            </Text>
                             <Text style={{
                                 fontSize: 15,
                                 fontWeight: "bold",
@@ -165,7 +167,8 @@ class EsperandoConfirmacionPage extends Component {
                             AsyncStorage.removeItem(AppParams.storage.usuarioLog)
                             this.props.state.usuarioReducer.usuarioLog = false
                             this.props.state.usuarioReducer.estado = ""
-                            this.props.state.backgroundLocationReducer.close()
+                            SSBackgroundLocation.getInstance().stop();
+                            // this.props.state.backgroundLocationReducer.close()
                             this.props.navigation.replace("CargaPage")
 
                             return <View />
@@ -186,7 +189,7 @@ class EsperandoConfirmacionPage extends Component {
                             fontSize: 20,
                         }}>
                             Salir
-                    </Text>
+                        </Text>
                     </TouchableOpacity>
                 </View>
             </View>

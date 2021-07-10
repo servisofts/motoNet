@@ -298,15 +298,16 @@ public class Viaje {
             // key_viaje + "'");
             JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_INICIO_VIAJE, key_usuario);
             viaje = getViajeAndDestinos(key_viaje);
-            JSONObject objSend = new JSONObject();
-            objSend.put("component", "viaje");
-            objSend.put("type", "confirmarBusqueda");
-            objSend.put("data", viaje);
-            objSend.put("estado", "exito");
-            SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_conductor"));
+            // JSONObject objSend = new JSONObject();
+            // objSend.put("component", "viaje");
+            // objSend.put("type", "confirmarBusqueda");
+            // objSend.put("data", viaje);
+            // objSend.put("estado", "exito");
             // SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
             obj.put("data", viaje);
             obj.put("estado", "exito");
+            SSServerAbstract.sendUser(obj.toString(), viaje.getString("key_conductor"));
+
         } catch (SQLException e) {
             obj.put("estado", "error");
         }
@@ -358,11 +359,18 @@ public class Viaje {
             JSONObject viaje = getViajeAndDestinos(key_viaje);
             String key_conductor = viaje.getString("key_conductor");
             JSONObject movimiento = viaje.getJSONObject("movimientos").getJSONObject(TIPO_NEGOCIACION_CONDUCTOR);
+            JSONObject movimiento2 = viaje.getJSONObject("movimientos").getJSONObject(TIPO_NOTIFICO_CONDUCTOR);
             if (movimiento != null) {
                 Conexion.ejecutarUpdate(
                         "UPDATE viaje_movimiento SET estado = 0 WHERE key = '" + movimiento.getString("key") + "'");
             }
+            if (movimiento2 != null) {
+                Conexion.ejecutarUpdate(
+                        "UPDATE viaje_movimiento SET estado = 0 WHERE key = '" + movimiento2.getString("key") + "'");
+            }
             Conexion.ejecutarUpdate("UPDATE viaje SET key_conductor = '' WHERE key = '" + key_viaje + "'");
+            // JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.,
+            // key_usuario);
             viaje = getViajeAndDestinos(key_viaje);
             JSONObject objSend = new JSONObject();
             objSend.put("component", "viaje");
@@ -397,12 +405,17 @@ public class Viaje {
     public void cancelarViajeCliente(JSONObject obj, SSSessionAbstract session) {
         try {
 
-            // String key_usuario = obj.getString("key_usuario");
+            String key_usuario = obj.getString("key_usuario");
             String key_viaje = obj.getString("key_viaje");
-            // JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje,
-            // Viaje.TIPO_CANCELO_VIAJE, key_usuario);
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_VIAJE, key_usuario);
             Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" + key_viaje + "'");
+            JSONObject viaje = getViajeAndDestinos(key_viaje);
+            obj.put("data", viaje);
             obj.put("estado", "exito");
+
+            if (viaje.has("key_conductor")) {
+                SSServerAbstract.sendUser(obj.toString(), viaje.getString("key_conductor"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             obj.put("estado", "error");
@@ -438,6 +451,12 @@ public class Viaje {
         return Conexion.ejecutarFuncionObject(consulta);
     }
 
+    public static JSONObject getViajeFormat(String key) throws SQLException {
+
+        String consulta = "select get_viaje_formateado('" + key + "') as json";
+        return Conexion.ejecutarFuncionObject(consulta);
+    }
+
     public static final String TIPO_INICIO_BUSQUEDA = "inicio_busqueda";
     public static final String TIPO_CANCELO_BUSQUEDA = "cancelo_busqueda";
     public static final String TIPO_CANCELO_BUSQUEDA_CONDUCTOR = "cancelo_busqueda_conductor";
@@ -445,6 +464,8 @@ public class Viaje {
     public static final String TIPO_NOTIFICO_CONDUCTOR = "notifico_conductor";
     public static final String TIPO_NEGOCIACION_CONDUCTOR = "negociacion_conductor";
     public static final String TIPO_ACEPTO_CONDUCTOR = "acepto_conductor";
+    public static final String TIPO_DENEGO_OFERTA = "denego_oferta";
+    public static final String TIPO_SIN_CONDUCTOR = "sin_conductor";
     public static final String TIPO_INICIO_VIAJE = "inicio_viaje";
 
     public static JSONObject nuevoMovimientoViaje(String key_viaje, String tipo, String key_referencia)

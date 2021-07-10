@@ -30,11 +30,15 @@ const ViajeInicioPage = (props) => {
     if (props.state.ViajeReducer.data) {
         if (props.state.ViajeReducer.data.movimientos) {
             if (props.state.ViajeReducer.data.movimientos["termino_viaje_conductor"]) {
-                       props.navigation.replace("CargaPage");    
-                       return <View/>
+                props.navigation.replace("CargaPage");
+                return <View />
+            }
+            if (props.state.ViajeReducer.data.movimientos["cancelo_viaje"]) {
+                props.navigation.replace("CargaPage");
+                return <View />
             }
         }
-        
+
     }
     // console.log(props.navigation)
     const getViajeHilo = async () => {
@@ -60,7 +64,7 @@ const ViajeInicioPage = (props) => {
         }, true);
         getViajeHilo();
     };
-    getViajeHilo();
+    // getViajeHilo();
 
     if (!zoom) {
         const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -71,6 +75,16 @@ const ViajeInicioPage = (props) => {
         // yourFunction();
     }
 
+    const fitCordinates = (pos) => {
+        mapa.fitToCoordinates(pos, {
+            edgePadding: {
+                top: 400,
+                right: 100,
+                bottom: 400,
+                left: 100,
+            }
+        })
+    }
     const markerClick = (obj) => {
         console.log(obj);
         if (!zoom)
@@ -81,15 +95,14 @@ const ViajeInicioPage = (props) => {
 
 
     const zoomin = (obj) => {
-        obj = currentPos;
-
-        obj = {
+        // obj = currentPos;
+        var pos = {
             latitude: obj.latitude,
             longitude: obj.longitude,
-            latitudeDelta: 0.01,
-            longitudeDelta: 0.01
+            latitudeDelta: 0.001,
+            longitudeDelta: 0.001
         }
-        mapa.animateToRegion(obj, 2000);
+        mapa.animateToRegion(pos, 2000);
         setZoom(true);
         return <View />
     }
@@ -168,7 +181,7 @@ const ViajeInicioPage = (props) => {
                     color: "#fff"
                 }}>
                     CANCELAR VIAJE
-            </Text>
+                </Text>
             </TouchableOpacity>)
     }
     if (props.state.backgroundLocationReducer.open) {
@@ -189,7 +202,10 @@ const ViajeInicioPage = (props) => {
                 ref={map => { mapa = map }}
                 provider={PROVIDER_GOOGLE}
             >
-                <RutaViaje />
+                <RutaViaje
+                    fitCordinates={(arrpos) => { fitCordinates(arrpos) }}
+                    zoomin={(pos) => { zoomin(pos) }}
+                />
             </MapView>
             {/* <CancelarViaje navigation={props.navigation} /> */}
             <EstadoViaje />

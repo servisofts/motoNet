@@ -5,6 +5,7 @@ import Svg from '../../Svg';
 import AppParams from '../../Json/index.json'
 import { ScrollView } from 'react-native-gesture-handler';
 import Styles from '../../Styles';
+import EsperandoConfirmacion from './EsperandoConfirmacion';
 
 const ConfirmarViaje = (props) => {
     const [obj, setObj] = React.useState(false);
@@ -45,12 +46,38 @@ const ConfirmarViaje = (props) => {
                     }
                     break;
                 case "inicio_viaje":
-                    setRedirect("ViajeInicioPage")
+                    if (!isRedirect) {
+                        setRedirect("ViajeInicioPage")
+                    }
                     break;
             }
             return <View />
         })
     }
+
+    if (props.state.ViajeReducer) {
+        var viaje = props.state.ViajeReducer.data;
+        if (viaje.movimientos["notifico_conductor"]) {
+            if (viaje.movimientos["notifico_conductor"].key_referencia != props.state.usuarioReducer.usuarioLog.key) {
+                props.dispatch({
+                    component: "viaje",
+                    type: "borrarViaje",
+                    estado: "exito"
+                })
+                return <View />
+            }
+        } else {
+            console.log("BORRADO POR ALGON MOTIVO")
+            console.log(viaje)
+            props.dispatch({
+                component: "viaje",
+                type: "borrarViaje",
+                estado: "exito"
+            })
+            return <View />
+        }
+    }
+
 
     const yourFunction = async () => {
         await delay(datos.parametros["Tiempo permitido para aceptar viaje conductor"] * 1000);
@@ -97,6 +124,7 @@ const ConfirmarViaje = (props) => {
         return <View />
     }
 
+
     return (
         <View style={{
             position: "absolute",
@@ -105,7 +133,6 @@ const ConfirmarViaje = (props) => {
             //backgroundColor: "#2c4c7e",
             backgroundColor: "#fff",
         }}>
-
             <View style={{
                 flex: 2,
                 alignItems: 'center',
@@ -252,7 +279,7 @@ const ConfirmarViaje = (props) => {
 
                 </View>
             </View>
-
+            <EsperandoConfirmacion state={props.state} />
         </View>
     )
 }
@@ -269,7 +296,7 @@ const styles = StyleSheet.create({
         shadowColor: "#000",
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5,
+        // elevation: 5,
     },
 });
 

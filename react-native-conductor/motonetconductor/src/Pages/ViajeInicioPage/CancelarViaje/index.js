@@ -112,18 +112,18 @@ const CancelarViaje = (props) => {
                             justifyContent: "center",
                         }}
                         onPress={() => {
-                            AsyncStorage.removeItem("motonet_viaje");
-                            props.state.ViajeReducer.data = false;
-                            props.navigation.replace("CargaPage");
+                            // AsyncStorage.removeItem("motonet_viaje");
+                            // props.state.ViajeReducer.data = false;
+                            // props.navigation.replace("CargaPage");
                         }}>
                         <Text>
-                            CANCELAR MOTONET
+                            CANCELAR VIAJE  
                         </Text>
                     </TouchableOpacity>
                 </View>
             </View>
 
-            <TouchableOpacity style={{
+            {/* <TouchableOpacity style={{
                 height: 50,
                 width: 50,
                 alignItems: "center",
@@ -134,8 +134,8 @@ const CancelarViaje = (props) => {
                 onPress={() => {
                     //props.state.locationGoogleMapReducer.route = false;
                     //props.setVentanaSelect("tipoDeViaje")
-                    AsyncStorage.removeItem("motonet_viaje");
-                    props.navigation.replace("CargaPage");
+                    // AsyncStorage.removeItem("motonet_viaje");
+                    // props.navigation.replace("CargaPage");
                 }}>
                 <Svg name="Close"
                     style={{
@@ -143,7 +143,7 @@ const CancelarViaje = (props) => {
                         height: 30,
                         fill: "#000"
                     }} />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
         </Animated.View>
     )

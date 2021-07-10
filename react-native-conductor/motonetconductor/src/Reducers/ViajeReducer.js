@@ -19,6 +19,9 @@ export default (state, action) => {
             case "viajeEntrante":
                 viajeEntrante(state, action);
                 break;
+            case "confirmarBusqueda":
+                confirmarBusqueda(state, action);
+                break;
             case "confirmarBusquedaConductor":
                 confirmarBusquedaConductor(state, action);
                 break;
@@ -33,6 +36,9 @@ export default (state, action) => {
                 break;
             case "movimiento":
                 movimiento(state, action);
+                break;
+            case "denegarOferta":
+                denegarOferta(state, action);
                 break;
             case "ambulanciaCerca":
                 ambulanciaCerca(state, action);
@@ -88,6 +94,16 @@ const viajeEntrante = (state, action) => {
     }
 }
 
+const confirmarBusqueda = (state, action) => {
+    state.estado = action.estado
+    if (state.estado === "exito") {
+        state.data = action.data
+        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+    }
+    if (state.estado === "error") {
+        state.error = action.error
+    }
+}
 const confirmarBusquedaConductor = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
@@ -161,6 +177,16 @@ const inicioDeRuta = (state, action) => {
     }
 }
 const movimiento = (state, action) => {
+    state.estado = action.estado
+    if (state.estado === "exito") {
+        state.data = action.data
+        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+    }
+    if (state.estado === "error") {
+        state.error = action.error
+    }
+}
+const denegarOferta = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data

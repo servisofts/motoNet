@@ -3,11 +3,35 @@ import { Polyline, Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import Svg from '../../../Svg';
+const delay = ms => new Promise(res => setTimeout(res, ms));
+let lastSend = 0;
 const RutaViaje = (props) => {
 
     // if (props.state.locationGoogleReducer.estado == "cargando") {
     //     return <View />
     // }
+    const getHilo = async () => {
+        await delay(5000);
+        var timeActual = new Date().getTime();
+        if (timeActual - lastSend < 5000) {
+            getHilo();
+            return;
+        }
+        lastSend = timeActual;
+
+        var movimientos = props.state.ViajeReducer.data.movimientos;
+        var viaje = props.state.ViajeReducer.data;
+        console.log(Object.keys(movimientos))
+        if (movimientos["inicio_viaje"]) {
+            if (viaje["direccion_fin"]) {
+                props.fitCordinates([viaje.direccion_inicio, viaje.direccion_fin])
+            } else {
+                props.zoomin(viaje.direccion_inicio);
+            }
+            return;
+        }
+    }
+    getHilo();
     if (!props.state.ViajeReducer.data) {
         return <View />
     }
@@ -27,7 +51,7 @@ const RutaViaje = (props) => {
                 coordinate={json}
                 style={{ width: 40, height: 40 }}
                 resizeMode="contain"
-                title={(index + 1) + ""}
+                title={(index) + ""}
 
             >
             </Marker>

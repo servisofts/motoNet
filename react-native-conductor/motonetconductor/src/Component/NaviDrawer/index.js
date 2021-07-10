@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Svg from '../../Svg';
 import ConfirmarViaje from '../ConfirmarViaje';
 import AppParams from '../../Json/index.json'
+import * as SSBackgroundLocation from '../../SSBackgroundLocation'
 
 const NaviDrawe = (props) => {
 
@@ -34,7 +35,8 @@ const NaviDrawe = (props) => {
                 AsyncStorage.removeItem(AppParams.storage.usuarioLog);
                 props.state.usuarioReducer.usuarioLog = false;
                 props.state.usuarioReducer.estado = "";
-                props.state.backgroundLocationReducer.close();
+                SSBackgroundLocation.getInstance().stop();
+                // props.state.backgroundLocationReducer.close();
                 props.state.usuarioReducer.usuarioCargado=false;
                 props.dispatch(
                     {

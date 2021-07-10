@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Text, View, TouchableOpacity, Animated } from 'react-native';
 import Inicio from '../../Component/Inicio';
 import NaviDrawer from '../../Component/NaviDrawer';
+import * as SSBackgroundLocation from '../../SSBackgroundLocation'
 
 class InicioPage extends Component {
     static navigationOptions = ({ navigation }) => (
@@ -38,7 +39,8 @@ class InicioPage extends Component {
         })
         if (estados) {
             this.props.state.usuarioReducer.estado = ""
-            this.props.state.backgroundLocationReducer.close();
+            SSBackgroundLocation.getInstance().stop();
+
             this.props.navigation.replace("EsperandoConfirmacionPage");
             return <View />
         }
