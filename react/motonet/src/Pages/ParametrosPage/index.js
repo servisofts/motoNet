@@ -97,10 +97,10 @@ const ParametrosPages = (props) => {
                                 <TextField id="descripcionLabel" label="Descripción" required />
                                 <TextField id="valorLabel" label="Valor" required type="number"/>
                                 <FormControl className={classes.formControl}>
-                                    <InputLabel id="medidaLabel">Medida</InputLabel>
+                                    <InputLabel >Medida</InputLabel>
                                     <Select
                                         labelId="medidaLabel"
-                                        id="demo-controlled-open-select"
+                                        id="medidaLabel"
                                         open={open}
                                         onClose={handleClose}
                                         onOpen={handleOpen}
@@ -113,7 +113,7 @@ const ParametrosPages = (props) => {
                                         </MenuItem>
                                         <MenuItem value={10}>Metros</MenuItem>
                                         <MenuItem value={20}>Segundos</MenuItem>
-                                        <MenuItem value={30}>Cantidad</MenuItem>
+                                        <MenuItem value={"cantidad"}>Cantidad</MenuItem>
                                     </Select>
                                 </FormControl>
                             </form>

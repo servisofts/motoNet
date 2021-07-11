@@ -38,7 +38,7 @@ const SSPushNotification = (props) => {
     });
     PushNotification.createChannel(
         {
-            channelId: "notificaciones-ambulancia", // (required)
+            channelId: "notificaciones-motonet", // (required)
             channelName: "notificaciones-chanel", // (required)
             // channelDescription: "A channel to categorise your notifications", // (optional) default: undefined.
             soundName: "default", // (optional) See `soundName` parameter of `localNotification` function

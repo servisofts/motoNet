@@ -23,7 +23,7 @@ import Warning from '../img/warning.svg';
 import Menu from '../img/menu.svg';
 import Ambulancia from '../img/ambulance.svg';
 import Sinubicacion from '../img/sinubicacion.svg';
-
+import LogoMoto from '../img/motonet.svg';
 const Svg = (props) => {
     const isWeb = Platform.OS === 'web';
 
@@ -31,6 +31,8 @@ const Svg = (props) => {
 
         case "logoCompleto":
             return <LogoCompleto style={props.style} />
+        case "LogoMoto":
+            return <LogoMoto style={props.style} />
         case "Volver":
             return <Volver style={props.style} />
 

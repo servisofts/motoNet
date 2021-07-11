@@ -115,7 +115,6 @@ class App extends Component {
     // BackgroundLocation.init(store);
     HttpConection.init(store);
     SSBackgroundLocation.init(store);
-
     SSSocketNative.init(store);
 
 

@@ -27,6 +27,7 @@ public class Viaje {
     // estado INT
 
     public Viaje(JSONObject data, SSSessionAbstract session) {
+        System.out.println("VIAJE- " + data.getString("type"));
         switch (data.getString("type")) {
             case "buscar":
                 buscar(data, session);
@@ -344,6 +345,7 @@ public class Viaje {
             objSend.put("estado", "exito");
             SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_usuario"));
             // SocketServer.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+            ViajeHilo.actualizarViaje(viaje);
             obj.put("data", viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {
@@ -379,6 +381,7 @@ public class Viaje {
             objSend.put("estado", "exito");
             SSServerAbstract.sendUser(objSend.toString(), key_conductor);
             obj.put("data", viaje);
+            ViajeHilo.actualizarViaje(viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {
             obj.put("estado", "error");

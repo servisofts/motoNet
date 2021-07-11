@@ -2,6 +2,7 @@ import { AsyncStorage } from 'react-native';
 import AppParams from '../../Json/index.json'
 import TcpSocket from 'react-native-tcp-socket';
 import SSColaMensaje from '../SSColaMensaje';
+import { notificar } from '../../Notificaciones';
 var DEBUG = true;
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -208,6 +209,7 @@ class SSSession {
             if (typeof datajson == "object") {
                 Log("ON MENSAJE:" + mensajeFinal);
                 this.store.dispatch(datajson);
+                notificar(datajson);
             }
         } else {
             this.dataTemporal = this.dataTemporal + decoderdata;
@@ -306,7 +308,7 @@ class SSSession {
                                 estado: "cargando"
                             };
                             _instance.send(objSend);
-                           
+
 
                         });
                     });
