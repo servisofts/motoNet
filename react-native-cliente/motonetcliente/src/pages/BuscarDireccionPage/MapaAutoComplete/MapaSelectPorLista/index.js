@@ -51,7 +51,7 @@ class MapaSelectPorLista extends Component {
                             color: "#000",
                             fontSize: 13,
                             margin: 5,
-                        }}>{"Seleccionar ubicacion en la lista."}</Text>
+                        }}>{"Seleccionar ubicación en la lista."}</Text>
                     </View>
                 </View>
             </TouchableOpacity>
