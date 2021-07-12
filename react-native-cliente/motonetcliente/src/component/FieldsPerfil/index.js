@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, Text, StyleSheet,TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import Svg from '../../Svg'
 import LineHorizontal from '../LineHorizontal'
-
+import { SPopupOpen } from '../../SPopup';
 const FieldsPerfil = ({ datos }) => {
 
     if (!datos) {
@@ -12,6 +12,14 @@ const FieldsPerfil = ({ datos }) => {
         console.log(datos)
     }
 
+    const editarCampo = (key) => {
+        SPopupOpen({
+            key: "editarCampo",
+            content: <View>
+                <Text>Editar {key}</Text>
+            </View>
+        })
+    }
     return (
         <View style={{
             width: "100%"
@@ -25,7 +33,9 @@ const FieldsPerfil = ({ datos }) => {
             }}>Información personal</Text>
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Nombre</Text>
-                <TouchableOpacity style={styles.edit_content}>
+                <TouchableOpacity style={styles.edit_content} onPress={() => {
+                    editarCampo("Nombres");
+                }}>
                     <Text style={styles.TextCampo}>
                         {!datos["Nombres"].dato ? "" : datos["Nombres"].dato}
                     </Text>
@@ -42,7 +52,9 @@ const FieldsPerfil = ({ datos }) => {
 
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Apellidos</Text>
-                <TouchableOpacity style={styles.edit_content}>
+                <TouchableOpacity style={styles.edit_content} onPress={() => {
+                    editarCampo("Apellidos");
+                }}>
                     <Text style={styles.TextCampo}>{datos["Apellidos"].dato}</Text>
                     <Svg resource={require("../../img/edit.svg")} style={{
                         width: 20,
@@ -64,7 +76,9 @@ const FieldsPerfil = ({ datos }) => {
             }}>Información de contacto</Text>
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Correo</Text>
-                <TouchableOpacity style={styles.edit_content}>
+                <TouchableOpacity style={styles.edit_content} onPress={() => {
+                    editarCampo("Correo");
+                }}>
                     <Text style={styles.TextCampo}>{datos["Correo"].dato}</Text>
                     <Svg resource={require("../../img/edit.svg")} style={{
                         width: 20,
@@ -80,7 +94,9 @@ const FieldsPerfil = ({ datos }) => {
 
             <View style={styles.ContenedorCampos}>
                 <Text style={styles.TextTitulo}>Telefono</Text>
-                <TouchableOpacity style={styles.edit_content}>
+                <TouchableOpacity style={styles.edit_content} onPress={() => {
+                    editarCampo("Telefono");
+                }}>
                     <Text style={styles.TextCampo}>{datos["Telefono"].dato}</Text>
                     <Svg resource={require("../../img/edit.svg")} style={{
                         width: 20,

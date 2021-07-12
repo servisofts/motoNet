@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableWithoutFeedback, Animated, Image, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableWithoutFeedback, Animated, Image, TouchableOpacity,ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux';
 import AppParams from '../../Json';
 import Svg from '../../Svg';
@@ -81,6 +81,9 @@ class NaviDrawer2 extends Component {
         var cabecera = "registro_cliente";
         var datos = this.props.state.usuarioReducer.usuarioDatos;
         if (!datos) {
+            if(!this.props.state.usuarioReducer.usuarioLog){
+                return <View/>
+            }
             if (this.props.state.usuarioReducer.estado == "cargando") {
                 return <ActivityIndicator />
             }

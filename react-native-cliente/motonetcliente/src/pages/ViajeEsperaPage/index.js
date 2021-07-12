@@ -6,6 +6,7 @@ import DetalleViaje from './DetalleViaje';
 import Svg from '../../Svg';
 import STheme from '../../STheme';
 import ModalOferta from './ModalOferta';
+import { SPopupOpen } from '../../SPopup';
 // import MapView, { Marker } from 'react-native-maps';
 // import RutaViaje from './RutaViaje';
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -49,7 +50,15 @@ class ViajeEsperaPage extends Component {
         }
 
         if (this.props.state.viajesReducer.data.movimientos["sin_conductor"]) {
-            alert("no se encontro conductor")
+            SPopupOpen({
+                key: "noConductor",
+                content: (
+                    <View>
+                        <Text>No encontamos conductor disponible.</Text>
+                        <Text>Porfavor intente nuevamente.</Text>
+                    </View>
+                )
+            })
             this.props.navigation.replace("ServicioPage");
             this.props.state.viajesReducer.data = false
             return <View />

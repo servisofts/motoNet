@@ -10,6 +10,7 @@ import {
   BackHandler,
   Dimensions,
   AsyncStorage,
+  ActivityIndicator
 } from "react-native";
 // import * as popupActions from '../../action/popupActions'
 import Svg from "../../Svg";
@@ -63,8 +64,7 @@ class PerfilPage extends Component {
     var url =
       urlFoto.urlImages +
       this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato +
-      `?type=getPerfil&key_usuario=${
-        this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario
+      `?type=getPerfil&key_usuario=${this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario
       }&date=${Date.now()}`;
     this.state.fotoPerfilUri = url;
   }
@@ -82,6 +82,9 @@ class PerfilPage extends Component {
   };
 
   render() {
+    if (!this.props.state.usuarioReducer.usuarioLog) {
+      return <View />
+    }
     if (
       this.props.state.usuarioReducer.type == "insertarDato" &&
       this.props.state.usuarioReducer.estado == "exito"
@@ -101,6 +104,7 @@ class PerfilPage extends Component {
     // this.state.fotoPerfilUri = url;
 
     var cabecera = "registro_cliente";
+
     var datos = this.props.state.usuarioReducer.usuarioDatos;
     if (!datos) {
       if (this.props.state.usuarioReducer.estado == "cargando") {
@@ -237,7 +241,7 @@ class PerfilPage extends Component {
               style={{
                 width: "90%",
                 maxWidth: 600,
-                marginBottom:10
+                marginBottom: 10
               }}
             >
               <FieldsPerfil datos={datos} />
@@ -249,7 +253,7 @@ class PerfilPage extends Component {
                   AsyncStorage.removeItem(AppParams.storage.urlLog);
                   this.props.state.usuarioReducer.usuarioLog = false;
                   this.props.state.usuarioReducer.usuarioDatos = false;
-                  this.props.state.usuarioReducer.cargaLoaded = true;
+                  this.props.state.usuarioReducer.cargaLoaded = false;
                   this.props.navigation.replace("CargaPage");
                   return <View />;
                 }}

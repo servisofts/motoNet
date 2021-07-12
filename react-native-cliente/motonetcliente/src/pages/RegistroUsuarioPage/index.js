@@ -6,6 +6,7 @@ import Boton1 from "../../component/Boton1";
 import BottomContent from "../../component/BottomContent";
 import SSCrollView from "../../component/SScrollView";
 import STextImput from "../../component/STextImput";
+import AppParams from "../../Json";
 import ModalPage from "../ModalPage";
 
 class RegistroUsuarioPage extends Component {
@@ -144,7 +145,7 @@ class RegistroUsuarioPage extends Component {
         estado: "cargando",
         cabecera: "registro_cliente",
       };
-      this.props.state.socketClienteReducer.sessiones["motonet"].send(
+      this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(
         objSend,
         true
       );
@@ -286,9 +287,7 @@ class RegistroUsuarioPage extends Component {
                         cabecera: "registro_cliente",
                         data: arr,
                       };
-                      this.props.state.socketClienteReducer.sessiones[
-                        "motonet"
-                      ].send(objSend, true);
+                      this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(objSend, true);
                       //alert("Registrar")
                     }
                   }
