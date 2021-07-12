@@ -138,7 +138,7 @@ class MensajeriaRegistroPage extends Component {
             backgroundColor: STheme.color.primary
         }}>
             <BarraSuperiorMensajeria
-                title={"Mensajeria"}
+                title={"Mensajería"}
                 goBack={() => { this.props.navigation.goBack() }}
                 pedir={() => this.pedirViaje()} />
             <View style={{
@@ -159,7 +159,7 @@ class MensajeriaRegistroPage extends Component {
                                 fontSize: 16,
                                 fontWeight: "bold",
                                 color: STheme.color.textb
-                            }}>Mensajería que vas a enviar?</Text>
+                            }}>Mensajería: ¿qué vas a enviar?</Text>
                             <SwitchTipo ref={(ref) => { this.switchtipo = ref; }} />
                             <View style={{
                                 marginTop: 16,
@@ -201,7 +201,7 @@ class MensajeriaRegistroPage extends Component {
 
                             <BuscardorNuevoBlack
                                 ref={(ref) => { this.direccionInicio = ref }}
-                                navigation={this.props.navigation} label={"Donde reogemos el encargo"} />
+                                navigation={this.props.navigation} label={"¿Dónde recogemos el encargo?"} />
 
                             {this.getInput("nombreR")}
                             {this.getInput("telefonoR")}
@@ -225,7 +225,7 @@ class MensajeriaRegistroPage extends Component {
                             }}>Destinatario</Text>
                             <BuscardorNuevoBlack
                                 ref={(ref) => { this.direccionFin = ref }}
-                                navigation={this.props.navigation} label={"Donde dejamos el encargo"} />
+                                navigation={this.props.navigation} label={"¿Dónde dejamos el encargo?"} />
                             {this.getInput("nombreD")}
                             {this.getInput("telefonoD")}
                             {this.getInput("notaD")}

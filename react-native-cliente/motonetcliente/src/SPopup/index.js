@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableWithoutFeedback, TouchableOpacity } from 'react-native';
+import Svg from '../Svg';
+
 var INSTANCE = false;
 
 
@@ -49,7 +51,7 @@ export default class SPopup extends Component {
                             // console.log("touch2")
                         }}>
                             <View style={{
-                                width: "90%",
+                                width: "80%",
                                 maxWidth: 600,
                                 backgroundColor: "#fff",
                                 borderRadius: 8,
@@ -70,7 +72,15 @@ export default class SPopup extends Component {
                                 }} onPress={() => {
                                     this.close(key);
                                 }}>
-                                    <Text>close</Text>
+                                   <Svg resource={require("../img/cerrar.svg")} style={{
+                                        width: 25,
+                                        height: 25,
+                                        color:"#000",
+                                        left:10,
+                                        //top: -10
+                                    }} />
+                                   
+                                    
                                 </TouchableOpacity>
                             </View>
                         </TouchableWithoutFeedback>
