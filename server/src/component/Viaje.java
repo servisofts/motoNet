@@ -470,6 +470,7 @@ public class Viaje {
     public static final String TIPO_DENEGO_OFERTA = "denego_oferta";
     public static final String TIPO_SIN_CONDUCTOR = "sin_conductor";
     public static final String TIPO_INICIO_VIAJE = "inicio_viaje";
+    public static final String TIPO_CONDUCTOR_CERCA = "conductor_cerca";
 
     public static JSONObject nuevoMovimientoViaje(String key_viaje, String tipo, String key_referencia)
             throws SQLException {
