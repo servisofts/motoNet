@@ -51,7 +51,7 @@ export default class SPopup extends Component {
                             // console.log("touch2")
                         }}>
                             <View style={{
-                                width: "80%",
+                                width: "90%",
                                 maxWidth: 600,
                                 backgroundColor: "#fff",
                                 borderRadius: 8,

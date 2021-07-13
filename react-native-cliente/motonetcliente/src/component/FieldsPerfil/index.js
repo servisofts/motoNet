@@ -5,6 +5,39 @@ import LineHorizontal from '../LineHorizontal'
 import { SPopupOpen } from '../../SPopup';
 const FieldsPerfil = ({ datos }) => {
 
+    const [obj, setObj] = React.useState({
+        usr: {
+            value: "",
+            error: false
+        },
+    });
+
+    const hanlechage = (text, id) => {
+        if (id === "usr") {
+            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (reg.test(text) === false) {
+                obj[id] = {
+                    value: text,
+                    error: true,
+                }
+            }
+            else {
+                obj[id] = {
+                    value: text,
+                    error: false,
+                }
+            }
+            setObj({ ...obj })
+            return <View />
+        }
+        obj[id] = {
+            value: text,
+            error: false,
+        }
+        setObj({ ...obj })
+        return <View />
+    };
+
     if (!datos) {
         console.log(datos)
         return <Text>No hay datos</Text>
@@ -13,8 +46,10 @@ const FieldsPerfil = ({ datos }) => {
     }
 
     const editarCampo = (key) => {
+      hanlechage("", "usr")
         SPopupOpen({
             key: "editarCampo",
+            
             content: <View  style={{
                 width: "100%",
                 //marginTop: 30,
@@ -24,10 +59,11 @@ const FieldsPerfil = ({ datos }) => {
                 <Text style={{paddingBottom:10}}>{key}:</Text>
                     <TextInput
                             //style={!obj.usr.error ? styles.touch2 : styles.touch2Error }
-                            style={styles.touch2}
-                            placeholder={"Ingresar correo"}
-                            //onChangeText={text => hanlechage(text, "usr")}
-                            defaultValue={datos[key].dato}
+                            style={!obj.usr.error ? styles.touch2 : styles.touch2Error }
+                            placeholder={"Ingresar dato"}
+                            onChangeText={text => hanlechage(text, "usr")}
+                            //defaultValue={datos[key].dato}
+                            defaultValue={datos[key].dato  ? datos[key].dato : obj.usr.value}
                             autoCapitalize='none'
                             autoFocus={true}
                             multiline={false}
@@ -39,6 +75,31 @@ const FieldsPerfil = ({ datos }) => {
                         />
                     <TouchableOpacity
                                 onPress={() => {
+                                    var datas = {}
+                                    var exito = true;
+                                    for (const key in obj) {
+                                        if (!obj[key].value || obj[key].value.length <= 0) {
+                                            obj[key].error = true;
+                                            exito = false;
+                                            //alert("error")
+                                        } else {
+                                            obj[key].error = false;
+                                            datas[key] = obj[key].value
+                                            //alert(datas[key])
+                                        }
+                                    }
+                                    setObj({ ...obj })
+                                    if (exito) {
+                                        // props.state.socketClienteReducer.sessiones["motonet"].send({
+                                        //     component: "usuario",
+                                        //     type: "recuperarPass",
+                                        //     data: obj.usr.value,
+                                        //     estado: "cargando"
+                                        // }, true);
+                                        //obj[key].error = false;
+                                       
+                                        alert( obj.usr.value+ " ++ MODIFICAR")
+                                    }
                                     
                                 }}
                                 style={styles.touch4}>
