@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { View, TouchableOpacity, Text, DatePickerIOS, Animated } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
-// import MarkerAmbulancia from './MarkerAmbulancia';
+import MarkerAmbulancia from './MarkerAmbulancia';
 var mapa;
 
 const Mapa = (props) => {
@@ -86,7 +86,7 @@ const Mapa = (props) => {
                 {getMarkerFin()} */}
 
                 {getMarkerInicio()}
-                {/* <MarkerAmbulancia /> */}
+                <MarkerAmbulancia />
                 {/* {getPosicionConductor()} */}
 
                 {/* <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} /> */}

@@ -110,14 +110,7 @@ const MarkerAmbulancia = (props) => {
             }
         }
     };
-    if (!props.state.emergenciaReducer.data) {
-        return <View />
-    }
-
-    if (!props.state.emergenciaReducer.data.movimientos["acepto_conductor"]) {
-        return <View />
-    }
-
+   
     if (!props.state.posicionConductorReducer.posicion) {
         return <View />
     }

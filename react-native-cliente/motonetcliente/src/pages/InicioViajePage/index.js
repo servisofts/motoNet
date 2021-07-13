@@ -101,7 +101,7 @@ class InicioViajePage extends Component {
 
     getDetalleRuta = () => {
 
-        // var tipos_de_viajes = props.state.tipoViajesReducer.data;
+        var dataCondutor = this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor];
 
         return (
             <View style={{
@@ -190,7 +190,7 @@ class InicioViajePage extends Component {
                             }}>
                                 <Text style={{
                                     color: "#000"
-                                }}>Ricardo Paz Demiquel</Text>
+                                }}>{dataCondutor["Nombres"].data}</Text>
                                 <View style={{
                                     flexDirection: "row",
                                     alignItems: "center"

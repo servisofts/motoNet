@@ -11,22 +11,21 @@ const EstadoViaje = (props) => {
         return <View />
     }
 
-    // if (props.state.viajesReducer.data.movimientos["inicio_emergencia"]) {
-    //     mensaje = "Esperando confirmacion."
-    // }
+    if (props.state.viajesReducer.data.movimientos["inicio_viaje"]) {
+        mensaje = "Conductor Viene"
+    }
 
-    // if (props.state.viajesReducer.data.movimientos["acepto_secretaria"]) {
-    //     mensaje = "Estamos en busca de tu ambulancia";
-    // }
+    if (props.state.viajesReducer.data.movimientos["acepto_secretaria"]) {
+        mensaje = "Su moto esta cerca";
+    }
 
-    // if (props.state.viajesReducer.data.movimientos["acepto_conductor"]) {
-    //     mensaje = "Tu ambulancia viene en camino";
-    // }
+    if (props.state.viajesReducer.data.movimientos["acepto_conductor"]) {
+        mensaje = "Su moto llego";
+    }
 
-    // if (props.state.viajesReducer.data.movimientos["ambulancia_cerca"]) {
-    //     mensaje = "Ya llegó tu Ambulancia";
-
-    // }
+    if (props.state.viajesReducer.data.movimientos["ambulancia_cerca"]) {
+        mensaje = "Viaje iniciado";
+    }
 
     if (!mensaje) {
         return <View />

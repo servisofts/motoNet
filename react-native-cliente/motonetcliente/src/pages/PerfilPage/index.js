@@ -170,12 +170,7 @@ class PerfilPage extends Component {
                 // borderColor:"#999"
               }}
             >
-              <TouchableOpacity
-                onPress={() => {
-                  this.handleClik(true);
-                }}
-                style={{}}
-              >
+              <View>
                 {!this.state.fotoPerfilUri ? (
                   <View
                     style={{
@@ -199,14 +194,13 @@ class PerfilPage extends Component {
                     }}
                   />
                 )}
-              </TouchableOpacity>
+              </View>
               <Text
                 style={{
                   color: "#000",
                   fontWeight: "bold",
                   fontSize: 18,
-                }}
-              >
+                }}>
                 {nombre} {apellidos}
               </Text>
               <View
@@ -225,16 +219,21 @@ class PerfilPage extends Component {
                     height: 50,
                   }}
                 >
-                  <Boton1 type={"1"} label={"Cambiar foto"} />
+                  <Boton1
+                    type={"1"}
+                    onPress={() => {
+                      this.handleClik(true)
+                    }}
+                    label={"Cambiar foto"} />
                 </View>
-                <View
+                {/* <View
                   style={{
                     width: "45%",
                     height: 50,
                   }}
                 >
                   <Boton1 type={"4"} label={"Quitar foto"} />
-                </View>
+                </View> */}
               </View>
             </View>
             <View
