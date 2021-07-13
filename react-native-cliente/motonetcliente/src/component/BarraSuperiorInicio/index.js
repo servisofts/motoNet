@@ -126,7 +126,7 @@ class BarraSuperiorInicio extends Component {
                             color: "#fff",
                             fontSize: 12,
                             // fontFamily:"myFont"
-                        }}>{"¿ Como podemos ayudarte hoy ?"}</Text>
+                        }}>{"¿ Cómo podemos ayudarte hoy ?"}</Text>
                     </View>
                     <View style={{
                         width: 45,

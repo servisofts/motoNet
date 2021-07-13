@@ -210,7 +210,7 @@ class NaviDrawer2 extends Component {
                                     height: 32,
                                 }}></View>
                                 {this.itemMenu({ title: "Inicio", url: "", icon: require("../../img/menu/inicio.svg") })}
-                                {this.itemMenu({ title: "Transporte", url: "InicioPage", icon: require("../../img/menu/transporte.svg") })}
+                                {this.itemMenu({ title: "Transporte", url: "TransportePage", icon: require("../../img/menu/transporte.svg") })}
                                 {this.itemMenu({ title: "Delivery", url: "PedidosRegistroPage", icon: require("../../img/menu/delivery.svg") })}
                                 {this.itemMenu({ title: "Mensajería", url: "MensajeriaRegistroPage", icon: require("../../img/menu/mensajeria.svg") })}
                                 {this.itemMenu({ title: "Ayuda", url: "", icon: require("../../img/menu/ayuda.svg") })}

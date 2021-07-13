@@ -124,7 +124,7 @@ class BarraSuperiorTransporte extends Component {
                     }}>
                         <BuscardorNuevo
                             ref={(ref) => { this.direccion = ref }}
-                            navigation={this.props.navigation} label={"Donde nos encontramos?"}
+                            navigation={this.props.navigation} label={"¿Dónde nos encontramos?"}
                             icon={"MarkerW"}
                             onChange={(direccion) => {
                                 this.props.onChangeDir1(direccion);
@@ -135,7 +135,7 @@ class BarraSuperiorTransporte extends Component {
                         }}></View>
                         <BuscardorNuevo
                             ref={(ref) => { this.direccion2 = ref }}
-                            navigation={this.props.navigation} label={"A donde iremos?"}
+                            navigation={this.props.navigation} label={"¿A dónde iremos?"}
                             icon={"Pointer"}
                             onChange={(direccion) => {
                                 this.props.onChangeDir2(direccion);

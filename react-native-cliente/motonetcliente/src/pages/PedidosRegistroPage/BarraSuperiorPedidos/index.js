@@ -117,7 +117,7 @@ class BarraSuperiorPedidos extends Component {
                         <BuscardorNuevo
                             icon={"MarkerW"}
                             ref={(ref) => { this.direccion = ref }}
-                            navigation={this.props.navigation} label={"Donde llevaremos el encargo"} />
+                            navigation={this.props.navigation} label={"¿Dónde llevaremos el encargo?"} />
                     </View>
 
                 </View>

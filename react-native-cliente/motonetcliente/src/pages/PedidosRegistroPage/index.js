@@ -51,7 +51,7 @@ class PedidosRegistroPage extends Component {
         // var direccionI = this.direccionInicio.getValue();
 
         if (!direccion) {
-            alert("Ingrese a donde llevaremos el encargo.")
+            alert("Ingrese a dónde llevaremos el encargo.")
             isValid = false;
         }
         var nombre = this._ref["nombre"].verify();
