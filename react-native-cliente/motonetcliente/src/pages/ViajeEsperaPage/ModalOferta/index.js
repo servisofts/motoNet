@@ -28,18 +28,49 @@ const ModalOferta = (props) => {
     }
 
     const getCondutor = () => {
-        if (props.state.usuarioReducer.data.estado == "cargando") {
+        if (!props.state.usuarioReducer.data[props.data.key_conductor]) {
+            if (props.state.usuarioReducer.data.estado == "cargando") {
+                return <View />
+            }
+            props.state.socketClienteReducer.sessiones["motonet"].send({
+                component: "usuario",
+                type: "getById",
+                cabecera: "registro_conductor",
+                key: props.data.key_conductor,
+                estado: "cargando",
+            }, true);
             return <View />
         }
-        props.state.socketClienteReducer.sessiones["motonet"].send({
-            component: "usuario",
-            type: "confirmarBusqueda",
-            estado: "cargando",
-            key_usuario: props.state.usuarioReducer.usuarioLog.key,
-            key_viaje: props.data.key
-        }, true);
-        return <View />
+        var data = props.state.usuarioReducer.data[props.data.key_conductor]
+        return (
+            <View style={{
+                alignItems: "center"
+            }}>
+                <View style={{
+                    backgroundColor: "#ccc",
+                    width: 60,
+                    height: 60,
+                    borderRadius: 100,
+                    marginTop: 10,
+                    marginBottom: 10
+                }}>
+                </View>
+                <Text>
+                    {data["Nombres"].dato} {data["Apellidos"].dato}
+                </Text>
+                <Text>
+                    {data["Correo"].dato}
+                </Text>
+                <Text style={{
+                    color: "#000",
+                    fontSize: 20,
+                    fontWeight: "bold"
+                }}>Bs. {JSON.stringify(props.data.movimientos["negociacion_conductor"].costo.monto)}</Text>
+
+            </View>
+        )
     }
+
 
     return (
         <View style={{
@@ -52,15 +83,23 @@ const ModalOferta = (props) => {
             alignItems: "center",
         }}>
 
+
             <View style={{
                 width: 300,
                 height: 250,
                 backgroundColor: "#fff",
-                borderRadius: 20
+                borderRadius: 20,
+                // justifyContent: "center",
+                // alignItems: "center"
             }}>
-                <View>
-                    <Text>Condutor</Text>
-                    <Text>Costo: {JSON.stringify(props.data.movimientos["negociacion_conductor"].costo.monto)}</Text>
+                <View style={{
+                    width: "100%",
+                    // backgroundColor:"#ccc",
+                    alignItems: "center"
+                }}>
+
+                    {getCondutor()}
+
                 </View>
 
                 <View style={{

@@ -131,7 +131,7 @@ export default class Productos extends Component {
                     fontSize: 16,
                     fontWeight: "700",
                     color: STheme.color.textb
-                }}>¿Que necesitas que te llevemos?</Text>
+                }}>¿Qué necesitas que te llevemos?</Text>
                 {this.getInput("nombre")}
                 {this.agregarFoto()}
                 {this.cantidad()}

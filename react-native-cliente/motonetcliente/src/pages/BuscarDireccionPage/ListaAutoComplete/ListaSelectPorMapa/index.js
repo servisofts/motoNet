@@ -51,7 +51,7 @@ class ListaSelectPorMapa extends Component {
                             color: "#000",
                             fontSize: 13,
                             margin: 5,
-                        }}>{"Seleccionar ubicacion en el mapa."}</Text>
+                        }}>{"Seleccionar ubicación en el mapa."}</Text>
                     </View>
 
                     <View style={{

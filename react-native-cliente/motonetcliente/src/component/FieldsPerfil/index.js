@@ -1,9 +1,42 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput,StyleSheet, TouchableOpacity } from 'react-native'
 import Svg from '../../Svg'
 import LineHorizontal from '../LineHorizontal'
 import { SPopupOpen } from '../../SPopup';
 const FieldsPerfil = ({ datos }) => {
+
+    const [obj, setObj] = React.useState({
+        usr: {
+            value: "",
+            error: false
+        },
+    });
+
+    const hanlechage = (text, id) => {
+        if (id === "usr") {
+            let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            if (reg.test(text) === false) {
+                obj[id] = {
+                    value: text,
+                    error: true,
+                }
+            }
+            else {
+                obj[id] = {
+                    value: text,
+                    error: false,
+                }
+            }
+            setObj({ ...obj })
+            return <View />
+        }
+        obj[id] = {
+            value: text,
+            error: false,
+        }
+        setObj({ ...obj })
+        return <View />
+    };
 
     if (!datos) {
         console.log(datos)
@@ -13,10 +46,70 @@ const FieldsPerfil = ({ datos }) => {
     }
 
     const editarCampo = (key) => {
+      hanlechage("", "usr")
         SPopupOpen({
             key: "editarCampo",
-            content: <View>
-                <Text>Editar {key}</Text>
+            
+            content: <View  style={{
+                width: "100%",
+                //marginTop: 30,
+                //alignItems: 'justify',
+                padding:10
+            }}>
+                <Text style={{paddingBottom:10}}>{key}:</Text>
+                    <TextInput
+                            //style={!obj.usr.error ? styles.touch2 : styles.touch2Error }
+                            style={!obj.usr.error ? styles.touch2 : styles.touch2Error }
+                            placeholder={"Ingresar dato"}
+                            onChangeText={text => hanlechage(text, "usr")}
+                            //defaultValue={datos[key].dato}
+                            defaultValue={datos[key].dato  ? datos[key].dato : obj.usr.value}
+                            autoCapitalize='none'
+                            autoFocus={true}
+                            multiline={false}
+                            placeholderTextColor={'#626262'}
+                           //keyboardType={'email-address'}
+                            autoCorrect={false}
+                            underlineColorAndroid={'transparent'}
+                            
+                        />
+                    <TouchableOpacity
+                                onPress={() => {
+                                    var datas = {}
+                                    var exito = true;
+                                    for (const key in obj) {
+                                        if (!obj[key].value || obj[key].value.length <= 0) {
+                                            obj[key].error = true;
+                                            exito = false;
+                                            //alert("error")
+                                        } else {
+                                            obj[key].error = false;
+                                            datas[key] = obj[key].value
+                                            //alert(datas[key])
+                                        }
+                                    }
+                                    setObj({ ...obj })
+                                    if (exito) {
+                                        // props.state.socketClienteReducer.sessiones["motonet"].send({
+                                        //     component: "usuario",
+                                        //     type: "recuperarPass",
+                                        //     data: obj.usr.value,
+                                        //     estado: "cargando"
+                                        // }, true);
+                                        //obj[key].error = false;
+                                       
+                                        alert( obj.usr.value+ " ++ MODIFICAR")
+                                    }
+                                    
+                                }}
+                                style={styles.touch4}>
+                                <Text
+                                    style={{
+                                        color: '#fff',
+                                    }} >
+                                    Guardar
+                        </Text>
+                            </TouchableOpacity>    
             </View>
         })
     }
@@ -137,8 +230,62 @@ const styles = StyleSheet.create({
     },
     edit_content: {
         flexDirection: "row"
+    },
+    touch2: {
+        backgroundColor: "#F7F7F7",
+        width: "100%",
+        height: 50,
+        paddingLeft: 15,
+        borderRadius: 5,
+        shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
+        color:"#707070"
+    },
+    touch2Error: {
+        backgroundColor: "#F7F7F7",
+        width: "100%",
+        height: 50,
+        paddingLeft: 15,
+        borderRadius: 10,
+        shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
+        borderColor: "red",
+        borderWidth: 1,
+        color:"#707070"
+    },
+    touch4: {
+        backgroundColor: "#F7001D",
+        width: "100%",
+        height: 40,
+        margin: 2,
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        borderRadius: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
     }
 });
+
 
 
 export default FieldsPerfil
