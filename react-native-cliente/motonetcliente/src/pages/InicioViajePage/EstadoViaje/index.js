@@ -6,7 +6,7 @@ import Svg from '../../../Svg';
 const EstadoViaje = (props) => {
 
     var mensaje = "Conductor cerca";
-
+    console.log(Object.keys(props.state.viajesReducer.data.movimientos))
     if (!props.state.viajesReducer.data) {
         return <View />
     }
@@ -15,15 +15,15 @@ const EstadoViaje = (props) => {
         mensaje = "Conductor Viene"
     }
 
-    if (props.state.viajesReducer.data.movimientos["acepto_secretaria"]) {
+    if (props.state.viajesReducer.data.movimientos["conductor_cerca"]) {
         mensaje = "Su moto esta cerca";
     }
 
-    if (props.state.viajesReducer.data.movimientos["acepto_conductor"]) {
+    if (props.state.viajesReducer.data.movimientos["conductor_llego"]) {
         mensaje = "Su moto llego";
     }
 
-    if (props.state.viajesReducer.data.movimientos["ambulancia_cerca"]) {
+    if (props.state.viajesReducer.data.movimientos["conductor_inicio"]) {
         mensaje = "Viaje iniciado";
     }
 

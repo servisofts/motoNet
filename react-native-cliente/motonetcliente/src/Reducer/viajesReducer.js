@@ -53,6 +53,9 @@ export default (state, action) => {
             case "movimiento":
                 movimientos(state, action);
                 break;
+            case "movimientos":
+                movimientos(state, action);
+                break;
             case "conductorLlegoDestino":
                 conductorLlegoDestino(state, action);
                 break;

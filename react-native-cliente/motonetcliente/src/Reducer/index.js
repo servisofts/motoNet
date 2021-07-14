@@ -10,9 +10,9 @@ import locationEmergenciaReducer from './locationEmergenciaReducer'
 import emergenciaReducer from './emergenciaReducer'
 import locationGoogleMapReducer from './locationGoogleMapReducer'
 import publicidadReducer from './publicidadReducer'
-
 import tipoViajesReducer from './tipoViajesReducer';
 import viajesReducer from './viajesReducer';
+import mensajeReducer from './mensajeReducer';
 
 export default combineReducers({
     navigationReducer,
@@ -28,5 +28,6 @@ export default combineReducers({
     publicidadReducer,
     tipoViajesReducer,
     viajesReducer,
+    mensajeReducer
 
 });
