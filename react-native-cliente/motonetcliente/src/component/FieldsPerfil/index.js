@@ -1,10 +1,13 @@
 import React from 'react'
-import { View, Text, TextInput,StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import Svg from '../../Svg'
 import LineHorizontal from '../LineHorizontal'
 import { SPopupOpen } from '../../SPopup';
-const FieldsPerfil = ({ datos }) => {
+import AppParams from "../../Json"
 
+const FieldsPerfil = ({ datos, propPat }) => {
+
+    var cabecera = "registro_cliente";
     const [obj, setObj] = React.useState({
         usr: {
             value: "",
@@ -12,6 +15,8 @@ const FieldsPerfil = ({ datos }) => {
         },
     });
 
+  
+   
     const hanlechage = (text, id) => {
         if (id === "usr") {
             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -38,6 +43,8 @@ const FieldsPerfil = ({ datos }) => {
         return <View />
     };
 
+    
+
     if (!datos) {
         console.log(datos)
         return <Text>No hay datos</Text>
@@ -45,72 +52,117 @@ const FieldsPerfil = ({ datos }) => {
         console.log(datos)
     }
 
+    if (!propPat.state.cabeceraDatoReducer.data[cabecera]) {
+        if (propPat.state.cabeceraDatoReducer.estado == "cargando") {
+            return <View />
+        }
+        propPat.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+            component: "cabeceraDato",
+            type: "getDatoCabecera",
+            estado: "cargando",
+            cabecera: cabecera
+        });
+        return <View />
+    }
+
+    const getKeyDato = (keyDescripcion) => {
+        var cabecera = "registro_cliente";
+        var props = propPat;
+        var key = "undefined"
+
+        //alert((propPat.state.cabeceraDatoReducer.data[cabecera]))
+        
+        for (let i = 0; i < props.state.cabeceraDatoReducer.data[cabecera].length; i++) {
+            const obj2 = props.state.cabeceraDatoReducer.data[cabecera][i];
+            if (obj2.dato.descripcion == keyDescripcion) {
+                return obj2;
+            }
+        }
+        return {
+            key
+        }
+    };
+
+   
+
+    
     const editarCampo = (key) => {
-      hanlechage("", "usr")
+
+        
+        hanlechage("", "usr")
         SPopupOpen({
             key: "editarCampo",
-            
-            content: <View  style={{
+
+            content: <View style={{
                 width: "100%",
                 //marginTop: 30,
                 //alignItems: 'justify',
-                padding:10
+                padding: 10
             }}>
-                <Text style={{paddingBottom:10}}>{key}:</Text>
-                    <TextInput
-                            //style={!obj.usr.error ? styles.touch2 : styles.touch2Error }
-                            style={!obj.usr.error ? styles.touch2 : styles.touch2Error }
-                            placeholder={"Ingresar dato"}
-                            onChangeText={text => hanlechage(text, "usr")}
-                            //defaultValue={datos[key].dato}
-                            defaultValue={datos[key].dato  ? datos[key].dato : obj.usr.value}
-                            autoCapitalize='none'
-                            autoFocus={true}
-                            multiline={false}
-                            placeholderTextColor={'#626262'}
-                           //keyboardType={'email-address'}
-                            autoCorrect={false}
-                            underlineColorAndroid={'transparent'}
+                <Text style={{ paddingBottom: 10 }}>{key}:</Text>
+                <TextInput
+                    style={!obj.usr.error ? styles.touch2 : styles.touch2Error}
+                    placeholder={"Ingresar dato"}
+                    onChangeText={text => hanlechage(text, "usr")}
+                    defaultValue={datos[key].dato ? datos[key].dato : obj.usr.value}
+                    autoCapitalize='none'
+                    autoFocus={true}
+                    multiline={false}
+                    placeholderTextColor={'#626262'}
+                    autoCorrect={false}
+                    underlineColorAndroid={'transparent'}
+
+                />
+                <TouchableOpacity
+                    onPress={() => {
+                        var datas = {}
+                        var exito = true;
+                        for (const key in obj) {
+                            if (!obj[key].value || obj[key].value.length <= 0) {
+                                obj[key].error = true;
+                                exito = false;
+                            } else {
+                                obj[key].error = false;
+                                datas[key] = obj[key].value
+                            }
+                        }
+                        setObj({ ...obj })
+                        if (exito) {
                             
-                        />
-                    <TouchableOpacity
-                                onPress={() => {
-                                    var datas = {}
-                                    var exito = true;
-                                    for (const key in obj) {
-                                        if (!obj[key].value || obj[key].value.length <= 0) {
-                                            obj[key].error = true;
-                                            exito = false;
-                                            //alert("error")
-                                        } else {
-                                            obj[key].error = false;
-                                            datas[key] = obj[key].value
-                                            //alert(datas[key])
-                                        }
-                                    }
-                                    setObj({ ...obj })
-                                    if (exito) {
-                                        // props.state.socketClienteReducer.sessiones["motonet"].send({
-                                        //     component: "usuario",
-                                        //     type: "recuperarPass",
-                                        //     data: obj.usr.value,
-                                        //     estado: "cargando"
-                                        // }, true);
-                                        //obj[key].error = false;
-                                       
-                                        alert( obj.usr.value+ " ++ MODIFICAR")
-                                    }
-                                    
-                                }}
-                                style={styles.touch4}>
-                                <Text
-                                    style={{
-                                        color: '#fff',
-                                    }} >
-                                    Guardar
-                        </Text>
-                            </TouchableOpacity>    
-            </View>
+
+                            datos[key].dato = obj.usr.value;
+                            var datosToSend = [];
+                            var datosKeys = [];
+                            Object.keys(datos).map((key) => {
+                                var value = datos[key].dato;
+                                datosKeys.push(key);
+                                datosToSend.push({
+                                    dato: getKeyDato(key),
+                                    data: value
+                                })
+                            })
+                           
+                            propPat.state.socketClienteReducer.sessiones["motonet"].send({
+                                component: "usuario",
+                                type: "insertarDato",
+                                data: datosToSend,
+                                estado: "cargando",
+                                key_usuario: datos["Apellidos"].key_usuario,
+                                key_datos: datosKeys
+                            }, true);
+                            alert(JSON.stringify(datosKeys))
+                        }
+
+                    }}
+                    style={styles.touch4}>
+                    <Text
+                        style={{
+                            color: '#fff',
+                        }} >
+                        Guardar
+                    </Text>
+                </TouchableOpacity>
+            </View >
         })
     }
     return (
@@ -245,7 +297,7 @@ const styles = StyleSheet.create({
         // shadowOpacity: 0.25,
         // shadowRadius: 3.84,
         // elevation: 2,
-        color:"#707070"
+        color: "#707070"
     },
     touch2Error: {
         backgroundColor: "#F7F7F7",
@@ -263,7 +315,7 @@ const styles = StyleSheet.create({
         // elevation: 2,
         borderColor: "red",
         borderWidth: 1,
-        color:"#707070"
+        color: "#707070"
     },
     touch4: {
         backgroundColor: "#F7001D",

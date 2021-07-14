@@ -28,8 +28,10 @@ const ModalOferta = (props) => {
     }
 
     const getCondutor = () => {
+
         if (!props.state.usuarioReducer.data[props.data.key_conductor]) {
-            if (props.state.usuarioReducer.data.estado == "cargando") {
+            if (props.state.usuarioReducer.estado == "cargando") {
+                console.log("entro")
                 return <View />
             }
             props.state.socketClienteReducer.sessiones["motonet"].send({
@@ -41,7 +43,9 @@ const ModalOferta = (props) => {
             }, true);
             return <View />
         }
+
         var data = props.state.usuarioReducer.data[props.data.key_conductor]
+
         return (
             <View style={{
                 alignItems: "center"

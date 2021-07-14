@@ -28,6 +28,7 @@ const SubirFotoPerfil = (props) => {
             chooseFromLibraryButtonTitle: "Elegir de la Biblioteca...",
             allowEditing: true,
             mediaType: 'foto',
+            rotation:0,
             cancelButtonTitle: "Cancelar",
             storageOptions: {
                 skipBackup: true,
@@ -43,7 +44,7 @@ const SubirFotoPerfil = (props) => {
             } else if (response.customButton) {
                 return <View />
             } else {
-                ImageResizer.createResizedImage("data:image/jpeg;base64," + response.data, 400, 400, 'PNG', 100).then((uri) => {
+                ImageResizer.createResizedImage("data:image/jpeg;base64," + response.data, 400, 400, 'PNG', 100,3).then((uri) => {
                     //console.log(uri)
                     RNFS.readFile(uri.path, 'base64').then((resp) => {
                         //console.log(resp)

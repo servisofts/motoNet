@@ -5,7 +5,7 @@ import { View, StyleSheet } from 'react-native';
 
 const RutaViaje = (props) => {
 
-    if (!props.state.viajesReducer.ubicacion["inicio"].data || !props.state.viajesReducer.ubicacion["fin"].data) {
+    if (!props.state.viajesReducer.data.direccion_inicio || !props.state.viajesReducer.data.direccion_fin) {
         return <View />
     }
 
@@ -16,16 +16,14 @@ const RutaViaje = (props) => {
                 type: "route",
                 estado: "cargando",
                 data: {
-                    inicio: props.state.viajesReducer.ubicacion["inicio"].data,
-                    fin: props.state.viajesReducer.ubicacion["fin"].data
+                    inicio: props.state.viajesReducer.data.direccion_inicio,
+                    fin: props.state.viajesReducer.data.direccion_fin
                 }
             }, true);
         }
         return <View />
     }
 
-
-    
 
     const getRouteFormat = () => {
         var ruta = [];
@@ -44,7 +42,11 @@ const RutaViaje = (props) => {
         />
     )
 }
+
+
 const initStates = (state) => {
     return { state }
 };
+
+
 export default connect(initStates)(RutaViaje);

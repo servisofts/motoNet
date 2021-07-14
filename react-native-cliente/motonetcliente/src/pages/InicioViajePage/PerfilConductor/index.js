@@ -4,8 +4,7 @@ import STheme from '../../../STheme';
 // import Svg from '../../../Svg';
 import ComponentDetalleViaje from './ComponentDetalleViaje';
 
-class DetalleViaje extends Component {
-
+export default class PerfilConductor extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -13,7 +12,6 @@ class DetalleViaje extends Component {
         };
         this.open()
     }
-
     open() {
         new Animated.timing(this.state.anim, {
             toValue: 1,
@@ -28,7 +26,7 @@ class DetalleViaje extends Component {
                 position: "absolute",
                 bottom: 0,
                 width: "100%",
-                height: 220,
+                height: 200,
                 backgroundColor: "#fff",
                 borderTopLeftRadius: 16,
                 borderTopRightRadius: 16,
@@ -37,14 +35,14 @@ class DetalleViaje extends Component {
                 transform: [{
                     translateY: this.state.anim.interpolate({
                         inputRange: [0, 1],
-                        outputRange: [220, 0]
+                        outputRange: [200, 0]
                     })
                 }]
             }}>
-                <ComponentDetalleViaje data={this.props.data} />
+
+                <ComponentDetalleViaje data={this.props.data} close={this.props.close} />
+
             </Animated.View >
         );
     }
 }
-
-export default DetalleViaje
