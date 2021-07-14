@@ -24,7 +24,18 @@ import Menu from '../img/menu.svg';
 import Ambulancia from '../img/ambulance.svg';
 import Sinubicacion from '../img/sinubicacion.svg';
 import LogoMoto from '../img/motonet.svg';
-const Svg = (props) => {
+const Svg = (propsa) => {
+    var props = { ...propsa }
+    if (!props.style) {
+        props.style = {
+            width: "100%",
+            height: "100%",
+            fill: "#fff"
+        }
+    }
+    if (props.resource) {
+        return (Platform.OS == "web" ? <img style={props.style} src={props.resource.default} /> : <props.resource.default style={props.style} />);
+    }
     const isWeb = Platform.OS === 'web';
 
     switch (props.name) {

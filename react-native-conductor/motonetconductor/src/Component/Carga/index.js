@@ -147,7 +147,9 @@ const Carga = (props) => {
                                 props.navigation.replace("InicioPage");
                                 return "Inicio page"
                             }
-                            props.navigation.replace("ViajeInicioPage");
+                            // props.navigation.replace("ViajeInicioPage");
+                            props.navigation.replace("InicioPage");
+
                             return "Ir al viaje.";
                         }
                     }
