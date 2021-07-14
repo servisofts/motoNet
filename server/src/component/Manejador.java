@@ -79,6 +79,10 @@ public class Manejador {
                     new Rol(data, session);
                     break;
                 }
+                  case "mensaje": {
+                    new Mensaje(data, session);
+                    break;
+                }
                 default:
                     break;
             }

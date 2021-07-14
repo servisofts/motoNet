@@ -21,7 +21,7 @@ const RutaViaje = (props) => {
 
         var movimientos = props.state.ViajeReducer.data.movimientos;
         var viaje = props.state.ViajeReducer.data;
-        console.log(Object.keys(movimientos))
+        // console.log(Object.keys(movimientos))
         if (movimientos["inicio_viaje"]) {
             if (viaje["direccion_fin"]) {
                 props.fitCordinates([viaje.direccion_inicio, viaje.direccion_fin])

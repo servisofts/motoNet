@@ -40,7 +40,8 @@ public class ViajeHilo {
         try {
             JSONObject obj = Viaje.getViajeFormat(viaje.getString("key"));
             JSONObject movimientos = obj.getJSONObject("movimientos");
-            if (!movimientos.has(Viaje.TIPO_CONDUCTOR_CERCA) {
+            if (!movimientos.has(Viaje.TIPO_CONDUCTOR_CERCA)) {
+                
                 JSONObject direccionInicio = obj.getJSONObject("direccion_inicio");
                 double latitude_g = direccionInicio.getDouble("latitude");
                 double longitude_g = direccionInicio.getDouble("longitude");
@@ -50,6 +51,14 @@ public class ViajeHilo {
                 if (distancia < 100) {
                     Viaje.nuevoMovimientoViaje(obj.getString("key"), Viaje.TIPO_CONDUCTOR_CERCA,
                             obj.getString("key_conductor"));
+                    obj = Viaje.getViajeFormat(viaje.getString("key"));
+                    JSONObject dataSend = new JSONObject();
+                    dataSend.put("component", "viaje");
+                    dataSend.put("type", "movimientos");
+                    dataSend.put("estado", "exito");
+                    dataSend.put("data", obj);
+                    SSServerAbstract.sendUser(dataSend.toString(), obj.getString("key_usuario"));
+                    SSServerAbstract.sendUser(dataSend.toString(), obj.getString("key_conductor"));
                 }
 
             }

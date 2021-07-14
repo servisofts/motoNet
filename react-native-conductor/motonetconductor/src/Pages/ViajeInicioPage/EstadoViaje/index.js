@@ -7,23 +7,26 @@ import { NavigationApps, actions, googleMapsTravelModes, mapsTravelModes } from 
 const EstadoViaje = (props) => {
 
     var mensaje = false;
-
     if (!props.state.ViajeReducer.data) {
         return <View />
     }
+    var movimientos = props.state.ViajeReducer.data.movimientos;
 
-
-    if (props.state.ViajeReducer.data.movimientos["inicio_viaje"]) {
+    console.log(Object.keys(movimientos))
+    if (movimientos["inicio_viaje"]) {
         mensaje = "Dirijete a recojer al cliente."
     }
-    if (props.state.ViajeReducer.data.movimientos["conductor_llego_destino"]) {
+    if (movimientos["conductor_cerca"]) {
+        mensaje = "Ya estas cerca."
+    }
+    if (movimientos["conductor_llego"]) {
         mensaje = "Espera a el cliente. Recuerda se amable."
     }
-    if (props.state.ViajeReducer.data.movimientos["termino_viaje_conductor"]) {
+    if (movimientos["termino_viaje_conductor"]) {
         mensaje = "Esperamos que ayas tenido un buen viaje."
     }
 
-    if (props.state.ViajeReducer.data.movimientos["cancelo_viaje_cliente"]) {
+    if (movimientos["cancelo_viaje_cliente"]) {
         mensaje = "Viaje Cancelado"
     }
 
@@ -55,7 +58,7 @@ const EstadoViaje = (props) => {
                 right: 8,
                 top: 80,
             }}>
-                <Text style={{ color: "#666", fontSize: 12, textAlign:"center" }}>
+                <Text style={{ color: "#666", fontSize: 12, textAlign: "center" }}>
                     Navega con:
                 </Text>
                 <NavigationApps

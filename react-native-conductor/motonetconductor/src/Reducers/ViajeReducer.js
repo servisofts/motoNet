@@ -37,6 +37,9 @@ export default (state, action) => {
             case "movimiento":
                 movimiento(state, action);
                 break;
+            case "movimientos":
+                movimiento(state, action);
+                break;
             case "denegarOferta":
                 denegarOferta(state, action);
                 break;

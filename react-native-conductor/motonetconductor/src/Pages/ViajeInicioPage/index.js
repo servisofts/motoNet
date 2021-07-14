@@ -49,7 +49,7 @@ const ViajeInicioPage = (props) => {
             return;
         }
         lastSend = timeActual;
-        console.log("HILO DEL VIAJE COMPLETADO");
+        // console.log("HILO DEL VIAJE COMPLETADO");
         if (!props.state.ViajeReducer.data) {
             return;
         }

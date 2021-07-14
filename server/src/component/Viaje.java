@@ -53,6 +53,9 @@ public class Viaje {
             case "getViajeByKeyUsuario":
                 getViajeByKeyUsuario(data, session);
                 break;
+            case "conductorLlegoDestino":
+                conductorLlegoDestino(data, session);
+                break;
         }
     }
 
@@ -427,6 +430,28 @@ public class Viaje {
 
     }
 
+    public void conductorLlegoDestino(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CONDUCTOR_LLEGO, key_usuario);
+            JSONObject viaje = getViajeAndDestinos(key_viaje);
+            obj.put("data", viaje);
+            obj.put("estado", "exito");
+
+            JSONObject objSend = new JSONObject();
+            objSend.put("component", "viaje");
+            objSend.put("type", "movimientos");
+            objSend.put("estado", "exito");
+            objSend.put("data", viaje);
+            SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            obj.put("estado", "error");
+
+        }
+    }
+
     public void cancelarBusquedaConductor(JSONObject obj, SSSessionAbstract session) {
         try {
 
@@ -471,6 +496,7 @@ public class Viaje {
     public static final String TIPO_SIN_CONDUCTOR = "sin_conductor";
     public static final String TIPO_INICIO_VIAJE = "inicio_viaje";
     public static final String TIPO_CONDUCTOR_CERCA = "conductor_cerca";
+    public static final String TIPO_CONDUCTOR_LLEGO = "conductor_llego";
 
     public static JSONObject nuevoMovimientoViaje(String key_viaje, String tipo, String key_referencia)
             throws SQLException {

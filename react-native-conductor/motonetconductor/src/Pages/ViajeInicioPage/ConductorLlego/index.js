@@ -14,7 +14,7 @@ const ConductorLlego = (props) => {
         return <View />
     }
 
-    if (props.state.ViajeReducer.data.movimientos["conductor_llego_destino"]) {
+    if (props.state.ViajeReducer.data.movimientos["conductor_llego"]) {
         return <View />
     }
 
