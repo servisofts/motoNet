@@ -14,7 +14,7 @@ import ViajePedirYBuscar from './ViajePedirYBuscar';
 import ViajeEsperaPage from './ViajeEsperaPage';
 import InicioViajePage from './InicioViajePage';
 // import ConfirmarPage from './ConfirmarPage';
-// import ChatPage from './ChatPage';
+import ChatPage from './ChatPage';
 // import EmergenciaEsperaPage from './EmergenciaEsperaPage';
 // import CentroDeAtencionPage from './CentroDeAtencionPage';
 // import EmergenciaViajePage from './EmergenciaViajePage';
@@ -41,10 +41,10 @@ export const getPages = () => {
         BuscarDireccionPage,
         ViajePedirYBuscar,
         ViajeEsperaPage,
-        InicioViajePage
+        InicioViajePage,
+        ChatPage,
 
         // ConfirmarPage,
-        // ChatPage,
         // EmergenciaEsperaPage,
         // CentroDeAtencionPage,
         // EmergenciaViajePage,

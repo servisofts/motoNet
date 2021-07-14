@@ -11,6 +11,7 @@ import Geolocation from '@react-native-community/geolocation';
 import STheme from '../../STheme';
 import Boton1 from '../../component/Boton1';
 import BarraViaje from '../../component/BarraViaje'
+import PerfilConductor from './PerfilConductor';
 
 class InicioViajePage extends Component {
 
@@ -53,12 +54,12 @@ class InicioViajePage extends Component {
         );
     }
 
-    cancelar() {
 
+
+    cancelar() {
         // if (this.props.state.emergenciaReducer.data.movimientos["inicio_ruta"]) {
         //     return <View />
         // }
-
         return (
             Alert.alert(
                 "Cancelar",
@@ -87,9 +88,6 @@ class InicioViajePage extends Component {
                 { cancelable: false }
             )
         )
-        // this.setState({
-        //     abrirModal: true
-        // })
     }
 
     closeModal() {
@@ -100,6 +98,20 @@ class InicioViajePage extends Component {
     }
 
     getDetalleRuta = () => {
+
+        if (!this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]) {
+            if (this.props.state.usuarioReducer.estado == "cargando") {
+                return <View />
+            }
+            this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                component: "usuario",
+                type: "getById",
+                cabecera: "registro_conductor",
+                key: this.props.state.viajesReducer.data.key_conductor,
+                estado: "cargando",
+            }, true);
+            return <View />
+        }
 
         var dataCondutor = this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor];
 
@@ -146,8 +158,8 @@ class InicioViajePage extends Component {
                             <Boton1 type="1"
                                 label="Chat"
                                 cargando={false}
-                            // cargando={props.state.viajesReducer.estado == "cargando"}
-                            // onPress={() => cancelarViaje()} 
+                                // cargando={props.state.viajesReducer.estado == "cargando"}
+                                onPress={() => this.props.navigation.navigate("ChatPage")}
                             />
                         </View>
                     </View>
@@ -190,10 +202,13 @@ class InicioViajePage extends Component {
                             }}>
                                 <Text style={{
                                     color: "#000"
-                                }}>{dataCondutor["Nombres"].data}</Text>
-                                <View style={{
+                                }}>{dataCondutor["Nombres"].dato} {dataCondutor["Apellidos"].dato}</Text>
+                                {/* }}>sds</Text> */}
+                                <TouchableOpacity style={{
                                     flexDirection: "row",
                                     alignItems: "center"
+                                }} onPress={() => {
+                                    this.setState({ abrirModal: true })
                                 }}>
                                     <Text style={{
                                         fontWeight: "bold",
@@ -205,7 +220,7 @@ class InicioViajePage extends Component {
                                             height: 15,
                                             fill: STheme.color.background
                                         }} />
-                                </View>
+                                </TouchableOpacity>
                             </View>
                         </View>
 
@@ -238,11 +253,20 @@ class InicioViajePage extends Component {
         )
     }
 
+    perfilConductor = () => {
+        if (this.state.abrirModal) {
+            return (
+                <PerfilConductor data={this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]} close={() => {
+                    this.setState({ abrirModal: false })
+                }} />
+            )
+        }
+    }
+
     render() {
 
         if (this.props.state.viajesReducer.data.movimientos["cancelo_viaje"]) {
-            // alert("cancelado")
-            console.log(this.props.state.viajesReducer.data)
+            // console.log(this.props.state.viajesReducer.data)
             this.props.navigation.replace("CargaPage");
             this.props.state.viajesReducer.data = false
             return <View />
@@ -250,7 +274,7 @@ class InicioViajePage extends Component {
 
         return (
             <>
-                <BarraViaje title="Trasporte" onpress={() => this.cancelar()} />
+                <BarraViaje title={this.props.state.viajesReducer.data.tipo_viaje.descripcion} onpress={() => this.cancelar()} />
 
                 <View style={{
                     flex: 1,
@@ -276,8 +300,9 @@ class InicioViajePage extends Component {
                         {/* {getAllPrecio()} */}
                         {this.getDetalleRuta()}
                     </View >
-                    {/* {this.Cancelar()} */}
-                    {/* <CancelarViaje navigation={this.props.navigation} /> */}
+
+                    {this.perfilConductor()}
+
                 </View >
             </>
         )

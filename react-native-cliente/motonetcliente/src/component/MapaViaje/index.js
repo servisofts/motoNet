@@ -3,6 +3,8 @@ import { View, TouchableOpacity, Text, DatePickerIOS, Animated } from 'react-nat
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import MarkerAmbulancia from './MarkerAmbulancia';
+import RutaViaje from "./RutaViaje"
+
 var mapa;
 
 const Mapa = (props) => {
@@ -89,7 +91,7 @@ const Mapa = (props) => {
                 <MarkerAmbulancia />
                 {/* {getPosicionConductor()} */}
 
-                {/* <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} /> */}
+                <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
 
             </MapView >
             {/* <TouchableOpacity
