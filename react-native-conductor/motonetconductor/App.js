@@ -49,6 +49,7 @@ import AppStateChange from './src/AppStateChange';
 import * as SSBackgroundLocation from './src/SSBackgroundLocation';
 
 import Styles from './src/Styles';
+import SPopup from './src/SPopup';
 
 const store = createStore(
   Reducer,
@@ -134,7 +135,7 @@ class App extends Component {
             <BarraDeDesconeccion socketName={"motonet"} />
             <AlertaDesconectado socketName={"motonet"} />
             <Container />
-
+            <SPopup />
           </View>
 
         </SafeAreaView>

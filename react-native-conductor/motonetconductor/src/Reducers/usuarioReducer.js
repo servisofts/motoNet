@@ -4,6 +4,7 @@ const initialState = {
     history: [],
     usuarioLog: false,
     sessiones: {},
+    data: {},
     lastSend: new Date(),
 }
 import AppParam from '../Json/index.json';
@@ -77,7 +78,7 @@ const identificacion = (state, action) => {
 const recuperarPass = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
-        
+
     }
 }
 
@@ -100,12 +101,25 @@ const pedir = (state, action) => {
 const getById = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
-        if (action.data) {
-            state.usuarioDatos = JSON.parse(action.data[0].data);
+        if (action.key == state.usuarioLog.key) {
+            if (action.data.length > 0) {
+                state.usuarioDatos = JSON.parse(action.data[0].data)
+                state.data[action.key] = JSON.parse(action.data[0].data);
+            } else {
+                state.usuarioDatos = true;
+                state.data[action.key] = true;
+            }
         } else {
-            state.usuarioDatos = true;
+            if (action.data.length > 0) {
+                state.data[action.key] = JSON.parse(action.data[0].data)
+            } else {
+                state.data[action.key] = true;
+            }
         }
     }
+    // if(){
+
+    // }
 }
 const loginFacebook = (state, action) => {
     state.estado = action.estado
@@ -146,9 +160,12 @@ const getUsuario = (state, action) => {
 
 const insertarDato = (state, action) => {
     state.estado = action.estado
+    state.estadoInsertar = action.estado
     if (action.estado === "exito") {
-        if (action.data.length > 0) {
-            state.usuarioDatos[action.dato] = action.data[0]
+        if (action.key_datos.length > 0) {
+            action.key_datos.map((key, i) => {
+                state.usuarioDatos[key] = action.data[i]
+            })
         } else {
             state.usuarioDatos = true;
         }

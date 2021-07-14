@@ -7,6 +7,7 @@ import Svg from '../../Svg';
 import MapView, { Marker } from 'react-native-maps';
 import AppParams from "../../Json/index.json"
 import * as SSBackgroundLocation from '../../SSBackgroundLocation'
+import Boton1 from '../../Component/Boton1';
 
 class EsperandoConfirmacionPage extends Component {
     static navigationOptions = {
@@ -158,11 +159,16 @@ class EsperandoConfirmacionPage extends Component {
 
                 <View style={{
                     position: "absolute",
+                    width: "90%",
+                    maxWidth: 600,
                     bottom: 10,
                     right: 10,
                     flexDirection: 'column',
                 }}>
-                    <TouchableOpacity
+                    <Boton1
+                        label="Salir"
+                        type="1"
+                        cargando={false}
                         onPress={() => {
                             AsyncStorage.removeItem(AppParams.storage.usuarioLog)
                             this.props.state.usuarioReducer.usuarioLog = false
@@ -173,24 +179,7 @@ class EsperandoConfirmacionPage extends Component {
 
                             return <View />
                         }}
-                        style={{
-                            width: 60,
-                            height: 60,
-                            borderWidth: 2,
-                            borderRadius: 100,
-                            borderColor: "#fff",
-                            backgroundColor: '#f00',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            flexDirection: 'column',
-                        }}>
-                        <Text style={{
-                            color: "#fff",
-                            fontSize: 20,
-                        }}>
-                            Salir
-                        </Text>
-                    </TouchableOpacity>
+                    />
                 </View>
             </View>
         );

@@ -1,52 +1,57 @@
-import React from 'react';
-import LinearGradient from 'react-native-linear-gradient';
+import React, { useEffect } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 import Svg from '../../Svg';
 import ImagePicker from 'react-native-image-picker';
 import { connect } from 'react-redux'
-import ImageResizer from 'react-native-image-resizer';
-import RNFS from 'react-native-fs'
-import AppParams from '../../Json/index.json'
-import urlFoto from '../../Json/index.json';
+import AppParams from "../../Json"
+import Boton1 from '../Boton1';
 
+var cabecera = "registro_cliente";
 const SubirFotoPerfil = (props) => {
     const [foto, setFoto] = React.useState(false)
-    const [fotoPerfil, setFotoPerfil] = React.useState(false)
     const Repuesta = (text) => {
-        props.setComponent(text)
+        // props.setComponent(text)
         return <View />
     };
 
+    useEffect(() => {
+        pickPhoto()
+    }, [])
 
-    if(props.datos){
-        if(!fotoPerfil){
-            if (!props.datos["Foto perfil"]) {
-                return <View />
-            }
-            var url = urlFoto.urlImages + props.datos["Foto perfil"].dato + `?type=getPerfil&key_usuario=${props.datos["Foto perfil"].key_usuario}&date=${Date.now()}`;
-            setFotoPerfil(url);
-        }
-    }
-    
     const pickPhoto = () => {
-        ImagePicker.showImagePicker((response) => {
+        var options = {
+            title: 'Seleccionar una Foto',
+            takePhotoButtonTitle: "Tomar Foto...",
+            chooseFromLibraryButtonTitle: "Elegir de la Biblioteca...",
+            allowEditing: true,
+            mediaType: 'foto',
+            rotation:0,
+            cancelButtonTitle: "Cancelar",
+            storageOptions: {
+                skipBackup: true,
+                path: 'image',
+            },
+        };
+        ImagePicker.showImagePicker(options, response => {
             if (response.didCancel) {
+                props.handleClik(false)
                 return <View />
             } else if (response.error) {
                 return <View />
             } else if (response.customButton) {
                 return <View />
             } else {
-                ImageResizer.createResizedImage("data:image/jpeg;base64," + response.data, 400, 400, 'PNG', 100).then((uri) => {
-                    console.log(uri)
-                    RNFS.readFile(uri.path, 'base64').then((resp) => {
-                        console.log(resp)
-                        setFoto(resp)
-                    });
+                setFoto(response.data)
 
-                }).catch(err => {
-                    console.log(err);
-                });
+                // ImageResizer.createResizedImage("data:image/jpeg;base64," + response.data, 400, 400, 'PNG', 100).then((uri) => {
+                //     //console.log(uri)
+                //     RNFS.readFile(uri.path, 'base64').then((resp) => {
+                //         //console.log(resp)
+                //     });
+
+                // }).catch(err => {
+                //     console.log(err);
+                // });
             }
         });
         return <View />
@@ -59,20 +64,24 @@ const SubirFotoPerfil = (props) => {
             if (!User) {
                 return "no hay usr";
             }
-            var cabecera = "registro_conductor";
-
             const getKeyDato = (keyDescripcion) => {
-                var key = "undefined"
-                for (let i = 0; i < props.state.cabeceraDatoReducer.data[cabecera].length; i++) {
+                var key = "undefined";
+                var cabecera = "registro_cliente";
+                // console.log(this.props.state.cabecreraDatoReducer.data[cabecera])
+                for (
+                    let i = 0;
+                    i < props.state.cabeceraDatoReducer.data[cabecera].length;
+                    i++
+                ) {
                     const obj = props.state.cabeceraDatoReducer.data[cabecera][i];
                     if (obj.dato.descripcion == keyDescripcion) {
                         return obj;
                     }
                 }
                 return {
-                    key
-                }
-            }
+                    key,
+                };
+            };
             var datas = []
             datas.push({
                 dato: getKeyDato("Foto perfil"),
@@ -84,20 +93,14 @@ const SubirFotoPerfil = (props) => {
                 estado: "cargando",
                 data: datas,
                 key_usuario: User.key,
-                dato: "Foto perfil"
+                key_datos: ["Foto perfil"]
             }
             props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(objSend, true)
+            props.handleClik(false)
         }
         return <View />
     }
 
-    if (props.state.usuarioReducer.estado == "exito" && props.state.usuarioReducer.type == "insertarDato") {
-        props.state.usuarioReducer.type = "";
-        setFoto(false);
-        return <View/>
-    }
-
-    var cabecera = "registro_conductor";
     if (!props.state.cabeceraDatoReducer.data[cabecera]) {
         if (props.state.cabeceraDatoReducer.estado == "cargando") {
             return <View />
@@ -111,133 +114,177 @@ const SubirFotoPerfil = (props) => {
         return <View />
     }
 
+    const getDatoCabecera = () => {
+
+        if (props.state.cabeceraDatoReducer.estado == "cargando") {
+            return <View />;
+        }
+        if (!props.state.cabeceraDatoReducer.data["registro_cliente"]) {
+            var objSend = {
+                component: "cabeceraDato",
+                type: "getDatoCabecera",
+                estado: "cargando",
+                cabecera: "registro_cliente",
+            };
+            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(
+                objSend,
+                true
+            );
+            return <View />;
+        }
+        // console.log("juan" + JSON.stringify(props.state.cabeceraDatoReducer.data["registro_cliente"]))
+        return <View />;
+
+    };
+
+    if (!foto) {
+        return <View />
+    }
+
     return (
-        <View style={{ justifyContent: 'center', alignItems: 'center', backgroundColor: '#fff' }}>
-            <TouchableOpacity
-                onPress={pickPhoto}
-                style={{
-                    flexDirection: "column-reverse",
-                    alignContent: 'center',
-                    backgroundColor: '#fff',
-                    borderWidth: 2,
-                    borderColor: '#2c4b81',
-                    borderRadius: 100,
-                    width: 150,
-                    height: 150
-                }}>
-                <Image source={{ uri: (!foto?(fotoPerfil ):('data:image/jpeg;base64,' + foto ))}}
-                    style={{
-                        width: 144,
-                        height: 144,
-                        margin: 1,
-                        borderRadius: 100,
-                    }} />
-            </TouchableOpacity>
-            {foto ? (
-                <View style={{
-                    flexDirection: "row",
-                }}>
+
+        <View style={styles.Model}>
+
+            <View style={styles.container} >
+                {getDatoCabecera()}
+                {foto ? (
                     <TouchableOpacity
                         onPress={pickPhoto}
                         style={{
-                            width: 150,
-                            height: 40,
-                            borderRadius: 40,
-                            backgroundColor: "#2c4b81",
-                            justifyContent: "center",
+                            flex: 1,
+                            flexDirection: "column-reverse",
+                            marginTop: 15
                         }}>
-                        <Text style={{
-                            color: "#fff",
-                            textAlign: "center"
-                        }}>
-                            SUBIR ARCHIVO</Text>
+                        <Image source={{ uri: 'data:image/jpeg;base64,' + foto }}
+                            style={{
+                                width: 100,
+                                height: 100,
+                                borderRadius: 100,
+                            }} />
                     </TouchableOpacity>
-
-                    <Text style={{ color: '#fff' }}>
-                        - {/** quien que separa los dos botones subir y enviar */}
-                    </Text>
-                        
-                    {!foto?<View/>:<TouchableOpacity
-                        onPress={EnviarPhoto}
-                        style={{
-                            width: 150,
-                            height: 40,
-                            borderRadius: 40,
-                            backgroundColor: "#a4a4a4",
-                            justifyContent: "center"
-                        }}>
+                ) : (
+                    <View style={{
+                        flex: 1,
+                        flexDirection: "column-reverse"
+                    }}>
                         <Text style={{
-                            color: "#fff",
+                            fontSize: 10,
+                            color: '#fff',
+                            height: 50,
+                            marginStart: 50,
+                            marginEnd: 50,
+                            fontWeight: "bold",
                             textAlign: "center"
-                        }}>
-                            ENVIAR</Text>
-                    </TouchableOpacity>}
-
-                </View>
-            ) : (
-                    <View />
+                        }}>SUBIR UNA FOTO DE PERFIL</Text>
+                    </View>
                 )
-            }
+                }
+                {!foto ? (
+                    <View style={{
+                        flex: 1,
+                        justifyContent: "center"
+                    }}>
+                        <TouchableOpacity
+                            onPress={pickPhoto}
+                            style={{
+                                width: 150,
+                                height: 40,
+                                borderRadius: 40,
+                                backgroundColor: "#a4a4a4",
+                                justifyContent: "center"
+                            }}>
+                            <Text style={{
+                                color: "#fff",
+                                textAlign: "center"
+                            }}>
+                                SUBIR ARCHIVOs</Text>
+                        </TouchableOpacity>
+                    </View>
+                ) : (
+                    <View style={{
+                        flexDirection: "row",
+                        flex: 1,
+                        width: "100%",
+                        justifyContent: "space-evenly",
+                        alignItems: "center",
+                        // backgroundColor: "#ccc"
+                    }}>
+
+                        <View style={{
+                            width: 100
+                        }}>
+                            <Boton1
+                                label="Subir foto"
+                                type="1"
+                                onPress={pickPhoto}
+                                cargando={false}
+                            />
+                        </View >
+
+                        <View style={{
+                            width: 100
+                        }}>
+                            <Boton1
+                                label="Enviar"
+                                type="4"
+                                onPress={EnviarPhoto}
+                                cargando={false}
+                            />
+                        </View>
+
+                    </View>
+                )}
+
+                <TouchableOpacity
+                    onPress={() => {
+                        props.handleClik(false)
+                        return <View />
+                    }}
+                    style={{
+                        position: "absolute",
+                        top: 0,
+                        right: 0,
+                        width: 50,
+                        height: 50,
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                    }}>
+                    <Svg name="Cerrar"
+                        style={{
+                            width: 20,
+                            height: 20,
+                            // margin: 1,
+                            // fill: "#fff"
+                        }} />
+                </TouchableOpacity>
+            </View>
 
         </View >
     )
 }
 
 const styles = StyleSheet.create({
+
     container: {
-        flex: 1,
+        width: 300,
+        maxWidth: 400,
+        height: 220,
         alignItems: 'center',
-        borderRadius: 30,
         flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        shadowColor: "#fff",
+        backgroundColor: "#fff",
+        borderRadius: 20
     },
-    container2: {
-        flex: 1,
-        width: "80%",
-        height: 90,
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    container3: {
-        flex: 0.5,
-        width: "90%",
-        marginTop: 10,
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
+
     Model: {
         flex: 1,
-        width: 300,
-        height: 220,
-        top: 10,
-        backgroundColor: '#ffc',
-        shadowColor: "#fff",
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-        borderRadius: 90
+        width: "100%",
+        height: "100%",
+        position: "absolute",
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#00000080"
     },
-    check: {
-        width: 20,
-        height: 20,
-        borderRadius: 100,
-        borderWidth: 2,
-        backgroundColor: "#fff",
-        borderColor: "#fff",
-        margin: 5,
-    },
-    buttOn2: {
-        width: 60,
-        height: 60,
-        borderWidth: 2,
-        borderRadius: 100,
-        borderColor: "#fff",
-        backgroundColor: "#fff",
-        borderColor: "#fff",
-    }
+
 });
 
 const initStates = (state) => {
