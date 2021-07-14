@@ -54,8 +54,8 @@ class ViajeEsperaPage extends Component {
                 key: "noConductor",
                 content: (
                     <View>
-                        <Text>No encontamos conductor disponible.</Text>
-                        <Text>Porfavor intente nuevamente.</Text>
+                        <Text>No encontramos conductor disponible.</Text>
+                        <Text>Por favor intente nuevamente.</Text>
                     </View>
                 )
             })
