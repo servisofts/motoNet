@@ -20,7 +20,7 @@ const EstadoViaje = (props) => {
     }
 
     if (props.state.viajesReducer.data.movimientos["conductor_llego"]) {
-        mensaje = "Su moto llego";
+        mensaje = "Su moto llegó";
     }
 
     if (props.state.viajesReducer.data.movimientos["conductor_inicio"]) {

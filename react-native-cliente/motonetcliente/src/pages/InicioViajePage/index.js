@@ -12,6 +12,7 @@ import STheme from '../../STheme';
 import Boton1 from '../../component/Boton1';
 import BarraViaje from '../../component/BarraViaje'
 import PerfilConductor from './PerfilConductor';
+import CalificarConductor from './CalificarConductor';
 
 class InicioViajePage extends Component {
 
@@ -192,8 +193,11 @@ class InicioViajePage extends Component {
                                 width: 60,
                                 height: 60,
                                 borderRadius: 100,
+                                overflow: "hidden",
                                 margin: 10
                             }}>
+                                {this.props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.viajesReducer.data.key_conductor, {
+                                })}
                             </View>
                             <View style={{
                                 // backgroundColor: "#ccc",
@@ -249,7 +253,7 @@ class InicioViajePage extends Component {
                         </View>
                     </View>
                 </View>
-            </View>
+            </View >
         )
     }
 
@@ -297,11 +301,12 @@ class InicioViajePage extends Component {
                         flex: 1,
                         bottom: 0
                     }}>
-                        {/* {getAllPrecio()} */}
                         {this.getDetalleRuta()}
                     </View >
 
                     {this.perfilConductor()}
+
+                    {/* <CalificarConductor data={this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]} /> */}
 
                 </View >
             </>

@@ -48,6 +48,8 @@ import Reloj from '../img/reloj.svg';
 import Arrow from '../img/arrow.svg';
 import Rightarrow from '../img/rightarrow.svg';
 import Send from '../img/send.svg';
+import Star from '../img/star.svg';
+import Staron from '../img/star-on.svg';
 
 const Svg = (propsa) => {
     var props = { ...propsa }
@@ -155,6 +157,10 @@ const Svg = (propsa) => {
             return <Rightarrow style={props.style} />
         case "Send":
             return <Send style={props.style} />
+        case "Star":
+            return <Star style={props.style} />
+        case "Staron":
+            return <Staron style={props.style} />
         default: return <Text>Not Found</Text>
     }
 }
