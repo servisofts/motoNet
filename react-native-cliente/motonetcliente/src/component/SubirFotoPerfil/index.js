@@ -44,16 +44,17 @@ const SubirFotoPerfil = (props) => {
             } else if (response.customButton) {
                 return <View />
             } else {
-                ImageResizer.createResizedImage("data:image/jpeg;base64," + response.data, 400, 400, 'PNG', 100,3).then((uri) => {
-                    //console.log(uri)
-                    RNFS.readFile(uri.path, 'base64').then((resp) => {
-                        //console.log(resp)
-                        setFoto(resp)
-                    });
+                setFoto(response.data)
 
-                }).catch(err => {
-                    console.log(err);
-                });
+                // ImageResizer.createResizedImage("data:image/jpeg;base64," + response.data, 400, 400, 'PNG', 100).then((uri) => {
+                //     //console.log(uri)
+                //     RNFS.readFile(uri.path, 'base64').then((resp) => {
+                //         //console.log(resp)
+                //     });
+
+                // }).catch(err => {
+                //     console.log(err);
+                // });
             }
         });
         return <View />
@@ -95,7 +96,7 @@ const SubirFotoPerfil = (props) => {
                 estado: "cargando",
                 data: datas,
                 key_usuario: User.key,
-                dato: "Foto perfil"
+                key_datos: ["Foto perfil"]
             }
             props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(objSend, true)
             props.handleClik(false)
@@ -134,7 +135,7 @@ const SubirFotoPerfil = (props) => {
             );
             return <View />;
         }
-        console.log("juan" + JSON.stringify(props.state.cabeceraDatoReducer.data["registro_cliente"]))
+        // console.log("juan" + JSON.stringify(props.state.cabeceraDatoReducer.data["registro_cliente"]))
         return <View />;
 
     };
@@ -216,7 +217,7 @@ const SubirFotoPerfil = (props) => {
                             width: 100
                         }}>
                             <Boton1
-                                label="SUBIR ARCHIVO"
+                                label="Subir foto"
                                 type="1"
                                 onPress={pickPhoto}
                                 cargando={false}
@@ -227,7 +228,7 @@ const SubirFotoPerfil = (props) => {
                             width: 100
                         }}>
                             <Boton1
-                                label="ENVIAR"
+                                label="Enviar"
                                 type="4"
                                 onPress={EnviarPhoto}
                                 cargando={false}
@@ -251,12 +252,12 @@ const SubirFotoPerfil = (props) => {
                         alignItems: 'center',
                         justifyContent: 'center',
                     }}>
-                    <Svg name="Close"
+                    <Svg name="Cerrar"
                         style={{
-                            width: 15,
-                            height: 15,
-                            margin: 1,
-                            fill: STheme.color.background
+                            width: 20,
+                            height: 20,
+                            // margin: 1,
+                            // fill: "#fff"
                         }} />
                 </TouchableOpacity>
             </View>

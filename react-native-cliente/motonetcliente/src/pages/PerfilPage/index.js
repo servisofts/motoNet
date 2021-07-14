@@ -41,33 +41,6 @@ class PerfilPage extends Component {
     };
   }
 
-  componentWillMount() {
-    // BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-    if (!this.props.state.usuarioReducer.usuarioDatos["Foto perfil"]) {
-      return <View />;
-    }
-    // var url = urlFoto.urlImages + this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato + `?type=getPerfil&key_usuario=${this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}&date=${Date.now()}`;
-    var url =
-      urlFoto.urlImages +
-      this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato +
-      `?type=getPerfil&key_usuario=${this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}`;
-    this.state.fotoPerfilUri = url;
-  }
-
-  componentWillUnmount() {
-    // BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-  }
-  componentDidUpdate() {
-    if (!this.props.state.usuarioReducer.usuarioDatos["Foto perfil"]) {
-      return <View />;
-    }
-    var url =
-      urlFoto.urlImages +
-      this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato +
-      `?type=getPerfil&key_usuario=${this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario
-      }&date=${Date.now()}`;
-    this.state.fotoPerfilUri = url;
-  }
 
   handleClik = (props) => {
     this.state.isVentana = props;
@@ -85,26 +58,20 @@ class PerfilPage extends Component {
     if (!this.props.state.usuarioReducer.usuarioLog) {
       return <View />
     }
+    // var usuario = this.props.state.usuarioReducer.usuarioLog;
     if (
       this.props.state.usuarioReducer.type == "insertarDato" &&
       this.props.state.usuarioReducer.estado == "exito"
     ) {
-      if (!this.props.state.usuarioReducer.usuarioDatos["Foto perfil"]) {
-        return <View />;
-      }
-      // var url = urlFoto.urlImages + this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato + `?type=getPerfil&key_usuario=${this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}&date=${Date.now()}`;
-      var url =
-        urlFoto.urlImages +
-        this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato +
-        `?type=getPerfil&key_usuario=${this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}`;
-      this.state.fotoPerfilUri = url;
-      this.props.state.usuarioReducer.estado = "";
+      this.props.dispatch({
+        component: "image",
+        type: "cambio",
+        url: urlFoto.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.usuarioReducer.usuarioLog.key,
+        props: {},
+      })
+      this.props.state.usuarioReducer.estado = ""
     }
-    // var url = urlFoto.urlImages + this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].dato + `?type=getPerfil&key_usuario=${this.props.state.usuarioReducer.usuarioDatos["Foto perfil"].key_usuario}&date=${Date.now()}`;
-    // this.state.fotoPerfilUri = url;
-
     var cabecera = "registro_cliente";
-
     var datos = this.props.state.usuarioReducer.usuarioDatos;
     if (!datos) {
       if (this.props.state.usuarioReducer.estado == "cargando") {
@@ -170,30 +137,17 @@ class PerfilPage extends Component {
                 // borderColor:"#999"
               }}
             >
-              <View>
-                {!this.state.fotoPerfilUri ? (
-                  <View
-                    style={{
-                      width: 120,
-                      height: 120,
-                      borderWidth: 1,
-                      borderColor: "#999",
-                      borderRadius: 100,
-                    }}
-                  ></View>
-                ) : (
-                  //<Image source={this.state.fotoPerfilUri}
-                  <Image
-                    source={{ uri: this.state.fotoPerfilUri }}
-                    style={{
-                      width: 120,
-                      height: 120,
-                      borderWidth: 1,
-                      borderColor: "#999",
-                      borderRadius: 100,
-                    }}
-                  />
-                )}
+              <View
+                style={{
+                  width: 120,
+                  height: 120,
+                  borderWidth: 1,
+                  borderColor: "#999",
+                  borderRadius: 100,
+                  overflow: "hidden",
+                }}>
+                {this.props.state.imageReducer.getImage(urlFoto.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.usuarioReducer.usuarioLog.key, {
+                })}
               </View>
               <Text
                 style={{
@@ -243,7 +197,7 @@ class PerfilPage extends Component {
                 marginBottom: 10
               }}
             >
-              <FieldsPerfil datos={datos} ref={(ref) => { this.fields = ref }} propPat={this.props}/>
+              <FieldsPerfil datos={datos} ref={(ref) => { this.fields = ref }} propPat={this.props} />
               <Boton1
                 type={"1"}
                 label={"Cerrar Sesión"}

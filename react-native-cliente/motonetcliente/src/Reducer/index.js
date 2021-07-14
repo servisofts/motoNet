@@ -13,6 +13,7 @@ import publicidadReducer from './publicidadReducer'
 import tipoViajesReducer from './tipoViajesReducer';
 import viajesReducer from './viajesReducer';
 import mensajeReducer from './mensajeReducer';
+import imageReducer from './imageReducer';
 
 export default combineReducers({
     navigationReducer,
@@ -28,6 +29,7 @@ export default combineReducers({
     publicidadReducer,
     tipoViajesReducer,
     viajesReducer,
-    mensajeReducer
+    mensajeReducer,
+    imageReducer
 
 });

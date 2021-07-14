@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
 import Svg from '../../Svg'
 import LineHorizontal from '../LineHorizontal'
-import { SPopupOpen } from '../../SPopup';
+import { SPopupClose, SPopupOpen } from '../../SPopup';
 import AppParams from "../../Json"
 
 const FieldsPerfil = ({ datos, propPat }) => {
@@ -15,8 +15,8 @@ const FieldsPerfil = ({ datos, propPat }) => {
         },
     });
 
-  
-   
+
+
     const hanlechage = (text, id) => {
         if (id === "usr") {
             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -43,13 +43,13 @@ const FieldsPerfil = ({ datos, propPat }) => {
         return <View />
     };
 
-    
+
 
     if (!datos) {
-        console.log(datos)
+        // console.log(datos)
         return <Text>No hay datos</Text>
     } else {
-        console.log(datos)
+        // console.log(datos)
     }
 
     if (!propPat.state.cabeceraDatoReducer.data[cabecera]) {
@@ -71,7 +71,7 @@ const FieldsPerfil = ({ datos, propPat }) => {
         var key = "undefined"
 
         //alert((propPat.state.cabeceraDatoReducer.data[cabecera]))
-        
+
         for (let i = 0; i < props.state.cabeceraDatoReducer.data[cabecera].length; i++) {
             const obj2 = props.state.cabeceraDatoReducer.data[cabecera][i];
             if (obj2.dato.descripcion == keyDescripcion) {
@@ -83,12 +83,12 @@ const FieldsPerfil = ({ datos, propPat }) => {
         }
     };
 
-   
 
-    
+
+
     const editarCampo = (key) => {
 
-        
+
         hanlechage("", "usr")
         SPopupOpen({
             key: "editarCampo",
@@ -128,20 +128,13 @@ const FieldsPerfil = ({ datos, propPat }) => {
                         }
                         setObj({ ...obj })
                         if (exito) {
-                            
-
-                            datos[key].dato = obj.usr.value;
                             var datosToSend = [];
                             var datosKeys = [];
-                            Object.keys(datos).map((key) => {
-                                var value = datos[key].dato;
-                                datosKeys.push(key);
-                                datosToSend.push({
-                                    dato: getKeyDato(key),
-                                    data: value
-                                })
+                            datosKeys.push(key);
+                            datosToSend.push({
+                                dato: getKeyDato(key),
+                                data: obj.usr.value
                             })
-                           
                             propPat.state.socketClienteReducer.sessiones["motonet"].send({
                                 component: "usuario",
                                 type: "insertarDato",
@@ -150,9 +143,9 @@ const FieldsPerfil = ({ datos, propPat }) => {
                                 key_usuario: datos["Apellidos"].key_usuario,
                                 key_datos: datosKeys
                             }, true);
-                            alert(JSON.stringify(datosKeys))
+                            SPopupClose("editarCampo");
+                            // alert(JSON.stringify(datosKeys))
                         }
-
                     }}
                     style={styles.touch4}>
                     <Text

@@ -117,9 +117,11 @@ class BarraSuperiorInicio extends Component {
                                 height: 25,
                                 borderRadius: 100,
                                 backgroundColor: STheme.color.primary + "44",
+                                overflow:"hidden",
                                 // borderWidth: 1,
                             }}>
-
+                                {this.props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.usuarioReducer.usuarioLog.key, {
+                                })}
                             </View>
                         </View>
                         <Text style={{
