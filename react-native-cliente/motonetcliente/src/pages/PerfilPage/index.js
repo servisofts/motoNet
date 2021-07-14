@@ -243,7 +243,7 @@ class PerfilPage extends Component {
                 marginBottom: 10
               }}
             >
-              <FieldsPerfil datos={datos} />
+              <FieldsPerfil datos={datos} ref={(ref) => { this.fields = ref }} propPat={this.props}/>
               <Boton1
                 type={"1"}
                 label={"Cerrar Sesión"}

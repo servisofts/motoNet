@@ -213,11 +213,12 @@ const insertarDato = (state, action) => {
     if (action.estado === "exito") {
         if (action.key_datos.length > 0) {
             action.key_datos.map((key, i) => {
-                console.log(key);
+                console.log(key+"AAAAAA");
                 state.usuarioDatos[key] = action.data[i]
             })
         } else {
             state.usuarioDatos = true;
+            console.log(key+"BBBBB");
         }
     }
 }
