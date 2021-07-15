@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import STheme from '../../../../STheme';
 import Svg from '../../../../Svg';
 import Boton1 from '../../../../component/Boton1';
+import AppParams from "../../../../Json"
 
 const ComponentDetalleViaje = (props) => {
 
@@ -16,8 +17,6 @@ const ComponentDetalleViaje = (props) => {
                 flex: 1,
                 margin: 10,
             }}>
-
-
                 <View style={{
                     flex: 1,
                     width: "100%",
@@ -38,8 +37,11 @@ const ComponentDetalleViaje = (props) => {
                                 width: 60,
                                 height: 60,
                                 borderRadius: 100,
+                                overflow: "hidden",
                                 margin: 10
                             }}>
+                                {props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + props.state.viajesReducer.data.key_conductor, {
+                                })}
                             </View>
                             <View style={{
                                 // backgroundColor: "#ccc",

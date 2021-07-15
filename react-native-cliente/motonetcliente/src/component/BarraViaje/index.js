@@ -75,12 +75,10 @@ class BarraViaje extends Component {
                     </TouchableOpacity>
                     <View style={{
                         flex: 1,
-
                         justifyContent: "center",
                         alignItems: "center"
                     }}>
                         {this.getTitle()}
-
                     </View>
                     <TouchableOpacity style={{
                         // width: 65,
@@ -93,9 +91,7 @@ class BarraViaje extends Component {
                             color: "#fff",
                         }}>Cancelar</Text>
                     </TouchableOpacity>
-
                 </View>
-
             </Animated.View>
         );
     }

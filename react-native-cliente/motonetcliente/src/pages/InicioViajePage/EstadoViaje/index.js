@@ -6,7 +6,7 @@ import Svg from '../../../Svg';
 const EstadoViaje = (props) => {
 
     var mensaje = "Conductor cerca";
-    console.log(Object.keys(props.state.viajesReducer.data.movimientos))
+    // console.log(Object.keys(props.state.viajesReducer.data.movimientos))
     if (!props.state.viajesReducer.data) {
         return <View />
     }
@@ -23,8 +23,12 @@ const EstadoViaje = (props) => {
         mensaje = "Su moto llegó";
     }
 
-    if (props.state.viajesReducer.data.movimientos["conductor_inicio"]) {
+    if (props.state.viajesReducer.data.movimientos["inicio_viaje_conductor"]) {
         mensaje = "Viaje iniciado";
+    }
+
+    if (props.state.viajesReducer.data.movimientos["finalizar_viaje"]) {
+        mensaje = "Viaje finalizado";
     }
 
     if (!mensaje) {
