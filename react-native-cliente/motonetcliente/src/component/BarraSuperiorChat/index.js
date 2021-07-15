@@ -5,7 +5,7 @@ import AppParams from '../../Json';
 import STheme from '../../STheme';
 import Svg from '../../Svg';
 
-class BarraSuperiorInicio extends Component {
+class BarraSuperiorChat extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -125,7 +125,7 @@ class BarraSuperiorInicio extends Component {
                                     overflow: "hidden",
                                     // borderWidth: 1,
                                 }}>
-                                    {this.props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.usuarioReducer.usuarioLog.key, {
+                                    {this.props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.viajesReducer.data.key_conductor, {
                                     })}
                                 </View>
                             </View>
@@ -152,4 +152,4 @@ class BarraSuperiorInicio extends Component {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(BarraSuperiorInicio);
+export default connect(initStates)(BarraSuperiorChat);
