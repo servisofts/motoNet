@@ -3,12 +3,12 @@ import { Text, TouchableOpacity, View } from 'react-native';
 import { connect } from 'react-redux';
 import STheme from '../../../../STheme';
 import Svg from '../../../../Svg';
-import Boton1 from '../../../../component/Boton1';
-import AppParams from "../../../../Json"
+import Boton1 from '../../../../Component/Boton1';
+import AppParams from '../../../../Json';
 
 const ComponentDetalleViaje = (props) => {
 
-    console.log("edson " + JSON.stringify(props.data))
+    // console.log("edson " + JSON.stringify(props.data))
 
     const getDetalleRuta = () => {
         // var tipos_de_viajes = props.state.tipoViajesReducer.data;
@@ -17,6 +17,8 @@ const ComponentDetalleViaje = (props) => {
                 flex: 1,
                 margin: 10,
             }}>
+
+
                 <View style={{
                     flex: 1,
                     width: "100%",
@@ -37,10 +39,10 @@ const ComponentDetalleViaje = (props) => {
                                 width: 60,
                                 height: 60,
                                 borderRadius: 100,
-                                overflow: "hidden",
-                                margin: 10
+                                margin: 10,
+                                overflow: 'hidden',
                             }}>
-                                {props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + props.state.viajesReducer.data.key_conductor, {
+                                {props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + props.data["Nombres"].key_usuario, {
                                 })}
                             </View>
                             <View style={{

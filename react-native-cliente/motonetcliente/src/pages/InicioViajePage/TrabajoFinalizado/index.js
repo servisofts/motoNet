@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Svg from '../../../Svg';
 // import urlFoto from '../../../Json/index.json';
 import estilos from '../../../STheme/index'
+import STheme from '../../../STheme/index';
 // import CloseButtom from '../../../Component/CloseButtom';
 
 const numStars = 5
@@ -120,7 +121,7 @@ class Star extends React.Component {
                         style={{
                             width: 20,
                             height: 20,
-                            fill: "#FFD446",
+                            fill: STheme.color.background,
                             marginLeft: 15,
                             marginRight: 15
                         }} />
@@ -129,7 +130,7 @@ class Star extends React.Component {
                         style={{
                             width: 20,
                             height: 20,
-                            fill: "#936519",
+                            fill: STheme.color.background,
                             // margin: 15
                             marginLeft: 15,
                             marginRight: 15

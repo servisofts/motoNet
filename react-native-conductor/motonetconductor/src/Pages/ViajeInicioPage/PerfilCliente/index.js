@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, TouchableOpacity } from 'react-native';
 import STheme from '../../../STheme';
-import ComponentDetalleCalificar from './ComponentDetalleCalificar';
+// import Svg from '../../../Svg';
+import ComponentDetalleViaje from './ComponentDetalleViaje';
 
-class CalificarConductor extends Component {
+export default class PerfilCliente extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -25,7 +26,7 @@ class CalificarConductor extends Component {
                 position: "absolute",
                 bottom: 0,
                 width: "100%",
-                height: 300,
+                height: 200,
                 backgroundColor: "#fff",
                 borderTopLeftRadius: 16,
                 borderTopRightRadius: 16,
@@ -34,17 +35,14 @@ class CalificarConductor extends Component {
                 transform: [{
                     translateY: this.state.anim.interpolate({
                         inputRange: [0, 1],
-                        outputRange: [300, 0]
+                        outputRange: [200, 0]
                     })
                 }]
             }}>
 
-                <ComponentDetalleCalificar navigation={this.props.navigation} data={this.props.data} />
+                <ComponentDetalleViaje data={this.props.data} close={this.props.close} />
 
             </Animated.View >
         );
     }
 }
-
-
-export default CalificarConductor

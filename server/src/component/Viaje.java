@@ -56,6 +56,12 @@ public class Viaje {
             case "conductorLlegoDestino":
                 conductorLlegoDestino(data, session);
                 break;
+            case "finalizarViaje":
+                finalizarViaje(data, session);
+                break;
+            case "iniciarViajeConductor":
+                iniciarViajeConductor(data, session);
+                break;
         }
     }
 
@@ -452,6 +458,50 @@ public class Viaje {
         }
     }
 
+    public void iniciarViajeConductor(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_INICIO_VIAJE_CONDUCTOR,
+                    key_usuario);
+            JSONObject viaje = getViajeAndDestinos(key_viaje);
+            obj.put("data", viaje);
+            obj.put("estado", "exito");
+            JSONObject objSend = new JSONObject();
+            objSend.put("component", "viaje");
+            objSend.put("type", "movimientos");
+            objSend.put("estado", "exito");
+            objSend.put("data", viaje);
+            SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            obj.put("estado", "error");
+
+        }
+    }
+
+    public void finalizarViaje(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_FINALIZAR_VIAJE, key_usuario);
+            Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" + key_viaje + "'");
+            JSONObject viaje = getViajeAndDestinos(key_viaje);
+            obj.put("data", viaje);
+            obj.put("estado", "exito");
+            JSONObject objSend = new JSONObject();
+            objSend.put("component", "viaje");
+            objSend.put("type", "movimientos");
+            objSend.put("estado", "exito");
+            objSend.put("data", viaje);
+            SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            obj.put("estado", "error");
+
+        }
+    }
+
     public void cancelarBusquedaConductor(JSONObject obj, SSSessionAbstract session) {
         try {
 
@@ -497,6 +547,8 @@ public class Viaje {
     public static final String TIPO_INICIO_VIAJE = "inicio_viaje";
     public static final String TIPO_CONDUCTOR_CERCA = "conductor_cerca";
     public static final String TIPO_CONDUCTOR_LLEGO = "conductor_llego";
+    public static final String TIPO_INICIO_VIAJE_CONDUCTOR = "inicio_viaje_conductor";
+    public static final String TIPO_FINALIZAR_VIAJE = "finalizar_viaje";
 
     public static JSONObject nuevoMovimientoViaje(String key_viaje, String tipo, String key_referencia)
             throws SQLException {

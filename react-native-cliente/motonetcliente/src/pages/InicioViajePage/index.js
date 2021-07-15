@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, Alert, AsyncStorage } from 'react-native';
 import Svg from '../../Svg';
 import MapaViaje from '../../component/MapaViaje';
-// import CancelarViaje from '../../component/InicioViajeComponent/CancelarViaje';
 import AppParams from "../../Json"
 import EstadoViaje from './EstadoViaje';
 import { stat } from 'react-native-fs';
@@ -235,20 +234,28 @@ class InicioViajePage extends Component {
                                 width: "100%",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                backgroundColor: "#f3f3fd"
+                                backgroundColor: "#f3f3fd",
+                                flexDirection: "row",
                             }}
                                 onPress={() => {
                                     // props.state.locationGoogleMapReducer.route = true;
                                     // props.setVentanaSelect("tipoDeViaje")
                                     return <View />
                                 }}>
-                                <Text>
+                                <Svg resource={require("../../../img/relojtestimado.svg")} style={{
+                                    width: 20,
+                                    height: 20,
+                                }} />
+                                <Text style={{
+                                    marginStart: 8,
+                                }}>
                                     Tiempo estimado de llegada
-                                    <Text style={{
-                                        color: "#000",
-                                        fontWeight: "bold"
-                                    }}> 5 min</Text>
+
                                 </Text>
+                                <Text style={{
+                                    color: "#000",
+                                    fontWeight: "bold"
+                                }}> 5 min</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -275,6 +282,7 @@ class InicioViajePage extends Component {
             this.props.state.viajesReducer.data = false
             return <View />
         }
+
 
         return (
             <>
@@ -306,7 +314,10 @@ class InicioViajePage extends Component {
 
                     {this.perfilConductor()}
 
-                    {/* <CalificarConductor data={this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]} /> */}
+                    {!this.props.state.viajesReducer.data.movimientos["finalizar_viaje"] ? <View /> :
+                        <CalificarConductor navigation={this.props.navigation} data={this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]} />
+                    }
+
 
                 </View >
             </>

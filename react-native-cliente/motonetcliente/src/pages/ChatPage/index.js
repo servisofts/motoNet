@@ -6,6 +6,7 @@ import moment from 'moment';
 import Svg from '../../Svg';
 import AppParams from "../../Json"
 import STheme from '../../STheme';
+import BarraSuperiorChat from '../../component/BarraSuperiorChat';
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
@@ -31,7 +32,6 @@ class ChatPage extends Component {
         // KeyboardEvent.
     }
 
-
     componentWillMount() {
         this.keyboardDidShowListener = Keyboard.addListener('keyboardWillShow', (e) => {
             console.log("Enrooooo");
@@ -40,7 +40,6 @@ class ChatPage extends Component {
             } else {
                 this.state.keyboardHeight = 2;
             }
-
             console.log(this.state.keyboardHeight)
             this.setState({ ...this.state })
             this.fadeIn();
@@ -155,61 +154,30 @@ class ChatPage extends Component {
 
         return (
             <View style={{
-                // position: "absolute",
                 flex: 1,
-                // width: "100%",
-                // backgroundColor:"#fff",
-                // height: "100%",
-                // padding: 20,
-                justifyContent: "flex-end",
-                // alignItems: "center"
             }}>
-                <Animated.View style={{
-                    // top: this.state.animValue.interpolate({
-                    // inputRange: [0, 100],
-                    // outputRange: [0, Dimensions.get("window").height/8*-2]
-                    // }),
-                    position: "absolute",
-                    width: "100%",
-                    height: "100%",
-                    // padding:20,
-                    // top: 0,
-                    // overflow:"hidden",
-                    transform: [
-                        {
-                            translateY: this.state.animValue.interpolate({
-                                inputRange: [0, 100],
-                                outputRange: [0, (this.state.keyboardHeight) * -1]
-                            }),
-                        }
-                    ],
-                    // minHeight: this.state.animValue.interpolate({
-                    //     inputRange: [0, 100],
-                    //     outputRange: [0, Dimensions.get("window").height * 0.40]
-                    // }),
-                    backgroundColor: "#f2f2f2",
-                    // borderRadius: 20,
-                }}>
-                    {/* <View style={{
-                width: "90%",
-                height: "100%",
-                backgroundColor: "#F2F1F2",
-                borderRadius: 20,
-            }}> */}
 
+                <BarraSuperiorChat navigation={this.props.navigation} />
+
+                <View style={{
+                    flex: 1,
+                    backgroundColor: "#f2f2f2",
+                }}>
                     <ScrollView
                         ref={(ref) => {
                             this.state.scrollView = ref;
                         }}
                         style={{
                             width: "100%",
+                            // height: "100%",
+                            // backgroundColor: "#ccc"
                         }}
                         onContentSizeChange={() => {
                             this.state.scrollView.scrollToEnd({ amimated: true });
                         }}
                         contentContainerStyle={{
                             flexDirection: "column-reverse",
-                            paddingBottom: 70,
+                            paddingBottom: 0,
                             minHeight: "100%",
                         }}>
                         <TouchableOpacity activeOpacity={1}
@@ -221,129 +189,104 @@ class ChatPage extends Component {
                             }}>
                             {getListaMensajes()}
                         </TouchableOpacity>
-
                     </ScrollView>
 
-                    <View style={{
-                        // top: -45,
-                        // left: -5,
-                        position: "absolute",
-                        width: 70,
-                        height: 70,
-                        backgroundColor: "#dedede",
-                        borderRadius: 100,
-                        borderColor: "#fff",
-                        borderWidth: 3,
-                    }}>
-                        {/* foto */}
-                        <Image style={{
-                            width: "100%",
-                            height: "100%",
-                            borderRadius: 100,
-                        }} source={{
-                            uri: urlFoto.urlImages + `perfil.png?type=getPerfil&key_usuario=${this.props.receptor}`
-                        }} />
-                    </View>
-                    {/* </View> */}
-                </Animated.View>
-                <Animated.View style={{
-                    width: "100%",
-                    // backgroundColor: "#efefef",
-                    height: 50,
-                    paddingLeft: 8,
-                    paddingRight: 8,
-                    marginBottom: 8,
-                    bottom: 0,
-                    transform: [
-                        {
-                            translateY: this.state.animValue.interpolate({
-                                inputRange: [0, 100],
-                                outputRange: [0, this.state.keyboardHeight * -1]
-                            }),
-                        }
-                    ],
-                    // borderRadius: 20,
-                }}>
-
-                    <View style={{
-                        flex: 1,
+                    <Animated.View style={{
                         width: "100%",
-                        flexDirection: 'row',
-                        borderWidth: 1,
-                        borderColor: "#B3B3B3",
-                        backgroundColor: "#fff",
-                        borderRadius: 10,
-                        overflow: 'hidden',
+                        // backgroundColor: "#efefef",
+                        height: 50,
+                        paddingLeft: 8,
+                        paddingRight: 8,
+                        marginBottom: 8,
+                        bottom: 0,
+                        transform: [
+                            {
+                                translateY: this.state.animValue.interpolate({
+                                    inputRange: [0, 100],
+                                    outputRange: [0, this.state.keyboardHeight * -1]
+                                }),
+                            }
+                        ],
                     }}>
-                        <TextInput
-                            ref={(ref) => {
-                                this.state.refMensaje = ref;
-                            }}
-                            onChangeText={(text) => {
-                                this.state.inputValue = text;
-                            }}
-                            style={{
-                                height: "100%",
-                                flex: 1,
-                                fontSize: 14,
-                            }}
-                            onFocus={() => {
-                                this.fadeIn();
-                            }}
-                            onBlur={() => {
-                                this.fadeOut();
-                            }}
-                            multiline={true}
-                            placeholderTextColor="#CCCCCC"
-                            autoCapitalize='none'
-                            placeholder="Escriba su texto..."
-                        />
 
-                        <TouchableOpacity
-                            onPress={() => {
-
-                                var exito = true
-                                if (!this.state.inputValue) {
-                                    exito = false
-                                }
-                                if (exito) {
-                                    this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                                        component: "mensaje",
-                                        type: "enviar",
-                                        estado: "cargando",
-                                        data: {
-                                            key: uuidv4(),
-                                            key_receptor: this.props.state.viajesReducer.data.key_conductor,
-                                            key_emisor: this.props.state.usuarioReducer.usuarioLog.key,
-                                            mensaje: this.state.inputValue,
-                                            key_viaje: this.props.state.viajesReducer.data.key,
-                                            fecha_envio: moment().format("YYYY-MM-DD HH:mm:ss")
-                                        }
-                                    }, true);
-                                    this.state.refMensaje.clear();
-                                    this.state.inputValue = "";
-                                }
-                            }}
-                            style={{
-                                width: 50,
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                            }}>
-                            <Svg name="Send"
+                        <View style={{
+                            flex: 1,
+                            width: "100%",
+                            flexDirection: 'row',
+                            borderWidth: 1,
+                            borderColor: "#B3B3B3",
+                            backgroundColor: "#fff",
+                            borderRadius: 10,
+                            overflow: 'hidden',
+                        }}>
+                            <TextInput
+                                ref={(ref) => {
+                                    this.state.refMensaje = ref;
+                                }}
+                                onChangeText={(text) => {
+                                    this.state.inputValue = text;
+                                }}
                                 style={{
-                                    width: 30,
-                                    height: 30,
-                                    fill: "#a4a4a4"
-                                }} />
-                        </TouchableOpacity>
-                    </View>
-                </Animated.View>
+                                    height: "100%",
+                                    flex: 1,
+                                    fontSize: 14,
+                                }}
+                                // onFocus={() => {
+                                //     this.fadeIn();
+                                // }}
+                                // onBlur={() => {
+                                //     this.fadeOut();
+                                // }}
+                                multiline={true}
+                                placeholderTextColor="#CCCCCC"
+                                autoCapitalize='none'
+                                placeholder="Escriba su texto..."
+                            />
 
+                            <TouchableOpacity
+                                onPress={() => {
+
+                                    var exito = true
+                                    if (!this.state.inputValue) {
+                                        exito = false
+                                    }
+                                    if (exito) {
+                                        this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                                            component: "mensaje",
+                                            type: "enviar",
+                                            estado: "cargando",
+                                            data: {
+                                                key: uuidv4(),
+                                                key_receptor: this.props.state.viajesReducer.data.key_conductor,
+                                                key_emisor: this.props.state.usuarioReducer.usuarioLog.key,
+                                                mensaje: this.state.inputValue,
+                                                key_viaje: this.props.state.viajesReducer.data.key,
+                                                fecha_envio: moment().format("YYYY-MM-DD HH:mm:ss")
+                                            }
+                                        }, true);
+                                        this.state.refMensaje.clear();
+                                        this.state.inputValue = "";
+                                    }
+                                }}
+                                style={{
+                                    width: 50,
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                }}>
+                                <Svg name="Send"
+                                    style={{
+                                        width: 30,
+                                        height: 30,
+                                        fill: "#a4a4a4"
+                                    }} />
+                            </TouchableOpacity>
+                        </View>
+                    </Animated.View>
+                </View>
             </View>
         );
     }
 }
-
 
 const initStates = (state) => {
     return { state }
