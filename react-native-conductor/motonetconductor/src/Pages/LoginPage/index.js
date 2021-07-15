@@ -6,6 +6,10 @@ import base64 from 'react-native-base64'
 import { LoginManager, AccessToken, GraphRequest, GraphRequestManager } from "react-native-fbsdk";
 import AppParams from '../../Json';
 import Styles from '../../Styles';
+import STheme from "../../STheme";
+import Boton1 from "../../Component/Boton1";
+import BottomContent from "../../Component/BottomContent";
+import SSCrollView from "../../Component/SScrollView";
 
 const LoginPage = (props) => {
     const [obj, setObj] = React.useState({
@@ -137,7 +141,7 @@ const LoginPage = (props) => {
             flex: 1,
             backgroundColor: Styles.colors.primary
         }}>
-            <ScrollView>
+            <SSCrollView>
                 <View style={{
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -146,6 +150,7 @@ const LoginPage = (props) => {
                 }}>
                     <Svg name="logoCompleto"
                         style={{
+                            fill: STheme.color.primary,
                             width: 200,
                             height: 200,
                         }} />
@@ -154,124 +159,169 @@ const LoginPage = (props) => {
                     // flex: 1,
                     alignItems: "center",
                 }}>
+                    <View style={{ width: "90%" }}>
+                        <Text style={{
+                            color: "#FFA9B3",
+                            height: 25,
+                            textAlign: "left"
+                        }}>Usuario</Text>
+                    </View>
                     <View
                         style={{
-                            width: '80%',
+                            width: '90%',
                             alignItems: 'center',
                             flexDirection: 'row',
-                            marginTop: 30,
+                            //marginTop: 30,
                             justifyContent: 'center',
                         }}>
+
                         <TextInput
                             style={!obj.usr.error ? styles.touch2 : styles.touch2Error}
-                            placeholder={"Usuario"}
+                            placeholder={"Ingresar usuario"}
                             onChangeText={text => hanlechage(text, "usr")}
                             value={obj.usr.value}
                             autoCapitalize='none'
                             autoFocus={true}
+                            placeholderTextColor="#FFF"
                         />
+                    </View>
+                    <View style={{ width: "90%" }}>
+                        <Text style={{
+                            color: "#FFA9B3",
+                            height: 25,
+                            textAlign: "left",
+                            marginTop: 10
+                        }}>Contraseña</Text>
                     </View>
                     <View
                         style={{
-                            width: '80%',
+                            width: '90%',
                             alignItems: 'center',
                             flexDirection: 'row',
-                            marginTop: 20,
+                            //marginTop: 20,
                             justifyContent: 'center',
                         }}>
+
                         <TextInput
                             style={!obj.pass.error ? styles.touch2 : styles.touch2Error}
-                            placeholder={"Contraseña"}
+                            placeholder={"Ingresar contraseña"}
                             onChangeText={text => hanlechage(text, "pass")}
                             value={obj.pass.value}
                             autoCapitalize='none'
                             secureTextEntry
                             autoCapitalize='none'
+                            placeholderTextColor="#FFF"
                             secureTextEntry
                         />
                     </View>
-                    <View
-                        style={{
-                            marginTop: 10,
-                            flex: 1,
-                            width: '80%',
-                            alignItems: 'center',
-                            flexDirection: 'row',
-                        }}>
-                        <TouchableOpacity
-                            onPress={() => {
-                                var datas = {}
-                                var exito = true;
-                                for (const key in obj) {
-                                    if (!obj[key].value || obj[key].value.length <= 0) {
-                                        obj[key].error = true;
-                                        exito = false;
-                                    } else {
-                                        obj[key].error = false;
-                                        var valor = obj[key].value;
-                                        if (valor) {
-                                            var aux = valor
-                                            valor = aux.toLowerCase();
-                                        }
-                                        obj[key].value = valor;
-                                        datas[key] = obj[key].value
-                                    }
-                                }
-                                setObj({ ...obj })
-                                if (exito) {
-                                    props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                                        component: "usuario",
-                                        type: "login",
-                                        data: datas,
-                                        estado: "cargando"
-                                    }, true);
-                                }
-                            }}
-
-                            style={styles.touch4}>
-                            <Text
-                                style={{
-                                    color: '#fff',
-                                }}>
-                                Ingresar
-                            </Text>
-                        </TouchableOpacity>
-                        <TouchableOpacity
-                            onPress={() => props.navigation.navigate("RegistroUsuarioPage")}
-                            style={styles.touch4}>
-                            <Text
-                                style={{
-                                    color: '#fff',
-                                }}>
-                                Crear una cuenta
-                            </Text>
-                        </TouchableOpacity>
-                    </View>
-                    <View
-                        style={{
-                            flex: 1,
-                            width: '100%',
-                            alignItems: 'center',
-                            flexDirection: 'column',
-                        }}>
-                        <TouchableOpacity
-                            onPress={() =>
-                                props.navigation.navigate("RecuperarPassPage")
-                            }
-                            style={
-                                styles.touch
-                            }>
-                            <Text
-                                style={{
-                                    fontSize: 15,
-                                    color: "#fff"
-                                }}>
-                                Recuperar la contraseña
+                    <View>
+                        <Boton1
+                            type={"3"}
+                            label={
+                                <Text>
+                                    {"¿Olvidó su contraseña?"}{" "}
+                                    <Text
+                                        style={{
+                                            color: STheme.color.text,
+                                            fontWeight: "bold",
+                                            textDecorationLine: "underline",
+                                        }}
+                                    >
+                                        Restablecer
+                                    </Text>
                                 </Text>
-                        </TouchableOpacity>
+                            }
+                            onPress={() => {
+                                props.navigation.navigate("RecuperarPassPage");
+                            }}
+                        />
                     </View>
+                    <BottomContent height={170}>
+                        <View
+                            style={{
+                                width: "100%",
+                                flex: 1,
+                                justifyContent: "space-around",
+                            }}
+                        >
+                            <View
+                                style={{
+                                    // marginTop: 10,
+                                    //flex: 1,
+                                    width: '100%',
+                                    alignItems: 'center',
+                                    flexDirection: 'row',
+                                }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        var datas = {}
+                                        var exito = true;
+                                        for (const key in obj) {
+                                            if (!obj[key].value || obj[key].value.length <= 0) {
+                                                obj[key].error = true;
+                                                exito = false;
+                                            } else {
+                                                obj[key].error = false;
+                                                var valor = obj[key].value;
+                                                if (valor) {
+                                                    var aux = valor
+                                                    valor = aux.toLowerCase();
+                                                }
+                                                obj[key].value = valor;
+                                                datas[key] = obj[key].value
+                                            }
+                                        }
+                                        setObj({ ...obj })
+                                        if (exito) {
+                                            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                                                component: "usuario",
+                                                type: "login",
+                                                data: datas,
+                                                estado: "cargando"
+                                            }, true);
+                                        }
+                                    }}
+
+                                    style={styles.touch4}>
+                                    <Text
+                                        style={{
+                                            color: '#fff',
+                                        }}>
+                                        Iniciar sesión
+                                    </Text>
+                                </TouchableOpacity>
+
+                            </View>
+                            <View>
+                                <Boton1
+                                    type={"2"}
+                                    label={
+                                        <Text>
+                                            ¿Aún no tienes una cuenta?{" "}
+                                            <Text
+                                                style={{
+                                                    color: STheme.color.background,
+                                                    fontWeight: "bold",
+                                                }}
+                                            >
+                                                Regístrate
+                                            </Text>
+                                        </Text>
+                                    }
+                                    onPress={() => {
+                                        props.navigation.navigate("RegistroUsuarioPage", {
+                                            registro: " ",
+                                        });
+                                    }}
+                                />
+                             
+                            </View>
+                        </View>
+                    </BottomContent>
+
+
                 </View>
-            </ScrollView>
+                </SSCrollView>
         </View >
     )
 }
@@ -349,44 +399,42 @@ const styles = StyleSheet.create({
     },
     touch2: {
         flex: 1,
-        backgroundColor: "#EAEAE2",
-        width: "80%",
+        backgroundColor: "#F7001D",
+        color: "#ffffff",
+        borderWidth: 2,
+        //placeholderTextColor:"#FFF",
+        width: "100%",
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
         paddingLeft: 15,
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        borderRadius: 5,
+        borderColor: "#fff",
+
     },
     touch2Error: {
         flex: 1,
-        backgroundColor: "#ff0000",
-        width: "80%",
+        backgroundColor: "#F7001D",
+        width: "100%",
         height: 50,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
         borderColor: "#fff",
-        borderWidth: 1,
+        borderWidth: 2,
         paddingLeft: 15,
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        borderRadius: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 5,
     },
+
     touch3: {
         marginTop: 10,
         flex: 1,
@@ -413,19 +461,20 @@ const styles = StyleSheet.create({
         height: 40,
         // borderColor: "#fff",
         margin: 2,
-        borderWidth: 3,
+        //borderWidth: 2,
+        //borderColor: "#fff",
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        borderRadius: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 5,
     },
 });
 
@@ -433,9 +482,9 @@ const initStates = (state) => {
     return { state }
 };
 
-LoginPage.navigationOptions = (nav)=>{
+LoginPage.navigationOptions = (nav) => {
     return {
-        headerShown:false
+        headerShown: false
     }
 }
 export default connect(initStates)(LoginPage);

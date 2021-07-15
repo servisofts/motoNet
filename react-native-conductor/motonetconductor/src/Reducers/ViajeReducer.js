@@ -58,11 +58,17 @@ export default (state, action) => {
             case "conductorLlegoDestino":
                 conductorLlegoDestino(state, action);
                 break;
+            case "iniciarViajeConductor":
+                iniciarViajeConductor(state, action);
+                break;
             case "inicioDeRuta":
                 inicioDeRuta(state, action);
                 break;
             case "terminarViajeConductor":
                 terminarViajeConductor(state, action);
+                break;
+            case "finalizarViaje":
+                finalizarViaje(state, action);
                 break;
             case "cobrarViaje":
                 cobrarViaje(state, action);
@@ -160,6 +166,26 @@ const cancelarViajeCliente = (state, action) => {
     }
 }
 const conductorLlegoDestino = (state, action) => {
+    state.estado = action.estado
+    if (state.estado === "exito") {
+        state.data = action.data
+        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+    }
+    if (state.estado === "error") {
+        state.error = action.error
+    }
+}
+const finalizarViaje = (state, action) => {
+    state.estado = action.estado
+    if (state.estado === "exito") {
+        state.data = action.data
+        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+    }
+    if (state.estado === "error") {
+        state.error = action.error
+    }
+}
+const iniciarViajeConductor = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data

@@ -4,6 +4,7 @@ import Carga from '../../Component/Carga';
 import Svg from '../../Svg';
 import ImgFondoCruces from '../../Component/ImgFondoCruces';
 import Styles from '../../Styles';
+import STheme from "../../STheme";
 class CargaPage extends Component {
   static navigationOptions = ({ navigation }) => (
     { headerShown: false }
@@ -58,6 +59,7 @@ class CargaPage extends Component {
             style={{
               width: Dimensions.get("window").width * 0.6,
               height: Dimensions.get("window").width * 0.6,
+              fill: STheme.color.primary,
             }} />
         </Animated.View>
         <Carga navigation={this.props.navigation} />
