@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { View, TouchableOpacity, Text, Alert, AsyncStorage } from 'react-native';
 import Svg from '../../Svg';
 import MapaViaje from '../../component/MapaViaje';
-// import CancelarViaje from '../../component/InicioViajeComponent/CancelarViaje';
 import AppParams from "../../Json"
 import EstadoViaje from './EstadoViaje';
 import { stat } from 'react-native-fs';
@@ -276,6 +275,7 @@ class InicioViajePage extends Component {
             return <View />
         }
 
+
         return (
             <>
                 <BarraViaje title={this.props.state.viajesReducer.data.tipo_viaje.descripcion} onpress={() => this.cancelar()} />
@@ -306,7 +306,10 @@ class InicioViajePage extends Component {
 
                     {this.perfilConductor()}
 
-                    {/* <CalificarConductor data={this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]} /> */}
+                    {!this.props.state.viajesReducer.data.movimientos["finalizar_viaje"] ? <View /> :
+                        <CalificarConductor navigation={this.props.navigation} data={this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]} />
+                    }
+
 
                 </View >
             </>

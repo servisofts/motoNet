@@ -39,7 +39,7 @@ class CalificarConductor extends Component {
                 }]
             }}>
 
-                <ComponentDetalleCalificar data={this.props.data} />
+                <ComponentDetalleCalificar navigation={this.props.navigation} data={this.props.data} />
 
             </Animated.View >
         );
