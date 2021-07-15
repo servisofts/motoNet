@@ -153,7 +153,7 @@ const ViajeInicioPage = (props) => {
                     />
                 </MapView>
                 <EstadoViaje />
-                <DetalleRuta />
+                <DetalleRuta navigation={props.navigation} />
             </View>
         </View>
     )

@@ -41,6 +41,7 @@ public class Mensaje {
             Conexion.insertArray("mensaje", new JSONArray().put(mensaje));
             JSONObject movimiento = nuevo_movimiento(mensaje.getString("key"), TIPO_ENVIANDO);
             mensaje.put("movimiento", new JSONObject().put(movimiento.getString("tipo"), movimiento));
+            mensaje.put("fecha_on", mensaje.getString("fecha_envio"));
             obj.put("data", mensaje);
             obj.put("estado", "exito");
             SSServerAbstract.sendUser(obj.toString(), mensaje.getString("key_receptor"));
@@ -53,7 +54,8 @@ public class Mensaje {
     public void getAllByViaje(JSONObject obj, SSSessionAbstract session) {
         try {
             String key_ref = obj.getString("key_viaje");
-            JSONObject arr = Conexion.ejecutarConsultaObject("select mensaje_getallby_keyref('" + key_ref + "') as json");
+            JSONObject arr = Conexion
+                    .ejecutarConsultaObject("select mensaje_getallby_keyref('" + key_ref + "') as json");
             obj.put("data", arr);
             obj.put("estado", "exito");
         } catch (SQLException e) {

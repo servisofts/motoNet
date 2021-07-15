@@ -18,7 +18,7 @@ import RecuperarPassPage from './RecuperarPassPage'
 import CodigoRecibidoPage from './CodigoRecibidoPage'
 import NuevoPassPage from './NuevoPassPage'
 import SessionSocketPage from '../SSSocketNative/SessionSocketPage'
-
+import ChatPage from './ChatPage';
 export const getPages = () => {
     return {
         // SessionSocketPage,
@@ -39,6 +39,7 @@ export const getPages = () => {
         EsperandoConfirmacionPage,
         RecuperarPassPage,
         CodigoRecibidoPage,
-        NuevoPassPage
+        NuevoPassPage,
+        ChatPage
     }
 }

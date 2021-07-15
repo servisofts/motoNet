@@ -17,6 +17,7 @@ import ViajeReducer from './ViajeReducer';
 import socketTestReducer from './socketTestReducer';
 import locationEmergenciaReducer from './locationEmergenciaReducer';
 import imageReducer from './imageReducer';
+import mensajeReducer from './mensajeReducer';
 
 export default combineReducers({
     navigationReducer,
@@ -36,6 +37,7 @@ export default combineReducers({
     ViajeReducer,
     socketTestReducer,
     locationEmergenciaReducer,
-    imageReducer
+    imageReducer,
+    mensajeReducer
 
 });
