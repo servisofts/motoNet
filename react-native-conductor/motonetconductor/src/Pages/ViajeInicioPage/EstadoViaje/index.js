@@ -12,7 +12,7 @@ const EstadoViaje = (props) => {
     }
     var movimientos = props.state.ViajeReducer.data.movimientos;
 
-    console.log(Object.keys(movimientos))
+    // console.log(Object.keys(movimientos))
     if (movimientos["inicio_viaje"]) {
         mensaje = "Dirijete a recojer al cliente."
     }
@@ -37,7 +37,7 @@ const EstadoViaje = (props) => {
     var viaje = props.state.ViajeReducer.data;
     return (
         <>
-            <View
+            {/* <View
                 style={{
                     width: "90%",
                     height: 50,
@@ -52,11 +52,11 @@ const EstadoViaje = (props) => {
                     {mensaje}
                 </Text>
 
-            </View>
+            </View> */}
             <View style={{
                 position: "absolute",
                 right: 8,
-                top: 80,
+                top: 8,
             }}>
                 <Text style={{ color: "#666", fontSize: 12, textAlign: "center" }}>
                     Navega con:

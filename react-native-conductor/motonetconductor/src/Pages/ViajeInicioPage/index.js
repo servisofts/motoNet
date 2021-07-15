@@ -2,16 +2,18 @@ import React from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { View, StyleSheet, TouchableOpacity, Text, AsyncStorage, Alert } from 'react-native';
-import Svg from '../../Svg';
+// import Svg from '../../Svg';
 import RutaViaje from './RutaViaje';
 import EstadoViaje from './EstadoViaje';
-import ConductorLlego from './ConductorLlego';
-import IniciarViaje from './IniciarViaje';
-import CancelarViaje from './CancelarViaje';
-import TerminarViaje from './TerminarViaje';
-import CobrarViaje from './CobrarViaje';
-import CanceloViajeCliente from './CanceloViajeCliente';
+// import ConductorLlego from './ConductorLlego';
+// import IniciarViaje from './IniciarViaje';
+// import CancelarViaje from './CancelarViaje';
+// import TerminarViaje from './TerminarViaje';
+// import CobrarViaje from './CobrarViaje';
+// import CanceloViajeCliente from './CanceloViajeCliente';
 import AppParams from '../../Json/index.json'
+import DetalleRuta from './DetalleRuta';
+import BarraSuperior from '../../Component/BarraSuperior';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -19,6 +21,7 @@ var mapa;
 var lastSend = new Date().getTime();
 const ViajeInicioPage = (props) => {
 
+    const [modal, setModal] = React.useState(false);
     const [zoom, setZoom] = React.useState(false);
     const [currentPos, setCurrentPos] = React.useState(false);
     const [region, setRegion] = React.useState({
@@ -76,21 +79,16 @@ const ViajeInicioPage = (props) => {
     }
 
     const fitCordinates = (pos) => {
+        if (!mapa) return;
+        if (!mapa.fitToCoordinates) return;
         mapa.fitToCoordinates(pos, {
             edgePadding: {
-                top: 400,
-                right: 100,
-                bottom: 400,
-                left: 100,
+                top: 120,
+                right: 120,
+                left: 120,
+                bottom: 500,
             }
         })
-    }
-    const markerClick = (obj) => {
-        console.log(obj);
-        if (!zoom)
-            zoomin(obj);
-        else
-            zoomout(obj);
     }
 
 
@@ -118,105 +116,45 @@ const ViajeInicioPage = (props) => {
         setZoom(false);
     }
 
-
-    const Cancelar = () => {
-        props.state.socketClienteReducer.sessiones["motonet"].send({
-            component: "viaje",
-            type: "cancelarViajeConductor",
-            key_usuario: props.state.usuarioReducer.usuarioLog.key,
-            key_viaje: props.state.ViajeReducer.data.key,
-            estado: "cargando"
-        }, true);
-        // AsyncStorage.removeItem("motonet_viaje");
-        // props.state.ViajeReducer.data= false;
-        // props.navigation.replace("CargaPage");    
+    if (!props.state.ViajeReducer.data) {
+        props.navigation.replace("CargaPage");
         return <View />
     }
-
-    const cancelarViaje = () => {
-        if (!props.state.ViajeReducer.data) {
-            return <View />
-        }
-        if (props.state.ViajeReducer.data.estado == 0) {
-            return <View />
-        }
-        if (props.state.ViajeReducer.data.movimientos["inicio_ruta"]) {
-            return <View />
-        }
-        if (props.state.ViajeReducer.data.movimientos["conductor_cobro_viaje"]) {
-            return <View />
-        }
-        return (
-            <TouchableOpacity
-                onPress={() => {
-                    // this.Cancelar()
-                    Alert.alert(
-                        "Alerta",
-                        "Al aceptar la cancelación, puede que tenga un costo",
-                        [
-                            {
-                                text: "Cancelar",
-                                onPress: () => console.log("Cancel Pressed"),
-                                style: "cancel"
-                            },
-                            {
-                                text: "Aceptar",
-                                onPress: () => Cancelar()
-                            }
-                        ],
-                        { cancelable: false }
-                    );
-                }}
-                style={{
-                    width: "90%",
-                    height: 50,
-                    position: "absolute",
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    backgroundColor: "#f00",
-                    bottom: 30,
-                    borderRadius: 10
-                }} >
-                <Text style={{
-                    color: "#fff"
-                }}>
-                    CANCELAR VIAJE
-                </Text>
-            </TouchableOpacity>)
+    if (props.state.ViajeReducer.data.estado == 0) {
+        props.navigation.replace("CargaPage");
+        return <View />
     }
-    if (props.state.backgroundLocationReducer.open) {
-        if (!props.state.backgroundLocationReducer.isOpen) {
-            props.state.backgroundLocationReducer.open()
-        }
+    if (props.state.ViajeReducer.data.movimientos["finalizar_viaje"]) {
+        props.navigation.replace("CargaPage");
+        return <View />
     }
-
     return (
         <View style={{
-            justifyContent: "center",
-            alignItems: "center"
+            flex: 1,
+            width: "100%",
         }}>
-            <MapView
-                showsUserLocation={true}
-                style={styles.map}
-                initialRegion={region}
-                ref={map => { mapa = map }}
-                provider={PROVIDER_GOOGLE}
-            >
-                <RutaViaje
-                    fitCordinates={(arrpos) => { fitCordinates(arrpos) }}
-                    zoomin={(pos) => { zoomin(pos) }}
-                />
-            </MapView>
-            {/* <CancelarViaje navigation={props.navigation} /> */}
-            <EstadoViaje />
-            <IniciarViaje />
-            <TerminarViaje navigation={props.navigation} />
-            <CanceloViajeCliente navigation={props.navigation} />
-            <CancelarViaje navigation={props.navigation} />
-            <ConductorLlego />
-            <CobrarViaje />
-            {/* {cancelarViaje()} */}
-
+            <BarraSuperior title={"Viaje"} />
+            <View style={{
+                width: "100%",
+                flex: 1,
+                justifyContent: "center",
+                alignItems: "center"
+            }}>
+                <MapView
+                    showsUserLocation={true}
+                    style={styles.map}
+                    initialRegion={region}
+                    ref={ref => { mapa = ref }}
+                    provider={PROVIDER_GOOGLE}
+                >
+                    <RutaViaje
+                        fitCordinates={(arrpos) => { fitCordinates(arrpos) }}
+                        zoomin={(pos) => { zoomin(pos) }}
+                    />
+                </MapView>
+                <EstadoViaje />
+                <DetalleRuta />
+            </View>
         </View>
     )
 }

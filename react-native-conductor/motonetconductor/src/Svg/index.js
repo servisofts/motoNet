@@ -10,6 +10,7 @@ import BtnAzul from '../img/btnAzul.svg';
 import BtnRojo from '../img/btnRojo.svg';
 import AlianzaSegurosRecurso from '../img/alianzaSegurosRecurso.svg';
 //import BtnSOS from '../img/btnSOS.svg';
+import Cerrar from '../img/cerrar.svg';
 
 import CentroAtencion from '../img/iconRecursoCentroAtencion.svg';
 import Farmacia from '../img/iconRecursoFarmacia.svg';
@@ -24,6 +25,8 @@ import Menu from '../img/menu.svg';
 import Ambulancia from '../img/ambulance.svg';
 import Sinubicacion from '../img/sinubicacion.svg';
 import LogoMoto from '../img/motonet.svg';
+import Rightarrow from '../img/rightarrow.svg';
+
 const Svg = (propsa) => {
     var props = { ...propsa }
     if (!props.style) {
@@ -103,6 +106,10 @@ const Svg = (propsa) => {
             return <Ambulancia style={props.style} />
         case "Sinubicacion":
             return <Sinubicacion style={props.style} />
+        case "Rightarrow":
+            return <Rightarrow style={props.style} />
+        case "Cerrar":
+            return <Cerrar style={props.style} />
         default:
             return <Text>SVG</Text>
     }

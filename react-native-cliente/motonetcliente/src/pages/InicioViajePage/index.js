@@ -235,20 +235,28 @@ class InicioViajePage extends Component {
                                 width: "100%",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                backgroundColor: "#f3f3fd"
+                                backgroundColor: "#f3f3fd",
+                                flexDirection: "row",
                             }}
                                 onPress={() => {
                                     // props.state.locationGoogleMapReducer.route = true;
                                     // props.setVentanaSelect("tipoDeViaje")
                                     return <View />
                                 }}>
-                                <Text>
+                                <Svg resource={require("../../../img/relojtestimado.svg")} style={{
+                                    width: 20,
+                                    height: 20,
+                                }} />
+                                <Text style={{
+                                    marginStart: 8,
+                                }}>
                                     Tiempo estimado de llegada
-                                    <Text style={{
-                                        color: "#000",
-                                        fontWeight: "bold"
-                                    }}> 5 min</Text>
+
                                 </Text>
+                                <Text style={{
+                                    color: "#000",
+                                    fontWeight: "bold"
+                                }}> 5 min</Text>
                             </TouchableOpacity>
                         </View>
                     </View>
