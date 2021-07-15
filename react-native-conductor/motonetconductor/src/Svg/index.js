@@ -2,7 +2,8 @@ import React from 'react';
 import { Platform, Text, View } from 'react-native';
 
 //motonet
-import LogoCompleto from '../img/logoCompleto.svg';
+//import LogoCompleto from '../img/logoCompleto.svg';
+import LogoCompleto from '../img/motonet.svg';
 import Volver from '../img/volver.svg';
 
 import BisaSegurosRecurso from '../img/bisaSegurosRecurso.svg';
