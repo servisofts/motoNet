@@ -1,8 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, NativeModules } from 'react-native';
+import { View, TouchableOpacity, Text, TextInput, ScrollView, StyleSheet, NativeModules, ActivityIndicator } from 'react-native';
 import Svg from '../../Svg';
-import Styles from '../../Styles';
+import ImgFondoCruces from '../ImgFondoCruces'
+import STheme from "../../STheme";
+import BarraSuperior from '../../Component/BarraSuperior';
 
 const RecuperarPass = (props) => {
 
@@ -14,7 +16,7 @@ const RecuperarPass = (props) => {
     });
 
     const hanlechage = (text, id) => {
-        if (id === "correo") {
+        if (id === "usr") {
             let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (reg.test(text) === false) {
                 obj[id] = {
@@ -42,155 +44,259 @@ const RecuperarPass = (props) => {
 
     return (
 
-        <ScrollView>
+        <View style={{
+            flex: 1,
+            backgroundColor:"#F7001D"
+        }}>
 
-            <View
-                style={{
-                    marginTop: 20,
-                    width: '100%',
-                    alignItems: 'center',
-                    flexDirection: 'column',
-                    marginBottom: 30
+            <BarraSuperior title={" "} goBack={() => { props.navigation.goBack() }} />
+            <ScrollView>
+            
+                <View style={{
+                    width: "100%",
+                    alignItems: "center",
+                    justifyContent: "center"
                 }}>
-                <Svg name="logoCompleto"
-                    style={{
-                        width: 200,
-                        height: 200,
-                        fill: "#fff"
-                    }} />
 
-                <View
-                    style={{
-                        width: '80%',
-                        flexDirection: 'column',
-                        marginTop: 30,
-                    }}>
-                    <Text style={styles.texto}>Recuperar contraseña:</Text>
-                    <TextInput
-                        style={!obj.usr.error ? styles.touch2 : styles.touch2Error}
-                        placeholder={"Ingrese su correo electrónico"}
-                        onChangeText={text => hanlechage(text, "usr")}
-                        value={obj.usr.value}
-                        autoCapitalize='none'
-                        autoFocus={true}
-                    />
-                </View>
-
-                <View
-                    style={{
-                        marginTop: 10,
-                        flex: 1,
-                        width: '80%',
-                        alignItems: 'center',
-                        flexDirection: 'row',
-                    }}>
-                    <TouchableOpacity
-                        onPress={() => {
-                            var datas = {}
-                            var exito = true;
-                            for (const key in obj) {
-                                if (!obj[key].value || obj[key].value.length <= 0) {
-                                    obj[key].error = true;
-                                    exito = false;
-                                } else {
-                                    obj[key].error = false;
-                                    datas[key] = obj[key].value
-                                }
-                            }
-                            setObj({ ...obj })
-                            if (exito) {
-                                props.state.socketClienteReducer.sessiones["clinica_nj"].send({
-                                    component: "usuario",
-                                    type: "recuperarPass",
-                                    data: datas,
-                                    estado: "cargando"
-                                }, true);
-                            }
-                        }}
-                        /*onPress={() => props.navigation.navigate("CodigoRecibidoPage")}*/
-
-                        style={styles.touch4}>
-                        <Text
+                    <View
+                        style={{
+                            marginTop: 20,
+                            width: '100%',
+                            alignItems: 'center',
+                            // flexDirection: 'column',
+                        }}>
+                        <Svg name="logoCompleto"
                             style={{
-                                color: '#fff',
-                            }} >
-                            Enviar
+                                fill: STheme.color.primary,
+                                width: 100,
+                                height: 100,
+                            }} />
+                    </View>
+
+                    <View
+                        style={{
+                            marginTop: 20,
+                            width: '100%',
+                            alignItems: 'center',
+                            // flexDirection: 'column',
+                        }}>
+                        <Text style={styles.textoTitulo}>Recuperar contraseña</Text>
+                    </View>
+
+                    <View
+                        style={{
+                            marginTop: 10,
+                            width: '100%',
+                            alignItems: 'center',
+                            // flexDirection: 'column',
+                        }}>
+                        <Text style={styles.texto}>Por favor ingresar su correo electrónico para recuperar su contraseña</Text>
+                    </View>
+
+                    <View
+                        style={{
+                            width: "90%",
+                            marginTop: 30,
+                            alignItems: 'center',
+                            backgroundColor: "#fff",
+                            padding:10,
+                            borderRadius:10
+                        }}>
+
+                            <View
+                             style={{
+                                width: "100%",
+                                //marginTop: 30,
+                                alignItems: 'center',
+                                padding:10
+                            }}> 
+
+                        <TextInput
+                            style={!obj.usr.error ? styles.touch2 : styles.touch2Error }
+                            placeholder={"Ingresar correo"}
+                            onChangeText={text => hanlechage(text, "usr")}
+                            value={obj.usr.value}
+                            autoCapitalize='none'
+                            autoFocus={true}
+                            multiline={false}
+                            placeholderTextColor={'#626262'}
+                            keyboardType={'email-address'}
+                            autoCorrect={false}
+                            underlineColorAndroid={'transparent'}
+                            
+                        />
+
+<View
+                        style={{
+                            marginTop: 10,
+                            width: '100%',
+                            alignItems: 'center',
+                            justifyContent: "center",
+                            // backgroundColor:"#ccc",
+                            //marginBottom: 20
+                        }}>
+                        {props.state.usuarioReducer.estadoEmail == "cargando" ? (
+                            <View style={styles.touch4}>
+                                <ActivityIndicator color="#fff" size="small" />
+                            </View>
+                        ) : (
+                            <TouchableOpacity
+                                onPress={() => {
+                                    var datas = {}
+                                    var exito = true;
+                                    for (const key in obj) {
+                                        if (!obj[key].value || obj[key].value.length <= 0) {
+                                            obj[key].error = true;
+                                            exito = false;
+                                        } else {
+                                            obj[key].error = false;
+                                            datas[key] = obj[key].value
+                                        }
+                                    }
+                                    setObj({ ...obj })
+                                    if (exito) {
+                                        props.state.socketClienteReducer.sessiones["motonet"].send({
+                                            component: "usuario",
+                                            type: "recuperarPass",
+                                            data: obj.usr.value,
+                                            estado: "cargando"
+                                        }, true);
+                                    }
+                                    //alert(obj.usr.value)
+                                    // obj.usr = ""
+                                    // setObj({ ...obj })
+                                }}
+                                /*onPress={() => props.navigation.navigate("CodigoRecibidoPage")}*/
+                                style={styles.touch4}>
+                                <Text
+                                    style={{
+                                        color: '#fff',
+                                    }} >
+                                    Enviar
                         </Text>
-                    </TouchableOpacity>
+                            </TouchableOpacity>
+                        )
+                        }
 
+                        <TouchableOpacity
+                            style={styles.touch5}
+                            onPress={() => {
+                                props.navigation.navigate("CodigoRecibidoPage")
+                                return <View />
+                                // props.navigation.navigate(props.page);
+                            }}>
+                            <Text
+                                style={{
+                                    color: '#F7001D',
+                                    //padding: 10,
+                                }} >
+                                Verificar Código
+                        </Text>
+                        </TouchableOpacity>
+
+                    </View>
+
+                        </View>
+                    </View>
+
+                    
                 </View>
-
-            </View>
-
-        </ScrollView>
+            </ScrollView>
+        </View>
     )
-
 }
 const styles = StyleSheet.create({
 
     touch2: {
-        flex: 1,
-        backgroundColor: "#EAEAE2",
+        backgroundColor: "#F7F7F7",
         width: "100%",
         height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
         paddingLeft: 15,
-        borderRadius: 10,
+        borderRadius: 5,
         shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
+        color:"#707070"
     },
     touch2Error: {
-        flex: 1,
-        backgroundColor: "#EAEAE2",
+        backgroundColor: "#F7F7F7",
         width: "100%",
         height: 50,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: 'row',
         paddingLeft: 15,
         borderRadius: 10,
         shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
+        borderColor: "red",
+        borderWidth: 1,
+        color:"#707070"
     },
 
     touch4: {
-        marginTop: 10,
-        backgroundColor: Styles.colors.secondary,
+        backgroundColor: "#F7001D",
         width: "100%",
-        height: 45,
+        height: 40,
+        margin: 2,
+        marginTop: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 10,
-        shadowColor: "#000",
-        shadowOffset: {
-            width: 0,
-            height: -2,
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        flexDirection: 'row',
+        borderRadius: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        // elevation: 2,
     },
-    texto: {
-        width: '100%',
-        color: "#fff",
-        fontSize: 12,
-        margin: 5,
-    }
 
+
+    texto: {
+        color: "#fff",
+        fontSize: 15,
+        textAlign:"center"
+    },
+
+    textoTitulo: {
+        color: "#fff",
+        fontSize: 27,
+        fontWeight:'bold'
+    },
+
+    touch5: {
+        backgroundColor: "#fff",
+        borderStyle:"solid",
+        borderColor:"#F7001D",
+        width: "100%",
+        height: 40,
+        //margin: 2,
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexDirection: 'row',
+        borderRadius: 5,
+        // shadowColor: "#000",
+        // shadowOffset: {
+        //     width: 0,
+        //     height: -2,
+        // },
+        // shadowOpacity: 0.25,
+        // shadowRadius: 3.84,
+        //elevation: 2,
+        borderWidth: 2,
+    },
 });
 const initStates = (state) => {
     return { state }

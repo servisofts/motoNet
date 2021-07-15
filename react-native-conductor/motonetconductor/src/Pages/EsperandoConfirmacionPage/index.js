@@ -69,7 +69,7 @@ class EsperandoConfirmacionPage extends Component {
                 style={{
                     fontSize: 12,
                     fontWeight: "bold",
-                    color: "#000",
+                    color: "#484848",
                     width: "100%",
                     textAlign: "center"
                 }}>{texto}</Text>
@@ -112,7 +112,7 @@ class EsperandoConfirmacionPage extends Component {
                     }}>
                         <View style={{
                             width: Dimensions.get("window").width * 0.3,
-                            height: Dimensions.get("window").width * 0.3,
+                            height: Dimensions.get("window").width * 0.2,
                             alignItems: 'center',
                             justifyContent: 'center',
 
@@ -120,7 +120,8 @@ class EsperandoConfirmacionPage extends Component {
                             <Svg style={{
                                 width: "100%",
                                 height: "100%",
-                            }} name="logoCompletoRecurso" />
+                                fill: "#F7001D"
+                            }} name="logoCompleto" />
                         </View>
                     </View>
                     <View style={{
@@ -128,7 +129,7 @@ class EsperandoConfirmacionPage extends Component {
                         alignItems: "center"
                     }}>
                         <View style={{
-                            backgroundColor: "#f00",
+                            backgroundColor: "#fff",
                             borderRadius: 20,
                             width: 400,
                             height: Dimensions.get("window").height * 0.5,
@@ -136,19 +137,34 @@ class EsperandoConfirmacionPage extends Component {
                             alignItems: 'center',
                             justifyContent: 'center',
                         }}>
+                             <Svg style={{
+                                width: "100px",
+                                height: "100px",
+                                fill: "#113452"
+                            }} name="Verificar" />
                             <Text style={{
-                                fontSize: 15,
+                                fontSize: 20,
                                 fontWeight: "bold",
-                                color: "#fff",
-                                padding: 15,
+                                color: "#484848",
+                                paddingTop: 15,
                                 textAlign: "center"
                             }}>
-                                Estamos verificando tu usuario. Por favor ten paciencia.
+                                Estamos verificando tus datos
                             </Text>
+                            <Text style={{
+                                fontSize: 14,
+                                fontWeight: "bold",
+                                color: "#484848",
+                                //padding: 5,
+                                textAlign: "center"
+                            }}>
+                                Por favor ten paciencia
+                            </Text>
+                           
                             <Text style={{
                                 fontSize: 15,
                                 fontWeight: "bold",
-                                color: "#fff",
+                                color: "#484848",
                                 padding: 15,
                                 textAlign: "center"
                             }}>Datos pendientes de verificación:</Text>
