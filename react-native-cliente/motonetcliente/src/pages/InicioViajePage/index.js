@@ -242,7 +242,7 @@ class InicioViajePage extends Component {
                                     // props.setVentanaSelect("tipoDeViaje")
                                     return <View />
                                 }}>
-                                <Svg resource={require("../../../img/relojtestimado.svg")} style={{
+                                <Svg resource={require("../../img/relojtestimado.svg")} style={{
                                     width: 20,
                                     height: 20,
                                 }} />
