@@ -24,12 +24,12 @@ const LoginPage = (props) => {
     });
 
 
-    if (props.state.usuarioReducer.estado === "exito") {
+    if (props.state.usuarioReducer.usuarioLog === "exito") {
         props.navigation.estado = ""
         props.navigation.replace("CargaPage");
         return <View />
     }
-    if (props.state.usuarioReducer.estado === "error") {
+    if (props.state.usuarioReducer.usuarioLog === "error") {
         switch (props.state.usuarioReducer.error) {
             case "not_found":
                 props.navigation.navigate("RegistroUsuarioPage", {
@@ -38,7 +38,7 @@ const LoginPage = (props) => {
                 })
                 break;
         }
-        props.state.usuarioReducer.estado = ""
+        props.state.usuarioReducer.usuarioLog = ""
         obj.pass.error = true;
         setObj({ ...obj })
         return <View />
