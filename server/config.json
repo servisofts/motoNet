@@ -11,9 +11,11 @@
         },
         "reconectTime": 5000
     },
-    "files":{
-        "url":"/Users/rickypazd/Documents/GitHub/motoNet/Files/usuario/files/",
-        "url_publicidad": "/Users/rickypazd/Documents/GitHub/motoNet/Files/publicidad/"
+    "files": {
+        "url": "/Users/rickypazd/Documents/GitHub/motoNet/Files/usuario/files/",
+        "url_publicidad": "/Users/rickypazd/Documents/GitHub/motoNet/Files/publicidad/",
+        "pedido": "/Users/rickypazd/Documents/GitHub/motoNet/Files/pedidos/",
+        "paquete": "/Users/rickypazd/Documents/GitHub/motoNet/Files/paquete/"
     },
     "data_base": {
         "puerto": 5432,
@@ -43,6 +45,3 @@
         "ip": "192.168.0.3"
     }
 }
-
-
-

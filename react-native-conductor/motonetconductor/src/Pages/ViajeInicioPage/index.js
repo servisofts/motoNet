@@ -83,10 +83,10 @@ const ViajeInicioPage = (props) => {
         if (!mapa.fitToCoordinates) return;
         mapa.fitToCoordinates(pos, {
             edgePadding: {
-                top: 120,
-                right: 120,
-                left: 120,
-                bottom: 500,
+                top: 100,
+                right: 300,
+                left: 300,
+                bottom: 600,
             }
         })
     }

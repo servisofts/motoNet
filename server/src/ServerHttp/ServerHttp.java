@@ -59,10 +59,17 @@ public class ServerHttp {
                 key = parametros.get("key_usuario");
                 file = getPerfil(file, imgName, key);
                 break;
-     
-                case "publicidad":
+            case "publicidad":
                 key = parametros.get("key");
                 file = publicidad(file, imgName, key);
+                break;
+            case "pedido":
+                key = parametros.get("key");
+                file = pedido(file, imgName, key);
+                break;
+            case "paquete":
+                key = parametros.get("key");
+                file = paquete(file, imgName, key);
                 break;
         }
         // System.out.println(type);
@@ -116,9 +123,18 @@ public class ServerHttp {
         return new File(url);
     }
 
-
     private static File publicidad(File file, String imgName, String key) throws IOException {
         String url = Config.getJSON("files").getString("url_publicidad") + key + "/" + imgName;
+        return new File(url);
+    }
+
+    private static File pedido(File file, String imgName, String key) throws IOException {
+        String url = Config.getJSON("files").getString("pedido") + key + "/" + imgName;
+        return new File(url);
+    }
+
+    private static File paquete(File file, String imgName, String key) throws IOException {
+        String url = Config.getJSON("files").getString("paquete") + key + "/" + imgName;
         return new File(url);
     }
 }

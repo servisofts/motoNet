@@ -173,7 +173,7 @@ class DetalleRuta extends Component {
                         // backgroundColor: "#ccc"
                     }}>
                         <View style={{
-                            flex: 1,
+                            flex: 2,
                             justifyContent: "center",
                             // alignItems: "center",
                         }}>
