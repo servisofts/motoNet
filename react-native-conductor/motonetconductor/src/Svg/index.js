@@ -12,6 +12,10 @@ import BtnRojo from '../img/btnRojo.svg';
 import AlianzaSegurosRecurso from '../img/alianzaSegurosRecurso.svg';
 //import BtnSOS from '../img/btnSOS.svg';
 import Cerrar from '../img/cerrar.svg';
+import Error from '../img/error.svg';
+import Success from '../img/success.svg';
+
+import Verificar from '../img/verificar.svg';
 
 import CentroAtencion from '../img/iconRecursoCentroAtencion.svg';
 import Farmacia from '../img/iconRecursoFarmacia.svg';
@@ -117,6 +121,12 @@ const Svg = (propsa) => {
             return <Send style={props.style} />
         case "Arrow":
             return <Arrow style={props.style} />
+        case "Error":
+            return <Error style={props.style} />
+        case "Success":
+            return <Success style={props.style} />
+        case "Verificar":
+            return <Verificar style={props.style} />
         default:
             return <Text>SVG</Text>
     }

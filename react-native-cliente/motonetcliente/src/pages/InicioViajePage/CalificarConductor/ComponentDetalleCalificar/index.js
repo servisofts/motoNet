@@ -12,6 +12,15 @@ const ComponentDetalleCalificar = (props) => {
 
     console.log("edson " + JSON.stringify(props.data))
 
+    const [obj, setObj] = React.useState({
+        sugerencia: {
+            value: "",
+        },
+        rating: {
+            value: 0,
+        },
+    });
+
     const getDetalleRuta = () => {
         // var tipos_de_viajes = props.state.tipoViajesReducer.data;
         return (
@@ -100,7 +109,7 @@ const ComponentDetalleCalificar = (props) => {
                         </View>
                     </View>
 
-                    <TrabajoFinalizado />
+                    <TrabajoFinalizado obj={obj} setObj={setObj} />
 
                     <View style={{
                         marginTop: 15
@@ -114,20 +123,16 @@ const ComponentDetalleCalificar = (props) => {
                             paddingStart: 8,
                             textAlignVertical: 'top'
                         }}
-                            //type={this.props.type == "email" ? "email" : ""}
-                            // value={this.state.value}
-                            // onChangeText={(text) => {
-                            //     this.setState({ value: text });
-                            // }}
-                            // secureTextEntry={this.getIsSecure()}
+                            value={obj.sugerencia.value}
+                            onChangeText={(text) => {
+                                obj.sugerencia.value = text
+                                setObj({ ...obj });
+                            }}
                             placeholder="Sugerencias"
                             placeholderTextColor={STheme.color.placeholder}
                             color="#000"
-                            // autoCapitalize='none'
                             numberOfLines={4}
-                            // textAlignVerticalset={false}
                             multiline={true}
-                        // style={{ maxHeight: 80 }}
                         />
                     </View>
 
@@ -149,30 +154,23 @@ const ComponentDetalleCalificar = (props) => {
                                 cargando={false}
                                 // cargando={props.state.viajesReducer.estado == "cargando"}
                                 onPress={() => {
-                                    var datos = {};
-                                    var exito = true;
-                                    for (const key in obj2) {
-                                        if (obj2[key]) {
-                                            // obj[key].error = true;
-                                            // exito = false;
-                                            // } else {
-                                            // obj[key].error = false;
-                                            datos[key] = obj2[key]
-                                        }
+                                    var exito = false;
+                                    if (obj.rating.value > 0) {
+                                        exito = true
                                     }
-                                    // setObj({ ...obj2 })
                                     if (exito) {
-                                        // props.state.socketClienteReducer.sessiones["glup"].send({
-                                        //     component: "glup",
-                                        //     type: "movimientos",
-                                        //     estado: "cargando",
-                                        //     movimiento: "calificar_glup",
-                                        //     key_usuario: props.state.usuarioReducer.usuarioLog.key,
-                                        //     key_glup: props.state.glupReducer.glupEnCurso.key,
-                                        //     calificacion: obj.rating,
-                                        //     extras: datos,
-                                        // }, true);
+                                        props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                                            component: "viaje",
+                                            type: "calificar",
+                                            estado: "cargando",
+                                            key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                                            key_viaje: props.state.viajesReducer.data.key,
+                                            calificacion: obj.rating.value,
+                                            sugerencia: obj.sugerencia.value,
+                                        }, true);
                                     }
+                                    props.navigation.replace("CargaPage");
+                                    props.state.viajesReducer.data = false
                                 }}
                             />
                         </View>

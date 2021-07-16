@@ -56,12 +56,12 @@ class PedidosRegistroPage extends Component {
         }
         var nombre = this._ref["nombre"].verify();
         if (!nombre) {
-            console.log("entro");
+            // console.log("entro");
             isValid = false
         };
         var telefono = this._ref["telefono"].verify();
         if (!telefono) {
-            console.log("entro");
+            // console.log("entro");
             isValid = false
         };
         var nota = this._ref["nota"].getValue();
@@ -90,7 +90,7 @@ class PedidosRegistroPage extends Component {
         this.props.navigation.navigate("ViajePedirYBuscar",{
             data:OBJ
         });
-        console.log(OBJ)
+        // console.log(OBJ)
     }
     render() {
         return (<View style={{

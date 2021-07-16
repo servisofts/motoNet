@@ -53,6 +53,9 @@ export default (state, action) => {
             case "recuperarPass":
                 recuperarPass(state, action);
                 break;
+            case "verificarCodigoPass":
+                verificarCodigoPass(state, action);
+                break;    
 
         }
         state.type = action.type;
@@ -169,5 +172,15 @@ const insertarDato = (state, action) => {
         } else {
             state.usuarioDatos = true;
         }
+    }
+}
+
+const verificarCodigoPass = (state, action) => {
+    state.estadoEmail = action.estado
+    if (action.estado === "exito") {
+        state.usuarioRecuperado = action.data;
+    }
+    if (action.estado === "error") {
+        state.errorEmailRecuperado = action.error
     }
 }

@@ -1,12 +1,12 @@
 import React, { useRef } from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View, Image } from 'react-native';
 import { connect } from 'react-redux';
 import STheme from '../../../../STheme';
 import Svg from '../../../../Svg';
 import Boton1 from '../../../../component/Boton1';
 import AppParams from "../../../../Json"
 
-const ComponentDetalleViaje = (props) => {
+const ComponentDetalleProducto = (props) => {
 
     // console.log("edson " + JSON.stringify(props.data))
 
@@ -74,7 +74,85 @@ const ComponentDetalleViaje = (props) => {
         )
     }
 
-    
+
+    const getlistaItems = () => {
+        // console.log("aaaa" + JSON.stringify(props.state.viajesReducer.data.pedido))
+
+        let data = props.state.viajesReducer.data.pedido;
+
+        if (Object.keys(data).length <= 0) {
+            return <View />
+        };
+
+        var LIST = Object.keys(data).map((key) => {
+            var obj = data[key];
+            return (
+                <View style={{
+                    height: 40,
+                    width: "100%",
+                    marginBottom: 15,
+                    flexDirection: "row",
+                    justifyContent: "space-between"
+                }}>
+                    <View style={{
+                        // flex: 1,
+                    }}>
+                        <Text style={{
+                            color: STheme.color.textb
+                        }}>{obj.nombre}</Text>
+                        <Text style={{
+                            color: STheme.color.textb
+                        }}>{obj.cantidad} Unidades</Text>
+                    </View>
+                    <View
+                        style={{
+                            width: 50,
+                            height: 50,
+                            borderWidth: 1,
+                            borderColor: "#999",
+                            borderRadius: 4,
+                            overflow: "hidden",
+                        }}>
+                        {props.state.imageReducer.getImage(AppParams.urlImages + "foto.png?type=pedido&key=" + obj.key, {
+                        })}
+                    </View>
+
+                    {/* <TouchableOpacity style={{
+                        width: 40,
+                        height: "100%",
+                        justifyContent: "center",
+                        alignItems: "center"
+                    }} onPress={() => {
+                        delete this.state.productos[key];
+                        this.setState({ productos: this.state.productos })
+                    }}>
+                        <Svg name={"Eliminar"} style={{
+                            width: 20,
+                            height: 20,
+                            fill: "#000"
+                        }} />
+                    </TouchableOpacity> */}
+                </View>
+            )
+        })
+        return (
+            <View style={{
+                flex: 1,
+                margin: 10
+            }}>
+                <View style={{
+                    marginBottom: 20
+                }}>
+                    <Text style={{
+                        color: STheme.color.textb,
+                        fontSize: 14,
+                        fontWeight: "bold",
+                    }}>Productos añadidos</Text>
+                </View>
+                {LIST}
+            </View>
+        )
+    }
 
     return (
 
@@ -91,7 +169,9 @@ const ComponentDetalleViaje = (props) => {
             bottom: 0
         }}>
 
-            {getDetalleRuta()}
+            {/* {getDetalleRuta()} */}
+
+            {getlistaItems()}
 
             <TouchableOpacity
                 onPress={() => {
@@ -123,6 +203,6 @@ const ComponentDetalleViaje = (props) => {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(ComponentDetalleViaje);
+export default connect(initStates)(ComponentDetalleProducto);
 
 

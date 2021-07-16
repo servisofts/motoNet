@@ -53,8 +53,11 @@ class ViajePedirYBuscar extends Component {
     render() {
 
         if (this.props.state.viajesReducer.data) {
+            console.log("sdsds")
+
             // console.log("dfdf")
             this.props.navigation.replace("ViajeEsperaPage");
+            return <View />
         }
 
         this.data = this.props.navigation.getParam("data");

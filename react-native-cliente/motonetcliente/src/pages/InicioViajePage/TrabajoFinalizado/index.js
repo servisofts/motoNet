@@ -17,10 +17,10 @@ const TrabajoFinalizado = (props) => {
         return true;
     };
 
-    const [obj, setObj] = React.useState({
-        calificacion: "",
-        rating: 0
-    });
+    // const [obj, setObj] = React.useState({
+    //     calificacion: "",
+    //     rating: 0
+    // });
 
     // if (!props.ventanaValoracion) {
     //     BackHandler.removeEventListener("hardwareBackPress", backAction);
@@ -29,17 +29,18 @@ const TrabajoFinalizado = (props) => {
     // BackHandler.addEventListener("hardwareBackPress", backAction);
 
     const rate = star => {
-        setObj({ rating: star });
+        props.obj.rating.value = star
+        props.setObj({ ...props.obj });
         return <View />
     }
 
-    const handleChange = (event, id) => {
-        obj[id] = {
-            calificacion: event,
-        }
-        setObj({ ...obj })
-        return <View />
-    };
+    // const handleChange = (event, id) => {
+    //     obj[id] = {
+    //         calificacion: event,
+    //     }
+    //     setObj({ ...obj })
+    //     return <View />
+    // };
 
     let start = [];
     for (let x = 1; x <= numStars; x++) {
@@ -50,48 +51,10 @@ const TrabajoFinalizado = (props) => {
                     rate(x);
                 }}
             >
-                <Star filled={x <= obj.rating ? true : false} />
+                <Star filled={x <= props.obj.rating.value ? true : false} />
             </TouchableOpacity>
         )
     }
-    var key_solicitante;
-    var rol = "";
-    // if (props.glup.oferta_aceptada.key_usuario == props.state.usuarioReducer.usuarioLog.key) {
-    //     key_solicitante = props.glup.key_usuario;
-    //     rol = "pepe";
-    // }
-    // if (props.glup.oferta_aceptada.key_usuario != props.state.usuarioReducer.usuarioLog.key) {
-    //     key_solicitante = props.glup.oferta_aceptada.key_usuario;
-    //     rol = "gluper";
-    // }
-
-    // if (!props.state.usuarioReducer.data[key_solicitante]) {
-    //     if (props.state.usuarioReducer.estado == "cargando") {
-    //         console.log("OFERTA--:" + " line 71")
-    //         return <View />
-    //     }
-    //     props.state.socketClienteReducer.sessiones["glup"].send({
-    //         component: "usuario",
-    //         type: "getById",
-    //         key: key_solicitante,
-    //         cabecera: "perfil",
-    //         estado: "cargando"
-    //     }, true);
-    //     return <View />
-    // }
-    var usuario;
-    var url = "";
-    var nombres = "";
-    // if (props.state.usuarioReducer.data[key_solicitante]) {
-    //     usuario = props.state.usuarioReducer.data[key_solicitante];
-    //     if (props.state.usuarioReducer.usuarioDatos["Foto perfil"]) {
-    //         //error no existe foto    
-    //         // return <View />
-    //         // url = urlFoto.urlImages + `perfil.png?type=getPerfil&key_usuario=${objOferta.key_usuario}&date=${Date.now()}`;
-    //         url = urlFoto.urlImages + `perfil.png?type=getPerfil&key_usuario=${key_solicitante}`;
-    //     }
-    //     nombres = usuario["Nombres"].dato + " " + usuario["Apellidos"].dato;
-    // }
 
     return (
         <View style={{

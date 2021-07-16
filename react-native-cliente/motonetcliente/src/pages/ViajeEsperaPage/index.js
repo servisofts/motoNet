@@ -49,6 +49,11 @@ class ViajeEsperaPage extends Component {
             return <View />
         }
 
+        if (!this.props.state.viajesReducer.data.movimientos) {
+            this.props.navigation.replace("ServicioPage");
+            return <View />
+        }
+
         if (this.props.state.viajesReducer.data.movimientos["sin_conductor"]) {
             SPopupOpen({
                 key: "noConductor",
