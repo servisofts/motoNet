@@ -189,34 +189,29 @@ class RegistroUsuarioPage extends Component {
         style={{
           width: "100%",
           flex: 1,
-        }}
-      >
+        }}>
         <BarraSuperior
           title={"Crear usuario"}
           goBack={() => {
             this.props.navigation.goBack();
-          }}
-        />
+          }} />
         <View
           style={{
             flex: 1,
-          }}
-        >
+          }}>
           <SSCrollView>
             <View
               style={{
                 flex: 1,
                 width: "100%",
                 alignItems: "center",
-              }}
-            >
+              }}>
               {this.getDatoCabecera()}
               <View
                 style={{
                   width: "90%",
                   flex: 1,
-                }}
-              >
+                }}>
                 {this.getInputs()}
               </View>
               <BottomContent>
@@ -290,8 +285,7 @@ class RegistroUsuarioPage extends Component {
                       this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(objSend, true);
                       //alert("Registrar")
                     }
-                  }
-                  }
+                  }}
                 />
               </BottomContent>
             </View>

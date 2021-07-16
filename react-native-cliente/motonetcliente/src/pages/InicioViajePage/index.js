@@ -12,6 +12,7 @@ import Boton1 from '../../component/Boton1';
 import BarraViaje from '../../component/BarraViaje'
 import PerfilConductor from './PerfilConductor';
 import CalificarConductor from './CalificarConductor';
+import DetalleProducto from './DetalleProducto';
 
 class InicioViajePage extends Component {
 
@@ -22,7 +23,8 @@ class InicioViajePage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            abrirModal: false
+            abrirModal: false,
+            abrirModalProducto: false
         }
     }
 
@@ -44,7 +46,6 @@ class InicioViajePage extends Component {
                     type: "Miubicacion",
                     data: region,
                 });
-
             },
             (error) => {
                 // See error code charts below.
@@ -227,37 +228,54 @@ class InicioViajePage extends Component {
                             </View>
                         </View>
 
-                        <View style={{
-                        }}>
-                            <TouchableOpacity style={{
-                                height: 40,
-                                width: "100%",
-                                alignItems: "center",
+                        {this.props.state.viajesReducer.data.tipo_viaje.descripcion == "Pedido" ?
+                            <View style={{
+                                // flex: 0,
                                 justifyContent: "center",
-                                backgroundColor: "#f3f3fd",
-                                flexDirection: "row",
-                            }}
-                                onPress={() => {
-                                    // props.state.locationGoogleMapReducer.route = true;
-                                    // props.setVentanaSelect("tipoDeViaje")
-                                    return <View />
-                                }}>
-                                <Svg resource={require("../../img/relojtestimado.svg")} style={{
-                                    width: 20,
-                                    height: 20,
-                                }} />
-                                <Text style={{
-                                    marginStart: 8,
-                                }}>
-                                    Tiempo estimado de llegada
+                                alignItems: "center",
+                            }}>
+                                <Boton1 type="1"
+                                    label="Ver Productos"
+                                    cargando={false}
+                                    // cargando={props.state.viajesReducer.estado == "cargando"}
+                                    onPress={() => {
+                                        this.setState({ abrirModalProducto: true })
+                                    }}
+                                />
+                            </View>
+                            : <View style={{
+                            }}>
+                                <TouchableOpacity style={{
+                                    height: 40,
+                                    width: "100%",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    backgroundColor: "#f3f3fd",
+                                    flexDirection: "row",
+                                }}
+                                    onPress={() => {
+                                        // props.state.locationGoogleMapReducer.route = true;
+                                        // props.setVentanaSelect("tipoDeViaje")
+                                        return <View />
+                                    }}>
+                                    <Svg resource={require("../../img/relojtestimado.svg")} style={{
+                                        width: 20,
+                                        height: 20,
+                                    }} />
+                                    <Text style={{
+                                        marginStart: 8,
+                                    }}>
+                                        Tiempo estimado de llegada
+                                    </Text>
+                                    <Text style={{
+                                        color: "#000",
+                                        fontWeight: "bold"
+                                    }}> 5 min</Text>
+                                </TouchableOpacity>
+                            </View>
+                        }
 
-                                </Text>
-                                <Text style={{
-                                    color: "#000",
-                                    fontWeight: "bold"
-                                }}> 5 min</Text>
-                            </TouchableOpacity>
-                        </View>
+
                     </View>
                 </View>
             </View >
@@ -274,6 +292,16 @@ class InicioViajePage extends Component {
         }
     }
 
+    detalleProducto = () => {
+        if (this.state.abrirModalProducto) {
+            return (
+                <DetalleProducto data={this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]} close={() => {
+                    this.setState({ abrirModalProducto: false })
+                }} />
+            )
+        }
+    }
+
     render() {
 
         if (this.props.state.viajesReducer.data.movimientos["cancelo_viaje"]) {
@@ -282,7 +310,6 @@ class InicioViajePage extends Component {
             this.props.state.viajesReducer.data = false
             return <View />
         }
-
 
         return (
             <>
@@ -318,6 +345,7 @@ class InicioViajePage extends Component {
                         <CalificarConductor navigation={this.props.navigation} data={this.props.state.usuarioReducer.data[this.props.state.viajesReducer.data.key_conductor]} />
                     }
 
+                    {this.detalleProducto()}
 
                 </View >
             </>

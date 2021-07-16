@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native'
+import { Text, View, TouchableOpacity, Image } from 'react-native'
 import { connect } from 'react-redux';
 import BarraSuperiorMensajeria from './BarraSuperiorMensajeria';
 import SSCrollView from '../../component/SScrollView';
@@ -8,6 +8,10 @@ import STheme from '../../STheme';
 import SwitchTipo from './SwitchTipo';
 import BuscardorNuevoBlack from '../../component/BuscardorNuevoBlack';
 import Svg from '../../Svg';
+import ImagePicker from 'react-native-image-picker';
+import ImageResizer from 'react-native-image-resizer';
+import RNFS from 'react-native-fs'
+
 class MensajeriaRegistroPage extends Component {
     static navigationOptions = {
         headerShown: false,
@@ -16,6 +20,7 @@ class MensajeriaRegistroPage extends Component {
         super(props);
         this._ref = {};
         this.state = {
+            foto: false,
             datos: {
                 nombreR: {
                     label: "Nombre",
@@ -49,6 +54,7 @@ class MensajeriaRegistroPage extends Component {
                     type: "textarea",
                     height: 120,
                 },
+
             }
         };
     }
@@ -66,8 +72,7 @@ class MensajeriaRegistroPage extends Component {
 
         var tipo = this.switchtipo.getValue();
 
-        var foto = null;//TODO
-
+        // var foto = null;//TODO
 
         var direccionI = this.direccionInicio.getValue();
         var direccionF = this.direccionFin.getValue();
@@ -110,7 +115,7 @@ class MensajeriaRegistroPage extends Component {
             tipo_viaje: "mensajeria",
             paquete: {
                 tipo,
-                foto,
+                foto: this.state.foto,
             },
             inicio: {
                 nombre: nombreD,
@@ -126,11 +131,110 @@ class MensajeriaRegistroPage extends Component {
             direccionFin: direccionF
 
         }
-        console.log(OBJ)
+        // console.log(OBJ)
         this.props.navigation.navigate("ViajePedirYBuscar", {
             data: OBJ
         });
     }
+
+    pickPhoto = () => {
+        var options = {
+            title: 'Seleccionar una Foto',
+            takePhotoButtonTitle: "Tomar Foto...",
+            chooseFromLibraryButtonTitle: "Elegir de la Biblioteca...",
+            allowEditing: true,
+            isVertical: true,
+            originalRotation: 0,
+            mediaType: 'foto',
+            // rotation: 0,
+            cancelButtonTitle: "Cancelar",
+            storageOptions: {
+                skipBackup: true,
+                path: 'image',
+            },
+        };
+        ImagePicker.showImagePicker(options, response => {
+            if (response.didCancel) {
+                return <View />
+            } else if (response.error) {
+                return <View />
+            } else if (response.customButton) {
+                return <View />
+            } else {
+                var originalRotation = (!response.originalRotation ? 0 : response.originalRotation)
+                ImageResizer.createResizedImage("data:image/jpeg;base64," + response.data, 400, 400, 'PNG', 100, originalRotation).then((uri) => {
+                    //console.log(uri)
+                    RNFS.readFile(uri.path, 'base64').then((resp) => {
+                        //console.log(resp)
+                        this.setState({ foto: resp })
+                    });
+
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
+        });
+        return <View />
+    }
+
+    agregarFoto = () => {
+
+        if (this.state.foto) {
+            return (
+                <View style={{
+                    width: "100%",
+                    // justifyContent: "center",
+                    // alignItems: "center",
+                    // marginBottom: 8,
+                    marginTop: 16,
+                    // borderWidth: 1,
+                    height: 200,
+                    // borderRadius: 8,
+                    // borderColor: "#666",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                    <Image source={{ uri: 'data:image/jpeg;base64,' + this.state.foto }}
+                        style={{
+                            width: 200,
+                            height: 200,
+                            borderRadius: 4,
+                            resizeMode: "stretch"
+                        }} />
+                </View>
+            )
+        }
+
+        return (
+            <TouchableOpacity style={{
+                marginTop: 16,
+                borderWidth: 1,
+                height: 200,
+                borderRadius: 8,
+                borderColor: "#666",
+                justifyContent: "center",
+                alignItems: "center"
+            }} onPress={() => {
+                this.pickPhoto()
+            }}>
+                <View style={{
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center"
+                }}>
+                    <Svg resource={require("../../img/addFoto.svg")} style={{
+                        width: 25,
+                        height: 25
+                    }} />
+                    <Text style={{
+                        marginStart: 8,
+                        color: "#000"
+                    }}>Agregar foto</Text>
+                </View>
+            </TouchableOpacity>
+        )
+    }
+
     render() {
         return (<View style={{
             width: "100%",
@@ -161,30 +265,9 @@ class MensajeriaRegistroPage extends Component {
                                 color: STheme.color.textb
                             }}>Mensajería: ¿qué vas a enviar?</Text>
                             <SwitchTipo ref={(ref) => { this.switchtipo = ref; }} />
-                            <View style={{
-                                marginTop: 16,
-                                borderWidth: 1,
-                                height: 200,
-                                borderRadius: 8,
-                                borderColor: "#666",
-                                justifyContent: "center",
-                                alignItems: "center"
-                            }}>
-                                <View style={{
-                                    flexDirection: "row",
-                                    justifyContent: "center",
-                                    alignItems: "center"
-                                }}>
-                                    <Svg resource={require("../../img/addFoto.svg")} style={{
-                                        width: 25,
-                                        height: 25
-                                    }} />
-                                    <Text style={{
-                                        marginStart: 8,
-                                        color: "#000"
-                                    }}>Agregar foto</Text>
-                                </View>
-                            </View>
+
+                            {this.agregarFoto()}
+
                             <Text style={{
                                 marginTop: 8,
                                 marginBottom: 8,

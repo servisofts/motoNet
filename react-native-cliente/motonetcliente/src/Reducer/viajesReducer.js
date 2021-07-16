@@ -210,7 +210,6 @@ const getViaje = (state, action) => {
     if (action.estado === "exito") {
         state.data = action.data
         AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
-
     }
 }
 

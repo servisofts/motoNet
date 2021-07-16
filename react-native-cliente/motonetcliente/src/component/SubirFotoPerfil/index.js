@@ -45,7 +45,6 @@ const SubirFotoPerfil = (props) => {
                 return <View />
             } else {
                 setFoto(response.data)
-
                 // ImageResizer.createResizedImage("data:image/jpeg;base64," + response.data, 400, 400, 'PNG', 100).then((uri) => {
                 //     //console.log(uri)
                 //     RNFS.readFile(uri.path, 'base64').then((resp) => {
