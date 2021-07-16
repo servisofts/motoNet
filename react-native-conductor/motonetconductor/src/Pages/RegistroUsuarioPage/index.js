@@ -118,7 +118,8 @@ class RegistroUsuarioPage extends Component {
   }
   getKeyDato = (keyDescripcion) => {
     var key = "undefined";
-    var cabecera = "registro_cliente";
+    //var cabecera = "registro_cliente";
+    var cabecera = "registro_conductor";
     // console.log(this.props.state.cabecreraDatoReducer.data[cabecera])
     for (
       let i = 0;
@@ -138,12 +139,12 @@ class RegistroUsuarioPage extends Component {
     if (this.props.state.cabeceraDatoReducer.estado == "cargando") {
       return <View />;
     }
-    if (!this.props.state.cabeceraDatoReducer.data["registro_cliente"]) {
+    if (!this.props.state.cabeceraDatoReducer.data["registro_conductor"]) {
       var objSend = {
         component: "cabeceraDato",
         type: "getDatoCabecera",
         estado: "cargando",
-        cabecera: "registro_cliente",
+        cabecera: "registro_conductor",
       };
       this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(
         objSend,
@@ -168,19 +169,19 @@ class RegistroUsuarioPage extends Component {
       this.props.navigation.replace("CargaPage");
     }
 
-    if (this.props.state.usuarioReducer.errorRegistro) {
-      if (this.props.state.usuarioReducer.errorRegistro == "existe_Correo") {
-        console.log(this.props.state.usuarioReducer.errorRegistro);
-        //alert(this.props.state.usuarioReducer.errorRegistro);
-        this.props.state.usuarioReducer.errorRegistro = false;
+    if (this.props.state.usuarioReducer.error) {
+      if (this.props.state.usuarioReducer.error == "existe_Correo") {
+        console.log(this.props.state.usuarioReducer.error);
+        //alert(this.props.state.usuarioReducer.error);
+        this.props.state.usuarioReducer.error = false;
         this.state.mensaje = "Ya existe el correo electrónico."
         this.state.modalVisible = true;
       }
-      if (this.props.state.usuarioReducer.errorRegistro == "existe_Telefono") {
-        console.log(this.props.state.usuarioReducer.errorRegistro);
-        //alert(this.props.state.usuarioReducer.errorRegistro);
+      if (this.props.state.usuarioReducer.error == "existe_Telefono") {
+        console.log(this.props.state.usuarioReducer.error);
+        //alert(this.props.state.usuarioReducer.error);
         this.state.modalVisible = true;
-        this.props.state.usuarioReducer.errorRegistro = false;
+        this.props.state.usuarioReducer.error = false;
         this.state.mensaje = "Ya existe el teléfono."
       }
     }
@@ -285,7 +286,7 @@ class RegistroUsuarioPage extends Component {
                         component: "usuario",
                         type: "registro",
                         estado: "cargando",
-                        cabecera: "registro_cliente",
+                        cabecera: "registro_conductor",
                         data: arr,
                       };
                       this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(objSend, true);
