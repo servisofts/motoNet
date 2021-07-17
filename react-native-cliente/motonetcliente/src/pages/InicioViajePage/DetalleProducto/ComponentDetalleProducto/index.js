@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { Text, TouchableOpacity, View, Image } from 'react-native';
+import { Text, TouchableOpacity, View, Image, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import STheme from '../../../../STheme';
 import Svg from '../../../../Svg';
@@ -87,6 +87,8 @@ const ComponentDetalleProducto = (props) => {
         var LIST = Object.keys(data).map((key) => {
             var obj = data[key];
             return (
+
+
                 <View style={{
                     height: 40,
                     width: "100%",
@@ -94,6 +96,8 @@ const ComponentDetalleProducto = (props) => {
                     flexDirection: "row",
                     justifyContent: "space-between"
                 }}>
+
+
                     <View style={{
                         // flex: 1,
                     }}>
@@ -132,7 +136,9 @@ const ComponentDetalleProducto = (props) => {
                             fill: "#000"
                         }} />
                     </TouchableOpacity> */}
+
                 </View>
+
             )
         })
         return (
@@ -149,7 +155,13 @@ const ComponentDetalleProducto = (props) => {
                         fontWeight: "bold",
                     }}>Productos añadidos</Text>
                 </View>
-                {LIST}
+
+                <ScrollView style={{
+                    flex: 1
+                }}>
+                    {LIST}
+                </ScrollView>
+
             </View>
         )
     }
@@ -160,7 +172,7 @@ const ComponentDetalleProducto = (props) => {
             position: "absolute",
             width: "100%",
             // height: Dimensions.get('window').height * 0.3,
-            height: 220,
+            height: 400,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
             backgroundColor: "#fff",
@@ -171,7 +183,9 @@ const ComponentDetalleProducto = (props) => {
 
             {/* {getDetalleRuta()} */}
 
+
             {getlistaItems()}
+
 
             <TouchableOpacity
                 onPress={() => {
