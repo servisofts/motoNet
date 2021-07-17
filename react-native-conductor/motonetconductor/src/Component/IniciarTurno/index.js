@@ -108,12 +108,12 @@ const iniciarTurno = (props) => {
                     marginTop: 10,
                     color: "#fff",
                     textAlign: "center"
-                }}>No encontramos su ubicacion como lo esperamos.</Text>
+                }}>No encontramos su ubicación como lo esperamos.</Text>
                 <Text style={{
                     textAlign: "center",
                     marginTop: 10,
                     color: "#fff"
-                }}>Verifique los permisos de ubicacion o su conexion a internet.</Text>
+                }}>Verifique los permisos de ubicación o su conexión a internet.</Text>
                 <TouchableOpacity style={{
                     width: 100,
                     height: 40,
@@ -153,13 +153,13 @@ const iniciarTurno = (props) => {
             return "Buenas noches";    
         }
         if(horas>=5 && horas<12 ){
-            return "Buenos dias";    
+            return "¡Buenos dias!";    
         }
         if(horas>=12 && horas<19 ){
-            return "Buenas tardes";    
+            return "¡Buenas tardes!";    
         }
         if(horas>=19 && horas<24 ){
-            return "Buenas noches";    
+            return "¡Buenas noches!";    
         }
         return "Bienvenido son las "+horas+" ";
     }
@@ -169,15 +169,15 @@ const iniciarTurno = (props) => {
             width: "80%",
             height: "50%",
             borderRadius: 20,
-            backgroundColor: "#f00",
+            backgroundColor: "#ffffff",
             alignItems: 'center',
             justifyContent: 'center',
         }}>
 
-            <Text style={{ fontSize: 20, color: "#fff" }}>
+            <Text style={{ fontSize: 20, color: "#484848" }}>
                 {getSaludo()}
             </Text>
-            <Text style={{ fontSize: 30, color: "#fff", textAlign: 'center' }}>
+            <Text style={{ fontSize: 30, color: "#484848", textAlign: 'center' }}>
                 {props.state.usuarioReducer.usuarioDatos["Nombres"].dato}
                 {" " + props.state.usuarioReducer.usuarioDatos["Apellidos"].dato}
             </Text>
@@ -192,12 +192,12 @@ const iniciarTurno = (props) => {
                     width: 100,
                     height: 100,
                     borderRadius: 100,
-                    backgroundColor: "#fff",
+                    backgroundColor: "#F7001D",
                     alignItems: 'center',
                     justifyContent: 'center',
                 }}>
                 <Text style={{
-                    color:"#f00",
+                    color:"#fff",
                     fontWeight:"bold"
                 }}>Activarse</Text>
             </TouchableOpacity>

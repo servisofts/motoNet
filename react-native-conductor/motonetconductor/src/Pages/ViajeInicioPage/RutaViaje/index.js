@@ -34,12 +34,12 @@ const RutaViaje = (props) => {
             var movimientos = props.state.ViajeReducer.data.movimientos;
             var viaje = props.state.ViajeReducer.data;
             if (movimientos["inicio_viaje_conductor"]) {
-                if (viaje["direccion_fin"]) {
-                    props.fitCordinates([viaje.direccion_fin, ubicacion])
-                } else {
-                    props.zoomin(ubicacion);
-                }
-                return;
+                // if (viaje["direccion_fin"]) {
+                //     props.fitCordinates([viaje.direccion_fin, ubicacion])
+                // } else {
+                //     props.zoomin(ubicacion);
+                // }
+                // return;
             }
             if (movimientos["inicio_viaje"]) {
                 // if (viaje["direccion_fin"]) {

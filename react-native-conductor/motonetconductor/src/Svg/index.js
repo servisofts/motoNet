@@ -31,6 +31,8 @@ import Ambulancia from '../img/ambulance.svg';
 import Sinubicacion from '../img/sinubicacion.svg';
 import LogoMoto from '../img/motonet.svg';
 import Rightarrow from '../img/rightarrow.svg';
+import Send from '../img/send.svg';
+import Arrow from '../img/arrow.svg';
 
 const Svg = (propsa) => {
     var props = { ...propsa }
@@ -115,6 +117,10 @@ const Svg = (propsa) => {
             return <Rightarrow style={props.style} />
         case "Cerrar":
             return <Cerrar style={props.style} />
+        case "Send":
+            return <Send style={props.style} />
+        case "Arrow":
+            return <Arrow style={props.style} />
         case "Error":
             return <Error style={props.style} />
         case "Success":

@@ -1,9 +1,13 @@
 package component;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.UUID;
 
 import conexion.*;
+import util.FilesManager;
 import Viaje.LatLng;
 import Viaje.ViajeHilo;
 
@@ -62,6 +66,9 @@ public class Viaje {
             case "iniciarViajeConductor":
                 iniciarViajeConductor(data, session);
                 break;
+            case "calificar":
+                calificar(data, session);
+                break;
         }
     }
 
@@ -113,7 +120,17 @@ public class Viaje {
         // DESTINOS
         if (data.has("paquete")) {
             JSONObject paquete = data.getJSONObject("paquete");
-            paquete.put("key_viaje", viaje.get("key"));
+            paquete.put("key", UUID.randomUUID().toString());
+            paquete.put("key_viaje", viaje.getString("key"));
+            paquete.put("fecha_on", "now()");
+            paquete.put("estado", 1);
+            try {
+                byte[] foto = Base64.getDecoder().decode(paquete.getString("foto").getBytes("UTF-8"));
+                FilesManager.guardar_file_type(foto, "foto.png", paquete.getString("key"), "paquete");
+                paquete.put("foto", "foto.png");
+            } catch (JSONException | IOException e) {
+                System.out.println("Registro paquete sin foto");
+            }
             try {
                 Conexion.insertObject("viaje_paquete", paquete);
             } catch (Exception e) {
@@ -128,6 +145,16 @@ public class Viaje {
                 JSONObject pedido = pedidos.getJSONObject(key);
                 pedido.put("key", UUID.randomUUID().toString());
                 pedido.put("key_viaje", viaje.getString("key"));
+                pedido.put("fecha_on", "now()");
+                pedido.put("estado", 1);
+                try {
+                    byte[] foto = Base64.getDecoder().decode(pedido.getString("foto").getBytes("UTF-8"));
+                    FilesManager.guardar_file_type(foto, "foto.png", pedido.getString("key"), "pedido");
+                    pedido.put("foto", "foto.png");
+
+                } catch (JSONException | IOException e) {
+                    System.out.println("Registro producto sin foto");
+                }
                 try {
                     Conexion.insertObject("pedido", pedido);
                 } catch (Exception e) {
@@ -495,6 +522,31 @@ public class Viaje {
             objSend.put("estado", "exito");
             objSend.put("data", viaje);
             SSServerAbstract.sendUser(objSend.toString(), viaje.getString("key_usuario"));
+        } catch (Exception e) {
+            e.printStackTrace();
+            obj.put("estado", "error");
+
+        }
+    }
+
+    public void calificar(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+            int calificacion = obj.getInt("calificacion");
+            String sugerencia = obj.getString("sugerencia");
+            JSONObject dataIn = new JSONObject();
+            dataIn.put("key", UUID.randomUUID().toString());
+            dataIn.put("key_viaje", key_viaje);
+            dataIn.put("key_usuario", key_usuario);
+            dataIn.put("calificacion", calificacion);
+            dataIn.put("sugerencia", sugerencia);
+            dataIn.put("estado", 1);
+            dataIn.put("fecha_on", "now()");
+            Conexion.insertObject("viaje_calificacion", dataIn);
+
+            obj.put("data", dataIn);
+            obj.put("estado", "exito");
         } catch (Exception e) {
             e.printStackTrace();
             obj.put("estado", "error");
