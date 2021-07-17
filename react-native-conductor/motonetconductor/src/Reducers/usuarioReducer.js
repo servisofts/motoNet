@@ -79,18 +79,34 @@ const identificacion = (state, action) => {
     }
 }
 const recuperarPass = (state, action) => {
-    state.estado = action.estado
-    if (action.estado === "exito") {
+    // state.estado = action.estado
+    // if (action.estado === "exito") {
 
+    // }
+    state.estadoEmail = action.estado
+    if (action.estado === "exito") {
+        state.usuarioRecuperado = action.data;
+    }
+    if (action.estado === "error") {
+        state.errorEmailRecuperado = action.error
     }
 }
 
 const login = (state, action) => {
+    // state.estado = action.estado
+    // if (action.estado === "exito") {
+    //     state.usuarioLog = action.data;
+    //     AsyncStorage.setItem(AppParam.storage.usuarioLog, JSON.stringify(action.data));
+    //     state.login = "login"
+    // }
     state.estado = action.estado
+    if (action.estado === "error") {
+        state.error = action.error;
+    }
     if (action.estado === "exito") {
         state.usuarioLog = action.data;
-        AsyncStorage.setItem(AppParam.storage.usuarioLog, JSON.stringify(action.data));
-        state.login = "login"
+        AsyncStorage.setItem(AppParams.storage.urlLog, JSON.stringify(action.data));
+        state.login = action.data
     }
 }
 
