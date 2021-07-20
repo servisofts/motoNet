@@ -26,7 +26,7 @@ export default class DetalleProducto extends Component {
                 position: "absolute",
                 bottom: 0,
                 width: "100%",
-                height: 200,
+                height: 400,
                 backgroundColor: "#fff",
                 borderTopLeftRadius: 16,
                 borderTopRightRadius: 16,
@@ -35,7 +35,7 @@ export default class DetalleProducto extends Component {
                 transform: [{
                     translateY: this.state.anim.interpolate({
                         inputRange: [0, 1],
-                        outputRange: [200, 0]
+                        outputRange: [400, 0]
                     })
                 }]
             }}>

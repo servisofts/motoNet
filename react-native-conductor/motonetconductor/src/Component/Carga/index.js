@@ -168,7 +168,7 @@ const Carga = (props) => {
             position: "absolute",
             bottom: "10%",
         }}>
-            <Text>{mensaje}</Text>
+            <Text style={{color:"#fff"}}>{mensaje}</Text>
         </View>
     );
 }

@@ -13,7 +13,6 @@ import SSCrollView from '../../component/SScrollView';
 import BarraSuperiorInicio from '../../component/BarraSuperiorInicio';
 import STheme from '../../STheme';
 
-
 class ServicioPage extends Component {
 
     static navigationOptions = ({ navigation }) => (
@@ -82,7 +81,6 @@ class ServicioPage extends Component {
                             {this.getServicios()}
 
                         </View>
-
                         <View style={{
                             width: "100%",
                             justifyContent: "center",
@@ -98,7 +96,6 @@ class ServicioPage extends Component {
                         </View>
                     </SSCrollView>
                 </View>
-
                 <NaviDrawer2 navigation={this.props.navigation} />
             </View>
         );

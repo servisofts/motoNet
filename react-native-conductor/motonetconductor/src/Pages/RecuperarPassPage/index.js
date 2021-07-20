@@ -33,12 +33,12 @@ class RecuperarPassPage extends Component {
             // this.state..value = ""
             // this.setState({ ...this.state })
         } 
-        // if( this.props.state.usuarioReducer.estado == "error" ){
-        //     this.props.state.usuarioReducer.estadoEmail = false;
-        //     this.state.mensaje = "Error de datos..."
-        //     this.state.modalVisible = true;
-        //     this.state.modal = "ModalError";
-        // }
+        if( this.props.state.usuarioReducer.estadoEmail == "error" ){
+            this.props.state.usuarioReducer.estadoEmail = false;
+            this.state.mensaje = "Error de datos..."
+            this.state.modalVisible = true;
+            this.state.modal = "ModalError";
+        }
         return (
             <>
                 <RecuperarPass navigation={this.props.navigation} />
