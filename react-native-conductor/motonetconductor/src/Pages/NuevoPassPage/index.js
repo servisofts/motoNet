@@ -184,6 +184,7 @@ class NuevoPassPage extends Component {
                   value={this.state.pass.value}
                   autoCapitalize="none"
                   type="password"
+                  secureTextEntry
                 />
                 
                 <TextInput

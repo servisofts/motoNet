@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import AppParams from '../Json';
 const initialState = {
     estado: "Not Found",
     history: [],
@@ -55,7 +56,10 @@ export default (state, action) => {
                 break;
             case "verificarCodigoPass":
                 verificarCodigoPass(state, action);
-                break;    
+                break;
+            case "cambiarPassByCodigo":
+                cambiarPassByCodigo(state, action);
+                break;
 
         }
         state.type = action.type;
@@ -83,6 +87,16 @@ const recuperarPass = (state, action) => {
     // if (action.estado === "exito") {
 
     // }
+    state.estadoEmail = action.estado
+    if (action.estado === "exito") {
+        state.usuarioRecuperado = action.data;
+    }
+    if (action.estado === "error") {
+        state.errorEmailRecuperado = action.error
+    }
+}
+
+const cambiarPassByCodigo = (state, action) => {
     state.estadoEmail = action.estado
     if (action.estado === "exito") {
         state.usuarioRecuperado = action.data;

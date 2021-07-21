@@ -35,13 +35,13 @@ const NaviDrawe = (props) => {
                 AsyncStorage.removeItem(AppParams.storage.urlLog);
                   props.state.usuarioReducer.usuarioLog = false;
                   props.state.usuarioReducer.usuarioDatos = false;
-                 props.state.usuarioReducer.cargaLoaded = false;
+                 props.state.usuarioReducer.cargaLoaded = true;
 
-                //AsyncStorage.removeItem(AppParams.storage.usuarioLog);
+                AsyncStorage.removeItem(AppParams.storage.usuarioLog);
                 //props.state.usuarioReducer.usuarioLog = false;
                 props.state.usuarioReducer.estado = "";
                 SSBackgroundLocation.getInstance().stop();
-                // props.state.backgroundLocationReducer.close();
+               // props.state.backgroundLocationReducer.close();
                 props.state.usuarioReducer.usuarioCargado=false;
                 props.dispatch(
                     {

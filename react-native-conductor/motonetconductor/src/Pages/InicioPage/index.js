@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, TouchableOpacity, Animated } from 'react-native';
+import { Text, View, TouchableOpacity, Animated,Keyboard } from 'react-native';
 import Inicio from '../../Component/Inicio';
 import NaviDrawer from '../../Component/NaviDrawer';
 import * as SSBackgroundLocation from '../../SSBackgroundLocation'
@@ -18,14 +18,18 @@ class InicioPage extends Component {
                 color: '#fff',
             },
         })
+        //desactivar teclado
+        Keyboard.dismiss();
     }
     render() {
         var estados = false
-        if(!this.props.state.usuarioReducer.usuarioDatos){
+        if(!this.props.state.usuarioReducer.usuarioLog){
+            console.log("ssssss");
             return <View/>
         }
-        Object.keys(this.props.state.usuarioReducer.usuarioDatos).map((key) => {
-            var obj = this.props.state.usuarioReducer.usuarioDatos[key]
+        
+        Object.keys(this.props.state.usuarioReducer.usuarioLog).map((key) => {
+            var obj = this.props.state.usuarioReducer.usuarioLog[key]
             if (key === "Foto perfil") {
                 return <View />
             }
@@ -48,6 +52,7 @@ class InicioPage extends Component {
             <View style={{
                 flex: 1,
             }}>
+                
                 <Inicio navigation={this.props.navigation} />
                 <NaviDrawer navigation={this.props.navigation} />
             </View>
