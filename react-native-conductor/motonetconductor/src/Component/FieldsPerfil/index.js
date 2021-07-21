@@ -66,7 +66,7 @@ const FieldsPerfil = ({ datos, propPat }) => {
     }
 
     const getKeyDato = (keyDescripcion) => {
-        var cabecera = "registro_cliente";
+        var cabecera = "registro_conductor";
         var props = propPat;
         var key = "undefined"
 
@@ -334,4 +334,3 @@ const styles = StyleSheet.create({
 
 
 export default FieldsPerfil
-

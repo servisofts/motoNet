@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 import AppParams from "../../Json"
 import Boton1 from '../Boton1';
 
-var cabecera = "registro_cliente";
+var cabecera = "registro_conductor";
 const SubirFotoPerfil = (props) => {
     const [foto, setFoto] = React.useState(false)
     const Repuesta = (text) => {
@@ -66,7 +66,7 @@ const SubirFotoPerfil = (props) => {
             }
             const getKeyDato = (keyDescripcion) => {
                 var key = "undefined";
-                var cabecera = "registro_cliente";
+                var cabecera = "registro_conductor";
                 // console.log(this.props.state.cabecreraDatoReducer.data[cabecera])
                 for (
                     let i = 0;
@@ -119,12 +119,12 @@ const SubirFotoPerfil = (props) => {
         if (props.state.cabeceraDatoReducer.estado == "cargando") {
             return <View />;
         }
-        if (!props.state.cabeceraDatoReducer.data["registro_cliente"]) {
+        if (!props.state.cabeceraDatoReducer.data["registro_conductor"]) {
             var objSend = {
                 component: "cabeceraDato",
                 type: "getDatoCabecera",
                 estado: "cargando",
-                cabecera: "registro_cliente",
+                cabecera: "registro_conductor",
             };
             props.state.socketClienteReducer.sessiones[AppParams.socket.name].send(
                 objSend,
@@ -132,7 +132,7 @@ const SubirFotoPerfil = (props) => {
             );
             return <View />;
         }
-        // console.log("juan" + JSON.stringify(props.state.cabeceraDatoReducer.data["registro_cliente"]))
+        // console.log("juan" + JSON.stringify(props.state.cabeceraDatoReducer.data["registro_conductor"]))
         return <View />;
 
     };
