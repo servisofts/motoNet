@@ -97,7 +97,7 @@ const viajeEntrante = (state, action) => {
 
     if (action.estado === "exito") {
         console.log("Viaje entrantee.....")
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
         console.log(action.data)
         state.data = action.data
     }
@@ -107,7 +107,7 @@ const confirmarBusqueda = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -117,7 +117,7 @@ const confirmarBusquedaConductor = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -128,7 +128,7 @@ const cancelarBusquedaConductor = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.removeItem("clinica_viaje");
+        AsyncStorage.removeItem("motonet_viaje");
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -138,7 +138,7 @@ const cancelarViajeConductor = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -149,7 +149,7 @@ const terminarViajeConductor = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -159,7 +159,7 @@ const cancelarViajeCliente = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -169,7 +169,7 @@ const conductorLlegoDestino = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -179,7 +179,7 @@ const finalizarViaje = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -189,7 +189,7 @@ const iniciarViajeConductor = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -199,7 +199,7 @@ const inicioDeRuta = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -209,7 +209,7 @@ const movimiento = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -219,7 +219,7 @@ const denegarOferta = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -229,7 +229,7 @@ const ambulanciaCerca = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -239,7 +239,7 @@ const getViaje = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -249,7 +249,7 @@ const cobrarViaje = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -260,7 +260,7 @@ const borrarViaje = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = false;
-        AsyncStorage.removeItem("clinica_viaje");
+        AsyncStorage.removeItem("motonet_viaje");
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -272,7 +272,7 @@ const negociarViajeConductor = (state, action) => {
     console.log(action.estado)
     if (state.estado === "exito") {
         state.data = action.data
-        AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
     if (state.estado === "error") {
         state.error = action.error
@@ -283,7 +283,7 @@ const notificarSiguiente = (state, action) => {
     state.estado = action.estado
     if (state.estado === "exito") {
         state.data = false;
-        AsyncStorage.removeItem("clinica_viaje");
+        AsyncStorage.removeItem("motonet_viaje");
     }
 }
 const getViajeByKeyUsuario = (state, action) => {
@@ -293,9 +293,9 @@ const getViajeByKeyUsuario = (state, action) => {
         state.data = action.data
         state.estadoConsultado = true;
         if (!action.data) {
-            AsyncStorage.removeItem("clinica_viaje");
+            AsyncStorage.removeItem("motonet_viaje");
         } else {
-            AsyncStorage.setItem("clinica_viaje", JSON.stringify(action.data));
+            AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
         }
     }
 }

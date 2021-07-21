@@ -22,7 +22,7 @@ const Carga = (props) => {
         }
 
         if (!props.state.usuarioReducer.usuarioCargado) {
-            AsyncStorage.getItem(AppParams.storage.usuarioLog).then((value) => {
+            AsyncStorage.getItem(AppParams.storage.urlLog).then((value) => {
                 props.state.usuarioReducer.usuarioCargado = true;
                 if (!value) {
                     props.state.usuarioReducer.usuarioLog = false;
@@ -35,13 +35,14 @@ const Carga = (props) => {
                 props.state.usuarioReducer.usuarioLog = JSON.parse(value)
                 return;
             });
+          
             return "Buscando usuario...";
         }
         //Verificar si existe usuario
         if (!props.state.usuarioReducer.usuarioLog) { //Cuando no existe usuario
             if (!props.state.cabeceraDatoReducer.data[cabecera]) {
                 if (props.state.cabeceraDatoReducer.estado == "cargando") {
-                    return "Cargando datos de registro..."
+                    return "CCargando datos de registro..."
                 }
                 props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
                     component: "cabeceraDato",
@@ -50,9 +51,13 @@ const Carga = (props) => {
                     cabecera: cabecera
                 });
                 props.state.cabeceraDatoReducer.estado = "cargando";
+                console.log(props.state.usuarioReducer.usuarioLog.key + "fffff")
+                
                 return "Buscando datos de registro...";
+               
             } else {
                 props.state.usuarioReducer.estado = "";
+                
                 props.navigation.replace("LoginPage");
             }
         } else { //Cuando existe usuario

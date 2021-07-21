@@ -6,7 +6,7 @@ const initialState = {
 }
 export default (state, action) => {
     if (!state) return initialState
-
+    
     if (action.component == "viajes") {
         switch (action.type) {
             case "ubicacion":

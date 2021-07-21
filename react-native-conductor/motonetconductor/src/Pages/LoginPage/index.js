@@ -29,6 +29,7 @@ const LoginPage = (props) => {
         props.navigation.replace("CargaPage");
         return <View />
     }
+   
     if (props.state.usuarioReducer.estado === "error") {
         switch (props.state.usuarioReducer.error) {
             case "not_found":
@@ -136,194 +137,197 @@ const LoginPage = (props) => {
         LoginManager.logOut();
     }
 
-    return (
-        <View style={{
-            flex: 1,
-            backgroundColor: Styles.colors.primary
-        }}>
-            <SSCrollView>
-                <View style={{
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginTop: 30,
-                    marginBottom: 30,
-                }}>
-                    <Svg name="logoCompleto"
-                        style={{
-                            fill: STheme.color.primary,
-                            width: 200,
-                            height: 200,
-                        }} />
-                </View>
-                <View style={{
-                    // flex: 1,
-                    alignItems: "center",
-                }}>
-                    <View style={{ width: "90%" }}>
-                        <Text style={{
-                            color: "#FFA9B3",
-                            height: 25,
-                            textAlign: "left"
-                        }}>Usuario</Text>
+   // render() {
+      
+        return (
+            <View style={{
+                flex: 1,
+                backgroundColor: Styles.colors.primary
+            }}>
+                <SSCrollView>
+                    <View style={{
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginTop: 30,
+                        marginBottom: 30,
+                    }}>
+                        <Svg name="logoCompleto"
+                            style={{
+                                fill: STheme.color.primary,
+                                width: 200,
+                                height: 200,
+                            }} />
                     </View>
-                    <View
-                        style={{
-                            width: '90%',
-                            alignItems: 'center',
-                            flexDirection: 'row',
-                            //marginTop: 30,
-                            justifyContent: 'center',
-                        }}>
-
-                        <TextInput
-                            style={!obj.usr.error ? styles.touch2 : styles.touch2Error}
-                            placeholder={"Ingresar usuario"}
-                            onChangeText={text => hanlechage(text, "usr")}
-                            value={obj.usr.value}
-                            autoCapitalize='none'
-                            autoFocus={true}
-                            placeholderTextColor="#FFF"
-                        />
-                    </View>
-                    <View style={{ width: "90%" }}>
-                        <Text style={{
-                            color: "#FFA9B3",
-                            height: 25,
-                            textAlign: "left",
-                            marginTop: 10
-                        }}>Contraseña</Text>
-                    </View>
-                    <View
-                        style={{
-                            width: '90%',
-                            alignItems: 'center',
-                            flexDirection: 'row',
-                            //marginTop: 20,
-                            justifyContent: 'center',
-                        }}>
-
-                        <TextInput
-                            style={!obj.pass.error ? styles.touch2 : styles.touch2Error}
-                            placeholder={"Ingresar contraseña"}
-                            onChangeText={text => hanlechage(text, "pass")}
-                            value={obj.pass.value}
-                            autoCapitalize='none'
-                            secureTextEntry
-                            autoCapitalize='none'
-                            placeholderTextColor="#FFF"
-                            secureTextEntry
-                        />
-                    </View>
-                    <View>
-                        <Boton1
-                            type={"3"}
-                            label={
-                                <Text>
-                                    {"¿Olvidó su contraseña?"}{" "}
-                                    <Text
-                                        style={{
-                                            color: STheme.color.text,
-                                            fontWeight: "bold",
-                                            textDecorationLine: "underline",
-                                        }}
-                                    >
-                                        Restablecer
-                                    </Text>
-                                </Text>
-                            }
-                            onPress={() => {
-                                props.navigation.navigate("RecuperarPassPage");
-                            }}
-                        />
-                    </View>
-                    <BottomContent height={170}>
+                    <View style={{
+                        // flex: 1,
+                        alignItems: "center",
+                    }}>
+                        <View style={{ width: "90%" }}>
+                            <Text style={{
+                                color: "#FFA9B3",
+                                height: 25,
+                                textAlign: "left"
+                            }}>Usuario</Text>
+                        </View>
                         <View
                             style={{
-                                width: "100%",
-                                flex: 1,
-                                justifyContent: "space-around",
-                            }}
-                        >
+                                width: '90%',
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                //marginTop: 30,
+                                justifyContent: 'center',
+                            }}>
+
+                            <TextInput
+                                style={!obj.usr.error ? styles.touch2 : styles.touch2Error}
+                                placeholder={"Ingresar usuario"}
+                                onChangeText={text => hanlechage(text, "usr")}
+                                value={obj.usr.value}
+                                autoCapitalize='none'
+                                autoFocus={true}
+                                placeholderTextColor="#FFF"
+                            />
+                        </View>
+                        <View style={{ width: "90%" }}>
+                            <Text style={{
+                                color: "#FFA9B3",
+                                height: 25,
+                                textAlign: "left",
+                                marginTop: 10
+                            }}>Contraseña</Text>
+                        </View>
+                        <View
+                            style={{
+                                width: '90%',
+                                alignItems: 'center',
+                                flexDirection: 'row',
+                                //marginTop: 20,
+                                justifyContent: 'center',
+                            }}>
+
+                            <TextInput
+                                style={!obj.pass.error ? styles.touch2 : styles.touch2Error}
+                                placeholder={"Ingresar contraseña"}
+                                onChangeText={text => hanlechage(text, "pass")}
+                                value={obj.pass.value}
+                                autoCapitalize='none'
+                                secureTextEntry
+                                autoCapitalize='none'
+                                placeholderTextColor="#FFF"
+                                secureTextEntry
+                            />
+                        </View>
+                        <View>
+                            <Boton1
+                                type={"3"}
+                                label={
+                                    <Text>
+                                        {"¿Olvidó su contraseña?"}{" "}
+                                        <Text
+                                            style={{
+                                                color: STheme.color.text,
+                                                fontWeight: "bold",
+                                                textDecorationLine: "underline",
+                                            }}
+                                        >
+                                            Restablecer
+                                        </Text>
+                                    </Text>
+                                }
+                                onPress={() => {
+                                    props.navigation.navigate("RecuperarPassPage");
+                                }}
+                            />
+                        </View>
+                        <BottomContent height={170}>
                             <View
                                 style={{
-                                    // marginTop: 10,
-                                    //flex: 1,
-                                    width: '100%',
-                                    alignItems: 'center',
-                                    flexDirection: 'row',
-                                }}>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        var datas = {}
-                                        var exito = true;
-                                        for (const key in obj) {
-                                            if (!obj[key].value || obj[key].value.length <= 0) {
-                                                obj[key].error = true;
-                                                exito = false;
-                                            } else {
-                                                obj[key].error = false;
-                                                var valor = obj[key].value;
-                                                if (valor) {
-                                                    var aux = valor
-                                                    valor = aux.toLowerCase();
+                                    width: "100%",
+                                    flex: 1,
+                                    justifyContent: "space-around",
+                                }}
+                            >
+                                <View
+                                    style={{
+                                        // marginTop: 10,
+                                        //flex: 1,
+                                        width: '100%',
+                                        alignItems: 'center',
+                                        flexDirection: 'row',
+                                    }}>
+                                    <TouchableOpacity
+                                        onPress={() => {
+                                            var datas = {}
+                                            var exito = true;
+                                            for (const key in obj) {
+                                                if (!obj[key].value || obj[key].value.length <= 0) {
+                                                    obj[key].error = true;
+                                                    exito = false;
+                                                } else {
+                                                    obj[key].error = false;
+                                                    var valor = obj[key].value;
+                                                    if (valor) {
+                                                        var aux = valor
+                                                        valor = aux.toLowerCase();
+                                                    }
+                                                    obj[key].value = valor;
+                                                    datas[key] = obj[key].value
                                                 }
-                                                obj[key].value = valor;
-                                                datas[key] = obj[key].value
                                             }
-                                        }
-                                        setObj({ ...obj })
-                                        if (exito) {
-                                            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                                                component: "usuario",
-                                                type: "login",
-                                                data: datas,
-                                                estado: "cargando"
-                                            }, true);
-                                        }
-                                    }}
+                                            setObj({ ...obj })
+                                            if (exito) {
+                                                props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                                                    component: "usuario",
+                                                    type: "login",
+                                                    data: datas,
+                                                    estado: "cargando"
+                                                }, true);
+                                            }
+                                        }}
 
-                                    style={styles.touch4}>
-                                    <Text
-                                        style={{
-                                            color: '#fff',
-                                        }}>
-                                        Iniciar sesión
-                                    </Text>
-                                </TouchableOpacity>
-
-                            </View>
-                            <View>
-                                <Boton1
-                                    type={"2"}
-                                    label={
-                                        <Text>
-                                            ¿Aún no tienes una cuenta?{" "}
-                                            <Text
-                                                style={{
-                                                    color: STheme.color.background,
-                                                    fontWeight: "bold",
-                                                }}
-                                            >
-                                                Regístrate
-                                            </Text>
+                                        style={styles.touch4}>
+                                        <Text
+                                            style={{
+                                                color: '#fff',
+                                            }}>
+                                            Iniciar sesión
                                         </Text>
-                                    }
-                                    onPress={() => {
-                                        props.navigation.navigate("RegistroUsuarioPage", {
-                                            registro: " ",
-                                        });
-                                    }}
-                                />
-                             
+                                    </TouchableOpacity>
+
+                                </View>
+                                <View>
+                                    <Boton1
+                                        type={"2"}
+                                        label={
+                                            <Text>
+                                                ¿Aún no tienes una cuenta?{" "}
+                                                <Text
+                                                    style={{
+                                                        color: STheme.color.background,
+                                                        fontWeight: "bold",
+                                                    }}
+                                                >
+                                                    Regístrate
+                                                </Text>
+                                            </Text>
+                                        }
+                                        onPress={() => {
+                                            props.navigation.navigate("RegistroUsuarioPage", {
+                                                registro: " ",
+                                            });
+                                        }}
+                                    />
+
+                                </View>
                             </View>
-                        </View>
-                    </BottomContent>
+                        </BottomContent>
 
 
-                </View>
+                    </View>
                 </SSCrollView>
-        </View >
-    )
+            </View >
+        )
+  //  }
 }
 
 const styles = StyleSheet.create({
