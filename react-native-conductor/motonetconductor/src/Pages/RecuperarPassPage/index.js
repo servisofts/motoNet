@@ -39,6 +39,12 @@ class RecuperarPassPage extends Component {
             this.state.modalVisible = true;
             this.state.modal = "ModalError";
         }
+        if( this.props.state.usuarioReducer.error== "error_datos" ){
+            this.props.state.usuarioReducer.error = false;
+            this.state.mensaje = "Error de datos..."
+            this.state.modalVisible = true;
+            this.state.modal = "ModalError";
+        }
         return (
             <>
                 <RecuperarPass navigation={this.props.navigation} />

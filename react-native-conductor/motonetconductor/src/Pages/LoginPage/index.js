@@ -10,8 +10,16 @@ import STheme from "../../STheme";
 import Boton1 from "../../Component/Boton1";
 import BottomContent from "../../Component/BottomContent";
 import SSCrollView from "../../Component/SScrollView";
+import ModalPage from "../ModalPage";
 
 const LoginPage = (props) => {
+
+    this.state = {
+        modalVisible: false,
+
+    };
+
+   
     const [obj, setObj] = React.useState({
         usr: {
             value: "",
@@ -23,13 +31,37 @@ const LoginPage = (props) => {
         },
     });
 
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         modalVisible: false,
+    //         mensaje: "",
+    //         modal: "",
+
+    //     };
+    // }
+
 
     if (props.state.usuarioReducer.estado === "exito") {
         props.navigation.estado = ""
         props.navigation.replace("CargaPage");
         return <View />
     }
-   
+
+    var mensaje;
+    var modalVisible = false;
+    var modal
+
+    if (props.state.usuarioReducer.error == "error_datos") {
+        props.state.usuarioReducer.estadoEmail = false;
+        mensaje = "Error de datos..."
+        //modalVisible = true;
+        modal = "ModalError";
+        this.state.modalVisible = true;
+    }
+
+    //alert(modalVisible)
+
     if (props.state.usuarioReducer.estado === "error") {
         switch (props.state.usuarioReducer.error) {
             case "not_found":
@@ -137,197 +169,208 @@ const LoginPage = (props) => {
         LoginManager.logOut();
     }
 
-   // render() {
-      
-        return (
-            <View style={{
-                flex: 1,
-                backgroundColor: Styles.colors.primary
-            }}>
-                <SSCrollView>
-                    <View style={{
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        marginTop: 30,
-                        marginBottom: 30,
-                    }}>
-                        <Svg name="logoCompleto"
-                            style={{
-                                fill: STheme.color.primary,
-                                width: 200,
-                                height: 200,
-                            }} />
+    // render() {
+
+    return (
+        <View style={{
+            flex: 1,
+            backgroundColor: Styles.colors.primary
+        }}>
+            <SSCrollView>
+                <View style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    marginTop: 30,
+                    marginBottom: 30,
+                }}>
+                    <Svg name="logoCompleto"
+                        style={{
+                            fill: STheme.color.primary,
+                            width: 200,
+                            height: 200,
+                        }} />
+                </View>
+                <View style={{
+                    // flex: 1,
+                    alignItems: "center",
+                }}>
+                    <View style={{ width: "90%" }}>
+                        <Text style={{
+                            color: "#FFA9B3",
+                            height: 25,
+                            textAlign: "left"
+                        }}>Usuario</Text>
                     </View>
-                    <View style={{
-                        // flex: 1,
-                        alignItems: "center",
-                    }}>
-                        <View style={{ width: "90%" }}>
-                            <Text style={{
-                                color: "#FFA9B3",
-                                height: 25,
-                                textAlign: "left"
-                            }}>Usuario</Text>
-                        </View>
-                        <View
-                            style={{
-                                width: '90%',
-                                alignItems: 'center',
-                                flexDirection: 'row',
-                                //marginTop: 30,
-                                justifyContent: 'center',
-                            }}>
+                    <View
+                        style={{
+                            width: '90%',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            //marginTop: 30,
+                            justifyContent: 'center',
+                        }}>
 
-                            <TextInput
-                                style={!obj.usr.error ? styles.touch2 : styles.touch2Error}
-                                placeholder={"Ingresar usuario"}
-                                onChangeText={text => hanlechage(text, "usr")}
-                                value={obj.usr.value}
-                                autoCapitalize='none'
-                                autoFocus={true}
-                                placeholderTextColor="#FFF"
-                            />
-                        </View>
-                        <View style={{ width: "90%" }}>
-                            <Text style={{
-                                color: "#FFA9B3",
-                                height: 25,
-                                textAlign: "left",
-                                marginTop: 10
-                            }}>Contraseña</Text>
-                        </View>
-                        <View
-                            style={{
-                                width: '90%',
-                                alignItems: 'center',
-                                flexDirection: 'row',
-                                //marginTop: 20,
-                                justifyContent: 'center',
-                            }}>
+                        <TextInput
+                            style={!obj.usr.error ? styles.touch2 : styles.touch2Error}
+                            placeholder={"Ingresar usuario"}
+                            onChangeText={text => hanlechage(text, "usr")}
+                            value={obj.usr.value}
+                            autoCapitalize='none'
+                            autoFocus={true}
+                            placeholderTextColor="#FFF"
+                        />
+                    </View>
+                    <View style={{ width: "90%" }}>
+                        <Text style={{
+                            color: "#FFA9B3",
+                            height: 25,
+                            textAlign: "left",
+                            marginTop: 10
+                        }}>Contraseña</Text>
+                    </View>
+                    <View
+                        style={{
+                            width: '90%',
+                            alignItems: 'center',
+                            flexDirection: 'row',
+                            //marginTop: 20,
+                            justifyContent: 'center',
+                        }}>
 
-                            <TextInput
-                                style={!obj.pass.error ? styles.touch2 : styles.touch2Error}
-                                placeholder={"Ingresar contraseña"}
-                                onChangeText={text => hanlechage(text, "pass")}
-                                value={obj.pass.value}
-                                autoCapitalize='none'
-                                secureTextEntry
-                                autoCapitalize='none'
-                                placeholderTextColor="#FFF"
-                                secureTextEntry
-                            />
-                        </View>
-                        <View>
-                            <Boton1
-                                type={"3"}
-                                label={
-                                    <Text>
-                                        {"¿Olvidó su contraseña?"}{" "}
-                                        <Text
-                                            style={{
-                                                color: STheme.color.text,
-                                                fontWeight: "bold",
-                                                textDecorationLine: "underline",
-                                            }}
-                                        >
-                                            Restablecer
-                                        </Text>
+                        <TextInput
+                            style={!obj.pass.error ? styles.touch2 : styles.touch2Error}
+                            placeholder={"Ingresar contraseña"}
+                            onChangeText={text => hanlechage(text, "pass")}
+                            value={obj.pass.value}
+                            autoCapitalize='none'
+                            secureTextEntry
+                            autoCapitalize='none'
+                            placeholderTextColor="#FFF"
+                            secureTextEntry
+                        />
+                    </View>
+                    <View>
+                        <Boton1
+                            type={"3"}
+                            label={
+                                <Text>
+                                    {"¿Olvidó su contraseña?"}{" "}
+                                    <Text
+                                        style={{
+                                            color: STheme.color.text,
+                                            fontWeight: "bold",
+                                            textDecorationLine: "underline",
+                                        }}
+                                    >
+                                        Restablecer
                                     </Text>
-                                }
-                                onPress={() => {
-                                    props.navigation.navigate("RecuperarPassPage");
-                                }}
-                            />
-                        </View>
-                        <BottomContent height={170}>
+                                </Text>
+                            }
+                            onPress={() => {
+                                props.navigation.navigate("RecuperarPassPage");
+                            }}
+                        />
+                    </View>
+                    <BottomContent height={170}>
+                        <View
+                            style={{
+                                width: "100%",
+                                flex: 1,
+                                justifyContent: "space-around",
+                            }}
+                        >
                             <View
                                 style={{
-                                    width: "100%",
-                                    flex: 1,
-                                    justifyContent: "space-around",
-                                }}
-                            >
-                                <View
-                                    style={{
-                                        // marginTop: 10,
-                                        //flex: 1,
-                                        width: '100%',
-                                        alignItems: 'center',
-                                        flexDirection: 'row',
-                                    }}>
-                                    <TouchableOpacity
-                                        onPress={() => {
-                                            var datas = {}
-                                            var exito = true;
-                                            for (const key in obj) {
-                                                if (!obj[key].value || obj[key].value.length <= 0) {
-                                                    obj[key].error = true;
-                                                    exito = false;
-                                                } else {
-                                                    obj[key].error = false;
-                                                    var valor = obj[key].value;
-                                                    if (valor) {
-                                                        var aux = valor
-                                                        valor = aux.toLowerCase();
-                                                    }
-                                                    obj[key].value = valor;
-                                                    datas[key] = obj[key].value
+                                    // marginTop: 10,
+                                    //flex: 1,
+                                    width: '100%',
+                                    alignItems: 'center',
+                                    flexDirection: 'row',
+                                }}>
+                                <TouchableOpacity
+                                    onPress={() => {
+                                        var datas = {}
+                                        var exito = true;
+                                        for (const key in obj) {
+                                            if (!obj[key].value || obj[key].value.length <= 0) {
+                                                obj[key].error = true;
+                                                exito = false;
+                                            } else {
+                                                obj[key].error = false;
+                                                var valor = obj[key].value;
+                                                if (valor) {
+                                                    var aux = valor
+                                                    valor = aux.toLowerCase();
                                                 }
+                                                obj[key].value = valor;
+                                                datas[key] = obj[key].value
                                             }
-                                            setObj({ ...obj })
-                                            if (exito) {
-                                                props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                                                    component: "usuario",
-                                                    type: "login",
-                                                    data: datas,
-                                                    estado: "cargando"
-                                                }, true);
-                                            }
-                                        }}
-
-                                        style={styles.touch4}>
-                                        <Text
-                                            style={{
-                                                color: '#fff',
-                                            }}>
-                                            Iniciar sesión
-                                        </Text>
-                                    </TouchableOpacity>
-
-                                </View>
-                                <View>
-                                    <Boton1
-                                        type={"2"}
-                                        label={
-                                            <Text>
-                                                ¿Aún no tienes una cuenta?{" "}
-                                                <Text
-                                                    style={{
-                                                        color: STheme.color.background,
-                                                        fontWeight: "bold",
-                                                    }}
-                                                >
-                                                    Regístrate
-                                                </Text>
-                                            </Text>
                                         }
-                                        onPress={() => {
-                                            props.navigation.navigate("RegistroUsuarioPage", {
-                                                registro: " ",
-                                            });
-                                        }}
-                                    />
+                                        setObj({ ...obj })
+                                        if (exito) {
+                                            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                                                component: "usuario",
+                                                type: "login",
+                                                data: datas,
+                                                estado: "cargando"
+                                            }, true);
+                                        }
+                                    }}
 
-                                </View>
+                                    style={styles.touch4}>
+                                    <Text
+                                        style={{
+                                            color: '#fff',
+                                        }}>
+                                        Iniciar sesión
+                                    </Text>
+                                </TouchableOpacity>
+
                             </View>
-                        </BottomContent>
+                            <View>
+                                <Boton1
+                                    type={"2"}
+                                    label={
+                                        <Text>
+                                            ¿Aún no tienes una cuenta?{" "}
+                                            <Text
+                                                style={{
+                                                    color: STheme.color.background,
+                                                    fontWeight: "bold",
+                                                }}
+                                            >
+                                                Regístrate
+                                            </Text>
+                                        </Text>
+                                    }
+                                    onPress={() => {
+                                        props.navigation.navigate("RegistroUsuarioPage", {
+                                            registro: " ",
+                                        });
+                                    }}
+                                />
+
+                            </View>
+                        </View>
+                    </BottomContent>
 
 
-                    </View>
-                </SSCrollView>
-            </View >
-        )
-  //  }
+                </View>
+            </SSCrollView>
+            {/* <ModalPage
+                ventana="ModalError"
+                //mensaje="La contraseñas escritas no coinciden. Inténtelo de nuevo. "
+                mensaje="Error de datos..."
+                ModalVisible={this.state.modalVisible}
+                closeModal={() => {
+                    this.state.modalVisible = false;
+                    //ModalVisible = false;
+                    //this.setState({ ...this.state });
+                }}
+            /> */}
+        </View >
+    )
+    //  }
 }
 
 const styles = StyleSheet.create({
@@ -425,7 +468,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
-        borderColor: "#fff",
+        borderColor: "#BA112A",
         borderWidth: 2,
         paddingLeft: 15,
         borderRadius: 5,

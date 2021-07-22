@@ -139,7 +139,7 @@ const NaviDrawe = (props) => {
                                         }} >Configuración</Text>
                                     </TouchableOpacity>*/}
 
-                                    <TouchableOpacity style={styles.sty}
+                                    {/* <TouchableOpacity style={styles.sty}
                                         onPress={() => { handleClick("CerrarSesion") }}>
                                         <Text style={{
                                             marginTop: 10,
@@ -147,7 +147,7 @@ const NaviDrawe = (props) => {
                                             fontSize: 20,
                                             color: "#f99",
                                         }} >Cerrar Sesión</Text>
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
                                 </View>
                             </View>
                         </ScrollView>
