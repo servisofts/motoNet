@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View } from "react-native";
+import { View ,TouchableOpacity, TextInput} from "react-native";
 import { connect } from "react-redux";
 import BarraSuperior from "../../Component/BarraSuperior";
 import Boton1 from "../../Component/Boton1";
@@ -61,6 +61,12 @@ class RegistroUsuarioPage extends Component {
           ph: "Ingresar contraseña",
           type: "password",
         },
+        asociacion: {
+          label: "Asociación",
+          ph: "Ingresar la Asociación",
+          type: "text",
+          key_db: "key_encargado",
+        },
       },
     };
   }
@@ -105,13 +111,18 @@ class RegistroUsuarioPage extends Component {
             marginBottom: 16,
           }}
         >
+         
+          
           <STextImput
             label={obj.label}
             placeholder={obj.ph}
             defaultValue={value}
             type={obj.type}
             ref={(ref) => (this._ref[key] = ref)}
+            //onpres={(obj.key_db==="key_encargado") ? alert("aa"): alert("bb")}
+            onPress={() => alert("hoa")}
           />
+          
         </View>
       );
     });
@@ -219,7 +230,9 @@ class RegistroUsuarioPage extends Component {
                   flex: 1,
                 }}
               >
+                
                 {this.getInputs()}
+
               </View>
               <BottomContent>
                 <Boton1
