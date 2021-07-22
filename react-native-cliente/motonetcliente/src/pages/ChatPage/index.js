@@ -83,8 +83,8 @@ class ChatPage extends Component {
                 textAlign: "right",
                 ...styleVisto
             }
-            console.log(chat)
-            var hora = moment(chat.fecha_on, "YYYY-MM-DD hh:mm:ss").format("h:mm a");
+            // console.log(chat)
+            var hora = moment(chat.fecha_on).format("h:mm a");
             if (hora == " Invalid date") {
                 hora = moment(new Date(chat.fecha_on), "YYYY-MM-DD hh:mm:ss").format("h:mm a");
             }

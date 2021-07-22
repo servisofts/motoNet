@@ -18,7 +18,7 @@ import LogoEmail from '../img/google.svg';
 import Warning from '../img/warning.svg';
 import Menu from '../img/menu.svg';
 import Phone from '../img/phone.svg';
-import Ambulancia from '../img/ambulance.svg';
+import Ambulancia from '../img/motomarker.svg';
 import Consulta from '../img/clinicaesteto.svg';
 import Autorizacion from '../img/clinicaautorizacion.svg';
 import Close from '../img/close.svg';

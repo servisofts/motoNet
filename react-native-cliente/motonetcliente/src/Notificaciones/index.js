@@ -8,26 +8,11 @@ export const notificar = (action) => {
                     break;
             }
             break;
-        case "emergencia":
-            emergencia(action)
+        case "mensaje":
+            mensaje(action)
             break;
-        case "farmacia":
-            farmacia(action)
-            break;
-        case "firebase":
-            firebase(action)
-            break;
-        case "analisis":
-            analisis(action)
-            break;
-        case "consulta":
-            consulta(action)
-            break;
-        case "laboratorio":
-            laboratorio(action)
-            break;
-        case "ordenSeguro":
-            ordenSeguro(action)
+        case "viaje":
+            viaje(action)
             break;
     }
 }
@@ -38,106 +23,24 @@ const confirmarDato = (action) => {
     });
 }
 
-const emergencia = (action) => {
+
+const mensaje = (action) => {
     switch (action.type) {
-        case "viajeEntrante":
+        case "enviar":
             PushNotification.localNotification({
-                title: "Ambulacia", // (optional)
-                message: "tiene una emergencia....", // (required)
-                channelId: "notificaciones-clinica",
-                allowWhileIdle: true,
-            });
-            break;
-        case "ambulanciaCerca":
-            PushNotification.localNotification({
-                title: "Ambulacia", // (optional)
-                message: "Su ambulancia está llegando..", // (required)
+                title: "Nuevo Mensaje", // (optional)
+                message: "mensaje", // (required)
                 channelId: "notificaciones-clinica",
                 allowWhileIdle: true,
             });
             break;
     }
 }
-const farmacia = (action) => {
-    switch (action.type) {
-        case "cotizar":
-            PushNotification.localNotification({
-                title: "Receta cotizada", // (optional)
-                message: "Se a cotizado su receta por " + action.data.cotizacion + " Bs.", // (required)
-                channelId: "notificaciones-clinica",
-                allowWhileIdle: true,
-            });
-            break;
-    }
-
-}
-
-const firebase = (action) => {
-    console.log("ENTRO NOTIFICAR");
+const viaje = (action) => {
     PushNotification.localNotification({
-        title: "FIREBASE NOTI", // (optional)
-        message: JSON.stringify(action), // (required), // (required)
+        title: "Viaje", // (optional)
+        message: "Movimiento en el viaje", // (required)
         channelId: "notificaciones-clinica",
         allowWhileIdle: true,
     });
-}
-
-const analisis = (action) => {
-    switch (action.type) {
-        case "cotizar":
-            PushNotification.localNotification({
-                title: "Imagenología", // (optional)
-                message: "Se cotizo su analisis", // (required)
-                channelId: "notificaciones-clinica",
-                allowWhileIdle: true,
-            });
-            break;
-    }
-}
-
-const consulta = (action) => {
-    switch (action.type) {
-        case "confirmarConsulta":
-            PushNotification.localNotification({
-                title: "Consulta", // (optional)
-                message: "Se a confirmado su consulta.", // (required)
-                channelId: "notificaciones-clinica",
-                allowWhileIdle: true,
-            });
-            break;
-        case "cancelarConsulta":
-            PushNotification.localNotification({
-                title: "Consulta", // (optional)
-                message: "Se a denegado su consulta.", // (required)
-                channelId: "notificaciones-clinica",
-                allowWhileIdle: true,
-            });
-            break;
-    }
-}
-
-const ordenSeguro = (action) => {
-    switch (action.type) {
-        case "accion":
-            PushNotification.localNotification({
-                title: "Orden seguro", // (optional)
-                message: "Se a verificado su orden", // (required)
-                channelId: "notificaciones-clinica",
-                allowWhileIdle: true,
-            });
-            break;
-    }
-}
-
-const laboratorio = (action) => {
-    switch (action.type) {
-        case "cotizar":
-            PushNotification.localNotification({
-                title: "Laboratorio", // (optional)
-                message: "Se a cotizado su laboratorio por " + action.data.cotizacion + " Bs.", // (required)
-                channelId: "notificaciones-clinica",
-                allowWhileIdle: true,
-            });
-            break;
-    }
 }

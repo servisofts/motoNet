@@ -110,7 +110,7 @@ const MarkerAmbulancia = (props) => {
             }
         }
     };
-   
+
     if (!props.state.posicionConductorReducer.posicion) {
         return <View />
     }
@@ -137,8 +137,12 @@ const MarkerAmbulancia = (props) => {
         <Marker.Animated
             ref={marker => { _marker = marker }}
             coordinate={MarkerRegion}
-            anchor={{ x: 0.5, y: 0.5 }}>
+        // anchor={{ x: -1, y: -0.5 }}
+        >
             <Animated.View style={{
+                width: 50,
+                height: 50,
+                // backgroundColor:"#000",
                 transform: [
                     {
                         rotate: fadeAnim.interpolate({
@@ -147,13 +151,14 @@ const MarkerAmbulancia = (props) => {
                             useNativeDriver: true
                         })
                     },
-                    { translateY: 10 },
+                    // { scale: 1 }
+                    // { translateX: 1 },
                 ],
             }}>
                 <Svg name="Ambulancia"
                     style={{
-                        width: 60,
-                        height: 60,
+                        width: 50,
+                        height: 50,
                         fill: "#fff",
                     }} />
             </Animated.View>

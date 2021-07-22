@@ -132,8 +132,8 @@ android {
         applicationId "com.servisofts.motonetcliente"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "1.9"
+        versionCode 9
+        versionName "2.1"
         multiDexEnabled true
     }
     splits {
