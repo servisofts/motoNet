@@ -6,11 +6,13 @@ import AppParams from '../../../Json';
 import STheme from '../../../STheme';
 import Svg from '../../../Svg';
 import PerfilCliente from '../PerfilCliente';
+import DetalleProducto from '../DetalleProducto';
 
 class DetalleRuta extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            abrirModalProducto: false
         };
     }
 
@@ -94,6 +96,14 @@ class DetalleRuta extends Component {
             }, true);
         }} />
     }
+    verProductos = () => {
+        return <Boton1 label={"Ver productoss"}  type={1} cargando={false}
+        // cargando={props.state.ViajesReducer.estado == "cargando"}
+        onPress={() => {
+            this.setState({ abrirModalProducto: true })
+        }} />
+    }
+
     IniciarViaje = () => {
         return <Boton1 label={"Inicar viaje"} type={4} onPress={() => {
             this.props.state.socketClienteReducer.sessiones["motonet"].send({
@@ -126,6 +136,12 @@ class DetalleRuta extends Component {
         if (this.props.state.ViajeReducer.data.movimientos["conductor_cerca"]) {
             return this.notificarLlegada()
         }
+
+        //console.log(JSON.stringify(this.props.state.ViajeReducer.data.movimientos))
+        // if (this.props.state.ViajeReducer.data.movimientos["conductor_cerca"]) {
+        //     return this.verProductos()
+        // }
+        
         return this.getTiempoEstimado()
     }
     getDetalleRuta = () => {
@@ -254,6 +270,7 @@ class DetalleRuta extends Component {
                                             fill: STheme.color.background
                                         }} />
                                 </TouchableOpacity>
+                                {this.verProductos()}
                             </View>
                         </View>
 
@@ -261,6 +278,7 @@ class DetalleRuta extends Component {
                             height: 40,
                             width: "100%",
                         }}>
+                           
                             {this.getAction()}
                         </View>
                     </View>
@@ -273,6 +291,16 @@ class DetalleRuta extends Component {
             return (
                 <PerfilCliente data={this.props.state.usuarioReducer.data[this.props.state.ViajeReducer.data.key_usuario]} close={() => {
                     this.setState({ abrirModal: false })
+                }} />
+            )
+        }
+    }
+    detalleProducto = () => {
+        if (this.state.abrirModalProducto) {
+            alert(JSON.stringify(this.props.state.usuarioReducer.data))
+            return (
+                <DetalleProducto data={this.props.state.usuarioReducer.data[this.props.state.ViajesReducer.data.key_usuario]} close={() => {
+                    this.setState({ abrirModalProducto: false })
                 }} />
             )
         }
@@ -295,6 +323,7 @@ class DetalleRuta extends Component {
                     {this.getDetalleRuta()}
                 </View >
                 {this.getPerfilCliente()}
+                {this.detalleProducto()}
             </>
         );
     }

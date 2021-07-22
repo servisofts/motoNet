@@ -52,7 +52,7 @@ public class SSBL_Service extends Service implements LocationListener {
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_CANCEL_CURRENT);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
                 .setContentTitle("Motonet")
-                .setContentText("Utilizando tu ubicacion...")
+                .setContentText("Utilizando tu ubicación...")
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentIntent(contentIntent)
                 .setOngoing(true)

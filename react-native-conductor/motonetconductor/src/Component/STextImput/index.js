@@ -117,6 +117,7 @@ export default class STextImput extends Component<tprops> {
 
                 {this.getLabel()}
                 <View>
+                    
                     <TextInput style={{
                         width: "100%",
                         height: this.props.height ? this.props.height : 50,
@@ -137,6 +138,8 @@ export default class STextImput extends Component<tprops> {
                         placeholderTextColor={this.theme.placeholder}
                         color={this.theme.color}
                         autoCapitalize='none'
+                        pointerEvents="none"
+                        //onTouchStart={()=>  alert("Hello...")}
                     />
                     {this.getVerPass()}
                 </View>
