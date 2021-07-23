@@ -66,7 +66,7 @@ class RegistroUsuarioPage extends Component {
           ph: "Ingresar la Asociación",
           type: "text",
           key_db: "key_encargado",
-          page:"AsociacionPage"
+          page:"CargaPage"
         },
       },
     };
