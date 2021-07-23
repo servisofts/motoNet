@@ -8,6 +8,8 @@ type tprops = {
     type: String,
     placeholder: String,
     theme: String,
+    onPress: String,
+    page: String
 }
 export default class STextImput extends Component<tprops> {
     constructor(props) {
@@ -139,7 +141,8 @@ export default class STextImput extends Component<tprops> {
                         color={this.theme.color}
                         autoCapitalize='none'
                         pointerEvents="none"
-                        //onTouchStart={()=>  alert("Hello...")}
+                       
+                        onTouchStart={()=>   {this.props.onPress=="key_encargado" ? this.props.navigation.navigate(this.props.page): ""}}
                     />
                     {this.getVerPass()}
                 </View>
