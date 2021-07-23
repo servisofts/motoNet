@@ -66,6 +66,7 @@ class RegistroUsuarioPage extends Component {
           ph: "Ingresar la Asociación",
           type: "text",
           key_db: "key_encargado",
+          page:"AsociacionPage"
         },
       },
     };
@@ -105,6 +106,7 @@ class RegistroUsuarioPage extends Component {
             break;
         }
       }
+     
       return (
         <View
           style={{
@@ -119,8 +121,12 @@ class RegistroUsuarioPage extends Component {
             defaultValue={value}
             type={obj.type}
             ref={(ref) => (this._ref[key] = ref)}
+            navigation={this.props.navigation}
             //onpres={(obj.key_db==="key_encargado") ? alert("aa"): alert("bb")}
-            onPress={() => alert("hoa")}
+            onPress={ obj.key_db ? obj.key_db : ""}
+            page={ obj.page ? obj.page : ""}
+
+            
           />
           
         </View>
