@@ -14,10 +14,10 @@ import ModalPage from "../ModalPage";
 
 const LoginPage = (props) => {
 
-    this.state = {
-        modalVisible: false,
+    // this.state = {
+    //     modalVisible: false,
 
-    };
+    // };
 
    
     const [obj, setObj] = React.useState({
@@ -76,20 +76,20 @@ const LoginPage = (props) => {
         setObj({ ...obj })
         return <View />
     }
-    const _responseInfoCallback = (error, result) => {
-        if (error) {
-            alert('Error fetching data: ' + error.toString());
-        } else {
-            setState({ userName: result.name, userEmail: result.email, userPic: result.picture.data.url });
-            console.log("UserName", this.state.userName);
-            console.log("Email", this.state.userEmail);
-            console.log("UserPic", this.state.userPic);
-            //  SharedPreferences.setItem("UserName", this.state.userName);
-            //       SharedPreferences.setItem("Email", this.state.userEmail);
-            //       SharedPreferences.setItem("UserPic", this.state.userPic);
-            console.log("Picture" + this.state.userPic + "Name" + this.state.userName + "Email" + this.state.userEmail);
-        }
-    }
+    // const _responseInfoCallback = (error, result) => {
+    //     if (error) {
+    //         alert('Error fetching data: ' + error.toString());
+    //     } else {
+    //         setState({ userName: result.name, userEmail: result.email, userPic: result.picture.data.url });
+    //         console.log("UserName", this.state.userName);
+    //         console.log("Email", this.state.userEmail);
+    //         console.log("UserPic", this.state.userPic);
+    //         //  SharedPreferences.setItem("UserName", this.state.userName);
+    //         //       SharedPreferences.setItem("Email", this.state.userEmail);
+    //         //       SharedPreferences.setItem("UserPic", this.state.userPic);
+    //         console.log("Picture" + this.state.userPic + "Name" + this.state.userName + "Email" + this.state.userEmail);
+    //     }
+    // }
 
     const encode = () => {
         var b64 = base64.encode('Some string to encode to base64');
@@ -176,7 +176,9 @@ const LoginPage = (props) => {
             flex: 1,
             backgroundColor: Styles.colors.primary
         }}>
-            <SSCrollView>
+            <SSCrollView style={{
+                flex:1,
+            }}>
                 <View style={{
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -191,7 +193,7 @@ const LoginPage = (props) => {
                         }} />
                 </View>
                 <View style={{
-                    // flex: 1,
+                    flex: 1,
                     alignItems: "center",
                 }}>
                     <View style={{ width: "90%" }}>
@@ -270,6 +272,12 @@ const LoginPage = (props) => {
                                 props.navigation.navigate("RecuperarPassPage");
                             }}
                         />
+                    </View>
+                    <View style={{
+                        width:"100%",
+                        flex:1,
+                    }}>
+
                     </View>
                     <BottomContent height={170}>
                         <View
