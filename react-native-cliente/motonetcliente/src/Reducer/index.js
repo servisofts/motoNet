@@ -14,6 +14,7 @@ import tipoViajesReducer from './tipoViajesReducer';
 import viajesReducer from './viajesReducer';
 import mensajeReducer from './mensajeReducer';
 import imageReducer from './imageReducer';
+import historialViajeReducer from './historialViajeReducer';
 
 export default combineReducers({
     navigationReducer,
@@ -30,6 +31,7 @@ export default combineReducers({
     tipoViajesReducer,
     viajesReducer,
     mensajeReducer,
-    imageReducer
+    imageReducer,
+    historialViajeReducer
 
 });

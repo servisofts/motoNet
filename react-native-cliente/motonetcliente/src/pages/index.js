@@ -13,6 +13,7 @@ import TransportePage from './TransportePage';
 import ViajePedirYBuscar from './ViajePedirYBuscar';
 import ViajeEsperaPage from './ViajeEsperaPage';
 import InicioViajePage from './InicioViajePage';
+import HistorialPage from './HistorialPage';
 // import ConfirmarPage from './ConfirmarPage';
 import ChatPage from './ChatPage';
 // import EmergenciaEsperaPage from './EmergenciaEsperaPage';
@@ -43,6 +44,7 @@ export const getPages = () => {
         ViajeEsperaPage,
         InicioViajePage,
         ChatPage,
+        HistorialPage
 
         // ConfirmarPage,
         // EmergenciaEsperaPage,
