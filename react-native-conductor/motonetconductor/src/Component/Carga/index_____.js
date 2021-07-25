@@ -43,7 +43,7 @@ class Carga extends Component {
         if (this.props.state.usuarioReducer.usuarioCargado) {
             return;
         }
-        AsyncStorage.getItem(AppParams.storage.urlLog).then((value) => {
+        AsyncStorage.getItem(AppParams.storage.usuarioLog).then((value) => {
             this.props.state.usuarioReducer.usuarioCargado = true;
             try {
                 this.props.state.usuarioReducer.usuarioLog = JSON.parse(value)

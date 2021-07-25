@@ -22,7 +22,7 @@ const Carga = (props) => {
         }
 
         if (!props.state.usuarioReducer.usuarioCargado) {
-            AsyncStorage.getItem(AppParams.storage.urlLog).then((value) => {
+            AsyncStorage.getItem(AppParams.storage.usuarioLog).then((value) => {
                 props.state.usuarioReducer.usuarioCargado = true;
                 if (!value) {
                     props.state.usuarioReducer.usuarioLog = false;

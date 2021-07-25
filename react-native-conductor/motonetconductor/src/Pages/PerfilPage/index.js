@@ -190,7 +190,7 @@ class PerfilPage extends Component {
                 label={"Cerrar Sesión"}
                 cargando={false}
                 onPress={() => {
-                  AsyncStorage.removeItem(AppParams.storage.urlLog);
+                  AsyncStorage.removeItem(AppParams.storage.usuarioLog);
                   this.props.state.usuarioReducer.usuarioLog = false;
                   this.props.state.usuarioReducer.usuarioDatos = false;
                   this.props.state.usuarioReducer.cargaLoaded = false;

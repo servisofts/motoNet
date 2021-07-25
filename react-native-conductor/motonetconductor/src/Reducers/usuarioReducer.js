@@ -119,7 +119,7 @@ const login = (state, action) => {
     }
     if (action.estado === "exito") {
         state.usuarioLog = action.data;
-        AsyncStorage.setItem(AppParams.storage.urlLog, JSON.stringify(action.data));
+        AsyncStorage.setItem(AppParams.storage.usuarioLog, JSON.stringify(action.data));
         state.login = action.data
     }
 }

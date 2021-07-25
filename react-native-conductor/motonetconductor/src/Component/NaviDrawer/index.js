@@ -32,7 +32,7 @@ const NaviDrawe = (props) => {
                 setVisible(false);
                 return <View />
             case "CerrarSesion":
-                AsyncStorage.removeItem(AppParams.storage.urlLog);
+                AsyncStorage.removeItem(AppParams.storage.usuarioLog);
                   props.state.usuarioReducer.usuarioLog = false;
                   props.state.usuarioReducer.usuarioDatos = false;
                  props.state.usuarioReducer.cargaLoaded = true;
