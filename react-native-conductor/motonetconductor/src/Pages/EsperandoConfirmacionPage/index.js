@@ -80,7 +80,7 @@ class EsperandoConfirmacionPage extends Component {
             this.notificacion()
             this.props.state.usuarioReducer.estado = ""
         }
-
+        
         return (
             <View style={{
                 flex: 1,

@@ -15,6 +15,7 @@ import AppParams from '../../Json/index.json'
 import DetalleRuta from './DetalleRuta';
 import BarraSuperior from '../../Component/BarraSuperior';
 
+import * as SSBackgroundLocation from '../../SSBackgroundLocation';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 var mapa;
@@ -42,6 +43,10 @@ const ViajeInicioPage = (props) => {
             }
         }
 
+    }
+    var isRun = SSBackgroundLocation.getInstance().isRun();
+    if (!isRun) {
+        SSBackgroundLocation.getInstance().start();
     }
     // console.log(props.navigation)
     const getViajeHilo = async () => {

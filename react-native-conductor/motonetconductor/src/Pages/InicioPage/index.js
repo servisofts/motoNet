@@ -1,60 +1,59 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, TouchableOpacity, Animated,Keyboard } from 'react-native';
-import Inicio from '../../Component/Inicio';
+import { Text, View, TouchableOpacity, Keyboard } from 'react-native';
 import NaviDrawer from '../../Component/NaviDrawer';
-import * as SSBackgroundLocation from '../../SSBackgroundLocation'
+import Turno from './Turno';
+import Mapa from './Mapa';
+import Svg from '../../Svg';
+import STheme from '../../STheme';
 
 class InicioPage extends Component {
-    static navigationOptions = ({ navigation }) => (
-        navigation.state.prop ? ({ ...navigation.state.prop }) : {}
-    );
+    static navigationOptions = {
+        headerShown: false,
+    }
     constructor(props) {
         super(props);
-        props.state.navigationReducer.setParams(props.navigation, {
-            title: "Inicio",
-            headerShown: false,
-            headerTitleStyle: {
-                color: '#fff',
-            },
-        })
-        //desactivar teclado
         Keyboard.dismiss();
     }
     render() {
-        var estados = false
-        if(!this.props.state.usuarioReducer.usuarioLog){
-            console.log("ssssss");
-            return <View/>
-        }
-        
-        Object.keys(this.props.state.usuarioReducer.usuarioLog).map((key) => {
-            var obj = this.props.state.usuarioReducer.usuarioLog[key]
-            if (key === "Foto perfil") {
-                return <View />
-            }
-            if (key === "Password") {
-                return <View />
-            }
-            if (obj.estado === 0) {
-                estados = true
-                return <View />
-            }
-        })
-        if (estados) {
-            this.props.state.usuarioReducer.estado = ""
-            SSBackgroundLocation.getInstance().stop();
-
-            this.props.navigation.replace("EsperandoConfirmacionPage");
+        if (this.props.state.ViajeReducer.estado === "exito" && this.props.state.ViajeReducer.type == "viajeEntrante") {
+            this.props.navigation.replace("ConfirmarPage");
             return <View />
         }
         return (
             <View style={{
+                width: "100%",
                 flex: 1,
+                justifyContent: "center",
+                alignItems: "center"
             }}>
-                
-                <Inicio navigation={this.props.navigation} />
+                <Mapa />
+                <Turno navigation={this.props.navigation} />
                 <NaviDrawer navigation={this.props.navigation} />
+                <TouchableOpacity
+                    onPress={() => {
+                        this.props.state.naviDrawerReducer.openBar()
+                    }}
+                    style={{
+                        width: 55,
+                        height: 55,
+                        borderColor: "#fff",
+                        borderWidth: 2,
+                        borderRadius: 100,
+                        backgroundColor: STheme.color.background,
+                        position: "absolute",
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        top: 10,
+                        left: 10,
+                    }}>
+                    <Svg name="LogoMoto"
+                        style={{
+                            width: "60%",
+                            height: "60%",
+                            fill: "#fff"
+                        }} />
+                </TouchableOpacity>
             </View>
         );
     }

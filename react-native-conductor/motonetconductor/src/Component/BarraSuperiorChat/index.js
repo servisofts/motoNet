@@ -125,7 +125,7 @@ class BarraSuperiorChat extends Component {
                                     overflow: "hidden",
                                     // borderWidth: 1,
                                 }}>
-                                    {this.props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.usuarioReducer.usuarioLog.key, {
+                                    {this.props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.ViajeReducer.data.key_usuario, {
                                     })}
                                 </View>
                             </View>

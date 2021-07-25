@@ -34,7 +34,56 @@ import Rightarrow from '../img/rightarrow.svg';
 import Send from '../img/send.svg';
 import Arrow from '../img/arrow.svg';
 
-const Svg = (propsa) => {
+type ICONOS = "logoCompleto"
+    | "LogoMoto"
+    | "Volver"
+    | "persona"
+    | "arreglo"
+    | "LogoMoto"
+    | "LogoMotoRed"
+    | "MarkerMoto"
+    | "correo"
+    | "pass"
+    | "google"
+    | "facebook"
+    | "icloud"
+    | "volver"
+    | "Arriba"
+    | "btnRojo"
+    | "btnAzul"
+    | "logoRecurso"
+    | "alianza"
+    | "bisa"
+    | "nacional"
+    | "farmacia"
+    | "laboratorio"
+    | "turn"
+    | "imagenologia"
+    | "centroAtencion"
+    | "LogoFacebook"
+    | "LogoEmail"
+    | "Warning"
+    | "Menu"
+    | "Ambulancia"
+    | "Sinubicacion"
+    | "Rightarrow"
+    | "Cerrar"
+    | "Send"
+    | "Arrow"
+    | "Error"
+    | "Success"
+    | "Verificar"
+
+type typeProps = {
+    name: ICONOS,
+    resource: any,
+    style: {
+        width: Number,
+        height: Number,
+        fill: String
+    }
+}
+const Svg = (propsa: typeProps) => {
     var props = { ...propsa }
     if (!props.style) {
         props.style = {
@@ -63,8 +112,6 @@ const Svg = (propsa) => {
             return <Arreglo style={props.style} />
         case "LogoMoto":
             return <MotoNetBW style={props.style} />
-        case "LogoMotoRed":
-            return <MotoNetBR style={props.style} />
         case "MarkerMoto":
             return <MarkerMoto style={props.style} />
         case "correo":

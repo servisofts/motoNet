@@ -97,11 +97,17 @@ class DetalleRuta extends Component {
         }} />
     }
     verProductos = () => {
-        return <Boton1 label={"Ver productoss"}  type={1} cargando={false}
-        // cargando={props.state.ViajesReducer.estado == "cargando"}
-        onPress={() => {
-            this.setState({ abrirModalProducto: true })
-        }} />
+        if (this.props.state.ViajeReducer.data) {
+            var viaje = this.props.state.ViajeReducer.data;
+            if (viaje.tipo_viaje.codigo != "pedido") {
+                return <View />
+            }
+        }
+        return <Boton1 label={"Ver productoss"} type={1} cargando={false}
+            // cargando={props.state.ViajesReducer.estado == "cargando"}
+            onPress={() => {
+                this.setState({ abrirModalProducto: true })
+            }} />
     }
 
     IniciarViaje = () => {
@@ -141,7 +147,7 @@ class DetalleRuta extends Component {
         // if (this.props.state.ViajeReducer.data.movimientos["conductor_cerca"]) {
         //     return this.verProductos()
         // }
-        
+
         return this.getTiempoEstimado()
     }
     getDetalleRuta = () => {
@@ -278,7 +284,7 @@ class DetalleRuta extends Component {
                             height: 40,
                             width: "100%",
                         }}>
-                           
+
                             {this.getAction()}
                         </View>
                     </View>
@@ -297,7 +303,13 @@ class DetalleRuta extends Component {
     }
     detalleProducto = () => {
         if (this.state.abrirModalProducto) {
-            alert(JSON.stringify(this.props.state.usuarioReducer.data))
+            // alert(JSON.stringify(this.props.state.usuarioReducer.data))
+            if (this.props.state.ViajeReducer.data) {
+                var viaje = this.props.state.ViajeReducer.data;
+                if (viaje.tipo_viaje.codigo != "pedido") {
+                    return <View />
+                }
+            }
             return (
                 <DetalleProducto data={this.props.state.usuarioReducer.data[this.props.state.ViajesReducer.data.key_usuario]} close={() => {
                     this.setState({ abrirModalProducto: false })

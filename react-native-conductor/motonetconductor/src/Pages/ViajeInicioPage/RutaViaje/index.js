@@ -19,7 +19,6 @@ const RutaViaje = (props) => {
 
     const getHilo = async () => {
         new SThread(2000, "hiloUbicacion", false).start(() => {
-            console.log(new Date().toUTCString());
             getHilo();
             var timeActual = new Date().getTime();
             if (timeActual - lastSend < 15000) {
@@ -29,7 +28,6 @@ const RutaViaje = (props) => {
             if (!ubicacion) {
                 return;
             }
-            console.log("Repinto");
             lastSend = timeActual;
             var movimientos = props.state.ViajeReducer.data.movimientos;
             var viaje = props.state.ViajeReducer.data;

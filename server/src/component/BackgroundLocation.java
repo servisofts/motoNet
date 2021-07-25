@@ -26,6 +26,9 @@ public class BackgroundLocation {
             case "registro":
                 registro(data, session);
                 break;
+            case "stop":
+                stop(data, session);
+                break;
         }
     }
 
@@ -51,7 +54,7 @@ public class BackgroundLocation {
             if (conductorJson.has("key")) {
                 String consultaUpdate = "UPDATE conductor_activo SET \n" + "latitude = " + data.getDouble("latitude")
                         + ", \n" + "longitude = " + data.getDouble("longitude") + ", \n" + "deegre = "
-                        + data.getDouble("deegre") + ", \n" + "fecha_on = now() \n" + " WHERE key = '"
+                        + data.getDouble("deegre") + ", \n" + "fecha_on = now() \n" + ", fecha_off = null WHERE key = '"
                         + conductorJson.getString("key") + "'";
                 Conexion.ejecutarUpdate(consultaUpdate);
                 if (!conductorJson.isNull("viaje")) {
@@ -78,4 +81,11 @@ public class BackgroundLocation {
 
     }
 
+    public void stop(JSONObject obj, SSSessionAbstract session) {
+        if (obj.has("key_usuario")) {
+            String key_usuario = obj.getString("key_usuario");
+            String consultaUpdate = "UPDATE conductor_activo SET fecha_off = now() WHERE key_usuario = '" + key_usuario + "'";
+            Conexion.ejecutarUpdate(consultaUpdate);
+        }
+    }
 }

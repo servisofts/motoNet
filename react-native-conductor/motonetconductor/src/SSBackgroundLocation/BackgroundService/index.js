@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import * as HttpConection from '../../HttpConection'
+import SThread from '../../SThread';
 
 class BackgroundService {
     run;
@@ -43,6 +44,7 @@ class BackgroundService {
 
     }
     start() {
+        console.log("Start BACKGROUND LOCATION")
         var _inst = this;
         this.run = true;
         if (Platform.OS == "ios") {
@@ -66,6 +68,7 @@ class BackgroundService {
         });
     }
     stop() {
+        console.log("STOP BACKGROUND LOCATION")
         var _inst = this;
         this.run = false;
         if (Platform.OS == "ios") {
@@ -80,9 +83,22 @@ class BackgroundService {
                 estado: "cargando"
             })
         })
-
+        var state = this.store.getState();
+        if (!state.usuarioReducer.usuarioLog) {
+            this.log("ERROR SEND SERVER::: no se encontro usuario" + JSON.stringify(state.usuarioReducer))
+        } else {
+            HttpConection.send({
+                component: "backgroundLocation",
+                type: "stop",
+                key_usuario: state.usuarioReducer.usuarioLog.key,
+                id: "httpSession",
+            }, false);
+        }
     }
     onLocationChange(_inst, event) {
+        if (!this.isRun()) {
+            return;
+        }
         if (!event.data.latitude) {
             event.data = JSON.parse(event.data);
         }
@@ -93,7 +109,7 @@ class BackgroundService {
         _inst.location = event.data;
 
         event.data.deegre = this.toDegre(_inst.location.latitude, _inst.location.longitude, _inst.prevLocation.latitude, _inst.prevLocation.longitude);
-        console.log("Deegres "+event.data.deegre)
+        console.log("Deegres " + event.data.deegre)
         _inst.sendServer();
     }
 
@@ -123,6 +139,16 @@ class BackgroundService {
         // bearing = bearing * Math.PI / 180; // to rad
         return bearing;
     }
+    startHiloReSend = async () => {
+        new SThread(5000, "HiloSendServerLocation", true).start(() => {
+            if (!this.isRun()) {
+                return;
+            }
+            if (new Date().getTime() - this.lastSend > 3000) {
+                this.sendServer();
+            }
+        })
+    }
     sendServer() {
         this.log("send Server:::" + JSON.stringify(this.location))
         if (this.store) {
@@ -151,6 +177,7 @@ class BackgroundService {
                 };
                 if (new Date().getTime() - this.lastSend > 2000) {
                     this.lastSend = new Date().getTime();
+                    this.startHiloReSend();
                     HttpConection.send(locationToServer, false);
                 }
 

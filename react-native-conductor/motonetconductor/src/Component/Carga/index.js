@@ -8,7 +8,10 @@ var DEBUG = true;
 var lastSend = 0;
 const Carga = (props) => {
     const [mensaje, setMensaje] = React.useState("");
-
+    if (!props.state.usuarioReducer.cargaLoaded) {
+        props.state.usuarioReducer.cargaLoaded = true;
+        setMensaje("");
+    }
     const getMensaje = () => {
         if (!props.navigation) {
             return "No se encontro navegacion.";
@@ -24,6 +27,7 @@ const Carga = (props) => {
         if (!props.state.usuarioReducer.usuarioCargado) {
             AsyncStorage.getItem(AppParams.storage.usuarioLog).then((value) => {
                 props.state.usuarioReducer.usuarioCargado = true;
+                setMensaje("Usuario cargado");
                 if (!value) {
                     props.state.usuarioReducer.usuarioLog = false;
                     return;
@@ -35,14 +39,14 @@ const Carga = (props) => {
                 props.state.usuarioReducer.usuarioLog = JSON.parse(value)
                 return;
             });
-          
+
             return "Buscando usuario...";
         }
         //Verificar si existe usuario
         if (!props.state.usuarioReducer.usuarioLog) { //Cuando no existe usuario
             if (!props.state.cabeceraDatoReducer.data[cabecera]) {
                 if (props.state.cabeceraDatoReducer.estado == "cargando") {
-                    return "CCargando datos de registro..."
+                    return "Cargando datos de registro..."
                 }
                 props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
                     component: "cabeceraDato",
@@ -52,114 +56,114 @@ const Carga = (props) => {
                 });
                 props.state.cabeceraDatoReducer.estado = "cargando";
                 console.log(props.state.usuarioReducer.usuarioLog.key + "fffff")
-                
+
                 return "Buscando datos de registro...";
-               
+
             } else {
                 props.state.usuarioReducer.estado = "";
-                
+
                 props.navigation.replace("LoginPage");
             }
         } else { //Cuando existe usuario
-            if (!props.state.usuarioReducer.usuarioDatos) {//Cuando no existe Datos de usuario
-                if (props.state.usuarioReducer.estado == "cargando") {
-                    const reintent = async () => {
-                        await delay(4000);
-                        if (props.state.usuarioReducer.usuarioDatos) {
-                            return;
-                        }
-                        if (props.state.usuarioReducer.estado == "cargando") {
-                            var curTime = new Date().getTime();
-                            if (curTime - lastSend > 3000) {
-                                props.state.usuarioReducer.estado = "";
-                                setMensaje("Reintentado Cargar usuario");
-                                return;
-                            }
+            // if (!props.state.usuarioReducer.usuarioDatos) {//Cuando no existe Datos de usuario
+            //     if (props.state.usuarioReducer.estado == "cargando") {
+            //         const reintent = async () => {
+            //             await delay(4000);
+            //             if (props.state.usuarioReducer.usuarioDatos) {
+            //                 return;
+            //             }
+            //             if (props.state.usuarioReducer.estado == "cargando") {
+            //                 var curTime = new Date().getTime();
+            //                 if (curTime - lastSend > 3000) {
+            //                     props.state.usuarioReducer.estado = "";
+            //                     setMensaje("Reintentado Cargar usuario");
+            //                     return;
+            //                 }
 
-                        }
-                        reintent();
-                    };
-                    reintent();
-                    return "Cargando datos de usuario...";
+            //             }
+            //             reintent();
+            //         };
+            //         reintent();
+            //         return "Cargando datos de usuario...";
+            //     }
+            //     props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+            //         component: "usuario",
+            //         type: "getById",
+            //         key: props.state.usuarioReducer.usuarioLog.key,
+            //         cabecera: cabecera,
+            //         estado: "cargando"
+            //     }, true);
+            //     lastSend = new Date().getTime();
+            //     props.state.usuarioReducer.estado = "cargando";
+            //     return "Buscando datos de usuario...";
+            // } else {//Cuando existe Datos de usuario
+            if (!props.state.ViajeReducer.estadoConsultado) {//Cuando el viaje no se consultado
+                if (props.state.ViajeReducer.estado == "cargando") { //Cuando el viaje esta cargando
+                    return "Esperando viaje..."
                 }
                 props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                    component: "usuario",
-                    type: "getById",
-                    key: props.state.usuarioReducer.usuarioLog.key,
-                    cabecera: cabecera,
+                    component: "viaje",
+                    type: "getViajeByKeyUsuario",
+                    key_usuario: props.state.usuarioReducer.usuarioLog.key,
                     estado: "cargando"
                 }, true);
-                lastSend = new Date().getTime();
-                props.state.usuarioReducer.estado = "cargando";
-                return "Buscando datos de usuario...";
-            } else {//Cuando existe Datos de usuario
-                if (!props.state.ViajeReducer.estadoConsultado) {//Cuando el viaje no se consultado
-                    if (props.state.ViajeReducer.estado == "cargando") { //Cuando el viaje esta cargando
-                        return "Esperando viaje..."
+                props.state.ViajeReducer.estado = "cargando";
+                return "Buscando viaje...";
+            } else { //Cuando el viaje ya se consulto
+                if (!props.state.ViajeReducer.data) {  //Cuando no tenemos viaje
+                    //     //Verificamos los datos de el usuario;
+                    //     var estados = false
+                    //     Object.keys(props.state.usuarioReducer.usuarioDatos).map((key) => {
+                    //         var obj = props.state.usuarioReducer.usuarioDatos[key]
+                    //         if (key === "Foto perfil") {
+                    //             return <View /> //omitir 
+                    //         }
+                    //         if (key === "Password") {
+                    //             return <View />//omitir 
+                    //         }
+                    //         if (obj.estado === 0) {
+                    //             estados = true
+                    //             return <View />
+                    //         }
+                    //     })
+                    //     if (estados) {
+                    //         props.state.usuarioReducer.estado = ""
+                    //         props.navigation.replace("EsperandoConfirmacionPage");
+                    //         return "Ir a espera de confirmacion."
+                    //     } else {
+
+                    props.navigation.replace("InicioPage");
+                    return "Ir al inicio."
+                    //     }
+
+                } else {//Cuando tenemos viajeif()
+                    if (!props.state.ViajeReducer.data.movimientos) {
+                        return "No hay movimientos";
                     }
-                    props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-                        component: "viaje",
-                        type: "getViajeByKeyUsuario",
-                        key_usuario: props.state.usuarioReducer.usuarioLog.key,
-                        estado: "cargando"
-                    }, true);
-                    props.state.ViajeReducer.estado = "cargando";
-                    return "Buscando viaje...";
-                } else { //Cuando el viaje ya se consulto
-                    if (!props.state.ViajeReducer.data) {  //Cuando no tenemos viaje
-                        //Verificamos los datos de el usuario;
-                        var estados = false
-                        Object.keys(props.state.usuarioReducer.usuarioDatos).map((key) => {
-                            var obj = props.state.usuarioReducer.usuarioDatos[key]
-                            if (key === "Foto perfil") {
-                                return <View /> //omitir 
-                            }
-                            if (key === "Password") {
-                                return <View />//omitir 
-                            }
-                            if (obj.estado === 0) {
-                                estados = true
-                                return <View />
-                            }
-                        })
-                        if (estados) {
-                            props.state.usuarioReducer.estado = ""
-                            props.navigation.replace("EsperandoConfirmacionPage");
-                            return "Ir a espera de confirmacion."
-                        } else {
-
+                    if (props.state.ViajeReducer.data.estado == 0) {
+                        props.navigation.replace("InicioPage");
+                        return "Ir a confirmar viaje.";
+                    }
+                    if (props.state.ViajeReducer.data.key_conductor != props.state.usuarioReducer.usuarioLog.key) {
+                        props.navigation.replace("InicioPage");
+                        return "Ir a confirmar viaje.";
+                    }
+                    if (!props.state.ViajeReducer.data.movimientos["inicio_viaje"]) {
+                        props.navigation.replace("ConfirmarPage");
+                        return "Ir a confirmar viaje.";
+                    } else {
+                        if (props.state.ViajeReducer.data.movimientos["termino_viaje_conductor"]) {
                             props.navigation.replace("InicioPage");
-                            return "Ir al inicio."
+                            return "Inicio page"
                         }
+                        props.navigation.replace("ViajeInicioPage");
+                        // props.navigation.replace("InicioPage");
 
-                    } else {//Cuando tenemos viajeif()
-                        if (!props.state.ViajeReducer.data.movimientos) {
-                            return "No hay movimientos";
-                        }
-                        if (props.state.ViajeReducer.data.estado == 0) {
-                            props.navigation.replace("InicioPage");
-                            return "Ir a confirmar viaje.";
-                        }
-                        if (props.state.ViajeReducer.data.key_conductor != props.state.usuarioReducer.usuarioLog.key) {
-                            props.navigation.replace("InicioPage");
-                            return "Ir a confirmar viaje.";
-                        }
-                        if (!props.state.ViajeReducer.data.movimientos["inicio_viaje"]) {
-                            props.navigation.replace("ConfirmarPage");
-                            return "Ir a confirmar viaje.";
-                        } else {
-                            if(props.state.ViajeReducer.data.movimientos["termino_viaje_conductor"]){
-                                props.navigation.replace("InicioPage");
-                                return "Inicio page"
-                            }
-                            props.navigation.replace("ViajeInicioPage");
-                            // props.navigation.replace("InicioPage");
-
-                            return "Ir al viaje.";
-                        }
+                        return "Ir al viaje.";
                     }
                 }
             }
+            // }
         }
         return "Cargando...";
     }
@@ -173,7 +177,7 @@ const Carga = (props) => {
             position: "absolute",
             bottom: "10%",
         }}>
-            <Text style={{color:"#fff"}}>{mensaje}</Text>
+            <Text style={{ color: "#fff" }}>{mensaje}</Text>
         </View>
     );
 }

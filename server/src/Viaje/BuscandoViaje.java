@@ -109,14 +109,6 @@ public class BuscandoViaje extends Thread {
         try {
             int LIMITE = 10;
             int radioDeBusqueda = getParametro("Distancia minima permitida para recibir viaje como conductor");
-            // String consulta = "SELECT array_to_json(array_agg(calculo.*)) as json FROM
-            // (\n" + "SELECT \n" + "|/ ((("
-            // + direccion.getDouble("latitude") + " - ver.latitude) ^ 2) + ((" +
-            // direccion.getDouble("longitude")
-            // + " - ver.longitude) ^ 2)) AS resultado,\n" + "ver.*\n" + "FROM
-            // conductor_activo ver) calculo\n"
-            // + "WHERE\n" + "calculo.resultado <= ((0.000009) * (" + radioDeBusqueda + "))
-            // limit " + LIMITE;
             String consulta = "SELECT getConductoresActivos(" + direccion.getDouble("latitude") + ","
                     + direccion.getDouble("longitude") + ",30," + radioDeBusqueda + ") as json";
             return Conexion.ejecutarConsultaArray(consulta);
