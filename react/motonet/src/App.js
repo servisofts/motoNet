@@ -10,8 +10,7 @@ import MapaPage from './Pages/MapaPage'
 import TipoViajePage from './Pages/TipoViajePage'
 import ParametrosPage from './Pages/ParametrosPage'
 import NotificacionPage from './Pages/NotificacionPage'
-import AsociacionesMotoPage from './Pages/AsociacionesMotoPage'
-import ListaAsociacionMotoPage from './Pages/ListaAsociacionMotoPage'
+
 import HistorialViajePage from './Pages/HistorialViajePage'
 
 import ListaAdministradorPage from './Pages/ListaAdministradorPage'
@@ -23,14 +22,24 @@ import ConductorPerfilPage from './Pages/ConductorPerfilPage'
 import ConductorRegistroPage from './Pages/ConductorRegistroPage'
 
 import PublicidadPage from './Pages/PublicidadPage';
+import AjustesPage from './Pages/AjustesPage';
 
 
+import { Asociacion } from './Pages/Asociacion';
+import { Usuarios } from './Pages/Usuarios';
 function App() {
   return (
     <BrowserRouter>
       <Route exact path='/' component={CargaPage} />
       <Route exact path='/Login' component={LoginPage} />
       <Route exact path='/Inicio' component={InicioPage} />
+      <Route exact path='/AjustesPage' component={AjustesPage} />
+      <Route exact path='/Publicidad' component={PublicidadPage} />
+
+      {Usuarios}
+
+      {Asociacion}
+
       <Route exact path='/ListaUsuario' component={ListaUsuarioPage} />
       <Route exact path='/UsuarioRegistroPage' component={UsuarioRegistroPage} />
       <Route exact path='/UsuarioRegistroPage/:key' component={UsuarioRegistroPage} />
@@ -39,15 +48,12 @@ function App() {
       <Route exact path='/TipoViajePage' component={TipoViajePage} />
       <Route exact path='/ParametrosPage' component={ParametrosPage} />
       <Route exact path='/NotificacionPage' component={NotificacionPage} />
-      <Route exact path='/AsociacionesMotoPage' component={AsociacionesMotoPage} />
-      <Route exact path='/ListaAsociacionMotoPage' component={ListaAsociacionMotoPage} />
       <Route exact path='/HistorialViajePage' component={HistorialViajePage} />
       <Route exact path='/ConductorListaPage' component={ConductorListaPage} />
       <Route exact path='/ConductorPerfilPage/:key' component={ConductorPerfilPage} />
       <Route exact path='/ConductorRegistroPage' component={ConductorRegistroPage} />
       <Route exact path='/ConductorRegistroPage/:key' component={ConductorRegistroPage} />
-      <Route exact path='/PublicidadPage' component={PublicidadPage} />
-      
+
     </BrowserRouter>
   );
 }

@@ -1,4 +1,4 @@
-import React,{Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
@@ -12,6 +12,7 @@ import reducers from './reducers';
 import nativeSocket from './_nativeSocket';
 
 import ShowImagePicker from './elementsM/ImagePickerWeb';
+import { SComponentClass } from './SComponent';
 
 
 const store = createStore(
@@ -51,15 +52,16 @@ export default class AppMobile extends Component {
   render() {
     return (
       <Provider store={store}>
-    
-        <App />
-        {this.state.imagePicker ? (<ShowImagePicker calback={this.state.calback} />) : (<div />)}
+        <SComponentClass >
+          <App />
+          {this.state.imagePicker ? (<ShowImagePicker calback={this.state.calback} />) : (<div />)}
+        </SComponentClass>
       </Provider>
     );
   }
 }
 
 ReactDOM.render(
-  <AppMobile/>,
+  <AppMobile />,
   document.getElementById('root')
 );

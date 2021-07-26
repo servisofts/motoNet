@@ -48,7 +48,6 @@ const ListaUsuarioPage = (props) => {
           var data = props.state.usuarioReducer.data;
           Object.keys(data).map((key) => {
                var obj = data[key];
-
                var cabecera = "";
                cabecera = obj.usuario.key_cabecera;
                if (props.state.cabeceraDatosReducer.cabeceras[obj.usuario.key_cabecera]) {

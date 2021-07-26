@@ -38,6 +38,7 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
+        flex:1,
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -92,8 +93,8 @@ const useStyles = makeStyles((theme) => ({
         ...theme.mixins.toolbar,
     },
     content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
+        flex: 1,
+        backgroundColor:"#ddd"
     },
 }));
 
@@ -122,11 +123,11 @@ const NaviDrawer = (props) => {
     const getButton = (data) => {
         return (
             <ListItem button key={data.name} selected={props.title == data.name} onClick={() => {
-               // if (props.title == data.name) { return };
-               if (data.name == 'Salir') {
-                sessionStorage.removeItem("usuarioLog");
-                window.location.href = "/";
-            }
+                // if (props.title == data.name) { return };
+                if (data.name == 'Salir') {
+                    sessionStorage.removeItem("usuarioLog");
+                    window.location.href = "/";
+                }
                 props.history.push("/" + data.path);
             }}>
                 <ListItemIcon>
@@ -155,9 +156,7 @@ const NaviDrawer = (props) => {
         </div>)*/
     }
 
-
     const getButtonNotifi = (data) => {
-
         return (
             <ListItem button key={data.name} selected={props.title == data.name} onClick={() => {
                 if (props.title == data.name) { return };
@@ -185,11 +184,11 @@ const NaviDrawer = (props) => {
                     [classes.appBarShift]: open,
                 }), "secondary"]}
             >
-                  <div style={{
-                        display: "none"
-                    }}>
-                        <UsuarioCabeceras />
-                    </div>
+                <div style={{
+                    display: "none"
+                }}>
+                    <UsuarioCabeceras />
+                </div>
                 <Toolbar>
                     <Grid xs={2}>
                         <IconButton
@@ -250,13 +249,15 @@ const NaviDrawer = (props) => {
                     {getButton({ name: "Publicidad", path: "PublicidadPage", icon: <ImageIcon /> })}
                     {getButton({
                         name: "Salir", path: "Salir", icon: <ExitToAppIcon />,
-                       
+
                     })}
                 </List>
 
             </Drawer>
             <main className={classes.content}>
-                <div style={{ height: 50 }}></div>
+                <div style={{ height: 60 }}>
+
+                </div>
                 {props.page()}
             </main>
         </div>

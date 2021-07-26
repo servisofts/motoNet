@@ -74,6 +74,9 @@ public class ServerHttp {
         }
         // System.out.println(type);
         // printRequestInfo(exchange);
+        if (!file.exists()) {
+            file = new File("./default.png");
+        }
         String response = "This is the response at " + requestURI;
         exchange.sendResponseHeaders(200, file.length());
         OutputStream os = exchange.getResponseBody();

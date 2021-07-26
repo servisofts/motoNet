@@ -4,26 +4,27 @@ import NaviDrawer from '../../Components/NaviDrawer';
 import { Button, Grid } from '@material-ui/core';
 //import Logo from '../../img/logoCompletoRecurso.svg'
 import Publicidad from '../../Components/Publicidad';
+import Page from '../../Components/Page';
+import { SIcon } from '../../SComponent';
 
 const PublicidadPage = (props) => {
-   
-    return (
-        <NaviDrawer title={"Publicidad"} history={props.history}
-            page={() => {
-                return (
-                    <Grid
-                        container
-                        justify="center"
-                        direction="row"
-                    >
-                       
-                        <Grid xs={12} style={{ height: 100, marginTop: 10, }}>
-                            <Publicidad/>
-                        </Grid>
-                    </Grid>
-                )
-            }} />
-    )
+
+    return (<Page
+        history={props.history}
+        title={"Publicidad"}
+        onBack={"/Inicio"}
+        icon={<SIcon name={"publicidad"}/>}
+    >
+        <Grid
+            container
+            justify="center"
+            direction="row"
+        >
+            <Grid xs={12} style={{ height: 100, marginTop: 10, }}>
+                <Publicidad />
+            </Grid>
+        </Grid>
+    </Page>)
 }
 
 const initStates = (state) => {
