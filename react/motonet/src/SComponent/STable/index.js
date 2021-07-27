@@ -122,7 +122,13 @@ export default class STable extends Component<SType> {
             }}>
                 <SHeadBar   {...this.props.headerProps} reload={() => {
                     this.setState({ reload: true, });
-                }} buscar={(text) => {
+                }}
+                onAdd={() => {
+                    if(this.props.onAdd){
+                       if(typeof this.props.onAdd=="function" ) this.props.onAdd();
+                    }
+                }}
+                 buscar={(text) => {
                     this.setState({
                         buscador: {
                             ...this.state.buscador,

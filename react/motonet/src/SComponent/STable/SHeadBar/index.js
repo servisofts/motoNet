@@ -76,6 +76,7 @@ export default class SHeadBar extends Component {
                         height: 24,
                     }} onPress={() => {
                         // this.props.reload();
+                        this.props.onAdd();
                     }}>
                         <SIcon name={"addRed"} style={{
                             fill: STheme().colorPrimary,
