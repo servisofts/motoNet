@@ -17,6 +17,12 @@ export default (state, action) => {
             case "getAll":
                 getAll(state, action);
                 break;
+            case "eliminar":
+                eliminar(state, action);
+                break;
+            case "confirmarDatos":
+                confirmarDatos(state, action);
+                break;
         }
 
         state = { ...state };
@@ -45,5 +51,17 @@ const getAll = (state, action) => {
             state.data[obj.key] = obj;
         });
     }
+}
+
+const eliminar = (state, action) => {
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        var key = action.key;
+        delete state.data[key];
+    }
+}
+
+const confirmarDatos = (state, action) => {
+    state.estadoConfirmando = action.estado;
 }
 

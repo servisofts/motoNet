@@ -61,7 +61,10 @@ export default class SForm extends Component<SFromProps> {
                 props={{
                     ...this.props.inputProps,
                     ...inputProps
-                }} />
+                }}
+                //defaultValue={(inputProps.defaultValue) ? inputProps.defaultValue : ""}
+                defaultValue={inputProps.defaultValue}
+                />
         })
     }
 
