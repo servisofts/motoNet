@@ -40,8 +40,8 @@ const Themas = {
         colorOpaque: "#eeeeee"
     },
     dark: {
-        colorPrimary: "#A70011",
-        colorSecondary: "#ffffff",
+        colorPrimary: "#660000",
+        colorSecondary: "#999999",
         colorTextPrimary: "#eeeeee",
         backgroundColor: "#222222",
         colorDanger: "#C31C37",

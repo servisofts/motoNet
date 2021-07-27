@@ -42,9 +42,6 @@ export default class SHeadBar extends Component {
                         col: "xs-12 md-6",
                         customStyle: "primary",
                     }}
-                        style={{
-                            borderWidth: 0,
-                        }}
                         placeholder={"Buscar..."}
                         onChangeText={(text) => {
                             new SThread(600, "buscadorTabla", true).start(() => {
