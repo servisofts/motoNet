@@ -18,7 +18,8 @@ import SBackground from './SBackground';
 import SSound from './SSound';
 import SDate from './SDate';
 import STable from './STable'
-import SIcon, { SIconsType } from './SIcon';
+import SForm from './SForm'
+import SIcon from './SIcon';
 import SActivityIndicator from './SActivityIndicator';
 export {
     SActivityIndicator,
@@ -43,6 +44,7 @@ export {
     SBackground,
     STable,
     SIcon,
+    SForm
 }
 export class SComponentClass extends Component {
     constructor(props) {

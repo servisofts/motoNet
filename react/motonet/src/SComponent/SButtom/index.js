@@ -5,6 +5,7 @@ import DeleteBtn from './DeleteBtn';
 
 
 type typeConfig = {
+    customStyle: "default" | "outline" | "secondary" | "danger",
     type: "default" | "outline" | "secondary" | "danger",
     variant: "default" | "confirm",
 }
@@ -86,7 +87,7 @@ export class SButtom extends Component<typeProps> {
                     alignItems: 'center',
                 },
                 text: {
-                    color: STheme().colorPrimary,
+                    color: STheme().colorTextPrimary,
                     ...this.props.styleText
                 }
             },
@@ -122,6 +123,7 @@ export class SButtom extends Component<typeProps> {
         //---RETURN
         var variant = this.variant[this.getOption("variant")]
         var style = this.styleType[this.getOption("type")]
+        // var style = this.styleType[this.getOption("customStyle")]
         var Component = TouchableOpacity;
         if (this.props.props) {
             if (this.props.props.variant == "confirm") {

@@ -1,7 +1,7 @@
 
 const initialState = {
     estado: ""
- 
+
 }
 
 export default (state, action) => {
@@ -27,11 +27,11 @@ export default (state, action) => {
 const registro = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
-        if (!state.data) {
-            state.data = {}
+        if (state.data) {
+            var obj = action.data;
+            state.data[obj.key] = obj;
         }
-        var obj = action.data;
-        state.data[obj.key] = obj;
+
     }
 }
 
@@ -42,7 +42,7 @@ const getAll = (state, action) => {
             state.data = {}
         }
         action.data.map((obj, key) => {
-            state.data[obj.key] =obj;
+            state.data[obj.key] = obj;
         });
     }
 }

@@ -76,7 +76,7 @@ class ListaPage extends Component {
                     color: STheme().colorTextPrimary
                 }
             }}
-            onAdd={()=>{
+            onAdd={() => {
                 this.props.history.push("/Asociaciones/Registro")
             }}
             header={[
@@ -107,6 +107,14 @@ class ListaPage extends Component {
 
             }}
             data={data}
+            onAction={(type, obj) => {
+                switch (type) {
+                    case "edit":
+                        break;
+                    case "delete":
+                        break;
+                }
+            }}
             dataProps={{
                 defaultHeight: 40,
             }}

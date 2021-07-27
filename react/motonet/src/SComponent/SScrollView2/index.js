@@ -71,7 +71,9 @@ export default class SScrollView2 extends Component<SType> {
                     <View style={{
                         maxWidth: "100%",
                         height: "100%",
-                        // backgroundColor: "#f0f",
+                        ...(this.props.disableHorizontal ? {
+                            minWidth:"100%",
+                        } : {}),
                     }}>
                         <Scroll
                             disableHorizontal={this.props.disableHorizontal}

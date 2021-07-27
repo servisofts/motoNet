@@ -95,12 +95,14 @@ export default class Page extends Component<PageType> {
         if (this.props.disableScroll) {
             return this.props.children
         }
-        return <SScrollView2 disableHorizontal={true}>
-            <View style={{
+        return <SScrollView2 disableHorizontal={true} style={{
+            width: "100%",
+        }}>
+            <SView style={{
                 width: "100%",
             }}>
                 {this.props.children}
-            </View >
+            </SView >
         </SScrollView2 >
     }
     render() {

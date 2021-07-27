@@ -18,6 +18,7 @@ const InicioPage = (props) => {
         // disableScroll={true}
         >
             <SView props={{
+                col:"xs-12",
                 variant: "center"
             }}>
                 <BotonesPaginas

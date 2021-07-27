@@ -9,7 +9,7 @@ import SSize from '../SSize';
 import { SText } from '../SText';
 import SDate from '../SDate';
 //@ts-ignore
-type typeConfig = {
+export type SViewPropsType = {
     style: ViewStyle,
     customStyle: TypeStyles,
     type: TypeType,
@@ -24,7 +24,7 @@ type typeConfig = {
 
 type typeProps = {
     style: ViewStyle,
-    props: typeConfig,
+    props: SViewPropsType,
     onPress: Function,
     // ViewPropTypes,
     // TouchableOpacityProps,
@@ -34,7 +34,7 @@ type typeProps = {
 interface IProps extends ViewProps {
     animated: Boolean,
     style: ViewStyle,
-    props: typeConfig,
+    props: SViewPropsType,
     onPress: Function,
 }
 
@@ -147,7 +147,6 @@ export class SView extends Component<IProps> {
                     {
                         ...size,
                         ...this.style,
-
                         ...(this.getOption("direction") == "row" ? { flexDirection: "row", flexWrap: "wrap", alignContent: "flex-start", } : {}),
 
                     }, {

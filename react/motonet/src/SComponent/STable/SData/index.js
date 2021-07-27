@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Animated } from 'react-native';
 import { SView, SText, SThread, STheme } from '../../../SComponent'
+import { SPopupClose, SPopupOpen } from '../../SPopup';
+import SelectAlert from '../SelectAlert';
 
 export type SDataType = {
     defaultHeight: Number
@@ -47,7 +49,7 @@ export default class SData extends Component<SDataType> {
     }
     getRow(obj, key, position) {
         return this.props.header.map((header, i) => {
-            if(header.hidden) return <View/>
+            if (header.hidden) return <View />
             var Anims = this.props.animates;
             if (!Anims) {
                 return <View />
@@ -56,7 +58,7 @@ export default class SData extends Component<SDataType> {
                 return <View />
             }
             var DATA = this.getData(obj, header.key);
-            if(header.key=="index"){
+            if (header.key == "index") {
                 DATA = position;
             }
             if (header.render) {
@@ -94,9 +96,21 @@ export default class SData extends Component<SDataType> {
                         height: "100%",
                     }} onPress={() => {
                         // Anims.animHover[header.key].setValue(1);
-                        console.log(obj)
-                        console.log(key)
-                        console.log(header)
+                        if (this.props.onSelectRow) {
+                            this.props.onSelectRow(obj, header);
+                        }
+                        if (this.props.onAction) {
+                            SPopupOpen({
+                                "key": "SelectTableAlert",
+                                content: <SelectAlert data={obj} onAction={(type) => {
+                                    SPopupClose("SelectTableAlert");
+                                    if (this.props.onAction) {
+                                        this.props.onAction(type, obj);
+                                    }
+                                }} />
+                            })
+                        }
+
                         this.setState({
                             select: {
                                 x: header.key,

@@ -16,12 +16,16 @@ type typeHeader = {
     hidden: Boolean,
     render: (data: String) => {}
 }
+type typeAction = "edit" | "delete";
 type SType = {
     header: [typeHeader],
     headerProps: SHeaderProps,
     data: [Object],
     dataProps: SDataType,
+    onAdd: Function,
     filter: (obj: Object, index: Number) => {},
+    onSelectRow: (obj: Object, index: typeHeader) => {},
+    onAction: (type: typeAction, obj: Object) => {},
     style: {
 
     }
@@ -123,19 +127,15 @@ export default class STable extends Component<SType> {
                 <SHeadBar   {...this.props.headerProps} reload={() => {
                     this.setState({ reload: true, });
                 }}
-                onAdd={() => {
-                    if(this.props.onAdd){
-                       if(typeof this.props.onAdd=="function" ) this.props.onAdd();
-                    }
-                }}
-                 buscar={(text) => {
-                    this.setState({
-                        buscador: {
-                            ...this.state.buscador,
-                            value: text
-                        },
-                    });
-                }} />
+                    onAdd={this.props.onAdd}
+                    buscar={(text) => {
+                        this.setState({
+                            buscador: {
+                                ...this.state.buscador,
+                                value: text
+                            },
+                        });
+                    }} />
                 <SView props={{
                     // direction:"row",
                 }} style={{
@@ -180,6 +180,8 @@ export default class STable extends Component<SType> {
                         }}>
                             <SData
                                 {...this.props.dataProps}
+                                onAction={this.props.onAction}
+                                onSelectRow={this.props.onSelectRow}
                                 ref={(ref) => { this.refData = ref }}
                                 data={this.filterData()}
                                 header={this.state.header}

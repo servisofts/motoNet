@@ -18,17 +18,17 @@ const getType = (type: TypeStyles) => {
                 "View": {
                     backgroundColor: STheme().colorPrimary + "22",
                     borderWidth: 1,
-                    borderColor: STheme().colorOpaque+"44",
+                    borderColor: STheme().colorOpaque + "44",
                     borderRadius: 4,
                     marginTop: 32,
-                    paddingStart:8,
+                    paddingStart: 8,
                 },
                 "LabelStyle": {
                     position: "absolute",
                     top: -22,
                     left: 8,
                     fontSize: 14,
-                    color:STheme().colorPrimary,
+                    color: STheme().colorPrimary,
                     // backgroundColor:STheme().colorPrimary+"22",
                     // borderRadius:4,
                     // padding:4,
@@ -74,21 +74,31 @@ const getType = (type: TypeStyles) => {
         case "primary":
             return StyleSheet.create({
                 "View": {
-                    backgroundColor: STheme().colorPrimary,
-                    borderWidth: 1,
-                    borderColor: STheme().colorSecondary,
-                    borderRadius: 4 ,
+                    borderWidth: 2,
+                    borderColor: STheme().colorPrimary,
+                    backgroundColor:STheme().colorPrimary+"11",
+                    borderRadius: 4,
+                    marginTop: 32,
+                    paddingStart: 8,
                 },
                 "LabelStyle": {
+                    position: "absolute",
+                    top: -22,
+                    left: 8,
+                    fontSize: 14,
+                    color: STheme().colorSecondary,
+                    // backgroundColor:STheme().colorPrimary+"22",
+                    // borderRadius:4,
+                    // padding:4,
 
                 },
                 "InputText": {
-                    padding: 4,
+                    fontSize: 14,
                     color: STheme().colorSecondary,
-                    ...(Platform.OS != "web" ? {} : { placeholderTextColor: STheme().colorOpaque }),
+                    ...(Platform.OS != "web" ? {} : { placeholderTextColor: STheme().colorSecondary }),
                 },
                 "placeholder": {
-                    color: STheme().colorOpaque
+                    color: STheme().colorSecondary
                 },
                 "error": {
                     borderColor: STheme().colorDanger,

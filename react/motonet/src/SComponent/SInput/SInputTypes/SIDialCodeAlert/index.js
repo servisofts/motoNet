@@ -38,7 +38,7 @@ export default class SIDialCodeAlert extends Component<typeProps> {
             props={{
                 variant: "center"
             }} style={{
-                width: 60,
+                width: 60,  
                 height: "100%"
             }}
             onPress={() => {
@@ -62,6 +62,9 @@ export default class SIDialCodeAlert extends Component<typeProps> {
                 width: "100%",
             }}>
                 <SText style={style}>{defaultCountry.flag}</SText>
+                <View style={{
+                    width:4,
+                }}></View>
                 <SText style={style}>{defaultCountry.dialCode}</SText>
             </SView>
         </SView>

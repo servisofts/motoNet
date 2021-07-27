@@ -35,6 +35,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return password(type, Parent);
         case "phone":
             return phone(type, Parent);
+        case "telefono":
+            return phone(type, Parent);
         case "email":
             return email(type, Parent);
         default:
@@ -52,11 +54,18 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
 }
 const phone = (type: TypeType, Parent: SInput) => {
     var value = Parent.getValue();
-    var arr = value.split(" ");
+    var arr = []
+    if (value) {
+        arr = value.split(" ");
+    }
     var dialcodeTxt = "+591"
     if (arr.length > 1) {
         dialcodeTxt = arr[0];
         value = arr[1];
+    } else {
+        if (Parent.getData().dialCode) {
+            dialcodeTxt = Parent.getData().dialCode.dialCode
+        }
     }
     var dialcode = SIDialCodeAlert.getDialCode(dialcodeTxt)
     return buildResp({
@@ -64,6 +73,14 @@ const phone = (type: TypeType, Parent: SInput) => {
             keyboardType: "phone-pad",
         },
         onChangeText: (text) => {
+            var _value = Parent.getValue();
+            if (_value) {
+                var arr = _value.split(" ");
+                if (arr.length > 1) {
+                    console.log(arr[1])
+                    dialcode = SIDialCodeAlert.getDialCode(arr[0])
+                }
+            }
             return dialcode.dialCode + " " + text;
         },
         verify: (value) => {
@@ -77,11 +94,14 @@ const phone = (type: TypeType, Parent: SInput) => {
             return isVerified;
         },
         filter: (value: String) => {
+            if (!value) return value;
             var _value = value;
             var arr = _value.split(" ");
             if (arr.length > 1) {
+                dialcode = SIDialCodeAlert.getDialCode(arr[0])
                 _value = arr[1];
             }
+
             let unmaskedPhoneNumber = (_value.match(/\d+/g) || []).join('');
             if (unmaskedPhoneNumber.length === 0) {
                 return ""
@@ -102,8 +122,17 @@ const phone = (type: TypeType, Parent: SInput) => {
             return phoneNumber;
         },
         icon: (
-            SIDialCodeAlert.getOpenButtom(dialcodeTxt, Parent.getStyle().InputText, (value) => {
-                Parent.setData({ dialCode: value })
+            SIDialCodeAlert.getOpenButtom(dialcodeTxt, Parent.getStyle().InputText, (dial) => {
+                var value = Parent.getValue();
+                var arr = []
+                if (value) {
+                    arr = value.split(" ");
+                }
+                if (arr.length > 0) {
+                    Parent.setValue(dial.dialCode + " " + arr[1])
+                } else {
+                    Parent.setValue(dial.dialCode + " " + "")
+                }
             })
         ),
         style: {
@@ -127,6 +156,7 @@ const email = (type: TypeType, Parent: SInput) => {
             InputText: {}
         },
         filter: (_value: String) => {
+            if (!_value) return _value;
             var value = _value;
             value = value.trim();
             value = value.split(" ")[0];

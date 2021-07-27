@@ -202,6 +202,9 @@ class UsuariosTablaPage extends Component {
 
             }}
             data={data}
+            onAdd={this.props.match.params.tipo != "Todos" ? () => {
+                this.props.history.push("/Usuarios/" + this.props.match.params.tipo + "/registro/")
+            } : false}
             dataProps={{
                 defaultHeight: 40,
             }}

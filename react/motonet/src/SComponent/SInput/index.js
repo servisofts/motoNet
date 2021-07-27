@@ -9,7 +9,7 @@ import SSize from '../SSize';
 import { SText } from '../SText';
 import { SView } from '../SView';
 
-type typeConfig = {
+export type TypeInputProps = {
     style: ViewStyle,
     customStyle: TypeStyles,
     type: TypeType,
@@ -23,7 +23,7 @@ type typeConfig = {
 
 interface IProps extends TextInputProps {
     style: ViewStyle,
-    props: typeConfig,
+    props: TypeInputProps,
     onPress: Function,
 }
 // export type SInputProps = IProps;
@@ -98,6 +98,7 @@ export class SInput extends Component<IProps> {
         return <SView
             props={{ variant: "center" }}
             style={{
+                width: 60,
                 height: "100%"
             }}>
             {ITEM}
@@ -127,14 +128,16 @@ export class SInput extends Component<IProps> {
             Component = TouchableOpacity;
         }
         var valueFilter = this.state.value;
-        if (this.type.filter) {
-            valueFilter = this.type.filter(valueFilter);
+        if (this.type) {
+            if (this.type.filter) {
+                valueFilter = this.type.filter(valueFilter);
+            }
         }
-        // if(valueFilter){
-        //     if(valueFilter){
-        //         this.verify();
-        //     }
-        // }
+        if (valueFilter) {
+            if (valueFilter) {
+                this.verify();
+            }
+        }
         return (
             <Component
                 onLayout={(evt) => {
@@ -159,6 +162,7 @@ export class SInput extends Component<IProps> {
                         ...this.style,
                     }
                 ]} >
+                {this.getLabel()}
                 <SView props={{
                     col: "xs-12",
                     direction: "row",
@@ -171,12 +175,13 @@ export class SInput extends Component<IProps> {
                         onChangeText={(_text) => {
                             var text = _text;
                             if (this.type) {
-                                if (this.type.filter) {
-                                    text = this.type.filter(text)
-                                }
                                 if (this.type.onChangeText) {
                                     text = this.type.onChangeText(text)
                                 }
+                                if (this.type.filter) {
+                                    text = this.type.filter(text)
+                                }
+
                             }
                             if (this.props.onChangeText) {
                                 this.props.onChangeText(text)
@@ -198,7 +203,6 @@ export class SInput extends Component<IProps> {
 
                     />
                 </SView>
-                {this.getLabel()}
             </Component >
         );
     }

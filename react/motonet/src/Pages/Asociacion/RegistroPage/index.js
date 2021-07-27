@@ -7,14 +7,13 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import TableNewMe from '../../../Components/TableNewMe'
 import Page from '../../../Components/Page';
-import { SButtom, SInput, SText, SView } from '../../../SComponent';
+import { SButtom, SForm, SInput, SText, SView } from '../../../SComponent';
 
 class RegistroPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
         };
-        this._ref = {}
     }
     render() {
         return (
@@ -24,106 +23,34 @@ class RegistroPage extends Component {
                 onBack={"/Asociaciones"}
             >
                 <SView props={{
+                    variant: "center",
                     col: "xs-12",
-                    variant: "default"
                 }}>
-                    <SView props={{
-                        // variant: "col-square",
-                        col: "md-6"
-                    }} style={{
-                        borderRadius: 8,
-                        overflow: 'hidden',
-                    }}>
-                        Responsable
-                    </SView>
-
-                    <SInput
-                        ref={(ref) => { this._ref["responsable"] = ref }}
+                    <SForm
                         props={{
+                            variant: "center",
                             col: "xs-12 md-6",
+                        }}
+                        inputProps={{
                             customStyle: "primary",
                         }}
-                        style={{
-                            textAlign: "center",
-                            width: "100%"
+                        inputs={{
+                            key_encargado: { label: "Responsable", type: "default", isRequired: true },
+                            descripcion: { label: "Descripción", type: "default", isRequired: true },
+                            direccion: { label: "Dirección", type: "default", isRequired: true },
                         }}
-                        placeholder={"Responsable..."}></SInput>
-
-
-                    <SView props={{
-                        // variant: "col-square",
-                        col: "xs-6"
-                    }} style={{
-                        borderRadius: 8,
-                        overflow: 'hidden',
-                    }}>
-                        Descripción
-                    </SView>
-                    <SInput
-                        ref={(ref) => { this._ref["descripcion"] = ref }}
-                        props={{
-                            col: "xs-12 md-6",
-                            customStyle: "primary",
-                        }}
-                        style={{
-                            textAlign: "center",
-                            width: "100%"
-                        }}
-                        placeholder={"Descripción..."}></SInput>
-
-                    <SView props={{
-                        // variant: "col-square",
-                        col: "xs-6"
-                    }} style={{
-                        borderRadius: 8,
-                        overflow: 'hidden',
-                    }}>
-                        Dirección
-                    </SView>
-                    <SInput
-                        ref={(ref) => { this._ref["direccion"] = ref }}
-                        props={{
-                            col: "xs-12 md-6",
-                            customStyle: "primary",
-                        }}
-                        style={{
-                            textAlign: "center",
-                            width: "100%"
-                        }}
-                        placeholder={"Dirección..."}></SInput>
-                    <SButtom
-                        style={{color:"#ffffff", marginTop:"10px"}}
-                        props={{
-                            type: "danger",
-                            col: "xs-12 md-6",
-                            customStyle: "primary",
-                        }} onPress={() => {
-                            var ref_responsable: SInput = this._ref["responsable"];
-                            var ref_descripcion: SInput = this._ref["descripcion"];
-                            var ref_direccion: SInput = this._ref["direccion"];
-                            //console.log(ref_responsable.getValue())
-                            //console.log(ref_descripcion.getValue())
-                            //console.log(ref_direccion.getValue())
-                            //console.log(this.props.state.usuarioReducer.usuarioLog.key)
-
-                            var dataSend = {};
-                            dataSend["key_encargado"] = ref_responsable.getValue();
-                            dataSend["descripcion"] = ref_descripcion.getValue();
-                            dataSend["direccion"] = ref_direccion.getValue();
-                            console.log(dataSend)
-
+                        onSubmit={(data) => {
                             var objSend = {
                                 component: "asociacionMoto",
                                 type: "registro",
                                 estado: "cargando",
                                 key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                                data: dataSend
+                                data: data
                             };
                             this.props.state.socketReducer.send(objSend);
-                        }}>
-                        REGISTRAR
-                    </SButtom>
-
+                            this.props.history.goBack();
+                        }}
+                    />
                 </SView>
 
             </Page>

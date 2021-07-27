@@ -27,10 +27,14 @@ export type SIconsType = "add"
     | "usuarios1"
     | "usuarios2"
     | "usuarios3"
-    | "usuarios4"
-type IconsPropsType = {
+    | "usuarios4";
+export type IconsNames = SIconsType | [SIconsType]
+
+export type IconsPropsType = {
     name: SIconsType
 }
+
+
 export default class SIcon extends Component<IconsPropsType> {
     constructor(props) {
         super(props);
@@ -60,7 +64,6 @@ export default class SIcon extends Component<IconsPropsType> {
             case "usuarios3": return <SImage source={{ uri: require("./Icons/usuarios3.png") }} style={this.props.style} />
             case "usuarios4": return <SImage source={{ uri: require("./Icons/usuarios4.png") }} style={this.props.style} />
             case "usuarios4": return <SImage source={{ uri: require("./Icons/usuarios4.png") }} style={this.props.style} />
-
             default: return <View />
         }
     }
