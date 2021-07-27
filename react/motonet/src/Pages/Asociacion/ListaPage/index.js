@@ -76,6 +76,9 @@ class ListaPage extends Component {
                     color: STheme().colorTextPrimary
                 }
             }}
+            onAdd={()=>{
+                this.props.history.push("/Asociaciones/Registro")
+            }}
             header={[
                 { label: "#", key: "index", width: 30, },
                 { label: "Descripcion", key: "descripcion", width: 200, },
