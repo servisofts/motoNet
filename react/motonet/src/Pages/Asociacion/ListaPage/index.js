@@ -56,7 +56,7 @@ class ListaPage extends Component {
     }
 
     getTabla() {
-        var data = this.getAsociaciones();
+        var data = this.getAsociaciones();  
         var usuarios = this.getUsuarios();
         // var cabeceras = this.getCabecera();
         if (!data) {

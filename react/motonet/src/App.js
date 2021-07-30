@@ -27,9 +27,11 @@ import AjustesPage from './Pages/AjustesPage';
 
 import { Asociacion } from './Pages/Asociacion';
 import { Usuarios } from './Pages/Usuarios';
+import Test from './SComponent/Test';
 function App() {
   return (
     <BrowserRouter>
+      <Route exact path='/Test' component={Test} />
       <Route exact path='/' component={CargaPage} />
       <Route exact path='/Login' component={LoginPage} />
       <Route exact path='/Inicio' component={InicioPage} />

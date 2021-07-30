@@ -10,7 +10,7 @@ const UsuarioRegistroPage = (props) => {
         <NaviDrawer title={"Registro de usuario"} history={props.history}
             page={() => {
                 return (
-                    <UsuarioRegistro history={props.history} key_usuario={key_usuario}/>
+                    <UsuarioRegistro history={props.history} key_usuario={key_usuario} />
                 )
             }}
         />
