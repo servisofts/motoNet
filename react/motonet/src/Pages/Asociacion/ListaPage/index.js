@@ -55,6 +55,23 @@ class ListaPage extends Component {
         return data;
     }
 
+    deleteAsociaciones(key) {
+        if (!key) {
+            return <View />
+        }
+        var bool = window.confirm("Seguro de eliminar el dato?");
+        if (bool) {
+            var objSend = {
+                component: "asociacionMoto",
+                type: "eliminar",
+                estado: "cargando",
+                key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                key: key
+            };
+            this.props.state.socketReducer.send(objSend);
+        }
+    }
+
     getTabla() {
         var data = this.getAsociaciones();  
         var usuarios = this.getUsuarios();
@@ -81,8 +98,6 @@ class ListaPage extends Component {
             }}
             header={[
                 { label: "#", key: "index", width: 30, },
-                { label: "Descripcion", key: "descripcion", width: 200, },
-                { label: "Direccion", key: "direccion", width: 300, },
                 {
                     label: "Encargado", key: "key_encargado", width: 200, render: (data) => {
                         if (usuarios[data]) {
@@ -91,8 +106,10 @@ class ListaPage extends Component {
                         return data;
                     }
                 },
+                { label: "Descripción", key: "descripcion", width: 200, },
+                { label: "Dirección", key: "direccion", width: 300, },
                 {
-                    label: "Fecha Creacion",
+                    label: "Fecha Creación",
                     key: "fecha_on",
                     width: 150,
                     render: (data) => { return new SDate(data).toString("yyyy-MM-dd hh:mm:ss") }
@@ -110,8 +127,10 @@ class ListaPage extends Component {
             onAction={(type, obj) => {
                 switch (type) {
                     case "edit":
+                        this.props.history.push("./Asociaciones/Registro/" + obj.key)
                         break;
                     case "delete":
+                        this.deleteAsociaciones(obj.key)
                         break;
                 }
             }}
