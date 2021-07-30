@@ -120,6 +120,7 @@ const BuscadorComponenteMapSingle = (props) => {
                         {props.state.viajesReducer.ubicacion.inicio.value}
                     </Text>
                 </TouchableOpacity>
+               
             </View >
         )
     }

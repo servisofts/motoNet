@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -7,6 +7,7 @@ import Svg from '../../../Svg';
 import Geolocation from '@react-native-community/geolocation';
 import MarkerMedio from './MarkerMedio';
 import MapaSelectPorLista from './MapaSelectPorLista';
+import Boton1 from '../../../component/Boton1';
 
 class MapaAutoComplete extends Component {
     constructor(props) {
@@ -135,6 +136,21 @@ class MapaAutoComplete extends Component {
                                 fill: "#f00"
                             }} />
                     </TouchableOpacity>
+                    <View style={{
+                        position: "absolute",
+                        bottom: 0,
+                        width: "100%",
+                        //margin:10
+                    }}>
+                        <Boton1 type="1"
+                            label="Aceptar"
+                            cargando={false}
+                            // cargando={props.state.viajesReducer.estado == "cargando"}
+                            onPress={() => {
+                                this.props.navigation.goBack()
+                            }}
+                        />
+                    </View>
                 </View>
             </View>
         );
