@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import TableNewMe from '../../../Components/TableNewMe'
 import Page from '../../../Components/Page';
-import { SButtom, SForm, SInput, SText, SView } from '../../../SComponent';
+import { SButtom, SForm, SInput, SText, SView,SActivityIndicator } from '../../../SComponent';
 import { View } from 'react-native';
 
 class RegistroPage extends Component {
@@ -38,6 +38,7 @@ class RegistroPage extends Component {
             }
             return data[this.props.match.params.key];
         }
+        return {}
     }
 
     // getData(){
@@ -45,7 +46,10 @@ class RegistroPage extends Component {
     // }
 
     render() {
-
+        var asociacion = this.getAsociacion();
+        if(!asociacion){
+            return <SActivityIndicator/>
+        }
         return (
             <Page
                 history={this.props.history}
@@ -56,7 +60,6 @@ class RegistroPage extends Component {
                     variant: "center",
                     col: "xs-12",
                 }}>
-                    {(!this.props.match.params.key) ?
                         <SForm
                             props={{
                                 variant: "center",
@@ -66,53 +69,27 @@ class RegistroPage extends Component {
                                 customStyle: "primary",
                             }}
                             inputs={{
-                                key_encargado: { label: "Responsable", type: "default", isRequired: true },
-                                descripcion: { label: "Descripción", type: "default", isRequired: true },
-                                direccion: { label: "Dirección", type: "default", isRequired: true },
+                                key_encargado: { label: "Responsable", type: "default", isRequired: true, defaultValue:asociacion.key_encargado  },
+                                descripcion: { label: "Descripción", type: "default", isRequired: true, defaultValue:asociacion.descripcion },
+                                direccion: { label: "Dirección", type: "default", isRequired: true, defaultValue: asociacion.direccion  },
 
                             }}
                             onSubmit={(data) => {
                                 var objSend = {
                                     component: "asociacionMoto",
-                                    type: "registro",
+                                    type: (this.props.match.params.key?"editar":"registro"),
                                     estado: "cargando",
                                     key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                                    data: data
-                                };
-                                this.props.state.socketReducer.send(objSend);
-                                this.props.history.goBack();
-                            }}
-                        />
-                        :
-                        <SForm
-                            val={this.getAsociacion()}
-                            props={{
-                                variant: "center",
-                                col: "xs-12 md-6",
-                            }}
-                            inputProps={{
-                                customStyle: "primary",
-                            }}
-                            inputs={{
-                                key_encargado: { label: "Responsable", type: "default", isRequired: true, defaultValue: this.getAsociacion().key_encargado  },
-                                descripcion: { label: "Descripción", type: "default", isRequired: true, defaultValue: this.getAsociacion().descripcion },
-                                direccion: { label: "Dirección", type: "default", isRequired: true, defaultValue: this.getAsociacion().direccion  },
-
-                            }}
-                            onSubmit={(data) => {
-                                var objSend = {
-                                    component: "asociacionMoto",
-                                    type: "confirmarDatos",
-                                    estado: "cargando",
-                                    key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                                    data: data
+                                    data: {
+                                        ...asociacion,
+                                        ...data
+                                    }
                                 };
                                 alert(JSON.stringify(data))
                                 this.props.state.socketReducer.send(objSend);
                                 this.props.history.goBack();
                             }}
                         />
-                    }
                 </SView>
 
             </Page>
