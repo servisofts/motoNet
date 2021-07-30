@@ -58,7 +58,7 @@ class BarraSuperiorMensajeria extends Component {
                 }}>
                     <View style={{
                         // flex: 1,
-                        height: 50,
+                        height: 40,
                         flexDirection: "row",
                         backgroundColor: STheme.color.background,
                         // borderBottomEndRadius: 16,

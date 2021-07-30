@@ -48,7 +48,7 @@ class BarraSuperiorTransporte extends Component {
         return (
             <Animated.View style={{
                 width: "100%",
-                height: 180,
+                height: 150,
                 flexDirection: "row",
                 // backgroundColor: "#fff",
                 transform: [
@@ -66,7 +66,7 @@ class BarraSuperiorTransporte extends Component {
                 }}>
                     <View style={{
                         // flex: 1,
-                        height: 50,
+                        height: 40 ,
                         flexDirection: "row",
                         backgroundColor: STheme.color.background,
                         // borderBottomEndRadius: 16,
@@ -77,6 +77,7 @@ class BarraSuperiorTransporte extends Component {
                             height: "100%",
                             justifyContent: "center",
                             alignItems: "center",
+                            marginLeft:8
                         }}
                             activeOpacity={0.9}
                             onPress={this.props.goBack}>
@@ -131,7 +132,7 @@ class BarraSuperiorTransporte extends Component {
                             }}
                         />
                         <View style={{
-                            height: 16,
+                            height: 10,
                         }}></View>
                         <BuscardorNuevo
                             ref={(ref) => { this.direccion2 = ref }}

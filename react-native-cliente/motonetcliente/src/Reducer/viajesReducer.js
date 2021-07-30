@@ -74,6 +74,9 @@ export default (state, action) => {
             case "calificarViajeCliente":
                 calificarViajeCliente(state, action);
                 break;
+            case "calificar":
+                calificar(state, action);
+                break;
             case "getViajeByKeyUsuario":
                 getViajeByKeyUsuario(state, action);
                 break;
@@ -214,6 +217,15 @@ const getViaje = (state, action) => {
 }
 
 const calificarViajeCliente = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.data = action.data
+        AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
+    }
+}
+
+const calificar = (state, action) => {
     state.type = action.type
     state.estado = action.estado
     if (action.estado === "exito") {
