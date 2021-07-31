@@ -11,6 +11,7 @@ const MapaPage = (props) => {
 
     return (
         <Page
+            history={props.history}
             disableScroll={true}
             onBack={"goBack"}>
             <Mapa />
