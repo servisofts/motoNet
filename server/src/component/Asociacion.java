@@ -28,12 +28,26 @@ public class Asociacion {
             case "registro":
                 registro(data, session);
                 break;
+            case "editar":
+                editar(data, session);
+                break;
             case "subirFoto":
                 subirFoto(data, session);
                 break;
             case "eliminar":
                 eliminar(data, session);
                 break;
+        }
+    }
+
+    public void editar(JSONObject obj, SSSessionAbstract session) {
+        try {
+            JSONObject data = obj.getJSONObject("data");
+            Conexion.editObject("asociacion_moto", data);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -51,7 +65,7 @@ public class Asociacion {
     }
 
     public void registro(JSONObject obj, SSSessionAbstract session) {
-        //JSONObject data = obj.getJSONObject("data");
+        // JSONObject data = obj.getJSONObject("data");
         try {
 
             // String key_usuario = obj.getString("key_usuario");
@@ -76,11 +90,12 @@ public class Asociacion {
     public void subirFoto(JSONObject obj, SSSessionAbstract session) {
         try {
 
-            //String b64 = obj.getString("data");
+            // String b64 = obj.getString("data");
             String key = UUID.randomUUID().toString();
             String key_usuario = obj.getString("key_usuario");
-            //byte[] foto = Base64.getDecoder().decode(b64.getBytes("UTF-8"));
-            //String url = FilesManager.guardar_file_type(foto, "publicidad.png", key, "url_publicidad");
+            // byte[] foto = Base64.getDecoder().decode(b64.getBytes("UTF-8"));
+            // String url = FilesManager.guardar_file_type(foto, "publicidad.png", key,
+            // "url_publicidad");
             JSONObject especialidad = new JSONObject();
             especialidad.put("key", key);
             especialidad.put("fecha_on", "now()");
@@ -101,10 +116,9 @@ public class Asociacion {
 
     public void eliminar(JSONObject obj, SSSessionAbstract session) {
         try {
-
             String key = obj.getString("key");
-            //String key_usuario = obj.getString("key_usuario");
-            Conexion.ejecutarUpdate("UPDATE publicidad SET estado = 0 WHERE key = '"+ key + "'");
+            String key_usuario = obj.getString("key_usuario");
+            Conexion.ejecutarUpdate("UPDATE asociacion_moto SET estado = 0 WHERE key = '" + key + "'");
             // obj.put("data", "");
             obj.put("estado", "exito");
             SSServerAbstract.sendServer(SSServerAbstract.TIPO_SOCKET_WEB, obj.toString());

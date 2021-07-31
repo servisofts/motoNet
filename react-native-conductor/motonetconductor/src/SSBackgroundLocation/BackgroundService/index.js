@@ -145,6 +145,12 @@ class BackgroundService {
                 return;
             }
             if (new Date().getTime() - this.lastSend > 3000) {
+                if (this.hiloLocation) {
+                    if (this.getDistanciaMetros(this.hiloLocation.latitude, this.hiloLocation.longitude, this.location.latitude, this.location.longitude) <= 1) {
+                        return;
+                    }
+                }
+                this.hiloLocation = this.location;
                 this.sendServer();
             }
         })

@@ -15,6 +15,7 @@ public class BuscandoViaje extends Thread {
     private JSONObject viaje;
     private JSONArray conductores_cercanos;
     private boolean isRun;
+    private boolean notificarSiguiente;
     private int cantidadIntentos;
 
     public BuscandoViaje(JSONObject viaje) {
@@ -24,6 +25,10 @@ public class BuscandoViaje extends Thread {
 
     public void setViaje(JSONObject viaje) {
         this.viaje = viaje;
+    }
+
+    public void notificarSiguiente() {
+        this.notificarSiguiente = true;
     }
 
     public String getKey() {
@@ -151,7 +156,16 @@ public class BuscandoViaje extends Thread {
                 }
                 conductor = this.conductores_cercanos.getJSONObject(i);
                 this.solicitarViajeConductor(conductor);
-                this.sleep(this.getParametro("Tiempo permitido para aceptar viaje conductor"));
+                int frecuencia = 1;
+                int tiempoLimite = this.getParametro("Tiempo permitido para aceptar viaje conductor");
+                for (int j = 0; j < tiempoLimite; j += frecuencia) {
+                    this.sleep(frecuencia);
+                    if (this.notificarSiguiente) {
+                        this.notificarSiguiente = false;
+                        j = tiempoLimite;
+                        continue;
+                    }
+                }
 
             }
         }

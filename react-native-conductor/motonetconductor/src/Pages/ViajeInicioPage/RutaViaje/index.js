@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import Svg from '../../../Svg';
 import SThread from '../../../SThread';
+import * as SSBackgroundLocation from '../../../SSBackgroundLocation';
+
 const delay = ms => new Promise(res => setTimeout(res, ms));
 let lastSend = 0;
 const RutaViaje = (props) => {
@@ -24,6 +26,7 @@ const RutaViaje = (props) => {
             if (timeActual - lastSend < 15000) {
                 return;
             }
+            SSBackgroundLocation.getInstance().location;
             let ubicacion = props.state.backgroundLocationReducer.data;
             if (!ubicacion) {
                 return;

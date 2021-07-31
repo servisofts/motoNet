@@ -7,6 +7,7 @@ import { ReactComponent as AddRed } from './Icons/addRed.svg'
 import { ReactComponent as Reload } from './Icons/reload.svg'
 import { ReactComponent as Reloadbox } from './Icons/reloadbox.svg'
 import { ReactComponent as Drag } from './Icons/drag.svg'
+import { ReactComponent as Marker } from './Icons/marker.svg'
 
 
 export type SIconsType = "add"
@@ -20,6 +21,7 @@ export type SIconsType = "add"
     | "eliminar"
     | "engranaje"
     | "engranaje2"
+    | "marker"
     | "publicidad"
     | "reload"
     | "reloadbox"
@@ -55,6 +57,7 @@ export default class SIcon extends Component<IconsPropsType> {
             case "eliminar": return <SImage source={{ uri: require("./Icons/eliminar.png") }} style={this.props.style} />
             case "engranaje": return <Engranaje style={this.props.style} />
             case "engranaje2": return <Engranaje2 style={this.props.style} />
+            case "marker": return <Marker style={this.props.style} />
             case "publicidad": return <SImage source={{ uri: require("./Icons/publicidad.png") }} style={this.props.style} />
             case "reload": return <Reload style={this.props.style} />
             case "reloadbox": return <Reloadbox style={this.props.style} />

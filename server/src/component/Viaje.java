@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import conexion.*;
 import util.FilesManager;
+import Viaje.BuscandoViaje;
 import Viaje.LatLng;
 import Viaje.ViajeHilo;
 
@@ -418,6 +419,7 @@ public class Viaje {
             SSServerAbstract.sendUser(objSend.toString(), key_conductor);
             obj.put("data", viaje);
             ViajeHilo.actualizarViaje(viaje);
+            ViajeHilo.notificarSiguiente(viaje);
             obj.put("estado", "exito");
         } catch (SQLException e) {
             obj.put("estado", "error");

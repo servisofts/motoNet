@@ -3,6 +3,7 @@ import { Text, TouchableOpacity, View, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
 import Svg from '../../../Svg';
 import { NavigationApps, actions, googleMapsTravelModes, mapsTravelModes } from "react-native-navigation-apps";
+import SNavigationApps from '../SNavigationApps';
 
 const EstadoViaje = (props) => {
 
@@ -35,6 +36,7 @@ const EstadoViaje = (props) => {
     }
 
     var viaje = props.state.ViajeReducer.data;
+    
     return (
         <>
             {/* <View
@@ -61,14 +63,15 @@ const EstadoViaje = (props) => {
                 <Text style={{ color: "#666", fontSize: 12, textAlign: "center" }}>
                     Navega con:
                 </Text>
-                <NavigationApps
+                <SNavigationApps />
+                {/* <NavigationApps
                     iconSize={40}
                     row
                     address='some default address to navigate' // address to navigate by for all apps 
                     waze={{ address: '', lat: viaje.latitude, lon: viaje.longitude, action: actions.navigateByLatAndLon }} // specific settings for waze
                     googleMaps={{ address: '', lat: viaje.latitude, lon: viaje.longitude, action: actions.navigateByLatAndLon, travelMode: googleMapsTravelModes.driving }} // specific settings for google maps
                     maps={{ address: '', lat: viaje.latitude, lon: viaje.longitude, action: actions.navigateByLatAndLon, travelMode: mapsTravelModes.driving }} // specific settings for maps
-                />
+                /> */}
 
             </View>
         </>

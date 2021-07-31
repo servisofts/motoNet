@@ -16,6 +16,7 @@ import DetalleRuta from './DetalleRuta';
 import BarraSuperior from '../../Component/BarraSuperior';
 
 import * as SSBackgroundLocation from '../../SSBackgroundLocation';
+import SThread from '../../SThread';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 var mapa;
@@ -49,30 +50,26 @@ const ViajeInicioPage = (props) => {
         SSBackgroundLocation.getInstance().start();
     }
     // console.log(props.navigation)
+
     const getViajeHilo = async () => {
-        await delay(10000);
-        var timeActual = new Date().getTime();
-        if (timeActual - lastSend < 10000) {
+        new SThread(30000, "hiloViaje", false).start(() => {
+            if (!props.state.ViajeReducer.data) {
+                return;
+            }
+            if (!props.state.ViajeReducer.data["key"]) {
+                return;
+            }
+            SSBackgroundLocation.getInstance().sendServer();
+            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+                component: "viaje",
+                type: "getViajeByKeyUsuario",
+                key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                estado: "cargando"
+            }, true);
             getViajeHilo();
-            return;
-        }
-        lastSend = timeActual;
-        // console.log("HILO DEL VIAJE COMPLETADO");
-        if (!props.state.ViajeReducer.data) {
-            return;
-        }
-        if (!props.state.ViajeReducer.data["key"]) {
-            return;
-        }
-        props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-            component: "viaje",
-            type: "getViajeByKeyUsuario",
-            key_usuario: props.state.usuarioReducer.usuarioLog.key,
-            estado: "cargando"
-        }, true);
-        getViajeHilo();
+        })
     };
-    // getViajeHilo();
+    getViajeHilo();
 
     if (!zoom) {
         const delay = ms => new Promise(res => setTimeout(res, ms));

@@ -43,46 +43,41 @@ export class Mapa extends Component {
     constructor(props) {
         super(props);
     }
-
-
-
-
-
     render() {
-        if (!this.props.state.conductorReducer.data) {
-            if (this.props.state.conductorReducer.estado == "cargando") {
-                return <CircularProgress color="#fff" style={{ display: "block" }} />
-            }
-            if (this.props.state.conductorReducer.estado == "error") {
-                return <div>{this.props.state.conductorReducer.error}</div>
-            }
-            if (!this.props.state.socketReducer.socket) {
-                return <div>cargando.</div>
-            }
-            var objSend = {
-                component: "usuario",
-                type: "getAllCabecera",
-                estado: "cargando",
-                cabecera: "registro_conductor",
-                data: ""
-            };
-            this.props.state.socketReducer.send(objSend);
-            return <CircularProgress color="#fff" style={{ display: "block" }} />
-        }
-        if (!this.props.state.socketReducer.socket) {
-            this.props.state.seguimientoConductorReducer.isRun = false;
-        }
-        if (!this.props.state.seguimientoConductorReducer.isRun) {
-            var objSend = {
-                component: "seguimientoConductor",
-                type: "startAll",
-                estado: "cargando",
-            };
-            if (!this.props.state.socketReducer.socket) {
-                return <div>cargando.</div>
-            }
-            this.props.state.socketReducer.send(objSend);
-        }
+        // if (!this.props.state.conductorReducer.data) {
+        //     if (this.props.state.conductorReducer.estado == "cargando") {
+        //         return <CircularProgress color="#fff" style={{ display: "block" }} />
+        //     }
+        //     if (this.props.state.conductorReducer.estado == "error") {
+        //         return <div>{this.props.state.conductorReducer.error}</div>
+        //     }
+        //     if (!this.props.state.socketReducer.socket) {
+        //         return <div>cargando.</div>
+        //     }
+        //     var objSend = {
+        //         component: "usuario",
+        //         type: "getAllCabecera",
+        //         estado: "cargando",
+        //         cabecera: "registro_conductor",
+        //         data: ""
+        //     };
+        //     this.props.state.socketReducer.send(objSend);
+        //     return <CircularProgress color="#fff" style={{ display: "block" }} />
+        // }
+        // if (!this.props.state.socketReducer.socket) {
+        //     this.props.state.seguimientoConductorReducer.isRun = false;
+        // }
+        // if (!this.props.state.seguimientoConductorReducer.isRun) {
+        //     var objSend = {
+        //         component: "seguimientoConductor",
+        //         type: "startAll",
+        //         estado: "cargando",
+        //     };
+        //     if (!this.props.state.socketReducer.socket) {
+        //         return <div>cargando.</div>
+        //     }
+        //     this.props.state.socketReducer.send(objSend);
+        // }
         var getSVGMapa = () => {
             if (!this.props.state.seguimientoConductorReducer.data) {
                 return <div />
@@ -124,14 +119,9 @@ export class Mapa extends Component {
                         lat: -17.7799998333333332,
                         lng: -63.180598333333336
                     }}
-               
-                    defaultZoom={11}
-                >
-                    {
-                        getSVGMapa()
-                    }
 
-
+                    defaultZoom={11}>
+                    {getSVGMapa()}
                 </GoogleMapReact>
             </div>
         )

@@ -22,6 +22,10 @@ public class ViajeHilo {
         VIAJES_EN_CURSO.remove(key);
     }
 
+    public static void notificarSiguiente(JSONObject objViaje) {
+        VIAJES_EN_CURSO.get(objViaje.getString("key")).notificarSiguiente();
+    }
+
     public static void actualizarViaje(JSONObject objViaje) {
         VIAJES_EN_CURSO.get(objViaje.getString("key")).setViaje(objViaje);
     }
@@ -41,7 +45,7 @@ public class ViajeHilo {
             JSONObject obj = Viaje.getViajeFormat(viaje.getString("key"));
             JSONObject movimientos = obj.getJSONObject("movimientos");
             if (!movimientos.has(Viaje.TIPO_CONDUCTOR_CERCA)) {
-                
+
                 JSONObject direccionInicio = obj.getJSONObject("direccion_inicio");
                 double latitude_g = direccionInicio.getDouble("latitude");
                 double longitude_g = direccionInicio.getDouble("longitude");
