@@ -20,8 +20,8 @@ export default (state, action) => {
             case "eliminar":
                 eliminar(state, action);
                 break;
-            case "confirmarDatos":
-                confirmarDatos(state, action);
+            case "editar":
+                editar(state, action);
                 break;
         }
 
@@ -61,7 +61,14 @@ const eliminar = (state, action) => {
     }
 }
 
-const confirmarDatos = (state, action) => {
-    state.estadoConfirmando = action.estado;
+const editar = (state, action) => {
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        if (state.data) {
+            var obj = action.data;
+            state.data[obj.key] = obj;
+        }
+
+    }
 }
 

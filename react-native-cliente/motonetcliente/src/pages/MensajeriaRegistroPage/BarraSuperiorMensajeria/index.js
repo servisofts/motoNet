@@ -69,6 +69,7 @@ class BarraSuperiorMensajeria extends Component {
                             height: "100%",
                             justifyContent: "center",
                             alignItems: "center",
+                            marginLeft:8
                         }}
                             activeOpacity={0.9}
                             onPress={this.props.goBack}>
@@ -93,6 +94,7 @@ class BarraSuperiorMensajeria extends Component {
                             justifyContent: "center",
                             alignItems: "center",
                             flexDirection: "row",
+                            marginRight:8
                         }} onPress={() => {
                             this.props.pedir();
                         }}>

@@ -169,8 +169,7 @@ const ComponentDetalleCalificar = (props) => {
                                             sugerencia: obj.sugerencia.value,
                                         }, true);
                                     }
-                                    props.navigation.replace("CargaPage");
-                                    props.state.viajesReducer.data = false
+                                   
                                 }}
                             />
                         </View>

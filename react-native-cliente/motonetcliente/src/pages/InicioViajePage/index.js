@@ -304,6 +304,13 @@ class InicioViajePage extends Component {
 
     render() {
 
+        if (this.props.state.viajesReducer.estado=="exito" && this.props.state.viajesReducer.type=="calificar"  ) {
+            // console.log(this.props.state.viajesReducer.data)
+            this.props.navigation.replace("CargaPage");
+            this.props.state.viajesReducer.data = false
+            return <View />
+        }
+
         if (this.props.state.viajesReducer.data.movimientos["cancelo_viaje"]) {
             // console.log(this.props.state.viajesReducer.data)
             this.props.navigation.replace("CargaPage");

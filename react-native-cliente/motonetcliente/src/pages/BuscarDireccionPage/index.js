@@ -42,7 +42,7 @@ export default class BuscarDireccionPage extends Component {
                 this.setState({ type: "mapa" })
             }} />
         } else {
-            return <MapaAutoComplete value={this.state.ubicacion} seleccionar={(dt) => this.seleccionar(dt)} changeType={() => {
+            return <MapaAutoComplete {...this.props}  value={this.state.ubicacion} seleccionar={(dt) => this.seleccionar(dt)} changeType={() => {
                 this.setState({ type: "lista" })
             }} />
         }

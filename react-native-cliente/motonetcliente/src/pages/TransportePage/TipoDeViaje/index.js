@@ -39,7 +39,9 @@ export default class TipoDeViaje extends Component {
                 borderColor: "red",
                 borderWidth: (this.state.tipoSelect == key ? 1 : 0),
                 alignItems: "center",
-                justifyContent: "center"
+                justifyContent: "center",
+                marginLeft:12,
+                marginRight:12
             }} onPress={() => {
                 this.setState({ tipoSelect: key });
             }}>
@@ -74,7 +76,7 @@ export default class TipoDeViaje extends Component {
                 position: "absolute",
                 bottom: 0,
                 width: "100%",
-                height: 150,
+                height: 140,
                 backgroundColor: "#fff",
                 borderTopLeftRadius: 16,
                 borderTopRightRadius: 16,
@@ -92,7 +94,8 @@ export default class TipoDeViaje extends Component {
                     padding: 8,
                     flexDirection: "row",
                     alignItems: "space-between",
-                    justifyContent: "space-between"
+                    justifyContent: "space-between",
+                    
                 }}>
                     {this.ListaTiposDeViajes()}
                 </View>
