@@ -77,7 +77,7 @@ class RegistroPage extends Component {
                             onSubmit={(data) => {
                                 var objSend = {
                                     component: "asociacionMoto",
-                                    type: (this.props.match.params.key?"editar":"registro"),
+                                    type: (this.props.match.params.key ? "editar" : "registro"),
                                     estado: "cargando",
                                     key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
                                     data: {
