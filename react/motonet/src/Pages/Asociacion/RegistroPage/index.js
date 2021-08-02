@@ -71,7 +71,7 @@ class RegistroPage extends Component {
                             inputs={{
                                 key_encargado: { label: "Responsable", type: "default", isRequired: true, defaultValue:asociacion.key_encargado  },
                                 descripcion: { label: "Descripción", type: "default", isRequired: true, defaultValue:asociacion.descripcion },
-                                direccion: { label: "Dirección", type: "number", isRequired: true, defaultValue: asociacion.direccion  },
+                                direccion: { label: "Dirección", type: "default", isRequired: true, defaultValue: asociacion.direccion  },
 
                             }}
                             onSubmit={(data) => {

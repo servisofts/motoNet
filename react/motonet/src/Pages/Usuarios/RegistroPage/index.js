@@ -69,7 +69,7 @@ class RegistroPage extends Component {
             }}
             inputs={inputs}
             onSubmit={(data) => {
-
+                console.log(data);
             }}
         />
     }

@@ -16,6 +16,7 @@ export type SFromProps = {
     inputProps: TypeInputProps,
     inputs: InputsTp,
     onSubmit: Function,
+    onSubmitName:String,
 }
 export default class SForm extends Component<SFromProps> {
     constructor(props) {
@@ -85,5 +86,6 @@ export default class SForm extends Component<SFromProps> {
 SForm.defaultProps = {
     props: {
 
-    }
+    },
+    onSubmitName:"Registro"
 }

@@ -198,8 +198,6 @@ class UsuariosTablaPage extends Component {
                     case "Clientes": return (cabeceras[obj.usuario.key_cabecera].descripcion == "registro_cliente") ? true : false;
                     default: return true;
                 }
-
-
             }}
             data={data}
             onAdd={this.props.match.params.tipo != "Todos" ? () => {
