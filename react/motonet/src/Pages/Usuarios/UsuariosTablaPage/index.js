@@ -81,6 +81,11 @@ class UsuariosTablaPage extends Component {
 
                 },
                 {
+                    label: "Key",
+                    key: "usuario/key-1",
+                    width: 50,
+                },
+                {
                     label: "Foto",
                     key: "usuario/key",
                     width: 50,
@@ -203,6 +208,29 @@ class UsuariosTablaPage extends Component {
             onAdd={this.props.match.params.tipo != "Todos" ? () => {
                 this.props.history.push("/Usuarios/" + this.props.match.params.tipo + "/registro/")
             } : false}
+            actionTypes={['edit', "delete"]}
+            onAction={(type, obj) => {
+                var cabeceraFinal = "";
+                switch (cabeceras[obj.usuario.key_cabecera].descripcion) {
+                    case "registro_administrador":
+                        cabeceraFinal = "Administradores";
+                        break;
+                    case "registro_conductor":
+                        cabeceraFinal = "Conductores";
+                        break;
+                    case "registro_cliente":
+                        cabeceraFinal = "Clientes";
+                        break;
+                }
+                switch (type) {
+                    case "edit":
+                        this.props.history.push("/Usuarios/" + cabeceraFinal + "/" + obj.key)
+                        break;
+                    case "delete":
+                        // this.deleteAsociaciones(obj.key)
+                        break;
+                }
+            }}
             dataProps={{
                 defaultHeight: 40,
             }}

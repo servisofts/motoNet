@@ -25,6 +25,7 @@ type SType = {
     onAdd: Function,
     filter: (obj: Object, index: Number) => {},
     onSelectRow: (obj: Object, index: typeHeader) => {},
+    actionTypes: [typeAction],
     onAction: (type: typeAction, obj: Object) => {},
     style: {
 
@@ -181,6 +182,7 @@ export default class STable extends Component<SType> {
                         }}>
                             <SData
                                 {...this.props.dataProps}
+                                actionTypes={this.props.actionTypes}
                                 onAction={this.props.onAction}
                                 onSelectRow={this.props.onSelectRow}
                                 ref={(ref) => { this.refData = ref }}
