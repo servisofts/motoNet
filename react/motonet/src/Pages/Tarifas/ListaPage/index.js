@@ -33,8 +33,8 @@ class ListaPage extends Component {
         }
         return data;
     }
-    getParametros() {
-        var reducer = this.props.state.parametrosViajeReducer;
+    getTarifas() {
+        var reducer = this.props.state.tipoViajeReducer;
         var data = reducer.data;
         if (!data) {
             if (!this.props.state.socketReducer.socket) {
@@ -44,7 +44,7 @@ class ListaPage extends Component {
                 return false;
             }
             var objSend = {
-                component: "parametrosViaje",
+                component: "tipoViaje",
                 type: "getAll",
                 estado: "cargando",
                 data: ""
@@ -73,7 +73,7 @@ class ListaPage extends Component {
     }
 
     getTabla() {
-        var data = this.getParametros();
+        var data = this.getTarifas();
         var usuarios = this.getUsuarios();
         // var cabeceras = this.getCabecera();
         if (!data) {
@@ -99,8 +99,23 @@ class ListaPage extends Component {
             header={[
                 { label: "#", key: "index", width: 30, },
                 { label: "Descripción", key: "descripcion", width: 300, },
-                { label: "Valor", key: "valor", width: 200, },
-                { label: "Medida", key: "medida", width: 300, },
+                {
+                    label: "Datos",
+                    key: "usuario/key_cabecera",
+                    width: 200,
+                    render: (data) => {
+                        // var dataTarifaViaje = data.tarifas;
+                        // var descripcion1 = dataTarifaViaje[0]
+                        // var monto10 = dataTarifaViaje[0].monto
+
+                        // switch (cabeceras[data].descripcion) {
+                        //     case "registro_administrador": return "Administrador";
+                        //     case "registro_conductor": return "Conductor";
+                        //     case "registro_cliente": return "Cliente";
+                        //     default: return "--";
+                        // }
+                    }
+                },
                 {
                     label: "Fecha Creación",
                     key: "fecha_on",
@@ -120,7 +135,7 @@ class ListaPage extends Component {
             onAction={(type, obj) => {
                 switch (type) {
                     case "edit":
-                        this.props.history.push("./Parametros/Registro/" + obj.key)
+                        this.props.history.push("./Tarifas/Registro/" + obj.key)
                         break;
                     // case "delete":
                     //     this.deleteAsociaciones(obj.key)
@@ -137,7 +152,7 @@ class ListaPage extends Component {
         return (
             <Page
                 history={this.props.history}
-                title={"Parametros"}
+                title={"Tarifas"}
                 onBack={"/Inicio"}
                 disableScroll={true}
                 icon={<SIcon name={"asociacion"} />}
