@@ -16,9 +16,9 @@ class RegistroPage extends Component {
         this.state = {
         };
     }
-    getAsociacion() {
+    getParametros() {
         if (this.props.match.params.key) {
-            var reducer = this.props.state.asociacionMotoReducer;
+            var reducer = this.props.state.parametrosViajeReducer;
             var data = reducer.data;
             if (!data) {
                 if (!this.props.state.socketReducer.socket) {
@@ -28,7 +28,7 @@ class RegistroPage extends Component {
                     return false;
                 }
                 var objSend = {
-                    component: "asociacionMoto",
+                    component: "parametrosViaje",
                     type: "getAll",
                     estado: "cargando",
                     data: ""
@@ -42,19 +42,19 @@ class RegistroPage extends Component {
     }
 
     // getData(){
-    //     var datosUpdate=this.getAsociacion();
+    //     var datosUpdate=this.getParametros();
     // }
 
     render() {
-        var asociacion = this.getAsociacion();
-        if(!asociacion){
+        var parametros = this.getParametros();
+        if(!parametros){
             return <SActivityIndicator/>
         }
         return (
             <Page
                 history={this.props.history}
-                title={"Asociaciones Registro"}
-                onBack={"/Asociaciones"}
+                title={"Parámetros Registro"}
+                onBack={"/Parametros"}
             >
                 <SView props={{
                     variant: "center",
@@ -69,19 +69,19 @@ class RegistroPage extends Component {
                                 customStyle: "primary",
                             }}
                             inputs={{
-                                key_encargado: { label: "Responsable", type: "default", isRequired: true, defaultValue:asociacion.key_encargado  },
-                                descripcion: { label: "Descripción", type: "default", isRequired: true, defaultValue:asociacion.descripcion },
-                                direccion: { label: "Dirección", type: "default", isRequired: true, defaultValue: asociacion.direccion  },
+                                descripcion: { label: "Descripción", type: "default", editable: false, defaultValue:parametros.descripcion },
+                                valor: { label: "Valor", type: "default", isRequired: true, defaultValue:parametros.valor  },
+                                medida: { label: "Medida", type: "default", defaultValue: parametros.medida  },
 
                             }}
                             onSubmit={(data) => {
                                 var objSend = {
-                                    component: "asociacionMoto",
-                                    type: (this.props.match.params.key?"editar":"registro"),
+                                    component: "parametrosViaje",
+                                    type: (this.props.match.params.key?"modificar":"registro"),
                                     estado: "cargando",
                                     key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
                                     data: {
-                                        ...asociacion,
+                                        ...parametros,
                                         ...data
                                     }
                                 };
@@ -89,6 +89,7 @@ class RegistroPage extends Component {
                                 this.props.state.socketReducer.send(objSend);
                                 this.props.history.goBack();
                             }}
+                            onSubmitName={(this.props.match.params.key ? "EDITAR" : "REGISTRAR")}
                         />
                 </SView>
 

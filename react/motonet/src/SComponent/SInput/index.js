@@ -169,6 +169,7 @@ export class SInput extends Component<IProps> {
                 }} style={{ flex: 1, height: "100%" }}>
                     {this.getIcon()}
                     <TextInput
+                   
                         value={valueFilter}
                         {...type.props}
                         {...this.props}
