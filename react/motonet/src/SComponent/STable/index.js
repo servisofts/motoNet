@@ -155,6 +155,7 @@ export default class STable extends Component<SType> {
                                     }}
                                     minWidth={20}
                                     initialPosition={8}
+                                    separation={2}
                                     {...this.props.headerProps}
                                     header={this.state.header}
                                     contentSize={this.contentSize}

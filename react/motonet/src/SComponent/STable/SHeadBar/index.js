@@ -19,6 +19,7 @@ export default class SHeadBar extends Component {
         return <SView style={{
             width: 24,
             height: 24,
+            marginEnd:8,
         }} onPress={() => {
             // this.props.reload();
             this.props.onAdd();
@@ -37,20 +38,20 @@ export default class SHeadBar extends Component {
                 }}
                 style={{
                     width: "100%",
-                    height: 28,
+                    height: 32,
                     justifyContent: "center",
                 }}>
 
                 <SView props={{
                     col: {
-                        xs: "10",
+                        xs: "9",
                         md: "8",
                         // xl: "6"
                     }
                 }} style={{
                     height: "100%",
                     alignItems: "flex-start",
-                    paddingStart: 4,
+                    paddingStart: 8,
                 }}>
                     <SInput props={{
                         col: "xs-12 md-6",
@@ -58,7 +59,7 @@ export default class SHeadBar extends Component {
                     }}
                         style={{
                             margin: 0,
-                            height: 24,
+                            height: 28,
                         }}
                         placeholder={"Buscar..."}
                         onChangeText={(text) => {
@@ -72,16 +73,17 @@ export default class SHeadBar extends Component {
                     variant: "center",
                     direction: "row",
                     col: {
-                        xs: "2",
+                        xs: "3",
                         md: "4"
                     }
                 }} style={{
                     height: 24,
-                    justifyContent: "space-evenly"
+                    justifyContent:"flex-end"
                 }}>
                     <SView style={{
                         width: 24,
                         height: 24,
+                        marginEnd:8,
                     }} onPress={() => {
                         this.props.reload();
                     }}>

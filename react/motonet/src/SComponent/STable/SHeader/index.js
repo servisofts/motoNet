@@ -276,6 +276,7 @@ export default class SHeader extends Component<SHeaderProps> {
                             marginTop: 8,
                             textAlign: "center",
                             fontWeight: "700",
+                            fontSize:14,
                             ...this.props.styleText
                         }}>
                             {obj.label}
@@ -297,7 +298,7 @@ export default class SHeader extends Component<SHeaderProps> {
                             alignItems: "flex-end",
                         }}>
                         <SView style={{
-                            width: 4,
+                            width: 2,
                             height: "100%",
                             backgroundColor: STheme().colorSecondary
                         }}>
@@ -305,7 +306,7 @@ export default class SHeader extends Component<SHeaderProps> {
                         </SView>
 
                     </SView>
-                    <SView style={{
+                    {/* <SView style={{
                         left: 2,
                         top: 2,
                         width: 16,
@@ -322,7 +323,7 @@ export default class SHeader extends Component<SHeaderProps> {
                             height: 10,
                             stroke: this.props.styleText.color,
                         }} />
-                    </SView>
+                    </SView> */}
                 </SView>
             </SView>
         });

@@ -44,6 +44,7 @@ export default class BotonesPaginas extends Component<BotonesType> {
                     color: STheme().colorSecondary,
                     textAlign: "center",
                     marginTop: 4,
+                    fontSize:16,
                 }}>{label}</SText>
             </SView>
         </SView>

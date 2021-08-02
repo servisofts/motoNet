@@ -8,6 +8,7 @@ class RegistroPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            exclude: ["Foto perfil",]
         };
     }
     getIcon = () => {
@@ -52,6 +53,9 @@ class RegistroPage extends Component {
         if (!data) return <SActivityIndicator />
         var inputs = {};
         data.map((obj) => {
+            if (this.state.exclude.indexOf(obj.dato.descripcion) >= 0) {
+                return;
+            }
             inputs[obj.dato.descripcion] = { label: obj.dato.descripcion, type: obj.tipo_dato.descripcion, isRequired: obj.dato.requerido }
         })
         console.log(data);
