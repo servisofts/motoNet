@@ -89,6 +89,7 @@ class RegistroPage extends Component {
                                 this.props.state.socketReducer.send(objSend);
                                 this.props.history.goBack();
                             }}
+                            onSubmitName={(this.props.match.params.key ? "EDITAR" : "REGISTRAR")}
                         />
                 </SView>
 

@@ -6,7 +6,7 @@ import ListaPage from './ListaPage';
 
 export const Parametros = [
     < Route exact path='/Parametros' component={ListaPage} />,
-    // <Route exact path='/Parametros/Registro' component={RegistroPage} />,
-    // <Route exact path='/Parametros/Registro/:key' component={RegistroPage} />
+    <Route exact path='/Parametros/Registro' component={RegistroPage} />,
+    <Route exact path='/Parametros/Registro/:key' component={RegistroPage} />
 
 ]

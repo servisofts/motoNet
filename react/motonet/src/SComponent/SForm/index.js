@@ -26,6 +26,7 @@ export default class SForm extends Component<SFromProps> {
     }
     getButtom() {
         if (!this.props.onSubmit) return <View />
+        if (!this.props.onSubmitName) return <View />
         return <SButtom
             props={{
                 type: "danger",
@@ -45,7 +46,7 @@ export default class SForm extends Component<SFromProps> {
                     this.props.onSubmit(data);
                 }
             }}>
-            REGISTRAR
+            {this.props.onSubmitName }
         </SButtom>
     }
     getInputs() {

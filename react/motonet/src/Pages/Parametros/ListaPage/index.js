@@ -93,21 +93,14 @@ class ListaPage extends Component {
                     color: STheme().colorTextPrimary
                 }
             }}
-            onAdd={() => {
-                // this.props.history.push("/Asociaciones/Registro")
-            }}
+            // onAdd={() => {
+            //     this.props.history.push("/Parametros/Registro")
+            // }}
             header={[
                 { label: "#", key: "index", width: 30, },
-                {
-                    label: "Encargado", key: "key_encargado", width: 200, render: (data) => {
-                        if (usuarios[data]) {
-                            return JSON.stringify(usuarios[data]);
-                        }
-                        return data;
-                    }
-                },
-                { label: "Descripción", key: "descripcion", width: 200, },
-                { label: "Dirección", key: "direccion", width: 300, },
+                { label: "Descripción", key: "descripcion", width: 300, },
+                { label: "Valor", key: "valor", width: 200, },
+                { label: "Medida", key: "medida", width: 300, },
                 {
                     label: "Fecha Creación",
                     key: "fecha_on",
@@ -127,7 +120,7 @@ class ListaPage extends Component {
             onAction={(type, obj) => {
                 switch (type) {
                     case "edit":
-                        this.props.history.push("./Asociaciones/Registro/" + obj.key)
+                        this.props.history.push("./Parametros/Registro/" + obj.key)
                         break;
                     case "delete":
                         this.deleteAsociaciones(obj.key)

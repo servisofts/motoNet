@@ -47,14 +47,24 @@ const getAll = (state, action) => {
 }
 
 const modificar = (state, action) => {
+    // state.estado = action.estado
+    // if (action.estado === "exito") {
+    //     if (!state.data) {
+    //         state.data = {}
+    //     }
+    //     //state.dataParametro[action.key] = JSON.parse(action.data[0].data)
+
+    // }
     state.estado = action.estado
     if (action.estado === "exito") {
         if (!state.data) {
             state.data = {}
         }
-        //state.dataParametro[action.key] = JSON.parse(action.data[0].data)
+        var obj = action.data;
+        state.data[obj.key] = obj;
 
     }
+
 }
 
 
