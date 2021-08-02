@@ -104,10 +104,9 @@ public class Usuario {
     public void registro(JSONObject obj) {
         if (obj.getString("estado").equals("exito")) {
             if (obj.has("router")) {
-                JSONObject data = obj.getJSONObject("data");
+                // JSONObject data = obj.getJSONObject("data");
                 SSSessionAbstract session = SSServerAbstract.getSession(obj.getString("router"));
-
-                session.setKeyUsuario(data.getString("key"));
+                // session.setKeyUsuario(data.getString("key"));
                 // JSONObject info = session.getPendiente("carnetDeIdentidad");
                 // if (info != null) {
                 // byte[] front;
@@ -137,11 +136,11 @@ public class Usuario {
                 new EmailRegistroUsr(infoUser).start();
                 System.out.println("NOTIFICAR QUE SE REGISTRO UN NUEVO USUARIO");
 
-                JSONObject objNotificacion = new JSONObject(obj.toString());
-                objNotificacion.put("component", "notificacion");
-                objNotificacion.put("type", "nuevoUsuario");
-                objNotificacion.put("data", data);
-                SSServerAbstract.sendServer(SSServerAbstract.TIPO_SOCKET_WEB, objNotificacion.toString());
+                // JSONObject objNotificacion = new JSONObject(obj.toString());
+                // objNotificacion.put("component", "notificacion");
+                // objNotificacion.put("type", "nuevoUsuario");
+                // objNotificacion.put("data", data);
+                // SSServerAbstract.sendServer(SSServerAbstract.TIPO_SOCKET_WEB, objNotificacion.toString());
                 // SocketWeb.sendAll(objNotificacion.toString());
             }
 

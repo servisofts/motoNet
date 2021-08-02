@@ -28,6 +28,9 @@ public class ParametrosViaje {
             case "registro":
                 registro(data, session);
                 break;
+            case "modificar":
+                modificar(data, session);
+                break;
         }
     }
 
@@ -48,7 +51,7 @@ public class ParametrosViaje {
         JSONObject data = obj.getJSONObject("data");
         try {
 
-            //String key_usuario = obj.getString("key_usuario");
+            // String key_usuario = obj.getString("key_usuario");
             JSONObject tipo_viaje = new JSONObject();
             tipo_viaje.put("key", UUID.randomUUID().toString());
             tipo_viaje.put("descripcion", data.getString("descripcion"));
@@ -64,7 +67,20 @@ public class ParametrosViaje {
             e.printStackTrace();
             obj.put("estado", "error");
         }
-       
+
+    }
+
+    public void modificar(JSONObject obj, SSSessionAbstract session) {
+        JSONObject data = obj.getJSONObject("data");
+        try {
+            Conexion.editObject("parametros_viaje", data);
+            obj.put("data", data);
+            obj.put("estado", "exito");
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            obj.put("estado", "error");
+        }
 
     }
 

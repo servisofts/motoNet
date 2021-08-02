@@ -8,7 +8,8 @@ const getCabeceras = () => {
 const initialState = {
     estado: "",
     data: {},
-    cabeceras:getCabeceras()
+    dataCabecera: {},
+    cabeceras: getCabeceras()
 }
 
 export default (state, action) => {
@@ -35,6 +36,14 @@ const getDatoCabecera = (state, action) => {
     state.estado = action.estado;
     if (action.estado === "exito") {
         state.data[action.cabecera] = action.data;
+
+        if (!state.dataCabecera[action.cabecera]) {
+            state.dataCabecera[action.cabecera] = {};
+        }
+        action.data.map((obj) => {
+            state.dataCabecera[action.cabecera][obj.dato.descripcion] = obj;
+        });
+
     }
 }
 const getAll = (state, action) => {

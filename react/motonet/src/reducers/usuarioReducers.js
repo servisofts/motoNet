@@ -9,7 +9,7 @@ const getUsuario = () => {
 const initialState = {
     estado: "",
     usuarioLog: getUsuario(),
-    dataUsuario:{},
+    dataUsuario: {},
 }
 
 export default (state, action) => {
@@ -72,13 +72,25 @@ const login = (state, action) => {
 const registro = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
+
         var obj = action.data.datos[0];
-        obj.data = JSON.parse(obj.data);
+        if (typeof obj.data == "string") {
+            obj.data = JSON.parse(obj.data);
+        }
+        console.log(obj);
+
+        var usuario = { ...action.data };
+        delete usuario["datos"];
         state.registrado = obj;
         if (!state.data) {
             return;
         }
-        state.data[obj.key_usuario] = obj;
+        console.log(usuario)
+        state.data[obj.key_usuario] = {
+            data: obj.data,
+            usuario: usuario,
+            key: usuario.key
+        };
     }
     if (action.estado === "error") {
         state.error = action.error
@@ -190,8 +202,8 @@ const eliminar = (state, action) => {
         if (state.data[action.key_admin]) {
             delete state.data[action.key_admin];
         }
-       /* if (state.data[action.key_especialidad]) {
-            delete state.data[action.key_especialidad][action.key_doctor];
-        }*/
+        /* if (state.data[action.key_especialidad]) {
+             delete state.data[action.key_especialidad][action.key_doctor];
+         }*/
     }
 }
