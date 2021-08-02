@@ -85,7 +85,7 @@ class RegistroPage extends Component {
                                         ...data
                                     }
                                 };
-                                alert(JSON.stringify(data))
+                                //alert(JSON.stringify(data))
                                 this.props.state.socketReducer.send(objSend);
                                 this.props.history.goBack();
                             }}
