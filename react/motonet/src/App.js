@@ -6,15 +6,14 @@ import CargaPage from './Pages/CargaPage'
 import LoginPage from './Pages/LoginPage'
 import InicioPage from './Pages/InicioPage'
 import MapaPage from './Pages/MapaPage'
-
 import PublicidadPage from './Pages/PublicidadPage';
 import AjustesPage from './Pages/AjustesPage';
-
 
 import { Asociacion } from './Pages/Asociacion';
 import { Usuarios } from './Pages/Usuarios';
 import { Parametros } from './Pages/Parametros';
 import { Tarifas } from './Pages/Tarifas';
+
 function App() {
   return (
     <BrowserRouter>
