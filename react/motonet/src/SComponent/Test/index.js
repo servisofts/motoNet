@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import SComponent from 's-component';
 
 export type TestPropsType = {
     detalle: String
