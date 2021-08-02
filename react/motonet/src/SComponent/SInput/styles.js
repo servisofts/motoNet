@@ -74,10 +74,10 @@ const getType = (type: TypeStyles) => {
         case "primary":
             return StyleSheet.create({
                 "View": {
-                    borderWidth: 2,
+                    borderWidth: 1,
                     borderColor: STheme().colorPrimary,
                     backgroundColor:STheme().colorPrimary+"11",
-                    borderRadius: 4,
+                    borderRadius: 2,
                     marginTop: 32,
                     paddingStart: 8,
                 },

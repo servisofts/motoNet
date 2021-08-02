@@ -66,7 +66,7 @@ class UsuariosTablaPage extends Component {
             headerProps={{
                 style: {
                     backgroundColor: STheme().colorPrimary,
-                    borderRadius: 4,
+                    borderRadius: 2,
                 },
                 styleText: {
                     color: STheme().colorTextPrimary
