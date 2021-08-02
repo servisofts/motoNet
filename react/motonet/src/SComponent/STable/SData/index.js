@@ -27,6 +27,7 @@ export default class SData extends Component<SDataType> {
         var path = key.split("/");
         var data = obj;
         path.map((dir) => {
+            dir = dir.replace(/-.*/, "")
             if (!data) data = {};
             if (typeof data == "string") {
                 try { data = JSON.parse(data) } catch (e) { }
@@ -102,7 +103,7 @@ export default class SData extends Component<SDataType> {
                         if (this.props.onAction) {
                             SPopupOpen({
                                 "key": "SelectTableAlert",
-                                content: <SelectAlert data={obj} onAction={(type) => {
+                                content: <SelectAlert data={obj} actionTypes={this.props.actionTypes} onAction={(type) => {
                                     SPopupClose("SelectTableAlert");
                                     if (this.props.onAction) {
                                         this.props.onAction(type, obj);
