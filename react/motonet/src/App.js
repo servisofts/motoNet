@@ -14,6 +14,7 @@ import AjustesPage from './Pages/AjustesPage';
 import { Asociacion } from './Pages/Asociacion';
 import { Usuarios } from './Pages/Usuarios';
 import { Parametros } from './Pages/Parametros';
+import { Tarifas } from './Pages/Tarifas';
 function App() {
   return (
     <BrowserRouter>
@@ -27,6 +28,7 @@ function App() {
       {Usuarios}
       {Asociacion}
       {Parametros}
+      {Tarifas}
     </BrowserRouter>
   );
 }
