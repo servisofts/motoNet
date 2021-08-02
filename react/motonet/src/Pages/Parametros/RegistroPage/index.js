@@ -70,8 +70,8 @@ class RegistroPage extends Component {
                             }}
                             inputs={{
                                 descripcion: { label: "Descripción", type: "default", editable: false, defaultValue:parametros.descripcion },
-                                valor: { label: "Valor", type: "default", isRequired: true, defaultValue:parametros.valor  },
-                                medida: { label: "Medida", type: "default", defaultValue: parametros.medida  },
+                                valor: { label: "Valor", type: "number", isRequired: true, defaultValue:parametros.valor  },
+                                medida: { label: "Medida", type: "default",editable: false, defaultValue: parametros.medida  },
 
                             }}
                             onSubmit={(data) => {
@@ -85,7 +85,7 @@ class RegistroPage extends Component {
                                         ...data
                                     }
                                 };
-                                alert(JSON.stringify(data))
+                                //alert(JSON.stringify(data))
                                 this.props.state.socketReducer.send(objSend);
                                 this.props.history.goBack();
                             }}
