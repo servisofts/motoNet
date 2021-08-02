@@ -95,10 +95,10 @@ const getType = (type: TypeStyles) => {
                 "InputText": {
                     fontSize: 14,
                     color: STheme().colorSecondary,
-                    ...(Platform.OS != "web" ? {} : { placeholderTextColor: STheme().colorSecondary }),
+                    ...(Platform.OS != "web" ? {} : { placeholderTextColor: STheme().colorOpaque }),
                 },
                 "placeholder": {
-                    color: STheme().colorSecondary
+                    color: STheme().colorOpaque
                 },
                 "error": {
                     borderColor: STheme().colorDanger,

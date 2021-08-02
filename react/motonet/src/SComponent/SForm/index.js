@@ -58,6 +58,7 @@ export default class SForm extends Component<SFromProps> {
             return <SInput
                 ref={(ref) => { this._ref[key] = ref }}
                 placeholder={inputProps.label}
+                {...inputProps}
                 props={{
                     ...this.props.inputProps,
                     ...inputProps
