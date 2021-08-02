@@ -27,6 +27,7 @@ const InicioPage = (props) => {
                         { url: "/Usuarios", label: "Usuarios", icon: "usuarios" },
                         { url: "/Publicidad", label: "Publicidad", icon: "publicidad" },
                         { url: "/Asociaciones", label: "Asociaciones", icon: "asociacion" },
+                        { url: "/Parametros", label: "Parametros", icon: "asociacion" },
                         { url: "/Viajes", label: "Viajes", icon: "ajustesMano" },
                         { url: "/MapaPage", label: "Mapa", icon: "marker" },
                         { url: "/AjustesPage", label: "Ajustes", icon: "ajustes" }
