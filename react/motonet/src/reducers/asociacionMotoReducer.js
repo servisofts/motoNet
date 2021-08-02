@@ -71,4 +71,3 @@ const editar = (state, action) => {
 
     }
 }
-
