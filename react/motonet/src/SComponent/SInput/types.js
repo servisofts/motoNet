@@ -8,7 +8,8 @@ import SIFechaPicker from "./SInputTypes"
 import SIDialCodeAlert from "./SInputTypes/SIDialCodeAlert"
 import SIFechaAlert from "./SInputTypes/SIFechaAlert"
 
-export type TypeType = "default" | "fecha" | "password" | "email" | "phone"
+export type TypeType = "default" | "fecha" | "password" | "email" | "phone" | "number"
+
 type returnType = {
     props: TextInputProps,
     onPress: Function,
@@ -39,6 +40,8 @@ export const Type = (type: TypeType, Parent: SInput): returnType => {
             return phone(type, Parent);
         case "email":
             return email(type, Parent);
+        case "number":
+            return number(type, Parent);
         default:
             return buildResp({
                 props: {
@@ -213,6 +216,29 @@ const fecha = (type: TypeType, Parent: SInput) => {
 
             },
             LabelStyle: {}
+        }
+    })
+}
+
+const number = (type: TypeType, Parent: SInput) => {
+    return buildResp({
+        props: {
+            keyboardType: "number-pad"
+        },
+        style: {
+            View: {},
+            InputText: {}
+        },
+        filter: (_value: String) => {
+            if (!_value) return _value;
+            var value = _value;
+            value = value.trim();
+            value = value.replace(/\D/,"");
+            return value;
+        },
+        verify: (value) => {
+            if (!value) return false;
+            return true;
         }
     })
 }
