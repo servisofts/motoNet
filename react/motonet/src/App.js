@@ -27,6 +27,7 @@ import AjustesPage from './Pages/AjustesPage';
 
 import { Asociacion } from './Pages/Asociacion';
 import { Usuarios } from './Pages/Usuarios';
+import { Parametros } from './Pages/Parametros';
 import Test from './SComponent/Test';
 function App() {
   return (
@@ -41,7 +42,7 @@ function App() {
       {Usuarios}
 
       {Asociacion}
-
+      {Parametros}
       <Route exact path='/ListaUsuario' component={ListaUsuarioPage} />
       <Route exact path='/UsuarioRegistroPage' component={UsuarioRegistroPage} />
       <Route exact path='/UsuarioRegistroPage/:key' component={UsuarioRegistroPage} />

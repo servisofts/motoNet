@@ -7,6 +7,6 @@
         "deviceKey": "clinica_deviceKey",
         "fbtoken": "FIREBASE_TOKEN"
     },
-    "urlImages": "http://192.168.0.3:30004/",
-    "_urlImages": "http://servisofts.com:30004/"
+    "_urlImages": "http://192.168.0.3:30004/",
+    "urlImages": "http://servisofts.com:30004/"
 }

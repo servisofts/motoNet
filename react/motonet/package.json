@@ -16,6 +16,8 @@
     "react-dom": "^16.13.1",
     "react-google-maps": "9.4.5",
     "react-hook-form": "^6.15.5",
+    "react-native": "0.64.0",
+    "react-native-web": "^0.14.8",
     "react-native-web-maps": "^0.3.0",
     "react-number-format": "^4.4.1",
     "react-redux": "^7.2.0",
@@ -24,9 +26,7 @@
     "react-user-profile": "^1.0.3",
     "reactjs-popup": "^2.0.4",
     "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "react-native": "0.64.0",
-    "react-native-web": "^0.14.8"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

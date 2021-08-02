@@ -14,7 +14,6 @@ import nativeSocket from './_nativeSocket';
 import ShowImagePicker from './elementsM/ImagePickerWeb';
 import { SComponentClass } from './SComponent';
 
-
 const store = createStore(
   reducers,
   {},
