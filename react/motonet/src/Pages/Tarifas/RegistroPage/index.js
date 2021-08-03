@@ -70,9 +70,9 @@ class RegistroPage extends Component {
                                 customStyle: "primary",
                             }}
                             inputs={{
-                                monto1: { label: "Monto por kilometro", type: "default",  defaultValue:tarifas.tarifas["Monto por kilometro"].monto },
+                                monto1: { label: "Monto por kilometro", type: "money",  defaultValue:tarifas.tarifas["Monto por kilometro"].monto },
                                
-                                monto2: { label: "Monto por tiempo", type: "default", defaultValue: tarifas.tarifas["Monto por tiempo"].monto  },
+                                monto2: { label: "Monto por tiempo", type: "money", defaultValue: tarifas.tarifas["Monto por tiempo"].monto  },
 
                             }}
                             onSubmit={(data) => {
