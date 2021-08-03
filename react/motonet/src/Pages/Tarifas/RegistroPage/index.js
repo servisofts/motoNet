@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import TableNewMe from '../../../Components/TableNewMe'
 import Page from '../../../Components/Page';
-import { SButtom, SForm, SInput, SText, SView,SActivityIndicator } from '../../../SComponent';
+import { SButtom, SForm, SInput, SText, SView, SActivityIndicator } from '../../../SComponent';
 import { View } from 'react-native';
 
 class RegistroPage extends Component {
@@ -47,8 +47,8 @@ class RegistroPage extends Component {
 
     render() {
         var tarifas = this.getTarifas();
-        if(!tarifas){
-            return <SActivityIndicator/>
+        if (!tarifas) {
+            return <SActivityIndicator />
         }
         return (
             <Page
@@ -60,46 +60,53 @@ class RegistroPage extends Component {
                     variant: "center",
                     col: "xs-12",
                 }}>
-                        <View style={{color:"#fff"}}>{tarifas.descripcion}</View>
-                        <SForm
-                            props={{
-                                variant: "center",
-                                col: "xs-12 md-6",
-                            }}
-                            inputProps={{
-                                customStyle: "primary",
-                            }}
-                            inputs={{
-                                monto1: { label: "Monto por kilometro", type: "money",  defaultValue:tarifas.tarifas["Monto por kilometro"].monto },
-                               
-                                monto2: { label: "Monto por tiempo", type: "money", defaultValue: tarifas.tarifas["Monto por tiempo"].monto  },
+                    <View style={{ color: "#fff" }}>{tarifas.descripcion}</View>
+                    <SForm
+                        props={{
+                            variant: "center",
+                            col: {
+                                xs: "11",
+                                sm: "6",
+                                md: "5",
+                                lg: "4",
+                                xl: "3",
 
-                            }}
-                            onSubmit={(data) => {
-                                // var data2 = {
-                                //             ["Monto por kilometro"]:{monto: data["monto1"]}, 
-                                //             ["Monto por tiempo"]:{monto: data["monto2"]}
-                                //         }
-                               // data2={["Monto por tiempo"]:{monto: data["monto2"]}}
-                               tarifas.tarifas["Monto por kilometro"].monto =  data["monto1"] 
-                               tarifas.tarifas["Monto por tiempo"].monto =  data["monto2"]
-                                var objSend = {
-                                    component: "tipoTarifa",
-                                    type: (this.props.match.params.key?"editarMontoTipoViaje":"registro"),
-                                    estado: "cargando",
-                                    key_tipo_viaje : this.props.match.params.key,
-                                    key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                                    data: {
-                                        ...tarifas,
-                                        //...data2
-                                    }
-                                };
-                                //alert(JSON.stringify(tarifas))
-                                this.props.state.socketReducer.send(objSend);
-                                this.props.history.goBack();
-                            }}
-                            onSubmitName={(this.props.match.params.key ? "EDITAR" : "REGISTRAR")}
-                        />
+                            },
+                        }}
+                        inputProps={{
+                            customStyle: "primary",
+                        }}
+                        inputs={{
+                            monto1: { label: "Monto por kilometro", type: "money", defaultValue: tarifas.tarifas["Monto por kilometro"].monto },
+
+                            monto2: { label: "Monto por tiempo", type: "money", defaultValue: tarifas.tarifas["Monto por tiempo"].monto },
+
+                        }}
+                        onSubmit={(data) => {
+                            // var data2 = {
+                            //             ["Monto por kilometro"]:{monto: data["monto1"]}, 
+                            //             ["Monto por tiempo"]:{monto: data["monto2"]}
+                            //         }
+                            // data2={["Monto por tiempo"]:{monto: data["monto2"]}}
+                            tarifas.tarifas["Monto por kilometro"].monto = data["monto1"]
+                            tarifas.tarifas["Monto por tiempo"].monto = data["monto2"]
+                            var objSend = {
+                                component: "tipoTarifa",
+                                type: (this.props.match.params.key ? "editarMontoTipoViaje" : "registro"),
+                                estado: "cargando",
+                                key_tipo_viaje: this.props.match.params.key,
+                                key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                                data: {
+                                    ...tarifas,
+                                    //...data2
+                                }
+                            };
+                            //alert(JSON.stringify(tarifas))
+                            this.props.state.socketReducer.send(objSend);
+                            this.props.history.goBack();
+                        }}
+                        onSubmitName={(this.props.match.params.key ? "EDITAR" : "REGISTRAR")}
+                    />
                 </SView>
 
             </Page>

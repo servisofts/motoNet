@@ -274,7 +274,7 @@ const money = (type: TypeType, Parent: SInput) => {
         ),
         filter: (_value: String) => {
             if (!_value) return _value;
-            var value = _value;
+            var value = _value+"";
             value = value.trim();
             if (value.indexOf("\.") >= 0) {
                 var arr = value.split("\.");
