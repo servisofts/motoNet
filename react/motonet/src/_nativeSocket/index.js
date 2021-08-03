@@ -34,6 +34,11 @@ const SocketComp = (store) => {
         }
         return;
     }
+    var hiloTimeOut = async (data) => {
+        await delay(5000)
+        data.estado = "timeout"
+        store.dispatch(data)
+    }
     var openSocket = (url) => {
         var socket = new WebSocket(url);
         socket.onopen = () => {
@@ -49,6 +54,7 @@ const SocketComp = (store) => {
                 send: (obj) => {
                     socket.send(JSON.stringify(obj) + "\n");
                     store.dispatch(obj);
+                    hiloTimeOut(obj);
                 }
             });
             reintent = 0;
@@ -60,9 +66,9 @@ const SocketComp = (store) => {
                     return v.toString(16);
                 });
             }
-            var keyDevice= sessionStorage.getItem("keyDevice",null);
-            if(!keyDevice){
-                keyDevice= uuidv4()
+            var keyDevice = sessionStorage.getItem("keyDevice", null);
+            if (!keyDevice) {
+                keyDevice = uuidv4()
             }
             var objSend = {
                 component: "usuario",
