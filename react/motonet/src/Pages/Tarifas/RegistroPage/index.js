@@ -16,9 +16,9 @@ class RegistroPage extends Component {
         this.state = {
         };
     }
-    getParametros() {
+    getTarifas() {
         if (this.props.match.params.key) {
-            var reducer = this.props.state.parametrosViajeReducer;
+            var reducer = this.props.state.tipoViajeReducer;
             var data = reducer.data;
             if (!data) {
                 if (!this.props.state.socketReducer.socket) {
@@ -28,7 +28,7 @@ class RegistroPage extends Component {
                     return false;
                 }
                 var objSend = {
-                    component: "parametrosViaje",
+                    component: "tipoViaje",
                     type: "getAll",
                     estado: "cargando",
                     data: ""
@@ -42,24 +42,25 @@ class RegistroPage extends Component {
     }
 
     // getData(){
-    //     var datosUpdate=this.getParametros();
+    //     var datosUpdate=this.getTarifas();
     // }
 
     render() {
-        var parametros = this.getParametros();
-        if(!parametros){
+        var tarifas = this.getTarifas();
+        if(!tarifas){
             return <SActivityIndicator/>
         }
         return (
             <Page
                 history={this.props.history}
-                title={"Parámetros Registro"}
-                onBack={"/Parametros"}
+                title={"Tarifas Registro"}
+                onBack={"/Tarifas"}
             >
                 <SView props={{
                     variant: "center",
                     col: "xs-12",
                 }}>
+                        <View style={{color:"#fff"}}>{tarifas.descripcion}</View>
                         <SForm
                             props={{
                                 variant: "center",
@@ -69,25 +70,25 @@ class RegistroPage extends Component {
                                 customStyle: "primary",
                             }}
                             inputs={{
-                                descripcion: { label: "Descripción", type: "default", editable: false, defaultValue:parametros.descripcion },
-                                valor: { label: "Valor", type: "number", isRequired: true, defaultValue:parametros.valor  },
-                                medida: { label: "Medida", type: "default",editable: false, defaultValue: parametros.medida  },
+                                monto1: { label: "Monto por kilometro", type: "default",  defaultValue:tarifas.tarifas["Monto por kilometro"].monto },
+                               
+                                monto2: { label: "Monto por tiempo", type: "default", defaultValue: tarifas.tarifas["Monto por tiempo"].monto  },
 
                             }}
                             onSubmit={(data) => {
                                 var objSend = {
-                                    component: "parametrosViaje",
+                                    component: "editarMontoTipoViaje",
                                     type: (this.props.match.params.key?"modificar":"registro"),
                                     estado: "cargando",
                                     key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
                                     data: {
-                                        ...parametros,
+                                        ...tarifas,
                                         ...data
                                     }
                                 };
-                                //alert(JSON.stringify(data))
-                                this.props.state.socketReducer.send(objSend);
-                                this.props.history.goBack();
+                                alert(JSON.stringify(data))
+                                // this.props.state.socketReducer.send(objSend);
+                                // this.props.history.goBack();
                             }}
                             onSubmitName={(this.props.match.params.key ? "EDITAR" : "REGISTRAR")}
                         />

@@ -117,6 +117,7 @@ class ListaPage extends Component {
 
             }}
             data={data}
+            actionTypes={["edit"]}
             onAction={(type, obj) => {
                 switch (type) {
                     case "edit":
@@ -140,7 +141,7 @@ class ListaPage extends Component {
                 title={"Parametros"}
                 onBack={"/Inicio"}
                 disableScroll={true}
-                icon={<SIcon name={"asociacion"} />}
+                icon={<SIcon name={"ajustesMano"} />}
             >
                 {this.getTabla()}
             </Page>
