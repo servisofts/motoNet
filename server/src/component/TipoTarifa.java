@@ -51,7 +51,7 @@ public class TipoTarifa {
         JSONObject data = obj.getJSONObject("data");
         try {
 
-            //String key_usuario = obj.getString("key_usuario");
+            // String key_usuario = obj.getString("key_usuario");
             JSONObject tipo_viaje = new JSONObject();
             tipo_viaje.put("key", UUID.randomUUID().toString());
             tipo_viaje.put("descripcion", data.getString("descripcion"));
@@ -67,30 +67,31 @@ public class TipoTarifa {
         }
 
     }
+
     public void editarMontoTipoViaje(JSONObject obj, SSSessionAbstract session) {
         JSONObject data = obj.getJSONObject("data");
         try {
-            //String key_usuario = obj.getString("key_usuario");
+            // String key_usuario = obj.getString("key_usuario");
             String key_tipo_viaje = obj.getString("key_tipo_viaje");
-            JSONObject tipo_tarifa = obj.getJSONObject("tarifa");
-            String key_tarifa = tipo_tarifa.getString("key");
-            JSONObject tipo_viaje = new JSONObject();
-            tipo_viaje.put("key", UUID.randomUUID().toString());
-            tipo_viaje.put("monto", data.getDouble("monto"));
-            tipo_viaje.put("key_tipo_viaje", key_tipo_viaje);
-            tipo_viaje.put("key_tipo_tarifa", key_tarifa);
-            tipo_viaje.put("fecha_on", "now()");
-            tipo_viaje.put("estado", 1);
+            JSONObject tipo_tarifas = data.getJSONObject("tarifas");
+            JSONArray arrToInsert = new JSONArray();
+            tipo_tarifas.keySet().forEach(keyStr -> {
+                JSONObject tarita_tv = (JSONObject) tipo_tarifas.get(keyStr);
+                Conexion.ejecutarUpdate("UPDATE tipo_viaje_tipo_tarifa SET estado = 0 where key_tipo_viaje = '"
+                        + key_tipo_viaje + "' and key_tipo_tarifa = '" + tarita_tv.getString("key_tipo_tarifa") + "'");
 
-            Conexion.ejecutarUpdate(
-                    "UPDATE tipo_viaje_tipo_tarifa SET estado = 0 where key_tipo_viaje = '" + key_tipo_viaje + "' and key_tipo_tarifa = '" + key_tarifa + "'");
-
-            Conexion.insertArray("tipo_viaje_tipo_tarifa", new JSONArray().put(tipo_viaje));
-            
-            JSONObject tipo = new JSONObject();
-            tipo.put(tipo_tarifa.getString("descripcion"), tipo_viaje);
-            obj.put("data", tipo);
+                JSONObject tipo_viaje = new JSONObject();
+                tipo_viaje.put("key", UUID.randomUUID().toString());
+                tipo_viaje.put("monto", tarita_tv.getDouble("monto"));
+                tipo_viaje.put("key_tipo_viaje", key_tipo_viaje);
+                tipo_viaje.put("key_tipo_tarifa", tarita_tv.getString("key_tipo_tarifa"));
+                tipo_viaje.put("fecha_on", "now()");
+                tipo_viaje.put("estado", 1);
+                arrToInsert.put(tipo_viaje);
+            });
+            Conexion.insertArray("tipo_viaje_tipo_tarifa", arrToInsert);
             obj.put("estado", "exito");
+
         } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
