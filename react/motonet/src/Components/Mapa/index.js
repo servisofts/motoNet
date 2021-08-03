@@ -5,6 +5,8 @@ import Logo from '../../img/ambulancia.svg'
 import LogoVerde from '../../img/ambulanciaverde.svg'
 import { CircularProgress, Grid } from '@material-ui/core';
 import Moment from 'moment';
+import { SThread } from '../../SComponent';
+import { View } from 'react-native';
 
 
 const MiMarker = (propMarker) => {
@@ -17,13 +19,13 @@ const MiMarker = (propMarker) => {
             onClick={() => {
                 //alert(propMarker)
             }}>
-            <span style={{
+            {/* <span style={{
                 position: "absolute",
                 textAlign: "center",
                 left: -30,
                 top: -25,
                 width: 100,
-            }}>{(propMarker.minutes == 0 ? "Ahora" : "Hace " + propMarker.minutes + " min.")}</span>
+            }}>{(propMarker.minutes == 0 ? "Ahora" : "Hace " + propMarker.minutes + " min.")}</span> */}
             <span style={{
                 position: "absolute",
                 textAlign: "center",
@@ -43,58 +45,63 @@ export class Mapa extends Component {
     constructor(props) {
         super(props);
     }
+    componentDidMount() {
+        this.getPosition()
+    }
+
+    getPosition() {
+        var objSend = {
+            component: "seguimientoConductor",
+            type: "getAll",
+            estado: "cargando",
+        };
+        this.props.state.socketReducer.send(objSend);
+    }
+    getData() {
+        var reducer = this.props.state.usuarioReducer;
+        var data = reducer.data;
+        if (!data) {
+            if (reducer.estado == "cargando") {
+                return false;
+            }
+            var objSend = {
+                component: "usuario",
+                type: "getAll",
+                estado: "cargando",
+                cabecera: "%%",
+                data: ""
+            };
+            this.props.state.socketReducer.send(objSend);
+            return false;
+        }
+        return data;
+    }
     render() {
-        // if (!this.props.state.conductorReducer.data) {
-        //     if (this.props.state.conductorReducer.estado == "cargando") {
-        //         return <CircularProgress color="#fff" style={{ display: "block" }} />
-        //     }
-        //     if (this.props.state.conductorReducer.estado == "error") {
-        //         return <div>{this.props.state.conductorReducer.error}</div>
-        //     }
-        //     if (!this.props.state.socketReducer.socket) {
-        //         return <div>cargando.</div>
-        //     }
-        //     var objSend = {
-        //         component: "usuario",
-        //         type: "getAllCabecera",
-        //         estado: "cargando",
-        //         cabecera: "registro_conductor",
-        //         data: ""
-        //     };
-        //     this.props.state.socketReducer.send(objSend);
-        //     return <CircularProgress color="#fff" style={{ display: "block" }} />
-        // }
-        // if (!this.props.state.socketReducer.socket) {
-        //     this.props.state.seguimientoConductorReducer.isRun = false;
-        // }
-        // if (!this.props.state.seguimientoConductorReducer.isRun) {
-        //     var objSend = {
-        //         component: "seguimientoConductor",
-        //         type: "startAll",
-        //         estado: "cargando",
-        //     };
-        //     if (!this.props.state.socketReducer.socket) {
-        //         return <div>cargando.</div>
-        //     }
-        //     this.props.state.socketReducer.send(objSend);
+        new SThread(5000, "hiloConductor", false).start(() => {
+            this.getPosition()
+        })
+        // var usuarios = this.getData();
+        // if (usuarios) {
+        //     return <View />
         // }
         var getSVGMapa = () => {
+          
             if (!this.props.state.seguimientoConductorReducer.data) {
                 return <div />
             }
             return Object.keys(this.props.state.seguimientoConductorReducer.data).map((key) => {
                 var obj = this.props.state.seguimientoConductorReducer.data[key];
-                var conductor = this.props.state.conductorReducer.data[obj.key_usuario];
+                // var conductor = usuarios[obj.key_usuario];
 
-                if (!conductor) {
-                    return <div />
-                }
-                var a = Moment(new Date());//now
-                var b = Moment(obj.fecha_on);
-                var minutes = a.diff(b, 'minutes');
-                if (minutes > 30) {
-                    return <div />
-                }
+                // if (!conductor) {
+                //     return <div />
+                // }
+                // var a = Moment(new Date());//now
+                // var b = Moment(obj.fecha_on);
+                // var minutes = a.diff(b, 'minutes');
+                // if (minutes > 30) {
+                //     return <div />
+                // }
                 var IMG = LogoVerde;
                 if (obj.emergencias) {
                     IMG = Logo;
@@ -104,8 +111,9 @@ export class Mapa extends Component {
                     <MiMarker
                         lat={obj.latitude}
                         lng={obj.longitude}
-                        title={conductor.data["Nombres"].dato + " " + conductor.data["Apellidos"].dato}
-                        minutes={minutes}
+                        title={obj.key_usuario}
+                        // title={conductor.data["Nombres"].dato + " " + conductor.data["Apellidos"].dato}
+                        // minutes={minutes}
                         logo={IMG}
                     />
                 )

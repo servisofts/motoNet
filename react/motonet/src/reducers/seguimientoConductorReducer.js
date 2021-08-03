@@ -1,7 +1,7 @@
 
 const initialState = {
     estado: "",
-    data: {} 
+    data: {}
 }
 
 export default (state, action) => {
@@ -9,6 +9,7 @@ export default (state, action) => {
         return initialState;
     }
     if (action.component == "seguimientoConductor") {
+        state.estado = action.estado;
         switch (action.type) {
             case "startAll":
                 startAll(state, action);
@@ -19,6 +20,9 @@ export default (state, action) => {
             case "changePosition":
                 changePosition(state, action)
                 break;
+            case "getAll":
+                getAll(state, action)
+                break;
         }
         state = { ...state };
     }
@@ -27,18 +31,21 @@ export default (state, action) => {
 
 const startAll = (state, action) => {
     state.estado = action.estado;
-    state.isRun=true;
+    state.isRun = true;
 
 }
 
 const stopAll = (state, action) => {
     state.estado = action.estado;
-    state.data=false;
-    state.isRun=false;
+    state.data = false;
+    state.isRun = false;
 
 }
 
 const changePosition = (state, action) => {
-        state.data = action.data;
-        state.isRun=true;
+    state.data = action.data;
+    state.isRun = true;
+}
+const getAll = (state, action) => {
+    state.data = action.data;
 }

@@ -80,11 +80,11 @@ class UsuariosTablaPage extends Component {
 
 
                 },
-                {
-                    label: "Key",
-                    key: "usuario/key-1",
-                    width: 50,
-                },
+                // {
+                //     label: "Key",
+                //     key: "usuario/key-1",
+                //     width: 50,
+                // },
                 {
                     label: "Foto",
                     key: "usuario/key",
@@ -107,6 +107,7 @@ class UsuariosTablaPage extends Component {
                     label: "CI",
                     key: "data/CI/dato",
                     width: 100,
+                    hidden: (this.props.match.params.tipo == "Administradores"),
 
                 },
                 {

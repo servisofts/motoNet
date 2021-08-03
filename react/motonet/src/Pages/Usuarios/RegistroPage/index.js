@@ -77,15 +77,18 @@ class RegistroPage extends Component {
         var inputs = {};
         var usuario = {};
         if (this.props.match.params.key) {
-            var usuarios = this.getData();
-            if (!usuarios) {
-                return <View />
+            if (this.props.match.params.key != "registro") {
+                var usuarios = this.getData();
+                if (!usuarios) {
+                    return <View />
+                }
+                var usrAll = usuarios[this.props.match.params.key];
+                if (!usrAll) {
+                    return <View />;
+                }
+                usuario = usrAll["data"];
             }
-            var usrAll = usuarios[this.props.match.params.key];
-            if (!usrAll) {
-                return <View />;
-            }
-            usuario = usrAll["data"];
+
         }
         Object.keys(data).map((key) => {
             var obj = data[key];
