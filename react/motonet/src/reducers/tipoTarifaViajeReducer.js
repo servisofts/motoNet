@@ -42,6 +42,14 @@ const seleccionarTipoViaje = (state, action) => {
 
 
 const editarMontoTipoViaje = (state, action) => {
+    // state.estado = action.estado
     state.estado = action.estado
+    if (action.estado === "exito") {
+        if (!state.data) {
+            state.data = {}
+        }
+        var obj = action.data;
+        state.data[obj.key] = obj;
+    }
     
 }
