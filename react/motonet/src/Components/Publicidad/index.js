@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     },
     boxImg: {
         display: "inline-block",
-        width: 380,
+        width: 300,
         padding: 25,
         border: "1px solid rgb(192, 192, 192)",
         borderRadius: "8px",
@@ -142,7 +142,7 @@ const Publicidad = (props) => {
                             key: key
                         }
                         var resp = window.confirm("¿Eliminar imagen?");
-                        if( resp === true) {
+                        if (resp === true) {
                             props.state.socketReducer.send(objSend);
                             //alert ("")
                         }
@@ -151,8 +151,6 @@ const Publicidad = (props) => {
                     }} />
                     <img src={AppParams.images.urlImage + "publicidad.png" + "?type=publicidad&key=" + key} style={{
                         maxWidth: "100%",
-
-
                     }} />
 
 

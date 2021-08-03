@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import TableNewMe from '../../../Components/TableNewMe'
 import Page from '../../../Components/Page';
-import { SButtom, SForm, SInput, SText, SView, SActivityIndicator } from '../../../SComponent';
+import { SButtom, SForm, SInput, SText, SView, SActivityIndicator ,STheme} from '../../../SComponent';
 import { View } from 'react-native';
 
 class RegistroPage extends Component {
@@ -60,7 +60,7 @@ class RegistroPage extends Component {
                     variant: "center",
                     col: "xs-12",
                 }}>
-                    <View style={{ color: "#fff" }}>{tarifas.descripcion}</View>
+                    <View style={{ color: STheme().colorSecondary }}>{tarifas.descripcion}</View>
                     <SForm
                         props={{
                             variant: "center",
@@ -76,9 +76,9 @@ class RegistroPage extends Component {
                             customStyle: "primary",
                         }}
                         inputs={{
-                            monto1: { label: "Monto por kilometro", type: "money", defaultValue: tarifas.tarifas["Monto por kilometro"].monto },
+                            monto1: { label: "Monto por kilometro", type: "money", isRequired: true, defaultValue: tarifas.tarifas["Monto por kilometro"].monto },
 
-                            monto2: { label: "Monto por tiempo", type: "money", defaultValue: tarifas.tarifas["Monto por tiempo"].monto },
+                            monto2: { label: "Monto por tiempo", type: "money", isRequired: true, defaultValue: tarifas.tarifas["Monto por tiempo"].monto },
 
                         }}
                         onSubmit={(data) => {

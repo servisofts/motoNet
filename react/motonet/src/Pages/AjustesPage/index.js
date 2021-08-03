@@ -28,6 +28,15 @@ export default class AjustesPage extends Component {
                         data={[
                             { url: "/", label: "Salir", icon: "salir-png" },
                         ]}
+                        onPress={() => {
+                            //AsyncStorage.removeItem(AppParams.storage.urlLog);
+                            this.props.state.usuarioReducer.usuarioLog = false;
+                            this.props.state.usuarioReducer.usuarioDatos = false;
+                            this.props.state.usuarioReducer.cargaLoaded = false;
+                            //this.props.navigation.replace("CargaPage");
+                            this.props.history.push("CargaPage");
+                            return <View />;
+                          }}
                     />
                 </SView>
             </Page>
