@@ -98,22 +98,24 @@ class ListaPage extends Component {
             // }}
             header={[
                 { label: "#", key: "index", width: 30, },
-                { label: "Descripción", key: "descripcion", width: 300, },
+                { label: "Descripción", key: "descripcion", width: 120 },
+                
                 {
-                    label: "Datos",
-                    key: "usuario/key_cabecera",
+                    label: "Monto por Km",
+                    key: "key-1",
                     width: 200,
                     render: (data) => {
-                        // var dataTarifaViaje = data.tarifas;
-                        // var descripcion1 = dataTarifaViaje[0]
-                        // var monto10 = dataTarifaViaje[0].monto
-
-                        // switch (cabeceras[data].descripcion) {
-                        //     case "registro_administrador": return "Administrador";
-                        //     case "registro_conductor": return "Conductor";
-                        //     case "registro_cliente": return "Cliente";
-                        //     default: return "--";
-                        // }
+                         var dataTarifaViaje = this.props.state.tipoViajeReducer.data[data].tarifas;
+                        return dataTarifaViaje["Monto por kilometro"].monto
+                    }
+                },
+                {
+                    label: "Monto por tiempo",
+                    key: "key-2",
+                    width: 220,
+                    render: (data) => {
+                         var dataTarifaViaje = this.props.state.tipoViajeReducer.data[data].tarifas;
+                        return dataTarifaViaje["Monto por tiempo"].monto
                     }
                 },
                 {
@@ -121,7 +123,7 @@ class ListaPage extends Component {
                     key: "fecha_on",
                     width: 150,
                     render: (data) => { return new SDate(data).toString("yyyy-MM-dd hh:mm:ss") }
-                },
+                }
 
             ]}
             filter={(obj, i) => {
@@ -132,6 +134,7 @@ class ListaPage extends Component {
 
             }}
             data={data}
+            actionTypes={["edit"]}
             onAction={(type, obj) => {
                 switch (type) {
                     case "edit":
@@ -155,7 +158,7 @@ class ListaPage extends Component {
                 title={"Tarifas"}
                 onBack={"/Inicio"}
                 disableScroll={true}
-                icon={<SIcon name={"asociacion"} />}
+                icon={<SIcon name={"tarifa-png"} />}
             >
                 {this.getTabla()}
             </Page>

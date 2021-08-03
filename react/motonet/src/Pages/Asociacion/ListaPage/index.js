@@ -124,6 +124,7 @@ class ListaPage extends Component {
 
             }}
             data={data}
+            actionTypes={["edit","delete"]}
             onAction={(type, obj) => {
                 switch (type) {
                     case "edit":
