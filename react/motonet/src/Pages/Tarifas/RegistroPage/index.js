@@ -76,19 +76,25 @@ class RegistroPage extends Component {
 
                             }}
                             onSubmit={(data) => {
+                                var data2 = {
+                                            ["Monto por kilometro"]:{monto: data["monto1"]}, 
+                                            ["Monto por tiempo"]:{monto: data["monto2"]}
+                                        }
+                               // data2={["Monto por tiempo"]:{monto: data["monto2"]}}
                                 var objSend = {
-                                    component: "editarMontoTipoViaje",
-                                    type: (this.props.match.params.key?"modificar":"registro"),
+                                    component: "tipoTarifa",
+                                    type: (this.props.match.params.key?"editarMontoTipoViaje":"registro"),
                                     estado: "cargando",
+                                    key_tipo_viaje : this.props.match.params.key,
                                     key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
                                     data: {
-                                        ...tarifas,
-                                        ...data
+                                        //...tarifas,
+                                        ...data2
                                     }
                                 };
-                                alert(JSON.stringify(data))
-                                // this.props.state.socketReducer.send(objSend);
-                                // this.props.history.goBack();
+                                alert(JSON.stringify(objSend))
+                                this.props.state.socketReducer.send(objSend);
+                                this.props.history.goBack();
                             }}
                             onSubmitName={(this.props.match.params.key ? "EDITAR" : "REGISTRAR")}
                         />
