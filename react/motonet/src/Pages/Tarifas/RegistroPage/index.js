@@ -76,11 +76,13 @@ class RegistroPage extends Component {
 
                             }}
                             onSubmit={(data) => {
-                                var data2 = {
-                                            ["Monto por kilometro"]:{monto: data["monto1"]}, 
-                                            ["Monto por tiempo"]:{monto: data["monto2"]}
-                                        }
+                                // var data2 = {
+                                //             ["Monto por kilometro"]:{monto: data["monto1"]}, 
+                                //             ["Monto por tiempo"]:{monto: data["monto2"]}
+                                //         }
                                // data2={["Monto por tiempo"]:{monto: data["monto2"]}}
+                               tarifas.tarifas["Monto por kilometro"].monto =  data["monto1"] 
+                               tarifas.tarifas["Monto por tiempo"].monto =  data["monto2"]
                                 var objSend = {
                                     component: "tipoTarifa",
                                     type: (this.props.match.params.key?"editarMontoTipoViaje":"registro"),
@@ -88,11 +90,11 @@ class RegistroPage extends Component {
                                     key_tipo_viaje : this.props.match.params.key,
                                     key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
                                     data: {
-                                        //...tarifas,
-                                        ...data2
+                                        ...tarifas,
+                                        //...data2
                                     }
                                 };
-                                alert(JSON.stringify(objSend))
+                                //alert(JSON.stringify(tarifas))
                                 this.props.state.socketReducer.send(objSend);
                                 this.props.history.goBack();
                             }}
