@@ -85,7 +85,7 @@ export class Mapa extends Component {
         //     return <View />
         // }
         var getSVGMapa = () => {
-          
+
             if (!this.props.state.seguimientoConductorReducer.data) {
                 return <div />
             }
@@ -127,7 +127,6 @@ export class Mapa extends Component {
                         lat: -17.7799998333333332,
                         lng: -63.180598333333336
                     }}
-
                     defaultZoom={11}>
                     {getSVGMapa()}
                 </GoogleMapReact>
