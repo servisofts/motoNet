@@ -125,7 +125,6 @@ class ListaPage extends Component {
                     key: "key_usuario",
                     width: 150,
                     render: (data) => {
-                        //console.log(JSON.stringify(usuarios[data].data["Nombres"].dato))
                         return usuarios[data].data["Nombres"].dato + " " + usuarios[data].data["Apellidos"].dato
                     }
                 },
