@@ -13,6 +13,7 @@ import { Asociacion } from './Pages/Asociacion';
 import { Usuarios } from './Pages/Usuarios';
 import { Parametros } from './Pages/Parametros';
 import { Tarifas } from './Pages/Tarifas';
+import { Viajes } from './Pages/Viajes';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
       {Asociacion}
       {Parametros}
       {Tarifas}
+      {Viajes}
     </BrowserRouter>
   );
 }
