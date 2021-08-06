@@ -153,7 +153,6 @@ class ListaPage extends Component {
                             borderRadius: 4,
                             backgroundColor: (verificado ? "#060" : "#600")
                         }}>
-
                         </View>
                     }
                 },

@@ -10,6 +10,7 @@ export default class SelectAlert extends Component {
             actions: {
                 edit: { label: "Editar", icon: "editar", onPress: () => { this.props.onAction("edit") } },
                 delete: { label: "Eliminar", icon: "eliminar", onPress: () => { this.props.onAction("delete") } },
+                blocker: { label: "Bloquear", icon: "bloquear", onPress: () => { this.props.onAction("blocker") } },
             }
         };
     }

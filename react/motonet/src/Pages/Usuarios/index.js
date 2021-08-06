@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import RegistroPage from './RegistroPage';
+import BloqueoPage from './BloqueoPage';
 
 import TipoDeUsuario from './TipoDeUsuario';
 import UsuariosTablaPage from './UsuariosTablaPage';
@@ -11,4 +12,5 @@ export const Usuarios = [
     <Route exact path='/Usuarios/:tipo/:key' component={RegistroPage} />,
     <Route exact path='/Usuarios/:tipo/registro' component={RegistroPage} />,
     // <Route exact path='/Usuarios/:tipo/:key' component={RegistroPage} />
+    <Route exact path='/Usuarios/:tipo/Bloqueo/:key' component={BloqueoPage} />,
 ]
