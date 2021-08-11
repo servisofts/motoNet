@@ -157,7 +157,7 @@ class MapaAutoComplete extends Component {
                                 //     return <View/>
                                 // } 
                                 // this.props.state.locationGoogleReducer.estado = "";
-                                // this.props.navigation.goBack()
+                                 this.props.navigation.goBack()
                             }}
                         />
                     </View>
