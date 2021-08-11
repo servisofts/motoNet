@@ -58,9 +58,15 @@ class ViajeEsperaPage extends Component {
             SPopupOpen({
                 key: "noConductor",
                 content: (
-                    <View>
-                        <Text>No encontramos conductor disponible.</Text>
-                        <Text>Por favor intente nuevamente.</Text>
+                    <View alignItems="center" >
+                        <Svg name={"logoCompletoRecurso"}
+                        style={{
+                            width: 80,
+                            height: 80,
+                            fill: "#f00",
+                        }} />
+                        <Text style={{paddingTop:10, fontSize:15}}>No encontramos conductor disponible.</Text>
+                        <Text style={{ fontSize:15}}>Por favor intente nuevamente.</Text>
                     </View>
                 )
             })

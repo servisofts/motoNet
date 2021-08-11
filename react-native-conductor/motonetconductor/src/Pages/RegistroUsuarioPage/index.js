@@ -211,7 +211,7 @@ class RegistroUsuarioPage extends Component {
         }}
       >
         <BarraSuperior
-          title={"Crear usuario"}
+          title={"Crear usuario conductor"}
           goBack={() => {
             this.props.navigation.goBack();
           }}

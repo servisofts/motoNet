@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Button } from 'react-native';
+import { View, Text, TouchableOpacity, Button, Alert } from 'react-native';
 import { connect } from 'react-redux';
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
@@ -139,15 +139,25 @@ class MapaAutoComplete extends Component {
                     <View style={{
                         position: "absolute",
                         bottom: 0,
-                        width: "100%",
+                        backgroundColor: "#fff",
+                        height: 45,
+                        width: "90%",
                         //margin:10
                     }}>
                         <Boton1 type="1"
+                            style={{}}
                             label="Aceptar"
                             cargando={false}
                             // cargando={props.state.viajesReducer.estado == "cargando"}
-                            onPress={() => {
-                                this.props.navigation.goBack()
+                            onPress={(region) => {
+                                // if ((this.props.state.locationGoogleReducer.estado == "exito" )) {
+                                    
+                                //     alert("Posicione en el mapa la ubicación")
+                                //     this.props.state.locationGoogleReducer.estado = "";
+                                //     return <View/>
+                                // } 
+                                // this.props.state.locationGoogleReducer.estado = "";
+                                // this.props.navigation.goBack()
                             }}
                         />
                     </View>

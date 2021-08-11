@@ -46,13 +46,13 @@ class CargaPage extends Component {
               alignItems: "center",
               width: "100%"
             },
-            {
-              transform: [
-                {
-                  scale: this.state.startValue,
-                },
-              ],
-            },
+            // {
+            //   transform: [
+            //     {
+            //       scale: this.state.startValue,
+            //     },
+            //   ],
+            // },
           ]}
         >
           <Svg name="logoCompleto"

@@ -56,11 +56,14 @@ class BarraSuperior extends Component {
                 borderWidth: 2,
                 borderRadius: 5,
                 height: 40,
+                
+               
             }}>
                 <View style={{
                     width: 40,
                     justifyContent: "center",
                     alignItems: "center",
+                    
                 }}>
                     <Svg name={svg}
                         style={{
@@ -92,7 +95,7 @@ class BarraSuperior extends Component {
         return (
             <Animated.View style={{
                 width: "100%",
-                height: (this.props.tipo_viaje === "pedido" ? 150 : 200),
+                height: (this.props.tipo_viaje === "pedido" ? 150 : 150),
                 flexDirection: "row",
                 // backgroundColor: "#fff",
                 transform: [
@@ -112,7 +115,7 @@ class BarraSuperior extends Component {
                 }}>
                     <View style={{
                         // flex: 1,
-                        height: 50,
+                        height: 40,
                         flexDirection: "row",
                         // borderBottomEndRadius: 16,
                         // borderBottomStartRadius: 16,
@@ -122,6 +125,7 @@ class BarraSuperior extends Component {
                             height: "100%",
                             justifyContent: "center",
                             alignItems: "center",
+                            marginLeft:8
                         }}
                             activeOpacity={0.9}
                             onPress={this.props.goBack}>
@@ -143,14 +147,14 @@ class BarraSuperior extends Component {
                     </View>
 
                     <View style={{
-                        height: 150,
+                        height: 110,
                         justifyContent: "space-evenly",
                         alignItems: "center"
                     }}>
                         {this.getTextFieldDireccion("MarkerW", this.props.direccion1)}
                         {this.getTextFieldDireccion("Pointer", this.props.direccion2)}
                     </View>
-                </View>
+                </View> 
 
             </Animated.View>
         );

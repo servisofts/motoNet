@@ -262,7 +262,7 @@ const ComponentDetalleViaje = (props) => {
             position: "absolute",
             width: "100%",
             // height: Dimensions.get('window').height * 0.3,
-            height: 220,
+            height: 210,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
             backgroundColor: "#fff",
