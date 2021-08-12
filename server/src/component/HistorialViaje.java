@@ -24,7 +24,7 @@ public class HistorialViaje {
         try {
             String consulta = "";
             consulta += "select get_all_viaje_formateado() as json";
-            JSONArray tiposViajes = Conexion.ejecutarConsultaArray(consulta);
+            JSONObject tiposViajes = Conexion.ejecutarConsultaObject(consulta);
             obj.put("data", tiposViajes);
             obj.put("estado", "exito");
         } catch (SQLException e) {
