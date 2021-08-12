@@ -182,12 +182,11 @@ const ComponentDetalleViaje = (props) => {
                             justifyContent: "space-evenly",
                             // backgroundColor: "#ccc"
                         }}>
-                            <View style={{
+                            {/* <View style={{
                                 flexDirection: "row",
                             }}>
                                 <View style={{
                                     flex: 1,
-                                    // backgroundColor:"#000"
                                 }}>
                                     <Text style={{
                                         fontSize: 14,
@@ -213,7 +212,7 @@ const ComponentDetalleViaje = (props) => {
                                     }}>Monto estimado
                                     </Text>
                                 </View>
-                            </View>
+                            </View> */}
                             {/* <Text style={{
                     fontSize: 12,
                     color: STheme.color.textb
@@ -277,7 +276,7 @@ const ComponentDetalleViaje = (props) => {
             position: "absolute",
             width: "100%",
             // height: Dimensions.get('window').height * 0.3,
-            height: 210,
+            height: 170,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
             backgroundColor: "#fff",
