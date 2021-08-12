@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 const SolicitudSos = () => {
     return (
         <View>
-            {alert("Asds")}
+            {/* {alert("Asds")} */}
             <Text>sdfdsffsdf</Text>
             {console.log("sdfs")}
         </View>

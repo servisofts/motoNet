@@ -8,6 +8,7 @@ import Geolocation from '@react-native-community/geolocation';
 import MarkerMedio from './MarkerMedio';
 import MapaSelectPorLista from './MapaSelectPorLista';
 import Boton1 from '../../../component/Boton1';
+import { SPopupOpen } from '../../../SPopup';
 
 class MapaAutoComplete extends Component {
     constructor(props) {
@@ -23,7 +24,8 @@ class MapaAutoComplete extends Component {
             region.longitude = this.props.value.longitude
         }
         this.state = {
-            region: region
+            region: region,
+            ubi: 0
         };
     }
     getDistancia = (lat1, lon1, lat2, lon2) => {
@@ -82,11 +84,13 @@ class MapaAutoComplete extends Component {
         // }, 1000)
         return <View />
     }
-    render() {
 
+    render() {
+        // var b = 0;
         if (this.props.state.locationGoogleReducer.estado == "exito" && this.props.state.locationGoogleReducer.type == "geocode") {
             this.props.state.locationGoogleReducer.estado = "";
             this.props.seleccionar(this.props.state.locationGoogleReducer.data);
+            this.state.ubi = 1;
         }
         return (
             <View style={{
@@ -149,15 +153,28 @@ class MapaAutoComplete extends Component {
                             label="Aceptar"
                             cargando={false}
                             // cargando={props.state.viajesReducer.estado == "cargando"}
-                            onPress={(region) => {
-                                // if ((this.props.state.locationGoogleReducer.estado == "exito" )) {
-                                    
-                                //     alert("Posicione en el mapa la ubicación")
-                                //     this.props.state.locationGoogleReducer.estado = "";
-                                //     return <View/>
-                                // } 
-                                // this.props.state.locationGoogleReducer.estado = "";
-                                 this.props.navigation.goBack()
+                            onPress={() => {
+                             
+                                if(!this.props.value){
+                                    //alert("Posicione la ubicación en el mapa");
+                                    SPopupOpen({
+                                        key: "noConductor",
+                                        content: (
+                                            <View alignItems="center" >
+                                                <Svg name={"Warning2"}
+                                                style={{
+                                                    width: 100,
+                                                    height: 100,
+                                                    fill: "#f00",
+                                                }} />
+                                                <Text style={{paddingTop:10, fontSize:15}}>Posicione la ubicación en el mapa.</Text>
+                                            </View>
+                                        )
+                                    })
+                                    return <View/>
+                                }
+                                //console.log(this.props.value)
+                                this.props.navigation.goBack()
                             }}
                         />
                     </View>

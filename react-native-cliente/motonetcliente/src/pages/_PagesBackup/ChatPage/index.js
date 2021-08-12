@@ -113,7 +113,7 @@ class ChatPage extends Component {
                                 alignItems: "center",
                                 height: 40
                             }} onPress={() => {
-                                alert("dsfdsfd")
+                                // alert("dsfdsfd")
                             }}>
                             <Text>Enviar</Text>
                         </TouchableOpacity>

@@ -90,7 +90,10 @@ export default class TransportePage extends Component {
                     </MapView>
                     <TipoDeViaje pedir={(tipo) => {
                         this.pedirViaje(tipo);
-                    }} />
+                    }} 
+                    dir1={this.state.direccion1}
+                    dir2={this.state.direccion2}
+                    />
                 </View>
             </View>
         );

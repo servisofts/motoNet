@@ -18,6 +18,7 @@ import AppParam from "../../Json/index.json";
 import BarraSuperior from "../../component/BarraSuperior";
 import STextInput from '../../component/STextImput';
 import ModalPage from "../ModalPage";
+//import { SPopupOpen } from '../../SPopup'; 
 
 class NuevoPassPage extends Component {
   //para que no muestre el encabezado por defecto
@@ -121,7 +122,22 @@ class NuevoPassPage extends Component {
       this.props.state.usuarioReducer.estadoEmail == "error" &&
       this.props.state.usuarioReducer.type == "cambiarPassByCodigo"
     ) {
+
       alert("Algo salío mal");
+    //   SPopupOpen({
+    //     key: "noConductor",
+    //     content: (
+    //         <View alignItems="center" >
+    //             <Svg name={"Warning2"}
+    //             style={{
+    //                 width: 100,
+    //                 height: 100,
+    //                 fill: "#f00",
+    //             }} />
+    //             <Text style={{paddingTop:10, fontSize:15}}>Algo salío mal.</Text>
+    //         </View>
+    //     )
+    // })
       this.props.state.usuarioReducer.estadoEmail = false;
     }
 

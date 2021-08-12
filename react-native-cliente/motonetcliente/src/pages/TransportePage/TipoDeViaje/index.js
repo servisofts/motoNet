@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Animated, TouchableOpacity } from 'react-native';
 import STheme from '../../../STheme';
 import Svg from '../../../Svg';
+import { SPopupOpen } from '../../../SPopup';
 
 export default class TipoDeViaje extends Component {
     constructor(props) {
@@ -21,6 +22,12 @@ export default class TipoDeViaje extends Component {
             tipoSelect: "moto",
         };
         this.open()
+    }
+    validarVacio(){
+        if (!(this.props.dir1 && this.props.dir2)){
+            return false
+        }
+        return true
     }
     open() {
         new Animated.timing(this.state.anim, {
@@ -102,6 +109,25 @@ export default class TipoDeViaje extends Component {
 
                 <TouchableOpacity
                     onPress={() => {
+                        if(!this.validarVacio()){
+                            //alert("error")
+                            SPopupOpen({
+                                key: "noConductor",
+                                content: (
+                                    <View alignItems="center" >
+                                        <Svg name={"Warning2"}
+                                        style={{
+                                            width: 100,
+                                            height: 100,
+                                            fill: "#f00",
+                                        }} />
+                                        <Text style={{paddingTop:10, fontSize:15}}>Ingrese las ubicaciones requeridas.</Text>
+                                    </View>
+                                )
+                            })
+
+                        }
+                        
                         this.props.pedir(this.state.tipoSelect);
                     }}
                     style={{

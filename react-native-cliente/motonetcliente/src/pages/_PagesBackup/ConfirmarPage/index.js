@@ -8,6 +8,8 @@ import ImgFondoCruces from '../../component/ImgFondoCruces';
 import { NavigationActions, StackActions } from 'react-navigation';
 import LinearGradient from 'react-native-linear-gradient';
 import PopupUbicacion from './PopupUbicacion';
+import { SPopupOpen } from '../../../SPopup';
+import Svg from '../../../Svg';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -181,7 +183,21 @@ class ConfirmarPage extends Component {
         var ubicacion = this.props.state.locationEmergenciaReducer.region;
         if (!ubicacion) {
             console.log(dato);
-            alert("Porfavor Active su ubicacion");
+            //alert("Porfavor Active su ubicacion");
+            SPopupOpen({
+                key: "noConductor",
+                content: (
+                    <View alignItems="center" >
+                        <Svg name={"Warning2"}
+                        style={{
+                            width: 100,
+                            height: 100,
+                            fill: "#f00",
+                        }} />
+                        <Text style={{paddingTop:10, fontSize:15}}>Por favor active su ubicación</Text>
+                    </View>
+                )
+            })
             this.state.tiempo = false;
             this.getPosition();
             this.setState({ ...this.state });
