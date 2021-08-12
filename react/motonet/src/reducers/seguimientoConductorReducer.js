@@ -47,5 +47,7 @@ const changePosition = (state, action) => {
     state.isRun = true;
 }
 const getAll = (state, action) => {
-    state.data = action.data;
+    if (action.estado == "exito") {
+        state.data = action.data;
+    }
 }

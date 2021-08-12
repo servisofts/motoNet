@@ -70,7 +70,6 @@ class RegistroPage extends Component {
                                 md: "5",
                                 lg: "4",
                                 xl: "3",
-
                             },
                         }}
                         inputProps={{
