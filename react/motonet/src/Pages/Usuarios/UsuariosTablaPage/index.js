@@ -209,7 +209,7 @@ class UsuariosTablaPage extends Component {
             onAdd={this.props.match.params.tipo != "Todos" ? () => {
                 this.props.history.push("/Usuarios/" + this.props.match.params.tipo + "/registro/")
             } : false}
-            actionTypes={['edit', "delete"]}
+            actionTypes={['edit', "delete", "blocker"]}
             onAction={(type, obj) => {
                 var cabeceraFinal = "";
                 switch (cabeceras[obj.usuario.key_cabecera].descripcion) {
@@ -230,6 +230,10 @@ class UsuariosTablaPage extends Component {
                     case "delete":
                         // this.deleteAsociaciones(obj.key)
                         break;
+                    case "blocker":
+                        this.props.history.push("/Usuarios/" + cabeceraFinal + "/Bloqueo/" + obj.key)
+                        break;
+
                 }
             }}
             dataProps={{

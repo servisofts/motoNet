@@ -61,6 +61,7 @@ export default class SIcon extends Component<IconsPropsType> {
             case "drag": return <Drag style={this.props.style} />
             case "editar": return <SImage source={{ uri: require("./Icons/editar.png") }} style={this.props.style} />
             case "eliminar": return <SImage source={{ uri: require("./Icons/eliminar.png") }} style={this.props.style} />
+            case "bloquear": return <SImage source={{ uri: require("./Icons/bloquear.png") }} style={this.props.style} />
             case "engranaje": return <Engranaje style={this.props.style} />
             case "engranaje2": return <Engranaje2 style={this.props.style} />
             case "marker": return <Marker style={this.props.style} />

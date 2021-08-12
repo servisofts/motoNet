@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import STheme from '../../../../STheme';
 import Svg from '../../../../Svg';
 import Boton1 from '../../../../component/Boton1';
+import { SPopupOpen } from '../../../../SPopup';
 
-var totalViaje;
+var totalViaje; 
 
 const ComponentDetalleViaje = (props) => {
 
@@ -37,7 +38,21 @@ const ComponentDetalleViaje = (props) => {
             }, true);
             return <View />
         }
-        alert("falta rellenar datos en la carrera")
+        //alert("falta rellenar datos en la carrera")
+        SPopupOpen({
+            key: "noConductor",
+            content: (
+                <View alignItems="center" >
+                    <Svg name={"Warning2"}
+                    style={{
+                        width: 100,
+                        height: 100,
+                        fill: "#f00",
+                    }} />
+                    <Text style={{paddingTop:10, fontSize:15}}>Falta rellenar datos en la carrera.</Text>
+                </View>
+            )
+        })
     }
 
 
@@ -262,7 +277,7 @@ const ComponentDetalleViaje = (props) => {
             position: "absolute",
             width: "100%",
             // height: Dimensions.get('window').height * 0.3,
-            height: 220,
+            height: 210,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
             backgroundColor: "#fff",

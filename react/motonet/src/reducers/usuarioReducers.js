@@ -49,6 +49,9 @@ export default (state, action) => {
             case "eliminar":
                 eliminar(state, action);
                 break;
+            case "bloquear":
+                bloquear(state, action);
+                break;
 
         }
         state.type = action.type;
@@ -67,6 +70,18 @@ const login = (state, action) => {
         state.error = action.error
     }
 
+}
+
+const bloquear = (state, action) => {
+    state.estado = action.estado;
+    if (action.estado === "exito") {
+        if (!state.data) {
+            state.data = {}
+        }
+        action.data.map((obj, key) => {
+            state.data[obj.usuario.key] = obj;
+        });
+    }
 }
 
 const registro = (state, action) => {

@@ -46,13 +46,13 @@ class CargaPage extends Component {
               // backgroundColor: "#ccc",
               alignItems: "center"
             },
-            {
-              transform: [
-                {
-                  scale: this.state.startValue,
-                },
-              ],
-            },
+            // {
+            //   transform: [
+            //     {
+            //       scale: this.state.startValue,
+            //     },
+            //   ],
+            // },
           ]}
         >
           <Svg name="logoCompletoRecurso"

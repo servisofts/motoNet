@@ -16,6 +16,7 @@ import NacionalSegurosRecurso from '../img/NacionalSegurosRecurso.svg';
 import LogoFacebook from '../img/facebook.svg';
 import LogoEmail from '../img/google.svg';
 import Warning from '../img/warning.svg';
+import Warning2 from '../img/warning2.svg';
 import Menu from '../img/menu.svg';
 import Phone from '../img/phone.svg';
 import Ambulancia from '../img/motomarker.svg';
@@ -95,6 +96,8 @@ const Svg = (propsa) => {
             return <LogoEmail style={props.style} />
         case "Warning":
             return <Warning style={props.style} />
+        case "Warning2":
+            return <Warning2 style={props.style} />
         case "Menu":
             return <Menu style={props.style} />
         case "Phone":

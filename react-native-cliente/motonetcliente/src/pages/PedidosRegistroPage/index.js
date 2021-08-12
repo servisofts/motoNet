@@ -8,6 +8,8 @@ import SSCrollView from '../../component/SScrollView';
 import STextImput from '../../component/STextImput';
 import STheme from '../../STheme';
 import Productos from './Productos';
+import { SPopupOpen } from '../../SPopup';
+import Svg from '../../Svg';
 
 class PedidosRegistroPage extends Component {
     static navigationOptions = {
@@ -51,7 +53,21 @@ class PedidosRegistroPage extends Component {
         // var direccionI = this.direccionInicio.getValue();
 
         if (!direccion) {
-            alert("Ingrese a dónde llevaremos el encargo.")
+            //alert("Ingrese a dónde llevaremos el encargo.")
+            SPopupOpen({
+                key: "noConductor",
+                content: (
+                    <View alignItems="center" >
+                        <Svg name={"Warning2"}
+                        style={{
+                            width: 100,
+                            height: 100,
+                            fill: "#f00",
+                        }} />
+                        <Text style={{paddingTop:10, fontSize:15}}>Ingrese a dónde llevaremos el encargo.</Text>
+                    </View>
+                )
+            })
             isValid = false;
         }
         var nombre = this._ref["nombre"].verify();
@@ -70,7 +86,21 @@ class PedidosRegistroPage extends Component {
         var productos = this.productos.getProductos();
 
         if (Object.keys(productos).length <= 0) {
-            alert("Ingrese por lo menos 1 producto.")
+            //alert("Ingrese por lo menos 1 producto.")
+            SPopupOpen({
+                key: "noConductor",
+                content: (
+                    <View alignItems="center" >
+                        <Svg name={"Warning2"}
+                        style={{
+                            width: 100,
+                            height: 100,
+                            fill: "#f00",
+                        }} />
+                        <Text style={{paddingTop:10, fontSize:15}}>Ingrese al menos 1 producto.</Text>
+                    </View>
+                )
+            })
             isValid = false
         }
         if (!isValid) {

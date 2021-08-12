@@ -201,7 +201,7 @@ const LoginPage = (props) => {
                             color: "#FFA9B3",
                             height: 25,
                             textAlign: "left"
-                        }}>Usuario</Text>
+                        }}>Usuario conductor</Text>
                     </View>
                     <View
                         style={{

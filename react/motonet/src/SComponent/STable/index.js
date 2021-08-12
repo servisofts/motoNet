@@ -16,7 +16,7 @@ type typeHeader = {
     hidden: Boolean,
     render: (data: String) => {}
 }
-type typeAction = "edit" | "delete";
+type typeAction = "edit" | "delete" | "blocker";
 type SType = {
     header: [typeHeader],
     headerProps: SHeaderProps,

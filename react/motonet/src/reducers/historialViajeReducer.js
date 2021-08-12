@@ -23,13 +23,13 @@ export default (state, action) => {
 
 
 const getAll = (state, action) => {
+
     state.estado = action.estado;
     if (action.estado === "exito") {
         if (!state.data) {
             state.data = {}
         }
-        action.data.map((obj, key) => {
-            state.data[obj.key] = obj;
-        });
+    state.data = action.data
     }
+
 }
