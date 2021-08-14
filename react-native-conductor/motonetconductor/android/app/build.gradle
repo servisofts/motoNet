@@ -58,8 +58,8 @@ android {
         applicationId "com.servisofts.motonetconductor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 15
-        versionName "2.6"
+        versionCode 16
+        versionName "2.7"
         multiDexEnabled true
     }
     splits {
@@ -122,6 +122,8 @@ dependencies {
         exclude group:'com.facebook.fbjni'
     }
           implementation 'com.google.firebase:firebase-analytics:17.3.0'
+           implementation 'com.google.firebase:firebase-core:16.0.8'
+    implementation 'com.google.firebase:firebase-messaging:17.6.0'
           implementation project(':react-native-push-notification')
 ///////////////////////map
    implementation project(':react-native-community-geolocation')

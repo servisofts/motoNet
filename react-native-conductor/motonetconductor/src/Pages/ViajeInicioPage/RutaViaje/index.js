@@ -8,6 +8,7 @@ import * as SSBackgroundLocation from '../../../SSBackgroundLocation';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 let lastSend = 0;
+let lastEstado = "";
 const RutaViaje = (props) => {
 
     // if (props.state.locationGoogleReducer.estado == "cargando") {
@@ -15,41 +16,63 @@ const RutaViaje = (props) => {
     // }
     useEffect(() => {
         lastSend = 0;
+        lastEstado = "";
         getHilo();
     }, [])
 
+    const functionHilos = () => {
+        if (!props.state.ViajeReducer.data) {
+            return;
+        }
+        if (props.state.ViajeReducer.data.estado == 0) {
+            return;
+        }
+        getHilo();
+        var timeActual = new Date().getTime();
+
+        var viaje = props.state.ViajeReducer.data;
+
+        var movimientos = props.state.ViajeReducer.data.movimientos;
+        var preventAwait = false
+        if (movimientos["inicio_viaje_conductor"]) {
+            if (lastEstado != "inicio_viaje_conductor") {
+                preventAwait = true;
+            }
+        }
+        if (timeActual - lastSend < 10000 && !preventAwait) {
+            return;
+        }
+        SSBackgroundLocation.getInstance().location;
+        let ubicacion = props.state.backgroundLocationReducer.data;
+        if (!ubicacion) {
+            return;
+        }
+        lastSend = timeActual;
+
+        console.log(Object.keys(viaje.movimientos));
+        if (movimientos["inicio_viaje_conductor"]) {
+            lastEstado = "inicio_viaje_conductor";
+            if (viaje["direccion_fin"]) {
+                props.fitCordinates([viaje.direccion_fin, ubicacion])
+            } else {
+                // props.zoomin(viaje.direccion_inicio);
+            }
+            return;
+        }
+        if (movimientos["inicio_viaje"]) {
+            lastEstado = "inicio_viaje";
+            if (viaje["direccion_fin"]) {
+                props.fitCordinates([viaje.direccion_inicio, ubicacion])
+            } else {
+                props.zoomin(viaje.direccion_inicio);
+            }
+            return;
+        }
+    }
 
     const getHilo = async () => {
-        new SThread(2000, "hiloUbicacion", false).start(() => {
-            getHilo();
-            var timeActual = new Date().getTime();
-            if (timeActual - lastSend < 15000) {
-                return;
-            }
-            SSBackgroundLocation.getInstance().location;
-            let ubicacion = props.state.backgroundLocationReducer.data;
-            if (!ubicacion) {
-                return;
-            }
-            lastSend = timeActual;
-            var movimientos = props.state.ViajeReducer.data.movimientos;
-            var viaje = props.state.ViajeReducer.data;
-            if (movimientos["inicio_viaje_conductor"]) {
-                // if (viaje["direccion_fin"]) {
-                //     props.fitCordinates([viaje.direccion_fin, ubicacion])
-                // } else {
-                //     props.zoomin(ubicacion);
-                // }
-                // return;
-            }
-            if (movimientos["inicio_viaje"]) {
-                // if (viaje["direccion_fin"]) {
-                props.fitCordinates([viaje.direccion_inicio, ubicacion])
-                // } else {
-                // props.zoomin(viaje.direccion_inicio);
-                // }
-                return;
-            }
+        new SThread(2000, "hiloUbicacion", true).start(() => {
+            functionHilos();
         });
     }
     getHilo();
@@ -61,6 +84,7 @@ const RutaViaje = (props) => {
     }
 
     var dato = props.state.ViajeReducer.data;
+
     return ["direccion_inicio", "direccion_fin"].map((index) => {
         var obj = dato[index];
         if (!obj) {

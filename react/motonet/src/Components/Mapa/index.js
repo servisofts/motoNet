@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import GoogleMapReact from 'google-map-react';
-import Logo from '../../img/ambulancia.svg'
-import LogoVerde from '../../img/ambulanciaverde.svg'
+import { ReactComponent as Logo } from '../../img/MarkerMoto.svg'
 import { CircularProgress, Grid } from '@material-ui/core';
 import Moment from 'moment';
 import { SThread } from '../../SComponent';
@@ -10,11 +9,22 @@ import { View } from 'react-native';
 
 
 const MiMarker = (propMarker) => {
-
+    var color = '#660000';
+    if (!propMarker.data.fecha_off) {
+        color = '#006600';
+    }
     return (
         <div style={{
+            position: 'absolute',
+            width: 80,
             cursor: "pointer",
-            textAlign: "center"
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            // backgroundColor: color,
+            borderRadius: 4,
+            top: -20,
+            left: -40,
         }}
             onClick={() => {
                 //alert(propMarker)
@@ -27,15 +37,20 @@ const MiMarker = (propMarker) => {
                 width: 100,
             }}>{(propMarker.minutes == 0 ? "Ahora" : "Hace " + propMarker.minutes + " min.")}</span> */}
             <span style={{
-                position: "absolute",
                 textAlign: "center",
-                left: -30,
                 fontWeight: "bold",
-                top: 25,
-                width: 100,
+                width: 80,
+                fontSize: 10,
             }}>{propMarker.title}</span>
 
-            <img src={propMarker.logo} alt="here marker" style={{ width: 25, height: 25 }} />
+            <div style={{
+                width: 80,
+                height: 25,
+                justifyContent: "center",
+                alignItems: "center",
+            }}>
+                <Logo style={{ width: 25, height: 25, fill: color }} fill={color}/>
+            </div>
         </div>
     )
 }
@@ -80,10 +95,10 @@ export class Mapa extends Component {
         new SThread(5000, "hiloConductor", false).start(() => {
             this.getPosition()
         })
-        // var usuarios = this.getData();
-        // if (usuarios) {
-        //     return <View />
-        // }
+        var usuarios = this.getData();
+        if (!usuarios) {
+            return <View />
+        }
         var getSVGMapa = () => {
 
             if (!this.props.state.seguimientoConductorReducer.data) {
@@ -91,7 +106,7 @@ export class Mapa extends Component {
             }
             return Object.keys(this.props.state.seguimientoConductorReducer.data).map((key) => {
                 var obj = this.props.state.seguimientoConductorReducer.data[key];
-                // var conductor = usuarios[obj.key_usuario];
+                var conductor = usuarios[obj.key_usuario];
 
                 // if (!conductor) {
                 //     return <div />
@@ -102,19 +117,19 @@ export class Mapa extends Component {
                 // if (minutes > 30) {
                 //     return <div />
                 // }
-                var IMG = LogoVerde;
-                if (obj.emergencias) {
-                    IMG = Logo;
-                }
+                // var IMG = Logo;
+                // if (obj.emergencias) {
+                // IMG = Logo;
+                // }
 
                 return (
                     <MiMarker
                         lat={obj.latitude}
                         lng={obj.longitude}
                         title={obj.key_usuario}
-                        // title={conductor.data["Nombres"].dato + " " + conductor.data["Apellidos"].dato}
-                        // minutes={minutes}
-                        logo={IMG}
+                        title={conductor.data["Nombres"].dato + " " + conductor.data["Apellidos"].dato}
+                        data={obj}
+                    // logo={IMG}
                     />
                 )
             })
@@ -127,7 +142,7 @@ export class Mapa extends Component {
                         lat: -17.7799998333333332,
                         lng: -63.180598333333336
                     }}
-                    defaultZoom={11}>
+                    defaultZoom={13}>
                     {getSVGMapa()}
                 </GoogleMapReact>
             </div>

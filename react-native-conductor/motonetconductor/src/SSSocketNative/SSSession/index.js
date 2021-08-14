@@ -174,7 +174,7 @@ class SSSession {
         data.estado = "timeout"
         this.store.dispatch(data)
     }
-    send(mensaje,isDispatch) {
+    send(mensaje, isDispatch) {
         this.colaMensaje.setMensaje(mensaje);
         this.socket.write(JSON.stringify(mensaje) + "\n");
         if (isDispatch) {
@@ -312,7 +312,7 @@ class SSSession {
                                 data: usuario,
                                 token: token,
                                 deviceKey: token,
-                                fbapp: "ambulancia_android",
+                                fbapp: "motonet_conductor",
                                 estado: "cargando"
                             };
                             _instance.send(objSend);

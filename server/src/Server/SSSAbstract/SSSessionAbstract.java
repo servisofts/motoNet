@@ -2,6 +2,7 @@ package Server.SSSAbstract;
 
 import org.json.JSONObject;
 
+import FireBase.FireBase;
 import Server.SSSInterface.SSSessionInterface;
 import component.Manejador;
 
@@ -10,6 +11,8 @@ public abstract class SSSessionAbstract implements SSSessionInterface {
     private String idSession;
     private String keyUsuario;
     private String keyDevice;
+    private String tokenFb;
+    private String appFb;
     private JSONObject usuario;
     private SSServerAbstract Server;
 
@@ -45,9 +48,15 @@ public abstract class SSSessionAbstract implements SSSessionInterface {
         }
     }
 
+    public void sendFireBase(String mensaje) {
+        System.out.println("Enviando por fb");
+        FireBase.send(this.getTokenFb(), this.getAppFb(), mensaje);
+    }
+
     public void onClose(JSONObject data) {
         SSServerAbstract.closeSession(getIdSession());
     }
+
     public SSServerAbstract getServer() {
         return Server;
     }
@@ -59,21 +68,39 @@ public abstract class SSSessionAbstract implements SSSessionInterface {
     public String getKeyUsuario() {
         return keyUsuario;
     }
+
     public void setUsuario(JSONObject usuario) {
         this.usuario = usuario;
     }
+
     public JSONObject getUsuario() {
         return usuario;
     }
 
+    public void setTokenFb(String tokenFb) {
+        this.tokenFb = tokenFb;
+    }
+
+    public String getTokenFb() {
+        return tokenFb;
+    }
+
+    public void setAppFb(String appFb) {
+        this.appFb = appFb;
+    }
+
+    public String getAppFb() {
+        return appFb;
+    }
+
     public void setKeyDevice(String keyDevice) {
         this.keyDevice = keyDevice;
-        SSServerAbstract.setDeviceSession(keyDevice,getIdSession());
+        SSServerAbstract.setDeviceSession(keyDevice, getIdSession());
     }
 
     public void setKeyUsuario(String keyUsuario) {
         this.keyUsuario = keyUsuario;
-        SSServerAbstract.setUserSession(keyUsuario,getKeyDevice());
+        SSServerAbstract.setUserSession(keyUsuario, getKeyDevice());
     }
 
     public void setPendiente(String key, JSONObject pendiente) {

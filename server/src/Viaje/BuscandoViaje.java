@@ -104,6 +104,7 @@ public class BuscandoViaje extends Thread {
             objSend.put("estado", "exito");
             objSend.put("data", this.viaje);
             SSServerAbstract.sendUser(objSend.toString(), conductor.getString("key_usuario"));
+            SSServerAbstract.sendUserFireBase(objSend.toString(), conductor.getString("key_usuario"));
             System.out.println("SE NOTIFICO AL CONDUCTOR " + conductor.getString("key_usuario"));
         } catch (JSONException | SQLException e) {
             e.printStackTrace();

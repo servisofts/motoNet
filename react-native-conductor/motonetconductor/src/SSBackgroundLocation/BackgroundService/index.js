@@ -16,6 +16,7 @@ class BackgroundService {
     location;
     prevLocation;
     Listener;
+    
     constructor() {
         this.log("SSBackgroundLocation constructor");
         this.run = false;

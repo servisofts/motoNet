@@ -3,7 +3,7 @@
     "socket_client": {
         "servicio": {
             "puerto": 10001,
-            "ip": "192.168.0.10",
+            "ip": "192.168.0.4",
             "cert": {
                 "OU": "servicio",
                 "pem": "servicio.pem"
@@ -20,8 +20,8 @@
     "data_base": {
         "puerto": 5432,
         "pg_restore": "C:\\Program Files\\PostgreSQL\\12\\bin\\pg_restore.exe",
-        "pass": "fullparts123.",
-        "ip": "192.168.0.10",
+        "pass": "postgres",
+        "ip": "192.168.0.4",
         "pg_dump": "C:\\Program Files\\PostgreSQL\\12\\bin\\pg_dump.exe",
         "bd_name": "servisofts.motonet",
         "user": "postgres"

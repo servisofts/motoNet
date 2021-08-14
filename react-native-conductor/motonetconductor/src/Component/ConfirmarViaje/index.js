@@ -191,7 +191,7 @@ const ConfirmarViaje = (props) => {
             position: "absolute",
             width: "100%",
             height: "100%",
-            backgroundColor: "#f20022",
+            backgroundColor: "#F10023",
             alignItems: "center"
         }}>
             <ScrollView style={{
@@ -204,9 +204,8 @@ const ConfirmarViaje = (props) => {
                 <View style={{
                     width: "100%",
                     alignItems: 'center',
+                    paddingBottom: 8,
                 }}>
-
-
                     <Text style={{
                         marginTop: 4,
                         color: "#fff",
@@ -216,20 +215,15 @@ const ConfirmarViaje = (props) => {
                     }}>
                         {"Nuevo viaje"}
                     </Text>
-
-                    {getDireccion("direccion_inicio")}
-                    {getDireccion("direccion_fin")}
                     <Text style={{
-                        marginTop: 4,
                         color: "#fff",
-                        fontSize: 18,
-                        fontWeight: "bold",
+                        fontSize: 14,
                         textAlign: "center",
-
                     }}>
                         {datos["tipo_viaje"].descripcion}
                     </Text>
-
+                    {getDireccion("direccion_inicio")}
+                    {getDireccion("direccion_fin")}
                 </View>
                 <View style={{
                     flex: 1,
@@ -262,20 +256,20 @@ const ConfirmarViaje = (props) => {
                     alignItems: "center",
                 }}>
                     <Text style={{
-                        color: "#fff",
-                        fontSize: 16,
+                        width: "80%",
+                        color: "#eee",
+                        fontSize: 10,
                         marginTop: 4,
-                        fontWeight: "bold",
                         textAlign: "center",
-                    }}>Costo sugerido: {datos.movimientos["inicio_busqueda"].costo.monto} Bs</Text>
+                    }}>Coloca tu oferta y preciona negociar!</Text>
                     <View style={{
-                        width: "90%",
+                        width: "80%",
                         maxWidth: 600,
                         alignItems: 'center',
                         justifyContent: 'space-around',
                         flexDirection: "row",
                     }}>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             onPress={() => {
                                 setPrecio(precio - 1)
                             }}
@@ -285,32 +279,72 @@ const ConfirmarViaje = (props) => {
                                 height: 40,
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                borderRadius: 8,
+                                borderRadius: 4,
                                 borderColor: "#fff",
-                                borderWidth: 2,
+                                borderWidth: 1,
                             }}>
                             <Text style={{
                                 color: "#fff",
                                 fontSize: 20
                             }}>-</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
+                        <View style={{
+                            flex: 1,
+                        }}>
+
+                        </View>
                         <View
                             // onPress={CancelarViaje}
                             style={{
-                                flex: 2,
+                                flex: 3,
                                 height: 40,
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                borderRadius: 8,
+                                borderRadius: 4,
                                 borderColor: "#fff",
-                                borderWidth: 2,
+                                borderWidth: 1,
                             }}>
+                            <TextInput
+                                value={precio + ""}
+                                style={{
+                                    padding: 0,
+                                    textAlign: "center",
+                                    color: "#fff",
+                                    fontSize: 20,
+                                    width: "100%",
+                                    flex: 1,
+                                }}
+                                keyboardType={"phone-pad"}
+                                onBlur={(e) => {
+                                    if (precio == "_") {
+                                        setPrecio(0);
+                                    }
+                                }}
+                                onChangeText={(_value) => {
+
+                                    if (!_value) {
+                                        setPrecio("_");
+                                        return _value;
+                                    }
+                                    var value = _value;
+                                    value = value.trim();
+                                    value = value.replace(/\D/, "");
+                                    setPrecio(parseInt(value));
+                                }}
+                            />
+                        </View>
+
+                        <View style={{
+                            flex: 1,
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}>
                             <Text style={{
                                 color: "#fff",
                                 fontSize: 20
-                            }}>{precio}</Text>
+                            }}>Bs.</Text>
                         </View>
-                        <TouchableOpacity
+                        {/* <TouchableOpacity
                             onPress={() => {
                                 setPrecio(precio + 1)
                             }}
@@ -320,19 +354,28 @@ const ConfirmarViaje = (props) => {
                                 height: 40,
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                borderRadius: 8,
+                                borderRadius: 4,
                                 borderColor: "#fff",
-                                borderWidth: 2,
+                                borderWidth: 1,
                             }}>
                             <Text style={{
                                 color: "#fff",
                                 fontSize: 20
                             }}>+</Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
 
                     </View>
+                    <Text style={{
+                        width: "80%",
+                        color: "#eee",
+                        fontSize: 10,
+                        marginTop: 4,
+                        textAlign: "center",
+                    }}> Costo sugerido: {datos.movimientos["inicio_busqueda"].costo.monto} Bs</Text>
                     <View style={{
-                        width: "100%",
+                        width: "80%",
+                        paddingTop: 8,
+                        paddingBottom: 8,
                         alignItems: 'center',
                         justifyContent: 'center',
                         flexDirection: "row",
@@ -344,12 +387,12 @@ const ConfirmarViaje = (props) => {
                             style={{
                                 width: 130,
                                 height: 40,
-                                margin: 8,
+                                // margin: 4,
                                 alignItems: 'center',
                                 justifyContent: 'center',
-                                borderRadius: 8,
+                                borderRadius: 4,
                                 borderColor: "#fff",
-                                borderWidth: 2,
+                                borderWidth: 1,
                             }}>
                             <Text style={{
                                 color: "#fff",
@@ -357,15 +400,20 @@ const ConfirmarViaje = (props) => {
                             }}>
                                 CANCELAR</Text>
                         </TouchableOpacity>
+                        <View style={{
+                            flex: 1,
+                        }}>
+
+                        </View>
                         <TouchableOpacity
                             onPress={AceptarViaje}
                             style={{
                                 width: 130,
                                 height: 40,
-                                margin: 8,
-                                borderRadius: 8,
+                                // margin: 4,
+                                borderRadius: 4,
                                 borderColor: "#fff",
-                                borderWidth: 2,
+                                borderWidth: 1,
                                 backgroundColor: "#fff",
                                 alignItems: 'center',
                                 justifyContent: 'center'
@@ -387,16 +435,16 @@ const ConfirmarViaje = (props) => {
 
 const styles = StyleSheet.create({
     touch: {
-        width: "90%",
-        backgroundColor: "#fff",
+        width: "95%",
+        // backgroundColor: "#fff",
         textAlign: "center",
-        color: "#666",
-        marginTop: 16,
+        color: "#fff",
+        marginTop: 8,
         borderWidth: 1,
         borderColor: "#dddddd",
-        height: 50,
+        height: 40,
         paddingLeft: 10,
-        borderRadius: 10,
+        borderRadius: 4,
         shadowColor: "#000",
         shadowOpacity: 0.25,
         shadowRadius: 3.84,

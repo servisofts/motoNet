@@ -12,7 +12,7 @@ export const notificar = (action) => {
             mensaje(action)
             break;
         case "viaje":
-            viaje(action)
+            // viaje(action)
             break;
     }
 }

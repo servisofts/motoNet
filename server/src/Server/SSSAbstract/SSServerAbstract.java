@@ -59,7 +59,7 @@ public abstract class SSServerAbstract implements SSServerInterface {
                 }
             }
         } catch (Exception e) {
-            console.log(console.ANSI_RED, "--> ERROR: "+e.getMessage());
+            console.log(console.ANSI_RED, "--> ERROR: " + e.getMessage());
         }
 
     }
@@ -96,6 +96,29 @@ public abstract class SSServerAbstract implements SSServerInterface {
                         SSServerAbstract server = SERVIDORES.get(me.getKey());
                         if (server.getSessiones().get(idSession) != null) {
                             server.getSessiones().get(idSession).send(mensaje);
+                        }
+                    }
+
+                }
+            }
+        };
+        t.start();
+    }
+
+    public static void sendUserFireBase(String mensaje, String key_usr) {
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                ArrayList<String> devices = USUARIOS.get(key_usr);
+                if (devices == null) {
+                    return;
+                }
+                for (String idDevice : devices) {
+                    String idSession = DEVICES.get(idDevice);
+                    for (Map.Entry me : SERVIDORES.entrySet()) {
+                        SSServerAbstract server = SERVIDORES.get(me.getKey());
+                        if (server.getSessiones().get(idSession) != null) {
+                            server.getSessiones().get(idSession).sendFireBase(mensaje);
                         }
                     }
 

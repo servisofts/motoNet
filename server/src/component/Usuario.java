@@ -32,8 +32,8 @@ public class Usuario {
                 identificaion(data, session);
                 break;
             // case "recuperarPass":
-            //     recuperarPass(data, session);
-            //     break;
+            // recuperarPass(data, session);
+            // break;
             default:
                 defaultType(data, session);
         }
@@ -44,15 +44,23 @@ public class Usuario {
         obj.put("estado", "exito");
         String deviceKey = obj.getString("deviceKey");
         session.setKeyDevice(deviceKey);
+
+        if (obj.has("token") && obj.has("fbapp")) {
+            String token = obj.getString("token");
+            String fbapp = obj.getString("fbapp");
+            session.setTokenFb(token);
+            session.setAppFb(fbapp);
+        }
         try {
             JSONObject data = obj.getJSONObject("data");
-            session.setKeyUsuario(data.getString("key"));    
+            session.setKeyUsuario(data.getString("key"));
         } catch (Exception e) {
             System.out.println("INICIADO SIN USR");
         }
     }
+
     public void recuperarPass(JSONObject obj, SSSessionAbstract session) {
-        //String texto  = obj.getString("data");
+        // String texto = obj.getString("data");
         // JSONObject data = new JSONObject();
         // data.put("key", "sa323-23r2r-2r-23r-23r");
         // obj.put("data",data);
@@ -62,7 +70,7 @@ public class Usuario {
     public void registro(JSONObject obj, SSSessionAbstract session) {
         JSONArray data = obj.getJSONArray("data");
         JSONObject objData;
-        
+
         for (int i = 0; i < data.length(); i++) {
             objData = data.getJSONObject(i);
             String insertarTipoDato = TipoDato.insertarTipo(objData, session);
