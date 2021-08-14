@@ -36,11 +36,37 @@ const mensaje = (action) => {
             break;
     }
 }
+
+const validarNotificacion = (action) => {
+    var mensaje
+    switch (action) {
+        case "inicio_viaje_conductor":
+            mensaje= "Inició viaje conductor";
+        break;
+        case "conductor_cerca":
+            mensaje= "Conductor cerca";
+         break;
+        case "conductor_llego":
+            mensaje= "Conductor llegó";
+        break;
+        // default:
+        //     console.log("PRUEBAA  " + JSON.stringify(action))
+    }
+    console.log(" PPPPP "+mensaje)
+    return mensaje
+}
 const viaje = (action) => {
-    PushNotification.localNotification({
-        title: "Viaje", // (optional)
-        message: "Movimiento en el viaje", // (required)
-        channelId: "notificaciones-clinica",
-        allowWhileIdle: true,
-    });
+    
+    if (action.data.movimientos) {
+        //console.log("AQUIIIII " + JSON.stringify(action.data.movimientos))
+        PushNotification.localNotification({
+            title: "Viaje", // (optional)
+            //message: "Movimiento en el viaje", // (required)
+
+            message: validarNotificacion(action.data.movimientos), // (required)
+            channelId: "notificaciones-clinica",
+            allowWhileIdle: true,
+
+        });
+    }
 }

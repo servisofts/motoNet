@@ -88,7 +88,7 @@ class BarraSuperior extends Component {
         return (
             <Animated.View style={{
                 width: "100%",
-                height: (this.props.tipo_viaje === "pedido" ? 150 : 200),
+                height: (this.props.tipo_viaje === "pedido" ? 95 : 150),
                 flexDirection: "row",
                 // backgroundColor: "#fff",
                 transform: [
@@ -108,7 +108,7 @@ class BarraSuperior extends Component {
                 }}>
                     <View style={{
                         // flex: 1,
-                        height: 50,
+                        height: 40,
                         flexDirection: "row",
                         // borderBottomEndRadius: 16,
                         // borderBottomStartRadius: 16,
@@ -139,7 +139,7 @@ class BarraSuperior extends Component {
                     </View>
 
                     <View style={{
-                        height: 150,
+                       height: (this.props.tipo_viaje === "pedido" ? 65 : 110),
                         justifyContent: "space-evenly",
                         alignItems: "center"
                     }}>

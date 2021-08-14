@@ -125,12 +125,11 @@ const ComponentDetalleViaje = (props) => {
                             justifyContent: "space-evenly",
                             // backgroundColor: "#ccc"
                         }}>
-                            <View style={{
+                            {/* <View style={{
                                 flexDirection: "row",
                             }}>
                                 <View style={{
                                     flex: 1,
-                                    // backgroundColor:"#000"
                                 }}>
                                     <Text style={{
                                         fontSize: 14,
@@ -150,13 +149,8 @@ const ComponentDetalleViaje = (props) => {
                                         color: STheme.color.textb
                                     }}>Bs. {props.data.monto_estimado}
                                     </Text>
-                                    {/* <Text style={{
-                                        fontSize: 12,
-                                        color: STheme.color.textb
-                                    }}>Monto estimado
-                                    </Text> */}
                                 </View>
-                            </View>
+                            </View> */}
                             {/* <Text style={{
                     fontSize: 12,
                     color: STheme.color.textb
@@ -168,7 +162,8 @@ const ComponentDetalleViaje = (props) => {
                                     width: "100%",
                                     alignItems: "center",
                                     justifyContent: "center",
-                                    backgroundColor: "#f3f3fd"
+                                    backgroundColor: "#f3f3fd",
+                                    marginTop: 10
                                 }}
                                     onPress={() => {
                                         // props.state.locationGoogleMapReducer.route = true;
@@ -220,7 +215,7 @@ const ComponentDetalleViaje = (props) => {
             position: "absolute",
             width: "100%",
             // height: Dimensions.get('window').height * 0.3,
-            height: 220,
+            height: 170,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
             backgroundColor: "#fff",

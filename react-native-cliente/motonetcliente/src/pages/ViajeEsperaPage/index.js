@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator  } from 'react-native';
 import BarraSuperior from './BarraSuperior';
 import DetalleViaje from './DetalleViaje';
 import Svg from '../../Svg';
@@ -43,7 +43,7 @@ class ViajeEsperaPage extends Component {
     }
 
     render() {
-
+        console.log("bbbb")
         if (!this.props.state.viajesReducer.data) {
             this.props.navigation.replace("ServicioPage");
             return <View />
@@ -60,13 +60,13 @@ class ViajeEsperaPage extends Component {
                 content: (
                     <View alignItems="center" >
                         <Svg name={"logoCompletoRecurso"}
-                        style={{
-                            width: 80,
-                            height: 80,
-                            fill: "#f00",
-                        }} />
-                        <Text style={{paddingTop:10, fontSize:15}}>No encontramos conductor disponible.</Text>
-                        <Text style={{ fontSize:15}}>Por favor intente nuevamente.</Text>
+                            style={{
+                                width: 80,
+                                height: 80,
+                                fill: "#f00",
+                            }} />
+                        <Text style={{ paddingTop: 10, fontSize: 15 }}>No encontramos conductor disponible.</Text>
+                        <Text style={{ fontSize: 15 }}>Por favor intente nuevamente.</Text>
                     </View>
                 )
             })
@@ -98,12 +98,15 @@ class ViajeEsperaPage extends Component {
                     alignItems: "center",
                     backgroundColor: STheme.color.background,
                 }}>
-                    <Svg name={"logoCompletoRecurso"}
+                    {/* <Svg name={"logoCompletoRecurso"}
                         style={{
                             width: 200,
                             height: 200,
                             fill: "#fff"
-                        }} />
+                        }} /> */}
+                        <ActivityIndicator 
+                        color="#fff"
+                        size= "large"/>
                     <DetalleViaje data={this.props.state.viajesReducer.data} />
                 </View>
 
