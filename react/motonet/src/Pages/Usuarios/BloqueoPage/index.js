@@ -50,7 +50,7 @@ class RegistroPage extends Component {
         return data;
     }
 
-    getButtonName() {
+    isVerificado() {
         var usuario = {};
         var usuarios = this.getData();
         if (!usuarios) {
@@ -68,7 +68,7 @@ class RegistroPage extends Component {
                 verificado = false;
             }
         })
-        return (verificado ? "Bloquear" : "Desbloquear")
+        return verificado;
 
     }
     getCabecera(cabecera) {
@@ -122,7 +122,7 @@ class RegistroPage extends Component {
             if (usuario[obj.dato.descripcion]) {
                 defaultv = usuario[obj.dato.descripcion].dato;
             }
-            inputs[obj.dato.descripcion] = { label: obj.dato.descripcion, type: obj.tipo_dato.descripcion, isRequired: obj.dato.requerido, defaultValue: defaultv , editable: false}
+            inputs[obj.dato.descripcion] = { label: obj.dato.descripcion, type: obj.tipo_dato.descripcion, isRequired: obj.dato.requerido, defaultValue: defaultv, editable: false }
         })
         return <SForm
             props={{
@@ -135,44 +135,54 @@ class RegistroPage extends Component {
             inputs={inputs}
 
             onSubmit={() => {
-                // var objSend = {
-                //     component: "parametrosViaje",
-                //     type: (this.props.match.params.key?"modificar":"registro"),
-                //     estado: "cargando",
-                //     key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                //     data: {
 
-                //         ...data
-                //     }
-                // };
-                //this.sendBlock()
-                var usuario = {};
                 var usuarios = this.getData();
                 if (!usuarios) {
                     return <View />
                 }
-                var usrAll = usuarios[this.props.match.params.key];
+                var usuario = usuarios[this.props.match.params.key];
                 if (!usrAll) {
                     return <View />;
                 }
-                usuario = usrAll["data"];
-               // alert(JSON.stringify(usuario) + "dddd")
-               
+                // usuario = usrAll["data"];
+                var estado = 1;
+                if (this.isVerificado()) {
+                    estado = 0;
+                }
+
+                var datos = {}
+                Object.keys(usuario.data).map((key) => {
+                    var obj = usuario.data[key];
+                    obj.estado = estado;
+                    datos[key] = obj;
+                })
+                this.props.state.usuarioReducer.data[usuario.key].data = datos;
                 var objSend = {
                     component: "usuario",
-                    type: "bloquear" ,
+                    type: "confirmarDatos",
                     estado: "cargando",
                     cabecera: this.getCabeceraKey(),
-                    data: usuario,
-                    ...(this.props.match.params.key ? {
-                        key_usuario: this.props.match.params.key
-                    } : {})
-                }
-                console.log(JSON.stringify(objSend))
-                // this.props.state.socketReducer.send(objSend)
-                // this.props.history.goBack();
+                    key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                    key_usuario_modificado: usuario.key,
+                    data: datos,
+                    // detalle_confirmacion: "Se denegaron sus datos por xx y y n motivos."
+                    detalle_confirmacion: "Se denegaron sus datos por asjdhasdha sahd sahd a."
+                };
+                // var objSend = {
+                //     component: "usuario",
+                //     type: "bloquear" ,
+                //     estado: "cargando",
+                //     cabecera: this.getCabeceraKey(),
+                //     data: usuario,
+                //     ...(this.props.match.params.key ? {
+                //         key_usuario: this.props.match.params.key
+                //     } : {})
+                // }
+                // console.log(JSON.stringify(objSend))
+                this.props.state.socketReducer.send(objSend)
+                this.props.history.goBack();
             }}
-            onSubmitName={this.getButtonName()}
+            onSubmitName={(this.isVerificado() ? "Bloquear" : "Desbloquear")}
 
 
 

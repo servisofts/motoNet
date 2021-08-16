@@ -110,7 +110,7 @@ class RegistroPage extends Component {
                 customStyle: "primary",
             }}
             inputs={inputs}
-            onSubmitName={this.props.match.params.key ? "Editar" : "Registrar"}
+            onSubmitName={this.props.match.params.key!="registro" ? "Editar" : "Registrar"}
             onSubmit={(dataToInsert) => {
                 var arrDatos = [];
                 Object.keys(dataToInsert).map((key) => {
@@ -121,7 +121,7 @@ class RegistroPage extends Component {
                 })
                 var objSend = {
                     component: "usuario",
-                    type: this.props.match.params.key ? "insertarDato" : "registro",
+                    type: this.props.match.params.key!="registro"? "insertarDato" : "registro",
                     estado: "cargando",
                     cabecera: this.getCabeceraKey(),
                     data: arrDatos,

@@ -22,7 +22,7 @@ export class SThemeClass extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            theme: "dark",
+            theme: "default",
         };
         INSTANCE = this;
 

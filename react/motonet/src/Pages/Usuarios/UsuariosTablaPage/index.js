@@ -207,7 +207,7 @@ class UsuariosTablaPage extends Component {
             }}
             data={data}
             onAdd={this.props.match.params.tipo != "Todos" ? () => {
-                this.props.history.push("/Usuarios/" + this.props.match.params.tipo + "/registro/")
+                this.props.history.push("/Usuarios/" + this.props.match.params.tipo + "/registro")
             } : false}
             actionTypes={['edit', "delete", "blocker"]}
             onAction={(type, obj) => {
