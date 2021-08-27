@@ -8,6 +8,7 @@ import BuscardorNuevo from '../../../component/BuscardorNuevo';
 class BarraSuperior extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             anim: new Animated.Value(0),
         };
@@ -139,12 +140,24 @@ class BarraSuperior extends Component {
                     </View>
 
                     <View style={{
-                       height: (this.props.tipo_viaje === "pedido" ? 65 : 110),
+                        height: (this.props.tipo_viaje === "pedido" ? 65 : 110),
                         justifyContent: "space-evenly",
                         alignItems: "center"
                     }}>
-                        {this.getTextFieldDireccion("MarkerW", this.props.data.direccion_inicio)}
-                        {this.getTextFieldDireccion("Pointer", this.props.data.direccion_fin)}
+                        {this.props.state.viajesReducer.estadoBuscando ?
+                            (<View>
+                                {this.getTextFieldDireccion("MarkerW", this.props.data.direccion_inicio)}
+                                {this.getTextFieldDireccion("Pointer", this.props.data.direccion_fin)}
+
+                            </View>)
+                            :
+                            (
+                                <View>
+                                    
+                                </View>
+                            )
+
+                        }
                     </View>
                 </View>
 

@@ -27,21 +27,21 @@ const ComponentDetalleViaje = (props) => {
             }, true);
             return <View />
         }
-       // alert("falta rellenar datos en la carrera")
-       SPopupOpen({
-        key: "noConductor",
-        content: (
-            <View alignItems="center" >
-                <Svg name={"Warning2"}
-                style={{
-                    width: 100,
-                    height: 100,
-                    fill: "#f00",
-                }} />
-                <Text style={{paddingTop:10, fontSize:15}}>Falta rellenar datos en la carrera.</Text>
-            </View>
-        )
-    })
+        // alert("falta rellenar datos en la carrera")
+        SPopupOpen({
+            key: "noConductor",
+            content: (
+                <View alignItems="center" >
+                    <Svg name={"Warning2"}
+                        style={{
+                            width: 100,
+                            height: 100,
+                            fill: "#f00",
+                        }} />
+                    <Text style={{ paddingTop: 10, fontSize: 15 }}>Falta rellenar datos en la carrera.</Text>
+                </View>
+            )
+        })
     }
 
 
@@ -59,15 +59,25 @@ const ComponentDetalleViaje = (props) => {
                 }}>
                     <View style={{
                         marginBottom: 15,
+                        justifyContent: 'space-evenly',
                         // backgroundColor:"#ccc"
                     }}>
+
+                        <Text style={{
+                            color: STheme.color.textb,
+                            fontSize: 14,
+                            width: "100%",
+                            textAlign: "left",
+
+                        }}>
+                            Buscando el conductor mas cercano....
+                        </Text>
                         <Text style={{
                             color: STheme.color.textb,
                             fontSize: 14,
                         }}>
                             Confirme el viaje
                         </Text>
-
                     </View>
 
                     <View style={{
@@ -144,7 +154,7 @@ const ComponentDetalleViaje = (props) => {
                                 <View style={{
                                     flex: 1,
                                 }}>
-                                    <Text style={{
+                                     <Text style={{
                                         fontSize: 14,
                                         color: STheme.color.textb
                                     }}>Bs. {props.data.monto_estimado}
@@ -157,27 +167,8 @@ const ComponentDetalleViaje = (props) => {
                 }}>{TipoViaje.descripcion}</Text> */}
                             <View style={{
                             }}>
-                                <TouchableOpacity style={{
-                                    height: 40,
-                                    width: "100%",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    backgroundColor: "#f3f3fd",
-                                    marginTop: 10
-                                }}
-                                    onPress={() => {
-                                        // props.state.locationGoogleMapReducer.route = true;
-                                        // props.setVentanaSelect("tipoDeViaje")
-                                        return <View />
-                                    }}>
-                                    <Text>
-                                        Consejos la app y mensajes
-                                        <Text style={{
-                                            color: "#f00",
-                                            fontWeight: "bold"
-                                        }}> Ver</Text>
-                                    </Text>
-                                </TouchableOpacity>
+                                
+                               
                             </View>
                             {/* <Text>Tipo viaje: {TipoViaje.descripcion}</Text> */}
                             {/* <Text>distancia: {distancia / 1000} km</Text> */}
@@ -192,38 +183,18 @@ const ComponentDetalleViaje = (props) => {
             </View>
         )
     }
-
-    // const getAllPrecio = () => {
-    //     if (props.state.tipoViajesReducer.estado == "cargando") {
-    //         return <ActivityIndicator color="#000" />
-    //     }
-    //     if (!props.state.tipoViajesReducer.data) {
-    //         props.state.socketClienteReducer.sessiones["motonet"].send({
-    //             component: "tipoViaje",
-    //             type: "getAll",
-    //             key_usuario: props.state.usuarioReducer.usuarioLog.key,
-    //             estado: "cargando"
-    //         }, true);
-    //         return <View />
-    //     }
-    //     return <View />
-    // }
-
     return (
 
         <View style={{
             position: "absolute",
             width: "100%",
-            // height: Dimensions.get('window').height * 0.3,
             height: 170,
             borderTopRightRadius: 20,
             borderTopLeftRadius: 20,
             backgroundColor: "#fff",
-            // borderColor: "#ccc",
             flex: 1,
             bottom: 0
         }}>
-            {/* {getAllPrecio()} */}
             {getDetalleRuta()}
 
         </View >

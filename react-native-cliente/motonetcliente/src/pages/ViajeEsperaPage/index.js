@@ -88,6 +88,7 @@ class ViajeEsperaPage extends Component {
                 backgroundColor: "#fff",
             }}>
                 <BarraSuperior
+                    vistaDirecion={this.props.state.viajesReducer.estadoBuscando}
                     data={this.props.state.viajesReducer.data}
                 />
                 <View style={{

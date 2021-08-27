@@ -68,6 +68,7 @@ class ViajePedirYBuscar extends Component {
                 backgroundColor: "#fff",
             }}>
                 <BarraSuperior title={this.data.tipo_viaje}
+                    estadoBuscando={this.props.state.viajesReducer.estadoBuscando}
                     tipo_viaje={this.data.tipo_viaje}
                     direccion1={this.data.direccionInicio}
                     direccion2={this.data.direccionFin}

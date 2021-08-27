@@ -121,6 +121,7 @@ const buscar = (state, action) => {
     state.estado = action.estado
     if (action.estado === "exito") {
         state.data = action.data
+        state.estadoBuscando = true
         AsyncStorage.setItem("motonet_viaje", JSON.stringify(action.data));
     }
 }

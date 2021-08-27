@@ -56,14 +56,14 @@ class BarraSuperior extends Component {
                 borderWidth: 2,
                 borderRadius: 5,
                 height: 40,
-                
-               
+
+
             }}>
                 <View style={{
                     width: 40,
                     justifyContent: "center",
                     alignItems: "center",
-                    
+
                 }}>
                     <Svg name={svg}
                         style={{
@@ -125,7 +125,7 @@ class BarraSuperior extends Component {
                             height: "100%",
                             justifyContent: "center",
                             alignItems: "center",
-                            marginLeft:8
+                            marginLeft: 8
                         }}
                             activeOpacity={0.9}
                             onPress={this.props.goBack}>
@@ -151,10 +151,12 @@ class BarraSuperior extends Component {
                         justifyContent: "space-evenly",
                         alignItems: "center"
                     }}>
-                        {this.getTextFieldDireccion("MarkerW", this.props.direccion1)}
-                        {this.getTextFieldDireccion("Pointer", this.props.direccion2)}
+                      
+                                    {this.getTextFieldDireccion("MarkerW", this.props.direccion1)}
+                                    {this.getTextFieldDireccion("Pointer", this.props.direccion2)}
+                         
                     </View>
-                </View> 
+                </View>
 
             </Animated.View>
         );
