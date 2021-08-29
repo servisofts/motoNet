@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { View, Text } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import BarraSuperior from './BarraSuperior';
 import DetalleViaje from './DetalleViaje';
 import MapView, { Marker } from 'react-native-maps';
 import RutaViaje from './RutaViaje';
+import MarkerConductores from './MarkerConductores';
+import SThread from '../../SThread';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 class ViajePedirYBuscar extends Component {
@@ -13,9 +15,20 @@ class ViajePedirYBuscar extends Component {
     }
     constructor(props) {
         super(props);
+
         this.state = {
         };
 
+    }
+    getAllConductores = (dataConductores) => {
+        Object.keys(dataConductores).map((key) => {
+            var data = dataConductores[key]
+            var marketDAta = {
+                longitude: data.longitude,
+                latitude: data.latitude
+            }
+            return <MarkerConductores latitude={data.latitude} longitude={data.longitude} />
+        })
     }
     getMarker1 = () => {
         if (!this.data.direccionInicio) return <View />
@@ -51,6 +64,27 @@ class ViajePedirYBuscar extends Component {
             console.log(data);
         }
     }
+    getData(force) {
+        var reducer = this.props.state.seguimientoConductorReducer;
+        var data = reducer.dataConductores;
+        if (!data || force) {
+            if (reducer.estado == "cargando" && reducer.type == "getAll") return;
+            this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                component: "seguimientoConductor",
+                type: "getAll",
+                estado: "cargando"
+            }, true);
+            return;
+        }
+        return data;
+    }
+    hilo() {
+        new SThread(5000, "buscandoConductores", true).start(() => {
+
+            this.getData(true)
+            this.hilo();
+        })
+    }
     render() {
 
         if (this.props.state.viajesReducer.data) {
@@ -59,6 +93,11 @@ class ViajePedirYBuscar extends Component {
             // console.log("dfdf")
             this.props.navigation.replace("ViajeEsperaPage");
             return <View />
+        }
+        this.hilo()
+        var dataConductores = this.getData()
+        if (!dataConductores) {
+            return <ActivityIndicator color="#fff" />
         }
 
         this.data = this.props.navigation.getParam("data");
@@ -94,6 +133,16 @@ class ViajePedirYBuscar extends Component {
                             longitudeDelta: 0.03,
 
                         }}>
+                        {
+                            Object.keys(dataConductores).map((key) => {
+                                var data = dataConductores[key]
+                                var marketDAta = {
+                                    longitude: data.longitude,
+                                    latitude: data.latitude
+                                }
+                                return <MarkerConductores latitude={data.latitude} longitude={data.longitude} />
+                            })
+                        }
                         {this.getMarker1()}
                         {this.getMarker2()}
                         <RutaViaje

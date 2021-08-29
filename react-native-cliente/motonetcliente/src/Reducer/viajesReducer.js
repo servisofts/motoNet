@@ -26,6 +26,9 @@ export default (state, action) => {
             case "actualizarUbicacion":
                 actualizarUbicacion(state, action);
                 break;
+            case "getAllConductoresCercano":
+                getAllConductoresCercano(state, action);
+                break;
             case "actualizarViaje":
                 actualizarViaje(state, action);
                 break;
@@ -258,6 +261,13 @@ const denegarOferta = (state, action) => {
 }
 
 const sinConductores = (state, action) => {
+    state.type = action.type
+    state.estado = action.estado
+    if (action.estado === "exito") {
+        state.data = action.data
+    }
+}
+const getAllConductoresCercano = (state, action) => {
     state.type = action.type
     state.estado = action.estado
     if (action.estado === "exito") {

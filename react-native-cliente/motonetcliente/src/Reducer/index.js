@@ -15,6 +15,7 @@ import viajesReducer from './viajesReducer';
 import mensajeReducer from './mensajeReducer';
 import imageReducer from './imageReducer';
 import historialViajeReducer from './historialViajeReducer';
+import seguimientoConductorReducer from './seguimientoConductorReducer';
 
 export default combineReducers({
     navigationReducer,
@@ -32,6 +33,6 @@ export default combineReducers({
     viajesReducer,
     mensajeReducer,
     imageReducer,
-    historialViajeReducer
-
+    historialViajeReducer,
+    seguimientoConductorReducer
 });
