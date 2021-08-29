@@ -66,7 +66,7 @@ class BarraSuperiorTransporte extends Component {
                 }}>
                     <View style={{
                         // flex: 1,
-                        height: 40 ,
+                        height: 40,
                         flexDirection: "row",
                         backgroundColor: STheme.color.background,
                         // borderBottomEndRadius: 16,
@@ -77,7 +77,7 @@ class BarraSuperiorTransporte extends Component {
                             height: "100%",
                             justifyContent: "center",
                             alignItems: "center",
-                            marginLeft:8
+                            marginLeft: 8
                         }}
                             activeOpacity={0.9}
                             onPress={this.props.goBack}>
@@ -136,7 +136,7 @@ class BarraSuperiorTransporte extends Component {
                         }}></View>
                         <BuscardorNuevo
                             ref={(ref) => { this.direccion2 = ref }}
-                            navigation={this.props.navigation} label={"¿A dónde iremos?"}
+                            navigation={this.props.navigation} label={"Destino"}
                             icon={"Pointer"}
                             onChange={(direccion) => {
                                 this.props.onChangeDir2(direccion);

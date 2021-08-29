@@ -23,8 +23,8 @@ export default class TipoDeViaje extends Component {
         };
         this.open()
     }
-    validarVacio(){
-        if (!(this.props.dir1 && this.props.dir2)){
+    validarVacio() {
+        if (!(this.props.dir1 && this.props.dir2)) {
             return false
         }
         return true
@@ -44,11 +44,11 @@ export default class TipoDeViaje extends Component {
                 borderRadius: 20,
                 width: "40%",
                 borderColor: "red",
-                borderWidth: (this.state.tipoSelect == key ? 1 : 0),
+                borderWidth: (this.state.tipoSelect == key ? 3 : 0),
                 alignItems: "center",
                 justifyContent: "center",
-                marginLeft:12,
-                marginRight:12
+                marginLeft: 12,
+                marginRight: 12
             }} onPress={() => {
                 this.setState({ tipoSelect: key });
             }}>
@@ -102,32 +102,32 @@ export default class TipoDeViaje extends Component {
                     flexDirection: "row",
                     alignItems: "space-between",
                     justifyContent: "space-between",
-                    
+
                 }}>
                     {this.ListaTiposDeViajes()}
                 </View>
 
                 <TouchableOpacity
                     onPress={() => {
-                        if(!this.validarVacio()){
+                        if (!this.validarVacio()) {
                             //alert("error")
                             SPopupOpen({
                                 key: "noConductor",
                                 content: (
                                     <View alignItems="center" >
                                         <Svg name={"Warning2"}
-                                        style={{
-                                            width: 100,
-                                            height: 100,
-                                            fill: "#f00",
-                                        }} />
-                                        <Text style={{paddingTop:10, fontSize:15}}>Ingrese las ubicaciones requeridas.</Text>
+                                            style={{
+                                                width: 100,
+                                                height: 100,
+                                                fill: "#f00",
+                                            }} />
+                                        <Text style={{ paddingTop: 10, fontSize: 15 }}>Ingrese las ubicaciones requeridas.</Text>
                                     </View>
                                 )
                             })
 
                         }
-                        
+
                         this.props.pedir(this.state.tipoSelect);
                     }}
                     style={{
