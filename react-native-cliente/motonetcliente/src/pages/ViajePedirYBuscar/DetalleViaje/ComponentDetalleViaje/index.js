@@ -183,29 +183,6 @@ const ComponentDetalleViaje = (props) => {
                             // backgroundColor: "#ccc"
                         }}>
 
-                            <View style={{
-                            }}>
-                                <TouchableOpacity style={{
-                                    height: 40,
-                                    width: "100%",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                    backgroundColor: "#f3f3fd"
-                                }}
-                                    onPress={() => {
-                                        // props.state.locationGoogleMapReducer.route = true;
-                                        // props.setVentanaSelect("tipoDeViaje")
-                                        return <View />
-                                    }}>
-                                    <Text>
-                                        Consejos la app y mensajes
-                                        <Text style={{
-                                            color: "#f00",
-                                            fontWeight: "bold"
-                                        }}> Ver</Text>
-                                    </Text>
-                                </TouchableOpacity>
-                            </View>
                         </View>
                     </View>
                 </View>
