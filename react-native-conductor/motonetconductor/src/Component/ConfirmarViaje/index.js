@@ -37,7 +37,11 @@ const ConfirmarViaje = (props) => {
             switch (objMovimiento.tipo) {
                 case "inicio_busqueda":
                     if (!precio) {
-                        setPrecio(objMovimiento.costo.monto)
+                        if(objMovimiento.costo.monto == 0){
+                            setPrecio(1)
+                        }else{
+                            setPrecio(objMovimiento.costo.monto)
+                        }
                     }
                     break;
                 case "inicio_viaje":
