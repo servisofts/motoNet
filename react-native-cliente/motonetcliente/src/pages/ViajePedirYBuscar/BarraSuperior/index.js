@@ -151,10 +151,10 @@ class BarraSuperior extends Component {
                         justifyContent: "space-evenly",
                         alignItems: "center"
                     }}>
-                      
-                                    {this.getTextFieldDireccion("MarkerW", this.props.direccion1)}
-                                    {this.getTextFieldDireccion("Pointer", this.props.direccion2)}
-                         
+
+                        {this.getTextFieldDireccion("MarkerW", this.props.direccion1)}
+                        {this.getTextFieldDireccion("Pointer", this.props.direccion2)}
+
                     </View>
                 </View>
 

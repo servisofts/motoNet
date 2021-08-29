@@ -66,15 +66,6 @@ const ComponentDetalleViaje = (props) => {
                         <Text style={{
                             color: STheme.color.textb,
                             fontSize: 14,
-                            width: "100%",
-                            textAlign: "left",
-
-                        }}>
-                            Buscando el conductor mas cercano....
-                        </Text>
-                        <Text style={{
-                            color: STheme.color.textb,
-                            fontSize: 14,
                         }}>
                             Confirme el viaje
                         </Text>
@@ -167,8 +158,8 @@ const ComponentDetalleViaje = (props) => {
                 }}>{TipoViaje.descripcion}</Text> */}
                             <View style={{
                             }}>
-                                
-                               
+
+
                             </View>
                             {/* <Text>Tipo viaje: {TipoViaje.descripcion}</Text> */}
                             {/* <Text>distancia: {distancia / 1000} km</Text> */}

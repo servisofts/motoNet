@@ -145,15 +145,22 @@ class BarraSuperior extends Component {
                         alignItems: "center"
                     }}>
                         {this.props.state.viajesReducer.estadoBuscando ?
-                            (<View>
-                                {this.getTextFieldDireccion("MarkerW", this.props.data.direccion_inicio)}
-                                {this.getTextFieldDireccion("Pointer", this.props.data.direccion_fin)}
-
+                            (<View style={{ width: '100%', alignItems: 'center', justifyContent: 'center', }}>
+                                <Svg name={"logoCompletoRecurso"}
+                                    style={{
+                                        width: 80,
+                                        height: 80,
+                                        fill: "#fff",
+                                    }} />
+                                <Text style={{ fontSize: 12, color: "#fff", marginTop: 15, }}>
+                                    Estamos Buscando El conductor Mas sercano
+                                </Text>
                             </View>)
                             :
                             (
                                 <View>
-                                    
+                                    {this.getTextFieldDireccion("MarkerW", this.props.data.direccion_inicio)}
+                                    {this.getTextFieldDireccion("Pointer", this.props.data.direccion_fin)}
                                 </View>
                             )
 

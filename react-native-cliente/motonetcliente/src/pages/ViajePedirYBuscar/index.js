@@ -32,7 +32,7 @@ class ViajePedirYBuscar extends Component {
     }
     center = async () => {
         await delay(500);
-        if(!this.mapa) return
+        if (!this.mapa) return
         this.mapa.fitToCoordinates([this.data.direccionInicio, this.data.direccionFin], {
             edgePadding: {
                 top: 300,

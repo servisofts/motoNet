@@ -6,7 +6,7 @@ import Svg from '../../../../Svg';
 import Boton1 from '../../../../component/Boton1';
 import { SPopupOpen } from '../../../../SPopup';
 
-var totalViaje; 
+var totalViaje;
 
 const ComponentDetalleViaje = (props) => {
 
@@ -16,7 +16,7 @@ const ComponentDetalleViaje = (props) => {
     // console.log("edson " + JSON.stringify(data))
 
     const PedirViaje = (tiempo, distancia) => {
-        var exito = true        
+        var exito = true
         if (exito) {
             props.state.socketClienteReducer.sessiones["motonet"].send({
                 component: "viaje",
@@ -44,12 +44,12 @@ const ComponentDetalleViaje = (props) => {
             content: (
                 <View alignItems="center" >
                     <Svg name={"Warning2"}
-                    style={{
-                        width: 100,
-                        height: 100,
-                        fill: "#f00",
-                    }} />
-                    <Text style={{paddingTop:10, fontSize:15}}>Falta rellenar datos en la carrera.</Text>
+                        style={{
+                            width: 100,
+                            height: 100,
+                            fill: "#f00",
+                        }} />
+                    <Text style={{ paddingTop: 10, fontSize: 15 }}>Falta rellenar datos en la carrera.</Text>
                 </View>
             )
         })
@@ -182,41 +182,7 @@ const ComponentDetalleViaje = (props) => {
                             justifyContent: "space-evenly",
                             // backgroundColor: "#ccc"
                         }}>
-                            {/* <View style={{
-                                flexDirection: "row",
-                            }}>
-                                <View style={{
-                                    flex: 1,
-                                }}>
-                                    <Text style={{
-                                        fontSize: 14,
-                                        color: STheme.color.textb
-                                    }}>Efectivo</Text>
-                                    <Text style={{
-                                        fontSize: 12,
-                                        color: STheme.color.textb
-                                    }}>Tipo de pago</Text>
-                                </View>
 
-                                <View style={{
-                                    flex: 1,
-                                }}>
-                                    <Text style={{
-                                        fontSize: 14,
-                                        color: STheme.color.textb
-                                    }}>Bs. {totalViaje}
-                                    </Text>
-                                    <Text style={{
-                                        fontSize: 12,
-                                        color: STheme.color.textb
-                                    }}>Monto estimado
-                                    </Text>
-                                </View>
-                            </View> */}
-                            {/* <Text style={{
-                    fontSize: 12,
-                    color: STheme.color.textb
-                }}>{TipoViaje.descripcion}</Text> */}
                             <View style={{
                             }}>
                                 <TouchableOpacity style={{
@@ -240,13 +206,6 @@ const ComponentDetalleViaje = (props) => {
                                     </Text>
                                 </TouchableOpacity>
                             </View>
-                            {/* <Text>Tipo viaje: {TipoViaje.descripcion}</Text> */}
-                            {/* <Text>distancia: {distancia / 1000} km</Text> */}
-                            {/* <Text>Tiempo: {Math.round(duracion / 60) - 1} a {Math.round(duracion / 60) + 1} minutos.</Text> */}
-                            {/* <Text>Monto por kilometro {montoKm.monto}</Text>
-                <Text>Monto por tiempo {montoTiempo.monto}</Text>
-                <Text>Monto por km * distancia {totalDistancia}</Text>
-                <Text>Monto por tiempo * duracion {totalTiempo}</Text>  */}
                         </View>
                     </View>
                 </View>
