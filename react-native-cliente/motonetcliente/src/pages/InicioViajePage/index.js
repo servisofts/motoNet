@@ -133,9 +133,9 @@ class InicioViajePage extends Component {
                     }}>
                         <Text style={{
                             color: STheme.color.textb,
-                            fontSize: 14,
+                            fontSize: 14, fontWeight: 'bold',
                         }}>
-                            Estado:
+                            El conductor acepto tu pedido
                         </Text>
                     </View>
 
@@ -245,7 +245,7 @@ class InicioViajePage extends Component {
                             </View>
                             : <View style={{
                             }}>
-                                <TouchableOpacity style={{
+                                {/*  <TouchableOpacity style={{
                                     height: 40,
                                     width: "100%",
                                     alignItems: "center",
@@ -271,7 +271,7 @@ class InicioViajePage extends Component {
                                         color: "#000",
                                         fontWeight: "bold"
                                     }}> 5 min</Text>
-                                </TouchableOpacity>
+                                </TouchableOpacity> */}
                             </View>
                         }
 

@@ -182,12 +182,7 @@ class DetalleRuta extends Component {
                         marginBottom: 5,
                         // backgroundColor:"#ccc"
                     }}>
-                        <Text style={{
-                            color: STheme.color.textb,
-                            fontSize: 14,
-                        }}>
-                            Estado:
-                        </Text>
+
                     </View>
 
                     <View style={{
