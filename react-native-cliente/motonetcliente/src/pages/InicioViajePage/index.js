@@ -265,7 +265,7 @@ class InicioViajePage extends Component {
                                     <Text style={{
                                         marginStart: 8,
                                     }}>
-                                        Tiempo estimado de llegada
+                                        El conductor acepto tu pedido llegara en
                                     </Text>
                                     <Text style={{
                                         color: "#000",
@@ -304,7 +304,7 @@ class InicioViajePage extends Component {
 
     render() {
 
-        if (this.props.state.viajesReducer.estado=="exito" && this.props.state.viajesReducer.type=="calificar"  ) {
+        if (this.props.state.viajesReducer.estado == "exito" && this.props.state.viajesReducer.type == "calificar") {
             // console.log(this.props.state.viajesReducer.data)
             this.props.navigation.replace("CargaPage");
             this.props.state.viajesReducer.data = false
