@@ -49,7 +49,8 @@ public class SocketCliete extends Thread {
             // return;
         }
         JSONObject config = new JSONObject();
-        config.put("ip", servicio.getString("ip"));
+        // config.put("ip", servicio.getString("ip"));
+        config.put("ip", "181.188.128.236");
         config.put("puerto", servicio.getInt("puerto"));
         JSONObject cert = new JSONObject();
         cert.put("OU", servicio.getString("nombre"));
