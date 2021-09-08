@@ -14,12 +14,12 @@ import ModalPage from "../ModalPage";
 
 const LoginPage = (props) => {
 
-    // this.state = {
-    //     modalVisible: false,
+    this.state = {
+        modalVisible: false,
 
-    // };
+    };
 
-   
+
     const [obj, setObj] = React.useState({
         usr: {
             value: "",
@@ -177,7 +177,7 @@ const LoginPage = (props) => {
             backgroundColor: Styles.colors.primary
         }}>
             <SSCrollView style={{
-                flex:1,
+                flex: 1,
             }}>
                 <View style={{
                     alignItems: 'center',
@@ -274,8 +274,8 @@ const LoginPage = (props) => {
                         />
                     </View>
                     <View style={{
-                        width:"100%",
-                        flex:1,
+                        width: "100%",
+                        flex: 1,
                     }}>
 
                     </View>
