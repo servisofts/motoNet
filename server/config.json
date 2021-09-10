@@ -18,7 +18,7 @@
         "paquete": "/Users/rickypazd/Documents/GitHub/motoNet/Files/paquete/"
     },
     "data_base": {
-        "puerto": 5432,
+        "puerto": 50004,
         "pg_restore": "C:\\Program Files\\PostgreSQL\\12\\bin\\pg_restore.exe",
         "pass": "postgres",
         "ip": "181.188.128.236",
