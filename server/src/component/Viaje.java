@@ -43,6 +43,9 @@ public class Viaje {
             case "cancelarBusquedaConductor":
                 cancelarBusquedaConductor(data, session);
                 break;
+            case "cancelarViajeConductor":
+                cancelarViajeConductor(data, session);
+                break;
             case "cancelarViajeCliente":
                 cancelarViajeCliente(data, session);
                 break;
@@ -372,8 +375,9 @@ public class Viaje {
             Conexion.ejecutarUpdate(
                     "UPDATE viaje SET key_conductor = '" + key_usuario + "' WHERE key = '" + key_viaje + "'");
             JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_NEGOCIACION_CONDUCTOR, key_usuario);
-            nuevoCostoMovimiento(viajeMovimiento.getString("key"), precio);
-
+            JSONObject costoMov = nuevoCostoMovimiento(viajeMovimiento.getString("key"), precio);
+            Conexion.ejecutarUpdate(
+                "UPDATE viaje SET key_costo_viaje = '" + costoMov.getString("key") + "' WHERE key = '" + key_viaje + "'");
             viaje = getViajeAndDestinos(key_viaje);
             JSONObject objSend = new JSONObject();
             objSend.put("component", "viaje");
@@ -435,6 +439,26 @@ public class Viaje {
             JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_BUSQUEDA, key_usuario);
             Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" + key_viaje + "'");
             obj.put("estado", "exito");
+        } catch (Exception e) {
+            e.printStackTrace();
+            obj.put("estado", "error");
+
+        }
+
+    }
+
+    public void cancelarViajeConductor(JSONObject obj, SSSessionAbstract session) {
+        try {
+            String key_usuario = obj.getString("key_usuario");
+            String key_viaje = obj.getString("key_viaje");
+            JSONObject viajeMovimiento = nuevoMovimientoViaje(key_viaje, Viaje.TIPO_CANCELO_VIAJE, key_usuario);
+            Conexion.ejecutarUpdate("UPDATE viaje SET estado = 0 WHERE key = '" + key_viaje + "'");
+            JSONObject viaje = getViajeAndDestinos(key_viaje);
+            obj.put("data", viaje);
+            obj.put("estado", "exito");
+            if (viaje.has("key_conductor")) {
+                SSServerAbstract.sendUser(obj.toString(), viaje.getString("key_usuario"));
+            }
         } catch (Exception e) {
             e.printStackTrace();
             obj.put("estado", "error");
@@ -593,6 +617,7 @@ public class Viaje {
     public static final String TIPO_CANCELO_BUSQUEDA = "cancelo_busqueda";
     public static final String TIPO_CANCELO_BUSQUEDA_CONDUCTOR = "cancelo_busqueda_conductor";
     public static final String TIPO_CANCELO_VIAJE = "cancelo_viaje";
+    public static final String TIPO_CANCELO_VIAJE_CONDUCTOR = "cancelo_viaje_conductor";
     public static final String TIPO_NOTIFICO_CONDUCTOR = "notifico_conductor";
     public static final String TIPO_NEGOCIACION_CONDUCTOR = "negociacion_conductor";
     public static final String TIPO_ACEPTO_CONDUCTOR = "acepto_conductor";

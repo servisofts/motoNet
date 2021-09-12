@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import STheme from '../../STheme';
 import Svg from '../../Svg';
 
-class BarraSuperior extends Component {
+type barraProps = {
+    contenido: any,
+}
+class BarraSuperior extends Component<barraProps> {
     constructor(props) {
         super(props);
         this.state = {
@@ -85,7 +88,7 @@ class BarraSuperior extends Component {
                     <View style={{
                         width: 45,
                     }}>
-
+                        {this.props.contenido}
                     </View>
 
                 </View>

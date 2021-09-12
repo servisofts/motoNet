@@ -1,6 +1,7 @@
 const initialState = {
     estado: false,
     data: {},
+    unread: 0
 }
 
 export default (state, action) => {
@@ -24,6 +25,7 @@ const enviar = (state, action) => {
     if (!state.data[action.data.key_viaje]) {
         state.data[action.data.key_viaje] = {};
     }
+    state.unread += 1;
     state.data[action.data.key_viaje][action.data.key] = action.data;
 }
 const getAllByViaje = (state, action) => {

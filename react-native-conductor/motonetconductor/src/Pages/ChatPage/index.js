@@ -29,6 +29,7 @@ class ChatPage extends Component {
             inputValue: "",
             keyboardHeight: 3,
         };
+        this.props.state.mensajeReducer.unread = 0;
         // KeyboardEvent.
     }
 
@@ -50,6 +51,7 @@ class ChatPage extends Component {
     }
 
     componentWillUnmount() {
+        this.props.state.mensajeReducer.unread = 0;
         this.keyboardDidShowListener.remove();
         this.keyboardDidHideListener.remove();
     }

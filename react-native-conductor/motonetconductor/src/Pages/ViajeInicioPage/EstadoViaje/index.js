@@ -18,7 +18,7 @@ const EstadoViaje = (props) => {
         mensaje = "Dirijete a recojer al cliente."
     }
     if (movimientos["conductor_cerca"]) {
-        mensaje = "Ya estas cerca."
+        mensaje = "Ya estas cerca. "
     }
     if (movimientos["conductor_llego"]) {
         mensaje = "Espera a el cliente. Recuerda se amable."

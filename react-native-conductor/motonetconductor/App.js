@@ -50,6 +50,7 @@ import * as SSBackgroundLocation from './src/SSBackgroundLocation';
 
 import Styles from './src/Styles';
 import SPopup from './src/SPopup';
+import { SComponentClass } from './src/SComponent';
 
 const store = createStore(
   Reducer,
@@ -118,7 +119,15 @@ class App extends Component {
     SSBackgroundLocation.init(store);
     SSSocketNative.init(store);
 
-
+  }
+  getContenido() {
+    var contenido = <View />
+    try {
+      contenido = <Container />;
+    } catch (error) {
+      SSBackgroundLocation.getInstance().stop();
+    }
+    return contenido;
   }
   render() {
     return (
@@ -134,7 +143,9 @@ class App extends Component {
           }}>
             <BarraDeDesconeccion socketName={"motonet"} />
             <AlertaDesconectado socketName={"motonet"} />
-            <Container />
+            <SComponentClass>
+              {this.getContenido()}
+            </SComponentClass>
             <SPopup />
           </View>
 

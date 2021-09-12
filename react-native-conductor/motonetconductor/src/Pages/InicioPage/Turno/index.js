@@ -41,8 +41,8 @@ export default class Turno extends Component {
                         justifyContent: "center"
                     }}>
                         <Text style={{
-                            color: "#fff",
-                            fontSize: 12,
+                            color: "#eee",
+                            fontSize: 10,
                             textAlign: "center",
                             maxWidth: 200,
                         }}>Presioná sobre el botón activarse para recibir viajes.</Text>

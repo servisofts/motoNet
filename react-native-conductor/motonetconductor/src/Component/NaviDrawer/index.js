@@ -33,20 +33,20 @@ const NaviDrawe = (props) => {
                 return <View />
             case "CerrarSesion":
                 AsyncStorage.removeItem(AppParams.storage.usuarioLog);
-                  props.state.usuarioReducer.usuarioLog = false;
-                  props.state.usuarioReducer.usuarioDatos = false;
-                 props.state.usuarioReducer.cargaLoaded = true;
+                props.state.usuarioReducer.usuarioLog = false;
+                props.state.usuarioReducer.usuarioDatos = false;
+                props.state.usuarioReducer.cargaLoaded = true;
 
                 AsyncStorage.removeItem(AppParams.storage.usuarioLog);
                 //props.state.usuarioReducer.usuarioLog = false;
                 props.state.usuarioReducer.estado = "";
                 SSBackgroundLocation.getInstance().stop();
-               // props.state.backgroundLocationReducer.close();
-                props.state.usuarioReducer.usuarioCargado=false;
+                // props.state.backgroundLocationReducer.close();
+                props.state.usuarioReducer.usuarioCargado = false;
                 props.dispatch(
                     {
-                        component:"clearReducer",
-                        type:"cerrar_sesion"
+                        component: "clearReducer",
+                        type: "cerrar_sesion"
                     }
                 );
                 props.navigation.replace("CargaPage");
@@ -97,17 +97,21 @@ const NaviDrawe = (props) => {
                         }}>
                             <View style={{
                                 flex: 1,
-                                paddingBottom:100,
+                                paddingBottom: 100,
                             }}>
 
                                 <View style={{
                                     flex: 1,
                                     alignItems: "center",
                                     height: 200,
-                                    justifyContent: "center"
+                                    justifyContent: "center",
+                                    backgroundColor: "#f20022",
+                                    borderBottomEndRadius:8,
+                                    borderBottomStartRadius:8,
                                 }}>
-                                    <Svg name="logoRecurso"
+                                    <Svg name="LogoMoto"
                                         style={{
+                                            fill: "#fff",
                                             width: 130,
                                             height: 130,
                                         }} />
@@ -115,7 +119,7 @@ const NaviDrawe = (props) => {
 
                                 <View style={{
                                     flex: 1,
-                                    marginStart: 20
+                                    // marginStart: 20
                                 }}>
                                     <TouchableOpacity style={styles.sty}
                                         onPress={() => { handleClick("PerfilPage") }}>
@@ -160,17 +164,17 @@ const NaviDrawe = (props) => {
 
 const styles = StyleSheet.create({
     sty: {
-        marginTop: 40,
         width: "100%",
-        fontWeight: 'bold',
-        fontSize: 18,
-        color: "#f00",
+        height: 70,
+        justifyContent: "center",
+        borderBottomWidth: 2,
+        borderBottomColor: "#eee",
+        paddingStart: 8,
+
     },
     texto: {
-        marginTop: 10,
-        fontWeight: "bold",
-        fontSize: 20,
-        color: "#f00",
+        fontSize: 16,
+        color: "#004",
     },
     logo: {
         height: 150,
@@ -184,8 +188,8 @@ const styles = StyleSheet.create({
     contenedors: {
         position: "absolute",
         flex: 1,
-        width: 200,
-        maxWidth: 200,
+        width: "70%",
+        maxWidth: 500,
         height: "100%",
         minHeight: Dimensions.get("window").height,
         borderRightWidth: 1,
@@ -204,6 +208,7 @@ const styles = StyleSheet.create({
         right: 0,
         top: 0,
         height: "100%",
+        backgroundColor: "#00000099",
         minHeight: Dimensions.get("window").height,
         paddingTop: 50,
     },

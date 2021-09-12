@@ -35,9 +35,9 @@ class BackgroundService {
         var _inst = this;
         AsyncStorage.getItem('backgroundLocationStorage', (error, result) => {
             if (result) {
-                this.run = true;
-                this.stop();
-                this.start();
+                _inst.run = true;
+                _inst.stop();
+                _inst.start();
             }
 
         });

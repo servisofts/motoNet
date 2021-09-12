@@ -17,6 +17,9 @@ import BarraSuperior from '../../Component/BarraSuperior';
 
 import * as SSBackgroundLocation from '../../SSBackgroundLocation';
 import SThread from '../../SThread';
+import Boton1 from '../../Component/Boton1';
+import Svg from '../../Svg';
+import { SPopup } from '../../SComponent';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 var mapa;
@@ -130,12 +133,40 @@ const ViajeInicioPage = (props) => {
         props.navigation.replace("CargaPage");
         return <View />
     }
+    const getCancelarViaje = () => {
+        return <TouchableOpacity style={{
+            flex: 1,
+            width: "100%",
+            justifyContent: "center",
+            alignItems: "center",
+        }} onPress={() => {
+            SPopup.confirm("Esta seguro de cancelar el viaje?", () => {
+                var exito = true
+                if (exito) {
+                    props.state.socketClienteReducer.sessiones["motonet"].send({
+                        component: "viaje",
+                        type: "cancelarViajeConductor",
+                        key_usuario: props.state.usuarioReducer.usuarioLog.key,
+                        key_viaje: props.state.ViajeReducer.data.key,
+                        estado: "cargando"
+                    }, true);
+                }
+            })
+        }}>
+            <Svg name="CerrarW"
+                style={{
+                    width: 20,
+                    height: 20,
+                    fill: "#fff"
+                }} />
+        </TouchableOpacity>
+    }
     return (
         <View style={{
             flex: 1,
             width: "100%",
         }}>
-            <BarraSuperior title={"Viaje"} />
+            <BarraSuperior title={"Viaje"} contenido={getCancelarViaje()} />
             <View style={{
                 width: "100%",
                 flex: 1,

@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import BarraSuperior from '../../Component/BarraSuperior';
 import AppParams from '../../Json';
+import { SDate, SOrdenador } from '../../SComponent'
 class HistorialViajesPage extends Component {
   static navigationOptions = {
+    headerShown: false,
     title: "Emergencias"
   }
   constructor(props) {
@@ -11,91 +14,158 @@ class HistorialViajesPage extends Component {
     this.state = {
     };
   }
+  componentDidMount() {
+    this.props.state.historialViajeReducer.data = null;
+    this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+      component: "historialViaje",
+      type: "getAllConductor",
+      estado: "cargando",
+      key_usuario: this.props.state.usuarioReducer.usuarioLog.key
+    });
+  }
 
   render() {
-
-    if (!this.props.state.ViajeReducer.historial) {
-      if (!this.props.state.ViajeReducer.estado == "cargando") {
+    var reducer = this.props.state.historialViajeReducer;
+    var data = reducer.data;
+    if (!data) {
+      if (!reducer.estado == "cargando") {
         return <View />
       }
-
       this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
-        component: "emergencia",
+        component: "historialViaje",
         type: "getAllConductor",
         estado: "cargando",
         key_usuario: this.props.state.usuarioReducer.usuarioLog.key
       });
       return <View />
     }
-    const getListaMovimientos = (emergencia) => {
-      return Object.keys(emergencia.movimientos).map((key) => {
-        var obj = emergencia.movimientos[key];
-        if (this.props.state.usuarioReducer.usuarioLog.key != obj.key_referencia) {
-          return <View />
-        }
-        var tipo = "";
-        switch (obj.tipo) {
-          case "notifico_conductor":
-            tipo = "Emergencia entrante.";
-            break;
-          case "acepto_conductor":
-            tipo = "Emergencia aceptada.";
-            break;
-          case "cancelo_busqueda_conductor":
-            tipo = "Cancelaste emegencia.";
-            break;
-          case "termino_viaje_conductor":
-            tipo = "Terminaste la emergencia.";
-            break;
-        }
-        return (
-          <Text>{tipo}</Text>
-        )
-      })
-    }
+    // const getListaMovimientos = (emergencia) => {
+    //   return Object.keys(emergencia.movimientos).map((key) => {
+    //     var obj = emergencia.movimientos[key];
+    //     if (this.props.state.usuarioReducer.usuarioLog.key != obj.key_referencia) {
+    //       return <View />
+    //     }
+    //     var tipo = "";
+    //     switch (obj.tipo) {
+    //       case "notifico_conductor":
+    //         tipo = "Emergencia entrante.";
+    //         break;
+    //       case "acepto_conductor":
+    //         tipo = "Emergencia aceptada.";
+    //         break;
+    //       case "cancelo_busqueda_conductor":
+    //         tipo = "Cancelaste emegencia.";
+    //         break;
+    //       case "termino_viaje_conductor":
+    //         tipo = "Terminaste la emergencia.";
+    //         break;
+    //     }
+    //     return (
+    //       <Text>{tipo}</Text>
+    //     )
+    //   })
+    // }
 
     const getListaEmergencia = () => {
-      return this.props.state.ViajeReducer.historial.map((obj, key) => {
-        return (<View style={{
-          minHeight: 100,
-          padding: 4,
-          width: "95%",
-          margin: 4,
-          borderRadius: 10,
-          backgroundColor: "#fff"
-        }}>
-          <Text style={{ fontSize: 15, width: "100%", backgroundColor: "#2c4b81", borderRadius: 10, color: "#fff", textAlign: "center" }}>Emergencia:</Text>
-          <View style={{
-            flexDirection: "row",
-            alignContent: "space-between"
+      return new SOrdenador([
+        { key: "fecha_on", order: "desc", peso: 1, }
+      ]).ordernarObject(data).map((key) => {
+        var obj = data[key];
+        var direccion = obj.direccion_inicio.direccion;
+        if (obj.direccion_fin) {
+          direccion = obj.direccion_fin.direccion;
+        }
+          return (<View style={{
+            minHeight: 200,
+            padding: 4,
+            width: "95%",
+            marginTop: 10,
+            borderRadius: 10,
+            backgroundColor: "#fff",
+            borderBottomWidth: 2,
+            borderBottomColor: "#ccc"
           }}>
-            <Text style={{ flex: 1, }}>Fecha: {new Date(obj.fecha_on).toLocaleDateString()} {new Date(obj.fecha_on).toLocaleTimeString()}</Text>
-            <Text style={{ flex: 1, textAlign: "center" }}> {obj.estado == 1 ? "En Curso" : "Concluida"}</Text>
-          </View>
-          <Text style={{ fontSize: 14, backgroundColor: "#2c4b81", borderRadius: 10, color: "#fff", width: 100, textAlign: "center", marginTop: 4, }}>movimientos:</Text>
-          <View style={{
-            paddingLeft: 8,
-          }}>
-            {getListaMovimientos(obj)}
-          </View>
-        </View>)
-      })
+            {/* <Text style={{}}>{`Cliente: ${obj.key_usuario}`}</Text> */}
+            {/* <Text style={{}}>{`Conductor: ${obj.key_conductor}`}</Text> */}
+            <View style={{
+              flex: 1,
+              width: "100%",
+              backgroundColor: "#ddd",
+            }}>
+
+            </View>
+            <View style={{
+              height: 80,
+              paddingStart: 16,
+              paddingEnd: 16,
+              justifyContent: "center",
+            }}>
+              <View style={{
+                width: "100%",
+                justifyContent: "center",
+              }}>
+                <Text style={{ fontSize: 10, color: "#999" }}>Direccion</Text>
+                <Text style={{}}>{`${direccion}`}</Text>
+              </View>
+              <View style={{
+                width: "100%",
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}>
+                <View style={{
+                  flex: 1,
+                  justifyContent: "center",
+                }}>
+                  <Text style={{ fontSize: 10, color: "#999" }}>Fecha</Text>
+                  <Text style={{}}>{`${new SDate(obj.fecha_on).toString("dd MON, yyyy")}`}</Text>
+                </View>
+                <View style={{
+                  flex: 1,
+                  justifyContent: "center",
+                }}>
+                  <Text style={{ fontSize: 10, color: "#999" }}>Costo</Text>
+                  <Text style={{}}>{`Bs. ${obj.costo}`}</Text>
+                </View>
+
+              </View>
+
+            </View>
+
+            {/* <Text style={{}}>{`${JSON.stringify(obj.movimientos["inicio_viaje"])}`}</Text> */}
+
+          </View>)
+        })
     }
     return (
-      <View>
-        <ScrollView
-          style={{
-            width: "100%",
-            height: "100%",
-            backgroundColor:""
-          }}
-          contentContainerStyle={{
-            justifyContent: "center",
-            alignItems: "center"
-          }}
-        >
-          {getListaEmergencia()}
-        </ScrollView>
+      <View style={{
+        flex: 1,
+        width: "100%",
+      }}>
+        <BarraSuperior title={"Historial de viajes"} goBack={() => {
+          this.props.navigation.goBack();
+        }} />
+        <View style={{
+          flex: 1,
+          width: "100%",
+        }}>
+          <ScrollView
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+            contentContainerStyle={{
+              justifyContent: "center",
+              alignItems: "center"
+            }}
+          >
+            {getListaEmergencia()}
+            <View style={{
+              height: 200,
+              width: "100%",
+            }}></View>
+          </ScrollView>
+        </View>
       </View>
     );
   }

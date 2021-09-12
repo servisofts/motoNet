@@ -78,7 +78,7 @@ const ComponentDetalleProducto = (props) => {
     const getlistaItems = () => {
         // console.log("aaaa" + JSON.stringify(props.state.ViajesReducer.data.pedido))
 
-        let data = props.state.ViajesReducer.data.pedido;
+        let data = props.state.ViajeReducer.data.pedido;
 
         if (Object.keys(data).length <= 0) {
             return <View />

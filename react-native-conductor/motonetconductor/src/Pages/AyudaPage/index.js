@@ -8,12 +8,13 @@ import {
     Animated
 } from 'react-native';
 import Ayuda from '../../Component/Ayuda';
+import BarraSuperior from '../../Component/BarraSuperior';
 
 class AyudaPage extends Component {
     static navigationOptions = {
-        title:"Ayuda"
+        headerShown: false,
     }
-    constructor(props) { 
+    constructor(props) {
         super(props);
     }
     render() {
@@ -22,7 +23,10 @@ class AyudaPage extends Component {
                 flex: 1,
                 alignItems: 'center',
             }}>
-                <Text style={{color:"#000"}}>AYUDA</Text>
+                <BarraSuperior title={"Ayuda"} goBack={()=>{
+                    this.props.navigation.goBack();
+                }}/>
+                <Text style={{ color: "#000" }}>AYUDA</Text>
             </View>
 
 

@@ -12,6 +12,7 @@ import BtnRojo from '../img/btnRojo.svg';
 import AlianzaSegurosRecurso from '../img/alianzaSegurosRecurso.svg';
 //import BtnSOS from '../img/btnSOS.svg';
 import Cerrar from '../img/cerrar.svg';
+import CerrarW from '../img/cerrarw.svg';
 import Error from '../img/error.svg';
 import Success from '../img/success.svg';
 
@@ -68,6 +69,7 @@ type ICONOS = "logoCompleto"
     | "Sinubicacion"
     | "Rightarrow"
     | "Cerrar"
+    | "CerrarW"
     | "Send"
     | "Arrow"
     | "Error"
@@ -164,6 +166,8 @@ const Svg = (propsa: typeProps) => {
             return <Rightarrow style={props.style} />
         case "Cerrar":
             return <Cerrar style={props.style} />
+        case "CerrarW":
+            return <CerrarW style={props.style} />
         case "Send":
             return <Send style={props.style} />
         case "Arrow":

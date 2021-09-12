@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import AppParams from '../../../Json';
 import STheme from '../../../STheme';
 import * as SSBackgroundLocation from '../../../SSBackgroundLocation';
+import { SThread } from '../../../SComponent';
 
 class PerfilUsuario extends Component {
     constructor(props) {
@@ -24,6 +25,9 @@ class PerfilUsuario extends Component {
         }
         if (!this.props.state.usuarioReducer.usuarioDatos) {//Cuando no existe Datos de usuario
             if (this.props.state.usuarioReducer.estado == "cargando") {
+                new SThread(2000, "algoUsr",true).start(()=>{
+                    this.props.state.usuarioReducer.estado = "";
+                });
                 return <Text>datos de Usuario No encontrado</Text>
             }
             this.props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({

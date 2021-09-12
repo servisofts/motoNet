@@ -2,8 +2,8 @@
     "socket": {
         "name": "motonet"
     },
-    "_urlImages": "http://servisofts.com:30004/images/",
-    "urlImages": "http://192.168.0.227:30004/",
+    "urlImages": "https://motonet.servisofts.com/images/",
+    "_urlImages": "http://192.168.0.3:30004/",
     "storage": {
         "usuarioLog": "usuarioLog",
         "isBackgroundLocation": "is_background_location",

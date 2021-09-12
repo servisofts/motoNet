@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Polyline, Marker } from 'react-native-maps';
+import { Polyline, Marker, Circle } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import Svg from '../../../Svg';
@@ -27,7 +27,7 @@ const RutaViaje = (props) => {
         if (props.state.ViajeReducer.data.estado == 0) {
             return;
         }
-        getHilo();
+        // getHilo();
         var timeActual = new Date().getTime();
 
         var viaje = props.state.ViajeReducer.data;
@@ -49,6 +49,7 @@ const RutaViaje = (props) => {
         }
         lastSend = timeActual;
 
+        console.log(viaje.key);
         console.log(Object.keys(viaje.movimientos));
         if (movimientos["inicio_viaje_conductor"]) {
             lastEstado = "inicio_viaje_conductor";
@@ -85,7 +86,46 @@ const RutaViaje = (props) => {
 
     var dato = props.state.ViajeReducer.data;
 
-    return ["direccion_inicio", "direccion_fin"].map((index) => {
+    const arco_a_partir_de_2_putos = ({ x1, y1, x2, y2 }) => {
+        var xm = (x1 + x2) / 2;
+        var ym = (y1 + y2) / 2;
+        var d = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        var r = d / 2;
+        var x = xm + r * (y2 - y1) / d;
+        var y = ym - r * (x2 - x1) / d;
+        return {
+            x,
+            y,
+            r
+        }
+    }
+    const getPolilyne = () => {
+        var myLocation = SSBackgroundLocation.getInstance().location;
+        var inicio = dato.direccion_inicio;
+        var fin = dato.direccion_fin;
+        var locations = [];
+        var movimientos = props.state.ViajeReducer.data.movimientos;
+        locations.push(myLocation);
+        var locTo = inicio;
+        if (movimientos["inicio_viaje_conductor"]) {
+            if(fin){
+                locTo = fin;
+            }
+        }
+        var circunferencia = arco_a_partir_de_2_putos({ x1: myLocation.latitude, y1: myLocation.longitude, x2: locTo.latitude, y2: locTo.longitude });
+
+        locations.push(locTo);
+
+        return <>
+            <Polyline
+                key={"asd"}
+                coordinates={locations}
+                strokeColor="#000"
+                strokeWidth={2}
+            />
+        </>
+    }
+    var MARKERS = ["direccion_inicio", "direccion_fin"].map((index) => {
         var obj = dato[index];
         if (!obj) {
             return <View />
@@ -102,6 +142,10 @@ const RutaViaje = (props) => {
             </Marker>
         )
     })
+    return <>
+        {MARKERS}
+        {getPolilyne()}
+    </>
 
 }
 const initStates = (state) => {

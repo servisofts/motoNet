@@ -8,5 +8,5 @@
         "fbtoken": "FIREBASE_TOKEN"
     },
     "_urlImages": "http://192.168.0.3:30004/",
-    "urlImages": "http://servisofts.com:30004/"
+    "urlImages": "https://motonet.servisofts.com/images/"
 }

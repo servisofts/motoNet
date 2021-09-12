@@ -7,6 +7,7 @@ import STheme from '../../../STheme';
 import Svg from '../../../Svg';
 import PerfilCliente from '../PerfilCliente';
 import DetalleProducto from '../DetalleProducto';
+import { SPopup } from '../../../SComponent';
 
 class DetalleRuta extends Component {
     constructor(props) {
@@ -23,20 +24,34 @@ class DetalleRuta extends Component {
             return <View />
         }
 
-        if (this.props.state.ViajeReducer.data.movimientos["inicio_viaje"]) {
-            mensaje = "Dirijite a la ubicacion del cliente"
+        if (this.props.state.ViajeReducer.data.tipo_viaje.codigo == "pedido") {
+            if (this.props.state.ViajeReducer.data.movimientos["inicio_viaje"]) {
+                mensaje = "Consigue el pedido y llevalo al cliente."
+            }
+        } else {
+            if (this.props.state.ViajeReducer.data.movimientos["inicio_viaje"]) {
+                mensaje = "Dirijete a la ubicacion del cliente."
+            }
         }
+
 
         if (this.props.state.ViajeReducer.data.movimientos["conductor_cerca"]) {
-            mensaje = "Ya estas cerca";
+            mensaje = "Ya estas cerca, notifica al cliente que llegaste.";
         }
 
-        if (this.props.state.ViajeReducer.data.movimientos["conductor_llego"]) {
-            mensaje = "Espera al cliente";
+        if (this.props.state.ViajeReducer.data.tipo_viaje.codigo == "pedido") {
+            if (this.props.state.ViajeReducer.data.movimientos["conductor_llego"]) {
+                mensaje = "Entrega el pedido al cliente.";
+            }
+        } else {
+            if (this.props.state.ViajeReducer.data.movimientos["conductor_llego"]) {
+                mensaje = "Espera al cliente, luego inicia el viaje.";
+            }
         }
+
 
         if (this.props.state.ViajeReducer.data.movimientos["inicio_viaje_conductor"]) {
-            mensaje = "Dirijete al destino";
+            mensaje = "Dirijete al destino.";
         }
 
         if (!mensaje) {
@@ -123,18 +138,31 @@ class DetalleRuta extends Component {
     }
     TerminarViaje = () => {
         return <Boton1 label={"Finalizar viaje"} type={1} onPress={() => {
-            this.props.state.socketClienteReducer.sessiones["motonet"].send({
-                component: "viaje",
-                type: "finalizarViaje",
-                key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
-                key_viaje: this.props.state.ViajeReducer.data.key,
-                estado: "cargando"
-            }, true);
+            SPopup.confirm("Esta seguro de terminar el viaje?", () => {
+                var exito = true
+                if (exito) {
+                    this.props.state.socketClienteReducer.sessiones["motonet"].send({
+                        component: "viaje",
+                        type: "finalizarViaje",
+                        key_usuario: this.props.state.usuarioReducer.usuarioLog.key,
+                        key_viaje: this.props.state.ViajeReducer.data.key,
+                        estado: "cargando"
+                    }, true);
+                }
+            })
+
         }} />
     }
     getAction = () => {
+
+        var viaje = this.props.state.ViajeReducer.data;
         if (this.props.state.ViajeReducer.data.movimientos["inicio_viaje_conductor"]) {
             return this.TerminarViaje()
+        }
+        if (viaje.tipo_viaje.codigo == "pedido") {
+            if (this.props.state.ViajeReducer.data.movimientos["conductor_llego"]) {
+                return this.TerminarViaje()
+            }
         }
         if (this.props.state.ViajeReducer.data.movimientos["conductor_llego"]) {
             return this.IniciarViaje()
@@ -148,7 +176,39 @@ class DetalleRuta extends Component {
         //     return this.verProductos()
         // }
 
-        return this.getTiempoEstimado()
+        return this.verProductos()
+    }
+    getMensajesSinLeer = () => {
+        var cantidad = this.props.state.mensajeReducer.unread;
+        if (!cantidad) return <View />
+        return <View style={{
+            width: 30,
+            height: 30,
+            borderRadius: 15,
+            backgroundColor: "#fff",
+            borderWidth: 1,
+            borderColor: "#f00",
+            position: "absolute",
+            top: -10,
+            left: -10,
+            justifyContent: "center",
+            alignItems: "center",
+        }}>
+            <Text style={{ color: "#f00" }}>{cantidad}</Text>
+        </View>
+    }
+    getChat = () => {
+        return <View style={{
+            width: "100%",
+        }}>
+            <Boton1 type="1"
+                label="Chat"
+                cargando={false}
+                // cargando={props.state.ViajeReducer.estado == "cargando"}
+                onPress={() => this.props.navigation.navigate("ChatPage")}
+            />
+            {this.getMensajesSinLeer()}
+        </View>
     }
     getDetalleRuta = () => {
         if (!this.props.state.usuarioReducer.data[this.props.state.ViajeReducer.data.key_usuario]) {
@@ -202,12 +262,7 @@ class DetalleRuta extends Component {
                             justifyContent: "center",
                             alignItems: "center",
                         }}>
-                            <Boton1 type="1"
-                                label="Chat"
-                                cargando={false}
-                                // cargando={props.state.ViajeReducer.estado == "cargando"}
-                                onPress={() => this.props.navigation.navigate("ChatPage")}
-                            />
+                            {this.getChat()}
                         </View>
                     </View>
                 </View>
@@ -221,13 +276,14 @@ class DetalleRuta extends Component {
 
                 <View style={{
                     flex: 1,
-                    width: "100%",
+                    // width: "100%",
                     height: "100%",
                     // backgroundColor: "#ccc"
                 }}>
                     <View style={{
                         width: "100%",
                         justifyContent: "center",
+                        flex: 1,
                         // alignItems: "center",
                         // backgroundColor: "#000"
                     }}>
@@ -271,13 +327,14 @@ class DetalleRuta extends Component {
                                             fill: STheme.color.background
                                         }} />
                                 </TouchableOpacity>
-                                {this.verProductos()}
                             </View>
                         </View>
 
                         <View style={{
-                            height: 40,
+                            flex: 1,
                             width: "100%",
+                            justifyContent: "center",
+                            alignItems: "center",
                         }}>
 
                             {this.getAction()}
@@ -306,7 +363,7 @@ class DetalleRuta extends Component {
                 }
             }
             return (
-                <DetalleProducto data={this.props.state.usuarioReducer.data[this.props.state.ViajesReducer.data.key_usuario]} close={() => {
+                <DetalleProducto data={this.props.state.ViajeReducer.data} close={() => {
                     this.setState({ abrirModalProducto: false })
                 }} />
             )

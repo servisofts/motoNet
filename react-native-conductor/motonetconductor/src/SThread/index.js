@@ -21,8 +21,8 @@ export default class SThread {
         this.time = time;
     }
     stop() {
-        delete HILOS[this.key];
         this.isRun = false;
+        delete HILOS[this.key];
     }
 
     hilo = async () => {
