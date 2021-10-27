@@ -221,7 +221,7 @@ class Productos extends Component {
         this.state.productos[nombre] = producto;
         this.state.foto = false;
         this.setState({ ...this.state });
-        // console.log(producto);
+        // console.log(producto); alvaroaqui
     }
     getlistaItems() {
         let data = this.state.productos;
@@ -245,9 +245,10 @@ class Productos extends Component {
                         <Text style={{
                             color: STheme.color.textb
                         }}>{obj.nombre}</Text>
-                        <Text style={{
+                        {/* <Text style={{
                             color: STheme.color.textb
-                        }}>{obj.cantidad} Unidades</Text>
+                        }}>100 Unidades</Text> */}
+
                     </View>
 
                     <Image source={{ uri: 'data:image/jpeg;base64,' + obj.foto }}
@@ -299,13 +300,35 @@ class Productos extends Component {
 
                 {this.agregarFoto()}
                 {/* {this.cantidad()} */}
+
+
+
+
+
                 <View style={{
                     marginBottom: 16,
                 }}>
+
+
+
                     <Boton1 label={"Añadir producto"} type={"4"} onPress={() => {
+                        // SPopupOpen({
+                        //      content: (
+                        //         <View alignItems="center" >
+                        //             <Svg name={"Warning2"}
+                        //                 style={{
+                        //                     width: 100,
+                        //                     height: 100,
+                        //                     fill: "#f00",
+                        //                 }} />
+                        //             <Text style={{ paddingTop: 10, fontSize: 15 }}>Posicione la ubicación en el mapa.</Text>
+                        //         </View>
+                        //     )
+                        // })
                         this.agergarProducto();
                     }} />
                 </View>
+
                 <View style={{
                     width: "100%",
                     paddingBottom: 10
@@ -318,4 +341,3 @@ class Productos extends Component {
 }
 
 export default Productos;
-

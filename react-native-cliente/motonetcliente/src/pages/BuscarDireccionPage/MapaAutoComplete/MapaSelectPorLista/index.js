@@ -20,7 +20,7 @@ class MapaSelectPorLista extends Component {
                 style={{
                     width: "95%",
                     height: 60,
-                    margin:5,
+                    margin: 5,
                     alignItems: 'center',
                     justifyContent: 'center',
                     flexDirection: 'row',
@@ -31,7 +31,9 @@ class MapaSelectPorLista extends Component {
                     justifyContent: "center",
                     alignItems: "center",
                     // backgroundColor: "#000"
+                    //alvaroPoint
                 }}>
+
                     <Svg name="Pointer"
                         style={{
                             width: 30,

@@ -58,8 +58,8 @@ android {
         applicationId "com.servisofts.motonetconductor"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 16
-        versionName "2.7"
+        versionCode 17
+        versionName "2.8"
         multiDexEnabled true
     }
     splits {

@@ -46,11 +46,11 @@ class MapaAutoComplete extends Component {
         }
     }
     OnRegionChangeComplete = (region) => {
-        var distancia = this.getDistancia(this.state.region.latitude, this.state.region.longitude, region.latitude, region.longitude);
+        //  var distancia = this.getDistancia(this.state.region.latitude, this.state.region.longitude, region.latitude, region.longitude);
         // console.log(distancia)
-        if (distancia <= 1) {
-            return <View />
-        }
+        //   if (distancia <= 1) {
+        // return <View />
+        //}
         this.props.state.socketClienteReducer.sessiones["motonet"].send({
             component: "locationGoogle",
             type: "geocode",
@@ -59,6 +59,10 @@ class MapaAutoComplete extends Component {
         }, true);
     }
     getposition = () => {
+
+
+
+
         Geolocation.getCurrentPosition(
             (position) => {
                 this.mapa.animateToRegion({
@@ -69,6 +73,21 @@ class MapaAutoComplete extends Component {
                 }, 1000)
             },
             (error) => {
+                SPopupOpen({
+                    key: "noConductor",
+                    content: (
+                        <View alignItems="center" >
+                            <Svg name={"Warning2"}
+                                style={{
+                                    width: 100,
+                                    height: 100,
+                                    fill: "#f00",
+                                }} />
+
+                            <Text style={{ paddingTop: 10, fontSize: 15 }}>Activar su gps.</Text>
+                        </View>
+                    )
+                })
                 console.log(error.code, error.message);
             },
             { timeout: 30000, enableHighAccuracy: false, maximumAge: 75000 }
@@ -76,6 +95,7 @@ class MapaAutoComplete extends Component {
         // if (!currentPos) {
         //     return <View />
         // }
+        //alvaro activo gps
         // mapa.animateToRegion({
         //     latitude: currentPos.coords.latitude,
         //     longitude: currentPos.coords.longitude,
@@ -154,24 +174,24 @@ class MapaAutoComplete extends Component {
                             cargando={false}
                             // cargando={props.state.viajesReducer.estado == "cargando"}
                             onPress={() => {
-                             
-                                if(!this.props.value){
+
+                                if (!this.props.value) {
                                     //alert("Posicione la ubicación en el mapa");
                                     SPopupOpen({
                                         key: "noConductor",
                                         content: (
                                             <View alignItems="center" >
                                                 <Svg name={"Warning2"}
-                                                style={{
-                                                    width: 100,
-                                                    height: 100,
-                                                    fill: "#f00",
-                                                }} />
-                                                <Text style={{paddingTop:10, fontSize:15}}>Posicione la ubicación en el mapa.</Text>
+                                                    style={{
+                                                        width: 100,
+                                                        height: 100,
+                                                        fill: "#f00",
+                                                    }} />
+                                                <Text style={{ paddingTop: 10, fontSize: 15 }}>Posicione la ubicación en el mapa.</Text>
                                             </View>
                                         )
                                     })
-                                    return <View/>
+                                    return <View />
                                 }
                                 //console.log(this.props.value)
                                 this.props.navigation.goBack()
