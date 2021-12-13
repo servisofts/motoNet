@@ -6,6 +6,7 @@ import ListaBusqueda from '../ListaBusqueda';
 import * as locationActions from '../../../action/locationActions'
 import * as viajesActions from '../../../action/viajesActions'
 import Geolocation from '@react-native-community/geolocation';
+import HttpConection from '../../../HttpConection';
 
 var secondTextInput;
 
@@ -137,8 +138,7 @@ const BuscadorComponenteMapSingle = (props) => {
                 longitude: info.coords.longitude
             }
             var direccions = false
-
-            props.state.socketClienteReducer.sessiones["motonet"].send({
+            HttpConection.sendJson({
                 component: "locationGoogle",
                 type: "autoComplete",
                 data: {
@@ -146,7 +146,7 @@ const BuscadorComponenteMapSingle = (props) => {
                     ...data.ubicacionActual
                 },
                 estado: "cargando"
-            }, true);
+            });
         });
     }
 

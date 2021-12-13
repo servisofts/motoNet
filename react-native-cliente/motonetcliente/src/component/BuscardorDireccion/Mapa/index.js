@@ -5,6 +5,7 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { connect } from 'react-redux';
 import Geolocation from '@react-native-community/geolocation';
 import RutaViaje from './RutaViaje';
+import HttpConection from '../../../HttpConection';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 var mapa;
@@ -85,12 +86,12 @@ const Mapa = (props) => {
 
     const OnRegionChangeComplete = (region) => {
         // console.log("PIDIOP GEOCODE DEL MAPA EN MOVOIMIENTO")
-        props.state.socketClienteReducer.sessiones["motonet"].send({
+        HttpConection.sendJson({
             component: "locationGoogle",
             type: "geocode",
             data: region,
             estado: "cargando"
-        }, true);
+        });
         return <View />
     }
 

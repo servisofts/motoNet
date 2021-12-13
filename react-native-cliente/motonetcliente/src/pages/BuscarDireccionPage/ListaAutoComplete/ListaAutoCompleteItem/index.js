@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, Alert, AsyncStorage } from 'react-native';
 import { connect } from 'react-redux';
+import HttpConection from '../../../../HttpConection';
 import Svg from '../../../../Svg'
 type tprops = {
     direccion: String,
@@ -17,13 +18,20 @@ class ListaAutoCompleteItem extends Component<tprops> {
             if (this.props.seleccionar) this.props.seleccionar(this.props.latLng);
             return <View />
         }
-        this.props.state.socketClienteReducer.sessiones["motonet"].send({
+        HttpConection.sendJson({
             component: "locationGoogle",
             type: "detail",
             place_id: this.props.placeId,
             estado: "cargando",
             dirSearch: this.props.direccion
-        }, true);
+        })
+        // this.props.state.socketClienteReducer.sessiones["motonet"].send({
+        //     component: "locationGoogle",
+        //     type: "detail",
+        //     place_id: this.props.placeId,
+        //     estado: "cargando",
+        //     dirSearch: this.props.direccion
+        // }, true);
     }
 
 

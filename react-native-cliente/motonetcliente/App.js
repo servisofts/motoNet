@@ -116,6 +116,8 @@ const Container = createAppContainer(Home);
 class App extends Component {
   constructor(props) {
     super(props);
+    SSSocketNative.init(store);
+    HttpConection.init(store);
 
   }
   componentDidMount() {

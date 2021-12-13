@@ -9,6 +9,7 @@ import MarkerMedio from './MarkerMedio';
 import MapaSelectPorLista from './MapaSelectPorLista';
 import Boton1 from '../../../component/Boton1';
 import { SPopupOpen } from '../../../SPopup';
+import HttpConection from '../../../HttpConection';
 
 class MapaAutoComplete extends Component {
     constructor(props) {
@@ -51,12 +52,18 @@ class MapaAutoComplete extends Component {
         //   if (distancia <= 1) {
         // return <View />
         //}
-        this.props.state.socketClienteReducer.sessiones["motonet"].send({
+        HttpConection.sendJson({
             component: "locationGoogle",
             type: "geocode",
             data: region,
             estado: "cargando"
-        }, true);
+        })
+        // this.props.state.socketClienteReducer.sessiones["motonet"].send({
+        //     component: "locationGoogle",
+        //     type: "geocode",
+        //     data: region,
+        //     estado: "cargando"
+        // }, true);
     }
     getposition = () => {
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Polyline } from 'react-native-maps';
 import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
+import HttpConection from '../../../HttpConection';
 
 const RutaViaje = (props) => {
 
@@ -11,7 +12,8 @@ const RutaViaje = (props) => {
 
     if (!props.state.locationGoogleMapReducer.route) {
         if (props.state.locationGoogleMapReducer.estado != "cargando") {
-            props.state.socketClienteReducer.sessiones["motonet"].send({
+            
+            HttpConection.sendJson({
                 component: "locationGoogle",
                 type: "route",
                 estado: "cargando",
@@ -19,7 +21,7 @@ const RutaViaje = (props) => {
                     inicio: props.state.viajesReducer.data.direccion_inicio,
                     fin: props.state.viajesReducer.data.direccion_fin
                 }
-            }, true);
+            });
         }
         return <View />
     }

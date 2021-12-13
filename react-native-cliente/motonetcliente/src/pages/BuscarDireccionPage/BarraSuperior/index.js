@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux';
+import HttpConection from '../../../HttpConection';
 import Svg from '../../../Svg';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -36,7 +37,7 @@ class BarraSuperior extends Component {
             })
             return;
         }
-        this.props.state.socketClienteReducer.sessiones["motonet"].send({
+        HttpConection.sendJson({
             component: "locationGoogle",
             type: "autoComplete",
             data: {
@@ -45,7 +46,7 @@ class BarraSuperior extends Component {
                 longitude: -63.18117
             },
             estado: "cargando"
-        }, true);
+        })
     }
     render() {
 

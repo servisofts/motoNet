@@ -135,6 +135,7 @@ class ConfirmarPage extends Component {
                     if (this.props.state.locationGoogleReducer.estado == "cargando") {
                         return <View />
                     }
+                    
                     this.props.state.socketClienteReducer.sessiones["clinica_nj"].send({
                         component: "locationGoogle",
                         type: "geocode",

@@ -6,6 +6,7 @@ import Svg from '../../../Svg';
 import ListaBusqueda from '../ListaBusqueda';
 import * as locationActions from '../../../action/locationActions'
 import AppParams from '../../../Json';
+import HttpConection from '../../../HttpConection';
 
 const BuscadorComponenteMap = (props) => {
     const [data, setData] = React.useState({
@@ -52,7 +53,8 @@ const BuscadorComponenteMap = (props) => {
                 latitude: info.coords.latitude,
                 longitude: info.coords.longitude
             }
-            props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
+            
+            HttpConection.sendJson({
                 component: "locationGoogle",
                 type: "autoComplete",
                 data: {
@@ -60,7 +62,7 @@ const BuscadorComponenteMap = (props) => {
                     ...data.ubicacionActual
                 },
                 estado: "cargando"
-            }, true);
+            });
             console.log("heyyy")
             // console.log(data.ubicacionActual)
             props.dispatch({

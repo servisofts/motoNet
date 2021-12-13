@@ -6,6 +6,7 @@ import STheme from '../../../STheme';
 import Geolocation from '@react-native-community/geolocation';
 import Mapa from '../../BuscardorDireccion/Mapa';
 import MapaAux from '../MapaAux';
+import HttpConection from '../../../HttpConection';
 
 const ListaBusqueda = (props) => {
 
@@ -113,7 +114,7 @@ const ListaBusqueda = (props) => {
             }
             var direccions = false
 
-            props.state.socketClienteReducer.sessiones["motonet"].send({
+            HttpConection.sendJson({
                 component: "locationGoogle",
                 type: "autoComplete",
                 data: {
@@ -121,7 +122,7 @@ const ListaBusqueda = (props) => {
                     ...data.ubicacionActual
                 },
                 estado: "cargando"
-            }, true);
+            });
         });
     }
     // if (props.state.locationGoogleReducer.estado == "cargando") {
@@ -145,12 +146,12 @@ const ListaBusqueda = (props) => {
     }
 
     const getDetail = (place_key) => {
-        props.state.socketClienteReducer.sessiones["motonet"].send({
+        HttpConection.sendJson({
             component: "locationGoogle",
             type: "detail",
             place_id: place_key,
             estado: "cargando"
-        }, true);
+        });
     }
 
     const hanlechage = (text) => {
