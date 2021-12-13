@@ -4,7 +4,7 @@ import TcpSocket from 'react-native-tcp-socket';
 import SSColaMensaje from '../SSColaMensaje';
 import * as Notificacion from '../../Notificaciones'
 
-var DEBUG = true;
+var DEBUG = false;
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 class SSSession {

@@ -1,7 +1,7 @@
 //SOCKET CLIENTE NUEVO
 import Config from './config.json';
 import SSSession from './SSSession';
-const DEBUG = true;
+const DEBUG = false;
 var store;
 var SESSIONES = {};
 const Log = (mensaje) => {

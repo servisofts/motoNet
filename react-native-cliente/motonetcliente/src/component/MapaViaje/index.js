@@ -88,7 +88,7 @@ const Mapa = (props) => {
                 {getMarkerFin()} */}
 
                 {getMarkerInicio()}
-                <MarkerAmbulancia />
+                <MarkerAmbulancia state={props.state} />
                 {/* {getPosicionConductor()} */}
 
                 <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
