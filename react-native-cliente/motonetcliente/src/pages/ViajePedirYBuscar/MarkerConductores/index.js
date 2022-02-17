@@ -125,11 +125,13 @@ const MarkerConductores = (props) => {
         <Marker.Animated
             ref={marker => { _marker = marker }}
             coordinate={MarkerRegion}
+            flat={true}
+            rotation={props.data?.deegre}
         // anchor={{ x: -1, y: -0.5 }}
         >
             <Animated.View style={{
-                width: 50,
-                height: 50,
+                width: 40,
+                height:40,
                 // backgroundColor:"#000",
                 transform: [
                     {
@@ -145,8 +147,8 @@ const MarkerConductores = (props) => {
             }}>
                 <Svg name="Ambulancia"
                     style={{
-                        width: 50,
-                        height: 50,
+                        width: 40,
+                        height: 40,
                         fill: "#fff",
                     }} />
             </Animated.View>

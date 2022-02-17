@@ -43,7 +43,7 @@ class ViajeEsperaPage extends Component {
     }
 
     render() {
-        console.log("bbbb")
+        // console.log("bbbb")
         if (!this.props.state.viajesReducer.data) {
             this.props.navigation.replace("ServicioPage");
             return <View />

@@ -5,7 +5,7 @@ import Svg from '../../Svg';
 import MapaViaje from '../../component/MapaViaje';
 import AppParams from "../../Json"
 import EstadoViaje from './EstadoViaje';
-import { stat } from 'react-native-fs';
+// import { stat } from 'react-native-fs';
 import Geolocation from '@react-native-community/geolocation';
 import STheme from '../../STheme';
 import Boton1 from '../../component/Boton1';
@@ -29,30 +29,30 @@ class InicioViajePage extends Component {
     }
 
     componentDidMount() {
-        Geolocation.getCurrentPosition(
-            (position) => {
-                // if (!this.state.region) {
-                //     return <View />
-                // }
-                // if (data.region.isRender) {
-                //     return <View />
-                // }
-                var region = {
-                    longitude: position.coords.longitude,
-                    latitude: position.coords.latitude,
-                }
-                this.props.dispatch({
-                    component: "locationEmergencia",
-                    type: "Miubicacion",
-                    data: region,
-                });
-            },
-            (error) => {
-                // See error code charts below.
-                console.log(error.code, error.message);
-                throw error;
-            },
-        );
+        // Geolocation.getCurrentPosition(
+        //     (position) => {
+        //         // if (!this.state.region) {
+        //         //     return <View />
+        //         // }
+        //         // if (data.region.isRender) {
+        //         //     return <View />
+        //         // }
+        //         var region = {
+        //             longitude: position.coords.longitude,
+        //             latitude: position.coords.latitude,
+        //         }
+        //         this.props.dispatch({
+        //             component: "locationEmergencia",
+        //             type: "Miubicacion",
+        //             data: region,
+        //         });
+        //     },
+        //     (error) => {
+        //         // See error code charts below.
+        //         console.log(error.code, error.message);
+        //         throw error;
+        //     },
+        // );
     }
 
 
@@ -127,7 +127,7 @@ class InicioViajePage extends Component {
                     // alignItems:"center"
                     marginBottom: 10
                 }}>
-                    <View style={{
+                    {/* <View style={{
                         marginBottom: 5,
                         // backgroundColor:"#ccc"
                     }}>
@@ -137,7 +137,7 @@ class InicioViajePage extends Component {
                         }}>
                             El conductor acepto tu pedido
                         </Text>
-                    </View>
+                    </View> */}
 
                     <View style={{
                         flexDirection: "row",

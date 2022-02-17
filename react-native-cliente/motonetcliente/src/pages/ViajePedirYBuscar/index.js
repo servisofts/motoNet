@@ -74,6 +74,8 @@ class ViajePedirYBuscar extends Component {
                 type: "getAll",
                 estado: "cargando"
             }, true);
+        console.log("getData")
+
             return;
         }
         return data;
@@ -140,7 +142,7 @@ class ViajePedirYBuscar extends Component {
                                     longitude: data.longitude,
                                     latitude: data.latitude
                                 }
-                                return <MarkerConductores latitude={data.latitude} longitude={data.longitude} />
+                                return <MarkerConductores latitude={data.latitude} longitude={data.longitude} data={data} />
                             })
                         }
                         {this.getMarker1()}
