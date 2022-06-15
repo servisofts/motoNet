@@ -14,6 +14,8 @@ import ViajePedirYBuscar from './ViajePedirYBuscar';
 import ViajeEsperaPage from './ViajeEsperaPage';
 import InicioViajePage from './InicioViajePage';
 import HistorialPage from './HistorialPage';
+import Ayuda from './Ayuda';
+import Configuracion from './Configuracion';
 // import ConfirmarPage from './ConfirmarPage';
 import ChatPage from './ChatPage';
 // import EmergenciaEsperaPage from './EmergenciaEsperaPage';
@@ -44,7 +46,9 @@ export const getPages = () => {
         ViajeEsperaPage,
         InicioViajePage,
         ChatPage,
-        HistorialPage
+        HistorialPage,
+        Ayuda, 
+        Configuracion 
 
         // ConfirmarPage,
         // EmergenciaEsperaPage,
