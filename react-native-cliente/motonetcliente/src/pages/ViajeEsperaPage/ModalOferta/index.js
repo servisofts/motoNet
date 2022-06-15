@@ -114,16 +114,8 @@ const ModalOferta = (props) => {
                     alignItems: "center",
                     // backgroundColor: "#ccc"
                 }}>
-                    <View style={{
-                        // flex: 1,
-                        width: 100
-                    }}>
-                        <Boton1
-                            label="Aceptar"
-                            type="1"
-                            onPress={() => { aceptarConductor() }}
-                            cargando={false} />
-                    </View>
+
+
 
                     <View style={{
                         // flex: 1,
@@ -135,6 +127,19 @@ const ModalOferta = (props) => {
                             onPress={() => { buscarOtro() }}
                             cargando={false} />
                     </View>
+
+                    <View style={{
+                        // flex: 1,
+                        width: 100
+                    }}>
+                        <Boton1
+                            label="Aceptar"
+                            type="1"
+                            onPress={() => { aceptarConductor() }}
+                            cargando={false} />
+                    </View>
+
+
 
                 </View>
             </View>
