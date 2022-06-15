@@ -178,8 +178,8 @@ class SSSession {
         this.socket.write(JSON.stringify(mensaje) + "\n");
         if (isDispatch) {
             this.store.dispatch(mensaje);
-            this.hiloTimeOut(mensaje);
         };
+        this.hiloTimeOut(mensaje);
 
     }
     getConfig() {
@@ -349,7 +349,7 @@ class SSSession {
 }
 const Log = (mensaje) => {
     if (DEBUG) {
-        console.log("\x1b[34m" + "SSSocketNative::SSSession:: " , mensaje ,+ "\x1b[39m");
+        console.log("\x1b[34m" + "SSSocketNative::SSSession:: ", mensaje, + "\x1b[39m");
     }
 }
 export default SSSession;

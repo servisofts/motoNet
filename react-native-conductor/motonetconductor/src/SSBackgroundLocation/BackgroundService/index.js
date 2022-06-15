@@ -182,7 +182,7 @@ class BackgroundService {
                     data: this.location,
                     id: "httpSession",
                 };
-                if (new Date().getTime() - this.lastSend > 2000) {
+                if (new Date().getTime() - this.lastSend > 750) {
                     this.lastSend = new Date().getTime();
                     this.startHiloReSend();
                     HttpConection.send(locationToServer, false);

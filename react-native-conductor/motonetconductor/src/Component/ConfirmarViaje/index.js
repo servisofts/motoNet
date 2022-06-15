@@ -10,12 +10,14 @@ import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import RutaViaje from './RutaViaje';
 import SThread from '../../SThread';
 import moment from 'moment';
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
 var mapa = false;
 const ConfirmarViaje = (props) => {
     const [isRedirect, setRedirect] = React.useState(false);
     const [precio, setPrecio] = React.useState(0)
+    const [state, setState] = React.useState({});
 
-    const delay = ms => new Promise(res => setTimeout(res, ms));
 
     var datos;
     if (!props.state.ViajeReducer.data) {
@@ -37,9 +39,9 @@ const ConfirmarViaje = (props) => {
             switch (objMovimiento.tipo) {
                 case "inicio_busqueda":
                     if (!precio) {
-                        if(objMovimiento.costo.monto == 0){
+                        if (objMovimiento.costo.monto == 0) {
                             setPrecio(1)
-                        }else{
+                        } else {
                             setPrecio(objMovimiento.costo.monto)
                         }
                     }
@@ -59,9 +61,11 @@ const ConfirmarViaje = (props) => {
         if (viaje.movimientos["notifico_conductor"]) {
             if (!viaje.movimientos["negociacion_conductor"]) {
                 var tiempoPermitido = viaje.parametros["Tiempo permitido para aceptar viaje conductor"]
-                var tiempo = moment(viaje.movimientos["notifico_conductor"].fecha_on)
+                var tiempo = moment(new Date(viaje.movimientos["notifico_conductor"].fecha_on))
                 var actual = moment(new Date())
+                console.log(tiempo.toISOString());
                 var transcurrido = actual.diff(tiempo);
+                console.log(transcurrido);
                 if (transcurrido > (tiempoPermitido * 1000)) {
                     console.log("LA NOTIFICACION VENCIO");
                     props.dispatch({
@@ -73,7 +77,8 @@ const ConfirmarViaje = (props) => {
                 }
             } else {
                 var tiempoPermitido = viaje.parametros["Tiempo permitido para aceptar oferta cliente"]
-                var tiempo = moment(viaje.movimientos["negociacion_conductor"].fecha_on)
+                var tiempo = moment(new Date(viaje.movimientos["negociacion_conductor"].fecha_on))
+                
                 var actual = moment(new Date())
                 var transcurrido = actual.diff(tiempo);
                 if (transcurrido > (tiempoPermitido * 1000)) {
@@ -190,6 +195,12 @@ const ConfirmarViaje = (props) => {
         />
         )
     }
+
+    const hilo = async () => {
+        await delay(1000);
+        setState({...state});
+    }
+    //hilo();
     return (
         <View style={{
             position: "absolute",

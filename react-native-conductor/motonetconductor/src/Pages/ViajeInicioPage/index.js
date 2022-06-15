@@ -55,7 +55,7 @@ const ViajeInicioPage = (props) => {
     // console.log(props.navigation)
 
     const getViajeHilo = async () => {
-        new SThread(30000, "hiloViaje", false).start(() => {
+        new SThread(10000, "hiloViaje", false).start(() => {
             if (!props.state.ViajeReducer.data) {
                 return;
             }

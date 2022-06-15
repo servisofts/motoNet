@@ -179,8 +179,9 @@ class SSSession {
         this.socket.write(JSON.stringify(mensaje) + "\n");
         if (isDispatch) {
             this.store.dispatch(mensaje);
-            this.hiloTimeOut(mensaje);
         };
+        this.hiloTimeOut(mensaje);
+
     }
     getConfig() {
         return this.config;
