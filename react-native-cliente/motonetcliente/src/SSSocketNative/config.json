@@ -1,7 +1,7 @@
 {
     "motonet": {
         "__ip": "204.93.216.182",
-        "_ip": "192.168.3.2",
+        "_ip": "192.168.3.7",
         "ip": "motonet.servisofts.com",
         "puerto": 10004,
         "timeReconect": 3000,

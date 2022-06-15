@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, Animated, Dimensions, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
 import STheme from '../../../STheme';
 import Svg from '../../../Svg';
 import BuscardorNuevo from '../../../component/BuscardorNuevo';
 
-class BarraSuperiorTransporte extends Component {
+class BarraSuperiorMensajeria extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -23,15 +24,6 @@ class BarraSuperiorTransporte extends Component {
         this.startAnimation();
     }
 
-    getDirecciones() {
-        var dir = this.direccion.getValue();
-        var dir2 = this.direccion2.getValue();
-        return {
-            inicio: dir,
-            destino: dir2,
-        }
-    }
-
     getTitle(text) {
         var text = text
         if (this.props.title) {
@@ -48,7 +40,7 @@ class BarraSuperiorTransporte extends Component {
         return (
             <Animated.View style={{
                 width: "100%",
-                height: 150,
+                height: 50,
                 flexDirection: "row",
                 // backgroundColor: "#fff",
                 transform: [
@@ -77,7 +69,6 @@ class BarraSuperiorTransporte extends Component {
                             height: "100%",
                             justifyContent: "center",
                             alignItems: "center",
-                            marginLeft: 8
                         }}
                             activeOpacity={0.9}
                             onPress={this.props.goBack}>
@@ -96,58 +87,24 @@ class BarraSuperiorTransporte extends Component {
                         }}>
                             {this.getTitle("Barra")}
                         </View>
-                        {/* <TouchableOpacity style={{
-                            width: 150,
-                            // backgroundColor:"#000",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            flexDirection: "row",
-                        }} onPress={() => {
-                            var dir = this.direccion.getValue();
-                            this.props.pedir(dir);
-                        }}>
-                            <Text style={{
-                                color: "#fff",
-                                marginRight: 4,
-                                fontWeight: "bold"
-                            }}>Solicitar servicio</Text>
-                            <Svg resource={require("../../../img/addicon.svg")} style={{
-                                width: 20,
-                                height: 20,
-                            }} />
-                        </TouchableOpacity> */}
+                   
                     </View>
 
-                    <View style={{
+                    {/* <View style={{
                         justifyContent: "center",
                         flex: 1,
                         backgroundColor: STheme.color.background
                     }}>
-                        <BuscardorNuevo
-                            ref={(ref) => { this.direccion = ref }}
-                            navigation={this.props.navigation} label={"¿Punto de Recogida?"}
-                            icon={"MarkerW"}
-                            onChange={(direccion) => {
-                                this.props.onChangeDir1(direccion);
-                            }}
-                        />
-                        <View style={{
-                            height: 10,
-                        }}></View>
-                        <BuscardorNuevo
-                            ref={(ref) => { this.direccion2 = ref }}
-                            navigation={this.props.navigation} label={"Destino"}
-                            icon={"Pointer"}
-                            onChange={(direccion) => {
-                                this.props.onChangeDir2(direccion);
-                            }}
-                        />
+                        <BuscardorNuevo navigation={this.props.navigation} label={"Donde llevaremos el encargo"} />
                     </View>
-
+ */}
                 </View>
 
             </Animated.View>
         );
     }
 }
-export default BarraSuperiorTransporte;
+const initStates = (state) => {
+    return { state }
+};
+export default connect(initStates)(BarraSuperiorMensajeria);

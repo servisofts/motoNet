@@ -216,8 +216,8 @@ class NaviDrawer2 extends Component {
                                 {this.itemMenu({ title: "Delivery", url: "PedidosRegistroPage", icon: require("../../img/menu/delivery.svg") })}
                                 {this.itemMenu({ title: "Mensajería", url: "MensajeriaRegistroPage", icon: require("../../img/menu/mensajeria.svg") })}
                                 {this.itemMenu({ title: "Mis Viajes", url: "HistorialPage", icon: require("../../img/menu/transporte.svg") })}
-                                {this.itemMenu({ title: "Ayuda", url: "", icon: require("../../img/menu/ayuda.svg") })}
-                                {this.itemMenu({ title: "Configuración", url: "", icon: require("../../img/menu/configuracion.svg") })}
+                                {this.itemMenu({ title: "Ayuda", url: "Ayuda", icon: require("../../img/menu/ayuda.svg") })}
+                                {this.itemMenu({ title: "Configuración", url: "Configuracion", icon: require("../../img/menu/configuracion.svg") })}
                             </View>
                         </Animated.View>
                     </TouchableWithoutFeedback>
