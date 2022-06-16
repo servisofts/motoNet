@@ -5,6 +5,9 @@ import { connect } from 'react-redux';
 import MarkerAmbulancia from './MarkerAmbulancia';
 import RutaViaje from "./RutaViaje";
 import Boton1 from '../Boton1';
+import Svg from '../../Svg';
+// import Svg from 'react-native-svg';
+// import Svg from '../../../Svg';
 
 const delay = ms => new Promise(res => setTimeout(res, ms));
 var mapa = false;
@@ -70,6 +73,8 @@ const Mapa = (props) => {
         )
     }
 
+
+
     const zoomin = (obj) => {
         // obj = currentPos;
         if (!mapa) {
@@ -112,8 +117,6 @@ const Mapa = (props) => {
 
     const hilo = async () => {
         await delay(1000);
-        // setState({ ...state });
-        // console.log("hola");
         fitCordinates(posicionar)
     }
 
@@ -126,20 +129,18 @@ const Mapa = (props) => {
             paddingBottom: 200
         }}>
             <MapView
-                // showsUserLocation={true}
+                showsUserLocation={true}
 
                 style={{
                     flex: 1,
                     width: '100%',
                     height: "100%",
                 }}
-                // ref={map => { mapa = map }}
-                // showsUserLocation={true}
-                ref={map => { mapa = map }}
 
+                ref={map => { mapa = map }}
                 initialRegion={data.region}>
-                {/* {getMarkerOrigen()}
-                {getMarkerFin()} */}
+                {/* {getMarkerOrigen()} */}
+                {/* {getMarkerFin()}s */}
 
                 {getMarkerInicio()}
                 <MarkerAmbulancia state={props.state} />
@@ -149,12 +150,25 @@ const Mapa = (props) => {
             </MapView >
 
 
-            <View style={{ position: "absolute", top: 200, right: 20, }}>
-                <Boton1 type="1" label="alva" style={{ backgroundColor: "blue", color: "blue" }}
-                    onPress={() =>
-                        fitCordinates(posicionar)
-                    }
-                />
+            <View style={{ position: "absolute", top: 400, right: 20 }}>
+                <View style={{
+                    height: 50,
+                    borderRadius: 50,
+                    width: 50,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "red",
+                }}>
+
+                    <TouchableOpacity style={{ width: "75%", height: "75%", justifyContent: "center", alignItems: "center", }}
+                        onPress={() => fitCordinates(posicionar)}>
+                        <Svg name={"Pointer"} style={{ width: "100%", height: "100%", fill: "#fff" }} />
+
+                    </TouchableOpacity>
+
+
+         
+                </View>
             </View>
 
         </View>
