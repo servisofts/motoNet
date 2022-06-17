@@ -81,6 +81,7 @@ class InicioViajePage extends Component {
                                 key_viaje: this.props.state.viajesReducer.data.key,
                                 estado: "cargando"
                             }, true);
+                            //this.props.navigation.replace("CargaPage");
                             return <View />
                         }
                     }
@@ -95,6 +96,174 @@ class InicioViajePage extends Component {
             abrirModal: false
         })
         return <View />
+    }
+
+
+    infoConductor() {
+        return (
+            <View style={{
+                flex: 1,
+                margin: 10,
+            }}>
+                <View style={{
+                    // flex: 1,
+                    // justifyContent:"center",
+                    // alignItems:"center"
+                    marginBottom: 10
+                }}>
+                    {/* <View style={{
+                        marginBottom: 5,
+                        // backgroundColor:"#ccc"
+                    }}>
+                        <Text style={{
+                            color: STheme.color.textb,
+                            fontSize: 14, fontWeight: 'bold',
+                        }}>
+                            El conductor acepto tu pedido
+                        </Text>
+                    </View> */}
+
+                    <View style={{
+                        flexDirection: "row",
+                        // backgroundColor: "#ccc"
+                    }}>
+                        <View style={{
+                            flex: 1,
+                            justifyContent: "center",
+                            // alignItems: "center",
+                        }}>
+                            <EstadoViaje />
+                        </View>
+
+                        <View style={{
+                            flex: 0.5,
+                            justifyContent: "center",
+                            alignItems: "center",
+                        }}>
+                            <Boton1 type="1"
+                                label="Chatsss"
+                                cargando={false}
+                                // cargando={props.state.viajesReducer.estado == "cargando"}
+                                onPress={() => this.props.navigation.navigate("ChatPage")}
+                            />
+                        </View>
+                    </View>
+                </View>
+
+                <View style={{
+                    width: "100%",
+                    height: 1.5,
+                    backgroundColor: "#ccc"
+                }}>
+                </View>
+
+                <View style={{
+                    flex: 1,
+                    width: "100%",
+                    height: "100%",
+                    // backgroundColor: "#ccc"
+                }}>
+                    <View style={{
+                        width: "100%",
+                        justifyContent: "center",
+                        // alignItems: "center",
+                        // backgroundColor: "#000"
+                    }}>
+                        <View style={{
+                            flexDirection: "row"
+                        }}>
+                            <View style={{
+                                backgroundColor: "#ccc",
+                                width: 60,
+                                height: 60,
+                                borderRadius: 100,
+                                overflow: "hidden",
+                                margin: 10
+                            }}>
+                                {this.props.state.imageReducer.getImage(AppParams.urlImages + "perfil.png?type=getPerfil&key_usuario=" + this.props.state.viajesReducer.data.key_conductor, {
+                                })}
+                            </View>
+                            <View style={{
+                                // backgroundColor: "#ccc",
+                                width: "100%",
+                                justifyContent: "center"
+                            }}>
+                                <Text style={{
+                                    color: "#000"
+                                }}>{dataCondutor["Nombres"].dato} {dataCondutor["Apellidos"].dato}</Text>
+                                {/* }}>sds</Text> */}
+                                <TouchableOpacity style={{
+                                    flexDirection: "row",
+                                    alignItems: "center"
+                                }} onPress={() => {
+                                    this.setState({ abrirModal: true })
+                                }}>
+                                    <Text style={{
+                                        fontWeight: "bold",
+                                        color: STheme.color.background
+                                    }}>Ver perfil  </Text>
+                                    <Svg name={"Rightarrow"}
+                                        style={{
+                                            width: 15,
+                                            height: 15,
+                                            fill: STheme.color.background
+                                        }} />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+
+                        {this.props.state.viajesReducer.data.tipo_viaje.descripcion == "Pedido" ?
+                            <View style={{
+                                // flex: 0,
+                                justifyContent: "center",
+                                alignItems: "center",
+                            }}>
+                                <Boton1 type="1"
+                                    label="Ver Productos"
+                                    cargando={false}
+                                    // cargando={props.state.viajesReducer.estado == "cargando"}
+                                    onPress={() => {
+                                        this.setState({ abrirModalProducto: true })
+                                    }}
+                                />
+                            </View>
+                            : <View style={{
+                            }}>
+                                {/*  <TouchableOpacity style={{
+                                    height: 40,
+                                    width: "100%",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    backgroundColor: "#f3f3fd",
+                                    flexDirection: "row",
+                                }}
+                                    onPress={() => {
+                                        // props.state.locationGoogleMapReducer.route = true;
+                                        // props.setVentanaSelect("tipoDeViaje")
+                                        return <View />
+                                    }}>
+                                    <Svg resource={require("../../img/relojtestimado.svg")} style={{
+                                        width: 20,
+                                        height: 20,
+                                    }} />
+                                    <Text style={{
+                                        marginStart: 8,
+                                    }}>
+                                        El conductor acepto tu pedido llegara en
+                                    </Text>
+                                    <Text style={{
+                                        color: "#000",
+                                        fontWeight: "bold"
+                                    }}> 5 min</Text>
+                                </TouchableOpacity> */}
+                            </View>
+                        }
+
+
+                    </View>
+                </View>
+            </View >
+        )
     }
 
 
@@ -123,17 +292,31 @@ class InicioViajePage extends Component {
                 margin: 10,
             }}>
                 <View style={{
-
+                    // flex: 1,
+                    // justifyContent:"center",
+                    // alignItems:"center"
                     marginBottom: 10
                 }}>
-
+                    {/* <View style={{
+                        marginBottom: 5,
+                        // backgroundColor:"#ccc"
+                    }}>
+                        <Text style={{
+                            color: STheme.color.textb,
+                            fontSize: 14, fontWeight: 'bold',
+                        }}>
+                            El conductor acepto tu pedido
+                        </Text>
+                    </View> */}
 
                     <View style={{
                         flexDirection: "row",
+                        // backgroundColor: "#ccc"
                     }}>
                         <View style={{
                             flex: 1,
                             justifyContent: "center",
+                            // alignItems: "center",
                         }}>
                             <EstadoViaje />
                         </View>
@@ -144,8 +327,9 @@ class InicioViajePage extends Component {
                             alignItems: "center",
                         }}>
                             <Boton1 type="1"
-                                label="Chatsssssssss"
+                                label="Chatsss"
                                 cargando={false}
+                                // cargando={props.state.viajesReducer.estado == "cargando"}
                                 onPress={() => this.props.navigation.navigate("ChatPage")}
                             />
                         </View>
@@ -163,10 +347,13 @@ class InicioViajePage extends Component {
                     flex: 1,
                     width: "100%",
                     height: "100%",
+                    // backgroundColor: "#ccc"
                 }}>
                     <View style={{
                         width: "100%",
                         justifyContent: "center",
+                        // alignItems: "center",
+                        // backgroundColor: "#000"
                     }}>
                         <View style={{
                             flexDirection: "row"
@@ -183,12 +370,14 @@ class InicioViajePage extends Component {
                                 })}
                             </View>
                             <View style={{
+                                // backgroundColor: "#ccc",
                                 width: "100%",
                                 justifyContent: "center"
                             }}>
                                 <Text style={{
                                     color: "#000"
                                 }}>{dataCondutor["Nombres"].dato} {dataCondutor["Apellidos"].dato}</Text>
+                                {/* }}>sds</Text> */}
                                 <TouchableOpacity style={{
                                     flexDirection: "row",
                                     alignItems: "center"
@@ -211,12 +400,14 @@ class InicioViajePage extends Component {
 
                         {this.props.state.viajesReducer.data.tipo_viaje.descripcion == "Pedido" ?
                             <View style={{
+                                // flex: 0,
                                 justifyContent: "center",
                                 alignItems: "center",
                             }}>
                                 <Boton1 type="1"
                                     label="Ver Productos"
                                     cargando={false}
+                                    // cargando={props.state.viajesReducer.estado == "cargando"}
                                     onPress={() => {
                                         this.setState({ abrirModalProducto: true })
                                     }}
@@ -224,6 +415,33 @@ class InicioViajePage extends Component {
                             </View>
                             : <View style={{
                             }}>
+                                {/*  <TouchableOpacity style={{
+                                    height: 40,
+                                    width: "100%",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    backgroundColor: "#f3f3fd",
+                                    flexDirection: "row",
+                                }}
+                                    onPress={() => {
+                                        // props.state.locationGoogleMapReducer.route = true;
+                                        // props.setVentanaSelect("tipoDeViaje")
+                                        return <View />
+                                    }}>
+                                    <Svg resource={require("../../img/relojtestimado.svg")} style={{
+                                        width: 20,
+                                        height: 20,
+                                    }} />
+                                    <Text style={{
+                                        marginStart: 8,
+                                    }}>
+                                        El conductor acepto tu pedido llegara en
+                                    </Text>
+                                    <Text style={{
+                                        color: "#000",
+                                        fontWeight: "bold"
+                                    }}> 5 min</Text>
+                                </TouchableOpacity> */}
                             </View>
                         }
 
@@ -257,12 +475,14 @@ class InicioViajePage extends Component {
     render() {
 
         if (this.props.state.viajesReducer.estado == "exito" && this.props.state.viajesReducer.type == "calificar") {
+            // console.log(this.props.state.viajesReducer.data)
             this.props.navigation.replace("CargaPage");
             this.props.state.viajesReducer.data = false
             return <View />
         }
 
         if (this.props.state.viajesReducer.data.movimientos["cancelo_viaje"]) {
+            // console.log(this.props.state.viajesReducer.data)
             this.props.navigation.replace("CargaPage");
             this.props.state.viajesReducer.data = false
             return <View />
@@ -284,10 +504,12 @@ class InicioViajePage extends Component {
                     <View style={{
                         position: "absolute",
                         width: "100%",
+                        // height: Dimensions.get('window').height * 0.3,
                         height: 220,
                         borderTopRightRadius: 20,
                         borderTopLeftRadius: 20,
                         backgroundColor: "#fff",
+                        // borderColor: "#ccc",
                         flex: 1,
                         bottom: 0
                     }}>
@@ -303,19 +525,6 @@ class InicioViajePage extends Component {
                     {this.detalleProducto()}
 
                 </View >
-
-                {/* <View style={{
-                    position: "absolute",
-                    top: 200, 
-                    right: 20,
-
-                }}>
-                    <Boton1 type="1" label="alva" style={{ backgroundColor: "blue", color: "blue" }}
-                        onPress={() =>
-                            alert("hola")
-                        }
-                    />
-                </View> */}
             </>
         )
     }

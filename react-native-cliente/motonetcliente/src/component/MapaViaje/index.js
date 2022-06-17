@@ -3,9 +3,14 @@ import { View, TouchableOpacity, Text, DatePickerIOS, Animated } from 'react-nat
 import MapView, { Marker } from 'react-native-maps';
 import { connect } from 'react-redux';
 import MarkerAmbulancia from './MarkerAmbulancia';
-import RutaViaje from "./RutaViaje"
+import RutaViaje from "./RutaViaje";
+import Boton1 from '../Boton1';
+import Svg from '../../Svg';
+// import Svg from 'react-native-svg';
+// import Svg from '../../../Svg';
 
-var mapa;
+const delay = ms => new Promise(res => setTimeout(res, ms));
+var mapa = false;
 
 const Mapa = (props) => {
     const [data, setdata] = React.useState({
@@ -19,9 +24,7 @@ const Mapa = (props) => {
         origen: false,
         ubicacionActual: false
     })
-
     // console.log(props.state.viajesReducer.data)
-
     // var pos = props.state.locationGoogleMapReducer.region;
     var pos = props.state.viajesReducer.data.direccion_inicio;
 
@@ -38,6 +41,7 @@ const Mapa = (props) => {
         }
         return <View />
     }
+
     const getMarkerInicio = () => {
         // if (!props.state.emergenciaReducer.data) {
         //     return <View />
@@ -69,6 +73,55 @@ const Mapa = (props) => {
         )
     }
 
+
+
+    const zoomin = (obj) => {
+        // obj = currentPos;
+        if (!mapa) {
+            return;
+        }
+        var pos = {
+            latitude: obj.latitude,
+            longitude: obj.longitude,
+            latitudeDelta: 0.001,
+            longitudeDelta: 0.001
+        }
+        mapa.animateToRegion(pos, 2000);
+        // setZoom(true);
+        return <View />
+    }
+
+    const fitCordinates = (pos) => {
+        if (!mapa) {
+            return;
+        }
+        // aqui es donde se va a hacer el zoom
+        mapa.fitToCoordinates(pos, {
+            edgePadding: {
+                top: 100,
+                right: 100,
+                bottom: 100,
+                left: 100,
+            }
+        })
+    }
+
+
+    const _clienteOrigen = props.state.viajesReducer.data.direccion_inicio;
+    const _clienteDestino = props.state.viajesReducer.data.direccion_fin;
+    const _conductorUbicacion = props.state.posicionConductorReducer.posicion;
+    console.log("origen ", _clienteOrigen.latitude, _clienteOrigen.longitude);
+    console.log("destino ", _clienteDestino.latitude, _clienteDestino.longitude);
+    console.log("conductor ", _conductorUbicacion.latitude, _conductorUbicacion.longitude);
+    var posicionar = [{ latitude: _clienteOrigen.latitude, longitude: _clienteOrigen.longitude }, { latitude: _conductorUbicacion.latitude, longitude: _conductorUbicacion.longitude }];
+
+    const hilo = async () => {
+        await delay(1000);
+        fitCordinates(posicionar)
+    }
+
+    hilo();
+
     return (
         <View style={{
             width: "100%",
@@ -76,43 +129,48 @@ const Mapa = (props) => {
             paddingBottom: 200
         }}>
             <MapView
+                showsUserLocation={true}
+
                 style={{
                     flex: 1,
                     width: '100%',
                     height: "100%",
                 }}
-                // ref={map => { mapa = map }}
-                // showsUserLocation={true}
+
+                ref={map => { mapa = map }}
                 initialRegion={data.region}>
-                {/* {getMarkerOrigen()}
-                {getMarkerFin()} */}
+                {/* {getMarkerOrigen()} */}
+                {/* {getMarkerFin()}s */}
 
                 {getMarkerInicio()}
                 <MarkerAmbulancia state={props.state} />
-                {/* {getPosicionConductor()} */}
 
                 <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
 
             </MapView >
-            {/* <TouchableOpacity
-                style={{
-                    position: "absolute",
-                    bottom: 200,
-                    right: 10
-                }}
-                onPress={() => {
-                    data.region = { isReder: false };
-                    setdata({ ...data })
-                    return <View />
-                }}
-            >
-                <Svg name="Gps"
-                    style={{
-                        width: 50,
-                        height: 50,
-                        fill: "#f00"
-                    }} />
-            </TouchableOpacity> */}
+
+
+            <View style={{ position: "absolute", top: 400, right: 20 }}>
+                <View style={{
+                    height: 50,
+                    borderRadius: 50,
+                    width: 50,
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "red",
+                }}>
+
+                    <TouchableOpacity style={{ width: "75%", height: "75%", justifyContent: "center", alignItems: "center", }}
+                        onPress={() => fitCordinates(posicionar)}>
+                        <Svg name={"Pointer"} style={{ width: "100%", height: "100%", fill: "#fff" }} />
+
+                    </TouchableOpacity>
+
+
+         
+                </View>
+            </View>
+
         </View>
     )
 }

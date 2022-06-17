@@ -46,10 +46,19 @@ const FieldsPerfil = ({ datos, propPat }) => {
 
 
     if (!datos) {
+
+        Text
         // console.log(datos)
         return <Text>No hay datos</Text>
     } else {
         // console.log(datos)
+
+        // datos["Telefono"].dato !=0 ? datos["Telefono"].dato = "777" : datos["Telefono"].dato = "111";
+        
+        // if (!datos["Telefono"].dato || datos["Telefono"].dato.length <= 5) {
+        //     alert("poco numeros")
+        // }
+ 
     }
 
     if (!propPat.state.cabeceraDatoReducer.data[cabecera]) {
@@ -235,6 +244,10 @@ const FieldsPerfil = ({ datos, propPat }) => {
                 <TouchableOpacity style={styles.edit_content} onPress={() => {
                     editarCampo("Telefono");
                 }}>
+                    {/* <Text style={styles.TextCampo}>
+                        {!datos["Nombres"].dato ? "" : datos["Nombres"].dato}
+                    </Text> */}
+
                     <Text style={styles.TextCampo}>{datos["Telefono"].dato}</Text>
                     <Svg resource={require("../../img/edit.svg")} style={{
                         width: 20,
