@@ -6,7 +6,8 @@ import PushNotification from "react-native-push-notification";
 import Svg from '../../Svg';
 import MapView, { Marker } from 'react-native-maps';
 import AppParams from "../../Json/index.json"
-import * as SSBackgroundLocation from '../../SSBackgroundLocation'
+import {SBLocation} from 'servisofts-background-location'
+
 import Boton1 from '../../Component/Boton1';
 
 class EsperandoConfirmacionPage extends Component {
@@ -189,7 +190,7 @@ class EsperandoConfirmacionPage extends Component {
                             AsyncStorage.removeItem(AppParams.storage.usuarioLog)
                             this.props.state.usuarioReducer.usuarioLog = false
                             this.props.state.usuarioReducer.estado = ""
-                            SSBackgroundLocation.getInstance().stop();
+                            SBLocation.stop();
                             // this.props.state.backgroundLocationReducer.close()
                             this.props.navigation.replace("CargaPage")
 

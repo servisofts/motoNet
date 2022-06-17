@@ -30,7 +30,7 @@ public class MainActivity extends ReactActivity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    checkPermission(Manifest.permission.ACCESS_FINE_LOCATION,110);
+   // checkPermission(Manifest.permission.ACCESS_FINE_LOCATION,110);
 
   }
 

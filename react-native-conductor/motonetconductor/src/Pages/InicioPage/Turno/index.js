@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Linking } from 'react-native';
 import STheme from '../../../STheme';
-import * as SSBackgroundLocation from '../../../SSBackgroundLocation';
+import { SBLocation } from 'servisofts-background-location'
+
 import PerfilUsuario from '../PerfilUsuario';
 export default class Turno extends Component {
     constructor(props) {
@@ -9,9 +10,22 @@ export default class Turno extends Component {
         this.state = {
         };
     }
-
+    onLocationChange = (data) => {
+        this.setState({ data: data })
+        if (data.type == "locationChange") {
+            // console.log("location Change listen");
+        } else {
+            // console.log("other listen");
+        }
+    }
+    componentDidMount() {
+        SBLocation.addListener(this.onLocationChange);
+    }
+    componentWillUnmount() {
+        SBLocation.removeListener(this.onLocationChange);
+    }
     render() {
-        var isRun = SSBackgroundLocation.getInstance().isRun();
+        var isRun = SBLocation.connected
         if (!isRun) {
             return (
                 <View style={{
@@ -55,7 +69,16 @@ export default class Turno extends Component {
                         justifyContent: "center",
                         alignItems: "center"
                     }} onPress={() => {
-                        SSBackgroundLocation.getInstance().start();
+                        SBLocation.start({
+                            nombre: "test nombre",
+                            label: "test label",
+                            minTime: 0,
+                            minDistance: 1
+                        }).then(resp => {
+                            console.log("start", resp);
+                        }).catch(err => {
+                            Linking.openSettings();
+                        });
                     }}>
                         <Text>Activarse</Text>
                     </TouchableOpacity>
@@ -63,9 +86,9 @@ export default class Turno extends Component {
                 </View>
             );
         }
-        var location = SSBackgroundLocation.getInstance().location;
+        var location = this.state.data?.data;
         var lastFecha = "Buscando tu ubicacion..."
-        if (location.time) {
+        if (location?.time) {
             lastFecha = new Date(location.time).toLocaleTimeString();
         }
         return (
@@ -93,7 +116,7 @@ export default class Turno extends Component {
                     justifyContent: "center",
                     alignItems: "center"
                 }} onPress={() => {
-                    SSBackgroundLocation.getInstance().stop();
+                    SBLocation.stop();
                 }}>
                     <Text>Desactivarse</Text>
                 </TouchableOpacity>

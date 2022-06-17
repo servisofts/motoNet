@@ -46,7 +46,8 @@ import * as HttpConection from './src/HttpConection'
 import DisconectBarra from './src/Component/DisconectBarra';
 import AppStateChange from './src/AppStateChange';
 // import * as BackgroundLocation from './src/BackgroundLocation'
-import * as SSBackgroundLocation from './src/SSBackgroundLocation';
+// import * as SSBackgroundLocation from './src/SSBackgroundLocation';
+import { SBLocation } from 'servisofts-background-location';
 
 import Styles from './src/Styles';
 import SPopup from './src/SPopup';
@@ -59,12 +60,35 @@ const store = createStore(
 );
 //SERVICIOS 
 // socketCliente.initSocket(store);
+
+const onLocationChange = (action) => {
+  if (action?.type == "locationChange") {
+    action.data.deegre = action.data.rotation;
+    var locationToServer = {
+      component: "backgroundLocation",
+      type: "registro",
+      key_usuario: store.getState().usuarioReducer?.usuarioLog?.key,
+      data: action.data,
+      id: "httpSession",
+    };
+    HttpConection.send(locationToServer, false);
+    console.log(locationToServer)
+  }
+  return true;
+}
+
+SBLocation.initEmitter(onLocationChange)
+
 HttpConection.init(store);
 SSSocketNative.init(store);
 // BackgroundLocation.init(store);
-SSBackgroundLocation.init(store);
+// SSBackgroundLocation.init(store);
 
 SSPushNotification(store)
+
+
+
+
 const Home = createStackNavigator(
   Pages.getPages(),
   {
@@ -116,7 +140,7 @@ class App extends Component {
     console.log("ENTRO COMPONENT DID MOUNT")
     // BackgroundLocation.init(store);
     HttpConection.init(store);
-    SSBackgroundLocation.init(store);
+    // SSBackgroundLocation.init(store);
     SSSocketNative.init(store);
 
   }
@@ -125,7 +149,7 @@ class App extends Component {
     try {
       contenido = <Container />;
     } catch (error) {
-      SSBackgroundLocation.getInstance().stop();
+      // SSBackgroundLocation.getInstance().stop();
     }
     return contenido;
   }

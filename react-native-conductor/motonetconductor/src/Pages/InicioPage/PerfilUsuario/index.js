@@ -3,8 +3,8 @@ import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 import AppParams from '../../../Json';
 import STheme from '../../../STheme';
-import * as SSBackgroundLocation from '../../../SSBackgroundLocation';
 import { SThread } from '../../../SComponent';
+import { SBLocation, Data } from 'servisofts-background-location'
 
 class PerfilUsuario extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ class PerfilUsuario extends Component {
         }
         if (!this.props.state.usuarioReducer.usuarioDatos) {//Cuando no existe Datos de usuario
             if (this.props.state.usuarioReducer.estado == "cargando") {
-                new SThread(2000, "algoUsr",true).start(()=>{
+                new SThread(2000, "algoUsr", true).start(() => {
                     this.props.state.usuarioReducer.estado = "";
                 });
                 return <Text>datos de Usuario No encontrado</Text>
@@ -51,7 +51,7 @@ class PerfilUsuario extends Component {
         })
         if (estados) {
             this.props.state.usuarioReducer.estado = ""
-            SSBackgroundLocation.getInstance().stop();
+            SBLocation.stop();
             this.props.navigation.replace("EsperandoConfirmacionPage");
             return <View />
         }

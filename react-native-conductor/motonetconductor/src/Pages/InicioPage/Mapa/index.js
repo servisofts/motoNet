@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
-import * as SSBackgroundLocation from '../../../SSBackgroundLocation';
+import { SBLocation, Data } from 'servisofts-background-location'
 
 export default class Mapa extends Component {
     constructor(props) {
@@ -12,7 +12,7 @@ export default class Mapa extends Component {
 
     render() {
         if (this.mapa) {
-            var posicionConductor = SSBackgroundLocation.getInstance().location;
+            var posicionConductor = Data.lastLocation
             if (posicionConductor) {
                 if (posicionConductor.latitude != 0 && posicionConductor.longitude != 0) {
                     this.mapa.animateToRegion({
@@ -44,8 +44,8 @@ export default class Mapa extends Component {
                         longitudeDelta: 0.07,
                     }}
                     ref={ref => { this.mapa = ref }}
-                // provider={PROVIDER_GOOGLE}
-                showsUserLocation={true}
+                    // provider={PROVIDER_GOOGLE}
+                    showsUserLocation={true}
                 // showsMyLocationButton={true}
                 >
                 </MapView>

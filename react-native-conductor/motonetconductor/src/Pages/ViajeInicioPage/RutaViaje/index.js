@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import { View, StyleSheet } from 'react-native';
 import Svg from '../../../Svg';
 import SThread from '../../../SThread';
-import * as SSBackgroundLocation from '../../../SSBackgroundLocation';
-
+import { SBLocation, Data } from 'servisofts-background-location'
 const delay = ms => new Promise(res => setTimeout(res, ms));
 let lastSend = 0;
 let lastEstado = "";
@@ -42,8 +41,8 @@ const RutaViaje = (props) => {
         if (timeActual - lastSend < 10000 && !preventAwait) {
             return;
         }
-        SSBackgroundLocation.getInstance().location;
-        let ubicacion = props.state.backgroundLocationReducer.data;
+
+        let ubicacion = Data.lastLocation
         if (!ubicacion) {
             return;
         }
@@ -100,7 +99,7 @@ const RutaViaje = (props) => {
         }
     }
     const getPolilyne = () => {
-        var myLocation = SSBackgroundLocation.getInstance().location;
+        var myLocation = Data.lastLocation;
         var inicio = dato.direccion_inicio;
         var fin = dato.direccion_fin;
         var locations = [];
@@ -108,7 +107,7 @@ const RutaViaje = (props) => {
         locations.push(myLocation);
         var locTo = inicio;
         if (movimientos["inicio_viaje_conductor"]) {
-            if(fin){
+            if (fin) {
                 locTo = fin;
             }
         }

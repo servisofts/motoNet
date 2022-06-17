@@ -15,7 +15,7 @@ import AppParams from '../../Json/index.json'
 import DetalleRuta from './DetalleRuta';
 import BarraSuperior from '../../Component/BarraSuperior';
 
-import * as SSBackgroundLocation from '../../SSBackgroundLocation';
+// import * as SSBackgroundLocation from '../../SSBackgroundLocation';
 import SThread from '../../SThread';
 import Boton1 from '../../Component/Boton1';
 import Svg from '../../Svg';
@@ -48,10 +48,10 @@ const ViajeInicioPage = (props) => {
         }
 
     }
-    var isRun = SSBackgroundLocation.getInstance().isRun();
-    if (!isRun) {
-        SSBackgroundLocation.getInstance().start();
-    }
+    // var isRun = SSBackgroundLocation.getInstance().isRun();
+    // if (!isRun) {
+    //     SSBackgroundLocation.getInstance().start();
+    // }
     // console.log(props.navigation)
 
     const getViajeHilo = async () => {
@@ -62,7 +62,7 @@ const ViajeInicioPage = (props) => {
             if (!props.state.ViajeReducer.data["key"]) {
                 return;
             }
-            SSBackgroundLocation.getInstance().sendServer();
+            // SSBackgroundLocation.getInstance().sendServer();
             props.state.socketClienteReducer.sessiones[AppParams.socket.name].send({
                 component: "viaje",
                 type: "getViajeByKeyUsuario",

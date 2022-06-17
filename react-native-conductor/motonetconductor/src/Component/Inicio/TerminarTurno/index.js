@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as SSBackgroundLocation from '../../../SSBackgroundLocation'
+// import * as SSBackgroundLocation from '../../../SSBackgroundLocation'
 
 import { View, TouchableOpacity, Text, StyleSheet, TouchableWithoutFeedback } from 'react-native';
 const TerminarTurno = (props) => {
@@ -14,7 +14,7 @@ const TerminarTurno = (props) => {
         }}>
             <TouchableOpacity
                 onPress={() => {
-                    SSBackgroundLocation.getInstance().stop();
+                    // SSBackgroundLocation.getInstance().stop();
                     // props.state.backgroundLocationReducer.close()
                 }}
                 style={{

@@ -45,9 +45,9 @@
 			</intent-filter>
 		</service>
 
-		<service android:name="com.servisofts.motonetconductor.SSBackgroundLocation.SSBL_Service" android:enabled="true" android:exported="true" />
-		<service android:name="com.servisofts.motonetconductor.SSBackgroundLocation.SSBL_event" android:enabled="true" android:exported="true"/>
-		<receiver android:name="com.servisofts.motonetconductor.SSBackgroundLocation.SSBL_BootUpReceiver"
+		<service android:name="com.servisofts.background.location.SSBL_Service" android:enabled="true" android:exported="true" />
+		<service android:name="com.servisofts.background.location.SSBL_event" android:enabled="true" android:exported="true"/>
+		<receiver android:name="com.servisofts.background.location.SSBL_BootUpReceiver"
 			android:enabled="true"
 			android:permission="android.permission.RECEIVE_BOOT_COMPLETED">
 			<intent-filter>

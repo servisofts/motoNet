@@ -125,6 +125,7 @@ dependencies {
            implementation 'com.google.firebase:firebase-core:16.0.8'
     implementation 'com.google.firebase:firebase-messaging:17.6.0'
           implementation project(':react-native-push-notification')
+        implementation project(':servisofts-background-location')
 ///////////////////////map
    implementation project(':react-native-community-geolocation')
     implementation project(':react-native-image-picker')
