@@ -47,7 +47,7 @@ const Consola = (props) => {
                     {
                         props.state.consoleReducer.data.map((obj, key) => {
                             return (
-                                <Text key >
+                                <Text key={key} >
                                     {obj}
                                 </Text>
                             )

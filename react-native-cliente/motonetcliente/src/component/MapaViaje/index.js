@@ -26,7 +26,7 @@ const Mapa = (props) => {
     })
     // console.log(props.state.viajesReducer.data)
     // var pos = props.state.locationGoogleMapReducer.region;
-    var pos = props.state.viajesReducer.data.direccion_inicio;
+    var pos = props.state.viajesReducer.data?.direccion_inicio;
 
     if (!data.region.isRender) {
         if (pos) {
@@ -107,16 +107,14 @@ const Mapa = (props) => {
     }
 
 
-    const _clienteOrigen = props.state.viajesReducer.data.direccion_inicio;
-    const _clienteDestino = props.state.viajesReducer.data.direccion_fin;
-    const _conductorUbicacion = props.state.posicionConductorReducer.posicion;
-    console.log("origen ", _clienteOrigen.latitude, _clienteOrigen.longitude);
-    console.log("destino ", _clienteDestino.latitude, _clienteDestino.longitude);
-    console.log("conductor ", _conductorUbicacion.latitude, _conductorUbicacion.longitude);
-    var posicionar = [{ latitude: _clienteOrigen.latitude, longitude: _clienteOrigen.longitude }, { latitude: _conductorUbicacion.latitude, longitude: _conductorUbicacion.longitude }];
+   
 
     const hilo = async () => {
         await delay(1000);
+        const _clienteOrigen = props.state.viajesReducer.data?.direccion_inicio;
+        const _clienteDestino = props.state.viajesReducer.data?.direccion_fin;
+        const _conductorUbicacion = props.state.posicionConductorReducer?.posicion;
+        var posicionar = [{ latitude: _clienteOrigen?.latitude, longitude: _clienteOrigen?.longitude }, { latitude: _conductorUbicacion?.latitude, longitude: _conductorUbicacion?.longitude }];
         fitCordinates(posicionar)
     }
 
@@ -130,46 +128,21 @@ const Mapa = (props) => {
         }}>
             <MapView
                 showsUserLocation={true}
-
                 style={{
                     flex: 1,
                     width: '100%',
                     height: "100%",
                 }}
-
                 ref={map => { mapa = map }}
                 initialRegion={data.region}>
                 {/* {getMarkerOrigen()} */}
                 {/* {getMarkerFin()}s */}
-
                 {getMarkerInicio()}
                 <MarkerAmbulancia state={props.state} />
 
                 <RutaViaje ventanaSelect={props.ventanaSelect} setVentanaSelect={props.setVentanaSelect} />
 
             </MapView >
-
-
-            <View style={{ position: "absolute", top: 400, right: 20 }}>
-                <View style={{
-                    height: 50,
-                    borderRadius: 50,
-                    width: 50,
-                    alignItems: "center",
-                    justifyContent: "center",
-                    backgroundColor: "red",
-                }}>
-
-                    <TouchableOpacity style={{ width: "75%", height: "75%", justifyContent: "center", alignItems: "center", }}
-                        onPress={() => fitCordinates(posicionar)}>
-                        <Svg name={"Pointer"} style={{ width: "100%", height: "100%", fill: "#fff" }} />
-
-                    </TouchableOpacity>
-
-
-         
-                </View>
-            </View>
 
         </View>
     )

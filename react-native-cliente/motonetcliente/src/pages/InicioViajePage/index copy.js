@@ -141,7 +141,7 @@ class InicioViajePage extends Component {
                             alignItems: "center",
                         }}>
                             <Boton1 type="1"
-                                label="Chatsss"
+                                label="Chat"
                                 cargando={false}
                                 // cargando={props.state.viajesReducer.estado == "cargando"}
                                 onPress={() => this.props.navigation.navigate("ChatPage")}

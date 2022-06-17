@@ -44,7 +44,7 @@ export default class Mapa extends Component {
                         longitudeDelta: 0.07,
                     }}
                     ref={ref => { this.mapa = ref }}
-                    // provider={PROVIDER_GOOGLE}
+                    provider={PROVIDER_GOOGLE}
                     showsUserLocation={true}
                 // showsMyLocationButton={true}
                 >

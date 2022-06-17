@@ -5,8 +5,8 @@ import Config from './config.json';
 export const init = (_store) => {
     store = _store;
 }
-export const send = (dataSend, isDispatch) => {
-  
+export const send = async (dataSend, isDispatch) => {
+
     var body = new FormData();
     body.append('data', JSON.stringify(dataSend));
     let xhr = new XMLHttpRequest();
@@ -21,7 +21,7 @@ export const send = (dataSend, isDispatch) => {
                 if (isDebug) console.log("HTTPCONECTION = Store no iniciado");
                 store.dispatch(objJson);
             }
-            console.log(xhr.responseText)
+            // console.log(xhr.responseText)
 
         }
     }

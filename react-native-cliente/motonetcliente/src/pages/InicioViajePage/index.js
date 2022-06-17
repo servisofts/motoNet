@@ -144,7 +144,7 @@ class InicioViajePage extends Component {
                             alignItems: "center",
                         }}>
                             <Boton1 type="1"
-                                label="Chatsssssssss"
+                                label="Chat"
                                 cargando={false}
                                 onPress={() => this.props.navigation.navigate("ChatPage")}
                             />
@@ -262,6 +262,12 @@ class InicioViajePage extends Component {
             return <View />
         }
 
+        if (!this.props.state.viajesReducer.data) {
+            return <View />
+        }
+        if (!this.props.state.viajesReducer.data.movimientos) {
+            return <View />
+        }
         if (this.props.state.viajesReducer.data.movimientos["cancelo_viaje"]) {
             this.props.navigation.replace("CargaPage");
             this.props.state.viajesReducer.data = false
@@ -270,7 +276,7 @@ class InicioViajePage extends Component {
 
         return (
             <>
-                <BarraViaje title={this.props.state.viajesReducer.data.tipo_viaje.descripcion} onpress={() => this.cancelar()} />
+                <BarraViaje title={this.props.state.viajesReducer.data?.tipo_viaje?.descripcion} onpress={() => this.cancelar()} />
 
                 <View style={{
                     flex: 1,

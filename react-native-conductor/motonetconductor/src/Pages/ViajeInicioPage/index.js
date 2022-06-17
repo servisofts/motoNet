@@ -1,7 +1,7 @@
 import React from 'react';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { connect } from 'react-redux';
-import { View, StyleSheet, TouchableOpacity, Text, AsyncStorage, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, AsyncStorage, Alert, Linking } from 'react-native';
 // import Svg from '../../Svg';
 import RutaViaje from './RutaViaje';
 import EstadoViaje from './EstadoViaje';
@@ -20,6 +20,7 @@ import SThread from '../../SThread';
 import Boton1 from '../../Component/Boton1';
 import Svg from '../../Svg';
 import { SPopup } from '../../SComponent';
+import { SBLocation } from 'servisofts-background-location';
 const delay = ms => new Promise(res => setTimeout(res, ms));
 
 var mapa;
@@ -48,6 +49,18 @@ const ViajeInicioPage = (props) => {
         }
 
     }
+    if (!SBLocation.connected) {
+        SBLocation.start({
+            nombre: "test nombre",
+            label: "test label",
+            minTime: 0,
+            minDistance: 1
+        }).then(resp => {
+            console.log("start", resp);
+        }).catch(err => {
+            Linking.openSettings();
+        });
+    }
     // var isRun = SSBackgroundLocation.getInstance().isRun();
     // if (!isRun) {
     //     SSBackgroundLocation.getInstance().start();
@@ -55,11 +68,14 @@ const ViajeInicioPage = (props) => {
     // console.log(props.navigation)
 
     const getViajeHilo = async () => {
-        new SThread(10000, "hiloViaje", false).start(() => {
+        new SThread(5000, "hiloViaje", false).start(() => {
             if (!props.state.ViajeReducer.data) {
                 return;
             }
             if (!props.state.ViajeReducer.data["key"]) {
+                return;
+            }
+            if (!props.state.ViajeReducer.data.estado == 0) {
                 return;
             }
             // SSBackgroundLocation.getInstance().sendServer();

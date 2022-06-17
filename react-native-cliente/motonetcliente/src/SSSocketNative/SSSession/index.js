@@ -203,6 +203,7 @@ class SSSession {
             var datajson = false;
             try {
                 datajson = JSON.parse(mensajeFinal);
+                Log(datajson);
             } catch (e) {
                 Log("ON MENSAJE ERROR:: " + e)
                 Log("DATA:: " + mensajeFinal)

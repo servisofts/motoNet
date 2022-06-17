@@ -10,8 +10,6 @@ import AppParams from "../../../../Json"
 
 const ComponentDetalleCalificar = (props) => {
 
-    console.log("edson " + JSON.stringify(props.data))
-
     const [obj, setObj] = React.useState({
         sugerencia: {
             value: "",

@@ -42,12 +42,15 @@ const insertInReducer = () => {
                     return;
                 }
             }
+            open(key);
+
             states.socketClienteReducer.sessiones[key] = {
                 isOpen: false,
                 estado: "desconectado",
                 send: (json) => {
                     //EL SOCKECT ESTA CERRADO 
                     Log("Error al enviar datos no existe socket");
+                    open(key)
                 }
             }
             return;

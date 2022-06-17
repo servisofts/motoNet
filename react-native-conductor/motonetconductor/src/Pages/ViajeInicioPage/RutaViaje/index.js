@@ -111,7 +111,7 @@ const RutaViaje = (props) => {
                 locTo = fin;
             }
         }
-        var circunferencia = arco_a_partir_de_2_putos({ x1: myLocation.latitude, y1: myLocation.longitude, x2: locTo.latitude, y2: locTo.longitude });
+        // var circunferencia = arco_a_partir_de_2_putos({ x1: myLocation.latitude, y1: myLocation.longitude, x2: locTo.latitude, y2: locTo.longitude });
 
         locations.push(locTo);
 
@@ -127,8 +127,9 @@ const RutaViaje = (props) => {
     var MARKERS = ["direccion_inicio", "direccion_fin"].map((index) => {
         var obj = dato[index];
         if (!obj) {
-            return <View />
+            return null;
         }
+        if (!obj.latitude || !obj.longitude) return;
         var json = { latitude: obj.latitude, longitude: obj.longitude };
         return (
             <Marker
@@ -143,7 +144,7 @@ const RutaViaje = (props) => {
     })
     return <>
         {MARKERS}
-        {getPolilyne()}
+        {/* {getPolilyne()} */}
     </>
 
 }

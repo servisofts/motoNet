@@ -30,6 +30,10 @@ public class ViajeHilo {
         VIAJES_EN_CURSO.get(objViaje.getString("key")).setViaje(objViaje);
     }
 
+    public int getParametro(JSONObject viaje, String key) {
+        return viaje.getJSONObject("parametros").getInt(key);
+    }
+
     public static void notificarLocationChange(JSONObject objConductor) {
         JSONObject viaje = objConductor.getJSONObject("viaje");
 
@@ -44,6 +48,9 @@ public class ViajeHilo {
         try {
             JSONObject obj = Viaje.getViajeFormat(viaje.getString("key"));
             JSONObject movimientos = obj.getJSONObject("movimientos");
+            if (!movimientos.has(Viaje.TIPO_INICIO_VIAJE)) {
+                return;
+            }
             if (!movimientos.has(Viaje.TIPO_CONDUCTOR_CERCA)) {
 
                 JSONObject direccionInicio = obj.getJSONObject("direccion_inicio");
@@ -52,7 +59,10 @@ public class ViajeHilo {
                 double latitude_c = objConductor.getDouble("latitude");
                 double longitude_c = objConductor.getDouble("longitude");
                 double distancia = LatLng.distanciaCoord(latitude_g, longitude_g, latitude_c, longitude_c);
-                if (distancia < 100) {
+                int distanciaMinima = obj.getJSONObject("parametros").getInt("Distancia para notificar conductor cerca");
+                System.out.println("Distancia: " + distancia);
+                System.out.println("Distancia minima: " + distanciaMinima);
+                if (distancia < distanciaMinima) {
                     Viaje.nuevoMovimientoViaje(obj.getString("key"), Viaje.TIPO_CONDUCTOR_CERCA,
                             obj.getString("key_conductor"));
                     obj = Viaje.getViajeFormat(viaje.getString("key"));

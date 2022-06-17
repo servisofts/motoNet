@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, TouchableOpacity, Animated } from 'react-native';
+import { Text, View, Linking, TouchableOpacity, Animated } from 'react-native';
 import ConfirmarViaje from '../../Component/ConfirmarViaje';
-
+import { SBLocation } from 'servisofts-background-location';
 class ConfirmarPage extends Component {
     static navigationOptions = ({ navigation }) => (
         navigation.state.prop ? ({ ...navigation.state.prop }) : {}
@@ -15,10 +15,17 @@ class ConfirmarPage extends Component {
         })
     }
     render() {
-        if (this.props.state.backgroundLocationReducer.open) {
-            if (!this.props.state.backgroundLocationReducer.isOpen) {
-                this.props.state.backgroundLocationReducer.open()
-            }
+        if (!SBLocation.connected) {
+            SBLocation.start({
+                nombre: "test nombre",
+                label: "test label",
+                minTime: 0,
+                minDistance: 1
+            }).then(resp => {
+                console.log("start", resp);
+            }).catch(err => {
+                Linking.openSettings();
+            });
         }
         return (
             <View style={{

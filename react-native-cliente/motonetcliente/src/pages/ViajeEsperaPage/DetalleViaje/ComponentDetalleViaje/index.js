@@ -12,8 +12,6 @@ const ComponentDetalleViaje = (props) => {
 
     // let data = props.tipo_viaje
 
-    console.log("edson " + JSON.stringify(props.data))
-
     const cancelarViaje = () => {
         console.log(props.state.viajesReducer.data)
         var exito = true

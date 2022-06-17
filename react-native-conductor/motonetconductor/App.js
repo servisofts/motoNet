@@ -72,7 +72,6 @@ const onLocationChange = (action) => {
       id: "httpSession",
     };
     HttpConection.send(locationToServer, false);
-    console.log(locationToServer)
   }
   return true;
 }
