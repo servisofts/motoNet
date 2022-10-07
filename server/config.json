@@ -3,26 +3,21 @@
     "socket_client": {
         "servicio": {
             "puerto": 10001,
-            "ip": "192.168.0.4",
+            "ip": "192.168.5.1",
             "cert": {
                 "OU": "servicio",
                 "pem": "servicio.pem"
             }
         },
-        "reconectTime": 5000
+        "reconectTime": 10000
     },
     "files": {
-        "url": "/Users/rickypazd/Documents/GitHub/motoNet/Files/usuario/files/",
-        "url_publicidad": "/Users/rickypazd/Documents/GitHub/motoNet/Files/publicidad/",
-        "pedido": "/Users/rickypazd/Documents/GitHub/motoNet/Files/pedidos/",
-        "paquete": "/Users/rickypazd/Documents/GitHub/motoNet/Files/paquete/"
+        "url": "/u01/servisoftsFiles/motonet/"
     },
     "data_base": {
         "puerto": 5432,
-        "pg_restore": "C:\\Program Files\\PostgreSQL\\12\\bin\\pg_restore.exe",
         "pass": "postgres",
-        "ip": "192.168.0.4",
-        "pg_dump": "C:\\Program Files\\PostgreSQL\\12\\bin\\pg_dump.exe",
+        "ip": "192.168.5.4",
         "bd_name": "servisofts.motonet",
         "user": "postgres"
     },
@@ -32,16 +27,18 @@
         "cert": {
             "ST": "Av Banzer",
             "C": "BO",
-            "E": "ricky.paz.d.97@gmail.com",
+            "E": "servisofts.srl@gmail.com",
             "OU": "motonet",
             "CN": "motonet.servisofts.com",
             "L": "Santa Cruz",
-            "O": "Servisofts SRL"
+            "O": "SERVISOFTS S.R.L."
         },
         "nombre_jks": "servisofts"
     },
-    "socket_server": {
-        "puerto": 10004,
-        "ip": "192.168.0.3"
+    "mail_server": {
+        "host": "smtp.gmail.com",
+        "port": 465,
+        "email": "servisofts.srl@gmail.com",
+        "password": "nyokyefgktmknlxn"
     }
 }
