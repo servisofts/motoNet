@@ -12,50 +12,36 @@ import model.viaje.ViajeStateFactory.ViajeStateType;
 
 public class buscando_conductor extends ViajeState {
 
-    boolean isRun;
-    int timeAllow = 10000;
-
     public buscando_conductor(Viaje viaje, String code) {
         super(viaje, code, "Buscando conductor disponible");
-        JSONObject params = viaje.data.getJSONObject("params");
-        String valor = params.getJSONObject("time_to_accept_driver").getString("valor");
-        this.timeAllow = Integer.parseInt(valor)*1000;
-        this.startThread();
     }
 
-    public void startThread() {
-        this.isRun = true;
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(1000);
-                    JSONArray conductores = SPG.all_array("background_location", "estado > 0" , "fecha_last > now() - interval '1 hour'");
-                    for (int i = 0; i < conductores.length(); i++) {
-                        System.out.println("Notificando a conductor");
-                        JSONObject conductor = conductores.getJSONObject(i);
-                        JSONObject notifi = new JSONObject();
-                        notifi.put("component", "viaje");
-                        notifi.put("type", "solicitar_viaje_conductor");
-                        notifi.put("estado", "exito");
-                        notifi.put("timeAllow", timeAllow);
-                        notifi.put("data", viaje.toJson());
-                        SSServerAbstract.sendUser(notifi, conductor.getString("key"));
-                        Thread.sleep(timeAllow);
-                        if (!isRun)
-                            return;
-                        if (!viaje.state.code.equals(code)) {
-                            return;
-                        }
+    @Override
+    public void run() {
+        try {
+            Thread.sleep(1000);
+            JSONArray keys_conductores_notificados = new JSONArray();
+            JSONArray movimientos = this.viaje.data.getJSONArray("movimientos");
+            movimientos.iterator().forEachRemaining(o -> {
+                JSONObject obj = (JSONObject) o;
+                if (obj.getString("tipo").equals("notificando_conductor")) {
+                    if (!obj.isNull("data")) {
+                        keys_conductores_notificados.put(obj.getJSONObject("data").getString("key"));
                     }
-                    viaje.changeState(ViajeStateType.no_conductor_disponible);
-                } catch (Exception e) {
-                    e.printStackTrace();
                 }
-            };
-        };
-        t.start();
-
+            });
+            JSONArray conductores = SPG.all_array("background_location", "estado > 0",
+                    "fecha_last > now() - interval '3 hour'", "key NOT IN (select * from json_array_elements_text('"
+                            + keys_conductores_notificados.toString() + "'))");
+            if (conductores.length() > 0) {
+                JSONObject conductor = conductores.getJSONObject(0);
+                viaje.changeState(ViajeStateType.notificando_conductor, conductor);
+            } else {
+                viaje.changeState(ViajeStateType.no_conductor_disponible, null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -70,14 +56,17 @@ public class buscando_conductor extends ViajeState {
 
     @Override
     public void cancelar(JSONObject obj) throws Exception {
-        this.viaje.changeState(ViajeStateType.cancelado);
+        this.viaje.changeState(ViajeStateType.cancelado, null);
+    }
+
+    @Override
+    public void cancelar_conductor(JSONObject obj) throws Exception {
+        this.not_permited();
     }
 
     @Override
     public void negociar_conductor(JSONObject obj) throws Exception {
-        this.isRun = false;
-        this.viaje.data.put("key_conductor", obj.getJSONObject("data").getString("key_conductor"));
-        this.viaje.changeState(ViajeStateType.en_negociacion);
+        this.not_permited();
     }
 
     @Override
@@ -89,4 +78,5 @@ public class buscando_conductor extends ViajeState {
     public void denegar_negociacion(JSONObject obj) throws Exception {
         this.not_permited();
     }
+
 }

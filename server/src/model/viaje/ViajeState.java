@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import Component.viaje;
 
-public abstract class ViajeState implements ViajeStateInterface {
+public abstract class ViajeState extends Thread implements ViajeStateInterface{
     public Viaje viaje;
     public String type;
     public String code;
@@ -27,5 +27,10 @@ public abstract class ViajeState implements ViajeStateInterface {
     public void not_permited() throws Exception {
         throw new Exception("Action not permited in state " + this.code);
 
+    }
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        
     }
 }

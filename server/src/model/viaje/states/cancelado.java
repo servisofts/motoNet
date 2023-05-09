@@ -29,6 +29,11 @@ public class cancelado extends ViajeState {
     }
 
     @Override
+    public void cancelar_conductor(JSONObject obj) throws Exception {
+        this.not_permited();
+    }
+
+    @Override
     public void negociar_conductor(JSONObject obj) throws Exception {
         this.not_permited();
     }

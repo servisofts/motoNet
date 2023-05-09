@@ -53,7 +53,7 @@ public class no_registrado extends ViajeState {
             index++;
         }
         this.viaje.syncDB();
-        this.viaje.changeState(ViajeStateType.buscando_conductor);
+        this.viaje.changeState(ViajeStateType.buscando_conductor, null);
 
     }
 
@@ -64,6 +64,11 @@ public class no_registrado extends ViajeState {
 
     @Override
     public void cancelar(JSONObject obj) throws Exception {
+        this.not_permited();
+    }
+
+    @Override
+    public void cancelar_conductor(JSONObject obj) throws Exception {
         this.not_permited();
     }
 

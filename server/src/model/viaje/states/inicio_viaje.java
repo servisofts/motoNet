@@ -28,7 +28,13 @@ public class inicio_viaje extends ViajeState {
 
     @Override
     public void cancelar(JSONObject obj) throws Exception {
-        this.viaje.changeState(ViajeStateType.cancelado);
+        this.viaje.changeState(ViajeStateType.cancelado, null);
+        this.viaje.notifyChange(this.viaje.data.getString("key_conductor"));
+    }
+
+    @Override
+    public void cancelar_conductor(JSONObject obj) throws Exception {
+        this.not_permited();
     }
 
     @Override

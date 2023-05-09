@@ -17,4 +17,6 @@ public interface ViajeStateInterface {
     public void denegar_negociacion(JSONObject obj) throws Exception;
 
     public void cancelar(JSONObject obj) throws Exception;
+
+    public void cancelar_conductor(JSONObject obj) throws Exception;
 }

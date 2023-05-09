@@ -4,7 +4,7 @@ import SSocket from 'servisofts-socket';
 import Model from "../..";
 const STORAGE_KEY = "viaje_item"
 
-type ACTIONS = "registro" | "buscar_conductor" | "negociar_conductor" | "aceptar_negociacion" | "denegar_negociacion" | "cancelar"
+type ACTIONS = "registro" | "buscar_conductor" | "negociar_conductor" | "aceptar_negociacion" | "denegar_negociacion" | "cancelar" | "cancelar_conductor"
 export default class Action extends SAction {
 
 

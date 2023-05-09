@@ -66,6 +66,10 @@ public class Viaje {
         this.initState();
     }
 
+    public JSONObject getUltimoMovimiento() {
+        return this.data.getJSONArray("movimientos").getJSONObject(0);
+    }
+
     public void syncDB() throws Exception {
         this.data = SPG.single_object(VIEW, "key = '" + this.key + "'");
         this.initState();
@@ -82,9 +86,14 @@ public class Viaje {
             }
             this.state = ViajeStateFactory.create(this, ViajeStateType.valueOf(this.data.getString("state")));
         }
+        this.state.start();
     }
 
-    public void notifyChange() throws Exception {
+    public void notifyChange(String key_usuario) throws Exception {
+        notifyChange(new String[] { key_usuario });
+    }
+
+    public void notifyChange(String[] users) throws Exception {
 
         JSONObject notify = new JSONObject();
         notify.put("component", "viaje");
@@ -93,15 +102,18 @@ public class Viaje {
         notify.put("estado", "exito");
         notify.put("data", this.data);
 
-        String key_cliente = this.data.getString("key_usuario");
-        SSServerAbstract.sendUser(notify, key_cliente);
+        // String key_cliente = this.data.getString("key_usuario");
+        for (String key_user : users) {
+            SSServerAbstract.sendUser(notify, key_user);
 
-        if (this.data.has("key_conductor")) {
-            if (!this.data.isNull("key_conductor")) {
-                String key_conductor = this.data.getString("key_conductor");
-                SSServerAbstract.sendUser(notify, key_conductor);
-            }
         }
+        // SSServerAbstract.sendUsers(notify, users);
+
+        // if (this.data.has("key_conductor")) {
+        // if (!this.data.isNull("key_conductor")) {
+        // String key_conductor = this.data.getString("key_conductor");
+        // }
+        // }
 
         System.out.println(
                 "TODO: Notificar por firebase que el viaje cambio para los interezados new state (" + this.state.code
@@ -135,26 +147,33 @@ public class Viaje {
         return obj;
     }
 
-    public void changeState(ViajeStateType state) throws Exception {
+    public void changeState(ViajeStateType state, JSONObject data) throws Exception {
+        if (data == null) {
+            data = new JSONObject();
+        }
         if (this.state.code.equals(state.name())) {
             return;
         }
+        System.out.println("Entro al change state");
+        this.state.interrupt();
         this.state = ViajeStateFactory.create(this, state);
         this.data.put("state", this.state.code);
         SPGConect.editObject("viaje", this.data);
+        addMovimiento(data);
         this.syncDB();
-        addMovimiento();
-        this.notifyChange();
+        this.notifyChange(new String[] { this.data.getString("key_usuario") });
+        this.state.start();
 
     }
 
-    public void addMovimiento() throws SQLException {
+    public void addMovimiento(JSONObject data) throws SQLException {
         JSONObject viaje_movimiento = new JSONObject();
         viaje_movimiento.put("key", SUtil.uuid());
         viaje_movimiento.put("key_viaje", this.key);
         viaje_movimiento.put("tipo", this.state.code);
         viaje_movimiento.put("fecha_on", SUtil.now());
         viaje_movimiento.put("estado", 1);
+        viaje_movimiento.put("data", data);
         SPGConect.insertObject("viaje_movimiento", viaje_movimiento);
     }
 

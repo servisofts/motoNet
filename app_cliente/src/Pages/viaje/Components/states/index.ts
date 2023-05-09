@@ -7,6 +7,7 @@ export default {
     cancelado,
     no_conductor_disponible,
     buscando_conductor,
+    "notificando_conductor":buscando_conductor,
     en_negociacion,
     inicio_viaje
 }

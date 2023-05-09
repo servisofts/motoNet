@@ -28,18 +28,27 @@ public class en_negociacion extends ViajeState {
     }
 
     @Override
+    public void cancelar_conductor(JSONObject obj) throws Exception {
+        this.not_permited();
+    }
+
+    @Override
     public void negociar_conductor(JSONObject obj) throws Exception {
         this.not_permited();
     }
 
     @Override
     public void aceptar_negociacion(JSONObject obj) throws Exception {
-        this.viaje.changeState(ViajeStateType.inicio_viaje);
+        this.viaje.changeState(ViajeStateType.inicio_viaje, null);
+        this.viaje.notifyChange(this.viaje.data.getString("key_conductor"));
     }
 
     @Override
     public void denegar_negociacion(JSONObject obj) throws Exception {
+        // JSONObject lastMov = viaje.getUltimoMovimiento();
+        String key_conductor = this.viaje.data.getString("key_conductor");
         this.viaje.data.put("key_conductor", "");
-        this.viaje.changeState(ViajeStateType.buscando_conductor);
+        this.viaje.changeState(ViajeStateType.buscando_conductor, null);
+        this.viaje.notifyChange(key_conductor);
     }
 }

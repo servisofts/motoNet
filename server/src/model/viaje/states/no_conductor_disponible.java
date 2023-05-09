@@ -22,12 +22,17 @@ public class no_conductor_disponible extends ViajeState {
 
     @Override
     public void buscar_conductor(JSONObject obj) throws Exception {
-        this.viaje.changeState(ViajeStateType.buscando_conductor);
+        this.viaje.changeState(ViajeStateType.buscando_conductor, null);
     }
 
     @Override
     public void cancelar(JSONObject obj) throws Exception {
-        this.viaje.changeState(ViajeStateType.cancelado);
+        this.viaje.changeState(ViajeStateType.cancelado, null);
+    }
+
+    @Override
+    public void cancelar_conductor(JSONObject obj) throws Exception {
+        this.not_permited();
     }
 
     @Override

@@ -7,6 +7,7 @@ public class ViajeStateFactory {
     public static enum ViajeStateType {
         no_registrado,
         buscando_conductor,
+        notificando_conductor,
         cancelado,
         no_conductor_disponible,
         en_negociacion,
@@ -16,6 +17,7 @@ public class ViajeStateFactory {
     public static Class[] clases = new Class[] {
             no_registrado.class,
             buscando_conductor.class,
+            notificando_conductor.class,
             cancelado.class,
             no_conductor_disponible.class,
             en_negociacion.class,
