@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Ruta del archivo build.gradle
+build_gradle_path="android/app/build.gradle"
+versionName=$(grep -o 'versionName ".*"' $build_gradle_path | sed 's/versionName "//;s/"//')
+echo $versionName

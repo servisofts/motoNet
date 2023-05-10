@@ -12,7 +12,6 @@ public class App {
             ViajeActions.resume();
             new Validator();
         } catch (Exception e) {
-
             e.printStackTrace();
         }
     }

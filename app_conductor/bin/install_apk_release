@@ -1,0 +1,4 @@
+#!/bin/bash
+adb devices
+adb reverse tcp:8081 tcp:8081
+cd ./android/app/build/outputs/apk/release/ && adb install app-release.apk

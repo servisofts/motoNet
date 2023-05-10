@@ -1,24 +1,16 @@
 {
   "Servicios": {
-    "usuario": {
-      "host": "192.168.5.2:10002",
-      "status": "exito"
-    },
-    "geolocation": {
-      "host": "192.168.5.5:10005",
-      "status": "exito"
-    }
+    "usuario": true,
+    "geolocation": true
   },
   "PostgreSQL": {
     "host": "jdbc:postgresql://192.168.5.4:5432/servisofts.motonet",
     "status": "exito"
   },
   "- SLog": "RealTime Log from server Servisofts",
-  "- Fecha": "2023-01-12T06:38:08.000409",
+  "- Fecha": "2023-05-09T22:09:16.000305",
   "Viajes": {
-    "activos": 1,
-    "states": {
-      "no_conductor_disponible": 1
-    }
+    "activos": 0,
+    "states": {}
   }
 }

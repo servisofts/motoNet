@@ -40,7 +40,7 @@ export default class no_conductor_disponible extends Component {
                                     type="4"
                                     onPress={() => {
                                         Model.viaje.Action.action("cancelar", this.props.viaje.key).then((resp) => {
-                                            Model.viaje.Action.CLEAR();
+                                            SNavigation.reset("/");
                                         })
                                     }}
                                     cargando={false} />
