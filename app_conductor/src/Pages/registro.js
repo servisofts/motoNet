@@ -110,7 +110,7 @@ class registro extends Component {
                                 }}
 
                                 onSubmitProps={{
-                                    type: "outline"
+                                    // type: "outline"
                                 }}
                                 onSubmit={(data) => {
                                     Model.usuario.Action.registro({ data: data }).then((resp) => {

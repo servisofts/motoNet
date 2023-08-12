@@ -17,12 +17,11 @@ class index extends Component {
 
     render() {
         if (!Model.usuario.Action.getUsuarioLog()) {
-            SNavigation.replace("/login");
-            return null;
+            // SNavigation.replace("/login");
+            return <SText>No hay usuario</SText>
         }
         return (
-            <SPage title={'index'} hidden disableScroll center>
-                <TopBar type={"usuario"} />
+            <SPage title={'index'} hidden disableScroll center header={<TopBar type={"usuario"} />}>
                 <SView col={"xs-12"} height={50} center backgroundColor={STheme.color.barColor}>
                     <SwitchRastreo callback={(resp) => {
                         if (!resp.active) {
@@ -41,16 +40,7 @@ class index extends Component {
                         } else {
                             SBLocation.stop();
                         }
-
                     }} />
-                    {/* <SText onPress={() => {
-                        SBLocation.start({
-                            nombre: "Title notification",
-                            label: "Body notification",
-                            minTime: 1000,
-                            minDistance: 1
-                        });
-                    }}>ACTIVARSE</SText> */}
                 </SView>
                 <SView col={"xs-12"} flex>
                     <SMapView initialRegion={{

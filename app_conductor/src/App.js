@@ -1,5 +1,5 @@
 import React from 'react';
-import { SComponentContainer, SNavigation } from 'servisofts-component';
+import { SComponentContainer, SNavigation, SPage, SText } from 'servisofts-component';
 import SSocket, { setProps } from 'servisofts-socket';
 import Redux, { store } from './Redux';
 import Config from "./Config";
@@ -21,6 +21,7 @@ const App = (props) => {
             inputs={Config.inputs}
             theme={{ themes: Config.theme, initialTheme: "dark" }}
         >
+            
             <SNavigation
 
                 props={{

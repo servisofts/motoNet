@@ -49,6 +49,7 @@ class Validator extends Component {
     render() {
         Validator._instace = this;
         this.validate();
+        return <SText>{SNavigation.lastRoute?.route?.name}</SText>
         return null;
     }
 }
