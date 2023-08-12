@@ -49,7 +49,7 @@ export default class inicio_viaje extends Component {
         if (!data) return <SLoad />
         return (
             <SView style={{
-                alignItems: "center"
+                // alignItems: "center"
             }}>
                 <SView style={{
                     backgroundColor: "#ccc",
