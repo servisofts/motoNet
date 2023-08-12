@@ -15,7 +15,7 @@ class Login extends Component {
     render() {
         return (
             <>
-                <SPage title={'Login'} hidden disableScroll>
+                <SPage title={'Login'} >
                     <SView col={"xs-12"} flex backgroundColor={STheme.color.primary}>
                         <SView col={"xs-12"} center>
                             <SHr height={50} />
@@ -72,6 +72,7 @@ class Login extends Component {
                                 <SText color={STheme.color.secondary} bold>Restablecer</SText>
                             </SView>
                         </SView>
+                        <SHr height={230} />
                     </SView>
                 </SPage>
                 <BottomBox>
@@ -85,7 +86,7 @@ class Login extends Component {
                             }}>
                                 <SText center>¿Aún no tienes una cuenta? </SText><SText color={STheme.color.primary} bold >Regístrate</SText>
                             </SView>
-                            <SHr height={30} />
+                            <SHr height={50} />
                         </SView>
                     </SView>
                 </BottomBox>

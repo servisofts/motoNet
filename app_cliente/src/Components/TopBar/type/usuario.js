@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { SIcon, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import Model from '../../../Model';
+import NavBar from '../../NavBar';
 
 class index extends Component {
 
@@ -34,7 +35,8 @@ class index extends Component {
                     width: 40,
                     height: 40
                 }} center onPress={() => {
-                    SNavigation.navigate("/profile");
+                    // SNavigation.navigate("/profile");
+                    NavBar.open(); 
                 }}>
                     <SIcon name={"Menu2"} width={30} height={30} />
                 </SView>

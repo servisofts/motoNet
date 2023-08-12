@@ -3,9 +3,9 @@ import { SThemeThemes } from 'servisofts-component';
 const theme: SThemeThemes = {
     default: {
         barStyle: 'light-content',
-        barColor: '#ff0000',
+        barColor: '#F7001D',
         text: '#000000',
-        primary: '#ff0000',
+        primary: '#F7001D',
         secondary: '#ffffff',
         background: '#ffffff',
         card: '#0000000f',
