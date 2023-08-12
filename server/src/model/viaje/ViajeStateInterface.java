@@ -19,4 +19,10 @@ public interface ViajeStateInterface {
     public void cancelar(JSONObject obj) throws Exception;
 
     public void cancelar_conductor(JSONObject obj) throws Exception;
+
+    public void llegue(JSONObject obj) throws Exception;
+
+    public void inicio_viaje(JSONObject obj) throws Exception;
+
+    public void fin_viaje(JSONObject obj) throws Exception;
 }

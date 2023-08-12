@@ -3,15 +3,15 @@ package model.viaje.states;
 import org.json.JSONObject;
 
 import Component.Direccion;
-import Servisofts.SUtil;
 import model.viaje.Viaje;
 import model.viaje.ViajeState;
 import model.viaje.ViajeStateFactory.ViajeStateType;
 
-public class inicio_viaje extends ViajeState {
+public class fin_viaje extends ViajeState {
 
-    public inicio_viaje(Viaje viaje, String code) {
-        super(viaje, code, "Buscando conductor disponible");
+    public fin_viaje(Viaje viaje, String code) {
+        super(viaje, code, "Fin viaje");
+        Viaje.INSTANCES.remove(viaje.getKey());
     }
 
     @Override

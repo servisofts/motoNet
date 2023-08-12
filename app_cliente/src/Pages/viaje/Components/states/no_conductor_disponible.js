@@ -20,6 +20,7 @@ export default class no_conductor_disponible extends Component {
                         height: 250,
                         backgroundColor: "#fff",
                         borderRadius: 20,
+                        padding:5
                         // justifyContent: "center",
                         // alignItems: "center"
                     }} center>

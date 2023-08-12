@@ -9,5 +9,9 @@ export default {
     buscando_conductor,
     "notificando_conductor":buscando_conductor,
     en_negociacion,
-    inicio_viaje
+    inicio_viaje,
+    "conductor_llego":inicio_viaje,
+    "fin_viaje":cancelado,
+    // "fin_viaje":inicio_viaje,
+
 }
