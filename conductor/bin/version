@@ -1,0 +1,52 @@
+#!/bin/bash
+. .env
+build_gradle_path="android/app/build.gradle"
+ios_project_pbxproj_path="ios/$IOS_PACKAGE_NAME.xcodeproj/project.pbxproj"
+
+_replace_ios_version() {
+    new_version=$1
+    new_version_code=$2
+    # CURRENT_PROJECT_VERSION
+    # MARKETING_VERSION
+    # cur_version=$(grep -o 'MARKETING_VERSION.*=.*' $ios_project_pbxproj_path | sed 's/MARKETING_VERSION = //;s///')
+    if [[ $(uname) == "Darwin" ]]; then
+        sed -i '' 's/MARKETING_VERSION = .*;/MARKETING_VERSION = '"$new_version"';/' "./$ios_project_pbxproj_path"
+        sed -i '' 's/CURRENT_PROJECT_VERSION = .*;/CURRENT_PROJECT_VERSION = '"$new_version_code"';/' "./$ios_project_pbxproj_path"
+    else
+        sed -i 's/MARKETING_VERSION = .*;/MARKETING_VERSION = '"$new_version"';/' "./$ios_project_pbxproj_path"
+        sed -i 's/CURRENT_PROJECT_VERSION = .*;/CURRENT_PROJECT_VERSION = '"$new_version_code"';/' "./$ios_project_pbxproj_path"
+    fi
+    # echo $cur_version
+}
+_replace_android_version() {
+    new_version=$1
+    new_version_code=$2
+
+    # cur_version=$(grep -o 'versionName ".*"' $build_gradle_path | sed 's/versionName "//;s/"//')
+    # cur_version_code=$(grep -o 'versionCode .*' $build_gradle_path | sed 's/versionCode //;s///')
+    if [[ $(uname) == "Darwin" ]]; then
+        sed -i '' 's/versionCode .*/versionCode '"$new_version_code"'/' "./$build_gradle_path"
+        sed -i '' 's/versionName ".*"/versionName "'"$new_version"'"/' "./$build_gradle_path"
+    else
+        sed -i 's/versionCode .*/versionCode '"$new_version_code"'/' "./$build_gradle_path"
+        sed -i 's/versionName ".*"/versionName "'"$new_version"'"/' "./$build_gradle_path"
+    fi
+
+    # echo $new_version
+    # echo $new_version_code
+}
+
+original_file="package.json"
+json_data=$(cat package.json | grep 'version.*:.".*"')
+version_package_json=$(echo "$json_data" | grep -oE '"version": "[^"]+"' | awk -F'"' '{print $4}')
+
+IFS='.' read -r a b c <<<"$version_package_json"
+range=100
+# Imprimir los valores
+version_code=$((c + (b * range) + (a * range * range)))
+
+echo "$version_package_json"
+# echo $version_code
+
+_replace_android_version $version_package_json $version_code
+_replace_ios_version $version_package_json $version_code

@@ -1,0 +1,5 @@
+#!/bin/bash
+adb devices
+adb reverse tcp:8081 tcp:8081
+# cd ./android/app/build/outputs/apk/debug && adb install app-debug.apk
+cd ./android/app/build/outputs/apk/debug && adb install -t -r -d app-debug.apk

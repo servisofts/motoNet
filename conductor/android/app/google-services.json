@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "885912798330",
+    "project_id": "tapeke-20bb6",
+    "storage_bucket": "tapeke-20bb6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885912798330:android:dacc64e170ce487b60e7c3",
+        "android_client_info": {
+          "package_name": "com.tapeke_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885912798330-aqj76qknania66cbju635j1b5k5sr444.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tapeke_app",
+            "certificate_hash": "159debb2542a12e7c85094404a1c0f377bf7fd93"
+          }
+        },
+        {
+          "client_id": "885912798330-cu0mue1oseja0p9devgkj4n9vdkk1q8f.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tapeke_app",
+            "certificate_hash": "0840488a96b8b999f23ac58406ea66c82c255595"
+          }
+        },
+        {
+          "client_id": "885912798330-2o9o5nmpdi2nf275ng201krcbsdi945s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZUmexJV2mceml3d-ZtwWMcUDNQo3fU2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885912798330-2o9o5nmpdi2nf275ng201krcbsdi945s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "885912798330-0h3tgs7ku8k8g35u832n2fng85i284b9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.servisofts.tapekeapp"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:885912798330:android:e17f94b1fc797ac360e7c3",
+        "android_client_info": {
+          "package_name": "com.motonet_conductor_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "885912798330-2o9o5nmpdi2nf275ng201krcbsdi945s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZUmexJV2mceml3d-ZtwWMcUDNQo3fU2c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "885912798330-2o9o5nmpdi2nf275ng201krcbsdi945s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "885912798330-0h3tgs7ku8k8g35u832n2fng85i284b9.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.servisofts.tapekeapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

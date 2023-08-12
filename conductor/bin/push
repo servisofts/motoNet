@@ -1,0 +1,6 @@
+# git commit -a -m $1
+STR=$(date)
+
+git add -A
+git commit -m "$STR"
+git push

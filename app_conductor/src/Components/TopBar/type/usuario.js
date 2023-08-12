@@ -34,7 +34,7 @@ class index extends Component {
                     width: 40,
                     height: 40
                 }} center onPress={() => {
-                    SNavigation.navigate("/profile");
+                    SNavigation.navigate("/menu");
                 }}>
                     <SIcon name={"Menu2"} width={30} height={30} />
                 </SView>

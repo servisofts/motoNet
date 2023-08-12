@@ -1,0 +1,12 @@
+#!/bin/bash
+. ./bin/config.properties
+
+build_gradle_path="android/app/build.gradle"
+
+mkdir -p target/android/
+
+version=$(grep -o 'versionName ".*"' $build_gradle_path | sed 's/versionName "//;s/"//')
+    # cur_version_code=$(grep -o 'versionCode .*' $build_gradle_path | sed 's/versionCode //;s///')
+cp ./android/app/build/outputs/apk/release/app-release.apk ./target/android/app-release-$version.apk
+scp ./target/android/app-release-$version.apk $REPO_SSH:$REPO_RESOURCE$REPO_DIR
+scp ./target/android/app-release-$version.apk $REPO_SSH:$REPO_RESOURCE$REPO_DIR/app-release.apk

@@ -4,7 +4,7 @@ import SSocket from 'servisofts-socket';
 import Model from "../..";
 const STORAGE_KEY = "viaje_item"
 
-type ACTIONS = "registro" | "buscar_conductor" | "negociar_conductor" | "aceptar_negociacion" | "denegar_negociacion" | "cancelar" | "cancelar_conductor"
+type ACTIONS = "registro" | "buscar_conductor" | "negociar_conductor" | "aceptar_negociacion" | "denegar_negociacion" | "cancelar" | "cancelar_conductor" | "llegue" | "inicio_viaje" | "fin_viaje"
 export default class Action extends SAction {
 
 
@@ -39,7 +39,7 @@ export default class Action extends SAction {
             component: "viaje",
             type: "getActivo",
             estado: "cargando",
-            key_usuario: key_usuario
+            key_conductor: key_usuario
         }
         SSocket.send(petition);
         return null;

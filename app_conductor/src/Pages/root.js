@@ -7,6 +7,7 @@ import { SIcon, SMapView, SNavigation, SPage, SText, STheme, SView } from 'servi
 import SwitchRastreo from '../Components/SwitchRastreo';
 import TopBar from '../Components/TopBar';
 import Model from '../Model';
+import Validator from '../Validator';
 
 class index extends Component {
     constructor(props) {
@@ -15,6 +16,9 @@ class index extends Component {
         };
     }
 
+    componentDidMount(){
+        Validator.validate();
+    }
     render() {
         if (!Model.usuario.Action.getUsuarioLog()) {
             // SNavigation.replace("/login");

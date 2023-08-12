@@ -10,9 +10,9 @@ import Validator from './Validator';
 
 
 setProps(Config.socket);
+BackgroundLocation();
 
 const App = (props) => {
-    BackgroundLocation();
     return <Redux>
         <SComponentContainer
             // debug

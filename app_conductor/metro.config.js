@@ -24,10 +24,10 @@
        })
      },
      watchFolders: [
-      path.resolve(__dirname, '../../servisofts-component/dist'),
-      path.resolve(__dirname, '../../servisofts-model/dist'),
-      path.resolve(__dirname, '../../servisofts-page/dist'),
-      path.resolve(__dirname, '../../usuario/library/dist'),
+      // path.resolve(__dirname, '../../servisofts-component/dist'),
+      // path.resolve(__dirname, '../../servisofts-model/dist'),
+      // path.resolve(__dirname, '../../servisofts-page/dist'),
+      // path.resolve(__dirname, '../../usuario/library/dist'),
      ],
      resolver: {
        assetExts: assetExts.filter((ext) => ext !== 'svg'),

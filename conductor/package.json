@@ -1,0 +1,71 @@
+{
+  "name": "motonet_conductor_app",
+  "version": "1.4.18",
+  "description": "Tapeke driver App.",
+  "scripts": {
+    "start": "react-native start",
+    "build": "react-scripts build",
+    "web": "react-scripts start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "SERVISOFTS S.R.L.",
+  "license": "ISC",
+  "dependencies": {
+    "@react-native-community/geolocation": "^2.0.2",
+    "@react-native-firebase/app": "14.8.0",
+    "@react-native-firebase/messaging": "14.8.0",
+    "@react-navigation/native": "^5.9.6",
+    "@react-navigation/stack": "^5.14.7",
+    "crypto-js": "^4.1.1",
+    "firebase": "^9.6.11",
+    "google-map-react": "^2.1.6",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-native": "0.64.4",
+    "react-native-compressor": "^1.6.1",
+    "react-native-document-picker": "^7.1.0",
+    "react-native-file-viewer": "^2.1.4",
+    "react-native-fs": "2.20.0",
+    "react-native-gesture-handler": "^1.10.3",
+    "react-native-image-picker": "4.7.3",
+    "react-native-image-resizer": "^1.4.5",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-maps": "^0.29.1",
+    "react-native-notifications": "4.2.4",
+    "react-native-reanimated": "2.13.0",
+    "react-native-safe-area-context": "^3.2.0",
+    "react-native-screens": "3.11.0",
+    "react-native-svg": "^12.1.1",
+    "react-native-svg-transformer": "^0.14.3",
+    "react-native-web": "0.17.7",
+    "react-redux": "7.2.9",
+    "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0",
+    "servisofts-background-location": "1.0.4",
+    "servisofts-component": "2.11.14",
+    "servisofts-model": "1.0.3",
+    "servisofts-page": "1.0.8",
+    "servisofts-rn-chat": "1.0.6",
+    "servisofts-rn-roles_permisos": "1.0.1",
+    "servisofts-rn-usuario": "1.0.13",
+    "servisofts-socket": "3.0.7",
+    "typescript": "^4.4.3",
+    "xlsx": "^0.18.5",
+    "xlsx-color": "^0.14.30"
+  },
+  "devDependencies": {
+    "react-scripts": "^4.0.3"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
