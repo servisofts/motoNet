@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { FlatList, ScrollView } from 'react-native'
+import { SHr, SIcon, SImage, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import TopBar from '../Components/TopBar';
 import Model from '../Model';
 
@@ -34,10 +35,26 @@ class index extends Component {
             </SView>
         </SView>
     }
-
+    publicidadItem({ src }) {
+        return <SView width={238} height={150} padding={4}>
+            <SImage enablePreview src={src} style={{ resizeMode: "contain", borderRadius: 8 }} />
+        </SView>
+    }
     getPublicidad() {
-        return <SView col={"xs-12"} height={150} center card>
-            <SText>TODO:Publicidad</SText>
+        return <SView col={"xs-12"}  >
+           
+                {/* <SText>TODO:Publicidad</SText> */}
+                <FlatList horizontal data={[
+                    { src: require('../Assets/img/banner1.jpg') },
+                    { src: require('../Assets/img/banner2.jpg') },
+                    { src: require('../Assets/img/banner1.jpg') },
+                    { src: require('../Assets/img/banner2.jpg') },
+                    { src: require('../Assets/img/banner1.jpg') },
+                    { src: require('../Assets/img/banner2.jpg') },
+                ]}
+                    renderItem={row => this.publicidadItem(row.item)}
+                />
+           
         </SView>
     }
     getTiposDeViajes() {
@@ -50,7 +67,7 @@ class index extends Component {
             {this.tipoItem({ label: "Mensajería", detail: "Servicio de mensajería", icon: "mensajeria", url: "/buscar/mensajeria" })}
             <SView flex />
             {this.getPublicidad()}
-            <SHr />
+            <SHr height={20} />
         </SView>
     }
     render() {

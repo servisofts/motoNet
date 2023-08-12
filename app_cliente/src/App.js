@@ -6,6 +6,7 @@ import Config from "./Config";
 import Assets from './Assets';
 import Pages from './Pages';
 import Validator from './Validator';
+import NavBar from './Components/NavBar';
 
 
 setProps(Config.socket);
@@ -37,7 +38,7 @@ const App = (props) => {
                     };
                 }}
             />
-
+            <NavBar />
         </SComponentContainer>
     </Redux>
 }
