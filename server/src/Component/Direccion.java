@@ -1,6 +1,5 @@
 package Component;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import Servisofts.SPG;
@@ -9,9 +8,8 @@ import Servisofts.SUtil;
 import model.viaje.Viaje;
 import Server.SSSAbstract.SSSessionAbstract;
 
-public class viaje {
-    public static final String COMPONENT = "viaje";
-    public static final String VIEW = "view_viaje";
+public class Direccion {
+    public static final String COMPONENT = "direccion";
 
     public static void onMessage(JSONObject obj, SSSessionAbstract session) {
         switch (obj.getString("type")) {
@@ -21,9 +19,6 @@ public class viaje {
             case "getByKey":
                 getByKey(obj, session);
                 break;
-            case "getActivo":
-                getActivo(obj, session);
-                break;
             case "action":
                 action(obj, session);
                 break;
@@ -32,7 +27,7 @@ public class viaje {
 
     public static void getAll(JSONObject obj, SSSessionAbstract session) {
         try {
-            String consulta = "select get_all('" + VIEW + "') as json";
+            String consulta = "select get_all('" + COMPONENT + "') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");
@@ -45,7 +40,7 @@ public class viaje {
 
     public static void getByKey(JSONObject obj, SSSessionAbstract session) {
         try {
-            String consulta = "select get_by_key('" + VIEW + "', '" + obj.getString("key") + "') as json";
+            String consulta = "select get_by_key('" + COMPONENT + "', '" + obj.getString("key") + "') as json";
             JSONObject data = SPGConect.ejecutarConsultaObject(consulta);
             obj.put("data", data);
             obj.put("estado", "exito");
@@ -55,16 +50,32 @@ public class viaje {
             e.printStackTrace();
         }
     }
-
-    public static void getActivo(JSONObject obj, SSSessionAbstract session) {
+    public static JSONObject getByKey(String key) {
         try {
-            String key_usuario = obj.getString("key_usuario");
-            JSONObject data = SPG.single_object(VIEW, "estado > 0", "key_usuario = '" + key_usuario + "'");
-            obj.put("data", data);
-            obj.put("estado", "exito");
+            String consulta = "select get_by_key('" + COMPONENT + "', '" + key + "') as json";
+            return SPGConect.ejecutarConsultaObject(consulta);
         } catch (Exception e) {
-            obj.put("estado", "error");
-            obj.put("error", e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static JSONObject getDireccion(String key_viaje){
+        try {
+            String consulta = "select get_direccion('" + key_viaje + "') as json";
+            return SPGConect.ejecutarConsultaObject(consulta);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void conductorLlego(String key_direccion){
+        try {
+            JSONObject direccion = getByKey(key_direccion);
+            direccion.put("fecha_conductor_llego", SUtil.now());
+            SPGConect.editObject(COMPONENT, direccion);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

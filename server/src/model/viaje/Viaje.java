@@ -115,9 +115,7 @@ public class Viaje {
         // }
         // }
 
-        System.out.println(
-                "TODO: Notificar por firebase que el viaje cambio para los interezados new state (" + this.state.code
-                        + ")");
+        System.out.println("TODO: Notificar por firebase que el viaje cambio para los interezados new state (" + this.state.code + ")");
     }
 
     public void action(JSONObject data) throws Exception {

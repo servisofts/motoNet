@@ -2,8 +2,6 @@ package model.viaje;
 
 import org.json.JSONObject;
 
-import Component.viaje;
-
 public abstract class ViajeState extends Thread implements ViajeStateInterface{
     public Viaje viaje;
     public String type;
@@ -22,11 +20,23 @@ public abstract class ViajeState extends Thread implements ViajeStateInterface{
         obj.put("code", this.code);
         return obj;
     }
-    
+
+    @Override
+    public void llegue(JSONObject obj) throws Exception {
+        this.not_permited();
+    }
+    @Override
+    public void inicio_viaje(JSONObject obj) throws Exception {
+        this.not_permited();
+    }
+
+    @Override
+    public void fin_viaje(JSONObject obj) throws Exception {
+        this.not_permited();
+    }
 
     public void not_permited() throws Exception {
         throw new Exception("Action not permited in state " + this.code);
-
     }
     @Override
     public void run() {

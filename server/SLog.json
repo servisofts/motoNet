@@ -1,14 +1,14 @@
 {
   "Servicios": {
     "usuario": true,
-    "geolocation": true
+    "geolocation": false
   },
   "PostgreSQL": {
     "host": "jdbc:postgresql://192.168.5.4:5432/servisofts.motonet",
     "status": "exito"
   },
   "- SLog": "RealTime Log from server Servisofts",
-  "- Fecha": "2023-05-31T19:19:13.000504",
+  "- Fecha": "2023-08-12T01:11:59.000410",
   "Viajes": {
     "activos": 0,
     "states": {}

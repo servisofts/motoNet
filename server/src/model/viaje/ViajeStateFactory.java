@@ -11,7 +11,9 @@ public class ViajeStateFactory {
         cancelado,
         no_conductor_disponible,
         en_negociacion,
-        inicio_viaje
+        inicio_viaje,
+        fin_viaje,
+        conductor_llego
     }
 
     public static Class[] clases = new Class[] {
@@ -21,7 +23,9 @@ public class ViajeStateFactory {
             cancelado.class,
             no_conductor_disponible.class,
             en_negociacion.class,
-            inicio_viaje.class
+            inicio_viaje.class,
+            fin_viaje.class,
+            conductor_llego.class
     };
 
     public static ViajeState create(Viaje pedido, ViajeStateType state) throws Exception {

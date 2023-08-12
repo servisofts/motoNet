@@ -1,19 +1,19 @@
 package model.viaje.states;
 
 import org.json.JSONObject;
-
-import Component.Direccion;
-import Servisofts.SUtil;
 import model.viaje.Viaje;
 import model.viaje.ViajeState;
 import model.viaje.ViajeStateFactory.ViajeStateType;
 
-public class inicio_viaje extends ViajeState {
+public class llegue extends ViajeState {
 
-    public inicio_viaje(Viaje viaje, String code) {
-        super(viaje, code, "Buscando conductor disponible");
+    public llegue(Viaje viaje, String code) {
+        super(viaje, code, "llegue");
+        //this.viaje.data.put("estado", 0);
+        //Viaje.INSTANCES.remove(viaje.getKey());
     }
 
+    
     @Override
     public void registro(JSONObject obj) throws Exception {
         this.not_permited();
@@ -26,7 +26,7 @@ public class inicio_viaje extends ViajeState {
 
     @Override
     public void cancelar(JSONObject obj) throws Exception {
-        this.viaje.changeState(ViajeStateType.cancelado, null);
+        this.not_permited();
     }
 
     @Override
@@ -51,11 +51,10 @@ public class inicio_viaje extends ViajeState {
 
     @Override
     public void llegue(JSONObject obj) throws Exception {
-        if(obj.getJSONObject("data").has("key_direccion")){
-            Direccion.conductorLlego(obj.getJSONObject("data").getString("key_direccion"));
-            this.viaje.changeState(ViajeStateType.conductor_llego, null);
-            this.viaje.notifyChange(this.viaje.data.getString("key_conductor"));
-        }
-        
+        this.viaje.changeState(ViajeStateType.conductor_llego, null);
+        this.viaje.notifyChange(this.viaje.data.getString("key_conductor"));
     }
+
+    
+
 }
