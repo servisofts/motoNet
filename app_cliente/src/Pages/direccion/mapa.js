@@ -33,7 +33,7 @@ class index extends Component {
         }
         return (
             <SView col={"xs-12"} flex center>
-                <ChangeItem label={"Seleccionar ubicacion en la lista."} type={"lista"} parent={this.props.parent} />
+                <ChangeItem label={"Seleccionar ubicación en la lista."} type={"lista"} parent={this.props.parent} />
                 <SView flex col={"xs-12"} center>
                     <SMapView initialRegion={{
                         latitude: !location.latitude ? defaultLocation.latitude : location.latitude,

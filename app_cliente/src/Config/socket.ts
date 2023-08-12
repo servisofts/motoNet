@@ -1,10 +1,16 @@
 export default {
     debug: true, //para que se vea los returns del server
     name: 'motonet',
+
     // ssl: true,
     // host: 'motonet.servisofts.com',
+
+    // ssl: false,
+    // host: '192.168.3.2',
+
     ssl: false,
-    host: '192.168.3.2',
+    host: '192.168.2.1',
+
     port: {
         native: 10004,
         web: 20004,

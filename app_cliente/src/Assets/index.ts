@@ -16,6 +16,8 @@ import Ihome, { ReactComponent as IhomeW } from './svg/ihome.svg';
 import Imensajeria, { ReactComponent as ImensajeriaW } from './svg/imensajeria.svg';
 import Itransporte, { ReactComponent as ItransporteW } from './svg/itransporte.svg';
 import Isalir, { ReactComponent as IsalirW } from './svg/isalir.svg';
+import Imoto, { ReactComponent as ImotoW } from './svg/moto.svg';
+import Itorito, { ReactComponent as ItoritoW } from './svg/torito.svg';
 
 
 const Assets: SAssets = {
@@ -36,6 +38,8 @@ const Assets: SAssets = {
         "Imensajeria": { Native: Imensajeria, Web: ImensajeriaW },
         "Itransporte": { Native: Itransporte, Web: ItransporteW },
         "Isalir": { Native: Isalir, Web: IsalirW },
+        "Imoto": { Native: Imoto, Web: ImotoW },
+        "Itorito": { Native: Itorito, Web: ItoritoW },
     }
 }
 

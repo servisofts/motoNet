@@ -116,7 +116,7 @@ class index extends Component {
         this.getData();
         return (
             <SView col={"xs-12"} flex center>
-                <ChangeItem label={"Seleccionar ubicacion en el mapa."} type={"mapa"} parent={this.props.parent} />
+                <ChangeItem label={"Seleccionar ubicación en el mapa."} type={"mapa"} parent={this.props.parent} />
                 <SView col={"xs-12"} flex center>
                     {this.getLista()}
                 </SView>

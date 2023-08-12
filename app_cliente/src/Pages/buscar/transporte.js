@@ -16,7 +16,7 @@ class index extends buscar_abstract {
         super("transporte-moto", props);
     }
 
-    getOption({ type, label }) {
+    getOption({ type, label , icon}) {
         return <SView width={130} height={50} row style={{
             borderRadius: 8,
             ...(type == this.state.key_tipo_viaje ? {
@@ -27,7 +27,7 @@ class index extends buscar_abstract {
         }} center onPress={() => {
             this.setState({ key_tipo_viaje: type })
         }}>
-            <SIcon name={"transporte"} width={40} height={40} />
+            <SIcon name={icon} width={40} height={40} />
             <SText bold>{label}</SText>
         </SView>
 
@@ -37,9 +37,9 @@ class index extends buscar_abstract {
             <SView col={"xs-12 sm-10 md-8 lg-6 xl-4"} height={120} center>
                 <SHr />
                 <SView col={"xs-11"} row height={50}>
-                    {this.getOption({ type: "transporte-moto", label: "Moto" })}
+                    {this.getOption({ type: "transporte-moto", label: "Moto" , icon:"Imoto"})}
                     <SView flex />
-                    {this.getOption({ type: "transporte-torito", label: "Torito" })}
+                    {this.getOption({ type: "transporte-torito", label: "Torito", icon: "Itorito" })}
                 </SView>
                 <SHr />
                 <Buttom onPress={() => {
